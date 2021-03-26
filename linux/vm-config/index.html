@@ -104,7 +104,7 @@
         
         
         <div class="post-content">
-            <h5 id="参数vmdirty_ratio和vmdirty_background_ratio">参数vm.dirty_ratio和vm.dirty_background_ratio</h5>
+            <h2 id="参数vmdirty_ratio和vmdirty_background_ratio">参数vm.dirty_ratio和vm.dirty_background_ratio</h2>
 <p><a href="https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/">https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/</a></p>
 <p>文件缓存是一项重要的性能改进，在大多数情况下，读缓存在绝大多数情况下是有益无害的（程序可以直接从RAM中读取数据）。写缓存比较复杂，Linux内核将磁盘写入缓存，过段时间再异步将它们刷新到磁盘。这对加速磁盘I/O有很好的效果，但是当数据未写入磁盘时，丢失数据的可能性会增加。</p>
 <p>当然，也存在缓存被写爆的情况。还可能出现一次性往磁盘写入过多数据，以致使系统卡顿。这些卡顿是因为系统认为，缓存太大用异步的方式来不及把它们都写进磁盘，于是切换到同步的方式写入。</p>
@@ -129,24 +129,24 @@ nr_writeback 0
 nr_writeback_temp 0
 nr_dirty_threshold 3934012
 nr_dirty_background_threshold 1964604
-</code></pre><h6 id="方法1减少缓存">方法1：减少缓存</h6>
+</code></pre><h2 id="方法1减少缓存">方法1：减少缓存</h2>
 <p>在很多情况下，我们有快速的磁盘子系统，它们有自己的大电池支持的NVRAM缓存，所以将东西保存在系统页面缓存中是有风险的。让我们尝试以更及时的方式向磁盘发送I/O，并减少本地操作系统(借用服务行业的话)“陷入困境”的机会。为了做到这一点，我们减小/etc/sysctl.conf中vm.dirty_background_ratio和vm.dirty_ratio的数值，并执行sysctl -p命令:</p>
 <pre><code>vm.dirty_background_ratio = 5
 vm.dirty_ratio = 10
 </code></pre><p>这是基于Linux的虚拟机管理程序的典型方法。不建议将这些参数设置为0，一些后台I/O可以很好地将应用程序性能与磁盘阵列在SAN(“峰值”)上的较短时间的较高延迟解耦。</p>
-<h6 id="方法2增加缓存">方法2：增加缓存</h6>
+<h2 id="方法2增加缓存">方法2：增加缓存</h2>
 <p>在某些情况下，显著提高缓存对性能有积极的影响。在这些情况下，Linux客户机上包含的数据不是关键的，可能会丢失，而且应用程序通常会重复或以可重复的方式写入相同的文件。理论上，通过允许内存中存在更多脏页，你将在缓存中一遍又一遍地重写相同的块，只需要每隔一段时间向实际磁盘写一次。为此，我们提出了以下参数:</p>
 <pre><code>vm.dirty_background_ratio = 50
 vm.dirty_ratio = 80
 </code></pre><p>有时候还会提高vm.dirty_expire_centisecs 这个参数的值，来允许脏数据更长时间地停留。除了增加数据丢失的风险之外，如果缓存已满并需要同步，还会有长时间I/O卡顿的风险，因为在大型虚拟机缓存中有大量数据。</p>
-<h6 id="方法3增减都用">方法3：增减都用</h6>
+<h2 id="方法3增减都用">方法3：增减都用</h2>
 <p>有时候系统需要应对突如其来的高峰数据，它可能会拖慢磁盘。比如说：每小时或者午夜进行批处理作业、在Raspberry Pi上写SD卡等等。这种情况下，我们可以允许大量的写I/O存储在缓存中，这样后台刷新操作就可以慢慢异步处理它:</p>
 <pre><code>vm.dirty_background_ratio = 5
 vm.dirty_ratio = 80
 </code></pre><p>这个时候，系统后台进程在脏数据达到5%时就开始异步清理，但在80%之前系统不会强制同步写磁盘。在此基础上，你只需要调整RAM和vm.dirty_ratio大小以便能缓存所有的写数据。当然，磁盘上的数据一致性也存在一定风险。</p>
-<h6 id="总结">总结</h6>
+<h2 id="总结">总结</h2>
 <p>无论你选择哪种方式，都应该始终收集数据来支持你的更改，并帮助你确定是在改进还是变得更糟。我们可以从应用程序，/proc/vmstat, /proc/meminfo, iostat, vmstat 以及/proc/sys/vm里面获得大量有用信息。</p>
-<h5 id="参数overcommit_memory">参数overcommit_memory</h5>
+<h2 id="参数overcommit_memory">参数overcommit_memory</h2>
 <p>0：表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程。</p>
 <p>1：表示内核允许分配所有的物理内存，而不管当前的内存状态如何。</p>
 <p>2： 表示内核允许分配超过所有物理内存和交换空间总和的内存。</p>
