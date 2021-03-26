@@ -1,22 +1,24 @@
 ---
 title: "smartctl 硬盘检测"
 date: 2018-12-03T14:21:00+08:00
+categories: ["linux"]
+toc: true
 draft: false
 ---
-##### SMART 简介
+## SMART 简介
 
 S.M.A.R.T.，全称为“Self-Monitoring Analysis and Reporting Technology”，即“自我监测、分析及报告技术”。是一种自动的硬盘状态检测与预警系统和规范。通过在硬盘硬件内的检测指令对硬盘的硬件如磁头、盘片、马达、电路的运行情况进行监控、记录并与厂商所设定的预设安全值进行比较，若监控情况将或已超出预设安全值的安全范围，就可以通过主机的监控硬件或软件自动向用户作出警告并进行轻微的自动修复，以提前保障硬盘数据的安全。除一些出厂时间极早的硬盘外，现在大部分硬盘均配备该项技术。
 
 SMART是一种磁盘自我分析检测技术，早在90年代末就基本得到了普及每一块硬盘(包括IDE、SCSI)在运行的时候，都会将自身的若干参数记录下来这些参数包括型号、容量、温度、密度、扇区、寻道时间、传输、误码率等，当硬盘运行了几千小时后，很多内在的物理参数都会发生变化某一参数超过报警阈值，则说明硬盘接近损坏，此时硬盘依然在工作，如果用户不理睬这个报警继续使用那么硬盘将变得非常不可靠，随时可能故障导致数据丢失。
 
 
-#### SMART 安装
+## SMART 安装
 
 ```
 yum install smartmontools.x86_64 -y
 ```
 
-#### 基本用法
+## 基本用法
 
 ```
 smartctl --scan 扫描当前系统中所有支持SMART的设备
@@ -215,10 +217,10 @@ TYPE (简要模式不可见)存在两种类型, Pre-failed(故障预警)和Old_a
 
 UPDATED (简要模式不可见)存在两种更新模式 Always(持续更新)和 Offline(离线更新)
 
-#### 已使用寿命参考
+## 已使用寿命参考
 
 Percentage Used Endurance Indicator
-``
+```
 smartctl -l devstat /dev/sdb
 smartctl 7.0 2018-12-30 r4883 [x86_64-linux-3.10.0-957.10.1.el7.x86_64] (local build)
 Copyright (C) 2002-18, Bruce Allen, Christian Franke, www.smartmontools.org
