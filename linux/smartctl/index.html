@@ -91,7 +91,111 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#smart-简介">SMART 简介</a></li>
+    <li><a href="#smart-安装">SMART 安装</a></li>
+    <li><a href="#基本用法">基本用法</a></li>
+    <li><a href="#已使用寿命参考">已使用寿命参考</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -101,15 +205,28 @@
             2018年12月3日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux.html'>linux</a></span>
+            
+        </div>
         
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
         
         <div class="post-content">
-            <h5 id="smart-简介">SMART 简介</h5>
+            <h2 id="smart-简介">SMART 简介</h2>
 <p>S.M.A.R.T.，全称为“Self-Monitoring Analysis and Reporting Technology”，即“自我监测、分析及报告技术”。是一种自动的硬盘状态检测与预警系统和规范。通过在硬盘硬件内的检测指令对硬盘的硬件如磁头、盘片、马达、电路的运行情况进行监控、记录并与厂商所设定的预设安全值进行比较，若监控情况将或已超出预设安全值的安全范围，就可以通过主机的监控硬件或软件自动向用户作出警告并进行轻微的自动修复，以提前保障硬盘数据的安全。除一些出厂时间极早的硬盘外，现在大部分硬盘均配备该项技术。</p>
 <p>SMART是一种磁盘自我分析检测技术，早在90年代末就基本得到了普及每一块硬盘(包括IDE、SCSI)在运行的时候，都会将自身的若干参数记录下来这些参数包括型号、容量、温度、密度、扇区、寻道时间、传输、误码率等，当硬盘运行了几千小时后，很多内在的物理参数都会发生变化某一参数超过报警阈值，则说明硬盘接近损坏，此时硬盘依然在工作，如果用户不理睬这个报警继续使用那么硬盘将变得非常不可靠，随时可能故障导致数据丢失。</p>
-<h4 id="smart-安装">SMART 安装</h4>
+<h2 id="smart-安装">SMART 安装</h2>
 <pre><code>yum install smartmontools.x86_64 -y
-</code></pre><h4 id="基本用法">基本用法</h4>
+</code></pre><h2 id="基本用法">基本用法</h2>
 <pre><code>smartctl --scan 扫描当前系统中所有支持SMART的设备
 
 smartctl -i /dev/sda 查看设备SMART是否开启
@@ -282,38 +399,32 @@ If Selective self-test is pending on power-up, resume after 0 minute delay.
 <p>RAW_VALUE 物理值(通常对应于计数或物理单位，如扇区个数，摄氏度或秒)</p>
 <p>TYPE (简要模式不可见)存在两种类型, Pre-failed(故障预警)和Old_age(正常损耗).</p>
 <p>UPDATED (简要模式不可见)存在两种更新模式 Always(持续更新)和 Offline(离线更新)</p>
-<h4 id="已使用寿命参考">已使用寿命参考</h4>
-<p>Percentage Used Endurance Indicator
-``
-smartctl -l devstat /dev/sdb
+<h2 id="已使用寿命参考">已使用寿命参考</h2>
+<p>Percentage Used Endurance Indicator</p>
+<pre><code>smartctl -l devstat /dev/sdb
 smartctl 7.0 2018-12-30 r4883 [x86_64-linux-3.10.0-957.10.1.el7.x86_64] (local build)
-Copyright (C) 2002-18, Bruce Allen, Christian Franke, <a href="http://www.smartmontools.org">www.smartmontools.org</a></p>
-<p>Device Statistics (GP Log 0x04)
+Copyright (C) 2002-18, Bruce Allen, Christian Franke, www.smartmontools.org
+
+Device Statistics (GP Log 0x04)
 Page  Offset Size        Value Flags Description
 0x01  =====  =               =  ===  == General Statistics (rev 1) ==
-0x01  0x008  4              26  &mdash;  Lifetime Power-On Resets
-0x01  0x010  4           15617  &mdash;  Power-on Hours
-0x01  0x018  6      3482676599  &mdash;  Logical Sectors Written
-0x01  0x020  6        71733219  &mdash;  Number of Write Commands
-0x01  0x028  6      2754401909  &mdash;  Logical Sectors Read
-0x01  0x030  6        16315927  &mdash;  Number of Read Commands
+0x01  0x008  4              26  ---  Lifetime Power-On Resets
+0x01  0x010  4           15617  ---  Power-on Hours
+0x01  0x018  6      3482676599  ---  Logical Sectors Written
+0x01  0x020  6        71733219  ---  Number of Write Commands
+0x01  0x028  6      2754401909  ---  Logical Sectors Read
+0x01  0x030  6        16315927  ---  Number of Read Commands
 0x07  =====  =               =  ===  == Solid State Device Statistics (rev 1) ==
-0x07  0x008  1               8  &mdash;  Percentage Used Endurance Indicator
-|||_ C monitored condition met
-||__ D supports DSN
-|___ N normalized value</p>
-<pre><code>
-#### TODO Smartd 服务
+0x07  0x008  1               8  ---  Percentage Used Endurance Indicator
+                                |||_ C monitored condition met
+                                ||__ D supports DSN
+                                |___ N normalized value
+</code></pre><h4 id="todo-smartd-服务">TODO Smartd 服务</h4>
+<pre><code>systemctl status smartd
+</code></pre><p>配置　</p>
+<p>vi /etc/smartmontools/smartd.conf</p>
+<p>集成监控 <a href="https://github.com/Sheridan/smartctl_exporter">smartctl_exporter</a></p>
 
-</code></pre><p>systemctl status smartd</p>
-<pre><code>
-配置　
-
-vi /etc/smartmontools/smartd.conf
-
-
-集成监控 [smartctl_exporter](https://github.com/Sheridan/smartctl_exporter)
-</code></pre>
         </div>
 
         
@@ -458,7 +569,9 @@ vi /etc/smartmontools/smartd.conf
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (8)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

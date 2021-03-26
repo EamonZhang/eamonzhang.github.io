@@ -101,28 +101,35 @@
             2019年1月30日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres.html'>postgres</a></span>
+            
+        </div>
+        
         
         
         <div class="post-content">
             <p>pg_rewind requires that the target server either has the wal_log_hints option enabled in postgresql.conf or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. full_page_writes must also be set to on, but is enabled by default.</p>
 <p>wal_log_hints</p>
-<h5 id="使用场景">使用场景</h5>
+<h2 id="使用场景">使用场景</h2>
 <p>在数据库主从结构中，从变成主易。但是由主变为从却需要一番周折。<br>
 如果是数据量少时重新使用pg_backup拉一份从即可，但是如果数据量大时，这个过程非常的耗时耗能。对线上业务也会有影响。   <br>
 在实际的场景中主从之间的数据绝大部分时一致的，只有非常少量的近期产生的数据是不一致的。<br>
 有没有什么方式可以利用已有的数据，充分利用已有的数据呢？<br>
 pg_rewind登场 告别一下回到解放前。</p>
-<h5 id="基本原理">基本原理</h5>
+<h2 id="基本原理">基本原理</h2>
 <p>数据库每次的主从切换时，timeLine会增加1。 新老数据库在不同的时间线上运行。
 使用pg_rewind 将数据拉回到时间线(timeLine)产生分裂的那个点上。重新选择时间线，重放新时间线上的wal日志，使两个数据库重新回到一个时间线，并且数据一致。</p>
-<h5 id="开始实验">开始实验</h5>
+<h2 id="开始实验">开始实验</h2>
 <p>背景:</p>
 <p>主从数据库结构</p>
 <p>10.1.88.71 主库<br>
 10.1.88.72 从库</p>
 <p>目标</p>
 <p>数据库主从兑换， 主降为从时使用pg_rewind校对时间线</p>
-<h5 id="实际操作">实际操作</h5>
+<h2 id="实际操作">实际操作</h2>
 <p>注意事项 :</p>
 <ul>
 <li>必须开启full_page_writes 默认开启</li>
@@ -160,14 +167,14 @@ primary_conninfo = 'user=postgres passfile=''/root/.pgpass'' host=10.1.88.72 por
 </code></pre><p>注意事项: host 指向新主库地址</p>
 <p>以上过程中保持数据库是关闭状态!!!!</p>
 <p>4 启动数据库，并验证</p>
-<h5 id="备注">备注</h5>
+<h2 id="备注">备注</h2>
 <p>以前操作时，主从切换后，主从状态是对的，但是向主库写数据，从库没有同步。（原因不详） <br>
 今天按照上面的操作，测试的多次都成功了！！！</p>
-<h5 id="扩展">扩展</h5>
+<h2 id="扩展">扩展</h2>
 <p>查看数据库timeline 等信息</p>
 <pre><code># 在数据所在位置执行
 /usr/pgsql-10/bin/pg_controldata .
-</code></pre><h5 id="更多">更多</h5>
+</code></pre><h2 id="更多">更多</h2>
 <p><a href="https://github.com/digoal/blog/blob/master/201901/20190128_02.md">https://github.com/digoal/blog/blob/master/201901/20190128_02.md</a></p>
 
         </div>
@@ -314,7 +321,9 @@ primary_conninfo = 'user=postgres passfile=''/root/.pgpass'' host=10.1.88.72 por
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (8)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

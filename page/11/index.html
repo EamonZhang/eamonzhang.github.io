@@ -130,6 +130,13 @@
             2019年1月30日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres.html'>postgres</a></span>
+            
+        </div>
+        
         <div class="post-content">
             pg_rewind requires that the target server either has the wal_log_hints option enabled in postgresql.conf or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. full_page_writes must also be set to on, but is enabled by default. wal_log_hints 使用场景 在数据库主从结构中，从变成主易。但是由主变为从却需要一番周折。 如果是数据量少时重新使用pg_backup拉一份从即可，但是如果数据量大时，这个过程非常的耗时耗能。对线上业务也会有影……
         </div>
@@ -440,7 +447,9 @@
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (8)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     
