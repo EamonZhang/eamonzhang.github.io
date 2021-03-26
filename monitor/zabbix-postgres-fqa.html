@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Zabbix Postgres Fqa | Let&#39;s Go</title>
+    <meta property="og:title" content="Zabbix Postgres Fqa - Let&#39;s Go">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-12-24T17:18:11&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-12-24T17:18:11&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Zabbix Postgres Fqa">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/monitor/zabbix-postgres-fqa.html">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s Go
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Zabbix Postgres Fqa</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月24日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="如何使用篇">如何使用篇</h4>
+<hr>
+<ul>
+<li>如何使用zabbix监控postgres</li>
+</ul>
+<p>我们采用的是github中的开源项目<a href="https://github.com/lesovsky/zabbix-extensions">zabbix-extensions</a>中的postgres，iostat对Postgres数据库性能指标及系统IO进行监控。<br>
+以及对实体机进行监控，本文主要介绍对postgres的性能进行监控和分析</p>
+<ul>
+<li>如何在现有的数据库系统中加入监控，需要哪些条件</li>
+</ul>
+<p>哪些条件<br>
+1 PostgreSQL version 9.4 and above<br>
+2 Zabbix 3.4 and newer</p>
+<p>如何加入监控<br>
+1 在数据服务的主机中加入zabbix-agent，在cp files/postgresql/postgresql.conf /etc/zabbix/zabbix_agentd.d/，zabbix界面端加入对应模板<br>
+2 数据库访问权限，本地访问数据库权限，可在pg_hba.conf中设置， 加入一行&rsquo;host all  all 127.0.0.1/32  trust',这个权限有些大，根据自己的情况设置。 <br>
+3 数据库中加入extends: pg_buffercache pg_stat_statements</p>
+<p>以上所有操作不需要重启数据库， reload即可生效</p>
+<ul>
+<li>监控是如何连接到数据库的</li>
+</ul>
+<p>使用模板中的宏定义</p>
+<pre><code> {$PG_CONNINFO}=-h 127.0.0.1 -p 5432 -U postgres -d zabbix
+</code></pre><p>如果现在一套zabbix系统中监控多个数据库，数据库的端口，用户名不统一时，可以在各自的hosts中的宏定义中分别设置各自的连接方式。</p>
+<ul>
+<li>如何指定哪些databases tables被监控</li>
+</ul>
+<p>首先模板中包含3种自动发现机制分别是Discovery rule</p>
+<p>PostgreSQL databases discovery  数据库中database<br>
+PostgreSQL database tables discovery 数据库中的table<br>
+PostgreSQL streaming stand-by discovery   流复制</p>
+<p>以上discovery 可根据具体需求进行开启关闭</p>
+<p>在Filters中对发现规则的结果进行过滤，如对哪些databases哪些tables进行监控。</p>
+<h4 id="如何调试">如何调试</h4>
+<pre><code>zabbix_get -s 10.1.88.74 -k pgsql.db.discovery['-h 127.0.0.1 -p 5432 -U postgres']
+
+-s 数据库访问ip
+-k key [参数]
+</code></pre><h4 id="常见问题解读">常见问题解读</h4>
+<hr>
+<ul>
+<li>PostgreSQL: number of running processes</li>
+</ul>
+<p>分析</p>
+<pre><code>zabbix_get -s 10.1.88.74 -k proc.num[postgres]
+0
+</code></pre><p>返回结果为0 ，</p>
+<p>登陆到对应节点</p>
+<pre><code>ps -fu postgres
+UID        PID  PPID  C STIME TTY          TIME CMD
+postgres  4699     1  0 5月16 ?       00:25:14 /usr/pgsql-10/bin/postmaster -D /home/pgsql/10/data/
+</code></pre><p>PID为1的进程应用名称为postmaster</p>
+<pre><code>zabbix_get -s 10.1.88.74 -k proc.num[postmaster]
+31
+</code></pre><p>解决方法：</p>
+<p>在zabbix模版对应值进行修改{$PG_PROCESS_NAME}=postmaster</p>
+<p>当前postgers version 10.4 出现如上问题,10.6 没有</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/monitor/zabbix-fqa.html">Zabbix FQA</a></li>
+        
+        <li><a href="/linux/kworker.html">Kworker </a></li>
+        
+        <li><a href="/postgres/index-invalid.html">引起索引失效</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

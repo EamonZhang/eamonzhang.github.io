@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>DNS | Let&#39;s Go</title>
+    <meta property="og:title" content="DNS - Let&#39;s Go">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2019-10-28T09:23:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2019-10-28T09:23:00&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="DNS">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/network-security/dns.html">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s Go
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">DNS</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年10月28日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <p>DNS：Domain Name System 域名管理系统</p>
+<p>A记录 A（Address）记录是用来指定主机名（或域名）对应的IP地址记录</p>
+<p>NS记录 NS（Name Server）记录是域名服务器记录，用来指定该域名由哪个DNS服务器来进行解析</p>
+<p>MX记录 MX（Mail Exchanger）记录是邮件交换记录，它指向一个邮件服务器，用于电子邮件系统发邮件时根据收信人的地址后缀来定位邮件服务器。</p>
+<p>CNAME记录 CNAME（Canonical Name ）别名记录，允许您将多个名字映射到同一台计算机。</p>
+<p>TXT记录，一般指某个主机名或域名的说明</p>
+<p>TTL值 TTL（Time-To-Live）</p>
+<p>PTR值 PTR是pointer的简写，用于将一个IP地址映射到对应的域名，也可以看成是A记录的反向，IP地址的反向解析</p>
+<h4 id="skydns">skydns</h4>
+<h5 id="软件安装">软件安装</h5>
+<p>skydns rpm 下载 for centos 7</p>
+<p>etcd 使用 centos7 官方自带软件</p>
+<h5 id="skydns-配置">skydns 配置</h5>
+<p>/etc/skydns/skydns.conf</p>
+<pre><code>ETCD_MACHINES=&quot;http://127.0.0.01:2379&quot;
+SKYDNS_ADDR=&quot;0.0.0.0:53&quot;
+SKYDNS_NAMESERVERS=&quot;119.29.29.29:53&quot;
+</code></pre><p>说明</p>
+<p>ETCD_MACHINES
+指定当前 etcd 集群地址</p>
+<p>SKYDNS_ADDR
+本地 dns 监听地址</p>
+<p>SKYDNS_NAMESERVERS
+上层 DNS 服务器</p>
+<h5 id="etcd-配置方法">etcd 配置方法</h5>
+<p>另一种配置方法, 只需要在 skydns.conf 中配置对应的 etcd 连接地址即可.</p>
+<p>其他配置选项在 etcd 中进行配置</p>
+<pre><code> etcdctl set /skydns/config '{&quot;dns_addr&quot;:&quot;0.0.0.0:53&quot;,&quot;ttl&quot;:30, &quot;nameservers&quot;: [&quot;119.29.29.29:53&quot;], &quot;domain&quot;:&quot;mydomain.com.&quot;}'
+</code></pre><h5 id="参考作用">参考作用</h5>
+<pre><code>dns_addr: IP:port on which SkyDNS should listen, defaults to 127.0.0.1:53.
+domain: domain for which SkyDNS is authoritative, defaults to skydns.local..
+dnssec: enable DNSSEC
+hostmaster: hostmaster email address to use.
+local: optional unique value for this skydns instance, default is none. This is returned when queried for local.dns.skydns.local.
+round_robin: enable round-robin sorting for A and AAAA responses, defaults to true. Note that packets containing more than one CNAME are exempt from this (see issue #128 on Github).
+nameservers: forward DNS requests to these (recursive) nameservers (array of IP:port combination), when not authoritative for a domain. This defaults to the servers listed in /etc/resolv.conf. Also see no_rec.
+no_rec: never (ever) provide a recursive service (i.e. forward to the servers provided in -nameservers).
+read_timeout: network read timeout, for DNS and talking with etcd.
+ttl: default TTL in seconds to use on replies when none is set in etcd, defaults to 3600.
+min_ttl: minimum TTL in seconds to use on NXDOMAIN, defaults to 30.
+scache: the capacity of the DNSSEC signature cache, defaults to 10000 signatures if not set.
+rcache: the capacity of the response cache, defaults to 0 messages if not set.
+rcache_ttl: the TTL of the response cache, defaults to 60 if not set.
+ndots: how many labels a name should have before we allow forwarding. Default to 2.
+systemd: bind to socket(s) activated by systemd (ignores -addr).
+path-prefix: backend(etcd) path prefix, defaults to skydns (i.e. if it is set to mydns, the SkyDNS's configuration object should be stored under the key /mydns/config).
+etcd3: flag that toggles the etcd version 3 support by skydns during runtime. Defaults to false.
+</code></pre><h5 id="service-文件">service 文件</h5>
+<pre><code>[Unit]
+Description=SkyDNS service
+#After=etcd.service             &lt;- 假如 etcd 不在本地, 那么这里需要屏蔽
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/skydns/skydns.conf
+User=skydns                      &lt;- 默认使用 skydns 用户启动, 但该用户无法启用 &lt; 1024 端口的服务
+ExecStart=/usr/bin/skydns
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><h5 id="授权服务启动">授权服务启动</h5>
+<pre><code>setcap cap_net_bind_service+ep /usr/bin/skydns   (允许该命令可以监听 53 端口)
+systemctl daemon-reload
+</code></pre><h5 id="服务管理">服务管理</h5>
+<pre><code>systemctl start skydns
+systemctl stop skydns
+</code></pre><h5 id="添加a记录">添加A记录</h5>
+<pre><code>ectctl set /skydns/com/mydomain/test/x1 '{&quot;host&quot;:&quot;10.1.0.1&quot;}'
+ectctl set /skydns/com/mydomain/test/x2 '{&quot;host&quot;:&quot;10.1.0.2&quot;}'
+
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/cmd-vim.html">vi 编辑</a></li>
+        
+        <li><a href="/es/curl-es.html">使用curl命令操作elasticsearch</a></li>
+        
+        <li><a href="/monitor/postgres-indicators.html">Postgres 10 监控指标</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

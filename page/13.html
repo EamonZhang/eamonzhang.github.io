@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+	<meta name="generator" content="Hugo 0.81.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Let&#39;s Go | Let&#39;s build our own cloud native together  </title>
+    <meta property="og:title" content="Let&#39;s Go | Let&#39;s build our own cloud native together  ">
+    <meta property="og:type" content="website">
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="python 软件架构等">
+    <meta property="og:url" content="https://zhangeamon.top/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml+xml" href="https://zhangeamon.top/index.xml" title="Let's Go" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <h1>
+                        <a id="logo" href="https://zhangeamon.top">
+                            Let&#39;s Go
+                        </a>
+                    </h1>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/at-crontab.html" title="定时任务">定时任务</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月9日
+        </date>
+        
+        <div class="post-content">
+            Linux 系统中的定时任务 重复执行 一次执行 重复执行 详见 /etc/crontab 配置 anacron 用于以天为单位的频率运行命令。它的工作与 cron 稍有不同，它假设机器不会一直开机。 cron 也适合在那些不会 24X7 运行如笔记本以及桌面电脑的机器上运行每日、每周以及每月的计划任务（LCTT 译注：不适合按小时、分钟执行任务）。 假设你有一个计划任务……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/at-crontab.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/nospace-device.html" title="no space left on device">no space left on device</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月9日
+        </date>
+        
+        <div class="post-content">
+            问题描述 Linux 系统中出现磁盘空间不足错误： No space left on device … 在linux环境下，用vi打开某文件时，提示Write error in swap file 原因分析 导致该问题的可能原因包括： 磁盘分区空间使用率达到百分之百 磁盘分区inode使用率达到百分之百 僵尸文件：已删除文件因句柄被占用未释放导致相应空间未释放 解决方法 磁盘……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/nospace-device.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/meminfo.html" title="meminfo Linux 内存信息">meminfo Linux 内存信息</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月8日
+        </date>
+        
+        <div class="post-content">
+            介绍 /proc/meminfo是了解Linux系统内存使用状况的主要接口，我们最常用的”free”、”vmstat”等命令就是通过它获取数据的 内容解读 cat /proc/meminfo MemTotal: 8009504 kB 除了bios ，kernel本身占用的内存以外，可以被kernel所分配的内存。一般这个值固定不变。 MemFree: 2385828 kB 未被使用的内存 MemAvailable:……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/meminfo.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_trgm.html" title="pg_trgm的gist和gin索引加速字符匹配查询">pg_trgm的gist和gin索引加速字符匹配查询</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月7日
+        </date>
+        
+        <div class="post-content">
+            背景 对车牌号的记忆有时可能记住的是前几位，有时可能是后几位，不同的人记车牌号的习惯也不同。 通常是是容易记住首尾，中间不清楚。 那么如何在大量已有车牌数据中快速根据模糊的信息来进行查询呢？ 模拟 数据库表中约有500w条车牌号记录，对表中的车牌号进行模糊查询。 即支持 car_id like &lsquo;%XXXX%XXX%&rsquo; 查询 ---创建表……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_trgm.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/troubles.html" title="Docker 问题集">Docker 问题集</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月3日
+        </date>
+        
+        <div class="post-content">
+            Docker push: Received unexpected HTTP status: 500 Internal Server Error 描述: 使用jenkins 构建docker images时 push images到私有harbor中报错: Received unexpected HTTP status: 500 Internal Server Error,在build机上直接push没有问题。有的项目可以成功，有的失败。即使同一个项目有时执行成功，有时也会失败。 解决方式: 网上很多的关于500的……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/troubles.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/mail.html" title="Centos mail">Centos mail</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月29日
+        </date>
+        
+        <div class="post-content">
+            介绍 电子邮件系统包括两个组件： MUA(Mail User Agent,邮件用户代理）为用户提供的可以读写邮件的界面,例如 Foxmail, Outlook MTA(Mail Transport Agent,邮件传送代理）MTA是运行在底层，能够处理邮件的收发工作的程序 邮件的接收是MTA和MUA配合完成的。远程的MUA首先向远程MTA连接并验证发信人身份，然后由远程MT……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/mail.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgbouncer.html" title="pgbouncer 连接池">pgbouncer 连接池</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月27日
+        </date>
+        
+        <div class="post-content">
+            背景介绍 Pgbouncer是一个针对PostgreSQL数据库的轻量级连接池 pgbouncer 的目标是降低因为新连接到 PostgreSQL 的连接而导致的性能损失 使用术语说明： 为了后面的描述更清晰，使用如下术语 Client : 指访问者 Pgboucer: 指连接池 Postgres: 指数据库。 Connetions: 指彼此之间的连接 整体架构 原来: Client -&gt; Postgres 现在: Client -&gt; Pgbounce -&gt; Postgres 优势 内存消耗低(默……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgbouncer.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cmd-xargs.html" title="xargs 命令">xargs 命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月25日
+        </date>
+        
+        <div class="post-content">
+            http://www.cnblogs.com/wangqiguo/p/6464234.html……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-xargs.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cmd-sed.html" title="sed 命令">sed 命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月25日
+        </date>
+        
+        <div class="post-content">
+            概述 sed命令是一个面向字符流的非交互式编辑器，也就是说sed不允许用户与它进行交互操作。sed是按行来处理文本内容的。在shell中，使用sed来批量修改文本内容是非常方便的。 sed命令的选项 sed [选项] [动作] 选项与参数： -n ：使用安静(silent)模式。在一般 sed 的用法中，所有……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-sed.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cmd-awk.html" title="awk 命令">awk 命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月25日
+        </date>
+        
+        <div class="post-content">
+            What is awk 官网 man 告诉我们 pattern scanning and processing language 那么awk能做什么，awk适合做什么 ？ awk最常用的工作一般是遍历一个文件中的每一行，然后分别对文件的每一行进行处理。 由于awk天生提供对文件中文本分列进行处理，所以如果一个文件中的每行都被特定的分隔符(常见的是空格)隔开， 我们可以将这个文件看成是由……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-awk.html">阅读全文</a></p>
+    </article>
+    
+    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="https://zhangeamon.top/page/12.html">上一页</a>
+    </li>
+    
+
+    
+
+    
+        
+        
+    
+    
+
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/">1</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/11.html">11</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/12.html">12</a>
+        </li>
+        
+    
+        
+        
+        <li  class="current">
+            <a href="https://zhangeamon.top/page/13.html">13</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/14.html">14</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/15.html">15</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/21.html">21</a>
+        </li>
+        
+    
+
+    
+    
+
+    <li class="next">
+        <a href="https://zhangeamon.top/page/14.html">下一页</a>
+    </li>
+    
+</ol>
+
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

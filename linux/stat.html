@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Access Modify Change 三种时间戳 | Let&#39;s Go</title>
+    <meta property="og:title" content="Access Modify Change 三种时间戳 - Let&#39;s Go">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-12-20T13:56:24&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-12-20T13:56:24&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Access Modify Change 三种时间戳">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/linux/stat.html">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s Go
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Access Modify Change 三种时间戳</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月20日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="三种时间对应关系">三种时间对应关系</h4>
+<ul>
+<li>访问时间  Access  atime</li>
+<li>修改时间  Modify  mtime</li>
+<li>状态改动时间  Change ctime</li>
+</ul>
+<h4 id="如何查看文件文件的三种时间戳">如何查看文件文件的三种时间戳</h4>
+<pre><code>stat filename
+</code></pre><h4 id="三种时间戳的解释">三种时间戳的解释</h4>
+<ul>
+<li>
+<p>访问时间：读一次文件的内容，这个时间就会更新。比如more、cat等命令。ls、stat命令不会修改atime</p>
+</li>
+<li>
+<p>修改时间：修改时间是文件内容最后一次被修改的时间。比如：vim操作后保存文件。ls -l列出的就是这个时间</p>
+</li>
+<li>
+<p>状态改动时间。是该文件的inode节点最后一次被修改的时间，通过chmod、chown命令修改一次文件属性，这个时间就会更新。</p>
+</li>
+</ul>
+<h4 id="应用举例-查看数据库的建立时间">应用举例 查看数据库的建立时间</h4>
+<p>数据库的oid</p>
+<pre><code>select  oid , datname from pg_database ;
+  oid  |   datname   
+-------+-------------
+ 13806 | postgres
+     1 | template1
+ 13805 | template0
+ 16629 | timescaledb
+ 16646 | normaldb
+ 16659 | pgwatch2
+ 26557 | awr
+ 42902 | pipelinedb
+(8 行记录)
+
+</code></pre><p>对应的存放位置</p>
+<pre><code>ll base/
+总用量 216
+drwx------ 2 postgres postgres 12288 12月 19 00:54 1
+drwx------ 2 postgres postgres  8192 12月 17 12:45 13805
+drwx------ 2 postgres postgres  8192 12月 15 02:32 13806
+drwx------ 2 postgres postgres 36864 12月 19 00:55 16629
+drwx------ 2 postgres postgres 32768 12月 20 11:23 16646
+drwx------ 2 postgres postgres  8192 12月 17 12:44 16659
+drwx------ 2 postgres postgres 12288 12月 15 02:33 26557
+drwx------ 2 postgres postgres 20480 12月 18 22:11 42902
+drwx------ 2 postgres postgres     6 12月 20 14:03 pgsql_tmp
+
+</code></pre><p>查看时间</p>
+<pre><code> stat PG_VERSION 
+  文件：&quot;PG_VERSION&quot;
+  大小：3         	块：8          IO 块：4096   普通文件
+设备：fd02h/64770d	Inode：1740036     硬链接：1
+权限：(0600/-rw-------)  Uid：(   26/postgres)   Gid：(   26/postgres)
+最近访问：2018-12-20 10:56:55.671680658 +0800
+最近更改：2018-11-30 10:46:14.736271487 +0800
+最近改动：2018-11-30 10:46:14.736271487 +0800
+创建时间：-
+</code></pre><p>禁用atime</p>
+<pre><code>cat /etc/fstab
+
+#
+# /etc/fstab
+# Created by anaconda on Tue Jul 10 10:13:30 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+UUID=ef850a59-8018-45f0-ad9e-54fa0b17d5dd /                       xfs     noatime,nodiratime        0 0
+UUID=bece2732-9d2c-4b3b-9818-1ea939f45db8 /boot                   xfs     defaults        0 0
+UUID=9d880ea3-0a7a-4d73-aeab-e972ea2af2f6 /home                   xfs     defaults        0 0
+UUID=c63df49f-85f3-4cf8-b69c-bc10808b69e1 swap                    swap    defaults        0 0
+
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/role-manager.html">权限管理</a></li>
+        
+        <li><a href="/postgres/dba.html">DBA 日常</a></li>
+        
+        <li><a href="/linux/ln-s.html">ln -s 建立软连接</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

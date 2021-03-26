@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>PG高可用Patroni | Let&#39;s Go</title>
+    <meta property="og:title" content="PG高可用Patroni - Let&#39;s Go">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2019-01-30T10:14:55&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2019-01-30T10:14:55&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="PG高可用Patroni">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/patroni.html">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s Go
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">PG高可用Patroni</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="环境">环境</h4>
+<ul>
+<li>操作系统 Centos 7</li>
+<li>patroni 版本 2.0.2</li>
+<li>postgres 版本 13</li>
+</ul>
+<h4 id="实现目标">实现目标</h4>
+<ul>
+<li><a href="postgres/patroni/#%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94">高可用方案对比</a></li>
+<li><a href="postgres/patroni/#patroni%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">patroni 结构分析</a></li>
+<li><a href="postgres/patroni/#patroni%E6%90%AD%E5%BB%BA%E6%96%B0%E9%9B%86%E7%BE%A4">patroni 搭建新集群</a></li>
+<li>patroni 接管现有集群</li>
+<li><a href="postgres/patroni/#patroni%E7%AE%A1%E7%90%86pg%E9%85%8D%E7%BD%AE">patroni 管理pg配置</a></li>
+<li><a href="postgres/patroni/#%E6%89%8B%E5%8A%A8swithover">手动swithover</a></li>
+<li><a href="postgres/patroni/#%E8%87%AA%E5%8A%A8failover">自动failover</a></li>
+<li><a href="postgres/patroni/#%E7%BB%B4%E6%8A%A4%E6%A8%A1%E5%BC%8F">维护模式</a></li>
+<li><a href="postgres/patroni/#%E5%BC%B9%E6%80%A7%E6%89%A9%E5%AE%B9%E7%BC%A9%E5%AE%B9">弹性扩容，缩容</a></li>
+<li><a href="postgres/patroni/#%E5%AF%B9%E5%A4%96%E6%8F%90%E4%BE%9B%E7%BB%9F%E4%B8%80%E6%9C%8D%E5%8A%A1">对外提供统一服务</a></li>
+<li><a href="postgres/patroni/#restFULLAPI">RestFULLAPI</a></li>
+<li><a href="postgres/patroni/#%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D">备份恢复</a></li>
+<li><a href="postgres/patroni/#%E7%9B%91%E6%8E%A7">监控</a></li>
+<li><a href="postgres/patroni/#%E6%97%A5%E5%BF%97">日志</a></li>
+<li><a href="postgres/patroni/#%E5%8D%87%E7%BA%A7">升级</a></li>
+</ul>
+<h5 id="高可用方案对比">高可用方案对比</h5>
+<p>pg的高可用方案都是基于流复制来实现</p>
+<ul>
+<li>
+<p><a href="https://github.com/clusterlabs/PAF/">PAF</a><br>
+pacemaker + corosyns</p>
+</li>
+<li>
+<p><a href="https://github.com/2ndQuadrant/repmgr">repmgr</a><br>
+repmgr 手动流复制管理<br>
+repmgrd 自动流复制管理 守护进程<br>
+主+从<br>
+主+从+见证节点</p>
+</li>
+</ul>
+<p><a href="https://scalegrid.io/blog/managing-high-availability-in-postgresql-part-1/">更多介绍</a></p>
+<h5 id="patroni架构分析">patroni架构分析</h5>
+<ul>
+<li>DCS[etcd] 外部依赖 ，集群通信选主</li>
+<li>patroni 与pg在同一个节点， 守护进程</li>
+</ul>
+<h5 id="patroni搭建新集群">patroni搭建新集群</h5>
+<p>1 <a href="kvm/vagrant">虚拟机环境</a></p>
+<pre><code>10.10.1.10 node0 外部节点etcd
+10.10.1.11 - 13 node1-node3 集群节点
+</code></pre><p>2 node0 安装etcd</p>
+<p>单节点etcd 安装</p>
+<pre><code>yum install etcd 
+</code></pre><p>配置其他节点可访问
+etc/etcd/etcd.conf</p>
+<pre><code>ETCD_LISTEN_CLIENT_URLS=&quot;http://10.10.1.10:2379&quot;
+</code></pre><p><a href="./">etcd 集群管理</a></p>
+<p>3 node1-node3 安装配置patroni</p>
+<p>python3 环境</p>
+<pre><code>yum install gcc python3 python3-devel
+</code></pre><p>依赖安装</p>
+<pre><code>pip3 install psycopg2-binary
+pip3 install patroni[etcd]
+</code></pre><p>服务安装</p>
+<pre><code>yum install ntp
+systemctl start ntpd
+systemctl enable ntpd
+</code></pre><p>数据库安装</p>
+<p><a href="/postgres/install01/">参考</a></p>
+<p>不需要初始化</p>
+<p>4 基础配置</p>
+<p>vi /etc/patroni.yml</p>
+<pre><code>scope: postgres          # 集群名称 
+namespace: /db002/       # 名称空间，对应etcd 根目录
+name: postgresql0        # 节点名称
+
+restapi:
+    listen: 10.10.1.11:8008             #对外restfull 接口
+    connect_address: 10.10.1.11:8008
+
+etcd:
+    host: 10.10.1.10:2379             # etcd服务地址
+
+bootstrap:                            # 心跳 
+    dcs:
+        ttl: 30
+        loop_wait: 10
+        retry_timeout: 10      # 访问etcd 超时多久后重试
+        maximum_lag_on_failover: 1048576  #从库落后主库多少bytes后failover时不能被选为主
+        postgresql:                 # 流复制
+          use_pg_rewind: true
+          use_slots: false          # 默认true  主从数据库wal保留策略
+          parameters:                # 以下为设置数据库参数，多个节点配置统一 
+#           synchronous_standby_names: &quot;*&quot; # 流复制 同步
+#           synchronous_commit: &quot;on&quot;  # 同步等级
+#           wal_level: hot_standby
+#           hot_standby: &quot;on&quot;
+#           wal_keep_segments: 8
+#           max_wal_senders: 10
+#           max_replication_slots: 10
+#           wal_log_hints: &quot;on&quot;
+#           archive_mode: &quot;on&quot;
+#           archive_timeout: 1800s
+#           archive_command: mkdir -p ../wal_archive &amp;&amp; test ! -f ../wal_archive/%f &amp;&amp; cp %p ../wal_archive/%f
+#        recovery_conf:
+#          restore_command: cp ../wal_archive/%f %p
+
+    initdb:                           #初始化数据库
+    - encoding: UTF8
+    - data-checksums
+
+    pg_hba:                           # 数据库访问验证配置
+    - host replication replicator 0.0.0.0/0 md5
+    - host all all 0.0.0.0/0 md5
+
+    users:                            #初始化数据库时创建应用用户
+        admin:
+            password: admin
+            options:
+                - createrole
+                - createdb
+
+postgresql:                           #数据库设置
+    listen: 0.0.0.0:5432
+    connect_address: 10.10.1.11:5432
+    data_dir: /var/lib/pgsql/13/data/
+    pgpass: /tmp/pgpass
+    authentication:
+        replication:
+            username: replicator
+            password: rep-pass
+        superuser:
+            username: postgres
+            password: secretpassword
+    parameters:
+        unix_socket_directories: '.'
+
+tags:
+    nofailover: false
+    noloadbalance: false
+    clonefrom: false
+    nosync: false
+
+</code></pre><p>5 启动服务</p>
+<p>服务管理
+cat /usr/lib/systemd/system/patroni.service</p>
+<pre><code>[Unit]
+Description=Runners to orchestrate a high-availability PostgreSQL
+After=syslog.target network.target
+
+[Service]
+Type=simple
+
+User=postgres
+Group=postgres
+
+# Note: avoid inserting whitespace in these Environment= lines, or you may
+# break postgresql-setup.
+
+# Location of database directory
+Environment=PATH=$PATH:/usr/pgsql-13/bin
+
+# Where to send early-startup messages from the server (before the logging
+# options of postgresql.conf take effect)
+# This is normally controlled by the global default set by systemd
+# StandardOutput=syslog
+
+# Disable OOM kill on the postmaster
+OOMScoreAdjust=-1000
+Environment=PG_OOM_ADJUST_FILE=/proc/self/oom_score_adj
+Environment=PG_OOM_ADJUST_VALUE=0
+
+ExecStart=/usr/local/bin/patroni /etc/patroni.yml
+ExecReload=/bin/kill -HUP $MAINPID
+
+KillMode=process
+KillMode=mixed
+KillSignal=SIGINT
+
+# Do not set any timeout value, so that systemd will not kill postmaster
+# during crash recovery.
+TimeoutSec=0
+[Install]
+WantedBy=multi-user.target
+</code></pre><p>验证</p>
+<pre><code> sudo systemd-analyze verify patroni.service
+</code></pre><p>启动</p>
+<pre><code>systemctl start patroni
+</code></pre><p>查看启动日志</p>
+<pre><code>journalctl -u patroni.service -f -n 1000
+</code></pre><p>查看patroni</p>
+<pre><code>#patronictl -c /etc/patroni.yml list
++ Cluster: postgres (6935229608238737808) ----+----+-----------+
+| Member      | Host       | Role   | State   | TL | Lag in MB |
++-------------+------------+--------+---------+----+-----------+
+| postgresql0 | 10.10.1.11 | Leader | running |  2 |           |
++-------------+------------+--------+---------+----+-----------+
+</code></pre><p>6 其他节点重复以上操作, 在集群中加入新节点</p>
+<p>注意事项 patroni.yml 中的配置不同的节点修改成相应的值</p>
+<p>name: postgresql0</p>
+<p>IP写成节点的IP</p>
+<pre><code>#patronictl -c /etc/patroni.yml list -e
++ Cluster: postgres (6935302809216505755) -----+----+-----------+-----------------+-------------------+------+
+| Member      | Host       | Role    | State   | TL | Lag in MB | Pending restart | Scheduled restart | Tags |
++-------------+------------+---------+---------+----+-----------+-----------------+-------------------+------+
+| postgresql0 | 10.10.1.11 | Leader  | running | 14 |           |                 |                   |      |
+| postgresql2 | 10.10.1.12 | Replica | running | 14 |         0 |                 |                   |      |
+| postgresql3 | 10.10.1.13 | Replica | running | 14 |         0 |                 |                   |      |
++-------------+------------+---------+---------+----+-----------+-----------------+-------------------+------+
+</code></pre><h5 id="patroni管理pg配置">patroni管理pg配置</h5>
+<p>1 多节点统一配置</p>
+<p>以下修改后集群中每个节点都生效，并且保持一致。</p>
+<pre><code>修改集群配置
+# patronictl -c /etc/patroni.yml edit-config
+
+</code></pre><pre><code>查看集群配置 
+#patronictl -c /etc/patroni.yml show-config
+
+loop_wait: 10
+maximum_lag_on_failover: 1048576
+postgresql:
+  parameters:
+    max_connections: 1000
+    synchronous_standby_names: '*'
+  use_pg_rewind: true
+  use_slots: false
+retry_timeout: 10
+ttl: 30
+</code></pre><pre><code>修改后待生效
+#patronictl -c /etc/patroni.yml list 
++ Cluster: postgres (6935302809216505755) -----+----+-----------+-----------------+
+| Member      | Host       | Role    | State   | TL | Lag in MB | Pending restart |
++-------------+------------+---------+---------+----+-----------+-----------------+
+| postgresql0 | 10.10.1.11 | Leader  | running | 14 |           | *               |
+| postgresql2 | 10.10.1.12 | Replica | running | 14 |         0 | *               |
+| postgresql3 | 10.10.1.13 | Replica | running | 14 |         0 | *               |
++-------------+------------+---------+---------+----+-----------+-----------------+
+</code></pre><pre><code>重启集群生效, 可指定执行计划。定时自动执行
+#patronictl -c /etc/patroni.yml restart postgres(集群名)
+</code></pre><p>以上修改的文件为 postgres.conf</p>
+<p>2 单节点数据库配置</p>
+<p>有些参数只想在特定节点生效，配置方式与单节点数据库一致</p>
+<p>vi postgres.base.conf</p>
+<p>对应节点执行 restart 或 reload 生效</p>
+<pre><code>systemctl restart patroni 
+systemctl reload patroni 
+</code></pre><p>3 REFTFULL API 接口访问</p>
+<h5 id="手动swithover">手动swithover</h5>
+<p>计划内调整主节点，集群拓扑关系</p>
+<pre><code>将原主postgresql0切换为postgresql2
+#patronictl -c /etc/patroni.yml switchover
+Master [postgresql0]: 
+Candidate ['postgresql2', 'postgresql3'] []: postgresql2
+When should the switchover take place (e.g. 2021-03-04T08:50 )  [now]: 
+Current cluster topology
++ Cluster: postgres (6935302809216505755) -----+----+-----------+
+| Member      | Host       | Role    | State   | TL | Lag in MB |
++-------------+------------+---------+---------+----+-----------+
+| postgresql0 | 10.10.1.11 | Leader  | running | 14 |           |
+| postgresql2 | 10.10.1.12 | Replica | running | 14 |         0 |
+| postgresql3 | 10.10.1.13 | Replica | running | 14 |         0 |
++-------------+------------+---------+---------+----+-----------+
+Are you sure you want to switchover cluster postgres, demoting current master postgresql0? [y/N]: y
+2021-03-04 07:50:08.99426 Successfully switched over to &quot;postgresql2&quot;
++ Cluster: postgres (6935302809216505755) -----+----+-----------+
+| Member      | Host       | Role    | State   | TL | Lag in MB |
++-------------+------------+---------+---------+----+-----------+
+| postgresql0 | 10.10.1.11 | Replica | stopped |    |   unknown |
+| postgresql2 | 10.10.1.12 | Leader  | running | 14 |           |
+| postgresql3 | 10.10.1.13 | Replica | running | 14 |         0 |
++-------------+------------+---------+---------+----+-----------+
+</code></pre><h5 id="自动failover">自动failover</h5>
+<ul>
+<li>节点断网，通信失败，服务不停</li>
+<li>节点断电，通信失败，停服</li>
+<li>通信成功，服务停</li>
+<li>dcs 失效, 集群变为只读</li>
+<li>失联节点重新加入集群</li>
+</ul>
+<h5 id="维护模式">维护模式</h5>
+<p>维护模式： 集群对外提供服务。但集群关系不在接受patroni管理。此时的集群为原生的流复制。</p>
+<p>主动维护模式： 集群正常的情况下开启维护模式, 集群不在拥有autofailover 能力。当DCS 失效集群不受影响.</p>
+<pre><code># 进入维护模式
+patronictl -c /etc/patroni.yml pause
+Success: cluster management is paused
+
+# 退出维护模式
+patronictl -c /etc/patroni.yml resume
+Success: cluster management is resumed
+
+# 当前状态 是否为维护模式
+1 可查看在DSC 中的config信息
+2 API 接口信息
+</code></pre><p>被动维护模式： 当DCS 失效时集群变为只读模式</p>
+<p>处理方法 TODO</p>
+<h5 id="弹性扩容缩容">弹性扩容缩容</h5>
+<ul>
+<li>扩容 :</li>
+</ul>
+<p>将patroni.yml 拷贝到新节点 修改对应的内容后 启动自动加入集群</p>
+<ul>
+<li>缩容 :</li>
+</ul>
+<p>关闭 节点patroni 服务自动退出集群</p>
+<h5 id="对外提供统一服务">对外提供统一服务</h5>
+<ul>
+<li>二层 VIP <a href="https://github.com/cybertec-postgresql/vip-manager">vip-manager</a></li>
+<li>四层 haproxy</li>
+<li>七层 DNS</li>
+</ul>
+<p>服务发现参考下面的 restfullapi</p>
+<h5 id="restfullapi">restFULLAPI</h5>
+<pre><code>-- 读取配置文件
+# curl -s http://10.10.1.11:8008/config | jq .
+{
+  &quot;loop_wait&quot;: 10,
+  &quot;maximum_lag_on_failover&quot;: 1048576,
+  &quot;postgresql&quot;: {
+    &quot;parameters&quot;: {
+      &quot;max_connections&quot;: 1001,
+      &quot;synchronous_standby_names&quot;: &quot;*&quot;
+    },
+    &quot;use_pg_rewind&quot;: true,
+    &quot;use_slots&quot;: false
+  },
+  &quot;retry_timeout&quot;: 10,
+  &quot;ttl&quot;: 30
+}
+-- 读取集群信息
+curl -s http://10.10.1.11:8008/cluster | jq .
+{
+  &quot;members&quot;: [
+    {
+      &quot;name&quot;: &quot;postgresql0&quot;,
+      &quot;role&quot;: &quot;leader&quot;,
+      &quot;state&quot;: &quot;running&quot;,
+      &quot;api_url&quot;: &quot;http://10.10.1.11:8008/patroni&quot;,
+      &quot;host&quot;: &quot;10.10.1.11&quot;,
+      &quot;port&quot;: 5432,
+      &quot;timeline&quot;: 16
+    },
+    {
+      &quot;name&quot;: &quot;postgresql2&quot;,
+      &quot;role&quot;: &quot;replica&quot;,
+      &quot;state&quot;: &quot;running&quot;,
+      &quot;api_url&quot;: &quot;http://10.10.1.12:8008/patroni&quot;,
+      &quot;host&quot;: &quot;10.10.1.12&quot;,
+      &quot;port&quot;: 5432,
+      &quot;timeline&quot;: 16,
+      &quot;lag&quot;: 0
+    },
+    {
+      &quot;name&quot;: &quot;postgresql3&quot;,
+      &quot;role&quot;: &quot;replica&quot;,
+      &quot;state&quot;: &quot;running&quot;,
+      &quot;api_url&quot;: &quot;http://10.10.1.13:8008/patroni&quot;,
+      &quot;host&quot;: &quot;10.10.1.13&quot;,
+      &quot;port&quot;: 5432,
+      &quot;timeline&quot;: 16,
+      &quot;lag&quot;: 0
+    }
+  ]
+}
+-- 获取节点角色信息
+curl -s http://10.10.1.12:8008/health | jq .role
+&quot;replica&quot;
+
+curl -s http://10.10.1.11:8008/health | jq .role
+&quot;master&quot;
+
+-- 根据response code status
+主节点 200 , 从节点503 
+curl -si http://10.10.1.13:8008/master
+从节点 200 ,主节点503
+curl -si http://10.10.1.13:8008/replica
+
+</code></pre><h5 id="备份恢复">备份恢复</h5>
+<ul>
+<li>etcd 备份恢复</li>
+</ul>
+<ol>
+<li>
+<p>patroni 节点关闭后删除etcd数据 ，重新启动后数据再次生成</p>
+</li>
+<li>
+<p>正在运行的集群删除etcd数据 , 数据再次自动生成。</p>
+</li>
+</ol>
+<ul>
+<li>pg 备份恢复</li>
+</ul>
+<ol>
+<li>全量备份</li>
+<li>wal 备份</li>
+</ol>
+<p>官方方案 wal-e</p>
+<h5 id="监控">监控</h5>
+<ul>
+<li>patroni_exporter</li>
+<li>etcd_exporter</li>
+<li>postgres_exporter</li>
+</ul>
+<h5 id="日志">日志</h5>
+<ul>
+<li>FLK</li>
+</ul>
+<h5 id="升级">升级</h5>
+<p>[参考]</p>
+<p><a href="https://www.cnblogs.com/zhangeamon/p/9772118.html">https://www.cnblogs.com/zhangeamon/p/9772118.html</a></p>
+<p><a href="https://www.linode.com/docs/databases/postgresql/create-a-highly-available-postgresql-cluster-using-patroni-and-haproxy">https://www.linode.com/docs/databases/postgresql/create-a-highly-available-postgresql-cluster-using-patroni-and-haproxy</a></p>
+<p><a href="https://github.com/vitabaks/postgresql_cluster">ansible 管理</a></p>
+<p><a href="https://mp.weixin.qq.com/s/edvWkTb-WF7YyVAFz5GCfw">实践</a></p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/mysql/performance-cmd.html">MySQL常用性能分析命令</a></li>
+        
+        <li><a href="/postgres/pg_citus.html">citus 数据库分库</a></li>
+        
+        <li><a href="/postgres/pgwatch2.html">pgwatch2 数据库指标监控查看</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

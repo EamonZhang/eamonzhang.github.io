@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+	<meta name="generator" content="Hugo 0.81.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Let&#39;s Go | Let&#39;s build our own cloud native together  </title>
+    <meta property="og:title" content="Let&#39;s Go | Let&#39;s build our own cloud native together  ">
+    <meta property="og:type" content="website">
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="python 软件架构等">
+    <meta property="og:url" content="https://zhangeamon.top/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml+xml" href="https://zhangeamon.top/index.xml" title="Let's Go" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <h1>
+                        <a id="logo" href="https://zhangeamon.top">
+                            Let&#39;s Go
+                        </a>
+                    </h1>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/cluster.html" title="cluster 聚族表">cluster 聚族表</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-content">
+            存储数据线性相关性 测试……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/cluster.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/archive.html" title="Archive wal归档">Archive wal归档</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-content">
+            介绍 所谓WAL日志归档，其实就是把在线的WAL日志备份出来。 配置 vi postgresql.conf wal_level='replica' # - Archiving - archive_mode = on # enables archiving; off, on, or always # (change requires restart) archive_command = 'test ! -f /mnt/backup/%f &amp;&amp; cp %p /mnt/backup/%f' # command to use to archive a logfile segment # placeholders: %p = path of file to archive # %f = file name only # e.g. 'test ! -f /mnt/server/archivedir/%f &amp;&amp; cp %p /mnt/server/archivedir/%f' #archive_timeout = 0 # force a logfile segment switch after this # number of seconds; 0 disables 参数说明 wal_level archive 或更高级别 archive_mode on 开启归档模式，always……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/archive.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/timescaledb.html" title="TimescaleDB 时序数据库">TimescaleDB 时序数据库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-content">
+            时序数据库 https://github.com/timescale/timescaledb 数据库配置 https://github.com/timescale/timescaledb-tune copy并行导入数据 https://github.com/timescale/timescaledb-parallel-copy 常用方法 创建拓展 CREATE EXTENSION timescaledb; 创建一个普通的表 CREATE TABLE conditions ( time TIMESTAMPTZ NOT NULL, location TEXT NOT NULL, temperature DOUBLE PRECISION NULL, humidity DOUBLE PRECISION NULL ); 转换成时序数据库表 SELECT create_hypertable('conditions', 'time'); conditions 表名 time 时序字段 修改时序间隔 对新表生效 SELECT set_chunk_time_interval('conditions', INTERVAL '24 hours'); 查看分区 SELECT show_chunks('conditions'); SELECT show_chunks('conditions', older_than =&gt; INTERVAL '3 months') SELECT show_chunks('conditions', older_than =&gt; DATE '2017-01-01'); SELECT show_chunks(newer_than =&gt; INTERVAL '3 months'); SELECT show_chunks(older_than =&gt; INTERVAL '3 months', newer_than =&gt; INTERVAL '4 months'); 查看数据大……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/timescaledb.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_rewind.html" title="PG主从切换 pg_rewind">PG主从切换 pg_rewind</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-content">
+            pg_rewind requires that the target server either has the wal_log_hints option enabled in postgresql.conf or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. full_page_writes must also be set to on, but is enabled by default. wal_log_hints 使用场景 在数据库主从结构中，从变成主易。但是由主变为从却需要一番周折。 如果是数据量少时重新使用pg_backup拉一份从即可，但是如果数据量大时，这个过程非常的耗时耗能。对线上业务也会有影……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_rewind.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/patroni.html" title="PG高可用Patroni">PG高可用Patroni</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-content">
+            环境 操作系统 Centos 7 patroni 版本 2.0.2 postgres 版本 13 实现目标 高可用方案对比 patroni 结构分析 patroni 搭建新集群 patroni 接管现有集群 patroni 管理pg配置 手动swithover 自动failover 维护模式 弹性扩容，缩容 对外提供统一服务 RestFULLAPI 备份恢复 监控 日志 升级 高可用方案对比 pg的高可用方案都是基于流复制来实现 PAF pacemaker + corosyns repmgr repmgr 手动流复制管……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/patroni.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/mysql/performance-cmd.html" title="MySQL常用性能分析命令">MySQL常用性能分析命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月29日
+        </date>
+        
+        <div class="post-content">
+            MySQL常用性能突发事件分析命令： SHOW PROCESSLIST; —当前MySQL数据库的运行的所有线程 INNODB_TRX; — 当前运行的所有事务 INNODB_LOCKS; — 当前出现的锁 INNODB_LOCK_WAITS; — 锁等待的对应关系计 SHOW OPEN TABLES where In_use &gt;0; — 当前打开表 SHOW ENGINE INNODB STATUS \G; —Innodb状态 SHOW STATUS LIKE &lsquo;innodb_row_lock_%'; — 锁性能状态 SQL语句EXPLAIN; — 查询优化器……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/mysql/performance-cmd.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_citus.html" title="citus 数据库分库">citus 数据库分库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月29日
+        </date>
+        
+        <div class="post-content">
+            数据库分库调研 Greenplum 更适用于AP场景 PGXL PGXC 社区不活跃，沟通问题反馈时间长。没找到用户群体. 在此基础上发展的有亚信antdb，腾讯tbase。没有那个研发实力，算了吧。 citus 插件方式，无侵入。很多牛X的特性企业版才支持。主要强调多租户。 mycat mysql支派，阿里开源（抛弃）项目。主要是对sql语……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_citus.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgwatch2.html" title="pgwatch2 数据库指标监控查看">pgwatch2 数据库指标监控查看</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月29日
+        </date>
+        
+        <div class="post-content">
+            介绍 pgwatch2官方 官方演示示例 架构 agent server agent 在被监控的pg上自定义方法，用于收集数据库信息。这些自定义的方法需要依赖需要数据库扩展如pg_stat_statements,plpythonu. server 负责存储收集过来的信息，可以存放在postgres或influxdb中. 并将收集的信息……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgwatch2.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_lock.html" title="锁机制">锁机制</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月24日
+        </date>
+        
+        <div class="post-content">
+            https://blog.csdn.net/pg_hgdb/article/details/79403651 https://habr.com/en/company/postgrespro/blog/500714/ 表锁 https://www.modb.pro/db/26462 查看被堵塞的任务 select * from pg_locks where not granted; locktype | database | relation | page | tuple | virtualxid | transactionid | classid | objid | objsubid | virtualtransaction | pid | mode | granted | fastpath ----------+----------+----------+------+-------+------------+---------------+---------+-------+----------+--------------------+-----+------+---------+---------- (0 行记录) 查看等待锁信息，是被谁堵塞了 select pg_blocking_pids(pid); pg_blocking_pids ------------------ {} 终止进程 select pg_cancel_backend(pid); # select select pg_terminate_backend(pid); # update insert delete 事务的隔离级别 Postgres 数据库共有三种数据隔离级别。 Read Commit 读看提交 默认级别 在读开始的时候建立数据快照 Repeat Read 可重复读。……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_lock.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pitr.html" title="时间点恢复">时间点恢复</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月24日
+        </date>
+        
+        <div class="post-content">
+            PITR Point-in-time recovery https://blog.csdn.net/a964921988/article/details/84957241 https://github.com/digoal/blog/blob/master/201608/20160823_03.md https://github.com/digoal/blog/blob/master/201608/20160823_04.md 依赖条件 历史完整备份 不间断wal日志 以上都可有wal-g 备份系统提供支持 恢复到指定点 指定标签 具体时间点 具体事务 指定标签 recovery.conf recovery_target_action= 'pause' # promote ,shutdown --- 打lable select pg_create_restore_point('my_daily_process_ended'); --- 恢复到指定的lable recovery.conf recovery_target_name = 'my_daily_process_ended' 具体时间 restore_command = 'cp /data/arch/%f %p' # e.g. 'cp /mnt/server/archivedir/%f %p' recovery_target_time = '2020-12-23 09:37:17.010268' recovery_target_inclusive = false recovery_target_timeline = 'latest' 具体事务 restore_command = 'cp /data/arch/%f %p' # e.g. 'cp /mnt/server/archivedir/%f %p' recovery_target_xid = '26897309' recovery_target_inclusive = false……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pitr.html">阅读全文</a></p>
+    </article>
+    
+    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="https://zhangeamon.top/page/10.html">上一页</a>
+    </li>
+    
+
+    
+
+    
+        
+        
+    
+    
+
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/">1</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/9.html">9</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/10.html">10</a>
+        </li>
+        
+    
+        
+        
+        <li  class="current">
+            <a href="https://zhangeamon.top/page/11.html">11</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/12.html">12</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/13.html">13</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/21.html">21</a>
+        </li>
+        
+    
+
+    
+    
+
+    <li class="next">
+        <a href="https://zhangeamon.top/page/12.html">下一页</a>
+    </li>
+    
+</ol>
+
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

@@ -1,0 +1,1901 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Let&#39;s Go</title>
+    <link>https://zhangeamon.top/</link>
+    <description>Recent content on Let&#39;s Go</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 17 Mar 2021 14:34:26 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Github DNS 加速</title>
+      <link>https://zhangeamon.top/linux/github-dns.html</link>
+      <pubDate>Wed, 17 Mar 2021 14:34:26 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/github-dns.html</guid>
+      <description>IP 查询 https://www.ipaddress.com/ 直接点击下面链接查询 github.com assets-cdn.github.com github.global.ssl.fastly.net 修改本地dns vi /etc/hosts 140.82.114.4 github.com 185.199.108.153 assets-cdn.github.com 199.232.69.194 github.global.ssl.fastly.net</description>
+    </item>
+    
+    <item>
+      <title>流复制同步级别</title>
+      <link>https://zhangeamon.top/postgres/replication02.html</link>
+      <pubDate>Wed, 17 Mar 2021 11:14:17 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/replication02.html</guid>
+      <description>流复制过程 synchronous_commit = on ） # synchronization level; on default # off, local, remote_write, or on 同步级别 remote_apply：事务commit或rollback时，等待其redo在primary、以及同步standby(s)已持久化，并且其redo在同步 standby(s)已apply。 on：事务commit或rollback时，</description>
+    </item>
+    
+    <item>
+      <title>Redis 应用场景</title>
+      <link>https://zhangeamon.top/redis/redis-scence.html</link>
+      <pubDate>Tue, 09 Mar 2021 17:23:59 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/redis/redis-scence.html</guid>
+      <description>应用场景 作为一名匠人，当熟悉手里各样工具的特点。用起来才能得心应手。什么时候使用锯子，什么时候当用斧子。 同理熟知产品的技术特性，方可灵活运用。 在面对不同的业务需求时才能提供具有针对性的解决方案。 不求十八般兵器样样精通，但求不置斧锯于一旁只顾轮打锤。 Redis 都能干点啥 缓存 消息队列 循环列表</description>
+    </item>
+    
+    <item>
+      <title>云存储同步 rclone</title>
+      <link>https://zhangeamon.top/storage/rclone.html</link>
+      <pubDate>Tue, 09 Mar 2021 16:40:29 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/storage/rclone.html</guid>
+      <description>云端对象同步 Rclone (&amp;ldquo;rsync for cloud storage&amp;rdquo;) is a command line program to sync files and directories to and from different cloud storage providers. https://github.com/rclone/rclone</description>
+    </item>
+    
+    <item>
+      <title>pg_rman 备份恢复数据库</title>
+      <link>https://zhangeamon.top/postgres/pg_rman.html</link>
+      <pubDate>Tue, 09 Mar 2021 13:35:31 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_rman.html</guid>
+      <description>适用场景 PG_RMAN 基于本地数据拷贝的方式，要求与数据库需要安装在同一个机器节点上。 适用于项目初期，对数据库的规划处于初级阶段。实体机不充分的情况是个很好的选择。 数据库使用ssd盘，备份磁盘采用企业sata大盘。或nfs网盘等。 PG_RMAN 支持全备份，增量备份，备份验证，保留策略等 应用软件包地址 https://github.com/ossc-db/pg_rman/releases 基</description>
+    </item>
+    
+    <item>
+      <title>Patroni 高可用管理进阶</title>
+      <link>https://zhangeamon.top/postgres/patroni02.html</link>
+      <pubDate>Fri, 05 Mar 2021 17:06:18 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/patroni02.html</guid>
+      <description>完成目标 主从同步策略 异地多机房策略 failover 触发详情 访问认证 watch-dog 配置文件详情 fencing DCS 失效处理 加入节点复制数据限流 主从切换流量,避免重新拉取 级联复制 callback 日志&amp;amp;监控 主从同步策略 数据库主从之间同步类型 Synchronous state of this standby server. Possible values are: async: This standby server is asynchronous. potential: This standby server is now asynchronous, but can potentially become synchronous if one of current synchronous ones fails. sync: This standby server is synchronous. quorum: This standby server is considered as</description>
+    </item>
+    
+    <item>
+      <title>数据库优化思考-性能优化</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_performance.html</link>
+      <pubDate>Fri, 26 Feb 2021 13:33:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_performance.html</guid>
+      <description>为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续</description>
+    </item>
+    
+    <item>
+      <title>Smapler</title>
+      <link>https://zhangeamon.top/monitor/smapler.html</link>
+      <pubDate>Wed, 10 Feb 2021 09:31:44 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/smapler.html</guid>
+      <description>一款轻量级的一体化监控工具 https://github.com/sqshq/sample</description>
+    </item>
+    
+    <item>
+      <title>Git 文件过大清理</title>
+      <link>https://zhangeamon.top/linux/git-objects-clean.html</link>
+      <pubDate>Mon, 08 Feb 2021 14:30:03 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/git-objects-clean.html</guid>
+      <description>git目录下object文件过大清理 一、删除仓库上的项目，重新提交代码。 二、彻底清除历史记录 查询大文件的文件名 git rev-list --objects --all | grep &amp;quot;$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk &#39;{print$1}&#39;)&amp;quot; 删除历史记录 git filter-branch --force --index-filter &#39;git rm -rf --cached --ignore-unmatch 你的大文件名&#39; --prune-empty --tag-name-filter cat -- --all rm -rf .git/refs/original/ git reflog expire --expire=now --all git fsck --full --unreachable git repack -A -d 本地空间变小 git gc --aggressive --prune=now 推送远端 ，本地远端空间</description>
+    </item>
+    
+    <item>
+      <title>Postgres  数据库</title>
+      <link>https://zhangeamon.top/postgresql.html</link>
+      <pubDate>Mon, 08 Feb 2021 10:10:01 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgresql.html</guid>
+      <description>关于优化思考 数据库优化思考 - 性能优化 数据库优化思考 - 结构设计 数据库优化思考 - 模块调优 基础知识 模板数据库 数据库日志 Explain 执行计划 vacuum 垃圾回收器 表空间膨胀 fillfactor 填充因子 TOAST 技术 hot update checkpoint tablespace 表空间 锁机制 锁等待 cluster 聚族表 咨询锁 adlock 数据库视图之 pg_stat_activity 数据库年龄 方法和函数 高级SQL 数据库 OOM 预防 跨库操作 auto vacuum 触发机制 unlogged</description>
+    </item>
+    
+    <item>
+      <title>etcd 访问控制</title>
+      <link>https://zhangeamon.top/middleware/etcd_auth.html</link>
+      <pubDate>Fri, 29 Jan 2021 09:37:26 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/etcd_auth.html</guid>
+      <description>介绍 etcd 默认没有开启访问控制。 在生产环境中使用属于裸奔。 开启访问控制有两种方式 密钥证书验证 用户名密码验证 本篇实验用户名密码验证方式 用户 开启访问认证需要创建root 用户，root 用户默认自动拥有root角色的权限，及超级管理员。 角色 角色理解为指定权限的集合，权限包括 read 、write、 readwrite</description>
+    </item>
+    
+    <item>
+      <title>hot update</title>
+      <link>https://zhangeamon.top/postgres/hotupdate.html</link>
+      <pubDate>Thu, 14 Jan 2021 13:49:11 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/hotupdate.html</guid>
+      <description>What is HOT HOT是“Heap Only Tuple”（仅元组堆）的缩写, 用来提高update效率。 行的新版本和旧版本位于同一块中时，该行的外部地址（原始行指针）保持不变，利用hot link指针进行转发地址。索引不需要任何改动。 前提条件 包含更新行的块中必须有足够的空间 在已修改值的任何列上均未定义</description>
+    </item>
+    
+    <item>
+      <title>数据库优化思考 - 模块调优</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_tune.html</link>
+      <pubDate>Wed, 13 Jan 2021 09:04:35 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_tune.html</guid>
+      <description>开始乱说 主要是结合postgres数据库自身特点，根据具体的业务场景，作出相应调整，使其更加合理。 数据库作为一个整体对外提供服务，单是其内部是由不同的功能模块组成，相互协调来共同完成任务。 各个功能模块完成不同的功能，每个模块的特点也不同，在调整的时候至少需要理解各个模块实现的基本</description>
+    </item>
+    
+    <item>
+      <title>unlogged table</title>
+      <link>https://zhangeamon.top/postgres/unlogged_table.html</link>
+      <pubDate>Tue, 12 Jan 2021 10:21:36 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/unlogged_table.html</guid>
+      <description>介绍 在写数据的时候不记录wal的表。 在意外发生时表中的数据被trunce 。如断电、 主进程kill 、scrash 等。 正常关闭重启数据库时数据不会丢失。 优点： 提高写入效率 不足： 数据安全性不能得到保障。 由于没有wal 流复制从库不能同步 应用场景： 数据可丢失，如频繁更新，只保留最后状态信息</description>
+    </item>
+    
+    <item>
+      <title>误操作闪回</title>
+      <link>https://zhangeamon.top/postgres/reback.html</link>
+      <pubDate>Mon, 11 Jan 2021 17:19:06 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/reback.html</guid>
+      <description>原理 利用mvcc原理，数据在删除或更新时只是标记为删除。当没有发生过gc时历史数据仍然存在。只是对当前事务不可见。 通过修改当前事务号为误操作前的事务号就可以看到历史数据。 例如 T1 （添加数据） T2 - T8（其他操作） T9（删除了T1加入的数据）T10&amp;hellip; (其他操作)。 自需要将</description>
+    </item>
+    
+    <item>
+      <title>高级SQL</title>
+      <link>https://zhangeamon.top/postgres/high_level_sql.html</link>
+      <pubDate>Mon, 11 Jan 2021 17:05:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/high_level_sql.html</guid>
+      <description>分组集 排序集 假象集 窗口函数 递归 递归应用 递归加速count(distint) 查询。 使用场景，数据分布：大数据集但其中的类型却很少 -- 创建表 test1=# create table recurive_t(user_id int,free float,info text); CREATE TABLE -- 加入数据 test1=# insert into recurive_t select 1 ,generate_series(0,1000000),&#39;user 1 pay !!!&#39;; test1=# insert into recurive_t select 2 ,generate_series(0,2000000),&#39;user 2 pay !!!&#39;; test1=# insert into recurive_t select 3 ,generate_series(0,3000000),&#39;user 3 pay !!!&#39;; test1=# insert into recurive_t select 4 ,generate_series(0,4000000),&#39;user 4 pay !!!&#39;; test1=# insert into recurive_t select 5 ,generate_series(0,4000000),&#39;user 5 pay !!!&#39;; test1=# analyze recurive_t ; ANALYZE -- count(distinct()) 查询</description>
+    </item>
+    
+    <item>
+      <title>数据库优化思考 - 结构设计</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_fd.html</link>
+      <pubDate>Mon, 11 Jan 2021 10:10:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_fd.html</guid>
+      <description>DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压</description>
+    </item>
+    
+    <item>
+      <title>auto vacuum 触发机制</title>
+      <link>https://zhangeamon.top/postgres/auto_vacuum_trigger.html</link>
+      <pubDate>Fri, 08 Jan 2021 09:20:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/auto_vacuum_trigger.html</guid>
+      <description>数据库自动垃圾回收触发条件分析 在postgres 中 垃圾回收的重要意义及在执行垃圾回收时具体都做了些什么很多地方都有介绍。 但是何时触发垃圾回收，即垃圾回收的触发条件是什么。 官网的介绍一般是有如下几个参数决定 #autovacuum = on # Enable autovacuum subprocess? &#39;on&#39; #autovacuum_vacuum_threshold = 50 # min number of row updates before vacuum #autovacuum_analyze_threshold = 50 # min number of row updates before analyze #autovacuum_vacuum_scale_factor = 0.2 # fraction of table size</description>
+    </item>
+    
+    <item>
+      <title>分区表</title>
+      <link>https://zhangeamon.top/postgres/partition.html</link>
+      <pubDate>Thu, 31 Dec 2020 10:17:03 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/partition.html</guid>
+      <description>分区表 数据库分区是一种将数据做物理分片的数据库设计技术，虽然分区技术可以有多种实现方法， 但其主要目的是为了在特定的SQL操作中减少数据读取的总量以缩减响应时间。 分区方式 水平分区 订单按时间维度 垂直分区 范式规范 ： 订单数据 （客户表，商品表，订单表） 优点 性能 ，范围或点查询。 管理 归档，删除</description>
+    </item>
+    
+    <item>
+      <title>跨库操作</title>
+      <link>https://zhangeamon.top/postgres/pg_fdw.html</link>
+      <pubDate>Thu, 24 Dec 2020 09:11:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_fdw.html</guid>
+      <description>dblink https://www.cnblogs.com/lottu/p/13331387.html fdw https://www.cnblogs.com/lottu/p/13345187.html 注意事项 查询条件下推，新版本功能更全 ddl 操作 , fdw 如果用于历史归档</description>
+    </item>
+    
+    <item>
+      <title>找回supper user 权限</title>
+      <link>https://zhangeamon.top/postgres/reback_supper_user.html</link>
+      <pubDate>Tue, 22 Dec 2020 17:12:53 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/reback_supper_user.html</guid>
+      <description>背景 意外删除postgres supper user 权限 找回方法 关闭数据库 用单用户模式重新启动 /usr/lib/postgresql/xxxx/bin/postgres --single -D $PGDATA 重新设置supper user 权限 alter user postgres with superuser;</description>
+    </item>
+    
+    <item>
+      <title>数据库监控指标</title>
+      <link>https://zhangeamon.top/postgres/monitor_explain.html</link>
+      <pubDate>Fri, 20 Nov 2020 14:46:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/monitor_explain.html</guid>
+      <description>实体机 硬盘空间 cup利用率 内存利用率 IO 网络带宽 tcp连接情况 温度 数据库年龄 -- 数据库database 年龄 select datname,age(datfrozenxid),pg_size_pretty(pg_database_size(oid)) from pg_database order by age(datfrozenxid) desc limit 10 ; -- 表年龄 select relname,age(relfrozenxid), pg_size_pretty(pg_table_size(oid)) from pg_class where relkind in (&#39;t&#39;,&#39;r&#39;) order by age(relfrozenxid) desc limit 10; 说明： 当age到达2亿（默认）时触发自动回卷，期间会大量占用系统资源。提前做好监控避免在业务高峰时发生。可在库级别操作</description>
+    </item>
+    
+    <item>
+      <title>kylin系统postgresql编译安装</title>
+      <link>https://zhangeamon.top/postgres/compile_kylin.html</link>
+      <pubDate>Mon, 16 Nov 2020 15:26:59 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/compile_kylin.html</guid>
+      <description>背景 麒麟系统默认自带postgresql10.5 安装过程与centos基本相同 , 注意事项 1 安装postgresql-dev 2 编译 postgis 时./configure &amp;ndash;with-pgconfig=/usr/bin/pg_config 但是如果想安装其他版本的postgres 需一番周折 首先第一个问题麒麟系统对openssl过进行改造。在编译postgres支</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 20.04 网络配置</title>
+      <link>https://zhangeamon.top/linux/ubuntu2004-network.html</link>
+      <pubDate>Mon, 21 Sep 2020 16:48:24 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/ubuntu2004-network.html</guid>
+      <description>配置 vim /etc/netplan/00-installer-config.yaml # This is the network config written by &#39;subiquity&#39; network: ethernets: enp2s0: addresses: - 192.168.6.111/24 gateway4: 192.168.6.1 nameservers: addresses: [119.29.29.29] version: 2 生效 netplan apply</description>
+    </item>
+    
+    <item>
+      <title>创建只读用户</title>
+      <link>https://zhangeamon.top/postgres/readonly.html</link>
+      <pubDate>Tue, 08 Sep 2020 09:28:59 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/readonly.html</guid>
+      <description>1.创建一个用户名为readonly密码为ropass的用户 CREATE USER readonly WITH ENCRYPTED PASSWORD &#39;ropass&#39;; 2.用户只读事务 alter user readonly set default_transaction_read_only=on; 3.把所有库的语言的USAGE权限给到readonly GRANT USAGE ON SCHEMA public to readonly; 4.授予select权限(这句要进入具体数据库操作在哪个db环境执行就授予那个db的权) grant select on all tables in schema public to readonly;</description>
+    </item>
+    
+    <item>
+      <title>文档</title>
+      <link>https://zhangeamon.top/dw/document.html</link>
+      <pubDate>Tue, 25 Aug 2020 10:25:55 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/dw/document.html</guid>
+      <description>https://ask.greenplum.cn</description>
+    </item>
+    
+    <item>
+      <title>go grpc</title>
+      <link>https://zhangeamon.top/go/grpc.html</link>
+      <pubDate>Thu, 13 Aug 2020 10:06:19 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/go/grpc.html</guid>
+      <description>python 实现 cat Server.py from SimpleXMLRPCServer import SimpleXMLRPCServer def fun_add(a,b): total = a+b return total if __name__==&#39;__main__&#39;: s = SimpleXMLRPCServer((&#39;0.0.0.0&#39;,8081)) s.register_function(fun_add) print &amp;quot;server in on line&amp;quot; s.serve_forever() cat Client.py from xmlrpclib import ServerProxy s = ServerProxy(&amp;quot;http://xx.xxx.xxx.xxx:8081&amp;quot;) print s.fun_add(1,2) go 实现</description>
+    </item>
+    
+    <item>
+      <title>API 自动化测试</title>
+      <link>https://zhangeamon.top/istio/auto-api-test.html</link>
+      <pubDate>Tue, 21 Jul 2020 15:22:08 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/istio/auto-api-test.html</guid>
+      <description>简介 主要用于Restful风格接口测试,指针对模块或系统间接口进行的测试 单一接口测试 多接口组合逻辑测试 定时自动，生成测试报告 失败通知 测试用例断言 返回状态码 返回结果 超时时间 基础应用需求 Postman 测试用例编写 Newman 执行测试用例命令行工具 Jenkins 自动化集成 Git 测试用例成果物管理 Allure 生成测试报告 TestLink 测试用例管理</description>
+    </item>
+    
+    <item>
+      <title>vagrant</title>
+      <link>https://zhangeamon.top/kvm/vagrant.html</link>
+      <pubDate>Mon, 13 Jul 2020 09:32:49 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/kvm/vagrant.html</guid>
+      <description>介绍 通常用vagrant 来管理VirtualBox ,VMWare，方便测试环境的创建，销毁。不常折腾用virtualbox, 反复折腾用vagrant。 简单使用 安装 下载virtualbox 下载vagrant -- 安装依赖 #yum --enablerepo=epel -y install fuse-sshfs #yum install bsdtar #yum -y install gcc kernel kernel-devel 常用方法 --- 镜像管理 添加镜像 #vagrant box add centos/7 查看</description>
+    </item>
+    
+    <item>
+      <title>数据库 OOM 预防</title>
+      <link>https://zhangeamon.top/postgres/oom.html</link>
+      <pubDate>Tue, 30 Jun 2020 09:26:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/oom.html</guid>
+      <description>降低主进程被OOM kill 掉的风险 1. restart_after_crash 默认崩溃重启 postgres=# show restart_after_crash; restart_after_crash --------------------- on (1 row) 2. vm.overcommit # vi /etc/sysctl.conf # 0 表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程 # 1 表示内核允许分配所有的物理内存，而不管当前的内存状态如何 # 2 表示内核允许分</description>
+    </item>
+    
+    <item>
+      <title>Consul DNS 服务发现</title>
+      <link>https://zhangeamon.top/middleware/consul.html</link>
+      <pubDate>Mon, 29 Jun 2020 11:09:52 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/consul.html</guid>
+      <description>实现目标 多IP解析，负载轮询 自动检查后端服务状态，自动剔除不可用后端 别名配置 上游DNS支持 ttl cache 支持 前两点由cousul实现 后两点由dnsmasq实现 别名配置未实现 简单应用 集群配置 10.1.88.84 10.1.88.85 10.1.88.86 consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.84 -bind=10.1.88.84 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -config-dir=/etc/consul.d -ui consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.85 -bind=10.1.88.85 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -join=10.1.88.84 -config-dir=/etc/consul.d -ui consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.86 -bind=10.1.88.86 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -join=10.1.88.84 -config-dir=/etc/consul.d -ui 服务发现配置 cat /etc/consul.d/web/json { &amp;quot;services&amp;quot;:[</description>
+    </item>
+    
+    <item>
+      <title>coredns</title>
+      <link>https://zhangeamon.top/middleware/coredns.html</link>
+      <pubDate>Mon, 22 Jun 2020 13:25:08 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/coredns.html</guid>
+      <description>背景 致力于打造云原生中的dns服务和服务发现。 各种功能都是通过插件方式实现 简单例子 服务 cat /usr/lib/systemd/system/coredns.service [Unit] Description=CoreDNS DNS server Documentation=https://coredns.io After=network.target [Service] PermissionsStartOnly=true LimitNOFILE=1048576 LimitNPROC=512 CapabilityBoundingSet=CAP_NET_BIND_SERVICE AmbientCapabilities=CAP_NET_BIND_SERVICE NoNewPrivileges=true User=coredns WorkingDirectory=~ ExecStart=/usr/local/bin/coredns -conf=/etc/coredns/Corefile ExecReload=/bin/kill -SIGUSR1 $MAINPID Restart=on-failure [Install] WantedBy=multi-user.target 配置文件 cat /etc/coredns/Corefile .:53 { # 绑定interface ip bind 127.0.0.1 # 先走本机的hosts # https://coredns.io/plugins/hosts/ hosts { # 自定义sms.service search.service 的解析 # 因为解析的域名少我们这里直接</description>
+    </item>
+    
+    <item>
+      <title>Redis 6.0安装配置管理</title>
+      <link>https://zhangeamon.top/redis/install.html</link>
+      <pubDate>Fri, 12 Jun 2020 14:48:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/redis/install.html</guid>
+      <description>安装 yum 方式 yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm yum --enablerepo=remi install redis make 方式 升级gcc 版本临时生效,否则编译错误 yum -y install centos-release-scl yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils scl enable devtoolset-9 bash wget http://download.redis.io/releases/redis-6.0.1.tar.gz tar -xvf redis-6.0.1.tar.gz cd /usr/local/redis-6.0.1/ make PREFIX=/usr/local/redis install 启动 systemctl start redis systemctl enalbe redis 配置 系统参数 vi /etc/sysctl.conf net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1 kernel.shmmax = 68719476736 kernel.shmall = 4294967296 net.core.netdev_max_backlog = 262144 net.core.somaxconn = 40960 net.ipv4.tcp_max_orphans = 3276800 net.ipv4.tcp_max_syn_backlog = 262144 服务参数 vi /etc/redis.conf daemonize yes pidfile /var/run/redis.pid bind 0.0.0.0 timeout 300 #当客户端闲置多长时间后关闭连接，如果指定为0，表示永不</description>
+    </item>
+    
+    <item>
+      <title>服务发现</title>
+      <link>https://zhangeamon.top/istio/servicediscovery.html</link>
+      <pubDate>Fri, 05 Jun 2020 10:19:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/istio/servicediscovery.html</guid>
+      <description>为什么需要服务发现 在传统的服务架构中，服务之间的依赖关系较为简单，服务部署的位置也通常不会变化。 前段的服务通常配置来发现后端服务具体的IP或端口。比如后端的服务原来部署在10.1.10.2的5522端口上，现在如果想把服务部署在10.1.10.3的5523端口上。 前段和后端都不许</description>
+    </item>
+    
+    <item>
+      <title>Firewall</title>
+      <link>https://zhangeamon.top/network-security/firewalld.html</link>
+      <pubDate>Wed, 03 Jun 2020 16:15:35 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/firewalld.html</guid>
+      <description>简单应用 服务管理 # 查看全部支持的服务 $ firewall-cmd --get-service # 查看开放的服务 $ firewall-cmd --list-service # 开放服务 $ firewall-cmd --add-service=postgresql --permanent # 关闭服务 $ firewall-cmd --remove-service=postgresql --permanent permanent 参数修改对应的配置文件 /etc/firewalld/zones/public.xml 端口管理 # 查看开放的端口 $ firewall-cmd --zone=public --list-ports # 开放指导端口 $ firewall-cmd --zone=public --add-port=80/tcp --permanent # 开放端口段 $ firewall-cmd --zone=public --add-port=8388-8389/tcp --permanent # 关闭端口 $ firewall-cmd --zone=public --remove-port=80/tcp --permanent 规则管理 # 对 147.152.139.197 开放10000端口 $ firewall-cmd --permanent --zone=public --add-rich-rule=&#39; rule family=&amp;quot;ipv4&amp;quot; source address=&amp;quot;147.152.139.197/32&amp;quot; port protocol=&amp;quot;tcp&amp;quot; port=&amp;quot;10000&amp;quot;</description>
+    </item>
+    
+    <item>
+      <title>数据库 ssl认证</title>
+      <link>https://zhangeamon.top/postgres/ssl.html</link>
+      <pubDate>Wed, 03 Jun 2020 15:06:15 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/ssl.html</guid>
+      <description>SSL双向认证和SSL单向认证的区别 双向认证 SSL 协议要求服务器和用户双方都有证书。单向认证 SSL 协议不需要客户拥有CA证书，服务器端不会验证客户证书，以及在协商对称密码方案，对称通话密钥时，服务器发送给客户的是没有加过密的(这并不影响 SSL 过程的安全性)密码方案。 这样，双方具体的通讯内容，</description>
+    </item>
+    
+    <item>
+      <title>工作中所使用的postgres</title>
+      <link>https://zhangeamon.top/postgres/awsome-postgres.html</link>
+      <pubDate>Wed, 27 May 2020 11:34:24 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/awsome-postgres.html</guid>
+      <description>Postgres 实际应用概览 MVCC 多版本控制 一个绕不开的话题， 主要是对抗表空间的膨胀。解决垃圾回收问题，主从库之间从库查询冲突问题。 目前方法每日低峰期定时 vaccum ，gocron自定定时任务 。 根据pgstattuple对磁盘空间利用率进行分析。决定是否vaccum full ,pg_repack 流复制 主从复制，读写分离的基础。五种同</description>
+    </item>
+    
+    <item>
+      <title>数据预加载</title>
+      <link>https://zhangeamon.top/postgres/pg_prewarm.html</link>
+      <pubDate>Wed, 27 May 2020 10:26:10 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_prewarm.html</guid>
+      <description>https://blog.csdn.net/Hehuyi_In/article/details/102653909</description>
+    </item>
+    
+    <item>
+      <title>Centos7 私有源搭建</title>
+      <link>https://zhangeamon.top/linux/repo.html</link>
+      <pubDate>Tue, 19 May 2020 10:32:33 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/repo.html</guid>
+      <description>介绍 为了保证IDC内所有主机版本一致。 目前问题， 当主机执行yum update 时，软件版本不可控。每个主机版本完全取决于更新的时机。 造成了同一个IDC内的版本的差异，比如有的数据库的版本为10.06,有的为10.13。尤其是使用了如postgis等拓展的时候。版本混乱，甚至主从之间都不一致。</description>
+    </item>
+    
+    <item>
+      <title>带宽检测 - iperf</title>
+      <link>https://zhangeamon.top/linux/iperf.html</link>
+      <pubDate>Tue, 12 May 2020 16:37:38 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/iperf.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jdango 多数据库读写配置</title>
+      <link>https://zhangeamon.top/python/django-ndb.html</link>
+      <pubDate>Tue, 12 May 2020 11:28:53 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/django-ndb.html</guid>
+      <description>https://www.cnblogs.com/thismyblogs/p/9855801.html</description>
+    </item>
+    
+    <item>
+      <title>Centos 登陆安全管理</title>
+      <link>https://zhangeamon.top/network-security/linux-user-passw.html</link>
+      <pubDate>Sat, 09 May 2020 16:20:05 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/linux-user-passw.html</guid>
+      <description>禁用root登陆 注意： 创建一个非root用户 并加入wheel用户组（拥有sudo权限） useradd NewUser passwd NewUser gpasswd -a NewUser wheel 本地禁用root登陆 修改/etc/pam.d/login文件增加下面一行 auth required pam_succeed_if.so user != root quiet 远程禁用root登陆 修改 /etc/ssh/sshd_config #PermitRootLogin yes PermitRootLogin no 修改ssh默认端口 修改 /etc/ssh/sshd_config #Port 22 Port 46608 安全认证 LoginGraceTime 2m PermitRootLogin no #StrictModes yes #MaxAuthTries 6 #MaxSessions</description>
+    </item>
+    
+    <item>
+      <title>系统日志 syslog</title>
+      <link>https://zhangeamon.top/linux/syslog.html</link>
+      <pubDate>Sat, 09 May 2020 11:43:18 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/syslog.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>日志审计 audit</title>
+      <link>https://zhangeamon.top/network-security/audit.html</link>
+      <pubDate>Fri, 08 May 2020 08:52:03 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/audit.html</guid>
+      <description>介绍 auditd是Linux审计系统中用户空间的一个组件，负责将审计记录写到磁盘中。在CentOS7上默认就会有安装这个服务。 如果被卸载，可以直接使用yum进行安装： yum -y install audit auditd-libs 常用命令 1、auditctl : 即时控制审计守护进程的行为的工具，比如如添加规则等等。 audtitctl -l #查看规则 auditctl -D #</description>
+    </item>
+    
+    <item>
+      <title>等保三指南</title>
+      <link>https://zhangeamon.top/network-security/dengbao3.html</link>
+      <pubDate>Fri, 08 May 2020 08:40:31 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/dengbao3.html</guid>
+      <description>等保三指南-上 等保三指南-下</description>
+    </item>
+    
+    <item>
+      <title>Linux 获取CPU温度</title>
+      <link>https://zhangeamon.top/linux/cpu_temp.html</link>
+      <pubDate>Thu, 07 May 2020 14:02:02 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/cpu_temp.html</guid>
+      <description>直接读取系统信息 可以通过读取如下路径中的数据来获取cpu的温度信息，不过读取的数据没有经过处理。 cpu0： cat /sys/class/thermal/thermal_zone0/temp cpu1： cat /sys/class/thermal/thermal_zone1/temp 通过命令行的方式获取 安装 lm_sensors 软件包： # rpm yum install lm_sensors # deb apt-get install lm-sensors 执行命令sensors-detect，进行简单配置，此命令执行后会出现一系列选项，一直yes即可； 执行</description>
+    </item>
+    
+    <item>
+      <title>依赖管理工具go module</title>
+      <link>https://zhangeamon.top/go/go_mod.html</link>
+      <pubDate>Thu, 30 Apr 2020 13:25:38 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/go/go_mod.html</guid>
+      <description>背景 大多数语言都会有包管理工具，像Node有npm，PHP有composer，Java有Maven和Gradle。 在go1.11 版本中，新增了module管理模块功能，用来管理依赖包 开启module特性 要开始使用 go module 的特性， 需要先设置 GO111MODULE 环境变量。 开启 GO111MODULE 要使用go module,首先</description>
+    </item>
+    
+    <item>
+      <title>Bloom 索引</title>
+      <link>https://zhangeamon.top/postgres/index-bloom.html</link>
+      <pubDate>Thu, 23 Apr 2020 15:37:33 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/index-bloom.html</guid>
+      <description>Bloom 索引 Bloom 过滤器代表的是一组值。它的作用是检测一个元素是否可能属于集合，它可以允许有一些false positive，但是不允许存在false negative。也就是说，尽管某个元素不在集合中，测试也可能返回true。然而，如果元素在集合中，就不可能返回false。 创建在一组列中的B</description>
+    </item>
+    
+    <item>
+      <title>Nginx 状态监控</title>
+      <link>https://zhangeamon.top/monitor/nginx-status.html</link>
+      <pubDate>Mon, 20 Apr 2020 11:12:28 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/nginx-status.html</guid>
+      <description>Nginx 开启status用以监控状态信息 Nginx 可以通过with-http_stub_status_module模块来监控nginx的一些状态信息。 通过nginx -V来查看是否有with-http_stub_status_module该模块。 # nginx -V nginx version: nginx/1.16.1 built by gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) built with OpenSSL 1.0.2k-fips 26 Jan 2017 TLS SNI support</description>
+    </item>
+    
+    <item>
+      <title>django 默认创建第二索引</title>
+      <link>https://zhangeamon.top/python/django-index-ops.html</link>
+      <pubDate>Thu, 16 Apr 2020 11:40:02 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/django-index-ops.html</guid>
+      <description>Django使用postgresql做数据库 db_index创建索引时会创建第二个索引varchar_pattern_ops问题 创建默认索引 minion_id = models.CharField(max_length=100, db_index=True, blank=True, null=False, default=&amp;quot;&amp;quot;) 当字段类型是 models.CharField 或者 models.TextField 时 使用 db_index=True创建索引 会创建第二索引 django.db.backends.postgresql.schema class DatabaseSchemaEditor(BaseDatabaseSchemaEditor): sql_alter_column_type = &amp;quot;ALTER COLUMN %(column)s TYPE %(type)s USING %(column)s::%(type)s&amp;quot; sql_create_sequence = &amp;quot;CREATE SEQUENCE %(sequence)s&amp;quot; sql_delete_sequence = &amp;quot;DROP SEQUENCE IF EXISTS %(sequence)s CASCADE&amp;quot; sql_set_sequence_max</description>
+    </item>
+    
+    <item>
+      <title>方法和函数</title>
+      <link>https://zhangeamon.top/postgres/FunctionsandOperators.html</link>
+      <pubDate>Mon, 13 Apr 2020 16:15:51 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/FunctionsandOperators.html</guid>
+      <description>条件表达式 https://www.postgresql.org/docs/10/functions-conditional.html postgresql支持CASE,COALESCE,NULLIF,GREATEST,LEAST条件表达式，使用它们有时候可以简化许多功能实现。 CASE CASE类似其他语言中的if/else等，当符合不同条件时则进行不同的运算 tbl_001表 create table tbl_001(id int,name varchar(32),sex varchar(1)); insert into tbl_001 values(1</description>
+    </item>
+    
+    <item>
+      <title>数据库日常管理</title>
+      <link>https://zhangeamon.top/postgres/daily_management.html</link>
+      <pubDate>Tue, 07 Apr 2020 10:38:45 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/daily_management.html</guid>
+      <description>日常管理 可用性 监测项 可用性 主从 HA 全量备份 增量备份 恢复 监测项 磁盘空间 全库 select pg_size_pretty(sum(pg_database_size(oid))) from pg_database; 数据库 select datname, pg_size_pretty(pg_database_size(oid)) from pg_database order by pg_database_size(oid) desc limit 10; 表总 SELECT table_schema || &#39;.&#39; || table_name AS table_full_name, pg_size_pretty(pg_total_relation_size(&#39;&amp;quot;&#39; || table_schema || &#39;&amp;quot;.&amp;quot;&#39; || table_name || &#39;&amp;quot;&#39;)) AS size FROM information_schema.tables where table_schema = &#39;public&#39; ORDER BY pg_total_relation_size(&#39;&amp;quot;&#39; || table_schema || &#39;&amp;quot;.&amp;quot;&#39; || table_name || &#39;&amp;quot;&#39;) DESC limit 10; 表 索引 冷热数据 上次统计信息更新时间 热表dml qps io 热表qdml 冷数据 冷索引 索引利用 全表扫描次数</description>
+    </item>
+    
+    <item>
+      <title>锁等待</title>
+      <link>https://zhangeamon.top/postgres/lock_wait.html</link>
+      <pubDate>Fri, 27 Mar 2020 16:27:02 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/lock_wait.html</guid>
+      <description>锁等待场景 一个事务尚未执行提交时持有锁，当另一个事务需要持有改行的锁时则需要等待。 Session 1 postgres=# \d+ wt Table &amp;quot;public.wt&amp;quot; Column | Type | Collation | Nullable | Default | Storage | Stats target | Description --------+---------+-----------+----------+---------+----------+--------------+------------- id | integer | | | | plain | | t | text | | | | extended | | postgres=# begin; BEGIN postgres=# update wt set t = &#39;aaaa&#39; where id = 1; UPDATE 1 postgres=# select pg_backend_pid(); pg_backend_pid ---------------- 20034 (1 row) Session 2 postgres=# begin ; BEGIN postgres=# update wt set t = &#39;bbbb&#39; where id = 1; Session 3 select * from pg_stat_activity; -[ RECORD 3 ]----+---------------------------------------- datid | 436980 datname</description>
+    </item>
+    
+    <item>
+      <title>软件安装</title>
+      <link>https://zhangeamon.top/linux/install-cmd.html</link>
+      <pubDate>Fri, 20 Mar 2020 09:35:08 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/install-cmd.html</guid>
+      <description>Centos7 查看是否存在需要安装的软件 yum search xxxx 查看具体版本详情 yum list xxxx 查看已安装 rpm -qa | grep xxxx 安装 yum install xxxx rpm -i xxxx.rpm 删除 yum erase xxxx rpm -r xxxx Unbuntu 查看是否存在需要安装的软件 apt-cache search xxxx 查看具体版本及信息 apt show xxxx 查看已安装 dpkg -l 安装 apt-get install xxxx dpkg -l 删除 apt-get remove xxxx</description>
+    </item>
+    
+    <item>
+      <title>数据库安装 Postgres12 Ubuntu18</title>
+      <link>https://zhangeamon.top/postgres/install02.html</link>
+      <pubDate>Thu, 19 Mar 2020 15:22:09 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/install02.html</guid>
+      <description>软件源 echo &amp;quot;deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main&amp;quot; &amp;gt;&amp;gt; /etc/apt/sources.list.d/pgdg.list wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - sudo apt-get update -y 安装 apt-get install postgresql-12 postgresql-client-12 postgresql-12-postgis-2.5 postgresql-contrib -y 初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb 启动 systemctl start postgresql systemctl stop postgresql systemctl status postgresql systemctl enable postgresql 配置 cd /etc/postgresql/12/main/ vi postgres.conf vi pg_hba.conf</description>
+    </item>
+    
+    <item>
+      <title>Git 免输入密码</title>
+      <link>https://zhangeamon.top/linux/git-nopassword.html</link>
+      <pubDate>Thu, 19 Mar 2020 15:10:15 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/git-nopassword.html</guid>
+      <description>一、配置Git的 git config --global user.name [userName] git config --global user.email [userEmail] 二、配置存储模式 git config --global credential.helper store 执行之后会在linux用户主目录下的.gitconfig文件中多加 helper = store [user] name = eamonzhang email = xxxx@xxxx.com [credential] helper = store 之后cd到项目目录，执行git pull命令，会提示输入账号密码。输完这一次以后就不再需要，并且会在根目录生成一个.git-c</description>
+    </item>
+    
+    <item>
+      <title>数据库年龄</title>
+      <link>https://zhangeamon.top/postgres/pgage.html</link>
+      <pubDate>Tue, 07 Jan 2020 09:47:18 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgage.html</guid>
+      <description>背景 数据库的事务标识符使用的是32位的,最大可表示42个亿。当前事务的数据在20亿个事务之后将变的不可见。为了解决这个问题（回卷），Postgres引入了一个冻结事务标识的概念。 并实现了名为freeze的冻结过程。 冻结过程 两种模式 惰性模式 迫切模式 惰性模式回跳过页中所有的数据都位可</description>
+    </item>
+    
+    <item>
+      <title>Linux 禁Ping</title>
+      <link>https://zhangeamon.top/network-security/reject-ping.html</link>
+      <pubDate>Thu, 02 Jan 2020 09:26:15 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/reject-ping.html</guid>
+      <description>修改配置文件/etc/sysctl.conf 在这个文件的最后添加一行: net.ipv4.icmp_echo_ignore_all=1 （0 代表允许 1 代表禁止） 执行sysctl -p 使新配置生效</description>
+    </item>
+    
+    <item>
+      <title>linux分区命令parted的用法</title>
+      <link>https://zhangeamon.top/linux/parted.html</link>
+      <pubDate>Fri, 27 Dec 2019 17:13:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/parted.html</guid>
+      <description>linux分区命令parted的用法 parted的适用场景 创建操作大于2T的分区 一般情况下，我们都是选择使用fdisk工具来进行分区，但是目前在实际生产环境中使用的磁盘空间越来越大，呈TiB级别增长；而常用的fdisk这个工具对分区是有大小限制的，它只能划分小于2T的磁盘，所以在</description>
+    </item>
+    
+    <item>
+      <title>Golang Gin 实战（五）| 接收数组和 Map</title>
+      <link>https://zhangeamon.top/2019/12/18/golang-gin-query-parameters-array-map.html</link>
+      <pubDate>Wed, 18 Dec 2019 21:55:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/2019/12/18/golang-gin-query-parameters-array-map.html</guid>
+      <description>标题 段落内容 标题 段落内容 标题 段落内容 标题 段落内容 标题 段落内容</description>
+    </item>
+    
+    <item>
+      <title>Golang Gin 实战（三）| 路由参数</title>
+      <link>https://zhangeamon.top/post/2019-12-13-golang-gin-parameters-in-path.html</link>
+      <pubDate>Fri, 13 Dec 2019 21:00:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/post/2019-12-13-golang-gin-parameters-in-path.html</guid>
+      <description>标题 段落内容 标题 段落内容 标题 段落内容 标题 段落内容 标题 段落内容</description>
+    </item>
+    
+    <item>
+      <title>Golang Gin 实战（三）| 路由参数</title>
+      <link>https://zhangeamon.top/post/2019-12-15-golang-gin-query-parameters-source-code-analysis.html</link>
+      <pubDate>Fri, 13 Dec 2019 21:00:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/post/2019-12-15-golang-gin-query-parameters-source-code-analysis.html</guid>
+      <description>标题 段落内容 标题 段落内容 标题 段落内容 标题 段落内容 标题 段落内容</description>
+    </item>
+    
+    <item>
+      <title>linux time 命令</title>
+      <link>https://zhangeamon.top/linux/time-cmd.html</link>
+      <pubDate>Tue, 10 Dec 2019 09:04:09 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/time-cmd.html</guid>
+      <description>Linux time命令的用途，在于量测特定指令执行时所需消耗的时间及系统资源等资讯。 例如 CPU 时间、记忆体、输入输出等等。需要特别注意的是，部分资讯在 Linux 上显示不出来。这是因为在 Linux 上部分资源的分配函式与 time 指令所预设的方式并不相同，以致于 time 指令无法取得这些资料。 语法 time [options] COMMAND [arguments] 参数： -o 或 &amp;ndash</description>
+    </item>
+    
+    <item>
+      <title>Greenplum6 安装</title>
+      <link>https://zhangeamon.top/dw/greenplum-install.html</link>
+      <pubDate>Fri, 06 Dec 2019 14:29:04 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/dw/greenplum-install.html</guid>
+      <description>环境准备 /ect/hosts groupadd gpadmin useradd gpadmin -r -m -g gpadmin passwd gpadmin su gpadmin ssh-keygen -t rsa -b 4096 visudo %wheel ALL=(ALL) NOPASSWD: ALL usermod -aG wheel gpadmin 软件安装 wget https://github.com/greenplum-db/gpdb/releases/download/6.1.0/greenplum-db-6.1.0-rhel7-x86_64.rpm sudo yum install ./greenplum-db-&amp;lt;version&amp;gt;-&amp;lt;platform&amp;gt;.rpm sudo chown -R gpadmin:gpadmin /usr/local/greenplum* source /usr/local/greenplum-db-&amp;lt;version&amp;gt;/greenplum_path.sh vi /home/gpadmin/.bashrc ssh 免密打通 1-n ssh-copy-id mdw n-n vi /home/gpadmin/hostfile_exkeys mdw smdw sdw1 sdw2 sdw3 sdw4 sdw5 sdw6 gpssh-exkeys -f hostfile_exkeys 创建存储目录 master mkdir -p /data/master segment mkdir -p /data/primary1 mkdir -p /data/primary2 mkdir -p /data/mirror1 mkdir -p /data/mirror2 chown -R gpadmin /data/* 性能测试 网络 gpcheckperf -f hostfile_gpchecknet_ic1 -r N -d /tmp &amp;gt; subnet1.out IO 250G gpcheckperf -f hostfile_gpcheckperf -r ds -D -d /data/primary1 -d /data/primary2 -d /data/mirror1 -d /data/mirror2 gpcheckperf -f gpconfigs/hostfile_gpcheckperf -r ds -D -d /data/primary1 -d /data/primary2</description>
+    </item>
+    
+    <item>
+      <title>内核设置</title>
+      <link>https://zhangeamon.top/linux/vm-config.html</link>
+      <pubDate>Tue, 26 Nov 2019 10:14:41 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/vm-config.html</guid>
+      <description>参数vm.dirty_ratio和vm.dirty_background_ratio https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/ 文件缓存是一项重要的性能改进，在大多数情况下，读缓存在绝大多数情况下是有益无害的（程序可以直接从RAM中读取数据）。写缓存比较复杂，Linux内核将磁盘写入缓存，过段时间再异步将它们刷新到磁盘。</description>
+    </item>
+    
+    <item>
+      <title>postgres 12</title>
+      <link>https://zhangeamon.top/postgres/postgres12.html</link>
+      <pubDate>Tue, 19 Nov 2019 08:43:36 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/postgres12.html</guid>
+      <description>安装&amp;amp;启动 #下载源 yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm #安装服务 yum install postgresql12 postgresql12-server postgresql12-contrib #初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb #启动服务 systemctl enable postgresql-12 systemctl start postgresql-12 流复制 #从机 建立从库 pg_basebackup -h 10.1.30.13 -U postgres -F p -P -R -D /var/lib/pgsql/12/data/ --checkpoint=fast -l postgresback #从库升级为主库 sudo su postgres -c &amp;quot;/usr/pgsql-12/bin/pg_ctl promote -D /var/lib/pgsql/12/data/&amp;quot; recovery.conf 配置文件不再支持，此文件中的参数合并到 postgresql.conf(postgresql.auto.conf) Recovery Target, 若 recovery.conf 存在，数据库无法启动 新增 recovery.signal 标识文件，表示数据库处于 recovery 模式 新增加 standby.signal</description>
+    </item>
+    
+    <item>
+      <title>DNS</title>
+      <link>https://zhangeamon.top/network-security/dns.html</link>
+      <pubDate>Mon, 28 Oct 2019 09:23:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/dns.html</guid>
+      <description>DNS：Domain Name System 域名管理系统 A记录 A（Address）记录是用来指定主机名（或域名）对应的IP地址记录 NS记录 NS（Name Server）记录是域名服务器记录，用来指定该域名由哪个DNS服务器来进行解析 MX记录 MX（Mail Exchanger）记录是邮件交换记录，它指向一</description>
+    </item>
+    
+    <item>
+      <title>vi 编辑</title>
+      <link>https://zhangeamon.top/linux/cmd-vim.html</link>
+      <pubDate>Tue, 22 Oct 2019 10:01:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/cmd-vim.html</guid>
+      <description>字符串查找 a.查找一个字符串使用：“/你要查询的内容” b.查找下一个 ：“/你要查询的内容” 再输入”n“跳到下一个 字符串替换 a. 文件内全部替换： %s#abc#def#g（用def替换文件中所有的abc） 例如把一个文本文件里面的“linuxidc.com”全部替换成“linuxidc.</description>
+    </item>
+    
+    <item>
+      <title>使用curl命令操作elasticsearch</title>
+      <link>https://zhangeamon.top/es/curl-es.html</link>
+      <pubDate>Wed, 16 Oct 2019 08:49:46 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/es/curl-es.html</guid>
+      <description>第一：_cat系列 _cat系列提供了一系列查询elasticsearch集群状态的接口。你可以通过执行 curl -XGET localhost:9200/_cat 获取所有_cat系列的操作 =^.^= /_cat/allocation /_cat/shards /_cat/shards/{index} /_cat/master /_cat/nodes /_cat/indices /_cat/indices/{index} /_cat/segments /_cat/segments/{index} /_cat/count /_cat/count/{index} /_cat/recovery /_cat/recovery/{index} /_cat/health /_cat/pending_tasks /_cat/aliases /_cat/aliases/{alias} /_cat/thread_pool /_cat/plugins /_cat/fielddata /_cat/fielddata/{fields} 你也可以后面加一个v，让输出内容表格显示表头，举例 curl -XGET http://10.1.80.85:9200/_cat/indices?v health status index uuid pri rep docs.count docs.deleted store.size pri.store.size green open filebeat-7.3.2-2019.09.27 agrhjW7KR_ObgdwrUOpJMA 1 1 218974 0 181.8mb 91mb 第二：</description>
+    </item>
+    
+    <item>
+      <title>Postgres 10 监控指标</title>
+      <link>https://zhangeamon.top/monitor/postgres-indicators.html</link>
+      <pubDate>Fri, 27 Sep 2019 15:13:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/postgres-indicators.html</guid>
+      <description>实体机 Cpu 内存 IO 网络 磁盘大小 数据库基本信息 服务启动时间 select pg_postmaster_start_time(); 版本信息 select current_setting(&#39;server_version&#39;); 主从角色 select pg_is_in_recovery();</description>
+    </item>
+    
+    <item>
+      <title>wget</title>
+      <link>https://zhangeamon.top/linux/wget.html</link>
+      <pubDate>Thu, 19 Sep 2019 14:07:59 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/wget.html</guid>
+      <description>断点续传 后台运行 限速 wget -cb --limit-rate=300k &amp;quot;http://...&amp;quot;</description>
+    </item>
+    
+    <item>
+      <title>ElasticAlert</title>
+      <link>https://zhangeamon.top/es/elasticalert.html</link>
+      <pubDate>Thu, 19 Sep 2019 09:52:34 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/es/elasticalert.html</guid>
+      <description>https://github.com/Yelp/elastalert</description>
+    </item>
+    
+    <item>
+      <title>Discovery 7.0&#43; 集群协调</title>
+      <link>https://zhangeamon.top/es/discovery.html</link>
+      <pubDate>Tue, 17 Sep 2019 15:17:15 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/es/discovery.html</guid>
+      <description>https://www.elastic.co/cn/blog/a-new-era-for-cluster-coordination-in-elasticsearch</description>
+    </item>
+    
+    <item>
+      <title>设置密码</title>
+      <link>https://zhangeamon.top/es/password.html</link>
+      <pubDate>Thu, 12 Sep 2019 15:31:15 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/es/password.html</guid>
+      <description>ElasticSearch 设置密码 以前在使用es的时候基本是裸，没有任何的权限管理。用户名密码设置。 配置 elasticsearch.yaml 添加，重启服务 xpack.security.enabled: true xpack.security.transport.ssl.enabled: true 设置用户密码 /usr/share/elasticsearch/elasticsearch-setup-passwords interactive Initiating the setup of passwords for reserved users elastic,kibana,logstash_system,beats_system. You will be prompted to enter passwords as the process progresses. Please confirm that you would like to continue [y/N]y Enter password for [elastic]: passwords must be at least [6] characters long Try again. Enter password for [elastic]: Reenter password for [elastic]: Passwords do not match. Try again. Enter password for [elastic]: Reenter password for [elastic]: Enter password for [kibana]: Reenter password for [kibana]: Enter password for [logstash_system]: Reenter password for</description>
+    </item>
+    
+    <item>
+      <title>数据库视图之 pg_stat_activity</title>
+      <link>https://zhangeamon.top/postgres/t_pg_stat_activity.html</link>
+      <pubDate>Fri, 23 Aug 2019 13:47:12 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/t_pg_stat_activity.html</guid>
+      <description>介绍 当需要了解数据库当前运行状态或需要排查问题时，首先需要查看的就是pg_stat_activity。该视图中包含了你想知道的数据库连接信息，正在执行的有哪些sql，并处于何状态。 One row per server process, showing information related to the current activity of that process, such as state and current query. 每一行都表示一个系统进程，显示与当前会话的活动进程的一些信</description>
+    </item>
+    
+    <item>
+      <title>Jumpserver 跳板机</title>
+      <link>https://zhangeamon.top/network-security/jumpserver.html</link>
+      <pubDate>Mon, 17 Jun 2019 15:17:29 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/jumpserver.html</guid>
+      <description>http://docs.jumpserver.org/zh/docs/index.html</description>
+    </item>
+    
+    <item>
+      <title>citus 简单应用</title>
+      <link>https://zhangeamon.top/postgres/citus01.html</link>
+      <pubDate>Wed, 05 Jun 2019 10:40:09 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/citus01.html</guid>
+      <description>常用方法 集群管理 加入节点 SELECT * from master_add_node(&#39;worker-101&#39;, 5432); 查看节点状态 SELECT * FROM master_get_active_worker_nodes(); select * from pg_dist_node; 数据库管理 分片表(distributed table ， hash | append ) 参考表(reference table 数据量小) 本地表(原生表，没有任何处理.兼容性高) 对表进行分片 SELECT create_distributed_table(&#39;companies&#39;, &#39;id&#39;); 分片查看 SELECT * from pg_dist_shard; 元数据表 pg_dist_shard pg_dist_placement pg_dist_node 参数 更多参考 sql 限制 1 非亲和性表之间的ou</description>
+    </item>
+    
+    <item>
+      <title>tpch AP测试</title>
+      <link>https://zhangeamon.top/postgres/tpch.html</link>
+      <pubDate>Wed, 05 Jun 2019 09:36:21 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/tpch.html</guid>
+      <description>背景介绍 24sql TPC-H 基准测试 下载安装 tpch-tools安装包 修改makefile.suite 模版 CC=gcc DATABASE-TDAT MACHINE=LINUX WORKLOAD=TPCH 执行 make 进行编译 生成测试数据 生成20G测试数据 ./dbgen -s 20 ls -lrth *.tbl 自动生成的测试数据每行的结尾多余一个 &amp;lsquo;|&amp;rsquo; 需要处理 for i in `ls *.tbl`; do sed &#39;s/|$//&#39; $i &amp;gt; ${i/tbl/csv}; echo $i; done; 创建表及索引 在下面的文件中分别是创建表和对应索引的s</description>
+    </item>
+    
+    <item>
+      <title>表空间膨胀</title>
+      <link>https://zhangeamon.top/postgres/pgstattuple.html</link>
+      <pubDate>Wed, 22 May 2019 17:26:45 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgstattuple.html</guid>
+      <description>背景介绍 由于mvcc机制，数据被删除后只是被标记为删除，实际空间没有被释放，这是表空间膨胀的根本原因。 目前用于解决表空间膨胀方式有如下方式 1 删除dead tuple vacuum ,tuple被清理。数据库可以自动执行autovacuum vacuum full ,tuple被清理并且空间连续紧凑。弊端，在执行过程中会锁表。</description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>https://zhangeamon.top/middleware/nginx.html</link>
+      <pubDate>Tue, 09 Apr 2019 15:42:15 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/nginx.html</guid>
+      <description>性能优化 错误码 502 ， error.log 中错误信息 [error] 236#236: *8371899 upstream sent too big header while reading response header from upstream, 问题 header 过大 proxy_buffer_size 64k; proxy_buffers 4 32k; proxy_busy_buffers_size 64k; 官网说明 利用nginx设置用户登陆认证 如下举例设置用户访问kibana时登陆认证 server { listen 80; server_name kibana.×××.com; location / { auth_basic &amp;quot;secret&amp;quot;; auth_basic_user_file /etc/nginx/db/passwd.db; proxy_pass http://****:5601; proxy_set_header Host $host:5601; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Via &amp;quot;nginx&amp;quot;; } access_log off; } 2、配置登录用户名(admi</description>
+    </item>
+    
+    <item>
+      <title>DNS Bind9 &amp; NamedManager </title>
+      <link>https://zhangeamon.top/middleware/bind9.html</link>
+      <pubDate>Thu, 04 Apr 2019 15:14:47 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/bind9.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tcpdump 网络抓包工具</title>
+      <link>https://zhangeamon.top/linux/tcpdump.html</link>
+      <pubDate>Tue, 19 Mar 2019 13:25:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/tcpdump.html</guid>
+      <description>http://www.cnblogs.com/ggjucheng/archive/2012/01/14/2322659.html</description>
+    </item>
+    
+    <item>
+      <title>pmap Linux 进程内存分析</title>
+      <link>https://zhangeamon.top/linux/pmap.html</link>
+      <pubDate>Tue, 19 Mar 2019 08:58:40 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/pmap.html</guid>
+      <description>介绍 pmap - report memory map of a process(查看进程的内存映像信息) 参数说明 x extended Show the extended format. 显示扩展格式 d device Show the deviceformat. 显示设备格式 结果查看说明 Address: start address ofmap 映像起始地址 Kbytes: size of map in kilobytes 映像大小 RSS: resident set size inkilobytes 驻留集大小 Dirty: dirty pages (both sharedand private) in kilobytes 脏页大小 Mode: permissions on map 映像权限: r=read,w=write, x=execute, s=shared, p=private (copy on write) Mapping: file backing the map ,or &amp;lsquo;[ anon ]&amp;rsquo; for allocated memory, or &amp;lsquo;[ stack ]&amp;rsquo; for the program stack.</description>
+    </item>
+    
+    <item>
+      <title>minio 轻量级对象存储</title>
+      <link>https://zhangeamon.top/storage/minio.html</link>
+      <pubDate>Mon, 18 Mar 2019 16:59:48 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/storage/minio.html</guid>
+      <description>简单了解 minio 完全实现了s3协议，使用简单方便。 支持多机模式，提高数据可用性和整体容量。 限制， 最多5T存储。 单个文件最大5T。 缺点， 不能在线扩容。开发者认为扩容应该是开发人员需要解决的问题。 安装及简单使用 服务端 #下载 wget https://dl.minio.io/server/minio/release/linux-amd64/minio mv minio /usr/local/bin/ chmod 777 /usr/local/bin/minio #启动服务 minio server minidata/ Endpoint: http://10.1.88.74:9000 http://172.17.0.1:9000 http://172.19.0.1:9000 http://172.21.0.1:9000 http://172.22.0.1:9000 http://172.23.0.1:9000 http://127.0.0.1:9000 AccessKey: ZSYLNWA109W0Q4DWDS73 SecretKey: kuqn+i1MpR0yoE9RoT59gYjRuB5IJdz8IhIZOqP9 Browser Access: http://10.1.88.74:9000 http://172.17.0.1:9000 http://172.19.0.1:9000 http://172.21.0.1:9000</description>
+    </item>
+    
+    <item>
+      <title>docker 磁盘空间管理</title>
+      <link>https://zhangeamon.top/docker/manager.html</link>
+      <pubDate>Mon, 18 Mar 2019 08:58:07 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/manager.html</guid>
+      <description>查看docker占用的空间情况 # docker system df TYPE TOTAL ACTIVE SIZE RECLAIMABLE Images 58 36 6.091GB 2.119GB (34%) Containers 90 89 232.3MB 0B (0%) Local Volumes 137 16 232.7MB 194.2MB (83%) Build Cache 0 0 0B 0B 四大资源尽收眼底，可回收多少资源也了然于胸 清除不在需要的资源 This will remove: - all stopped containers - all networks not used by at least one container - all dangling images - all build cach # docker system prune -f 清除一切非活跃状态，将资源还给系统 清除volume 查看 # docker volume ls</description>
+    </item>
+    
+    <item>
+      <title>checkpoint 检查点</title>
+      <link>https://zhangeamon.top/postgres/checkpoint.html</link>
+      <pubDate>Wed, 13 Mar 2019 15:57:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/checkpoint.html</guid>
+      <description>作用 一般checkpoint会将某个时间点之前的脏数据全部刷新到磁盘，以实现数据的一致性与完整性。其主要目的是为了缩短崩溃恢复时间。 触发 超级用户（其他用户不可）执行CHECKPOINT命令 数据库shutdown 数据库recovery完成 XLOG日志量达到了触发checkpoint</description>
+    </item>
+    
+    <item>
+      <title>咨询锁 adlock</title>
+      <link>https://zhangeamon.top/postgres/adlock.html</link>
+      <pubDate>Thu, 07 Mar 2019 16:20:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/adlock.html</guid>
+      <description>https://github.com/digoal/blog/blob/master/201805/20180524_02.md 行级锁 select .. for update select .. for update skip locked select .. for share</description>
+    </item>
+    
+    <item>
+      <title>rabbitmq 简单应用</title>
+      <link>https://zhangeamon.top/rabbitmq/manager01.html</link>
+      <pubDate>Tue, 26 Feb 2019 14:57:21 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/rabbitmq/manager01.html</guid>
+      <description>启动 rabbitmq-server &amp;amp; 队列重置（清空队列、用户等） rabbitmqctl stop_app rabbitmqctl reset rabbitmqctl stop 关闭 rabbitmqctl stop 列举所有用户 rabbitmqctl list_users 列举所有队列 rabbitmqctl list_queues 添加用户 rabbitmqctl add_user user_name user_passwd 设置用户角色为管理员 rabbitmqctl set_user_tags user_name administrator 权限设置 rabbitmqctl set_permissions -p / user_name &amp;quot;.*&amp;quot; &amp;quot;.*&amp;quot; &amp;quot;.*&amp;quot; 操作举例（添加用户admin） sudo rabbitmqctl add_user admin admin sudo rabbitmqctl set_user_tags admin administrator sudo rabbitmqctl set_permissions -p / admin &amp;quot;.*&amp;quot; &amp;quot;.*&amp;quot; &amp;quot;.*&amp;quot; 查看状态 rabbitmqctl status 安装 RabbitMQWeb管理插件 rabbitmq-plugins enable rabbitmq_management 可以</description>
+    </item>
+    
+    <item>
+      <title>Telegraf&#43;Influxdb&#43;Grafana</title>
+      <link>https://zhangeamon.top/monitor/influxdb01.html</link>
+      <pubDate>Tue, 26 Feb 2019 09:42:08 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/influxdb01.html</guid>
+      <description>架构组建介绍 telegraf 数据采集 Agent for collecting and Reporting Metrics and Events. influxdb 时序数据库存储 Purpose Buid time series databases. granafa 数据展现</description>
+    </item>
+    
+    <item>
+      <title>iptables查看、添加、删除规则</title>
+      <link>https://zhangeamon.top/network-security/iptables01.html</link>
+      <pubDate>Mon, 25 Feb 2019 17:23:44 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/iptables01.html</guid>
+      <description>查看 iptables -nvL –line-number -L 查看当前表的所有规则，默认查看的是filter表，如果要查看NAT表，可以加上-t NAT参数 -n 不对ip地址进行反查，加上这个参数显示速度会快很多 -v 输出详细信息，包含通过该规则的数据包数量，总字节数及相应的网络接口 –line-number 显示规则的</description>
+    </item>
+    
+    <item>
+      <title>dos 常用命令</title>
+      <link>https://zhangeamon.top/linux/wind-run.html</link>
+      <pubDate>Mon, 25 Feb 2019 10:45:06 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/wind-run.html</guid>
+      <description>运行 cmd command regedit 注册表 calc 计算器 notepad 笔记本 mspaint 图画板 winver window版本 shutdown 60秒关机 cmd ipconfig/all ip信息 cd 切换目录 D: 切换到D目录 dir 当前目录下文件信息 ipconfig /flushdns 刷新本地dns缓存</description>
+    </item>
+    
+    <item>
+      <title>Mysql 入门</title>
+      <link>https://zhangeamon.top/mysql/over-view.html</link>
+      <pubDate>Thu, 21 Feb 2019 14:31:26 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/mysql/over-view.html</guid>
+      <description>安装 &amp;amp; 启动 安装 rpm -i https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm yum install mysql-community-server.x86_64 启动 systemctl start mysqld systemctl enable mysqld 查看临时密码 sudo grep &#39;temporary password&#39; /var/log/mysqld.log 2019-05-15T06:42:54.826106Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: DVjSsl-ZX5f7 修改密码 mysql -uroot -p ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;MyNewPass4!&#39;; 常用命令 连接 mysql -h127.0.0.1 -P 3306 -uroot -p 权限管理 mysql登陆用户权限校验主要是通过用户名密码+访问来源主机方式 创建用户 CREATE USER &#39;finley&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;password&#39;; 赋权限 GRANT ALL ON *.* TO &#39;finley&#39;@&#39;localhost&#39; WITH GRANT OPTION; 收回权限 REVOKE ALL ON *.* FROM &#39;finley&#39;@&#39;localhost&#39;; 查看</description>
+    </item>
+    
+    <item>
+      <title>二叉树、B-Tree、B&#43;Tree、B*Tree</title>
+      <link>https://zhangeamon.top/tidb/tree.html</link>
+      <pubDate>Mon, 18 Feb 2019 14:00:58 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/tidb/tree.html</guid>
+      <description>二叉树：二叉树，每个结点只存储一个关键字，等于则命中，小于走左边，大于走右边； B-Tree：多路搜索树，每个结点存储【M/2-1，M-1]个关键字，非叶子结点存储指向关键字范围的子节点；所有关键字在整棵树中出现【且只出现一次】，非叶子结点可以命中。 B+Tree：在B-Tree基础</description>
+    </item>
+    
+    <item>
+      <title>Linux 常用命令</title>
+      <link>https://zhangeamon.top/linux/fu-cmd.html</link>
+      <pubDate>Mon, 18 Feb 2019 11:17:06 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/fu-cmd.html</guid>
+      <description>线上查询及帮助命令 man 查看命令帮助，命令的词典，更复杂的还有info，但不常用。 help 查看Linux内置命令的帮助，比如cd命令。 文件和目录操作命令 ls 全拼list，功能是列出目录的内容及其内容属性信息。 cd 全拼change directory，功能是从当前工作目录切换到指定的工作目录。 cp 全</description>
+    </item>
+    
+    <item>
+      <title>Mysql 书单</title>
+      <link>https://zhangeamon.top/mysql/book-list.html</link>
+      <pubDate>Wed, 13 Feb 2019 15:20:43 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/mysql/book-list.html</guid>
+      <description>入门： 《涂抹MySQL：跟着三思一步一步学MySQL》 《MySQL数据库应用从入门到精通（第2版）》 《MySQL核心技术手册》 《MySQL技术内幕（第5版）》 运维实践： 《高性能MySQL》 经典必读 《MySQL管理之道：性能调优、高可用与监控（第2版） 》贺春旸 《深入理解MySQL核</description>
+    </item>
+    
+    <item>
+      <title>Redis 常用数据结构</title>
+      <link>https://zhangeamon.top/redis/data-type.html</link>
+      <pubDate>Wed, 13 Feb 2019 14:41:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/redis/data-type.html</guid>
+      <description>String： 字符串。整数，浮点数 Hash：健值对的无序散列列表 List：链表 Set：无序集合 Zset：有序集合 https://www.cnblogs.com/knowledgesea/category/722602.html</description>
+    </item>
+    
+    <item>
+      <title>八种进程通信</title>
+      <link>https://zhangeamon.top/linux/process-comm.html</link>
+      <pubDate>Wed, 13 Feb 2019 14:07:39 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/process-comm.html</guid>
+      <description>1.无名管道( pipe )：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系。 2.高级管道(popen)：将另一个程序当做一个新的进程在当前程序进程中启动，则它算是当前程序的子进程，这种方式我们成为高级管道方式。 3.有名</description>
+    </item>
+    
+    <item>
+      <title>进程管理</title>
+      <link>https://zhangeamon.top/linux/pid_m.html</link>
+      <pubDate>Thu, 31 Jan 2019 10:56:47 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/pid_m.html</guid>
+      <description>监控进程 查看系统TOP(f进入field选择) top 打印系统进程 ps -efwL 统计每个进程的开销 pidstat -d -r -u -w -l -h -p ALL 5 1 打印进程stack pstack -p pid 打印进程系统调用 strace -p pid 结束和管理进程 结束进程 kill pid 强制结束进程(用户进程无法捕获-9信号，可能崩溃. -15信号稳妥些) kill -9 pid 管理周期进程 任务调度进程的管理</description>
+    </item>
+    
+    <item>
+      <title>pgpoolii 读写分离</title>
+      <link>https://zhangeamon.top/postgres/pgpool2.html</link>
+      <pubDate>Wed, 30 Jan 2019 15:43:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgpool2.html</guid>
+      <description>https://www.pgpool.net/docs/pgpool-II-3.5.4/doc/tutorial-zh_cn.html#dist-def https://www.xiaomastack.com/2019/08/16/postgresql集群/</description>
+    </item>
+    
+    <item>
+      <title>Logical Replication 逻辑复制</title>
+      <link>https://zhangeamon.top/postgres/logical-replication.html</link>
+      <pubDate>Wed, 30 Jan 2019 15:42:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/logical-replication.html</guid>
+      <description>逻辑复制 Postgres 10 版本开始， 在内核层面支持基于REDO流的逻辑复制。 控制粒度为表级别 物理复制相同都是基于wal 可指定多个上游数据源 下游数据可读可写 可用于数据汇总，无停服数据迁移,大版本升级等。 基本概念 发布者（publication）， 上游数据 订阅者 (subscrition)， 下游数据 复</description>
+    </item>
+    
+    <item>
+      <title>cluster 聚族表</title>
+      <link>https://zhangeamon.top/postgres/cluster.html</link>
+      <pubDate>Wed, 30 Jan 2019 15:19:41 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/cluster.html</guid>
+      <description>存储数据线性相关性 测试</description>
+    </item>
+    
+    <item>
+      <title>Archive wal归档</title>
+      <link>https://zhangeamon.top/postgres/archive.html</link>
+      <pubDate>Wed, 30 Jan 2019 14:20:38 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/archive.html</guid>
+      <description>介绍 所谓WAL日志归档，其实就是把在线的WAL日志备份出来。 配置 vi postgresql.conf wal_level=&#39;replica&#39; # - Archiving - archive_mode = on # enables archiving; off, on, or always # (change requires restart) archive_command = &#39;test ! -f /mnt/backup/%f &amp;amp;&amp;amp; cp %p /mnt/backup/%f&#39; # command to use to archive a logfile segment # placeholders: %p = path of file to archive # %f = file name only # e.g. &#39;test ! -f /mnt/server/archivedir/%f &amp;amp;&amp;amp; cp %p /mnt/server/archivedir/%f&#39; #archive_timeout = 0 # force a logfile segment switch after this # number of seconds; 0 disables 参数说明 wal_level archive 或更高级别 archive_mode on 开启归档模式，always</description>
+    </item>
+    
+    <item>
+      <title>TimescaleDB 时序数据库</title>
+      <link>https://zhangeamon.top/postgres/timescaledb.html</link>
+      <pubDate>Wed, 30 Jan 2019 10:20:51 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/timescaledb.html</guid>
+      <description>时序数据库 https://github.com/timescale/timescaledb 数据库配置 https://github.com/timescale/timescaledb-tune copy并行导入数据 https://github.com/timescale/timescaledb-parallel-copy 常用方法 创建拓展 CREATE EXTENSION timescaledb; 创建一个普通的表 CREATE TABLE conditions ( time TIMESTAMPTZ NOT NULL, location TEXT NOT NULL, temperature DOUBLE PRECISION NULL, humidity DOUBLE PRECISION NULL ); 转换成时序数据库表 SELECT create_hypertable(&#39;conditions&#39;, &#39;time&#39;); conditions 表名 time 时序字段 修改时序间隔 对新表生效 SELECT set_chunk_time_interval(&#39;conditions&#39;, INTERVAL &#39;24 hours&#39;); 查看分区 SELECT show_chunks(&#39;conditions&#39;); SELECT show_chunks(&#39;conditions&#39;, older_than =&amp;gt; INTERVAL &#39;3 months&#39;) SELECT show_chunks(&#39;conditions&#39;, older_than =&amp;gt; DATE &#39;2017-01-01&#39;); SELECT show_chunks(newer_than =&amp;gt; INTERVAL &#39;3 months&#39;); SELECT show_chunks(older_than =&amp;gt; INTERVAL &#39;3 months&#39;, newer_than =&amp;gt; INTERVAL &#39;4 months&#39;); 查看数据大</description>
+    </item>
+    
+    <item>
+      <title>PG主从切换 pg_rewind</title>
+      <link>https://zhangeamon.top/postgres/pg_rewind.html</link>
+      <pubDate>Wed, 30 Jan 2019 10:16:17 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_rewind.html</guid>
+      <description>pg_rewind requires that the target server either has the wal_log_hints option enabled in postgresql.conf or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. full_page_writes must also be set to on, but is enabled by default. wal_log_hints 使用场景 在数据库主从结构中，从变成主易。但是由主变为从却需要一番周折。 如果是数据量少时重新使用pg_backup拉一份从即可，但是如果数据量大时，这个过程非常的耗时耗能。对线上业务也会有影</description>
+    </item>
+    
+    <item>
+      <title>PG高可用Patroni</title>
+      <link>https://zhangeamon.top/postgres/patroni.html</link>
+      <pubDate>Wed, 30 Jan 2019 10:14:55 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/patroni.html</guid>
+      <description>环境 操作系统 Centos 7 patroni 版本 2.0.2 postgres 版本 13 实现目标 高可用方案对比 patroni 结构分析 patroni 搭建新集群 patroni 接管现有集群 patroni 管理pg配置 手动swithover 自动failover 维护模式 弹性扩容，缩容 对外提供统一服务 RestFULLAPI 备份恢复 监控 日志 升级 高可用方案对比 pg的高可用方案都是基于流复制来实现 PAF pacemaker + corosyns repmgr repmgr 手动流复制管</description>
+    </item>
+    
+    <item>
+      <title>MySQL常用性能分析命令</title>
+      <link>https://zhangeamon.top/mysql/performance-cmd.html</link>
+      <pubDate>Tue, 29 Jan 2019 14:06:55 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/mysql/performance-cmd.html</guid>
+      <description>MySQL常用性能突发事件分析命令： SHOW PROCESSLIST; —当前MySQL数据库的运行的所有线程 INNODB_TRX; — 当前运行的所有事务 INNODB_LOCKS; — 当前出现的锁 INNODB_LOCK_WAITS; — 锁等待的对应关系计 SHOW OPEN TABLES where In_use &amp;gt;0; — 当前打开表 SHOW ENGINE INNODB STATUS \G; —Innodb状态 SHOW STATUS LIKE &amp;lsquo;innodb_row_lock_%&#39;; — 锁性能状态 SQL语句EXPLAIN; — 查询优化器</description>
+    </item>
+    
+    <item>
+      <title>citus 数据库分库</title>
+      <link>https://zhangeamon.top/postgres/pg_citus.html</link>
+      <pubDate>Tue, 29 Jan 2019 13:19:26 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_citus.html</guid>
+      <description>数据库分库调研 Greenplum 更适用于AP场景 PGXL PGXC 社区不活跃，沟通问题反馈时间长。没找到用户群体. 在此基础上发展的有亚信antdb，腾讯tbase。没有那个研发实力，算了吧。 citus 插件方式，无侵入。很多牛X的特性企业版才支持。主要强调多租户。 mycat mysql支派，阿里开源（抛弃）项目。主要是对sql语</description>
+    </item>
+    
+    <item>
+      <title>pgwatch2 数据库指标监控查看</title>
+      <link>https://zhangeamon.top/postgres/pgwatch2.html</link>
+      <pubDate>Tue, 29 Jan 2019 11:19:05 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgwatch2.html</guid>
+      <description>介绍 pgwatch2官方 官方演示示例 架构 agent server agent 在被监控的pg上自定义方法，用于收集数据库信息。这些自定义的方法需要依赖需要数据库扩展如pg_stat_statements,plpythonu. server 负责存储收集过来的信息，可以存放在postgres或influxdb中. 并将收集的信息</description>
+    </item>
+    
+    <item>
+      <title>锁机制</title>
+      <link>https://zhangeamon.top/postgres/pg_lock.html</link>
+      <pubDate>Thu, 24 Jan 2019 11:26:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_lock.html</guid>
+      <description>https://blog.csdn.net/pg_hgdb/article/details/79403651 https://habr.com/en/company/postgrespro/blog/500714/ 表锁 https://www.modb.pro/db/26462 查看被堵塞的任务 select * from pg_locks where not granted; locktype | database | relation | page | tuple | virtualxid | transactionid | classid | objid | objsubid | virtualtransaction | pid | mode | granted | fastpath ----------+----------+----------+------+-------+------------+---------------+---------+-------+----------+--------------------+-----+------+---------+---------- (0 行记录) 查看等待锁信息，是被谁堵塞了 select pg_blocking_pids(pid); pg_blocking_pids ------------------ {} 终止进程 select pg_cancel_backend(pid); # select select pg_terminate_backend(pid); # update insert delete 事务的隔离级别 Postgres 数据库共有三种数据隔离级别。 Read Commit 读看提交 默认级别 在读开始的时候建立数据快照 Repeat Read 可重复读。</description>
+    </item>
+    
+    <item>
+      <title>时间点恢复</title>
+      <link>https://zhangeamon.top/postgres/pitr.html</link>
+      <pubDate>Thu, 24 Jan 2019 11:08:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pitr.html</guid>
+      <description>PITR Point-in-time recovery https://blog.csdn.net/a964921988/article/details/84957241 https://github.com/digoal/blog/blob/master/201608/20160823_03.md https://github.com/digoal/blog/blob/master/201608/20160823_04.md 依赖条件 历史完整备份 不间断wal日志 以上都可有wal-g 备份系统提供支持 恢复到指定点 指定标签 具体时间点 具体事务 指定标签 recovery.conf recovery_target_action= &#39;pause&#39; # promote ,shutdown --- 打lable select pg_create_restore_point(&#39;my_daily_process_ended&#39;); --- 恢复到指定的lable recovery.conf recovery_target_name = &#39;my_daily_process_ended&#39; 具体时间 restore_command = &#39;cp /data/arch/%f %p&#39; # e.g. &#39;cp /mnt/server/archivedir/%f %p&#39; recovery_target_time = &#39;2020-12-23 09:37:17.010268&#39; recovery_target_inclusive = false recovery_target_timeline = &#39;latest&#39; 具体事务 restore_command = &#39;cp /data/arch/%f %p&#39; # e.g. &#39;cp /mnt/server/archivedir/%f %p&#39; recovery_target_xid = &#39;26897309&#39; recovery_target_inclusive = false</description>
+    </item>
+    
+    <item>
+      <title>pg_pathman 分区表</title>
+      <link>https://zhangeamon.top/postgres/pg_pathman.html</link>
+      <pubDate>Thu, 24 Jan 2019 10:56:06 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_pathman.html</guid>
+      <description>介绍 分区表的诉求在现实的生成中的意义不必多说，pg以前的实现方式多采用触发器，rules实现。数据量上来时性能明显不尽如意。 虽然pg10 ，11 版本在分区表的特性上不断发力。但是性能啥还是不够给力。 pg_pathman 分区表功能在目前的pg版本10.6 中优势还是非常明显的。 在期待pg自身分区表特性的</description>
+    </item>
+    
+    <item>
+      <title>Qos</title>
+      <link>https://zhangeamon.top/linux/qos.html</link>
+      <pubDate>Mon, 21 Jan 2019 17:26:20 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/qos.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SSD 4k对齐写放大</title>
+      <link>https://zhangeamon.top/linux/4k-wa.html</link>
+      <pubDate>Thu, 17 Jan 2019 16:12:11 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/4k-wa.html</guid>
+      <description>4k对齐 早期硬盘每个扇区以512字节为标准，新一代硬盘扇区容量为4096个字节，也就是所说的4k扇区。 硬盘标准更新，但操作系统一直使用的是512字节扇区的标准，所以硬盘厂商为了保证兼容性，把4k扇区模拟成512字节扇区。 通常文件系统的块（簇）是512字节的倍数，新的系统基本上都设</description>
+    </item>
+    
+    <item>
+      <title>memtester 内存压力测试</title>
+      <link>https://zhangeamon.top/linux/memtester.html</link>
+      <pubDate>Mon, 14 Jan 2019 15:45:58 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/memtester.html</guid>
+      <description>memtester</description>
+    </item>
+    
+    <item>
+      <title>memtest 检测内存</title>
+      <link>https://zhangeamon.top/linux/memtest.html</link>
+      <pubDate>Mon, 14 Jan 2019 15:40:01 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/memtest.html</guid>
+      <description>NAME memtest-setup - Install Memtest86+ into your GRUB boot loader menu SYNOPSIS memtest-setup [OPTIONS] DESCRIPTION memtest-setup installs Memtest86+ into your GRUB boot loader menu. It supports both GRUB 2 and GRUB Legacy (i.e. GRUB 0.9x). In case of GRUB 2 it installs GRUB 2 template into /etc/grub.d and GRUB 2 config needs to be regenerated manually by running grub2-mkconfig -o /boot/grub2/grub.cfg under root. This is not done automatically because it could overwrite any custom changes in /boot/grub2/grub.cfg. OPTIONS -h, --help Shows help. AUTHOR Jaroslav Škarvada &amp;lt;jskarvad@redhat.com&amp;gt; Manpage author. COPYRIGHT Copyright © 2014 Jaroslav Škarvada Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 or (at your option) any later version published by the Free</description>
+    </item>
+    
+    <item>
+      <title>Linux查看内存条信息</title>
+      <link>https://zhangeamon.top/linux/dmidecode.html</link>
+      <pubDate>Mon, 14 Jan 2019 15:38:29 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/dmidecode.html</guid>
+      <description>1.查看内存槽及内存条 $ sudo dmidecode -t memory 2.查看内存的插槽数,已经使用多少插槽.每条内存多大 $ sudo dmidecode -t memory | grep Size 3.查看服务器型号、序列号 $ sudo dmidecode | grep &amp;quot;System Information&amp;quot; -A9 | egrep &amp;quot;Manufacturer|Product|Serial&amp;quot;</description>
+    </item>
+    
+    <item>
+      <title>cgroups</title>
+      <link>https://zhangeamon.top/linux/cgroups.html</link>
+      <pubDate>Mon, 14 Jan 2019 09:28:49 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/cgroups.html</guid>
+      <description>https://www.certdepot.net/rhel7-get-started-cgroups/ https://www.oracle.com/technical-resources/articles/linux/resource-controllers-linux.html iops和bps限制 限制sda 的读写 lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sda 8:0 0 931.5G 0 disk /data sdb 8:16 0 223.6G 0 disk ├─sdb1 8:17 0 200M 0 part /boot/efi ├─sdb2 8:18 0 1G 0 part /boot ├─sdb3 8:19 0 7.8G 0 part [SWAP] └─sdb4 8:20 0 214.6G 0 part / cd /sys/fs/cgroup/blkio/ echo &amp;quot;8:0 102400&amp;quot; &amp;gt; blkio.throttle.read_bps_device echo &amp;quot;8:0 10&amp;quot; &amp;gt; blkio.throttle.read_iops_device echo &amp;quot;8:0 204800&amp;quot; &amp;gt; blkio.throttle.write_bps_device echo &amp;quot;8:0 20&amp;quot; &amp;gt; blkio.throttle.write_iops_device</description>
+    </item>
+    
+    <item>
+      <title>Postgres</title>
+      <link>https://zhangeamon.top/monitor/postgres.html</link>
+      <pubDate>Fri, 11 Jan 2019 17:09:51 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/postgres.html</guid>
+      <description>Postgresql 常用监控 , 巡检报表 直接利用PG提供的性能统计数据 PG的很多性能数据可以通过查询pg_stat_或pg_statio_开头的系统表获取 zabbix http://pg-monz.github.io/pg_monz/index-en.html zabbix-extensions PG专用的监控工具 pgsnap, pgstatspack,pgwatch,pg_statsinfo等。这些工具主要做PG的性能分析，状态查看的。不能做故障</description>
+    </item>
+    
+    <item>
+      <title>pgfincore</title>
+      <link>https://zhangeamon.top/postgres/pgfincore.html</link>
+      <pubDate>Fri, 11 Jan 2019 13:17:12 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgfincore.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pgbench 压力测试</title>
+      <link>https://zhangeamon.top/postgres/pgbench.html</link>
+      <pubDate>Wed, 09 Jan 2019 16:36:47 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgbench.html</guid>
+      <description>介绍 pgbench是一种在PostgreSQL上运行基准测试的简单程序。 官方文档 默认测试 自定义测试 默认测试 pgbench中默认自带一套测试数据库和测试sql脚本。 初始化默认数据库 使用 -i 初始化数据库 #pgbench -U postgres -i -s 10 pgbenchdb NOTICE: table &amp;quot;pgbench_history&amp;quot; does not exist, skipping NOTICE: table &amp;quot;pgbench_tellers&amp;quot; does not exist, skipping NOTICE: table &amp;quot;pgbench_accounts&amp;quot; does not exist, skipping NOTICE: table &amp;quot;pgbench_branches&amp;quot; does not exist, skipping creating tables... 100000 of 1000000 tuples (10%)</description>
+    </item>
+    
+    <item>
+      <title>定时任务</title>
+      <link>https://zhangeamon.top/linux/at-crontab.html</link>
+      <pubDate>Wed, 09 Jan 2019 10:11:10 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/at-crontab.html</guid>
+      <description>Linux 系统中的定时任务 重复执行 一次执行 重复执行 详见 /etc/crontab 配置 anacron 用于以天为单位的频率运行命令。它的工作与 cron 稍有不同，它假设机器不会一直开机。 cron 也适合在那些不会 24X7 运行如笔记本以及桌面电脑的机器上运行每日、每周以及每月的计划任务（LCTT 译注：不适合按小时、分钟执行任务）。 假设你有一个计划任务</description>
+    </item>
+    
+    <item>
+      <title>no space left on device</title>
+      <link>https://zhangeamon.top/linux/nospace-device.html</link>
+      <pubDate>Wed, 09 Jan 2019 08:32:26 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/nospace-device.html</guid>
+      <description>问题描述 Linux 系统中出现磁盘空间不足错误： No space left on device … 在linux环境下，用vi打开某文件时，提示Write error in swap file 原因分析 导致该问题的可能原因包括： 磁盘分区空间使用率达到百分之百 磁盘分区inode使用率达到百分之百 僵尸文件：已删除文件因句柄被占用未释放导致相应空间未释放 解决方法 磁盘</description>
+    </item>
+    
+    <item>
+      <title>meminfo Linux 内存信息</title>
+      <link>https://zhangeamon.top/linux/meminfo.html</link>
+      <pubDate>Tue, 08 Jan 2019 09:04:15 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/meminfo.html</guid>
+      <description>介绍 /proc/meminfo是了解Linux系统内存使用状况的主要接口，我们最常用的”free”、”vmstat”等命令就是通过它获取数据的 内容解读 cat /proc/meminfo MemTotal: 8009504 kB 除了bios ，kernel本身占用的内存以外，可以被kernel所分配的内存。一般这个值固定不变。 MemFree: 2385828 kB 未被使用的内存 MemAvailable:</description>
+    </item>
+    
+    <item>
+      <title>pg_trgm的gist和gin索引加速字符匹配查询</title>
+      <link>https://zhangeamon.top/postgres/pg_trgm.html</link>
+      <pubDate>Mon, 07 Jan 2019 09:37:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_trgm.html</guid>
+      <description>背景 对车牌号的记忆有时可能记住的是前几位，有时可能是后几位，不同的人记车牌号的习惯也不同。 通常是是容易记住首尾，中间不清楚。 那么如何在大量已有车牌数据中快速根据模糊的信息来进行查询呢？ 模拟 数据库表中约有500w条车牌号记录，对表中的车牌号进行模糊查询。 即支持 car_id like &amp;lsquo;%XXXX%XXX%&amp;rsquo; 查询 ---创建表</description>
+    </item>
+    
+    <item>
+      <title>Docker 问题集</title>
+      <link>https://zhangeamon.top/docker/troubles.html</link>
+      <pubDate>Thu, 03 Jan 2019 15:06:43 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/troubles.html</guid>
+      <description>Docker push: Received unexpected HTTP status: 500 Internal Server Error 描述: 使用jenkins 构建docker images时 push images到私有harbor中报错: Received unexpected HTTP status: 500 Internal Server Error,在build机上直接push没有问题。有的项目可以成功，有的失败。即使同一个项目有时执行成功，有时也会失败。 解决方式: 网上很多的关于500的</description>
+    </item>
+    
+    <item>
+      <title>Centos mail</title>
+      <link>https://zhangeamon.top/linux/mail.html</link>
+      <pubDate>Sat, 29 Dec 2018 16:53:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/mail.html</guid>
+      <description>介绍 电子邮件系统包括两个组件： MUA(Mail User Agent,邮件用户代理）为用户提供的可以读写邮件的界面,例如 Foxmail, Outlook MTA(Mail Transport Agent,邮件传送代理）MTA是运行在底层，能够处理邮件的收发工作的程序 邮件的接收是MTA和MUA配合完成的。远程的MUA首先向远程MTA连接并验证发信人身份，然后由远程MT</description>
+    </item>
+    
+    <item>
+      <title>pgbouncer 连接池</title>
+      <link>https://zhangeamon.top/postgres/pgbouncer.html</link>
+      <pubDate>Thu, 27 Dec 2018 09:00:49 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgbouncer.html</guid>
+      <description>背景介绍 Pgbouncer是一个针对PostgreSQL数据库的轻量级连接池 pgbouncer 的目标是降低因为新连接到 PostgreSQL 的连接而导致的性能损失 使用术语说明： 为了后面的描述更清晰，使用如下术语 Client : 指访问者 Pgboucer: 指连接池 Postgres: 指数据库。 Connetions: 指彼此之间的连接 整体架构 原来: Client -&amp;gt; Postgres 现在: Client -&amp;gt; Pgbounce -&amp;gt; Postgres 优势 内存消耗低(默</description>
+    </item>
+    
+    <item>
+      <title>xargs 命令</title>
+      <link>https://zhangeamon.top/linux/cmd-xargs.html</link>
+      <pubDate>Tue, 25 Dec 2018 10:18:26 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/cmd-xargs.html</guid>
+      <description>http://www.cnblogs.com/wangqiguo/p/6464234.html</description>
+    </item>
+    
+    <item>
+      <title>sed 命令</title>
+      <link>https://zhangeamon.top/linux/cmd-sed.html</link>
+      <pubDate>Tue, 25 Dec 2018 10:17:45 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/cmd-sed.html</guid>
+      <description>概述 sed命令是一个面向字符流的非交互式编辑器，也就是说sed不允许用户与它进行交互操作。sed是按行来处理文本内容的。在shell中，使用sed来批量修改文本内容是非常方便的。 sed命令的选项 sed [选项] [动作] 选项与参数： -n ：使用安静(silent)模式。在一般 sed 的用法中，所有</description>
+    </item>
+    
+    <item>
+      <title>awk 命令</title>
+      <link>https://zhangeamon.top/linux/cmd-awk.html</link>
+      <pubDate>Tue, 25 Dec 2018 10:14:43 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/cmd-awk.html</guid>
+      <description>What is awk 官网 man 告诉我们 pattern scanning and processing language 那么awk能做什么，awk适合做什么 ？ awk最常用的工作一般是遍历一个文件中的每一行，然后分别对文件的每一行进行处理。 由于awk天生提供对文件中文本分列进行处理，所以如果一个文件中的每行都被特定的分隔符(常见的是空格)隔开， 我们可以将这个文件看成是由</description>
+    </item>
+    
+    <item>
+      <title>终端复用</title>
+      <link>https://zhangeamon.top/linux/terminal-reuse.html</link>
+      <pubDate>Tue, 25 Dec 2018 10:06:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/terminal-reuse.html</guid>
+      <description>背景 我们在linux服务器上的工作一般都是通过一个远程的终端连接软件连接到远端系统进行操作，例如使用xshell或者SecureCRT工具通过ssh进行远程连接。 在使用过程中，如果要做比较耗时的操作，例如有时候进行编译，或者下载大文件需要比较长的时间，一般情况下是下班之后直接运行</description>
+    </item>
+    
+    <item>
+      <title>Zabbix Postgres Fqa</title>
+      <link>https://zhangeamon.top/monitor/zabbix-postgres-fqa.html</link>
+      <pubDate>Mon, 24 Dec 2018 17:18:11 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/zabbix-postgres-fqa.html</guid>
+      <description>如何使用篇 如何使用zabbix监控postgres 我们采用的是github中的开源项目zabbix-extensions中的postgres，iostat对Postgres数据库性能指标及系统IO进行监控。 以及对实体机进行监控，本文主要介绍对postgres的性能进行监控和分析 如</description>
+    </item>
+    
+    <item>
+      <title>Zabbix FQA</title>
+      <link>https://zhangeamon.top/monitor/zabbix-fqa.html</link>
+      <pubDate>Mon, 24 Dec 2018 16:53:20 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/zabbix-fqa.html</guid>
+      <description>如何使用篇 如何安装 安装文档 架构模型为服务端、被监控端。 被监控端agent安装在需要被监控的主机上，负责收集被监控主机相关状态的信息指标如内存，cup，网络等。 服务端负责汇总所有agent的信息，如存储，处理，展现。数据存放在指定的数据库中如mysql pg。 需安装软件说明 zabbix-server-pgsql 服务端 zabbix-web-pgsql</description>
+    </item>
+    
+    <item>
+      <title>Kworker </title>
+      <link>https://zhangeamon.top/linux/kworker.html</link>
+      <pubDate>Mon, 24 Dec 2018 16:43:22 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/kworker.html</guid>
+      <description>名字的意思 Kernel Worker 什么时候有的 kworker是3.x内核引入的 这么看 系统中查看 Linux下使用 ps -ef|grep kowrker 显示的内容怎么看 显示的格式kworker/%u:%d%s u：是unbound的缩写，代表没有绑定特定的CPU，kworker /u2:0中的 2 是 work_pool 的ID。 不带u的就是绑定特定cpu的wo</description>
+    </item>
+    
+    <item>
+      <title>引起索引失效</title>
+      <link>https://zhangeamon.top/postgres/index-invalid.html</link>
+      <pubDate>Thu, 20 Dec 2018 16:34:22 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/index-invalid.html</guid>
+      <description>简介 索引的作用，加速检索，排序，分组。 优点： 检索 缺点： 新增，更新时需要维护索引，占磁盘空间，创建时锁表。 维护： 根据统计表发生全表扫描次数，索引使用次数。合理添加删除索引。 索引失效的场景 如果where过滤条件设置不合理，即使索引存在，且where过滤条件中包含索引列，也会导致全表扫</description>
+    </item>
+    
+    <item>
+      <title>Access Modify Change 三种时间戳</title>
+      <link>https://zhangeamon.top/linux/stat.html</link>
+      <pubDate>Thu, 20 Dec 2018 13:56:24 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/stat.html</guid>
+      <description>三种时间对应关系 访问时间 Access atime 修改时间 Modify mtime 状态改动时间 Change ctime 如何查看文件文件的三种时间戳 stat filename 三种时间戳的解释 访问时间：读一次文件的内容，这个时间就会更新。比如more、cat等命令。ls、stat命令不会修改atime 修改时间：修改时间是文件内容最后一次被修改的时间。比如：vim操作</description>
+    </item>
+    
+    <item>
+      <title>权限管理</title>
+      <link>https://zhangeamon.top/postgres/role-manager.html</link>
+      <pubDate>Thu, 20 Dec 2018 09:54:28 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/role-manager.html</guid>
+      <description>创建用户 # user 与 role 区别 ， user 具有login权限 postgres=# create user tester with password &#39;123456&#39;; CREATE ROLE 创建数据库,并关联所有者 postgres=# create database test owner tester ; CREATE DATABASE 变更数据库用户所有者 postgres=# alter database test owner to tester; ALTER DATABASE 修改用户&amp;amp;数据库 #用户连接数 postgres=# alter user tester connection limit 100; ALTER ROLE #数据库连接数 postgres=# alter database test connection limit 100; ALTER DATABASE #用户其他属性修改 postgres=# alter user tester BYPASSRLS CREATEDB ENCRYPTED PASSWORD LOGIN NOCREATEDB NOINHERIT NOREPLICATION PASSWORD REPLICATION SET VALID UNTIL CONNECTION</description>
+    </item>
+    
+    <item>
+      <title>DBA 日常</title>
+      <link>https://zhangeamon.top/postgres/dba.html</link>
+      <pubDate>Wed, 19 Dec 2018 11:33:43 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/dba.html</guid>
+      <description>备份 恢复 时时热备 定期冷备 升级 每年大版本小版本升级，新特性调研，性能测试，稳定性。 可用当前最新的上一个版本。 HA 手动 自动 读写分离 sharding 多副本 安全 权限管理 资源隔离 审计 ddl 慢sql 锁长时间占用 巡检 定期巡检 awr 报告 监控 系统 数据库 诊断 优化 背景 应用程序的野蛮生长，由产品为驱动的开发，一切以快速上线为目</description>
+    </item>
+    
+    <item>
+      <title>ln -s 建立软连接</title>
+      <link>https://zhangeamon.top/linux/ln-s.html</link>
+      <pubDate>Wed, 19 Dec 2018 09:19:19 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/ln-s.html</guid>
+      <description>创建软连接 类似于windows中的创建快捷方式 ln -s source target 具体方法举例 需求 数据库的数据实际存放位置为 /data/pgsql/10/data/ 数据库的应用访问地址为 /var/lib/pgsql/10/data/ 创建软连接 1 切换目录到需要创建快捷方式的文件目录 cd /var/lib/pgsql/10/ 2.1 创建软连接 ln -s /data/pgsql/10/data/ data 2.2 删除软连接 rm data 删除软连接和数据 rm data/ 3 权限和所有者 chmod chown 修改软连接的所用者 使用 -h 参数 chown -h</description>
+    </item>
+    
+    <item>
+      <title>hdparm 查看硬盘型号</title>
+      <link>https://zhangeamon.top/linux/hdparm.html</link>
+      <pubDate>Wed, 19 Dec 2018 08:53:10 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/hdparm.html</guid>
+      <description>安装工具 yum install hdparm 查看 -i参数是在引导驱动器时获得的识别信息，这个信息有时候不完整也不一 定准确 hdparm -i /dev/sdb /dev/sdb: Model=INTEL SSDSC2KW512G8, FwRev=LHF002C, SerialNo=PHLA75210153512DGN Config={ Fixed } RawCHS=16383/16/63, TrkSize=0, SectSize=0, ECCbytes=0 BuffType=unknown, BuffSize=unknown, MaxMultSect=16, MultSect=off CurCHS=16383/16/63, CurSects=16514064, LBA=yes, LBAsects=1000215216 IORDY=on/off, tPIO={min:120,w/IORDY:120}, tDMA={min:120,rec:120} PIO modes: pio0 pio3 pio4 DMA modes: mdma0 mdma1 mdma2 UDMA modes: udma0 udma1 udma2 udma3 udma4 udma5 *udma6 AdvancedPM=yes: unknown setting WriteCache=enabled Drive conforms to: unknown: ATA/ATAPI-2,3,4,5,6,7 * signifies the current active mode -I参数是直接从驱动器获取识别信息, 并以原始的,未经过修改和更正的形式</description>
+    </item>
+    
+    <item>
+      <title>数据库三范式五约束</title>
+      <link>https://zhangeamon.top/postgres/normal-form.html</link>
+      <pubDate>Mon, 17 Dec 2018 10:27:04 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/normal-form.html</guid>
+      <description>三范式 第一范式：数据表中的每一列（每个字段）必须是不可拆分的最小单元，也就是确保每一列的原子性； 第二范式（2NF）：满足1NF后，要求表中的所有列，都必须依赖于主键，而不能有任何一列与主键没有关系，也就是说一个表只描述一件事情； 第三范式：必须先满足第二范式（2NF），要求：表中的</description>
+    </item>
+    
+    <item>
+      <title>快速生成大量数据</title>
+      <link>https://zhangeamon.top/postgres/insert01.html</link>
+      <pubDate>Fri, 14 Dec 2018 13:13:57 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/insert01.html</guid>
+      <description>在数据库中快速生成1w条数据，或测试数据库的写入性能。 创建数据库表 postgres=# create table tbl(id int, info text, crt_time timestamp); CREATE TABLE 方法一 generate_series 查看方法函数 postgres=# \df generate_series 函数列表 架构模式 | 名称 | 结果数据类型 | 参数数据类型 | 类型 ------------+-----------------+-----------------------------------+--------------------------------------------------------------------+------ pg_catalog | generate_series | SETOF bigint | bigint, bigint | 常规 pg_catalog | generate_series | SETOF bigint | bigint, bigint, bigint | 常规 pg_catalog | generate_series | SETOF integer | integer, integer | 常规 pg_catalog | generate_series | SETOF integer | integer, integer, integer | 常规 pg_catalog | generate_series |</description>
+    </item>
+    
+    <item>
+      <title>Pipelinedb 简介</title>
+      <link>https://zhangeamon.top/postgres/pipelinedb02.html</link>
+      <pubDate>Wed, 12 Dec 2018 11:39:47 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pipelinedb02.html</guid>
+      <description>项目已经停止维护 适配支持版本 PostgreSQL 10: 10.1, 10.2, 10.3, 10.4, 10.5 PostgreSQL 11: 11.0 基本概念 流(Stream) 流是基础，Continuous Views和transform则是基于流中的数据进行处理的手段。 对于同一份数据，只需要定义一个流，写入一份即可。 如果对同一份数据有多个维度的统计，可以写在一条SQL完成的（如同</description>
+    </item>
+    
+    <item>
+      <title>Pipelinedb文档概览</title>
+      <link>https://zhangeamon.top/postgres/pipelinedb01.html</link>
+      <pubDate>Wed, 12 Dec 2018 09:46:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pipelinedb01.html</guid>
+      <description>官方文档 介绍 What PipelineDB is What PipelineDB is not QuitStart 一个统计wiki浏览的例子 安装 各种环境安装 Continuous Views 定义流视图，其实就是定义 统计分析的QUERY， 例如select id, count(*), avg(x), &amp;hellip; from table group by &amp;hellip;; 定义好之后，数据插入table，这个流视图就会不断增量的进行统计，你只要查询这个流视图，就可以查看到实时的统计结果。 数据库中存</description>
+    </item>
+    
+    <item>
+      <title>常用监控介绍</title>
+      <link>https://zhangeamon.top/monitor/introduce.html</link>
+      <pubDate>Fri, 07 Dec 2018 11:32:43 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/introduce.html</guid>
+      <description>zabbix zabbix-extensions promethues osquery m/monit</description>
+    </item>
+    
+    <item>
+      <title>学习参考</title>
+      <link>https://zhangeamon.top/python/reference.html</link>
+      <pubDate>Fri, 07 Dec 2018 11:24:11 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/reference.html</guid>
+      <description>廖雪峰 Python3 草根学 Python （基于Python3.6)</description>
+    </item>
+    
+    <item>
+      <title>云存储介绍</title>
+      <link>https://zhangeamon.top/storage/introduce.html</link>
+      <pubDate>Fri, 07 Dec 2018 11:04:12 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/storage/introduce.html</guid>
+      <description>对象存储(oss) 适用于大量的小文件，RESFULL接口方式存储读取迅速,不能修改，不用担心元数据过大问题。通常的架构为使用其他的数据库软件如(Hbase,ES) 等来存放管理元数据。 swift minio 块存储 这种接口通常以QEMU Driver或者Kernel Module的方式存在，这种接口需要实</description>
+    </item>
+    
+    <item>
+      <title>集群部署安装</title>
+      <link>https://zhangeamon.top/k8s/install.html</link>
+      <pubDate>Fri, 07 Dec 2018 10:48:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/k8s/install.html</guid>
+      <description>kubeadm kubeadm 可当做体验版，证书可用时间一年 Kubespray Kubespray 是 Kubernetes incubator 中的项目，目标是提供 Production Ready Kubernetes 部署方案，该项目基础是通过 Ansible Playbook 来定义系统与 Kubernetes 集群部署的任务，具有以下几个特点： 可以部署在 AWS, GCE, Azure, OpenStack 以及裸机上. 部署 High Available Kubernetes 集群. 可组合性 (Composable)，可自行选择 Network Plugin (flannel, calico, canal, weave) 来部署. 多种 Linux distributions(CoreOS, Debian Jessie, Ubuntu 16.04, CentOS/RHEL7). kops kops</description>
+    </item>
+    
+    <item>
+      <title>Postgres 监控</title>
+      <link>https://zhangeamon.top/postgres/monitor.html</link>
+      <pubDate>Thu, 06 Dec 2018 16:21:08 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/monitor.html</guid>
+      <description>各种监控方式 zabbix Monitor PostgreSQL with Zabbix postgres_exporter A PostgresSQL metric exporter for Prometheus pgwatch2 PostgreSQL metrics monitor/dashboard pgmetrics Collect and display information and stats from a running PostgreSQL server pgdash (收费) pganalyze PostgreSQL Performance Monitoring 参考自己实现 状态查看 pgcenter pgcenter top pgcenter: 2018-12-20 11:10:25, load average: 0.94, 0.84, 0.86 state [ok]: ::1:5432 postgres@postgres (ver: 10.6, up 8 days 19:57:54, recovery: f) %cpu: 15.0 us, 3.7 sy, 0.0 ni, 75.3 id, 5.7 wa, 0.0 hi, 0.2 si, 0.0 st activity: 5/1000 conns, 0/0 prepared, 2 idle, 0 idle_xact, 3 active, 0 waiting, 0 others MiB mem: 7821 total, 162 free, 424 used, 7235 buff/cached autovacuum: 0/3 workers/max, 0 manual, 0 wraparound, 00:00:00 vac_maxtime MiB swap: 1023 total, 903 free, 120 used, 0/0 dirty/writeback statements: 1888 stmt/s,</description>
+    </item>
+    
+    <item>
+      <title>Linux 系统性能检测</title>
+      <link>https://zhangeamon.top/linux/sysstat.html</link>
+      <pubDate>Thu, 06 Dec 2018 14:58:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/sysstat.html</guid>
+      <description>整体篇 安装 yum install sysstat -y top htop atop vmstat -wt 1 dstat 内存篇 由于Linux 内存的占用属于饥饿式，所以看到的结果只能作为参考 cat /proc/meminfo 结果具体含义 I/O 篇 整体io情况 iostat -dmx 1 Linux 3.10.0-862.14.4.el7.x86_64 (rjyd) 2018年12月06日 _x86_64_ (40 CPU) Device: rrqm/s wrqm/s r/s w/s rMB/s wMB/s avgrq-sz avgqu-sz await r_await w_await svctm %util sda 0.00 0.05 0.06 0.11 0.00 0.00 53.87 0.00 1.35 0.60 1.78 0.23 0.00 sdb 0.00 0.02 0.08 6.65 0.00 0.07 21.00 0.00 0.49 0.42 0.50 0.26 0.17 详细说明 哪些进程占用 iotop -oP</description>
+    </item>
+    
+    <item>
+      <title>tablespace 表空间</title>
+      <link>https://zhangeamon.top/postgres/tablespace.html</link>
+      <pubDate>Thu, 06 Dec 2018 11:17:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/tablespace.html</guid>
+      <description>原文 注意主从架构时，主从软连接位置需要对应一致。 思考： 冷热数据分离 冷数据对热数据的影响，垃圾回收机制。</description>
+    </item>
+    
+    <item>
+      <title>TOAST 技术</title>
+      <link>https://zhangeamon.top/postgres/toast.html</link>
+      <pubDate>Thu, 06 Dec 2018 11:14:20 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/toast.html</guid>
+      <description>原文</description>
+    </item>
+    
+    <item>
+      <title>fillfactor 填充因子</title>
+      <link>https://zhangeamon.top/postgres/fillfactor.html</link>
+      <pubDate>Thu, 06 Dec 2018 11:01:03 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/fillfactor.html</guid>
+      <description>介绍 PostgreSQL每个表和索引的数据都是由很多个固定尺寸的页面存储（通常是 8kB，不过在编译服务器时[–with-blocksize]可以选择其他不同的尺寸） 一个表的填充因子(fillfactor)是一个介于 10 和 100 之间的百分数。100(完全填充)是默认值。如果指定了较小的填</description>
+    </item>
+    
+    <item>
+      <title>vacuum 垃圾回收器</title>
+      <link>https://zhangeamon.top/postgres/vacuum.html</link>
+      <pubDate>Wed, 05 Dec 2018 16:48:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/vacuum.html</guid>
+      <description>介绍 数据库总是不断地在执行删除，更新等操作。良好的空间管理非常重要，能够对性能带来大幅提高。在postgresql中用于维护数据库磁盘空间的工具是VACUUM，其重要的作用是删除那些已经标示为删除的数据并释放空间。 postgresql中执行delete,update操作后，表中的</description>
+    </item>
+    
+    <item>
+      <title>Explain 执行计划</title>
+      <link>https://zhangeamon.top/postgres/explain.html</link>
+      <pubDate>Wed, 05 Dec 2018 15:27:30 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/explain.html</guid>
+      <description>文法 EXPLAIN [ ( option [, ...] ) ] statement EXPLAIN [ ANALYZE ] [ VERBOSE ] statement 这里 option可以是： ANALYZE [ boolean ] VERBOSE [ boolean ] COSTS [ boolean ] BUFFERS [ boolean ] TIMING [ boolean ] SUMMARY [ boolean ] FORMAT { TEXT | XML | JSON | YAML } 注意事项 记住当使用了ANALYZE选项时语句会被实际执行. 如执行dml 时将对数据库进行实际的操作。 避免污染数据的方式 BEGIN; EXPLAIN ANALYZE ...; ROLLBACK; 一个例子 postgres=# explain analyze select * from tbl; QUERY</description>
+    </item>
+    
+    <item>
+      <title>Nginx log 切割</title>
+      <link>https://zhangeamon.top/docker/nginx-log.html</link>
+      <pubDate>Wed, 05 Dec 2018 11:00:10 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/nginx-log.html</guid>
+      <description>Docker nginx 日志切割 docker 在运行 nginx 日志容器时，将日志挂载到实体机/var/log/nginx/* .log 中. 一般直接运行的nginx服务都会自带logrotate进行日志切分, 由docker方式安装的nginx 缺失日志切割功能! 添加logrotate cat /etc/logrotate.d/nginx /var/log/nginx/*.log { daily missingok rotate 52 compress delaycompress notifempty create 666 root root sharedscripts postrotate # [ -f /var/run/nginx.pid ] &amp;amp;&amp;amp; kill</description>
+    </item>
+    
+    <item>
+      <title>Centos FTP 服务</title>
+      <link>https://zhangeamon.top/middleware/vsftp.html</link>
+      <pubDate>Wed, 05 Dec 2018 09:24:29 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/vsftp.html</guid>
+      <description>利用vsftpd 搭建FTP 服务器 安装 yum -y install vsftpd 添加用户及设置密码 useradd -s /sbin/nologin -d /home/ftp_test ftp_test passwd ftp_test -s 禁止ssh登录主机 -d 设置ftp_test 用户home 目录，用于存放数据 基础配置 vi /etc/vsftpd/vsftpd.conf # 禁止匿名访问 anonymous_enable=NO # 禁止dns解析 reverse_lookup_enable=NO 启动&amp;amp;开机自启 systemctl start vsftpd.service systemctl enable vsftpd.service filezilla 客户端验证 host: 服务器IP port: 默认 user: password: 测试本地上传，远</description>
+    </item>
+    
+    <item>
+      <title>数据库日志</title>
+      <link>https://zhangeamon.top/postgres/log.html</link>
+      <pubDate>Tue, 04 Dec 2018 15:45:33 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/log.html</guid>
+      <description>介绍 PostgreSQL有3种日志，分别是pg_log（数据库运行日志）、pg_xlog（WAL 日志，即重做日志）、pg_clog（事务提交日志，记录的是事务的元数据） postgres 10 版本将文件目录结构改为 log，pg_wal，pg_xact log默认是关闭的，需要设置其参数。wal和xac</description>
+    </item>
+    
+    <item>
+      <title>fio 硬盘性能测试</title>
+      <link>https://zhangeamon.top/linux/fio.html</link>
+      <pubDate>Tue, 04 Dec 2018 10:30:48 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/fio.html</guid>
+      <description>基本概念 使用FIO之前，首先要有一些SSD性能测试的基础知识。 包括线程，队列深度，Offset，同步异步，DirectIO，BIO。 线程 线程指的是同时有多少个读或写任务在并行执行，一般来说，CPU里面的一个核心同一时间只能运行一个线程。如果只有一个核心，要想运行多线程，只能使用时</description>
+    </item>
+    
+    <item>
+      <title>smartctl 硬盘检测</title>
+      <link>https://zhangeamon.top/linux/smartctl.html</link>
+      <pubDate>Mon, 03 Dec 2018 14:21:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/smartctl.html</guid>
+      <description>SMART 简介 S.M.A.R.T.，全称为“Self-Monitoring Analysis and Reporting Technology”，即“自我监测、分析及报告技术”。是一种自动的硬盘状态检测与预警系统和规范。通过在硬盘硬件内的检测指令对硬盘的硬件如磁头、盘片、马达、电路的运行情况进行监控、记录并与厂商所设定的预设安全</description>
+    </item>
+    
+    <item>
+      <title>mdadm 软Raid 管理</title>
+      <link>https://zhangeamon.top/linux/mdadm.html</link>
+      <pubDate>Mon, 03 Dec 2018 13:39:39 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/mdadm.html</guid>
+      <description>背景 mdadm是linux下用于创建和管理软件RAID的命令，是一个模式化命令。但由于现在服务器一般都带有RAID阵列卡，并且RAID阵列卡也很廉价，且由于软件RAID的自身缺陷（不能用作启动分区、使用CPU实现，降低CPU利用率），因此在生产环境下并不适用。但为了学习和了解RA</description>
+    </item>
+    
+    <item>
+      <title>Centos 初始化配置</title>
+      <link>https://zhangeamon.top/linux/init-centos.html</link>
+      <pubDate>Mon, 03 Dec 2018 10:34:06 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/init-centos.html</guid>
+      <description>网络配置 设置IP 略 ip_froward 查看 sysctl -a | grep ip_ 修改 vi /etc/sysctl.conf net.ipv4.ip_forward = 1 最大使用内存 vm.max_map_count=262144 生效 sysctl -p 系统更新 yum -y update 安装扩展及工具 yum -y install epel-release net-tools bind-utils telnet wget 文件链接限制 查看 ulimit -n 修改 vi /etc/security/limits.conf * - nofile 65536 * soft nproc 65536 * hard nproc 65536 * soft nofile 65536 * hard nofile 65536 rm /etc/security/limits.d/* -rf 安全 selinux 查看 getenforce 修改 临时 setenforce 0 永久 vi /etc/sysconfig/selinux 设置 firewalld 设置 ssh 禁用root用户，密钥登陆 切换为其他用户登录 PermitRootLogin without-password</description>
+    </item>
+    
+    <item>
+      <title>模板数据库</title>
+      <link>https://zhangeamon.top/postgres/template.html</link>
+      <pubDate>Fri, 30 Nov 2018 09:52:43 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/template.html</guid>
+      <description>模板数据库 模板数据库就是创建新database时，PostgreSQL会基于模板数据库制作一份副本，其中会包含所有的数据库设置和数据文件。 PostgreSQL安装好以后会默认附带两个模板数据库：template0和template1。 template0 干净版，任何时候不要修改 template1 默认版，如果创建数</description>
+    </item>
+    
+    <item>
+      <title>pg_stat_statements 数据库统计信息</title>
+      <link>https://zhangeamon.top/postgres/pg_stat_statements.html</link>
+      <pubDate>Thu, 29 Nov 2018 11:08:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_stat_statements.html</guid>
+      <description>pg_stat_statements 扩展 安装 yum install postgresql10-contrib.x86_64 修改配置参数 vi $PGDATA/postgresql.conf shared_preload_libraries=&#39;pg_stat_statements&#39; # 加载模块 需要重启 , 近期测试不需要添加也可以。自带扩展 track_io_timing = on # 跟踪IO耗时 (可选) track_activity_query_size = 2048 # 设置单条SQL的最长长度，超过被截断显示（可选) pg_stat_statements.max = 10000 #在pg_stat_statements中最多保留多少条统计信息，通过LRU算法，覆盖老的记录。 pg_stat_statements.track = all</description>
+    </item>
+    
+    <item>
+      <title>数据库拓展</title>
+      <link>https://zhangeamon.top/postgres/extention.html</link>
+      <pubDate>Tue, 27 Nov 2018 15:20:33 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/extention.html</guid>
+      <description>流计算数据库产品 pipelineDB * 推荐数据库产品 recDB 时序数据库 timescaleDB * 分布式数据库插件 citus * 列存储插件 IMCS, cstore等 面向OLAP的codegen数据库 pg_LLVM 向量计算插件 vops 数据库性能分析 pg_stat_statements pg_buffercache 直接访问数据库文件系统 adminpack 加密数据 pgcrypto 预热缓存 pg_prewarm 检查存储，特别是表膨胀 pgstattuple 模糊搜索 pg_trgm 连接到远程服务器 postgres_fdw k近邻（KNN）搜索</description>
+    </item>
+    
+    <item>
+      <title>数据库参数</title>
+      <link>https://zhangeamon.top/postgres/params.html</link>
+      <pubDate>Tue, 27 Nov 2018 09:57:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/params.html</guid>
+      <description>postgres 数据库参数该如何设置 性能参数pgtune pgconfig 日志参数 更多参数详解 管理 listen_addresses = &amp;quot;*&amp;quot; # 连接访问控制，哪些ip可以访问， * 全部。 结合pg_hba.conf , iptables设置。 superuser_reserved_connections = 3 # 预留给超级管理员的连接数。 port = 5432 # 默认访问端口 wal_keep_segments = 1024 # wal 日志保存数量 wal日志 wal_log_hints = on full_page_writes = on 成本因子 # - Planner Cost</description>
+    </item>
+    
+    <item>
+      <title>LSM Overview</title>
+      <link>https://zhangeamon.top/tidb/lsm.html</link>
+      <pubDate>Mon, 26 Nov 2018 13:40:19 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/tidb/lsm.html</guid>
+      <description>介绍 LSM-Tree，全称为 log-structured merge-tree，是为了满足日益增长的数据量所带来的高效写性能的需求而提出的设计。考虑到磁盘随机写和顺序写上千倍的性能差距，传统的Btree 结构设计采取的分散的 update-in-place 策略在数据量庞大、写缓存作用有限的情况下，存在大批量的随机写操作，使得写性能完全满足</description>
+    </item>
+    
+    <item>
+      <title>Haproxy 算法</title>
+      <link>https://zhangeamon.top/middleware/haproxy.html</link>
+      <pubDate>Mon, 26 Nov 2018 08:53:09 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/haproxy.html</guid>
+      <description>blance roundrobin # 轮询，软负载均衡基本都具备这种算法 balance static-rr # 根据权重，建议使用 balance leastconn # 最少连接者先处理，建议使用 balance source # 根据请求源IP，建议使用 balance uri # 根据请求的URI balance url_param，# 根据请求的URl参数&amp;rsquo;balance url_param&#39; requires an URL parameter name balance hdr(name) # 根据HTTP请求头来锁定每一次HTTP请求</description>
+    </item>
+    
+    <item>
+      <title>Promethues Altermanager 报警</title>
+      <link>https://zhangeamon.top/monitor/prometheus-altermanager.html</link>
+      <pubDate>Wed, 21 Nov 2018 17:29:01 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/prometheus-altermanager.html</guid>
+      <description>Prometheus Alertmanager 概述 Alertmanager与Prometheus是相互分离的两个组件。Prometheus服务器根据报警规则将警报发送给Alertmanager，然后Alertmanager将silencing、inhibition、aggregation等消息通过电子邮件、PaperDu</description>
+    </item>
+    
+    <item>
+      <title>Promethues 基本概念</title>
+      <link>https://zhangeamon.top/monitor/prometheus-concepts.html</link>
+      <pubDate>Wed, 21 Nov 2018 14:08:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/prometheus-concepts.html</guid>
+      <description>数据模型(Data Model) 由指标名称(metric)和一个或一组标签(lable)集合以及float64类型的值组成。 例如 up{instance=&amp;quot;10.1.88.71:9115&amp;quot;,job=&amp;quot;blackbox_exporter_10.1.88.74_icmp&amp;quot;} 1 metric类型 client libraries提供了四种metric类型，包括Counter、Gauge、Histogram、Summary。 Counter 计数器，只允许增加或重置为</description>
+    </item>
+    
+    <item>
+      <title>Sql 优化</title>
+      <link>https://zhangeamon.top/tidb/sql-optimize01.html</link>
+      <pubDate>Wed, 21 Nov 2018 09:18:37 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/tidb/sql-optimize01.html</guid>
+      <description>一条sql的执行过程 将 SQL 解析成抽象语法树(AST)，将 AST 变换到内部表示(IR)。然后优化器的输入就是 IR，它将生成最优的查询计划（Plan），然后会变成具体的执行器（Executor），里面有许多的算。 优化的阶段为IR 到生成 Plan 的过程，包括逻辑优化和物理优化 逻辑优化 逻辑优化主要是基</description>
+    </item>
+    
+    <item>
+      <title>数据库索引类型及使用场景</title>
+      <link>https://zhangeamon.top/postgres/index01.html</link>
+      <pubDate>Mon, 19 Nov 2018 09:00:44 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/index01.html</guid>
+      <description>用途 优点 主键唯一约束 加速检索 排序 缺点 更新数据时需要同时维护对应索引 占用磁盘空间，甚至比表数据本身还要多 使用场景利弊分析 TP与AP应用 读写使用比例 点查询批量查询 创建索引 \h create index 命令： CREATE INDEX 描述： 建立新的索引 语法： CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ [ IF NOT EXISTS ] 名称 ] ON 表名 [ USING 方法 ] ( { 列名称 | ( 表达式 ) }</description>
+    </item>
+    
+    <item>
+      <title>Sysbench 测试</title>
+      <link>https://zhangeamon.top/middleware/sysbench.html</link>
+      <pubDate>Fri, 16 Nov 2018 19:25:45 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/sysbench.html</guid>
+      <description>下载安装 1.0.15 sysbench官网 curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh | sudo bash sudo yum -y install sysbench 参数说明 sysbench --help Usage: sysbench [options]... [testname] [command] Commands implemented by most tests: prepare run cleanup help General options: --threads=N number of threads to use [1] 线程数 --events=N limit for total number of events [0] 事务数 --time=N limit for total execution time in seconds [10] 测压时间 --forced-shutdown=STRING number of seconds to wait after the --time limit before forcing shutdown, or &#39;off&#39; to disable [off] --thread-stack-size=SIZE size of stack per thread [64K] --rate=N average transactions rate. 0 for unlimited rate [0] --report-interval=N periodically report intermediate statistics with a specified interval in seconds. 0 disables intermediate reports [0] --report-checkpoints=[LIST,...] dump full statistics and reset all counters</description>
+    </item>
+    
+    <item>
+      <title>PostgreSQL 无法kill(pg_terminate_backend, pg_cancel_backend)的情况分析 - 进程hang strace,pstack</title>
+      <link>https://zhangeamon.top/postgres/kill.html</link>
+      <pubDate>Wed, 14 Nov 2018 22:09:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/kill.html</guid>
+      <description>先 mark 下 https://yq.aliyun.com/articles/647468</description>
+    </item>
+    
+    <item>
+      <title>pstack</title>
+      <link>https://zhangeamon.top/linux/cmd-pstack.html</link>
+      <pubDate>Wed, 14 Nov 2018 22:05:59 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/cmd-pstack.html</guid>
+      <description>安装 yum install gdb 使用 pstack pid gstack pid pstree</description>
+    </item>
+    
+    <item>
+      <title> ERROR 2013 (HY000): Lost connection to MySQL server during query </title>
+      <link>https://zhangeamon.top/tidb/2013.html</link>
+      <pubDate>Wed, 14 Nov 2018 10:08:02 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/tidb/2013.html</guid>
+      <description>ERROR 2013 (HY000) Lost connection to MySQL server during query 错误出现场景 select count(id) from account_user where id&amp;gt; 0; +----------+ | count(id) | +----------+ | 2940245 | +----------+ 1 row in set (0.78 sec) delete from account_user where id&amp;gt; 0; ERROR 2013 (HY000): Lost connection to MySQL server during query tidb.log 2018/11/14 10:57:12.476 server.go:303: [info] con:261 new connection 10.1.88.32:54462 2018/11/14 10:57:15.387 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:792.561353ms txn_start_ts:404269101106331649 region_id:77367 store_addr:10.1.88.84:20160 kv_process_ms:537 2018/11/14 10:57:17.227 pd.go:107: [warning] get timestamp too slow: 135.012109ms 2018/11/14 10:57:17.812 pd.go:107: [warning] get timestamp too slow: 56.316863ms 2018/11/14 10:57:17.821 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.226284139s txn_start_ts:404269101106331649 region_id:77863 store_addr:10.1.88.85:20160 kv_process_ms:1580 scan_total_write:314161 scan_processed_write:314160 scan_total_data:314160 scan_processed_data:314160 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.826 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.231259247s txn_start_ts:404269101106331649 region_id:77590 store_addr:10.1.88.85:20160 kv_process_ms:1807 scan_total_write:355885 scan_processed_write:355884 scan_total_data:355884 scan_processed_data:355884 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.872 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.276994472s txn_start_ts:404269101106331649 region_id:77576 store_addr:10.1.88.86:20160 kv_process_ms:1684 scan_total_write:346208 scan_processed_write:346207 scan_total_data:346207 scan_processed_data:346207 scan_total_lock:1 scan_processed_lock:0 2018/11/14</description>
+    </item>
+    
+    <item>
+      <title>熔断，限流，降级</title>
+      <link>https://zhangeamon.top/istio/concept01.html</link>
+      <pubDate>Tue, 13 Nov 2018 10:23:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/istio/concept01.html</guid>
+      <description>写在前面 在学习Service Mesh前还是最好先清楚几个概念，如熔断，限流，降级。接下来一起揭开面纱，让陌生的名词变得没有那么神秘。一切都来自于现实的应用场景，及解决问题的方法方式。 consumer表示服务调用方 provider表示服务提供方 A调用B服务，一般是泛指调用B服务里面</description>
+    </item>
+    
+    <item>
+      <title>Istio 1.0.3 安装　</title>
+      <link>https://zhangeamon.top/istio/install.html</link>
+      <pubDate>Mon, 12 Nov 2018 13:44:34 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/istio/install.html</guid>
+      <description>Service Mesh(服务网格) Kubernetes 已经给我们带来了诸多的好处。但是仍有些需求比如 A/B 测试、金丝雀发布、限流、访问控制,端到端认证等需要运维人员进一步去解决。 Istio 是完全开源的服务网格,提供了一套完整的解决方案，可以透明地分层到现有的分布式应用程序上。对开发人员几乎无感的同时获得超能力。 如果想要现</description>
+    </item>
+    
+    <item>
+      <title>Esrallyi 压力测试</title>
+      <link>https://zhangeamon.top/es/esrally.html</link>
+      <pubDate>Mon, 12 Nov 2018 11:41:20 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/es/esrally.html</guid>
+      <description>https://segmentfault.com/a/1190000011174694</description>
+    </item>
+    
+    <item>
+      <title>蓝绿、A/B测试、金丝雀发布</title>
+      <link>https://zhangeamon.top/istio/concept02.html</link>
+      <pubDate>Fri, 09 Nov 2018 10:17:38 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/istio/concept02.html</guid>
+      <description>蓝绿发布 准备两套环境，蓝和绿。绿环境为当前正式环境，现在将新版部署到蓝环境当中并进行测试。没有问题后将路由指向蓝环境。若发现问题可将路由指回到原来的绿环境中进行回滚。 问题： 如果是无状态应用还可以，如果应用有状态或类似数据库之类的应该很麻烦，还有新旧版本是否兼容的问题。 A/B 测试 用来测</description>
+    </item>
+    
+    <item>
+      <title>KVM</title>
+      <link>https://zhangeamon.top/kvm/kvm01.html</link>
+      <pubDate>Tue, 06 Nov 2018 16:23:07 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/kvm/kvm01.html</guid>
+      <description>安装 ubuntu14.04 .安装kvm apt-get install qemu-kvm libvirt0 virtinst bridge-utils virt-viewer .配置实体机网络 cat /etc/network/interfaces auto lo iface lo inet loopback auto br0 iface br0 inet static address 10.0.*.* netmask 255.255.0.0 gateway 10.1.0.1 type bridge bridge_ports eth0 dns-nameservers 114.114.114.114 .创建一个虚拟机 virt-install --connect qemu:///system -n test01 -r 1024 -f /home/kvm/test01.qcow2 -s 20 -c /home/kvm/ubuntu-12.04.1-server-amd64.iso --vnc --noautoconsole --os-type linux --os-variant ubuntuPrecise --accelerate --network=bridge:br0 centos7 yum install qemu-kvm libvirt virt-install bridge-utils .配置实体机网络 cat ifcfg-enp7s0 DEVICE=&amp;quot;enp7s0&amp;quot; ONBOOT=yes BOOTPROTO=static UUID=96a09db3-9b06-4a50-8d0c-9868cf531b84 #HWADDR=&amp;quot;08:60:6E:06:C7:1A&amp;quot; TYPE=Ethernet BRIDGE=br0 IPADDR=0.0.0.0 cat ifcfg-br0 DEVICE=br0 ONBOOT=yes BOOTPROTO=static TYPE=Bridge IPADDR=10.1.*.* PREFIX=16 GATEWAY=10.1.0.1 DNS1=223.5.5.5 查看 brctl show .启动 libvirt systemctl start libvirtd systemctl enable libvirtd .创建虚拟机 virt-install --virt-type kvm --name test01 --ram</description>
+    </item>
+    
+    <item>
+      <title>APM</title>
+      <link>https://zhangeamon.top/elk/apm.html</link>
+      <pubDate>Tue, 06 Nov 2018 13:39:01 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/elk/apm.html</guid>
+      <description>https://www.elastic.co/solutions/apm 应用程序性能监控 整体架构 先搞起来 agent 收集信息 apm-server 接受agent信息并发送到ES ES 存储信息 Kibana 信息检索展示 agent python django 安装扩展包 pip install elastic-apm django 配置 # Add the agent to the installed apps INSTALLED_APPS = ( &#39;elasticapm.contrib.django&#39;, #... ) ELASTIC_APM = { # Set required service name. # Allowed characters: # a-z, A-Z, 0-9, -, _, and space &#39;SERVICE_NAME&#39;: &#39;my-app&#39;, #后台进程 &#39;TRANSPORT_CLASS&#39;: &#39;elasticapm.transport.http.AsyncTransport&#39;, # Use if APM Server requires a token #&#39;SECRET_TOKEN&#39;: &#39;&#39;, # 没有数据可以开启debug查看 # &#39;DEBUG&#39;: True, # Set custom APM Server</description>
+    </item>
+    
+    <item>
+      <title>Postgresql指标查看&amp;stat统计信息</title>
+      <link>https://zhangeamon.top/postgres/stat.html</link>
+      <pubDate>Tue, 06 Nov 2018 10:53:52 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/stat.html</guid>
+      <description>当前连接数 SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid(); count ------- 3 (1 row) 数据库占用空间 select pg_size_pretty(pg_database_size(&#39;postgres&#39;)); pg_size_pretty ---------------- 14 MB (1 row) or \l+ 数据库表(不包括索引)或单条索引占用空间 select pg_size_pretty(pg_relation_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 24 kB (1 行记录) or \d+ 表中所有索引占有的空间 select pg_size_pretty(pg_indexes_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 280 kB (1 行记录) 表和索引占用总空间 select pg_size_pretty(pg_total_relation_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 380 kB (1 行记录) 查看一条数据在数据库占用的空间 select pg_column_size(&#39;Let us go !!!&#39;); pg_column_size ---------------- 14 (1 行记录) 查出所</description>
+    </item>
+    
+    <item>
+      <title>Keepalived 问题集</title>
+      <link>https://zhangeamon.top/middleware/keepalived01.html</link>
+      <pubDate>Mon, 05 Nov 2018 10:08:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/keepalived01.html</guid>
+      <description>Q1 问题描述 ip address associated with VRID 51 not present in MASTER advert : 10.1.7.58 其中 51 为 virtual_router_id 10.1.7.58 为虚拟IP 可能原因 ntp 时间不同步 局域网内 virtual_router_id 与其他集群配置冲突。 另外 router_id 主机标示，一般为hostname即可。 解决方法： unicast_peer{ } 配置成单播模式</description>
+    </item>
+    
+    <item>
+      <title>Docker 本地网络</title>
+      <link>https://zhangeamon.top/docker/network01.html</link>
+      <pubDate>Fri, 02 Nov 2018 16:34:06 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/network01.html</guid>
+      <description>基础命令概览 docker network --help Usage: docker network COMMAND Manage networks Commands: connect Connect a container to a network create Create a network disconnect Disconnect a container from a network inspect Display detailed information on one or more networks ls List networks prune Remove all unused networks rm Remove one or more networks 默认网络 docker network ls NETWORK ID NAME DRIVER SCOPE 0770a8275bff bridge bridge local b6617326f199 host host local 31c55ffcf0a8 none null local 创建容器时通过 &amp;ndash;network= 指定网络类型 none 这个网络下的容器除了 lo，没有其他任何网卡。 host 共享Host的网络栈，容器的网络配置与 host 完</description>
+    </item>
+    
+    <item>
+      <title>Cgroup Namespaces</title>
+      <link>https://zhangeamon.top/docker/cgroup-namespaces.html</link>
+      <pubDate>Fri, 02 Nov 2018 14:17:44 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/cgroup-namespaces.html</guid>
+      <description>cgroup 实现资源限额 cgroup 全称 Control Group。Linux 操作系统通过 cgroup 可以设置进程使用 CPU、内存 和 IO 资源的限额。 在启动容器时可使用参数 docker run &amp;ndash;blkio-weight-device &amp;ndash;cpu-shares &amp;ndash;memory 等 。 ll /sys/fs/cgroup/cpu/docker/ ll /sys/fs/cgroup/memory/docker ll /sys/fs/cgroup/blkio/docker namespace 实现资源隔离 Mount Mount namespace 让容器看上去拥有整个文件系统。 容器有自己的 / 目录，可以执行 mount 和 umount 命令。当然我们知道这些操作只在当前容器中生效，</description>
+    </item>
+    
+    <item>
+      <title>Dumb Init</title>
+      <link>https://zhangeamon.top/docker/dumb-init.html</link>
+      <pubDate>Thu, 01 Nov 2018 11:43:35 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/dumb-init.html</guid>
+      <description>基础概念 孤儿进程：一个父进程退出，而它的一个或多个子进程还在运行，那么那些子进程将成为孤儿进程。孤儿进程将被init进程(进程号为1)所收养，并由init进程对它们完成状态收集工作。 僵尸进程：一个进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或waitpi</description>
+    </item>
+    
+    <item>
+      <title>代理</title>
+      <link>https://zhangeamon.top/middleware/proxy.html</link>
+      <pubDate>Wed, 31 Oct 2018 14:42:10 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/proxy.html</guid>
+      <description>科普 正向代理 对服务端来说是无感的，服务端无需配置，要在客户端指定。代理的是客户端。 访问原来无法访问的资源 用作缓存，加速访问速度 对客户端访问授权，上网进行认证 代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息 反向代理 对客户端来说的无感的，客户端无需配置，要在服务端实现。代理</description>
+    </item>
+    
+    <item>
+      <title>数据库备份和恢复</title>
+      <link>https://zhangeamon.top/postgres/backup_restore.html</link>
+      <pubDate>Tue, 30 Oct 2018 10:18:57 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/backup_restore.html</guid>
+      <description>Postgres 数据库备份恢复命令 备份：pg_dump -U postgres -v -F c -Z 4 -f ***.backup dbname 9压缩率最狠 恢复：pg_restore -U postgres -v -j 8 -d dbname ***.backup 8是采用8个线程 备份表：pg_dump -U postgres -t tablename dbname &amp;gt; 33.sql 恢复表：psql -U postgres -d dbname &amp;lt; 33.sql 只备份表结构 pg_dump -U postgres -s -t tablename dbname &amp;gt; 33.sql 只备份数据 pg_dump -U postgres -a -t tablename dbname &amp;gt; 33.sql copy 拷贝数据 数据拷贝到本地： psql</description>
+    </item>
+    
+    <item>
+      <title>Ansible Roles</title>
+      <link>https://zhangeamon.top/ansible/ansible-role.html</link>
+      <pubDate>Mon, 29 Oct 2018 14:09:08 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/ansible/ansible-role.html</guid>
+      <description>以特定的层级目录结构进行组织的tasks、variables、handlers、templates、files等 mkdir -pv ./{os_hard,nginx,memcached}/{files,templates,vars,handlers,meta,default,tasks}/main.yaml tree memcached/ memcached/ ├── default 设定默认变量 │ └── main.yaml ├── files 存储由copy或script等模块调用的文件 │ └── main.yaml ├── handlers │ └── main.yaml ├── meta 定义当前角色的特殊设定及其依赖关系 │ └</description>
+    </item>
+    
+    <item>
+      <title>Ansible Playbooks</title>
+      <link>https://zhangeamon.top/ansible/ansible-playbooks.html</link>
+      <pubDate>Thu, 25 Oct 2018 15:47:50 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/ansible/ansible-playbooks.html</guid>
+      <description>Playbook核心元素 hosts 一个或多个组或主机的 patterns,以逗号为分隔符 。 - hosts: webservices remote_user: root Tasks 任务集 tasks: - name: install httpd yum: name=httpd - name: start httpd service: name=httpd state=started Handlers 和 notity 由特定条件触发的操作，满足条件方才执行，否则不执行。 Handlers也是task列表，这些task与前述的task并没有本质上的不同,用于当关注的资</description>
+    </item>
+    
+    <item>
+      <title>Ansible Modules</title>
+      <link>https://zhangeamon.top/ansible/ansible-modules.html</link>
+      <pubDate>Thu, 25 Oct 2018 10:12:59 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/ansible/ansible-modules.html</guid>
+      <description>准备工作 安装 yum install ansible-doc.noarch ansible.noarch -y tree /etc/ansible/ /etc/ansible/ ├── ansible.cfg ├── hosts └── roles ansible --version ansible 2.7.0 config file = /etc/ansible/ansible.cfg configured module search path = [u&#39;/root/.ansible/plugins/modules&#39;, u&#39;/usr/share/ansible/plugins/modules&#39;] ansible python module location = /usr/lib/python2.7/site-packages/ansible executable location = /usr/bin/ansible python version = 2.7.5 (default, Jul 13 2018, 13:06:57) [GCC 4.8.5 20150623 (Red Hat 4.8.5-28)] 配置清单 cat hosts [webservers] 10.1.88.72 10.1.88.73 免密登录 常用命令 Usage: ansible &amp;lt;host-pattern&amp;gt; [options] 常用选项： -m MOD_NAME -a MOD_ARGS 获取模块列表：ansible-doc -l 获取指定模块的使用帮助：ansible-doc -s MOD_NAME</description>
+    </item>
+    
+    <item>
+      <title>Ansible Overview</title>
+      <link>https://zhangeamon.top/ansible/ansible-overview.html</link>
+      <pubDate>Thu, 25 Oct 2018 09:16:22 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/ansible/ansible-overview.html</guid>
+      <description>主要模块 PLAYBOOKS： 任务剧本（任务集），编排定义Ansible任务集的配置文件，由Ansible顺序依次执行，通常是JSON格式的YML文件 INVENTORY： Ansible管理主机的清单/etc/anaible/hosts MODULES： Ansible执行命令的功能模块</description>
+    </item>
+    
+    <item>
+      <title>Teleport 堡垒机</title>
+      <link>https://zhangeamon.top/network-security/teleport.html</link>
+      <pubDate>Wed, 24 Oct 2018 09:40:32 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/teleport.html</guid>
+      <description>https://gravitational.com/teleport/ https://mritd.me/2017/11/09/set-up-teleport/</description>
+    </item>
+    
+    <item>
+      <title>Git 只下载指定文件或文件夹下的内容</title>
+      <link>https://zhangeamon.top/linux/git-sparsecheckout.html</link>
+      <pubDate>Tue, 23 Oct 2018 17:21:01 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/git-sparsecheckout.html</guid>
+      <description>需求 有些时候我们只想下载项目中的部分文件或文件夹下面的内容，而不是整个项目。这个时候使用git clone难免有些过重。 是时候来寻找一个合适的方式来满足我们的需求了。这就是Sparse Checkout模式 具体方法 比如我只想下载 https://github.com/bodani/bodani.github.io.git 中的k8s 目录的内容 mkdir gitSparse cd gitSparse git init git remote add -f origin https://github.com/bodani/bodani.github.io.git git config core.sparsecheckout true echo</description>
+    </item>
+    
+    <item>
+      <title>Go 语言安装及配置</title>
+      <link>https://zhangeamon.top/go/install.html</link>
+      <pubDate>Tue, 23 Oct 2018 14:10:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/go/install.html</guid>
+      <description>1.下载安装包 https://golang.org/dl/ https://golang.google.cn/dl/ 将下载的二进制包解压至 /usr/local目录 2.配置环境变量 cat /etc/profile.d/go.sh export GOROOT=/usr/local/go export GOPATH=~/golib:~/goproject export GOBIN=~/gobin export PATH=$PATH:$GOROOT/bin:$GOBIN export GOPROXY=https://goproxy.cn export GO111MODULE=on 说明: GOROOT go安装包存放位置 GOPATH 工作区，多个工作区之间用冒号间隔 GOBIN 可执行文件目录 PATH 系统环境变量 Goproxy 中国完全实现了 Go 的模块代理协议。并且它是一个由中国备受信赖的云服务提供商七牛云支</description>
+    </item>
+    
+    <item>
+      <title>Let&#39;s Encrypt 通配符证书</title>
+      <link>https://zhangeamon.top/network-security/letusencrypt.html</link>
+      <pubDate>Mon, 22 Oct 2018 13:56:11 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/letusencrypt.html</guid>
+      <description>1.介绍 什么是 Let&amp;rsquo;s Encrypt？ 部署 HTTPS 网站的时候需要证书，证书由 CA 机构签发，大部分传统 CA 机构签发证书是需要收费的，这不利于推动 HTTPS 协议的使用。 Let&amp;rsquo;s Encrypt 也是一个 CA 机构，但这个 CA 机构是免费的！也就是说签发证书不需要任何费用。 Let&amp;rsquo;s Encrypt 由于是非盈利性的组织，需要控制开支，他们搞了一个非常有创意的事</description>
+    </item>
+    
+    <item>
+      <title>自签名证书</title>
+      <link>https://zhangeamon.top/network-security/cert.html</link>
+      <pubDate>Mon, 22 Oct 2018 11:05:47 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/cert.html</guid>
+      <description>1.环境预备 curl -s -L -o /usr/local/bin/cfssl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 curl -s -L -o /usr/local/bin/cfssljson https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 chmod +x /usr/local/bin/{cfssl,cfssljson} 2.生成配置模板 三类证书：服务器证书server cert，客户端证书client cert，对等证书peer cert(表示既是server cert又是client cert) cfssl print-defaults config &amp;gt; ca-config.json cat ca-config.json { &amp;quot;signing&amp;quot;: { &amp;quot;default&amp;quot;: { &amp;quot;expiry&amp;quot;: &amp;quot;168h&amp;quot; }, &amp;quot;profiles&amp;quot;: { &amp;quot;www&amp;quot;: { &amp;quot;expiry&amp;quot;: &amp;quot;8760h&amp;quot;, &amp;quot;usages&amp;quot;: [ &amp;quot;signing&amp;quot;, &amp;quot;key encipherment&amp;quot;, &amp;quot;server auth&amp;quot; ] }, &amp;quot;client&amp;quot;: { &amp;quot;expiry&amp;quot;: &amp;quot;8760h&amp;quot;, &amp;quot;usages&amp;quot;: [ &amp;quot;signing&amp;quot;, &amp;quot;key</description>
+    </item>
+    
+    <item>
+      <title>ssh 免密码登&amp;跳板机配置</title>
+      <link>https://zhangeamon.top/linux/no-passwd.html</link>
+      <pubDate>Thu, 18 Oct 2018 14:46:58 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/no-passwd.html</guid>
+      <description>Linux 免密码登录实现 1.说明 DES算法 加/解速度快,密钥量短,采用对称加密 RSA算法好 算法复杂,加/解速度慢,采用非对称加密 2.生成秘钥 $ssh-keygen -t dsa -P &#39;&#39; Generating public/private dsa key pair. Enter file in which to save the key (/root/.ssh/id_dsa): Your identification has been saved in /root/.ssh/id_dsa. Your public key has been saved in /root/.ssh/id_dsa.pub. The key fingerprint is: SHA256:/K/dqHKbkmm/0qw9IOFvZwRAPx36+yQtXtLM353spns root@kvm71 The key&#39;s randomart image is: +---[DSA 1024]----+ | .. . | | .. o . | | .+ . | | ...o | | . .S.. | | o ...* | | o B*</description>
+    </item>
+    
+    <item>
+      <title>Linux wheel 用户组</title>
+      <link>https://zhangeamon.top/linux/wheel.html</link>
+      <pubDate>Thu, 18 Oct 2018 10:33:14 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/wheel.html</guid>
+      <description>wheel 用户组 1.在Linux系统中root用户作为超级管理员拥有至高无上的权限，其他用户可以使用su命令将自己切换为root用户。为了加强系统的安全性,对系统用户权限进行限制。 设置为只有wheel用户组的成员拥有su 权利，其他用户不再具备切换到root 用户的权限。 2.设置 2.1 新建use</description>
+    </item>
+    
+    <item>
+      <title>gpasswd 命令</title>
+      <link>https://zhangeamon.top/linux/cmd-gpasswd.html</link>
+      <pubDate>Thu, 18 Oct 2018 09:52:03 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/cmd-gpasswd.html</guid>
+      <description>gpasswd 命令详解 gpasswd命令是Linux下工作组文件/etc/group和/etc/gshadow的管理工具，用于指定要管理的工作组。 选项详解： -a : 添加用户到组 -d : 从组删除用户 -A：指定管理员 -M：指定组成员和-A的用途差不多； -r：删除密码； -R：限制用户登入组，只有组中的成员</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes 安装　- V1.10</title>
+      <link>https://zhangeamon.top/k8s/v1.10.html</link>
+      <pubDate>Thu, 18 Oct 2018 09:12:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/k8s/v1.10.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes 安装　- V1.11</title>
+      <link>https://zhangeamon.top/k8s/v1.11.html</link>
+      <pubDate>Thu, 18 Oct 2018 09:12:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/k8s/v1.11.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>两地三机房方案落地</title>
+      <link>https://zhangeamon.top/tidb/%E4%B8%A4%E5%9C%B0%E4%B8%89%E6%9C%BA%E6%88%BF%E6%96%B9%E6%A1%88%E8%90%BD%E5%9C%B0.html</link>
+      <pubDate>Wed, 17 Oct 2018 17:19:09 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/tidb/%E4%B8%A4%E5%9C%B0%E4%B8%89%E6%9C%BA%E6%88%BF%E6%96%B9%E6%A1%88%E8%90%BD%E5%9C%B0.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>主从流复制</title>
+      <link>https://zhangeamon.top/postgres/replication01.html</link>
+      <pubDate>Wed, 17 Oct 2018 14:55:38 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/replication01.html</guid>
+      <description>历史演变 replication 主库配置 根据实际情况分配流复制权限 vi pg_hba.conf host replication all 10.2.0.0/0 trust vi postgresql.conf max_wal_senders = 10 wal_level = logical # minimal, replica, or logical hot_standby = on # 正常在从库配置，如果在主库配置完毕，因为从库复制主库配置不需要再修改从库配置。 wal_log_hints = on 从库配置 1 数据库安装 2 从主库复制数据 pg_basebackup -h 10.2.0.14 -U postgres -F p -P -R -D /var/lib/pgsql/10/data/ --checkpoint=fast -l postgresback20181219 pg_basebackup支持两种全量备</description>
+    </item>
+    
+    <item>
+      <title>安装 Postgresql</title>
+      <link>https://zhangeamon.top/postgres/install01.html</link>
+      <pubDate>Wed, 17 Oct 2018 14:37:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/install01.html</guid>
+      <description>官网 1.准备源 清除历史残余，有些是系统自带的旧版本数据库 rpm -qa | grep postgres rpm -r **** 安装新数据源 yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm 可将所有的软件更新到最新版本如 ， postgresql-10.2 更新到当前最新的postgresql-10.6 yum update -y 2.安装 yum install -y postgresql10-server postgresql10 postgresql10-contrib 3.初始化 默认 /usr/pgsql-10/bin/postgresql-10-setup initdb 自定义 /usr/pgsql-10/bin/initdb -D $PGDATA -U postgres -E UTF-8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8 -k -D 数据存放位置 -U 超级用户 -E 默认编码</description>
+    </item>
+    
+    <item>
+      <title>数据仓库介绍</title>
+      <link>https://zhangeamon.top/dw/introduce.html</link>
+      <pubDate>Fri, 21 Sep 2018 09:54:50 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/dw/introduce.html</guid>
+      <description>数据库与数据仓库的区别 数据库是面向事务的设计，数据仓库是面向主题设计的。 数据库一般服务于业务系统的，数据仓库一般是服务于分析系统的。 数据库一般存储在线交易数据，数据仓库存储的一般是历史数据。 数据库设计是尽量避免冗余，数据仓库在设计是有意引入冗余。 数据库是为捕获数据而设计，数据仓库</description>
+    </item>
+    
+    <item>
+      <title>关于本站</title>
+      <link>https://zhangeamon.top/about.html</link>
+      <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhangeamon.top/about.html</guid>
+      <description>建站目的 用于记录总结本人在日常工作中遇到的问题及解决方法等。 技术在于积累，更重于分享和交流, 一个人可以跑的更快，一群人可以走的更远! 日常工作 IT 基础服务架构建设者 Postgres DBA 代码搬运工 封侯非我意，但愿海波平。 能治病于未发者乃真高人也。 工作之余 马拉松爱好者，曾与国际顶尖选手同场竞技 联系方式 微</description>
+    </item>
+    
+    <item>
+      <title>归档</title>
+      <link>https://zhangeamon.top/archives.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhangeamon.top/archives.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>搜索</title>
+      <link>https://zhangeamon.top/search.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhangeamon.top/search.html</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

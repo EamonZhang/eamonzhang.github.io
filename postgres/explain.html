@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Explain 执行计划 | Let&#39;s Go</title>
+    <meta property="og:title" content="Explain 执行计划 - Let&#39;s Go">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-12-05T15:27:30&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-12-05T15:27:30&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Explain 执行计划">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/explain.html">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s Go
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Explain 执行计划</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月5日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h5 id="文法">文法</h5>
+<pre><code>EXPLAIN [ ( option [, ...] ) ] statement
+EXPLAIN [ ANALYZE ] [ VERBOSE ] statement
+
+这里 option可以是：
+
+    ANALYZE [ boolean ]
+    VERBOSE [ boolean ]
+    COSTS [ boolean ]
+    BUFFERS [ boolean ]
+    TIMING [ boolean ]
+    SUMMARY [ boolean ]
+    FORMAT { TEXT | XML | JSON | YAML }
+</code></pre><h5 id="注意事项">注意事项</h5>
+<p>记住当使用了ANALYZE选项时语句会被实际执行. 如执行dml 时将对数据库进行实际的操作。</p>
+<p>避免污染数据的方式</p>
+<pre><code>BEGIN;
+EXPLAIN ANALYZE ...;
+ROLLBACK;
+</code></pre><h5 id="一个例子">一个例子</h5>
+<pre><code>postgres=# explain analyze select * from tbl;
+                                                    QUERY PLAN                                                    
+------------------------------------------------------------------------------------------------------------------
+ Seq Scan on tbl  (cost=0.00..144248.48 rows=10000048 width=8) (actual time=0.091..780.145 rows=10000000 loops=1)
+ Planning time: 0.124 ms
+ Execution time: 1046.394 ms
+(3 rows)
+</code></pre><p>Seq Scan 顺序扫描<br>
+cost 代价成本, 启动成本..总成本<br>
+actual 实际值</p>
+<h4 id="cost计算">cost计算</h4>
+<p>cost的计算依据 数据库中的统计信息及成本因子相关</p>
+<ul>
+<li>统计信息 select * from pg_stats;</li>
+<li>成本因子</li>
+</ul>
+<pre><code># - Planner Cost Constants -
+
+#seq_page_cost = 1.0                    # measured on an arbitrary scale
+random_page_cost = 1.1                  # same scale as above
+#cpu_tuple_cost = 0.01                  # same scale as above
+#cpu_index_tuple_cost = 0.005           # same scale as above
+#cpu_operator_cost = 0.0025             # same scale as above
+#parallel_tuple_cost = 0.1              # same scale as above
+#parallel_setup_cost = 1000.0   # same scale as above
+#min_parallel_table_scan_size = 8MB
+#min_parallel_index_scan_size = 512kB
+effective_cache_size = 666666
+</code></pre><h4 id="影响执行计划的参数设置">影响执行计划的参数设置</h4>
+<pre><code>开关
+enable_bitmapscan
+enable_gathermerge
+enable_hashagg
+enable_hashjoin
+enable_indexonlyscan
+enable_indexscan
+enable_material
+enable_mergejoin
+enable_nestloop
+enable_seqscan
+enable_sort
+enable_tidscan
+
+关联
+from_collapse_limit 
+join_collapse_limit
+geqo_threshold
+</code></pre><p>设置</p>
+<ul>
+<li>session set enable_bitmapscan = default;</li>
+<li>全局 postgresql.conf</li>
+<li>用户级 alter user postgres set enable_bitmapscan = off;</li>
+<li>数据库级别 alter database postgres set enable_bitmapscan = off;</li>
+</ul>
+<p>查看</p>
+<ul>
+<li>session show enable_bitmapscan;</li>
+<li>用户级别 select * from pg_user;</li>
+</ul>
+<h4 id="在日志中记录explain信息">在日志中记录explain信息</h4>
+<p>通过auto_explain 扩展可在日志中记录explain信息</p>
+<p><a href="https://www.postgresql.org/docs/10/using-explain.html">文档 官网</a><br>
+<a href="http://www.postgres.cn/docs/10/sql-explain.html">文档 中文</a></p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/docker/nginx-log.html">Nginx log 切割</a></li>
+        
+        <li><a href="/middleware/vsftp.html">Centos FTP 服务</a></li>
+        
+        <li><a href="/postgres/log.html">数据库日志</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

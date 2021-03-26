@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>vacuum 垃圾回收器 | Let&#39;s Go</title>
+    <meta property="og:title" content="vacuum 垃圾回收器 - Let&#39;s Go">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-12-05T16:48:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-12-05T16:48:00&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="vacuum 垃圾回收器">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/vacuum.html">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s Go
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">vacuum 垃圾回收器</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月5日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="介绍">介绍</h4>
+<p>数据库总是不断地在执行删除，更新等操作。良好的空间管理非常重要，能够对性能带来大幅提高。在postgresql中用于维护数据库磁盘空间的工具是VACUUM，其重要的作用是删除那些已经标示为删除的数据并释放空间。
+postgresql中执行delete,update操作后，表中的记录只是被标示为删除状态，并没有释放空间，在以后的update或insert操作中该部分的空间是不能够被重用的。经过vacuum清理后，空间才能得到释放。</p>
+<h4 id="意义">意义</h4>
+<p>PostgreSQL每个表和索引的数据都是由很多个固定尺寸的页面存储（通常是 8kB，不过在编译服务器时[–with-blocksize]可以选择其他不同的尺寸）</p>
+<p>PostgreSQL中数据操作永远是Append操作,具体含义如下:</p>
+<ul>
+<li>insert 时向页中添加一条数据</li>
+<li>update 将历史数据标记为无效,然后向页中添加新数据</li>
+<li>delete 将历史数据标记为无效</li>
+</ul>
+<p>因为这个特性,所以需要定期对数据库vacuum,否则会导致数据库膨胀,建议打开autovacuum.</p>
+<h4 id="文法">文法</h4>
+<pre><code>VACUUM [ ( { FULL | FREEZE | VERBOSE | ANALYZE | DISABLE_PAGE_SKIPPING } [, ...] ) ] [ table_name [ (column_name [, ...] ) ] ]
+VACUUM [ FULL ] [ FREEZE ] [ VERBOSE ] [ table_name ]
+VACUUM [ FULL ] [ FREEZE ] [ VERBOSE ] ANALYZE [ table_name [ (column_name [, ...] ) ] ]
+</code></pre><h4 id="参数">参数</h4>
+<h5 id="full">FULL</h5>
+<p>Selects “full” vacuum, which can reclaim more space, but takes much longer and exclusively locks the table. This method also requires extra disk space, since it writes a new copy of the table and doesn&rsquo;t release the old copy until the operation is complete. Usually this should only be used when a significant amount of space needs to be reclaimed from within the table.</p>
+<p>大招，需要更多的磁盘空间，空间将会被重新整理。　auto vacumm 只删除空间，并没有整理使空间更紧凑。</p>
+<h5 id="verbose">VERBOSE</h5>
+<p>Prints a detailed vacuum activity report for each table.<br>
+打印回收时每个table 执行细节</p>
+<h5 id="analyze">ANALYZE</h5>
+<p>Updates statistics used by the planner to determine the most efficient way to execute a query.</p>
+<p>统计库</p>
+<h5 id="例子">例子</h5>
+<p>可以精确指定需要执行的table, 如果不指定被回收的对象，默认为当前database 下所有 table</p>
+<pre><code>VACUUM (FULL,VERBOSE, ANALYZE) table_name;
+</code></pre><p>将执行过程细节打印到文件中</p>
+<pre><code>psql -U user -d database  -c &quot;vacuum FULL VERBOSE ANALYZE table&quot;  &gt; vacuum-01.log 2&gt;&amp;1
+</code></pre><h5 id="测试-vacuum-full">测试 vacuum full</h5>
+<p>ctid (0,59) 表示数据存放位置为第0个页面的第59行</p>
+<p>创建测试表</p>
+<pre><code>create table test_vacuum(
+    objectid bigserial not null,                --唯一编号，主键
+    name text not null,                         --名称
+    describe text,                              --备注
+    generate timestamptz default now() not null,--创建日期
+    constraint pk_test1_objectid primary key(objectid)
+); 
+</code></pre><p>创建随机生成中文字符函数</p>
+<pre><code>drop function if exists gen_random_zh(int,int);
+create or replace function gen_random_zh(int,int)
+    returns text
+as $$
+	select string_agg(chr((random()*(20901-19968)+19968 )::integer) , '')  from generate_series(1,(random()*($2-$1)+$1)::integer); $$ language sql; 
+</code></pre><p>导入测试数据</p>
+<pre><code>insert into test_vacuum(name)
+  select gen_random_zh(8,32) from generate_series(1,10000); 
+</code></pre><p>查看数据布局</p>
+<pre><code>select ctid,objectid from test_vacuum limit 500;
+ctid,objectid
+--------
+ ....
+(1,17) 92
+(1,18) 93
+(1,19) 94
+(1,20) 95 
+ ....
+</code></pre><p>更新表中数据</p>
+<pre><code>update test2 set name=gen_random_zh(8,32) where objectid = 93;
+</code></pre><p>更新后表中数据布局</p>
+<pre><code>select ctid,objectid from test_vacuum limit 500;
+ctid,objectid
+--------
+ ....
+(1,17) 92
+(1,19) 94
+(1,20) 95 
+ ....
+</code></pre><p>执行 vacuum FULL</p>
+<pre><code>vacuum FULL test_vacuum
+
+select ctid,objectid from test_vacuum limit 500;
+ctid,objectid
+--------
+ ....
+(1,17) 92
+(1,18) 94
+(1,29) 95 
+ ....
+
+</code></pre><p>数据布局变的更紧凑，　只执行vacuum 数据不会移动</p>
+<h4 id="扩展阅读">扩展阅读</h4>
+<p>1.回收空间</p>
+<p>这个通常是大家最容易想起来的功能。回收空间，将dead tuple清理掉。但是已经分配的空间，一般不会释放掉。除非做vacuum full，但是需要exclusive lock。一般不太建议，因为如果表最终还是会涨到
+这个高水位上，经常做vacuum full意义不是非常大。一般合理设置vacuum参数，进行常规vacuum也就够了。</p>
+<p>2.冻结tuple的xid</p>
+<p>PG会在每条记录（tuple）的header中，存放xmin,xmax信息(增删改事务ID)。transactionID的最大值为2的32次，即无符整形来表示。当transactionID超过此最大值后，会循环使用。
+这会带来一个问题：就是最新事务的transactionID会小于老事务的transactionID。如果这种情况发生后，PG就没有办法按transactionID来区分事务的先后，也没有办法实现MVCC了。因此PG用vacuum后台进程，
+按一定的周期和算法触发vacuum动作，将过老的tuple的header中的事务ID进行冻结。冻结事务ID，即将事务ID设置为“2”（“0”表示无效事务ID；“1”表示bootstrap，即初始化；“3”表示最小的事务ID）。PG认为被冻结的事务ID比任何事务都要老。这样就不会出现上面的这种情况了。</p>
+<p>3.更新统计信息</p>
+<p>vacuum analyze时，会更新统计信息，让PG的planner能够算出更准确的执行计划。autovacuum_analyze_threshold和autovacuum_analyze_scale_factor参数可以控制analyze的触发的频率。</p>
+<p>4.更新visibility map</p>
+<p>在PG中，有一个visibility map用来标记那些page中是没有dead tuple的。这有两个好处，一是当vacuum进行scan时，直接可以跳过这些page。二是进行index-only scan时，可以先检查下visibility map。这样减少fetch tuple时的可见性判断，从而减少IO操作，提高性能。另外visibility map相对整个relation，还是小很多，可以cache到内存中。</p>
+<h4 id="vacuum参数介绍">vacuum参数介绍</h4>
+<h5 id="autovacuum-触发条件大致有以下几个">autovacuum 触发条件，大致有以下几个：</h5>
+<pre><code>autovacuum：默认为on，表示是否开起autovacuum。默认开起。特别的，当需要冻结xid时，尽管此值为off，PG也会进行vacuum。
+autovacuum_naptime：下一次vacuum的时间，默认1min。 这个naptime会被vacuum launcher分配到每个DB上。autovacuum_naptime/num of db。
+log_autovacuum_min_duration：记录autovacuum动作到日志文件，当vacuum动作超过此值时。 “-1”表示不记录。“0”表示每次都记录。
+autovacuum_max_workers：最大同时运行的worker数量，不包含launcher本身。
+autovacuum_vacuum_threshold:默认50。与autovacuum_vacuum_scale_factor配合使用， autovacuum_vacuum_scale_factor默认值为20%。
+                          当update,delete的tuples数量超过autovacuum_vacuum_scale_factor*table_size+autovacuum_vacuum_threshold时，进行vacuum。如果要使vacuum工作勤奋点，则将此值改小。
+autovacuum_analyze_threshold:默认50。与autovacuum_analyze_scale_factor配合使用, autovacuum_analyze_scale_factor默认10%。
+                          当update,insert,delete的tuples数量超过autovacuum_analyze_scale_factor*table_size+autovacuum_analyze_threshold时，进行analyze。
+autovacuum_freeze_max_age和autovacuum_multixact_freeze_max_age：前面一个200 million,后面一个400 million。离下一次进行xid冻结的最大事务数。
+autovacuum_vacuum_cost_delay：如果为-1，取vacuum_cost_delay值。
+autovacuum_vacuum_cost_limit：如果为-1，到vacuum_cost_limit的值，这个值是所有worker的累加值。
+</code></pre><h5 id="基于代价的vacuum参数">基于代价的vacuum参数:</h5>
+<pre><code>vacuum_cost_delay ：计算每个毫秒级别所允许消耗的最大IO，vacuum_cost_limit/vacuum_cost_dely。 默认vacuum_cost_delay为20毫秒。
+vacuum_cost_page_hit ：vacuum时，page在buffer中命中时，所花的代价。默认值为1。
+vacuum_cost_page_miss：vacuum时，page不在buffer中，需要从磁盘中读入时的代价默认为10。 vacuum_cost_page_dirty：当vacuum时，修改了clean的page。这说明需要额外的IO去刷脏块到磁盘。默认值为20。
+vacuum_cost_limit：当超过此值时，vacuum会sleep。默认值为200。
+把上面每个cost值调整的小点，然后把limit值调的大些，可以延长每次vacuum的时间。这样做，如果在高负载的系统当中，可能IO会有所影响，因vacuum。但是对于表物理存储空间的增长会有所减缓。
+</code></pre><p><a href="http://blog.itpub.net/30088583/viewspace-1592066/">参见</a></p>
+<h4 id="扩展阅读-1">扩展阅读</h4>
+<p>Autovacuum 基础调优 <a href="https://mp.weixin.qq.com/s/ekKuDMEkQsZX5vx0VG0_1A">中文</a> <a href="https://blog.2ndquadrant.com/autovacuum-tuning-basics/#PostgreSQL%20Performance%20Tuning">英文</a></p>
+<h4 id="实战">实战</h4>
+<p>autovacuum 在达到触发条件时就会执行。如果触发在业务高峰时发生，对线上的业务性能会带来影响。应避免。</p>
+<p>数据库的vacuum 为可控的，避免autovacuum对线上数据库在运行高峰时的影响。</p>
+<p>在必要时进行手动执行vacuum ,在业务低峰期执行。</p>
+<p>监控数据库的autovacuum ，使其在达到触发条件前被及时发现。</p>
+<h5 id="dba-维护">DBA 维护</h5>
+<ul>
+<li>参考表空间膨胀率计算执行预期效果</li>
+<li>执行前设置 maintenance_work_mem 增加临时使用内存</li>
+<li>执行前设置 vacuum_cost_delay , vacuum_cost_limit 调整处理速度</li>
+<li>执行vacuum VERVOSE ANALYZE</li>
+<li>执行analyze 更新统计信息</li>
+<li>进度查看  select * from pg_stat_progress_vacuum ;</li>
+<li>注意wal 生成速率，可能会造成从库落后过多。wal找不到错误。从库需要重新拉取</li>
+<li>注意业务峰值期对业务的造成影响</li>
+<li>系统IO，主从主机带宽</li>
+</ul>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/explain.html">Explain 执行计划</a></li>
+        
+        <li><a href="/docker/nginx-log.html">Nginx log 切割</a></li>
+        
+        <li><a href="/middleware/vsftp.html">Centos FTP 服务</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

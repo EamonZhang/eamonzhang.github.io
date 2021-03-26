@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tidbs on Let&#39;s Go</title>
+    <link>https://zhangeamon.top/tidb.html</link>
+    <description>Recent content in Tidbs on Let&#39;s Go</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 18 Feb 2019 14:00:58 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/tidb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>二叉树、B-Tree、B&#43;Tree、B*Tree</title>
+      <link>https://zhangeamon.top/tidb/tree.html</link>
+      <pubDate>Mon, 18 Feb 2019 14:00:58 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/tidb/tree.html</guid>
+      <description>二叉树：二叉树，每个结点只存储一个关键字，等于则命中，小于走左边，大于走右边； B-Tree：多路搜索树，每个结点存储【M/2-1，M-1]个关键字，非叶子结点存储指向关键字范围的子节点；所有关键字在整棵树中出现【且只出现一次】，非叶子结点可以命中。 B+Tree：在B-Tree基础</description>
+    </item>
+    
+    <item>
+      <title>LSM Overview</title>
+      <link>https://zhangeamon.top/tidb/lsm.html</link>
+      <pubDate>Mon, 26 Nov 2018 13:40:19 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/tidb/lsm.html</guid>
+      <description>介绍 LSM-Tree，全称为 log-structured merge-tree，是为了满足日益增长的数据量所带来的高效写性能的需求而提出的设计。考虑到磁盘随机写和顺序写上千倍的性能差距，传统的Btree 结构设计采取的分散的 update-in-place 策略在数据量庞大、写缓存作用有限的情况下，存在大批量的随机写操作，使得写性能完全满足</description>
+    </item>
+    
+    <item>
+      <title>Sql 优化</title>
+      <link>https://zhangeamon.top/tidb/sql-optimize01.html</link>
+      <pubDate>Wed, 21 Nov 2018 09:18:37 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/tidb/sql-optimize01.html</guid>
+      <description>一条sql的执行过程 将 SQL 解析成抽象语法树(AST)，将 AST 变换到内部表示(IR)。然后优化器的输入就是 IR，它将生成最优的查询计划（Plan），然后会变成具体的执行器（Executor），里面有许多的算。 优化的阶段为IR 到生成 Plan 的过程，包括逻辑优化和物理优化 逻辑优化 逻辑优化主要是基</description>
+    </item>
+    
+    <item>
+      <title> ERROR 2013 (HY000): Lost connection to MySQL server during query </title>
+      <link>https://zhangeamon.top/tidb/2013.html</link>
+      <pubDate>Wed, 14 Nov 2018 10:08:02 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/tidb/2013.html</guid>
+      <description>ERROR 2013 (HY000) Lost connection to MySQL server during query 错误出现场景 select count(id) from account_user where id&amp;gt; 0; +----------+ | count(id) | +----------+ | 2940245 | +----------+ 1 row in set (0.78 sec) delete from account_user where id&amp;gt; 0; ERROR 2013 (HY000): Lost connection to MySQL server during query tidb.log 2018/11/14 10:57:12.476 server.go:303: [info] con:261 new connection 10.1.88.32:54462 2018/11/14 10:57:15.387 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:792.561353ms txn_start_ts:404269101106331649 region_id:77367 store_addr:10.1.88.84:20160 kv_process_ms:537 2018/11/14 10:57:17.227 pd.go:107: [warning] get timestamp too slow: 135.012109ms 2018/11/14 10:57:17.812 pd.go:107: [warning] get timestamp too slow: 56.316863ms 2018/11/14 10:57:17.821 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.226284139s txn_start_ts:404269101106331649 region_id:77863 store_addr:10.1.88.85:20160 kv_process_ms:1580 scan_total_write:314161 scan_processed_write:314160 scan_total_data:314160 scan_processed_data:314160 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.826 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.231259247s txn_start_ts:404269101106331649 region_id:77590 store_addr:10.1.88.85:20160 kv_process_ms:1807 scan_total_write:355885 scan_processed_write:355884 scan_total_data:355884 scan_processed_data:355884 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.872 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.276994472s txn_start_ts:404269101106331649 region_id:77576 store_addr:10.1.88.86:20160 kv_process_ms:1684 scan_total_write:346208 scan_processed_write:346207 scan_total_data:346207 scan_processed_data:346207 scan_total_lock:1 scan_processed_lock:0 2018/11/14</description>
+    </item>
+    
+    <item>
+      <title>两地三机房方案落地</title>
+      <link>https://zhangeamon.top/tidb/%E4%B8%A4%E5%9C%B0%E4%B8%89%E6%9C%BA%E6%88%BF%E6%96%B9%E6%A1%88%E8%90%BD%E5%9C%B0.html</link>
+      <pubDate>Wed, 17 Oct 2018 17:19:09 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/tidb/%E4%B8%A4%E5%9C%B0%E4%B8%89%E6%9C%BA%E6%88%BF%E6%96%B9%E6%A1%88%E8%90%BD%E5%9C%B0.html</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

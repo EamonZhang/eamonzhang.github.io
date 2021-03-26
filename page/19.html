@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+	<meta name="generator" content="Hugo 0.81.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Let&#39;s Go | Let&#39;s build our own cloud native together  </title>
+    <meta property="og:title" content="Let&#39;s Go | Let&#39;s build our own cloud native together  ">
+    <meta property="og:type" content="website">
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="python 软件架构等">
+    <meta property="og:url" content="https://zhangeamon.top/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml+xml" href="https://zhangeamon.top/index.xml" title="Let's Go" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <h1>
+                        <a id="logo" href="https://zhangeamon.top">
+                            Let&#39;s Go
+                        </a>
+                    </h1>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/kvm/kvm01.html" title="KVM">KVM</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月6日
+        </date>
+        
+        <div class="post-content">
+            安装 ubuntu14.04 .安装kvm apt-get install qemu-kvm libvirt0 virtinst bridge-utils virt-viewer .配置实体机网络 cat /etc/network/interfaces auto lo iface lo inet loopback auto br0 iface br0 inet static address 10.0.*.* netmask 255.255.0.0 gateway 10.1.0.1 type bridge bridge_ports eth0 dns-nameservers 114.114.114.114 .创建一个虚拟机 virt-install --connect qemu:///system -n test01 -r 1024 -f /home/kvm/test01.qcow2 -s 20 -c /home/kvm/ubuntu-12.04.1-server-amd64.iso --vnc --noautoconsole --os-type linux --os-variant ubuntuPrecise --accelerate --network=bridge:br0 centos7 yum install qemu-kvm libvirt virt-install bridge-utils .配置实体机网络 cat ifcfg-enp7s0 DEVICE=&quot;enp7s0&quot; ONBOOT=yes BOOTPROTO=static UUID=96a09db3-9b06-4a50-8d0c-9868cf531b84 #HWADDR=&quot;08:60:6E:06:C7:1A&quot; TYPE=Ethernet BRIDGE=br0 IPADDR=0.0.0.0 cat ifcfg-br0 DEVICE=br0 ONBOOT=yes BOOTPROTO=static TYPE=Bridge IPADDR=10.1.*.* PREFIX=16 GATEWAY=10.1.0.1 DNS1=223.5.5.5 查看 brctl show .启动 libvirt systemctl start libvirtd systemctl enable libvirtd .创建虚拟机 virt-install --virt-type kvm --name test01 --ram……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/kvm/kvm01.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/elk/apm.html" title="APM">APM</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月6日
+        </date>
+        
+        <div class="post-content">
+            https://www.elastic.co/solutions/apm 应用程序性能监控 整体架构 先搞起来 agent 收集信息 apm-server 接受agent信息并发送到ES ES 存储信息 Kibana 信息检索展示 agent python django 安装扩展包 pip install elastic-apm django 配置 # Add the agent to the installed apps INSTALLED_APPS = ( 'elasticapm.contrib.django', #... ) ELASTIC_APM = { # Set required service name. # Allowed characters: # a-z, A-Z, 0-9, -, _, and space 'SERVICE_NAME': 'my-app', #后台进程 'TRANSPORT_CLASS': 'elasticapm.transport.http.AsyncTransport', # Use if APM Server requires a token #'SECRET_TOKEN': '', # 没有数据可以开启debug查看 # 'DEBUG': True, # Set custom APM Server……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/elk/apm.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/stat.html" title="Postgresql指标查看&amp;stat统计信息">Postgresql指标查看&amp;stat统计信息</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月6日
+        </date>
+        
+        <div class="post-content">
+            当前连接数 SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid(); count ------- 3 (1 row) 数据库占用空间 select pg_size_pretty(pg_database_size('postgres')); pg_size_pretty ---------------- 14 MB (1 row) or \l+ 数据库表(不包括索引)或单条索引占用空间 select pg_size_pretty(pg_relation_size('t_name')); pg_size_pretty ---------------- 24 kB (1 行记录) or \d+ 表中所有索引占有的空间 select pg_size_pretty(pg_indexes_size('t_name')); pg_size_pretty ---------------- 280 kB (1 行记录) 表和索引占用总空间 select pg_size_pretty(pg_total_relation_size('t_name')); pg_size_pretty ---------------- 380 kB (1 行记录) 查看一条数据在数据库占用的空间 select pg_column_size('Let us go !!!'); pg_column_size ---------------- 14 (1 行记录) 查出所……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/stat.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/keepalived01.html" title="Keepalived 问题集">Keepalived 问题集</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月5日
+        </date>
+        
+        <div class="post-content">
+            Q1 问题描述 ip address associated with VRID 51 not present in MASTER advert : 10.1.7.58 其中 51 为 virtual_router_id 10.1.7.58 为虚拟IP 可能原因 ntp 时间不同步 局域网内 virtual_router_id 与其他集群配置冲突。 另外 router_id 主机标示，一般为hostname即可。 解决方法： unicast_peer{ } 配置成单播模式……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/keepalived01.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/network01.html" title="Docker 本地网络">Docker 本地网络</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月2日
+        </date>
+        
+        <div class="post-content">
+            基础命令概览 docker network --help Usage: docker network COMMAND Manage networks Commands: connect Connect a container to a network create Create a network disconnect Disconnect a container from a network inspect Display detailed information on one or more networks ls List networks prune Remove all unused networks rm Remove one or more networks 默认网络 docker network ls NETWORK ID NAME DRIVER SCOPE 0770a8275bff bridge bridge local b6617326f199 host host local 31c55ffcf0a8 none null local 创建容器时通过 &ndash;network= 指定网络类型 none 这个网络下的容器除了 lo，没有其他任何网卡。 host 共享Host的网络栈，容器的网络配置与 host 完……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/network01.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/cgroup-namespaces.html" title="Cgroup Namespaces">Cgroup Namespaces</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月2日
+        </date>
+        
+        <div class="post-content">
+            cgroup 实现资源限额 cgroup 全称 Control Group。Linux 操作系统通过 cgroup 可以设置进程使用 CPU、内存 和 IO 资源的限额。 在启动容器时可使用参数 docker run &ndash;blkio-weight-device &ndash;cpu-shares &ndash;memory 等 。 ll /sys/fs/cgroup/cpu/docker/ ll /sys/fs/cgroup/memory/docker ll /sys/fs/cgroup/blkio/docker namespace 实现资源隔离 Mount Mount namespace 让容器看上去拥有整个文件系统。 容器有自己的 / 目录，可以执行 mount 和 umount 命令。当然我们知道这些操作只在当前容器中生效，……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/cgroup-namespaces.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/dumb-init.html" title="Dumb Init">Dumb Init</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月1日
+        </date>
+        
+        <div class="post-content">
+            基础概念 孤儿进程：一个父进程退出，而它的一个或多个子进程还在运行，那么那些子进程将成为孤儿进程。孤儿进程将被init进程(进程号为1)所收养，并由init进程对它们完成状态收集工作。 僵尸进程：一个进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或waitpi……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/dumb-init.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/proxy.html" title="代理">代理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月31日
+        </date>
+        
+        <div class="post-content">
+            科普 正向代理 对服务端来说是无感的，服务端无需配置，要在客户端指定。代理的是客户端。 访问原来无法访问的资源 用作缓存，加速访问速度 对客户端访问授权，上网进行认证 代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息 反向代理 对客户端来说的无感的，客户端无需配置，要在服务端实现。代理……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/proxy.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/backup_restore.html" title="数据库备份和恢复">数据库备份和恢复</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月30日
+        </date>
+        
+        <div class="post-content">
+            Postgres 数据库备份恢复命令 备份：pg_dump -U postgres -v -F c -Z 4 -f ***.backup dbname 9压缩率最狠 恢复：pg_restore -U postgres -v -j 8 -d dbname ***.backup 8是采用8个线程 备份表：pg_dump -U postgres -t tablename dbname &gt; 33.sql 恢复表：psql -U postgres -d dbname &lt; 33.sql 只备份表结构 pg_dump -U postgres -s -t tablename dbname &gt; 33.sql 只备份数据 pg_dump -U postgres -a -t tablename dbname &gt; 33.sql copy 拷贝数据 数据拷贝到本地： psql……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/backup_restore.html">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/ansible/ansible-role.html" title="Ansible Roles">Ansible Roles</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月29日
+        </date>
+        
+        <div class="post-content">
+            以特定的层级目录结构进行组织的tasks、variables、handlers、templates、files等 mkdir -pv ./{os_hard,nginx,memcached}/{files,templates,vars,handlers,meta,default,tasks}/main.yaml tree memcached/ memcached/ ├── default 设定默认变量 │ └── main.yaml ├── files 存储由copy或script等模块调用的文件 │ └── main.yaml ├── handlers │ └── main.yaml ├── meta 定义当前角色的特殊设定及其依赖关系 │ └……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-role.html">阅读全文</a></p>
+    </article>
+    
+    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="https://zhangeamon.top/page/18.html">上一页</a>
+    </li>
+    
+
+    
+
+    
+        
+        
+    
+    
+
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/">1</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/17.html">17</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/18.html">18</a>
+        </li>
+        
+    
+        
+        
+        <li  class="current">
+            <a href="https://zhangeamon.top/page/19.html">19</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/20.html">20</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/21.html">21</a>
+        </li>
+        
+    
+
+    
+    
+
+    <li class="next">
+        <a href="https://zhangeamon.top/page/20.html">下一页</a>
+    </li>
+    
+</ol>
+
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

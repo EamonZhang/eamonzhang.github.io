@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elks on Let&#39;s Go</title>
+    <link>https://zhangeamon.top/elk.html</link>
+    <description>Recent content in Elks on Let&#39;s Go</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 06 Nov 2018 13:39:01 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/elk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>APM</title>
+      <link>https://zhangeamon.top/elk/apm.html</link>
+      <pubDate>Tue, 06 Nov 2018 13:39:01 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/elk/apm.html</guid>
+      <description>https://www.elastic.co/solutions/apm 应用程序性能监控 整体架构 先搞起来 agent 收集信息 apm-server 接受agent信息并发送到ES ES 存储信息 Kibana 信息检索展示 agent python django 安装扩展包 pip install elastic-apm django 配置 # Add the agent to the installed apps INSTALLED_APPS = ( &#39;elasticapm.contrib.django&#39;, #... ) ELASTIC_APM = { # Set required service name. # Allowed characters: # a-z, A-Z, 0-9, -, _, and space &#39;SERVICE_NAME&#39;: &#39;my-app&#39;, #后台进程 &#39;TRANSPORT_CLASS&#39;: &#39;elasticapm.transport.http.AsyncTransport&#39;, # Use if APM Server requires a token #&#39;SECRET_TOKEN&#39;: &#39;&#39;, # 没有数据可以开启debug查看 # &#39;DEBUG&#39;: True, # Set custom APM Server</description>
+    </item>
+    
+  </channel>
+</rss>

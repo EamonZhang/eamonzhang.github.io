@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>postgres on Let&#39;s Go</title>
+    <link>https://zhangeamon.top/tags/postgres.html</link>
+    <description>Recent content in postgres on Let&#39;s Go</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 26 Feb 2021 13:33:23 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库优化思考-性能优化</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_performance.html</link>
+      <pubDate>Fri, 26 Feb 2021 13:33:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_performance.html</guid>
+      <description>为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续</description>
+    </item>
+    
+  </channel>
+</rss>

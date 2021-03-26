@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Docker 问题集 | Let&#39;s Go</title>
+    <meta property="og:title" content="Docker 问题集 - Let&#39;s Go">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2019-01-03T15:06:43&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2019-01-03T15:06:43&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Docker 问题集">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/docker/troubles.html">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s Go
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Docker 问题集</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月3日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <ul>
+<li>Docker push: Received unexpected HTTP status: 500 Internal Server Error</li>
+</ul>
+<p>描述: 使用jenkins 构建docker images时 push images到私有harbor中报错: Received unexpected HTTP status: 500 Internal Server Error,在build机上直接push没有问题。有的项目可以成功，有的失败。即使同一个项目有时执行成功，有时也会失败。</p>
+<p>解决方式: 网上很多的关于500的错误，大都是关闭selinux来解决。但是情况与这个不同。现在的问题时在jenkins中执行有问题，直接裸机执行没有问题。</p>
+<p>看到这篇<a href="https://www.jfrog.com/jira/browse/RTFACT-9025">文章</a>， 怀疑时在push images 过大时需要的系统内存不足导致。</p>
+<p>调整jenkins启动时java的内存参数</p>
+<pre><code>JAVA_OPTS=&quot;-Djava.util.logging.config.file=/var/jenkins_home/log.properties -Duser.timezone=Asia/Shanghai  -Xms4096m -Xmx4096m 
+</code></pre><p>问题过几天后有出现</p>
+<pre><code>/var/log/message 
+kernel crash after &quot;unregister_netdevice: waiting for lo to become free. Usage count = 
+</code></pre><p>换台build机 , nginx 配置</p>
+<p>问题解决</p>
+<ul>
+<li>Docker rpc error: code = 14 desc = grpc: the connection is unavailable</li>
+</ul>
+<p>尝试关闭容器，进入容器操作界面也报相同错误：</p>
+<pre><code>docker exec -it 7119f8f5feef /bin/bash
+rpc error: code = 14 desc = grpc: the connection is unavailable
+</code></pre><p>停止容器依旧提示错误</p>
+<pre><code>docker stop 7119f8f5feef
+Error response from daemon: Cannot stop container 7119f8f5feef: Cannot kill container 7119f8f5feef4c649d9ec04734e6224e2d837fa030de271f269f0b71eea29327: rpc error: code = 14 desc = grpc: the connection is unavailable
+</code></pre><p>删除容器依旧提示错误（-f强制删除）</p>
+<pre><code>docker rm -f 7119f8f5feef
+Error response from daemon: Could not kill running container 7119f8f5feef4c649d9ec04734e6224e2d837fa030de271f269f0b71eea29327, cannot remove - Cannot kill container 7119f8f5feef4c649d9ec04734e6224e2d837fa030de271f269f0b71eea29327: rpc error: code = 14 desc = grpc: the connection is unavailable
+</code></pre><p>解决办法：
+使用docker-containerd命令以debug模式调试容器
+注意：那个node上的容器不能删除就在那台node上面执行以下命令</p>
+<pre><code>docker-containerd -l unix:///var/run/docker/libcontainerd/docker-containerd.sock --metrics-interval=0 --start-timeout 2m --state-dir /var/run/docker/libcontainerd/containerd --shim docker-containerd-shim --runtime docker-runc --debug
+WARN[0000] containerd: low RLIMIT_NOFILE changing to max  current=1024 max=4096
+DEBU[0000] containerd: read past events                  count=1
+ low RLIMIT_NOFILE changing to max  current=1024 max=4096DEBU[0000] containerd: grpc api on /var/run/docker/libcontainerd/docker-containerd.sock 
+DEBU[0000] containerd: container restored                id=354af53914e3f76e653a26d9e9da8d4fbef4ef18cc2176371b89871a9126a646
+DEBU[0000] containerd: container restored                id=3f0bf43f7ca97c439b64370cee09205b35e58ed35e49f957412f58affbe4ed4b
+DEBU[0000] containerd: container restored                id=4b848d33a32a332635929b95eb7291abeb32f177a3c65248568b959dbfbc2712
+DEBU[0000] containerd: container restored                id=4ed8d1f971a0ea5035b507511d802a1445af9e771cde670814104102a7cc2d6f
+ERRO[0000] containerd: notify OOM events                 error=open /proc/13541/cgroup: no such file or directory
+DEBU[0000] containerd: container restored                id=7119f8f5feef4c649d9ec04734e6224e2d837fa030de271f269f0b71eea29327
+ERRO[0000] containerd: notify OOM events                 error=open /proc/12860/cgroup: no such file or directory
+DEBU[0000] containerd: container restored                id=7bdba0a1ee81997bdbb5958e31123538ac8a6730c6cc7120fe7359439b52b410
+DEBU[0000] containerd: container restored                id=8ba79a79836b4350335375f89fc1473a6a86593375fbac6344fb17e4dddff43f
+DEBU[0000] containerd: container restored                id=9692f3570460186de681476bd068d008891b24b3906f190443f24e97343c3e57
+DEBU[0000] containerd: supervisor running                cpus=1 memory=977 runtime=docker-runc runtimeArgs=[] stateDir=/var/run/docker/libcontainerd/containerd
+DEBU[0000] containerd: process exited                    id=7119f8f5feef4c649d9ec04734e6224e2d837fa030de271f269f0b71eea29327 pid=init status=143 systemPid=13541
+ERRO[0000] containerd: deleting container                error=exit status 1: &quot;container 7119f8f5feef4c649d9ec04734e6224e2d837fa030de271f269f0b71eea29327 does not exist\none or more of the container deletions failed\n&quot;
+DEBU[0000] containerd: process exited                    id=7bdba0a1ee81997bdbb5958e31123538ac8a6730c6cc7120fe7359439b52b410 pid=init status=137 systemPid=12860
+ERRO[0000] containerd: deleting contain
+
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/mail.html">Centos mail</a></li>
+        
+        <li><a href="/postgres/pgbouncer.html">pgbouncer 连接池</a></li>
+        
+        <li><a href="/linux/cmd-xargs.html">xargs 命令</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

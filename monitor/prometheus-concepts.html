@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Promethues 基本概念 | Let&#39;s Go</title>
+    <meta property="og:title" content="Promethues 基本概念 - Let&#39;s Go">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-11-21T14:08:54&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-11-21T14:08:54&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Promethues 基本概念">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/monitor/prometheus-concepts.html">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s Go
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Promethues 基本概念</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月21日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="数据模型data-model">数据模型(Data Model)</h4>
+<p>由指标名称(metric)和一个或一组标签(lable)集合以及float64类型的值组成。</p>
+<p>例如</p>
+<pre><code>up{instance=&quot;10.1.88.71:9115&quot;,job=&quot;blackbox_exporter_10.1.88.74_icmp&quot;}	1
+
+</code></pre><h4 id="metric类型">metric类型</h4>
+<p>client libraries提供了四种metric类型，包括Counter、Gauge、Histogram、Summary。</p>
+<h5 id="counter">Counter</h5>
+<p>计数器，只允许增加或重置为0，不允许减少，比如服务的请求数。Counter支持用rate()函数计算平均值，比如QPS。建议使用 _total 作为后缀命名。</p>
+<h5 id="gauge">Gauge</h5>
+<p>非固定的值，比如CPU负载 、内存使用量。</p>
+<p>其变化取决于server是否采集了数据，衡量的是一个事物的状态变化，比如内存使用量，内存始终是那个内存，只是其使用量会发生变化。</p>
+<h5 id="histogram">Histogram</h5>
+<p>采样观测值，可进行分位计算和数据聚合，计算在<!-- raw HTML omitted -->server<!-- raw HTML omitted -->端完成。</p>
+<p>一个名为<!-- raw HTML omitted -->的metric，其histogram有3个固定的时间序列</p>
+<pre><code>&lt;basename&gt;_bucket 不同bucket下的观测值的累加数量
+&lt;basename&gt;_sum 观测值的总和
+&lt;basename&gt;_count 观测值的数量
+</code></pre><h5 id="summary">Summary</h5>
+<p>采样观测值，与histogram不同的是，数量/总和/分位的计算在<!-- raw HTML omitted -->client<!-- raw HTML omitted -->端完成，计算结果存在server。因为没有最初的metric数据，所以summary不支持数据聚合。</p>
+<p>一个名为<!-- raw HTML omitted -->的metric，其summary有3个固定的时间序列</p>
+<pre><code>&lt;basename&gt;{quantile=&quot;&lt;φ&gt;&quot;}
+&lt;basename&gt;_sum 观测值的总和
+&lt;basename&gt;_count 观测值的数量
+</code></pre><h4 id="job-和-instance">Job 和 Instance</h4>
+<p>instance是指收集数据的目标端点，一般对应于一个进程；而job表示实现同一功能或目标的一组instance。</p>
+<p>Prometheus采集到数据后自动为其附加job和instance标签，其中job由Prometheus配置文件定义，instance是目标数据源的地址<!-- raw HTML omitted -->:<!-- raw HTML omitted -->。</p>
+<h4 id="特点">特点</h4>
+<ul>
+<li>多维数据模型，时间序列由metric名字和K/V标签标识</li>
+<li>灵活的查询语言(PromQL)</li>
+<li>单机模式，不依赖分布式存储</li>
+<li>基于HTTP采用pull方式收集数据</li>
+<li>支持push数据到中间件(pushgateway)</li>
+<li>通过服务发现或静态配置发现目标</li>
+<li>多种图表和仪表盘</li>
+</ul>
+<h4 id="组件">组件</h4>
+<p>Prometheus生态系统由多个组件构成，其中多是可选的，根据具体情况选择</p>
+<ul>
+<li>Prometheus server - 收集和存储时间序列数据</li>
+<li>client library - 用于client访问server/pushgateway</li>
+<li>pushgateway - 对于短暂运行的任务，负责接收和缓存时间序列数据，同时也是一个数据源</li>
+<li>exporter - 各种专用exporter，面向硬件、存储、数据库、HTTP服务等</li>
+<li>alertmanager - 处理报警</li>
+<li>其他各种支持的工具</li>
+</ul>
+<h6 id="各组件之间的通信">各组件之间的通信</h6>
+<p>1, prometheus与客户端主要采取pull方式获取数据</p>
+<p>exporter　通过http暴露自己的数据，prometheus服务主要采用pull的方式到exporter中拉取数据。</p>
+<p>同样prometheus也提供http来暴露自己的数据提供其他prometheus来pull。</p>
+<p>还有一种是node端将数据push到pushgateway中 ,prometheus 到pushgateway中来pull数据。</p>
+<p>2, prometheus与alertmanger</p>
+<p>在prometheus的配置中指定报警服务altermanager,同时在prometheus中制定rules触发报警的规则。
+altertmanger中定义配置各种报警机制,如email, stack等</p>
+<h4 id="架构">架构</h4>
+<p>
+        <img class="mx-auto" alt="" src="images/prometheus_architecture.png" />   
+    </p>
+<h4 id="配置">配置</h4>
+<ul>
+<li>抓取时间设置 <a href="https://www.robustperception.io/keep-it-simple-scrape_interval-id">https://www.robustperception.io/keep-it-simple-scrape_interval-id</a></li>
+</ul>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/tidb/sql-optimize01.html">Sql 优化</a></li>
+        
+        <li><a href="/postgres/index01.html">数据库索引类型及使用场景</a></li>
+        
+        <li><a href="/middleware/sysbench.html">Sysbench 测试</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

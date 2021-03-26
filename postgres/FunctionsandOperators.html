@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>方法和函数 | Let&#39;s Go</title>
+    <meta property="og:title" content="方法和函数 - Let&#39;s Go">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-04-13T16:15:51&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-04-13T16:15:51&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="方法和函数">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/FunctionsandOperators.html">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s Go
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">方法和函数</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月13日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="条件表达式">条件表达式</h4>
+<p><a href="https://www.postgresql.org/docs/10/functions-conditional.html">https://www.postgresql.org/docs/10/functions-conditional.html</a></p>
+<p>postgresql支持CASE,COALESCE,NULLIF,GREATEST,LEAST条件表达式，使用它们有时候可以简化许多功能实现。</p>
+<h5 id="case">CASE</h5>
+<p>CASE类似其他语言中的if/else等，当符合不同条件时则进行不同的运算</p>
+<p>tbl_001表</p>
+<pre><code>create table tbl_001(id int,name varchar(32),sex varchar(1));
+
+insert into tbl_001 values(1,'张三','m'),(2,'李四','m'),(3,'王五','f');
+</code></pre><p>测试</p>
+<pre><code>简单应用
+postgres=# select case when sex = 'm' then '男' when sex = 'f' then '女' else 'O'  end as sex from tbl_001 ;
+ sex 
+-----
+ 男
+ 男
+ 女
+(3 rows)
+
+统计男女人数
+postgres=# select count(sex) as 男 from tbl_001 where sex = 'm';
+ 男 
+----
+  2
+(1 row)
+
+postgres=# select count(sex) as 女 from tbl_001 where sex = 'f';
+ 女 
+----
+  1
+(1 row)
+
+使用case 一条搞定
+select sum(case when sex = 'm' then 1 else 0 end) as 男, sum(case when sex = 'f' then 1 else 0 end) as 女 from tbl_001 ;
+ 男 | 女 
+----+----
+  2 |  1
+(1 row)
+
+</code></pre><h5 id="coalesce">COALESCE</h5>
+<pre><code>COALESCE(value [, ...])
+</code></pre><p>返回第一个非null</p>
+<pre><code>postgres=# select coalesce(null,null,1,2,3);
+ coalesce 
+----------
+        1
+(1 row)
+
+postgres=# select coalesce(null,null,'a','b','c');
+ coalesce 
+----------
+ a
+(1 row)
+
+
+select coalesce(extract(epoch from max(age(now(), query_start))), 0) from pg_stat_activity where wait_event is not null;
+
+</code></pre><h5 id="nullif">NULLIF</h5>
+<pre><code>NULLIF(value1, value2)
+</code></pre><p>value1 和 value2 相等返回null 否则返回 value1</p>
+<pre><code>postgres=# select nullif(1,1),nullif(1,2);
+ nullif | nullif 
+--------+--------
+        |      1
+(1 row)
+</code></pre><h5 id="greatest-and-least">GREATEST and LEAST</h5>
+<p>分别返回最大和最小值</p>
+<pre><code>postgres=# select greatest(1,2,3),greatest('a','b','c');
+ greatest | greatest 
+----------+----------
+        3 | c
+(1 row)
+
+postgres=# select least(1,2,3),least('a','b','c');
+ least | least 
+-------+-------
+     1 | a
+(1 row)
+</code></pre><h6 id="时间类型">时间类型</h6>
+<p>纪元，utc时间epoch</p>
+<pre><code># t
+postgres=# select extract(epoch from now());
+    date_part     
+------------------
+ 1586846074.40049
+(1 row)
+
+postgres=# select extract(epoch from timestamp without time zone '1970-01-01 01:00:00');
+ date_part 
+-----------
+      3600
+(1 row)
+
+postgres=# SELECT TIMESTAMP WITH TIME ZONE 'epoch' + 1586846074.40049 * INTERVAL '1 second' as tsp;
+             tsp              
+------------------------------
+ 2020-04-14 14:34:34.40049+08
+(1 row)
+</code></pre><p>时区</p>
+<pre><code>#当前时区
+postgres=# show timezone;
+ TimeZone 
+----------
+ PRC
+(1 row)
+
+#系统支持的时区
+postgres=# select * from pg_timezone_names; 
+
+#时区
+postgres=# select now()::timestamp with time zone, now()::timestamp without time zone;
+              now              |            now             
+-------------------------------+----------------------------
+ 2020-04-14 15:44:39.501691+08 | 2020-04-14 15:44:39.501691
+(1 row)
+
+#时区转换
+postgres=# select '2020-04-14 09:07:30.816885+08' at time zone 'prc';
+          timezone          
+----------------------------
+ 2020-04-14 09:07:30.816885
+(1 row)
+
+postgres=# select '2016-02-03 09:07:30.816885+08' at time zone 'pst';
+          timezone          
+----------------------------
+ 2016-02-02 17:07:30.816885
+</code></pre><p>没有时区代表的是绝对时间，absolute timestamp，即 UTC (UTC+0) 时间。</p>
+<p>带着时区的代表相对时间，relative timestamp，即当地时间，如北京的当地时间是 UTC+8 的时间。</p>
+<p>使用的一个最佳实践是时间类型都设为 timestamp with time zone 类型，只有在根据 timestamp 进行 partition 时才使用 timestamp without time zone 类型，</p>
+<p>因为 partition 必须使用 immutable 数据 (即在任何情况下数据取出来都一样)，而 timestamp with time zone 的数据值与 postgres 配置的 timezone 有关。</p>
+<p>这两种数据类型的区别是:</p>
+<p>以当地时间存储数据到 timestamp with time zone 类型的字段时，postgres 底层会以 UTC 时间存储，展示数据时会根据 postgres 设置的 timezone 显示为当时时间。</p>
+<p>以当地时间存储数据到 timestamp without time zone 类型的字段时，postgres 底层以输入的数据进行存储，展示时会原样展示，与 postgres 设置的时区无关。</p>
+<p>时间戳加减</p>
+<pre><code>postgres=# select date '2016-02-02 10:00:00'+ interval '10 minutes'; 
+</code></pre><p>时间戳格式化</p>
+<pre><code>postgres=# select to_char(now(),'YYYY-MM-DD hh24:mi:ss');
+       to_char       
+---------------------
+ 2020-04-14 16:14:29
+(1 row)
+
+postgres=# select to_timestamp('2020-04-14 16:14:29','YYYY-MM-DD hh24:mi:ss');
+      to_timestamp      
+------------------------
+ 2020-04-14 16:14:29+08
+(1 row)
+</code></pre><p>时间比较</p>
+<pre><code>select current_date &lt;= to_date('2018-03-12 18:47:35','yyyy-MM-dd hh24:mi:ss');
+
+select current_timestamp &lt;= to_timestamp('2018-03-12 18:47:35','yyyy-MM-dd hh24:mi:ss');
+</code></pre><pre><code>--创建随机日期时间函数       
+CREATE OR REPLACE FUNCTION rand_date_time(start_date date, end_date date)
+ RETURNS TIMESTAMP AS $$  
+DECLARE  
+    interval_days integer;  
+    random_seconds integer;  
+    random_dates integer;  
+    random_date date;  
+    random_time time;
+BEGIN  
+    interval_days := end_date - start_date;  
+    random_dates:= trunc(random()*interval_days);
+    random_date := start_date + random_dates; 
+    random_seconds:= trunc(random()*3600*24); 
+    random_time:=' 00:00:00'::time+(random_seconds || ' second')::INTERVAL;
+    RETURN random_date +random_time;  
+END;   
+$$  
+LANGUAGE plpgsql;
+</code></pre><h6 id="json-类型">JSON 类型</h6>
+<p>postgresql支持两种json数据类型：json和jsonb，而两者唯一的区别在于效率,json是对输入的完整拷贝，使用时再去解析，所以它会保留输入的空格，重复键以及顺序等。</p>
+<p>而jsonb是解析输入后保存的二进制，它在解析时会删除不必要的空格和重复的键，顺序和输入可能也不相同。使用时不用再次解析。</p>
+<p>两者对重复键的处理都是保留最后一个键值对。效率的差别：json类型存储快，使用慢，jsonb类型存储稍慢，使用较快。</p>
+<pre><code>postgres=#  SELECT '{&quot;bar&quot;: &quot;baz&quot;, &quot;balance&quot;:      7.77, &quot;active&quot;:false}'::json;
+                         json                         
+------------------------------------------------------
+ {&quot;bar&quot;: &quot;baz&quot;, &quot;balance&quot;:      7.77, &quot;active&quot;:false}
+(1 row)
+
+postgres=#  SELECT '{&quot;bar&quot;: &quot;baz&quot;, &quot;balance&quot;:      7.77, &quot;active&quot;:false}'::jsonb;
+                      jsonb                       
+--------------------------------------------------
+ {&quot;bar&quot;: &quot;baz&quot;, &quot;active&quot;: false, &quot;balance&quot;: 7.77}
+(1 row)
+
+</code></pre><p>测试表</p>
+<pre><code>create table api(jdoc jsonb);
+
+insert into api values('{
+&quot;guid&quot;: &quot;9c36adc1-7fb5-4d5b-83b4-90356a46061a&quot;,
+&quot;name&quot;: &quot;Angela Barton&quot;,
+&quot;is_active&quot;: true,
+&quot;company&quot;: &quot;Magnafone&quot;,
+&quot;address&quot;: &quot;178 Howard Place, Gulf, Washington, 702&quot;,
+&quot;registered&quot;: &quot;2009-11-07T08:53:22 +08:00&quot;,
+&quot;latitude&quot;: 19.793713,
+&quot;longitude&quot;: 86.513373,
+&quot;tags&quot;: [
+&quot;enim&quot;,
+&quot;aliquip&quot;,
+&quot;qui&quot;
+]}');
+</code></pre><pre><code>postgres=# SELECT jdoc-&gt;'guid', jdoc-&gt;'name' FROM api WHERE jdoc @&gt; '{&quot;company&quot;: &quot;Magnafone&quot;}';
+                ?column?                |    ?column?     
+----------------------------------------+-----------------
+ &quot;9c36adc1-7fb5-4d5b-83b4-90356a46061a&quot; | &quot;Angela Barton&quot;
+</code></pre><p>jsonb缺省的GIN操作符类支持使用@&gt;、?、?&amp;和?|操作符查询，在api的jdoc上创建一个gin索引。</p>
+<pre><code>test=# CREATE INDEX idxgin ON api USING gin (jdoc);
+CREATE INDEX
+</code></pre><p>json和jsonb的操作符</p>
+<p><a href="https://www.postgresql.org/docs/9.6/functions-json.html">https://www.postgresql.org/docs/9.6/functions-json.html</a></p>
+<h5 id="数组函数和操作符">数组函数和操作符</h5>
+<p><a href="http://postgres.cn/docs/11/functions-array.html">http://postgres.cn/docs/11/functions-array.html</a></p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/daily_management.html">数据库日常管理</a></li>
+        
+        <li><a href="/postgres/lock_wait.html">锁等待</a></li>
+        
+        <li><a href="/linux/install-cmd.html">软件安装</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

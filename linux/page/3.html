@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Linuxes | Let&#39;s Go</title>
+    <meta property="og:title" content="Linuxes - Let&#39;s Go">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Linuxes">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/linux.html">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml+xml" href="https://zhangeamon.top/linux/index.xml" title="Let's Go" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s Go
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/qos.html" title="Qos">Qos</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月21日
+        </date>
+        
+        <div class="post-content">
+            ……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/qos.html">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/4k-wa.html" title="SSD 4k对齐写放大">SSD 4k对齐写放大</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月17日
+        </date>
+        
+        <div class="post-content">
+            4k对齐 早期硬盘每个扇区以512字节为标准，新一代硬盘扇区容量为4096个字节，也就是所说的4k扇区。 硬盘标准更新，但操作系统一直使用的是512字节扇区的标准，所以硬盘厂商为了保证兼容性，把4k扇区模拟成512字节扇区。 通常文件系统的块（簇）是512字节的倍数，新的系统基本上都设……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/4k-wa.html">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/memtester.html" title="memtester 内存压力测试">memtester 内存压力测试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月14日
+        </date>
+        
+        <div class="post-content">
+            memtester……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/memtester.html">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/memtest.html" title="memtest 检测内存">memtest 检测内存</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月14日
+        </date>
+        
+        <div class="post-content">
+            NAME memtest-setup - Install Memtest86+ into your GRUB boot loader menu SYNOPSIS memtest-setup [OPTIONS] DESCRIPTION memtest-setup installs Memtest86+ into your GRUB boot loader menu. It supports both GRUB 2 and GRUB Legacy (i.e. GRUB 0.9x). In case of GRUB 2 it installs GRUB 2 template into /etc/grub.d and GRUB 2 config needs to be regenerated manually by running grub2-mkconfig -o /boot/grub2/grub.cfg under root. This is not done automatically because it could overwrite any custom changes in /boot/grub2/grub.cfg. OPTIONS -h, --help Shows help. AUTHOR Jaroslav Škarvada &lt;jskarvad@redhat.com&gt; Manpage author. COPYRIGHT Copyright © 2014 Jaroslav Škarvada Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 or (at your option) any later version published by the Free……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/memtest.html">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/dmidecode.html" title="Linux查看内存条信息">Linux查看内存条信息</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月14日
+        </date>
+        
+        <div class="post-content">
+            1.查看内存槽及内存条 $ sudo dmidecode -t memory 2.查看内存的插槽数,已经使用多少插槽.每条内存多大 $ sudo dmidecode -t memory | grep Size 3.查看服务器型号、序列号 $ sudo dmidecode | grep &quot;System Information&quot; -A9 | egrep &quot;Manufacturer|Product|Serial&quot;……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/dmidecode.html">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cgroups.html" title="cgroups">cgroups</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月14日
+        </date>
+        
+        <div class="post-content">
+            https://www.certdepot.net/rhel7-get-started-cgroups/ https://www.oracle.com/technical-resources/articles/linux/resource-controllers-linux.html iops和bps限制 限制sda 的读写 lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sda 8:0 0 931.5G 0 disk /data sdb 8:16 0 223.6G 0 disk ├─sdb1 8:17 0 200M 0 part /boot/efi ├─sdb2 8:18 0 1G 0 part /boot ├─sdb3 8:19 0 7.8G 0 part [SWAP] └─sdb4 8:20 0 214.6G 0 part / cd /sys/fs/cgroup/blkio/ echo &quot;8:0 102400&quot; &gt; blkio.throttle.read_bps_device echo &quot;8:0 10&quot; &gt; blkio.throttle.read_iops_device echo &quot;8:0 204800&quot; &gt; blkio.throttle.write_bps_device echo &quot;8:0 20&quot; &gt; blkio.throttle.write_iops_device……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cgroups.html">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/at-crontab.html" title="定时任务">定时任务</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月9日
+        </date>
+        
+        <div class="post-content">
+            Linux 系统中的定时任务 重复执行 一次执行 重复执行 详见 /etc/crontab 配置 anacron 用于以天为单位的频率运行命令。它的工作与 cron 稍有不同，它假设机器不会一直开机。 cron 也适合在那些不会 24X7 运行如笔记本以及桌面电脑的机器上运行每日、每周以及每月的计划任务（LCTT 译注：不适合按小时、分钟执行任务）。 假设你有一个计划任务……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/at-crontab.html">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/nospace-device.html" title="no space left on device">no space left on device</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月9日
+        </date>
+        
+        <div class="post-content">
+            问题描述 Linux 系统中出现磁盘空间不足错误： No space left on device … 在linux环境下，用vi打开某文件时，提示Write error in swap file 原因分析 导致该问题的可能原因包括： 磁盘分区空间使用率达到百分之百 磁盘分区inode使用率达到百分之百 僵尸文件：已删除文件因句柄被占用未释放导致相应空间未释放 解决方法 磁盘……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/nospace-device.html">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/meminfo.html" title="meminfo Linux 内存信息">meminfo Linux 内存信息</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月8日
+        </date>
+        
+        <div class="post-content">
+            介绍 /proc/meminfo是了解Linux系统内存使用状况的主要接口，我们最常用的”free”、”vmstat”等命令就是通过它获取数据的 内容解读 cat /proc/meminfo MemTotal: 8009504 kB 除了bios ，kernel本身占用的内存以外，可以被kernel所分配的内存。一般这个值固定不变。 MemFree: 2385828 kB 未被使用的内存 MemAvailable:……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/meminfo.html">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/mail.html" title="Centos mail">Centos mail</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月29日
+        </date>
+        
+        <div class="post-content">
+            介绍 电子邮件系统包括两个组件： MUA(Mail User Agent,邮件用户代理）为用户提供的可以读写邮件的界面,例如 Foxmail, Outlook MTA(Mail Transport Agent,邮件传送代理）MTA是运行在底层，能够处理邮件的收发工作的程序 邮件的接收是MTA和MUA配合完成的。远程的MUA首先向远程MTA连接并验证发信人身份，然后由远程MT……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/mail.html">阅读全文</a></p>
+    </article>
+    
+    
+    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="https://zhangeamon.top/linux/page/2.html">上一页</a>
+    </li>
+    
+
+    
+    <li >
+        <a href="https://zhangeamon.top/linux.html">1</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/linux/page/2.html">2</a>
+    </li>
+    
+    <li  class="current">
+        <a href="https://zhangeamon.top/linux/page/3.html">3</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/linux/page/4.html">4</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/linux/page/5.html">5</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://zhangeamon.top/linux/page/4.html">下一页</a>
+    </li>
+    
+</ol>
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

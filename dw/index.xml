@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dws on Let&#39;s Go</title>
+    <link>https://zhangeamon.top/dw.html</link>
+    <description>Recent content in Dws on Let&#39;s Go</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 25 Aug 2020 10:25:55 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/dw/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>文档</title>
+      <link>https://zhangeamon.top/dw/document.html</link>
+      <pubDate>Tue, 25 Aug 2020 10:25:55 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/dw/document.html</guid>
+      <description>https://ask.greenplum.cn</description>
+    </item>
+    
+    <item>
+      <title>Greenplum6 安装</title>
+      <link>https://zhangeamon.top/dw/greenplum-install.html</link>
+      <pubDate>Fri, 06 Dec 2019 14:29:04 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/dw/greenplum-install.html</guid>
+      <description>环境准备 /ect/hosts groupadd gpadmin useradd gpadmin -r -m -g gpadmin passwd gpadmin su gpadmin ssh-keygen -t rsa -b 4096 visudo %wheel ALL=(ALL) NOPASSWD: ALL usermod -aG wheel gpadmin 软件安装 wget https://github.com/greenplum-db/gpdb/releases/download/6.1.0/greenplum-db-6.1.0-rhel7-x86_64.rpm sudo yum install ./greenplum-db-&amp;lt;version&amp;gt;-&amp;lt;platform&amp;gt;.rpm sudo chown -R gpadmin:gpadmin /usr/local/greenplum* source /usr/local/greenplum-db-&amp;lt;version&amp;gt;/greenplum_path.sh vi /home/gpadmin/.bashrc ssh 免密打通 1-n ssh-copy-id mdw n-n vi /home/gpadmin/hostfile_exkeys mdw smdw sdw1 sdw2 sdw3 sdw4 sdw5 sdw6 gpssh-exkeys -f hostfile_exkeys 创建存储目录 master mkdir -p /data/master segment mkdir -p /data/primary1 mkdir -p /data/primary2 mkdir -p /data/mirror1 mkdir -p /data/mirror2 chown -R gpadmin /data/* 性能测试 网络 gpcheckperf -f hostfile_gpchecknet_ic1 -r N -d /tmp &amp;gt; subnet1.out IO 250G gpcheckperf -f hostfile_gpcheckperf -r ds -D -d /data/primary1 -d /data/primary2 -d /data/mirror1 -d /data/mirror2 gpcheckperf -f gpconfigs/hostfile_gpcheckperf -r ds -D -d /data/primary1 -d /data/primary2</description>
+    </item>
+    
+    <item>
+      <title>数据仓库介绍</title>
+      <link>https://zhangeamon.top/dw/introduce.html</link>
+      <pubDate>Fri, 21 Sep 2018 09:54:50 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/dw/introduce.html</guid>
+      <description>数据库与数据仓库的区别 数据库是面向事务的设计，数据仓库是面向主题设计的。 数据库一般服务于业务系统的，数据仓库一般是服务于分析系统的。 数据库一般存储在线交易数据，数据仓库存储的一般是历史数据。 数据库设计是尽量避免冗余，数据仓库在设计是有意引入冗余。 数据库是为捕获数据而设计，数据仓库</description>
+    </item>
+    
+  </channel>
+</rss>

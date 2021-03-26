@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Let&#39;s Go</title>
+    <link>https://zhangeamon.top/categories.html</link>
+    <description>Recent content in Categories on Let&#39;s Go</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 26 Feb 2021 13:33:23 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>postgres</title>
+      <link>https://zhangeamon.top/categories/postgres.html</link>
+      <pubDate>Fri, 26 Feb 2021 13:33:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/categories/postgres.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>https://zhangeamon.top/categories/Golang.html</link>
+      <pubDate>Wed, 18 Dec 2019 21:55:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/categories/Golang.html</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

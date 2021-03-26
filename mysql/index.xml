@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysqls on Let&#39;s Go</title>
+    <link>https://zhangeamon.top/mysql.html</link>
+    <description>Recent content in Mysqls on Let&#39;s Go</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 21 Feb 2019 14:31:26 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mysql 入门</title>
+      <link>https://zhangeamon.top/mysql/over-view.html</link>
+      <pubDate>Thu, 21 Feb 2019 14:31:26 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/mysql/over-view.html</guid>
+      <description>安装 &amp;amp; 启动 安装 rpm -i https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm yum install mysql-community-server.x86_64 启动 systemctl start mysqld systemctl enable mysqld 查看临时密码 sudo grep &#39;temporary password&#39; /var/log/mysqld.log 2019-05-15T06:42:54.826106Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: DVjSsl-ZX5f7 修改密码 mysql -uroot -p ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;MyNewPass4!&#39;; 常用命令 连接 mysql -h127.0.0.1 -P 3306 -uroot -p 权限管理 mysql登陆用户权限校验主要是通过用户名密码+访问来源主机方式 创建用户 CREATE USER &#39;finley&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;password&#39;; 赋权限 GRANT ALL ON *.* TO &#39;finley&#39;@&#39;localhost&#39; WITH GRANT OPTION; 收回权限 REVOKE ALL ON *.* FROM &#39;finley&#39;@&#39;localhost&#39;; 查看</description>
+    </item>
+    
+    <item>
+      <title>Mysql 书单</title>
+      <link>https://zhangeamon.top/mysql/book-list.html</link>
+      <pubDate>Wed, 13 Feb 2019 15:20:43 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/mysql/book-list.html</guid>
+      <description>入门： 《涂抹MySQL：跟着三思一步一步学MySQL》 《MySQL数据库应用从入门到精通（第2版）》 《MySQL核心技术手册》 《MySQL技术内幕（第5版）》 运维实践： 《高性能MySQL》 经典必读 《MySQL管理之道：性能调优、高可用与监控（第2版） 》贺春旸 《深入理解MySQL核</description>
+    </item>
+    
+    <item>
+      <title>MySQL常用性能分析命令</title>
+      <link>https://zhangeamon.top/mysql/performance-cmd.html</link>
+      <pubDate>Tue, 29 Jan 2019 14:06:55 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/mysql/performance-cmd.html</guid>
+      <description>MySQL常用性能突发事件分析命令： SHOW PROCESSLIST; —当前MySQL数据库的运行的所有线程 INNODB_TRX; — 当前运行的所有事务 INNODB_LOCKS; — 当前出现的锁 INNODB_LOCK_WAITS; — 锁等待的对应关系计 SHOW OPEN TABLES where In_use &amp;gt;0; — 当前打开表 SHOW ENGINE INNODB STATUS \G; —Innodb状态 SHOW STATUS LIKE &amp;lsquo;innodb_row_lock_%&#39;; — 锁性能状态 SQL语句EXPLAIN; — 查询优化器</description>
+    </item>
+    
+  </channel>
+</rss>

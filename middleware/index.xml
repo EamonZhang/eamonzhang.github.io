@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Middlewares on Let&#39;s Go</title>
+    <link>https://zhangeamon.top/middleware.html</link>
+    <description>Recent content in Middlewares on Let&#39;s Go</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 29 Jan 2021 09:37:26 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/middleware/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>etcd 访问控制</title>
+      <link>https://zhangeamon.top/middleware/etcd_auth.html</link>
+      <pubDate>Fri, 29 Jan 2021 09:37:26 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/etcd_auth.html</guid>
+      <description>介绍 etcd 默认没有开启访问控制。 在生产环境中使用属于裸奔。 开启访问控制有两种方式 密钥证书验证 用户名密码验证 本篇实验用户名密码验证方式 用户 开启访问认证需要创建root 用户，root 用户默认自动拥有root角色的权限，及超级管理员。 角色 角色理解为指定权限的集合，权限包括 read 、write、 readwrite</description>
+    </item>
+    
+    <item>
+      <title>Consul DNS 服务发现</title>
+      <link>https://zhangeamon.top/middleware/consul.html</link>
+      <pubDate>Mon, 29 Jun 2020 11:09:52 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/consul.html</guid>
+      <description>实现目标 多IP解析，负载轮询 自动检查后端服务状态，自动剔除不可用后端 别名配置 上游DNS支持 ttl cache 支持 前两点由cousul实现 后两点由dnsmasq实现 别名配置未实现 简单应用 集群配置 10.1.88.84 10.1.88.85 10.1.88.86 consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.84 -bind=10.1.88.84 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -config-dir=/etc/consul.d -ui consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.85 -bind=10.1.88.85 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -join=10.1.88.84 -config-dir=/etc/consul.d -ui consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.86 -bind=10.1.88.86 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -join=10.1.88.84 -config-dir=/etc/consul.d -ui 服务发现配置 cat /etc/consul.d/web/json { &amp;quot;services&amp;quot;:[</description>
+    </item>
+    
+    <item>
+      <title>coredns</title>
+      <link>https://zhangeamon.top/middleware/coredns.html</link>
+      <pubDate>Mon, 22 Jun 2020 13:25:08 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/coredns.html</guid>
+      <description>背景 致力于打造云原生中的dns服务和服务发现。 各种功能都是通过插件方式实现 简单例子 服务 cat /usr/lib/systemd/system/coredns.service [Unit] Description=CoreDNS DNS server Documentation=https://coredns.io After=network.target [Service] PermissionsStartOnly=true LimitNOFILE=1048576 LimitNPROC=512 CapabilityBoundingSet=CAP_NET_BIND_SERVICE AmbientCapabilities=CAP_NET_BIND_SERVICE NoNewPrivileges=true User=coredns WorkingDirectory=~ ExecStart=/usr/local/bin/coredns -conf=/etc/coredns/Corefile ExecReload=/bin/kill -SIGUSR1 $MAINPID Restart=on-failure [Install] WantedBy=multi-user.target 配置文件 cat /etc/coredns/Corefile .:53 { # 绑定interface ip bind 127.0.0.1 # 先走本机的hosts # https://coredns.io/plugins/hosts/ hosts { # 自定义sms.service search.service 的解析 # 因为解析的域名少我们这里直接</description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>https://zhangeamon.top/middleware/nginx.html</link>
+      <pubDate>Tue, 09 Apr 2019 15:42:15 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/nginx.html</guid>
+      <description>性能优化 错误码 502 ， error.log 中错误信息 [error] 236#236: *8371899 upstream sent too big header while reading response header from upstream, 问题 header 过大 proxy_buffer_size 64k; proxy_buffers 4 32k; proxy_busy_buffers_size 64k; 官网说明 利用nginx设置用户登陆认证 如下举例设置用户访问kibana时登陆认证 server { listen 80; server_name kibana.×××.com; location / { auth_basic &amp;quot;secret&amp;quot;; auth_basic_user_file /etc/nginx/db/passwd.db; proxy_pass http://****:5601; proxy_set_header Host $host:5601; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Via &amp;quot;nginx&amp;quot;; } access_log off; } 2、配置登录用户名(admi</description>
+    </item>
+    
+    <item>
+      <title>DNS Bind9 &amp; NamedManager </title>
+      <link>https://zhangeamon.top/middleware/bind9.html</link>
+      <pubDate>Thu, 04 Apr 2019 15:14:47 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/bind9.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Centos FTP 服务</title>
+      <link>https://zhangeamon.top/middleware/vsftp.html</link>
+      <pubDate>Wed, 05 Dec 2018 09:24:29 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/vsftp.html</guid>
+      <description>利用vsftpd 搭建FTP 服务器 安装 yum -y install vsftpd 添加用户及设置密码 useradd -s /sbin/nologin -d /home/ftp_test ftp_test passwd ftp_test -s 禁止ssh登录主机 -d 设置ftp_test 用户home 目录，用于存放数据 基础配置 vi /etc/vsftpd/vsftpd.conf # 禁止匿名访问 anonymous_enable=NO # 禁止dns解析 reverse_lookup_enable=NO 启动&amp;amp;开机自启 systemctl start vsftpd.service systemctl enable vsftpd.service filezilla 客户端验证 host: 服务器IP port: 默认 user: password: 测试本地上传，远</description>
+    </item>
+    
+    <item>
+      <title>Haproxy 算法</title>
+      <link>https://zhangeamon.top/middleware/haproxy.html</link>
+      <pubDate>Mon, 26 Nov 2018 08:53:09 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/haproxy.html</guid>
+      <description>blance roundrobin # 轮询，软负载均衡基本都具备这种算法 balance static-rr # 根据权重，建议使用 balance leastconn # 最少连接者先处理，建议使用 balance source # 根据请求源IP，建议使用 balance uri # 根据请求的URI balance url_param，# 根据请求的URl参数&amp;rsquo;balance url_param&#39; requires an URL parameter name balance hdr(name) # 根据HTTP请求头来锁定每一次HTTP请求</description>
+    </item>
+    
+    <item>
+      <title>Sysbench 测试</title>
+      <link>https://zhangeamon.top/middleware/sysbench.html</link>
+      <pubDate>Fri, 16 Nov 2018 19:25:45 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/sysbench.html</guid>
+      <description>下载安装 1.0.15 sysbench官网 curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh | sudo bash sudo yum -y install sysbench 参数说明 sysbench --help Usage: sysbench [options]... [testname] [command] Commands implemented by most tests: prepare run cleanup help General options: --threads=N number of threads to use [1] 线程数 --events=N limit for total number of events [0] 事务数 --time=N limit for total execution time in seconds [10] 测压时间 --forced-shutdown=STRING number of seconds to wait after the --time limit before forcing shutdown, or &#39;off&#39; to disable [off] --thread-stack-size=SIZE size of stack per thread [64K] --rate=N average transactions rate. 0 for unlimited rate [0] --report-interval=N periodically report intermediate statistics with a specified interval in seconds. 0 disables intermediate reports [0] --report-checkpoints=[LIST,...] dump full statistics and reset all counters</description>
+    </item>
+    
+    <item>
+      <title>Keepalived 问题集</title>
+      <link>https://zhangeamon.top/middleware/keepalived01.html</link>
+      <pubDate>Mon, 05 Nov 2018 10:08:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/keepalived01.html</guid>
+      <description>Q1 问题描述 ip address associated with VRID 51 not present in MASTER advert : 10.1.7.58 其中 51 为 virtual_router_id 10.1.7.58 为虚拟IP 可能原因 ntp 时间不同步 局域网内 virtual_router_id 与其他集群配置冲突。 另外 router_id 主机标示，一般为hostname即可。 解决方法： unicast_peer{ } 配置成单播模式</description>
+    </item>
+    
+    <item>
+      <title>代理</title>
+      <link>https://zhangeamon.top/middleware/proxy.html</link>
+      <pubDate>Wed, 31 Oct 2018 14:42:10 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/proxy.html</guid>
+      <description>科普 正向代理 对服务端来说是无感的，服务端无需配置，要在客户端指定。代理的是客户端。 访问原来无法访问的资源 用作缓存，加速访问速度 对客户端访问授权，上网进行认证 代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息 反向代理 对客户端来说的无感的，客户端无需配置，要在服务端实现。代理</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>KVM | Let&#39;s Go</title>
+    <meta property="og:title" content="KVM - Let&#39;s Go">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-11-06T16:23:07&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-11-06T16:23:07&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="KVM">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/kvm/kvm01.html">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s Go
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives.html" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql.html" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/test/" title="test">test</a>
+                    
+                    <a  href="https://zhangeamon.top/about.html" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">KVM</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月6日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <ul>
+<li>安装</li>
+</ul>
+<h4 id="ubuntu1404">ubuntu14.04</h4>
+<hr>
+<p>.安装kvm</p>
+<p>apt-get install qemu-kvm libvirt0 virtinst bridge-utils virt-viewer</p>
+<p>.配置实体机网络</p>
+<p>cat /etc/network/interfaces</p>
+<pre><code>auto lo
+iface lo inet loopback
+auto br0
+iface br0 inet static
+address 10.0.*.*
+netmask 255.255.0.0
+gateway 10.1.0.1
+type bridge
+bridge_ports eth0
+dns-nameservers 114.114.114.114
+</code></pre><p>.创建一个虚拟机</p>
+<pre><code>virt-install --connect qemu:///system -n test01 -r 1024 -f /home/kvm/test01.qcow2 -s 20 -c /home/kvm/ubuntu-12.04.1-server-amd64.iso --vnc --noautoconsole --os-type linux --os-variant ubuntuPrecise --accelerate --network=bridge:br0 
+</code></pre><h4 id="centos7">centos7</h4>
+<hr>
+<p>yum install qemu-kvm libvirt virt-install bridge-utils</p>
+<p>.配置实体机网络</p>
+<p>cat ifcfg-enp7s0</p>
+<pre><code>DEVICE=&quot;enp7s0&quot;
+ONBOOT=yes
+BOOTPROTO=static
+UUID=96a09db3-9b06-4a50-8d0c-9868cf531b84
+#HWADDR=&quot;08:60:6E:06:C7:1A&quot;
+TYPE=Ethernet
+BRIDGE=br0
+IPADDR=0.0.0.0
+</code></pre><p>cat ifcfg-br0</p>
+<pre><code>DEVICE=br0
+ONBOOT=yes
+BOOTPROTO=static
+TYPE=Bridge
+IPADDR=10.1.*.*
+PREFIX=16
+GATEWAY=10.1.0.1
+DNS1=223.5.5.5
+</code></pre><p>查看 brctl show</p>
+<p>.启动 libvirt</p>
+<p>systemctl start libvirtd</p>
+<p>systemctl enable libvirtd</p>
+<p>.创建虚拟机</p>
+<pre><code>virt-install --virt-type kvm --name test01 --ram 1024 --vcpus 1 --cdrom=/home/kvm/CentOS-7.0-1406-x86_64-DVD.iso --disk path=/home/kvm/test01.qcow2,size=10,format=qcow2 --network bridge=br0 --graphics vnc,listen=0.0.0.0 --noautoconsole --os-type=linux --os-variant=rhel7 
+</code></pre><p>.连接道virth</p>
+<p>virsh &ndash;connect qemu:///system<br>
+.virt-viewer<br>
+连接本机的虚拟机:virt-viewer -c qemu:///system 虚拟机名<br>
+连接远程的虚拟机:virt-viewer -c qemu+ssh://ip/system 虚拟机名</p>
+<p>设置开机自启动 virsh autostart server01</p>
+<ul>
+<li>克隆</li>
+</ul>
+<hr>
+<pre><code>virt-clone --connect=qemu:///system -o server-02 -n server-clone -f /var/lib/libvirt/images/server-clone.img
+</code></pre><p>参数说明<br>
+-o &ndash;original 原始被克隆镜像
+-n &ndash;name 新镜像名称
+-f &ndash;file 镜像文件存放的物理地址</p>
+<p>注意事项
+被克隆镜像为关闭或停止状态<br>
+virsh destroy server-02</p>
+<p>其他说明</p>
+<p>cat /etc/libvirt/qemu/server-02.xml | grep &ldquo;source&rdquo;
+cat /etc/libvirt/qemu/server-02.xml | grep &ldquo;mac&rdquo;</p>
+<p>在 vi /etc/sysconfig/network-scripts/ifcfg-eth0 中修改相应的mac</p>
+<ul>
+<li>修改磁盘大小</li>
+</ul>
+<hr>
+<p>qemu-img resize [-q] filename [+ | -]size</p>
+<p>1.修改前查看</p>
+<pre><code>qemu-img info test01.qcow2
+image: test01.qcow2
+file format: qcow2
+virtual size: 10G (10737418240 bytes)
+disk size: 9.0G
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    lazy refcounts: true
+</code></pre><p>2.关闭虚拟机</p>
+<pre><code>virsh shutdown test01
+</code></pre><p>3.修改磁盘文件大小</p>
+<pre><code>qemu-img resize test01.qcow2 +10G
+Image resized.
+</code></pre><p>4.查看 结果</p>
+<pre><code>qemu-img info test01.qcow2
+image: test01.qcow2
+file format: qcow2
+virtual size: 20G (21474836480 bytes)
+disk size: 9.0G
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    lazy refcounts: true
+</code></pre><p>5.重新启动虚拟机 进入虚拟机查看
+virsh start test01</p>
+<pre><code>fdisk -l
+ 
+磁盘 /dev/vda：42.9 GB, 42949672960 字节，83886080 个扇区
+Units = 扇区 of 1 * 512 = 512 bytes
+扇区大小(逻辑/物理)：512 字节 / 512 字节
+I/O 大小(最小/最佳)：512 字节 / 512 字节
+磁盘标签类型：dos
+磁盘标识符：0x000a4b0b
+ 
+   设备 Boot      Start         End      Blocks   Id  System
+/dev/vda1   *        2048     1026047      512000   83  Linux
+/dev/vda2         1026048     3123199     1048576   82  Linux swap / Solaris
+/dev/vda3         3123200    20971519     8924160   83  Linux
+</code></pre><p>磁盘空间变大</p>
+<ul>
+<li>扩容分区</li>
+</ul>
+<hr>
+<p>1 fdisk 修改分区表　，　删除最后一个分区，新建分区，保持退出
+echo d; echo n; echo ; echo ; echo ; echo ; echo w;) | fdisk $rootdevicepath
+重启</p>
+<p>resize2fs $partedpath　扩磁盘空间</p>
+<ul>
+<li>修改内存和CUP</li>
+</ul>
+<hr>
+<p>1 查看 virsh dominfo test01<br>
+2 改内存 virsh setmem [domain-id or domain-name] [count]<br>
+3 改CUP virsh setvcpus test01 2</p>
+<p><a href="https://www.cnblogs.com/zhangeamon/p/6734275.html">原文</a></p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/elk/apm.html">APM</a></li>
+        
+        <li><a href="/postgres/stat.html">Postgresql指标查看&amp;stat统计信息</a></li>
+        
+        <li><a href="/middleware/keepalived01.html">Keepalived 问题集</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns.html" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02.html" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence.html" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone.html" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman.html" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02.html" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance.html" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler.html" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean.html" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgresql.html" title="Postgres  数据库">Postgres  数据库</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/Golang.html">Golang (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres.html">postgres (1)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/golang.html">golang</a>
+    
+    <a href="https://zhangeamon.top/tags/postgres.html">postgres</a>
+    
+    <a href="https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">性能优化</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>
