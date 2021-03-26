@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>pg_pathman 分区表 | 故乡的云☁️</title>
+    <meta property="og:title" content="pg_pathman 分区表 - 故乡的云☁️">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2019-01-24T10:56:06&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2019-01-24T10:56:06&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="pg_pathman 分区表">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/pg_pathman/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        故乡的云☁️
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">pg_pathman 分区表</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月24日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="介绍">介绍</h4>
+<p>分区表的诉求在现实的生成中的意义不必多说，pg以前的实现方式多采用触发器，rules实现。数据量上来时性能明显不尽如意。<br>
+虽然pg10 ，11 版本在分区表的特性上不断发力。但是性能啥还是不够给力。<br>
+pg_pathman 分区表功能在目前的pg版本10.6 中优势还是非常明显的。</p>
+<p>在期待pg自身分区表特性的同时，当前的pg10中还是使用pg_pathman来实现分区功能吧。</p>
+<h5 id="pathman与pg11-对比">pathman与pg11 对比</h5>
+<p>优点:
+支持HASH和RANGE分区，后续会支持LIST分区 支持自动和手动的分区维护<br>
+为分区表生成更有效的执行计划 通过引入两个自定义的执行计划节点RuntimeAppend &amp; RuntimeMergeAppend，<br>
+实现运行时动态添加分区到执行计划中 为新插入数据自动创建分区(只对RANGE分区) 提供用户callbacks接口处理创建分区事件。<br>
+提供在线分区实施(在线重定义)，父表数据迁移到子表，拆分， 合并分区
+不足:<br>
+不支持list分区;不支持二级分区;权限，索引，trigger等无法继承; 修改主键默认的seq需要重建分区。</p>
+<p>PG11内置分区<br>
+优点:<br>
+支持hash，range，list分区 支持多字段组合分区，支持表达式分区 支持创建主键，外键，索引，分区表自动继承。 支持update分区键 支持分区表DETACH，ATTACH，支持二级分区 分区自动创建<br>
+Default partition Partition improvements<br>
+不足:<br>
+在主表添加权限，索引，trigger等无法继承 分区表不可以作为其他表的外键主表</p>
+<h4 id="分区表数量对插入数据的影响">分区表数量对插入数据的影响</h4>
+<p><a href="https://www.jianshu.com/p/1cba77d18694">https://www.jianshu.com/p/1cba77d18694</a></p>
+<h4 id="pathman-分区表-转换为原生分区表">pathman 分区表 转换为原生分区表</h4>
+<p><a href="https://github.com/digoal/blog/blob/master/201911/20191113_01.md">https://github.com/digoal/blog/blob/master/201911/20191113_01.md</a></p>
+<p>主要思路</p>
+<p>1 创建一个与原来分区表一样的主表包括分区方式 。</p>
+<p>2 将原来的主表上的分区都卸载为普通表，在重新按照原生分区表的方式挂载上去。</p>
+<p>直接2 也行</p>
+<p>拓展思考。 分区数据迁移使用pg_pathman，迁移后再转换到原生表。</p>
+<h4 id="注意事项">注意事项</h4>
+<p>需要将pg_pathman放在后面注册，如pg_stat_statements。</p>
+<pre><code>shared_preload_libraries = 'pg_stat_statements,pg_pathman'
+</code></pre><p>创建拓展</p>
+<pre><code>CREATE SCHEMA pathman;
+GRANT USAGE ON SCHEMA pathman TO PUBLIC;
+CREATE EXTENSION pg_pathman WITH SCHEMA pathman;
+</code></pre><h4 id="参考">参考</h4>
+<p><a href="https://github.com/postgrespro/pg_pathman">https://github.com/postgrespro/pg_pathman</a></p>
+<p><a href="https://github.com/digoal/blog/blob/362b84417ca8b7aaf1add31fe7689c347642bb9a/201610/20161024_01.md">https://github.com/digoal/blog/blob/362b84417ca8b7aaf1add31fe7689c347642bb9a/201610/20161024_01.md</a></p>
+<h4 id="常见错误">常见错误</h4>
+<pre><code>FATAL:  could not load library &quot;/usr/pgsql-12/lib/pg_pathman.so&quot;: /usr/pgsql-12/lib/pg_pathman.so: undefined symbol: expandTableLikeClause
+postgres 版本问题
+</code></pre><h4 id="简单应用">简单应用</h4>
+<p>1 将现有表分区，禁止数据迁移</p>
+<p>2 并行迁移数据</p>
+<p>3 禁止主表</p>
+<p>表 log  必需满足</p>
+<ul>
+<li>
+<p>字段 created_time not null</p>
+</li>
+<li>
+<p>无外键约束</p>
+</li>
+</ul>
+<p>按月分表,后续数据超出范围会自动创建分区（默认）</p>
+<p>查看表中最早日期</p>
+<pre><code>select min(created_time) from log;
+---
+2018-05-18 00:00:00
+</code></pre><p>分表 false 表示禁止数据移动</p>
+<pre><code>select create_range_partitions('log'::regclass,'created_time','2018-05-18 00:00:00'::timestamp,interval '1 month', null,false);
+</code></pre><p>查看分区表</p>
+<pre><code>select * from pathman_partition_list where parent = 'log'::regclass;
+</code></pre><p>并行迁移数据</p>
+<pre><code>select partition_table_concurrently('log'::regclass,10000,1.0);
+</code></pre><p>查看迁移状态</p>
+<pre><code>select * from pathman_concurrent_part_tasks ;
+</code></pre><p>禁主表</p>
+<pre><code>select set_enable_parent('log'::regclass,false);
+</code></pre><p>查看数据</p>
+<pre><code>select count(1) from only log;
+</code></pre><h4 id="分区表常用管理">分区表常用管理</h4>
+<p>将一个分区拆分为两个分区</p>
+<pre><code>split_range_partition(partition_relid REGCLASS,
+                      split_value     ANYELEMENT,
+                      partition_name  TEXT DEFAULT NULL,
+                      tablespace      TEXT DEFAULT NULL)
+</code></pre><p>合并多个连续分区,数据将到第一个分区</p>
+<pre><code>merge_range_partitions(variadic partitions REGCLASS[])
+</code></pre><p>向后追加一个分区,分区间隔默认</p>
+<pre><code>append_range_partition(parent_relid   REGCLASS,
+                       partition_name TEXT DEFAULT NULL,
+                       tablespace     TEXT DEFAULT NULL)
+</code></pre><p>向前追加一个分区，分区间隔默认</p>
+<pre><code>prepend_range_partition(parent_relid   REGCLASS,
+                        partition_name TEXT DEFAULT NULL,
+                        tablespace     TEXT DEFAULT NULL)
+</code></pre><p>添加一个自定义间隔分区: 如加一个</p>
+<pre><code>add_range_partition(parent_relid   REGCLASS,
+                    start_value    ANYELEMENT,
+                    end_value      ANYELEMENT,
+                    partition_name TEXT DEFAULT NULL,
+                    tablespace     TEXT DEFAULT NULL)
+</code></pre><p>删除一个分区，及数据是否删除. 不删除数据将入主表</p>
+<pre><code>drop_range_partition(partition TEXT, delete_data BOOLEAN DEFAULT TRUE)
+</code></pre><p>卸载分区为普通表</p>
+<pre><code>detach_range_partition(partition_relid REGCLASS)
+</code></pre><p>挂载普通表为分区表</p>
+<pre><code>attach_range_partition(parent_relid    REGCLASS,
+                       partition_relid REGCLASS,
+                       start_value     ANYELEMENT,
+                       end_value       ANYELEMENT)
+</code></pre><h5 id="参数">参数</h5>
+<p>修改默认分区间隔</p>
+<pre><code>set_interval(relation REGCLASS, value ANYELEMENT)
+</code></pre><p>是否禁用主表,禁用后执行计划将不在走主表</p>
+<pre><code>set_enable_parent(relation REGCLASS, value BOOLEAN)
+</code></pre><p>是否自动创建分区. 开启后注意事项， 如果有一条数据的时间异常，会创建大量的分区表。灾难</p>
+<pre><code>set_auto(relation REGCLASS, value BOOLEAN)
+</code></pre><h4 id="遗留问题">遗留问题</h4>
+<p>1 原表分区后数据磁盘占用增加近一倍，需要vacuum full 解决. 主表残留</p>
+<p>数据全部分区后 vacuum 速度也很快</p>
+<p>2 分区后对父表添加或删除索引操作对现有分区表不产生作用，仅对新生成的分区有效。<a href="https://github.com/postgrespro/pg_pathman/wiki/How-do-I-create-indexes%3F">How do I create indexes?</a></p>
+<h4 id="注意事项-1">注意事项</h4>
+<p>对已经分区的表使用copy 方式导入数据后数据只存在于父表中，此时执行partition_table_concurrently 无效果</p>
+<p>解决</p>
+<pre><code> 1 set_enable_parent('log'::regclass, true)
+</code></pre><pre><code> 2 创建分区表 如插入一条数据 ， 时间比最小时间还小，select min(create) from only log
+</code></pre><pre><code> 3 partition_table_concurrently
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/qos/">Qos</a></li>
+        
+        <li><a href="/linux/4k-wa/">SSD 4k对齐写放大</a></li>
+        
+        <li><a href="/linux/memtester/">memtester 内存压力测试</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (8)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

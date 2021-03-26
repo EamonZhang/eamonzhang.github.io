@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Postgres  数据库 | 故乡的云☁️</title>
+    <meta property="og:title" content="Postgres  数据库 - 故乡的云☁️">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-02-08T10:10:01&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-02-08T10:10:01&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Postgres  数据库">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgresql/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        故乡的云☁️
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#关于优化思考">关于优化思考</a></li>
+    <li><a href="#基础知识">基础知识</a></li>
+    <li><a href="#安装维护">安装维护</a></li>
+    <li><a href="#管理">管理</a></li>
+    <li><a href="#备份恢复">备份恢复</a></li>
+    <li><a href="#高可用">高可用</a></li>
+    <li><a href="#索引">索引</a></li>
+    <li><a href="#流数据库">流数据库</a></li>
+    <li><a href="#时序数据库">时序数据库</a></li>
+    <li><a href="#数据库测试">数据库测试</a></li>
+    <li><a href="#监控系统">监控系统</a></li>
+    <li><a href="#日志系统">日志系统</a></li>
+    <li><a href="#分布式">分布式</a></li>
+    <li><a href="#安全管理">安全管理</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Postgres  数据库</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月8日
+        </date>
+        
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="关于优化思考">关于优化思考</h2>
+<ul>
+<li><a href="/postgres/thinking_in_db_performance">数据库优化思考 - 性能优化</a></li>
+<li><a href="/postgres/thinking_in_db_fd">数据库优化思考 - 结构设计</a></li>
+<li><a href="/postgres/thinking_in_db_tune">数据库优化思考 - 模块调优</a></li>
+</ul>
+<h2 id="基础知识">基础知识</h2>
+<ul>
+<li><a href="/postgres/template">模板数据库</a></li>
+<li><a href="/postgres/log">数据库日志</a></li>
+<li><a href="/postgres/explain">Explain 执行计划</a></li>
+<li><a href="/postgres/vacuum">vacuum 垃圾回收器</a></li>
+<li><a href="/postgres/pgstattuple">表空间膨胀</a></li>
+<li><a href="/postgres/fillfactor">fillfactor 填充因子</a></li>
+<li><a href="/postgres/toast">TOAST 技术</a></li>
+<li><a href="/postgres/hotupdate">hot update</a></li>
+<li><a href="/postgres/checkpoint">checkpoint</a></li>
+<li><a href="/postgres/tablespace">tablespace 表空间</a></li>
+<li><a href="/postgres/pg_lock">锁机制</a></li>
+<li><a href="/postgres/lock_wait">锁等待</a></li>
+<li><a href="/postgres/cluster">cluster 聚族表</a></li>
+<li><a href="/postgres/adlock">咨询锁 adlock</a></li>
+<li><a href="/postgres/pg_stat_activity">数据库视图之 pg_stat_activity</a></li>
+<li>数据库试图之 pg_stat_bgwriter</li>
+<li><a href="/postgres/pgage">数据库年龄</a></li>
+<li><a href="/postgres/functionsandoperators">方法和函数</a></li>
+<li><a href="/postgres/high_level_sql">高级SQL</a></li>
+<li><a href="/postgres/oom">数据库 OOM 预防</a></li>
+<li><a href="/postgres/pg_fdw">跨库操作</a></li>
+<li><a href="/postgres/auto_vacuum_trigger">auto vacuum 触发机制</a></li>
+<li><a href="/postgres/unlogged_table">unlogged table</a></li>
+</ul>
+<h2 id="安装维护">安装维护</h2>
+<ul>
+<li><a href="/postgres/install01">安装 Postgres</a></li>
+<li><a href="/postgres/replication01">主从流复制</a></li>
+<li><a href="/logical-replication">Logical Replication 逻辑复制</a></li>
+<li><a href="/postgres/params">数据库参数</a></li>
+<li><a href="/postgres/stat">指标查看&amp;stat统计信息</a></li>
+<li><a href="/postgres/extention">拓展插件</a></li>
+<li><a href="/postgres/pg_stat_statements">pg_stat_statements统计信息</a></li>
+<li><a href="/postgres/pgpool2">pg-pool2</a></li>
+<li><a href="/postgres/pgbouncer">pgbouncer 连接池</a></li>
+<li><a href="/postgres/postgres12">postgres 12</a></li>
+<li><a href="/postgres/install02">Untunu18安装Postgres12</a></li>
+<li><a href="/postgres/pg_prewarm">数据预加载</a></li>
+<li><a href="/postgres/compile_kylin">kylin系统postgresql编译安装</a></li>
+</ul>
+<h2 id="管理">管理</h2>
+<ul>
+<li><a href="/postgres/pg_pathman">pg_pathman 分区表</a></li>
+<li><a href="/postgres/normal-form">范式约束</a></li>
+<li><a href="/postgres/dba">DBA 日常</a></li>
+<li><a href="/postgres/daily_management">数据库日常管理</a></li>
+<li><a href="/postgres/awsome-postgres">应用实战</a></li>
+<li><a href="/postgres/readonly">创建只读用户</a></li>
+<li><a href="/postgres/reback_supper_user">找回supper user 权限</a></li>
+<li><a href="/postgres/partition">分区表</a></li>
+</ul>
+<h2 id="备份恢复">备份恢复</h2>
+<ul>
+<li><a href="/postgres/backup_restore">备份&amp;恢复</a></li>
+<li><a href="/postgres/archive">Archive wal归档</a></li>
+<li><a href="/postgres/pitr">时间点恢复</a></li>
+<li><a href="/postgres/reback">误操作闪回</a></li>
+<li><a href="/postgres/pg_rman">使用PG_RMAN管理备份恢复</a></li>
+<li>使用pgbakrest备份恢复</li>
+</ul>
+<h2 id="高可用">高可用</h2>
+<ul>
+<li><a href="/postgres/ha_fd">数据库高可用设计分析</a></li>
+<li><a href="/postgres/replication01">主从流复制</a></li>
+<li><a href="/postgres/pg_rewind">PG主从切换 pg_rewind</a></li>
+<li><a href="/postgres/patroni">PG高可用Patroni搭建</a></li>
+<li><a href="/postgres/patroni02">PG高可用Patroni管理进阶</a></li>
+</ul>
+<h2 id="索引">索引</h2>
+<ul>
+<li><a href="/postgres/index01">索引类型及使用场景</a></li>
+<li><a href="/postgres/index-invalid">引起索引失效</a></li>
+<li><a href="/postgres/pg_trgm">pg_trgm的gist和gin索引加速字符匹配查询</a></li>
+<li><a href="/postgres/index-bloom">Bloom 索引</a></li>
+</ul>
+<h2 id="流数据库">流数据库</h2>
+<ul>
+<li><a href="/postgres/pipelinedb01">Pipelinedb文档概览</a></li>
+<li><a href="/postgres/pipelinedb02">Pipelinedb 简介</a></li>
+</ul>
+<h2 id="时序数据库">时序数据库</h2>
+<ul>
+<li><a href="/postgres/timescaledb">TimescaleDB 时序数据库</a></li>
+</ul>
+<h2 id="数据库测试">数据库测试</h2>
+<ul>
+<li><a href="/postgres/insert01">快速生成大量数据</a></li>
+<li><a href="/postgres/pgbench">pgbench 压力测试</a></li>
+<li><a href="/postgres/tpch">tpch AP测试</a></li>
+</ul>
+<h2 id="监控系统">监控系统</h2>
+<ul>
+<li><a href="/postgres/monitor">监控工具</a></li>
+<li><a href="/postgres/pgwatch2">pgwatch2 数据库指标监控查看</a></li>
+<li><a href="/postgres/monitor_explain">数据库监控指标</a></li>
+</ul>
+<h2 id="日志系统">日志系统</h2>
+<ul>
+<li>ELK</li>
+</ul>
+<h2 id="分布式">分布式</h2>
+<ul>
+<li><a href="/postgres/pg_citus">citus 数据库分库</a></li>
+<li><a href="/postgres/citus01">citus 简单应用</a></li>
+</ul>
+<h2 id="安全管理">安全管理</h2>
+<ul>
+<li><a href="/postgres/ssl">数据库 ssl认证</a></li>
+</ul>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/middleware/etcd_auth/">etcd 访问控制</a></li>
+        
+        <li><a href="/postgres/hotupdate/">hot update</a></li>
+        
+        <li><a href="/postgres/thinking_in_db_tune/">数据库优化思考 - 模块调优</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (8)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

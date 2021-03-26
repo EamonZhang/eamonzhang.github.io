@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pythons on Let&#39;s Go</title>
-    <link>https://zhangeamon.top/python.html</link>
-    <description>Recent content in Pythons on Let&#39;s Go</description>
+    <title>Pythons on 故乡的云☁️</title>
+    <link>https://zhangeamon.top/python/</link>
+    <description>Recent content in Pythons on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Tue, 12 May 2020 11:28:53 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Jdango 多数据库读写配置</title>
-      <link>https://zhangeamon.top/python/django-ndb.html</link>
+      <link>https://zhangeamon.top/python/django-ndb/</link>
       <pubDate>Tue, 12 May 2020 11:28:53 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/python/django-ndb.html</guid>
+      <guid>https://zhangeamon.top/python/django-ndb/</guid>
       <description>https://www.cnblogs.com/thismyblogs/p/9855801.html</description>
     </item>
     
     <item>
       <title>django 默认创建第二索引</title>
-      <link>https://zhangeamon.top/python/django-index-ops.html</link>
+      <link>https://zhangeamon.top/python/django-index-ops/</link>
       <pubDate>Thu, 16 Apr 2020 11:40:02 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/python/django-index-ops.html</guid>
+      <guid>https://zhangeamon.top/python/django-index-ops/</guid>
       <description>Django使用postgresql做数据库 db_index创建索引时会创建第二个索引varchar_pattern_ops问题 创建默认索引 minion_id = models.CharField(max_length=100, db_index=True, blank=True, null=False, default=&amp;quot;&amp;quot;) 当字段类型是 models.CharField 或者 models.TextField 时 使用 db_index=True创建索引 会创建第二索引 django.db.backends.postgresql.schema class DatabaseSchemaEditor(BaseDatabaseSchemaEditor): sql_alter_column_type = &amp;quot;ALTER COLUMN %(column)s TYPE %(type)s USING %(column)s::%(type)s&amp;quot; sql_create_sequence = &amp;quot;CREATE SEQUENCE %(sequence)s&amp;quot; sql_delete_sequence = &amp;quot;DROP SEQUENCE IF EXISTS %(sequence)s CASCADE&amp;quot; sql_set_sequence_max</description>
     </item>
     
     <item>
       <title>学习参考</title>
-      <link>https://zhangeamon.top/python/reference.html</link>
+      <link>https://zhangeamon.top/python/reference/</link>
       <pubDate>Fri, 07 Dec 2018 11:24:11 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/python/reference.html</guid>
+      <guid>https://zhangeamon.top/python/reference/</guid>
       <description>廖雪峰 Python3 草根学 Python （基于Python3.6)</description>
     </item>
     

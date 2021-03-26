@@ -1,108 +1,108 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Network-securities on Let&#39;s Go</title>
-    <link>https://zhangeamon.top/network-security.html</link>
-    <description>Recent content in Network-securities on Let&#39;s Go</description>
+    <title>Network-securities on 故乡的云☁️</title>
+    <link>https://zhangeamon.top/network-security/</link>
+    <description>Recent content in Network-securities on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 03 Jun 2020 16:15:35 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/network-security/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Firewall</title>
-      <link>https://zhangeamon.top/network-security/firewalld.html</link>
+      <link>https://zhangeamon.top/network-security/firewalld/</link>
       <pubDate>Wed, 03 Jun 2020 16:15:35 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/network-security/firewalld.html</guid>
+      <guid>https://zhangeamon.top/network-security/firewalld/</guid>
       <description>简单应用 服务管理 # 查看全部支持的服务 $ firewall-cmd --get-service # 查看开放的服务 $ firewall-cmd --list-service # 开放服务 $ firewall-cmd --add-service=postgresql --permanent # 关闭服务 $ firewall-cmd --remove-service=postgresql --permanent permanent 参数修改对应的配置文件 /etc/firewalld/zones/public.xml 端口管理 # 查看开放的端口 $ firewall-cmd --zone=public --list-ports # 开放指导端口 $ firewall-cmd --zone=public --add-port=80/tcp --permanent # 开放端口段 $ firewall-cmd --zone=public --add-port=8388-8389/tcp --permanent # 关闭端口 $ firewall-cmd --zone=public --remove-port=80/tcp --permanent 规则管理 # 对 147.152.139.197 开放10000端口 $ firewall-cmd --permanent --zone=public --add-rich-rule=&#39; rule family=&amp;quot;ipv4&amp;quot; source address=&amp;quot;147.152.139.197/32&amp;quot; port protocol=&amp;quot;tcp&amp;quot; port=&amp;quot;10000&amp;quot;</description>
     </item>
     
     <item>
       <title>Centos 登陆安全管理</title>
-      <link>https://zhangeamon.top/network-security/linux-user-passw.html</link>
+      <link>https://zhangeamon.top/network-security/linux-user-passw/</link>
       <pubDate>Sat, 09 May 2020 16:20:05 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/network-security/linux-user-passw.html</guid>
+      <guid>https://zhangeamon.top/network-security/linux-user-passw/</guid>
       <description>禁用root登陆 注意： 创建一个非root用户 并加入wheel用户组（拥有sudo权限） useradd NewUser passwd NewUser gpasswd -a NewUser wheel 本地禁用root登陆 修改/etc/pam.d/login文件增加下面一行 auth required pam_succeed_if.so user != root quiet 远程禁用root登陆 修改 /etc/ssh/sshd_config #PermitRootLogin yes PermitRootLogin no 修改ssh默认端口 修改 /etc/ssh/sshd_config #Port 22 Port 46608 安全认证 LoginGraceTime 2m PermitRootLogin no #StrictModes yes #MaxAuthTries 6 #MaxSessions</description>
     </item>
     
     <item>
       <title>日志审计 audit</title>
-      <link>https://zhangeamon.top/network-security/audit.html</link>
+      <link>https://zhangeamon.top/network-security/audit/</link>
       <pubDate>Fri, 08 May 2020 08:52:03 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/network-security/audit.html</guid>
+      <guid>https://zhangeamon.top/network-security/audit/</guid>
       <description>介绍 auditd是Linux审计系统中用户空间的一个组件，负责将审计记录写到磁盘中。在CentOS7上默认就会有安装这个服务。 如果被卸载，可以直接使用yum进行安装： yum -y install audit auditd-libs 常用命令 1、auditctl : 即时控制审计守护进程的行为的工具，比如如添加规则等等。 audtitctl -l #查看规则 auditctl -D #</description>
     </item>
     
     <item>
       <title>等保三指南</title>
-      <link>https://zhangeamon.top/network-security/dengbao3.html</link>
+      <link>https://zhangeamon.top/network-security/dengbao3/</link>
       <pubDate>Fri, 08 May 2020 08:40:31 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/network-security/dengbao3.html</guid>
+      <guid>https://zhangeamon.top/network-security/dengbao3/</guid>
       <description>等保三指南-上 等保三指南-下</description>
     </item>
     
     <item>
       <title>Linux 禁Ping</title>
-      <link>https://zhangeamon.top/network-security/reject-ping.html</link>
+      <link>https://zhangeamon.top/network-security/reject-ping/</link>
       <pubDate>Thu, 02 Jan 2020 09:26:15 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/network-security/reject-ping.html</guid>
+      <guid>https://zhangeamon.top/network-security/reject-ping/</guid>
       <description>修改配置文件/etc/sysctl.conf 在这个文件的最后添加一行: net.ipv4.icmp_echo_ignore_all=1 （0 代表允许 1 代表禁止） 执行sysctl -p 使新配置生效</description>
     </item>
     
     <item>
       <title>DNS</title>
-      <link>https://zhangeamon.top/network-security/dns.html</link>
+      <link>https://zhangeamon.top/network-security/dns/</link>
       <pubDate>Mon, 28 Oct 2019 09:23:00 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/network-security/dns.html</guid>
+      <guid>https://zhangeamon.top/network-security/dns/</guid>
       <description>DNS：Domain Name System 域名管理系统 A记录 A（Address）记录是用来指定主机名（或域名）对应的IP地址记录 NS记录 NS（Name Server）记录是域名服务器记录，用来指定该域名由哪个DNS服务器来进行解析 MX记录 MX（Mail Exchanger）记录是邮件交换记录，它指向一</description>
     </item>
     
     <item>
       <title>Jumpserver 跳板机</title>
-      <link>https://zhangeamon.top/network-security/jumpserver.html</link>
+      <link>https://zhangeamon.top/network-security/jumpserver/</link>
       <pubDate>Mon, 17 Jun 2019 15:17:29 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/network-security/jumpserver.html</guid>
+      <guid>https://zhangeamon.top/network-security/jumpserver/</guid>
       <description>http://docs.jumpserver.org/zh/docs/index.html</description>
     </item>
     
     <item>
       <title>iptables查看、添加、删除规则</title>
-      <link>https://zhangeamon.top/network-security/iptables01.html</link>
+      <link>https://zhangeamon.top/network-security/iptables01/</link>
       <pubDate>Mon, 25 Feb 2019 17:23:44 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/network-security/iptables01.html</guid>
+      <guid>https://zhangeamon.top/network-security/iptables01/</guid>
       <description>查看 iptables -nvL –line-number -L 查看当前表的所有规则，默认查看的是filter表，如果要查看NAT表，可以加上-t NAT参数 -n 不对ip地址进行反查，加上这个参数显示速度会快很多 -v 输出详细信息，包含通过该规则的数据包数量，总字节数及相应的网络接口 –line-number 显示规则的</description>
     </item>
     
     <item>
       <title>Teleport 堡垒机</title>
-      <link>https://zhangeamon.top/network-security/teleport.html</link>
+      <link>https://zhangeamon.top/network-security/teleport/</link>
       <pubDate>Wed, 24 Oct 2018 09:40:32 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/network-security/teleport.html</guid>
+      <guid>https://zhangeamon.top/network-security/teleport/</guid>
       <description>https://gravitational.com/teleport/ https://mritd.me/2017/11/09/set-up-teleport/</description>
     </item>
     
     <item>
       <title>Let&#39;s Encrypt 通配符证书</title>
-      <link>https://zhangeamon.top/network-security/letusencrypt.html</link>
+      <link>https://zhangeamon.top/network-security/letusencrypt/</link>
       <pubDate>Mon, 22 Oct 2018 13:56:11 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/network-security/letusencrypt.html</guid>
+      <guid>https://zhangeamon.top/network-security/letusencrypt/</guid>
       <description>1.介绍 什么是 Let&amp;rsquo;s Encrypt？ 部署 HTTPS 网站的时候需要证书，证书由 CA 机构签发，大部分传统 CA 机构签发证书是需要收费的，这不利于推动 HTTPS 协议的使用。 Let&amp;rsquo;s Encrypt 也是一个 CA 机构，但这个 CA 机构是免费的！也就是说签发证书不需要任何费用。 Let&amp;rsquo;s Encrypt 由于是非盈利性的组织，需要控制开支，他们搞了一个非常有创意的事</description>
     </item>
     
     <item>
       <title>自签名证书</title>
-      <link>https://zhangeamon.top/network-security/cert.html</link>
+      <link>https://zhangeamon.top/network-security/cert/</link>
       <pubDate>Mon, 22 Oct 2018 11:05:47 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/network-security/cert.html</guid>
+      <guid>https://zhangeamon.top/network-security/cert/</guid>
       <description>1.环境预备 curl -s -L -o /usr/local/bin/cfssl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 curl -s -L -o /usr/local/bin/cfssljson https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 chmod +x /usr/local/bin/{cfssl,cfssljson} 2.生成配置模板 三类证书：服务器证书server cert，客户端证书client cert，对等证书peer cert(表示既是server cert又是client cert) cfssl print-defaults config &amp;gt; ca-config.json cat ca-config.json { &amp;quot;signing&amp;quot;: { &amp;quot;default&amp;quot;: { &amp;quot;expiry&amp;quot;: &amp;quot;168h&amp;quot; }, &amp;quot;profiles&amp;quot;: { &amp;quot;www&amp;quot;: { &amp;quot;expiry&amp;quot;: &amp;quot;8760h&amp;quot;, &amp;quot;usages&amp;quot;: [ &amp;quot;signing&amp;quot;, &amp;quot;key encipherment&amp;quot;, &amp;quot;server auth&amp;quot; ] }, &amp;quot;client&amp;quot;: { &amp;quot;expiry&amp;quot;: &amp;quot;8760h&amp;quot;, &amp;quot;usages&amp;quot;: [ &amp;quot;signing&amp;quot;, &amp;quot;key</description>
     </item>
     

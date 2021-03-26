@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>安装 Postgresql | 故乡的云☁️</title>
+    <meta property="og:title" content="安装 Postgresql - 故乡的云☁️">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-10-17T14:37:56&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-10-17T14:37:56&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="安装 Postgresql">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/install01/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        故乡的云☁️
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">安装 Postgresql</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月17日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <p><a href="https://www.postgresql.org/download/linux/redhat/">官网</a></p>
+<p>1.准备源</p>
+<pre><code>清除历史残余，有些是系统自带的旧版本数据库
+
+rpm -qa | grep postgres
+
+rpm -r ****
+
+安装新数据源
+
+yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+
+yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+
+可将所有的软件更新到最新版本如 ， postgresql-10.2 更新到当前最新的postgresql-10.6
+
+yum update -y 
+
+</code></pre><p>2.安装</p>
+<pre><code>yum install -y postgresql10-server postgresql10  postgresql10-contrib
+</code></pre><p>3.初始化</p>
+<pre><code>默认
+/usr/pgsql-10/bin/postgresql-10-setup initdb
+
+自定义
+/usr/pgsql-10/bin/initdb -D $PGDATA -U postgres -E UTF-8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8 -k
+
+-D 数据存放位置
+-U 超级用户
+-E 默认编码
+--lc-collate 区域 Collate会影响中文的排序，在zh_CN的区域下中文按拼音排序，其它区域按字符编码排序。
+--lc-ctype 字符类型Ctype会影响pg_trgm和部分正则匹配的结果，比如Ctype为'C'时，pg_trgm将无法支持中文。
+-k 使用 data checksums
+</code></pre><p>可将数据存放到其他目录下，使用<a href="linux/ln-s">软连接</a>的方式。</p>
+<p>为什么会使用软连接而不是更改PGDATA环境变量，因为升级数据库的时 PGDATA 被指回默认值。</p>
+<p>通过软连接的方式不改变初始值:<br>
+1 升级的时候不用修改PGDATA<br>
+2 数据位置存放固定，便于以后管理。</p>
+<p>4.启动服务　＆　开机自启</p>
+<pre><code>systemctl start postgresql-10.service
+
+systemctl enable postgresql-10.service
+</code></pre><p>5.设置访问权限</p>
+<p>　  vi postgresql.conf</p>
+<pre><code>  listen_addresses ='*'
+</code></pre><p>　vi pg_hba.conf</p>
+<pre><code>  # &quot;local&quot; is for Unix domain socket connections only
+  local   all             all                                     trust
+  # IPv4 local connections:
+  host    all             all             127.0.0.1/32            trust
+  host    all             all             0.0.0.0/0               md5
+  # IPv6 local connections:
+  host    all             all             ::1/128                 ident
+
+</code></pre><pre><code>systemctl restart postgresql-10.service
+</code></pre><p>6.设置密码</p>
+<pre><code>  #psql -U postgres
+  
+  postgres=# ALTER USER postgres WITH PASSWORD 'postgres'
+  \q
+
+</code></pre><h4 id="进一步优化">进一步优化</h4>
+<h5 id="系统linux-内核参数">系统Linux 内核参数</h5>
+<p>vi /etc/sysctl.conf</p>
+<pre><code>kernel.shmall = 4294967296  
+kernel.shmmax=135497418752  
+kernel.shmmni = 4096  
+kernel.sem = 50100 64128000 50100 1280  
+fs.file-max = 7672460  
+fs.aio-max-nr = 1048576  
+net.ipv4.ip_local_port_range = 9000 65000  
+net.core.rmem_default = 262144  
+net.core.rmem_max = 4194304  
+net.core.wmem_default = 262144  
+net.core.wmem_max = 4194304  
+net.ipv4.tcp_max_syn_backlog = 4096  
+net.core.netdev_max_backlog = 10000  
+#net.ipv4.netfilter.ip_conntrack_max = 655360  
+net.ipv4.tcp_timestamps = 0  
+net.ipv4.tcp_tw_recycle=1  
+net.ipv4.tcp_timestamps=1  
+net.ipv4.tcp_keepalive_time = 72   
+net.ipv4.tcp_keepalive_probes = 9   
+net.ipv4.tcp_keepalive_intvl = 7  
+vm.zone_reclaim_mode=0  
+vm.dirty_background_bytes = 40960000  
+vm.dirty_ratio = 80  
+vm.dirty_expire_centisecs = 6000  
+vm.dirty_writeback_centisecs = 50  
+vm.swappiness=0  
+vm.overcommit_memory = 0  
+vm.overcommit_ratio = 90  
+</code></pre><p>sysctl -p 生效</p>
+<h5 id="系统linux-最大句柄数">系统Linux 最大句柄数</h5>
+<p>vi /etc/security/limits.conf</p>
+<pre><code>* soft    nofile  131072  
+* hard    nofile  131072  
+* soft    nproc   131072  
+* hard    nproc   131072  
+* soft    core    unlimited  
+* hard    core    unlimited  
+* soft    memlock 500000000  
+* hard    memlock 500000000 
+
+</code></pre><h4 id="ntp">ntp</h4>
+<pre><code>yum install ntp -y
+
+systemctl start ntpd
+systemctl enable ntpd
+</code></pre><p>reboot 生效</p>
+<h4 id="数据库参数">数据库参数</h4>
+<p><a href="postgres/params/">参见</a></p>
+<h4 id="常见问题">常见问题</h4>
+<pre><code>Package: postgresql12-devel-12.3-1PGDG.rhel7.x86_64 (pgdg12)
+           Requires: llvm-toolset-7-clang &gt;= 4.0.1
+install CentOS SCLo RH repository and install llvm-toolset-7-clang to resolve it.
+yum install centos-release-scl-rh
+yum install llvm-toolset-7-clang
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/dw/introduce/">数据仓库介绍</a></li>
+        
+        <li><a href="/about/">关于</a></li>
+        
+        <li><a href="/archives/">归档</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (8)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

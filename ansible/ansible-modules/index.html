@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Ansible Modules | 故乡的云☁️</title>
+    <meta property="og:title" content="Ansible Modules - 故乡的云☁️">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-10-25T10:12:59&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-10-25T10:12:59&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Ansible Modules">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/ansible/ansible-modules/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        故乡的云☁️
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Ansible Modules</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月25日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h5 id="准备工作">准备工作</h5>
+<ul>
+<li>安装</li>
+</ul>
+<pre><code>yum install ansible-doc.noarch ansible.noarch -y
+
+tree /etc/ansible/
+/etc/ansible/
+├── ansible.cfg
+├── hosts
+└── roles
+
+ansible --version
+ansible 2.7.0
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = [u'/root/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python2.7/site-packages/ansible
+  executable location = /usr/bin/ansible
+  python version = 2.7.5 (default, Jul 13 2018, 13:06:57) [GCC 4.8.5 20150623 (Red Hat 4.8.5-28)]
+</code></pre><ul>
+<li>配置清单</li>
+</ul>
+<pre><code>cat hosts 
+[webservers]
+10.1.88.72
+10.1.88.73
+
+</code></pre><ul>
+<li><a href="../linux/no-passwd">免密登录</a></li>
+</ul>
+<h5 id="常用命令">常用命令</h5>
+<pre><code>Usage: ansible &lt;host-pattern&gt; [options]
+
+    常用选项：
+
+        -m MOD_NAME  
+
+        -a MOD_ARGS
+
+获取模块列表：ansible-doc -l
+
+获取指定模块的使用帮助：ansible-doc -s MOD_NAME
+</code></pre><ul>
+<li>ping</li>
+</ul>
+<p>尝试连接到主机，验证并返回pong成功。</p>
+<pre><code>ansible all -m ping
+10.1.88.73 | SUCCESS =&gt; {
+    &quot;changed&quot;: false, 
+    &quot;ping&quot;: &quot;pong&quot;
+}
+10.1.88.72 | SUCCESS =&gt; {
+    &quot;changed&quot;: false, 
+    &quot;ping&quot;: &quot;pong&quot;
+}
+
+</code></pre><ul>
+<li>command</li>
+</ul>
+<p>在远程主机执行命令, -m 默认模块为 commend, 可以省略 。</p>
+<pre><code>ansible all -a 'cat /etc/centos-release' 
+10.1.88.72 | CHANGED | rc=0 &gt;&gt;
+CentOS Linux release 7.5.1804 (Core) 
+
+10.1.88.73 | CHANGED | rc=0 &gt;&gt;
+CentOS Linux release 7.5.1804 (Core) 
+</code></pre><ul>
+<li>shell</li>
+</ul>
+<p>与command模快使用一致，但是，变量 和操作符号 &ldquo;&lt;&rdquo;, &ldquo;&gt;&rdquo;, &ldquo;|&rdquo;, &ldquo;;&rdquo; and &ldquo;&amp;&rdquo; 能正常工作</p>
+<pre><code>ansible all -m shell -a 'echo $LANG'
+10.1.88.73 | CHANGED | rc=0 &gt;&gt;
+en_US.UTF-8
+
+10.1.88.72 | CHANGED | rc=0 &gt;&gt;
+en_US.UTF-8
+
+</code></pre><ul>
+<li>script</li>
+</ul>
+<p>把脚本复制到远程节点后，在远程节点本地运行脚本</p>
+<pre><code>cat script.sh 
+#!/bin/bash
+touch /tmp/a.tmp
+echo 'ok'
+
+ansible all -m script -a './script.sh '
+
+</code></pre><ul>
+<li>copy</li>
+</ul>
+<p>复制文件或目录到远程节点。默认会覆盖目标文件</p>
+<pre><code>文件
+ansible all -m copy -a &quot;src=./script.sh dest=/tmp/ mode=666&quot;
+
+目录
+ansible all -m copy -a &quot;src=/home dest=/tmp/ &quot;
+</code></pre><ul>
+<li>fetch</li>
+</ul>
+<p>从远程获取文件（只能是文件）</p>
+<pre><code>单机
+ansible 10.1.88.72 -m fetch -a &quot;src=/var/log/messages dest=/tmp/&quot;
+组
+ansible all -m fetch -a &quot;src=/var/log/messages dest=/tmp/&quot;
+
+tree /tmp/
+/tmp/
+├── 10.1.88.72
+│   └── var
+│       └── log
+│           └── messages
+├── 10.1.88.73
+│   └── var
+│       └── log
+│           └── messages
+
+</code></pre><ul>
+<li>file</li>
+</ul>
+<p>设置远程节点的文件的文件属性</p>
+<pre><code>ansible all -m file -a 'path=/tmp/abc.txt state=touch mode=0666 owner=user1'   
+
+- state 参数说明 
+  - directory：如果目录不存在，创建目录
+  - file：即使文件不存在，也不会被创建
+  - link：创建软链接
+  - hard：创建硬链接
+  - touch：如果文件不存在，则会创建一个新的文件，如果文件或目录已存在，则更新其最后修改时间
+  - absent：删除目录、文件或者取消链接文件。相当于rm -rf
+
+</code></pre><ul>
+<li>cron</li>
+</ul>
+<p>计划任务</p>
+<ul>
+<li>yum</li>
+</ul>
+<p>程序包管理</p>
+<pre><code>ansible all -m yum -a 'name=ntp state=latest'
+
+- state 
+  - present|latest 安装
+  - absent 删除
+
+查看源　&amp; 验证
+ansible all -a 'yum info ntp'
+
+</code></pre><ul>
+<li>yum_repository</li>
+</ul>
+<p>yum源管理</p>
+<ul>
+<li>service</li>
+</ul>
+<p>服务管理</p>
+<pre><code>ansible all -m service -a 'name=ntpd enabled=true  state=started'
+
+- name 服务名
+- enabled 是否开机启动
+- state 
+  - started 
+  - reloaded
+  - restarted
+  - started
+  - stopped
+
+</code></pre><ul>
+<li>user</li>
+</ul>
+<p>用户管理</p>
+<pre><code>新建用户
+ansible all -m user -a &quot;name=user123 state=present&quot;
+删除用户并清除home 目录
+ansible all -m user -a &quot;name=user123 state=absent remove=yes&quot;
+
+- name 用户名
+- state 
+  - present 新建
+  - absent 删除
+</code></pre><ul>
+<li>group</li>
+</ul>
+<p>用户组管理</p>
+<pre><code>ansible all -m group -a &quot;name=group123 state=present&quot;
+
+- name 用户组
+- state
+  - present 创建
+  - absent 删除
+</code></pre><ul>
+<li>get_url</li>
+</ul>
+<p>从 HTTP, HTTPS, or FTP 下载文件</p>
+<pre><code>ansible all -m get_url -a &quot;url=https://resource.uucin.com/docker/docker-ce-18.03.1.ce-1.el7.centos.x86_64.rpm dest=/tmp mode=0666&quot;
+
+</code></pre><ul>
+<li>lineinfile</li>
+</ul>
+<p>替换一个文件中特定的行</p>
+<pre><code>ansible all -m lineinfile -a &quot;path=/etc/selinux/config regexp=^SELINUX= line=SELINUX=disabled&quot;
+
+</code></pre><ul>
+<li>replace</li>
+</ul>
+<p>替换一个文件中符合匹配的所有行</p>
+<ul>
+<li>setup</li>
+</ul>
+<p>获取系统属性变量</p>
+<ul>
+<li>sysctl</li>
+</ul>
+<pre><code>      ignoreerrors:          # Use this option to ignore errors about unknown keys.
+      name:                  # (required) The dot-separated path (aka `key') specifying the sysctl variable.
+      reload:                # If `yes', performs a `/sbin/sysctl -p' if the `sysctl_file' is updated. If `no', does not reload `sysctl' even if the `sysctl_file' is updated.
+      state:                 # Whether the entry should be present or absent in the sysctl file.
+      sysctl_file:           # Specifies the absolute path to `sysctl.conf', if not `/etc/sysctl.conf'.
+      sysctl_set:            # Verify token value with the sysctl command and set with -w if necessary
+      value:                 # Desired value of the sysctl key.
+</code></pre><ul>
+<li>blockinfile</li>
+</ul>
+<p>name: Insert/update/remove a text block surrounded by marker lines</p>
+<pre><code>  insertafter 修改的标记点 
+  insertbefore
+  path 目标文件
+  block 内容
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/ansible/ansible-overview/">Ansible Overview</a></li>
+        
+        <li><a href="/network-security/teleport/">Teleport 堡垒机</a></li>
+        
+        <li><a href="/linux/git-sparsecheckout/">Git 只下载指定文件或文件夹下的内容</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (8)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

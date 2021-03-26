@@ -1,36 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Let&#39;s Go</title>
-    <link>https://zhangeamon.top/tags.html</link>
-    <description>Recent content in Tags on Let&#39;s Go</description>
+    <title>Tags on 故乡的云☁️</title>
+    <link>https://zhangeamon.top/tags/</link>
+    <description>Recent content in Tags on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 26 Feb 2021 13:33:23 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>postgres</title>
-      <link>https://zhangeamon.top/tags/postgres.html</link>
+      <title>优化</title>
+      <link>https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/</link>
       <pubDate>Fri, 26 Feb 2021 13:33:23 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/tags/postgres.html</guid>
+      <guid>https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>性能优化</title>
-      <link>https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html</link>
-      <pubDate>Fri, 26 Feb 2021 13:33:23 +0800</pubDate>
+      <title>高可用</title>
+      <link>https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/</link>
+      <pubDate>Wed, 30 Jan 2019 10:14:55 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>golang</title>
-      <link>https://zhangeamon.top/tags/golang.html</link>
-      <pubDate>Wed, 18 Dec 2019 21:55:00 +0800</pubDate>
-      
-      <guid>https://zhangeamon.top/tags/golang.html</guid>
+      <guid>https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/</guid>
       <description></description>
     </item>
     

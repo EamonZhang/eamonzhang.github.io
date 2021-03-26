@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Postgresql指标查看&amp;stat统计信息 | 故乡的云☁️</title>
+    <meta property="og:title" content="Postgresql指标查看&amp;stat统计信息 - 故乡的云☁️">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-11-06T10:53:52&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-11-06T10:53:52&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Postgresql指标查看&amp;stat统计信息">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/stat/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        故乡的云☁️
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Postgresql指标查看&amp;stat统计信息</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月6日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <ul>
+<li>当前连接数</li>
+</ul>
+<pre><code>SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid();
+ count 
+-------
+     3
+(1 row)
+
+</code></pre><ul>
+<li>数据库占用空间</li>
+</ul>
+<pre><code>select pg_size_pretty(pg_database_size('postgres'));
+ pg_size_pretty 
+----------------
+ 14 MB
+(1 row)
+
+or
+
+\l+
+
+</code></pre><ul>
+<li>数据库表(不包括索引)或单条索引占用空间</li>
+</ul>
+<pre><code>select pg_size_pretty(pg_relation_size('t_name'));
+ pg_size_pretty 
+----------------
+ 24 kB
+(1 行记录)
+
+or
+
+\d+
+</code></pre><ul>
+<li>表中所有索引占有的空间</li>
+</ul>
+<pre><code>select pg_size_pretty(pg_indexes_size('t_name'));
+ pg_size_pretty 
+----------------
+ 280 kB
+(1 行记录)
+</code></pre><ul>
+<li>表和索引占用总空间</li>
+</ul>
+<pre><code>select pg_size_pretty(pg_total_relation_size('t_name'));
+ pg_size_pretty
+----------------
+ 380 kB
+(1 行记录)
+</code></pre><ul>
+<li>查看一条数据在数据库占用的空间</li>
+</ul>
+<pre><code>select pg_column_size('Let us go !!!');
+ pg_column_size 
+----------------
+             14
+(1 行记录)
+
+</code></pre><ul>
+<li>查出所有表（包含索引）并排序</li>
+</ul>
+<pre><code>SELECT table_schema || '.' || table_name AS table_full_name, pg_size_pretty(pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;')) AS size
+FROM information_schema.tables
+ORDER BY
+pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;') DESC limit 10;
+</code></pre><ul>
+<li>查出表大小按大小排序并分离data与index</li>
+</ul>
+<pre><code>SELECT
+table_name,
+pg_size_pretty(table_size) AS table_size,
+pg_size_pretty(indexes_size) AS indexes_size,
+pg_size_pretty(total_size) AS total_size
+FROM (
+SELECT
+table_name,
+pg_table_size(table_name) AS table_size,
+pg_indexes_size(table_name) AS indexes_size,
+pg_total_relation_size(table_name) AS total_size
+FROM (
+SELECT ('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;') AS table_name
+FROM information_schema.tables
+) AS all_tables
+ORDER BY total_size DESC
+) AS pretty_sizes;
+</code></pre><ul>
+<li>其他</li>
+</ul>
+<pre><code>pg_stat_database
+pg_stat_all_tables
+pg_stat_sys_tables
+pg_stat_user_tables
+pg_stat_all_indexes
+pg_stat_sys_indexes
+pg_stat_user_indexes
+</code></pre><hr>
+<pre><code>postgres=# select * from pg_stat_database where datname='postgres';
+-[ RECORD 1 ]-----+------------------------------
+datid             | 13510                 #数据库oid
+datname           | postgres              #数据库名
+numbackends       | 98                    #访问当前数据库连接数量
+xact_commit       | 14291309              #该数据库事务提交总量
+xact_rollback     | 0                     #该数据库事务回滚总量
+blks_read         | 536888                #总磁盘物理读的块数，这里read也可能是从page cache读取，如果这里很高需要结合blk_read_time看是否真的存在很多实际从磁盘读取的情况。
+blks_hit          | 261717850             #在shared_buffer命中的块数
+tup_returned      | 58521416              #对于表来说是全表扫描的行数，对于索引是通过索引方法返回的索引行数，如果这个值数量明显大于tup_fetched，说明当前数据库存在大量全表扫描的情况。
+tup_fetched       | 57193639              #指通过索引返回的行数
+tup_inserted      | 14293061              #插入的行数
+tup_updated       | 42868451              #更新的行数
+tup_deleted       | 98                    #删除的行数
+conflicts         | 0                     #与恢复冲突取消的查询次数(只会在备库上发生)
+temp_files        | 0                     #产生临时文件的数量，如果这个值很高说明work_mem需要调大
+temp_bytes        | 0                     #临时文件的大小
+deadlocks         | 0                     #死锁的数量，如果这个值很大说明业务逻辑有问题
+blk_read_time     | 0                     #数据库中花费在读取文件的时间，这个值较高说明内存较小，需要频繁的从磁盘中读入数据文件
+blk_write_time    | 0                     #数据库中花费在写数据文件的时间，pg中脏页一般都写入page cache，如果这个值较高，说明page cache较小，操作系统的page cache需要更积极的写入。
+stats_reset       | 2019-04-09 14:06:53.416473+08 #统计信息重置的时间
+</code></pre><p>通过pg_stat_database我们就可以大概了解数据库的历史情况，比如看到tup_returned值远大于tup_fetched，说明数据库历史执行的sql很多都是全表扫描，说明存在很多没有走索引的sql，这时候可以结合pg_stat_statments来查找慢sql，也可以通过pg_stat_user_tables找到全表扫描次数和行数最多的表。通过看到tup_updated很高说明数据库有很频繁的更新，这个时候就需要关注一下vacuum相关的指标和长事务，如果没有及时进行垃圾回收会造成数据膨胀的比较厉害。如果temp_files较高的话说明存在很多的排序，hash，或者聚合这种操作，可以通过增大work_mem减少临时文件的产生，并且同时这些操作的性能也会有较大的提升。</p>
+<p><a href="https://yq.aliyun.com/articles/697692?spm=5176.10695662.1996646101.searchclickresult.28b6528caEAf7X">https://yq.aliyun.com/articles/697692?spm=5176.10695662.1996646101.searchclickresult.28b6528caEAf7X</a></p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/middleware/keepalived01/">Keepalived 问题集</a></li>
+        
+        <li><a href="/docker/network01/">Docker 本地网络</a></li>
+        
+        <li><a href="/docker/cgroup-namespaces/">Cgroup Namespaces</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (8)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

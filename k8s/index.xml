@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>K8s on Let&#39;s Go</title>
-    <link>https://zhangeamon.top/k8s.html</link>
-    <description>Recent content in K8s on Let&#39;s Go</description>
+    <title>K8s on 故乡的云☁️</title>
+    <link>https://zhangeamon.top/k8s/</link>
+    <description>Recent content in K8s on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 07 Dec 2018 10:48:00 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/k8s/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>集群部署安装</title>
-      <link>https://zhangeamon.top/k8s/install.html</link>
+      <link>https://zhangeamon.top/k8s/install/</link>
       <pubDate>Fri, 07 Dec 2018 10:48:00 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/k8s/install.html</guid>
+      <guid>https://zhangeamon.top/k8s/install/</guid>
       <description>kubeadm kubeadm 可当做体验版，证书可用时间一年 Kubespray Kubespray 是 Kubernetes incubator 中的项目，目标是提供 Production Ready Kubernetes 部署方案，该项目基础是通过 Ansible Playbook 来定义系统与 Kubernetes 集群部署的任务，具有以下几个特点： 可以部署在 AWS, GCE, Azure, OpenStack 以及裸机上. 部署 High Available Kubernetes 集群. 可组合性 (Composable)，可自行选择 Network Plugin (flannel, calico, canal, weave) 来部署. 多种 Linux distributions(CoreOS, Debian Jessie, Ubuntu 16.04, CentOS/RHEL7). kops kops</description>
     </item>
     
     <item>
       <title>Kubernetes 安装　- V1.10</title>
-      <link>https://zhangeamon.top/k8s/v1.10.html</link>
+      <link>https://zhangeamon.top/k8s/v1.10/</link>
       <pubDate>Thu, 18 Oct 2018 09:12:56 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/k8s/v1.10.html</guid>
+      <guid>https://zhangeamon.top/k8s/v1.10/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kubernetes 安装　- V1.11</title>
-      <link>https://zhangeamon.top/k8s/v1.11.html</link>
+      <link>https://zhangeamon.top/k8s/v1.11/</link>
       <pubDate>Thu, 18 Oct 2018 09:12:56 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/k8s/v1.11.html</guid>
+      <guid>https://zhangeamon.top/k8s/v1.11/</guid>
       <description></description>
     </item>
     

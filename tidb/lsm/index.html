@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>LSM Overview | 故乡的云☁️</title>
+    <meta property="og:title" content="LSM Overview - 故乡的云☁️">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-11-26T13:40:19&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-11-26T13:40:19&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="LSM Overview">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/tidb/lsm/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        故乡的云☁️
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">LSM Overview</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月26日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="介绍">介绍</h4>
+<p>LSM-Tree，全称为 log-structured merge-tree，是为了满足日益增长的数据量所带来的高效写性能的需求而提出的设计。考虑到磁盘随机写和顺序写上千倍的性能差距，传统的Btree 结构设计采取的分散的 update-in-place 策略在数据量庞大、写缓存作用有限的情况下，存在大批量的随机写操作，使得写性能完全满足不了新数据的业务需求。为了提高写速率，LSM-Tree 采取的简单高效的日志结构的设计，将所有写操作的结果先缓存在内存并按次序分批写入硬盘，在底层管理多个版本的数据内容。理所当然地，不管是在点查还是范围查询的场景下，简单的日志结构会使得读的性能不高。因此为了提高读的性能，适当地保持系统内一定的有序性，引入排序开销是有必要的，即采取 LSM 里的 Merge 操作。此外在日志的基础上也可以添加额外的索引结构，例如 Bloomfilter 或者块索引设计。缓存友好的索引结构能够有效降低 IO 次数，快速定位到查询的数据具体的位置。</p>
+<p>在 LSM 结构设计当中，数据按写入顺序拆分成多个批次的数据集合，包括了内存中的Memtable 和硬盘上的 SSTable。具体地，数据插入到 Memtable 当中，在 MemTable 大小超过一定阈值后进行 Flush 操作，变成不可修改的、内部有序的 SSTable。SSTable 在后台根据一定的层次结构进行组织。如下图是一个典型的多个 Level 的层次设计，Level-0 对应多个 Memtable，Level-1 对应 Flush 到硬盘上的多个相互之间无序的 SSTable，Level-2 对应一个有序的大 SSTable。</p>
+<p>
+        <img class="mx-auto" alt="" src="images/lsm01.png" />   
+    </p>
+<p>在适当的条件下后台会触发 Merge 操作，合并多个旧 SSTable 成新的 SSTable。合并的目的是为了减少文件数量，提高读的性能，此外也能够进行垃圾回收，减少多版本数据占用的空间大小。值得注意的是，后台 Merge 可能是一个特别影响前台读、写性能的操作。若系统对读要求越高，即对有序性要求越严格，往往需要更加积极的 Merge 操作，也往往会导致更剧烈的写放大，对系统整体而言累积下来的负担是更大的。</p>
+<p>在LSM结构设计中所有的写操作都将是顺序写，换来的代价：</p>
+<p>读放大：查询一个 Key 值所对应的 Value 值，可能需要遍历多个 SSTable 文件，对应了复数次随机 IO。</p>
+<p>空间放大：多版本数据在合并之前会占用更多的存储空间。</p>
+<p>写放大：在系统稳定后硬盘写数据的累积值 / 数据第一次写入硬盘的大小，该比值在LevelDB 或 RocksDB 中可达两位数。</p>
+<p>总结来说，LSM结构设计能够提供非常好的写性能，在读方面需要结合业务特性，通过合理的层次结构设计以及索引结构控制负面影响，能够使得读性能达到业务能够接受的范畴。</p>
+<p>目前随着固态硬盘的普及，不同于传统Btree结构在大量随机写情况下可能导致FTL层繁重的垃圾回收负载，LSM 的日志结构设计对于固态硬盘天然的友好性以及较为简单的设计模式，使其受到了很多存储引擎开发者的青睐。然而后台排序导致的写放大对于寿命有限的固态盘来说，是 LSM 中备受关注的痛点，近年来也有不少关于 LSM 在 SSD 上深度优化的相关研究。</p>
+<h4 id="lsm-in-rocksdb">LSM in RocksDB</h4>
+<p>RocksDB 是 Facebook 公司基于 LevelDB 开发的一款使用日志结构的开源嵌入式数据库引擎。在 LevelDB 基础上，RocksDB 在硬件上针对多核 CPU 和 SSD 设备在底层做了优化，在软件上在 Single-Writer 的锁处理、LSM 组织结构、DB锁的处理等方面进行了一系列改进，同时提供了更加丰富的功能特性，例如数据压缩、多线程 Compaction、前缀BloomFilter、列簇等。</p>
+<p>RocksDB 默认使用了 kCompactionStyleLevel 类型的 Compaction 形式，有利于提高 Compaction 的并行度。文件组织形式如下图，在硬盘上管理 L0 到 Ln 层的 SSTable 文件。除开 L0 层，其他层的每一层，层内所有 SSTable 文件相互之间 Key 值范围是不重叠的，整体在逻辑上可以形成一个有序的 KV序列。在这种层次结构设计中，Memtable 会首先 Flush 到 L0 层成为不可修改的 SSTable 文件，当 L0 层文件数量超过了某个阈值将会触发 L0 到 L1 层的 Compaction，同理 Ln 层（n&gt;0）的文件内容足够多的时候也将 Compaction 到 Ln+1 层，数据不断下沉直到最后一层。</p>
+<p>
+        <img class="mx-auto" alt="" src="images/lsm02.png" />   
+    </p>
+<h4 id="lsm构成元素">LSM构成元素</h4>
+<p>具体到 RocksDB 中的 LSM，有3个比较重要的构成元素：</p>
+<p>版本管理</p>
+<hr>
+<ul>
+<li>
+<p>Version：对应了 RocksDB 在某个时刻点下组成层次结构的一组 SSTable 文件的所有元信息。Version 之间组成链表，通过 VersionEdit 记录相邻节点之间文件变动的情况。</p>
+</li>
+<li>
+<p>VersionSet：维护所有列簇的 Version 链表，持久化到.mainfest 文件。此外还提供了 LevelIterator 创建、Compaction 触发相关的接口。</p>
+</li>
+<li>
+<p>SuperVersion：由当前 Memtable、immutable Memtable 列表和 Version 构成，描述一个列簇在某个时刻点下的所有版本信息。</p>
+</li>
+</ul>
+<p>Memtable</p>
+<hr>
+<p>RocksDB 存在一个 Active 状态的 Memtable 和多个 Immutable 状态 Memtable，默认的数据结构类型为 Skiplist 类型。Skiplist 能够提供对数级的插入/删除/查询性能，在并发上使用 CAS 实现了无锁操作，适合高并发的混合负载，性能表现优异。</p>
+<p>SSTable</p>
+<hr>
+<p>全称为 Sorted-String-Table，RocksDB 默认使用 BlockBasedTable 类型的 SSTable，对应由一系列存储块构成的物理文件。如下图，存储块根据数据内容可以分为数据块、BloomFilter 数据块、Table 属性块、范围删除块、索引块、元索引块等，额外的 Footer 结构是固定模式的、能够帮助解析文件结构的元信息。</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI2MjQ5NTc1OQ==&amp;mid=2247484186&amp;idx=1&amp;sn=1f74da3d52965d40da4e23c0b7494cfc&amp;chksm=ea4b087add3c816c9a4db093abb1937bc10e1ac315eac04cd35c86f289dc347236ea570fa5a4&amp;scene=0&amp;pass_ticket=MqqsDfWQLOdOLkVQV1nxXZXj%2BnIp1FZZN7MTTFUGDf5s7nhDnBNPQ4NxjXb%2FFbM0#rd">https://mp.weixin.qq.com/s?__biz=MzI2MjQ5NTc1OQ==&amp;mid=2247484186&amp;idx=1&amp;sn=1f74da3d52965d40da4e23c0b7494cfc&amp;chksm=ea4b087add3c816c9a4db093abb1937bc10e1ac315eac04cd35c86f289dc347236ea570fa5a4&amp;scene=0&amp;pass_ticket=MqqsDfWQLOdOLkVQV1nxXZXj%2BnIp1FZZN7MTTFUGDf5s7nhDnBNPQ4NxjXb%2FFbM0#rd</a></p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/middleware/haproxy/">Haproxy 算法</a></li>
+        
+        <li><a href="/monitor/prometheus-altermanager/">Promethues Altermanager 报警</a></li>
+        
+        <li><a href="/monitor/prometheus-concepts/">Promethues 基本概念</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (8)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

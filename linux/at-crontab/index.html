@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>定时任务 | 故乡的云☁️</title>
+    <meta property="og:title" content="定时任务 - 故乡的云☁️">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2019-01-09T10:11:10&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2019-01-09T10:11:10&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="定时任务">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/linux/at-crontab/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        故乡的云☁️
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">定时任务</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月9日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="linux-系统中的定时任务">Linux 系统中的定时任务</h4>
+<ul>
+<li>重复执行</li>
+<li>一次执行</li>
+</ul>
+<h4 id="重复执行">重复执行</h4>
+<p>详见 /etc/crontab 配置</p>
+<p>anacron 用于以天为单位的频率运行命令。它的工作与 cron 稍有不同，它假设机器不会一直开机。</p>
+<p>cron 也适合在那些不会 24X7 运行如笔记本以及桌面电脑的机器上运行每日、每周以及每月的计划任务（LCTT 译注：不适合按小时、分钟执行任务）。</p>
+<p>假设你有一个计划任务（比如备份脚本）要使用 cron 在每天半夜运行，也许你以及睡着，那时你的桌面/笔记本电脑已经关机。你的备份脚本就不会被运行。</p>
+<p>然而，如果你使用 anacron，你可以确保在你下次开启桌面/笔记本电脑的时候，备份脚本会被执行。</p>
+<h4 id="一次执行">一次执行</h4>
+<p>我们使用at 命令来管理Linux中单次执行任务</p>
+<p>安装与启动</p>
+<pre><code>yum install at -y
+systemctl start atd  
+</code></pre><p>常用命令及参数讲解</p>
+<ul>
+<li>at和batch读取标准输入或一个指定文件，它们将会在稍后被执行。</li>
+<li>at在指定的时间执行命令。</li>
+<li>atq列出用户待处理作业（jobs），如果是超级用户，所有用户的（待处理）作业都将被列出。输出格式：作业号、日期、小时、队列和用户名。</li>
+<li>atrm删除作业，由作业号标识。</li>
+</ul>
+<pre><code>-t time run the job at time, given in the format [[CC]YY]MMDDhhmm[.ss]
+-c cats the jobs listed on the command line to standard output.
+</code></pre><h4 id="例子说明">例子说明</h4>
+<p>新建一个定期任务 ctrl + d 退出</p>
+<pre><code># at -t 201901091123.00
+at&gt; touch /home/11.23.at     
+at&gt; &lt;EOT&gt;
+job 9 at Wed Jan  9 11:23:00 2019
+# at -t 201901091124.00
+at&gt; touch /home/11.24.at 
+at&gt; &lt;EOT&gt;
+job 10 at Wed Jan  9 11:24:00 2019
+</code></pre><p>查看任务</p>
+<pre><code># atq
+9	Wed Jan  9 11:23:00 2019 a root
+10	Wed Jan  9 11:24:00 2019 a root
+</code></pre><p>根据任务id 查看任务具体内容</p>
+<pre><code># at -c 9
+</code></pre><p>删除任务</p>
+<pre><code># atrm 9 
+</code></pre><h5 id="扩展内容">扩展内容</h5>
+<p>centos 7</p>
+<pre><code># ll -a /var/spool/at/
+总用量 12
+drwx------  3 root root   75 1月   9 10:27 .
+drwxr-xr-x. 9 root root   97 1月   9 09:49 ..
+-rwx------  1 root root 3081 1月   9 10:27 a0000901896c6b
+-rwx------  1 root root 3082 1月   9 10:28 a0000a01896c6c
+-rw-------  1 root root    6 1月   9 10:27 .SEQ
+drwx------  2 root root    6 1月   9 10:23 spool
+</code></pre><p>.SEQ 序列</p>
+<p>a0000901896c6b 任务内容，at -c id 输出的内容</p>
+<p>可以直接执行对应的脚本文件进行测试</p>
+<pre><code>sh a0000901896c6b
+</code></pre><p>ubuntu</p>
+<pre><code>/var/spool/cron/atjobs
+</code></pre><h5 id="执行日志">执行日志</h5>
+<pre><code>cat /var/log/messages | grep atd
+Jan  9 10:00:36 kvm74 atd[27978]: Starting job 1 (a0000101896c10) for user 'root' (0)
+Jan  9 10:04:00 kvm74 atd[29511]: Starting job 2 (a0000201896c1c) for user 'root' (0)
+Jan  9 10:07:00 kvm74 atd[31902]: Starting job 4 (a0000401896c1f) for user 'root' (0)
+Jan  9 10:18:28 kvm74 atd[6985]: Starting job 5 (a000050181670b) for user 'root' (0)
+Jan  9 10:20:28 kvm74 atd[8173]: Starting job 6 (a000060181670e) for user 'root' (0)
+Jan  9 10:21:33 kvm74 atd[9617]: Starting job 7 (a000070181670f) for user 'root' (0)
+Jan  9 10:23:00 kvm74 atd[10016]: Starting job 8 (a0000801896c2f) for user 'root' (0)
+Jan  9 11:23:00 kvm74 atd[13963]: Starting job 9 (a0000901896c6b) for user 'root' (0)
+Jan  9 11:24:00 kvm74 atd[14248]: Starting job 10 (a0000a01896c6c) for user 'root' (0)
+Jan 10 08:57:00 kvm74 atd[13667]: Starting job 11 (a0000b01897179) for user 'root' (0)
+</code></pre><h4 id="错误总汇">错误总汇</h4>
+<pre><code>cat /var/log/syslog* | grep atd
+Jan 11 08:29:00 atd[14999]: Exec failed for mail command: No such file or directory
+</code></pre><p><a href="https://ubuntuforums.org/showthread.php?t=1777706">https://ubuntuforums.org/showthread.php?t=1777706</a></p>
+<p>上面的问题在系统环境中没有出现，在执行docker时出现</p>
+<p>如执行命令为</p>
+<pre><code>docker exec -it docker-name date
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/nospace-device/">no space left on device</a></li>
+        
+        <li><a href="/linux/meminfo/">meminfo Linux 内存信息</a></li>
+        
+        <li><a href="/postgres/pg_trgm/">pg_trgm的gist和gin索引加速字符匹配查询</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (8)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

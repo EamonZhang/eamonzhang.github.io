@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>redis on 故乡的云☁️</title>
+    <link>https://zhangeamon.top/categories/redis/</link>
+    <description>Recent content in redis on 故乡的云☁️</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 09 Mar 2021 17:23:59 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis 应用场景</title>
+      <link>https://zhangeamon.top/redis/redis-scence/</link>
+      <pubDate>Tue, 09 Mar 2021 17:23:59 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/redis/redis-scence/</guid>
+      <description>应用场景 作为一名匠人，当熟悉手里各样工具的特点。用起来才能得心应手。什么时候使用锯子，什么时候当用斧子。 同理熟知产品的技术特性，方可灵活运用。 在面对不同的业务需求时才能提供具有针对性的解决方案。 不求十八般兵器样样精通，但求不置斧锯于一旁只顾轮打锤。 Redis 都能干点啥 缓存 消息队列 循环列表</description>
+    </item>
+    
+  </channel>
+</rss>
