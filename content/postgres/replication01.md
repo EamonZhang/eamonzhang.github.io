@@ -1,6 +1,8 @@
 ---
 title: "主从流复制"
 date: 2018-10-17T14:55:38+08:00
+categories: ["postgres"]
+toc : true
 draft: false
 ---
 
@@ -8,7 +10,7 @@ draft: false
 
 [replication](https://www.postgresql.org/docs/9.3/warm-standby.html#STREAMING-REPLICATION)
 
-#### 主库配置
+## 主库配置
 
 ```
 根据实际情况分配流复制权限
@@ -28,11 +30,11 @@ hot_standby = on # 正常在从库配置，如果在主库配置完毕，因为�
 wal_log_hints = on
 ```
 
-#### 从库配置
+## 从库配置
 
-1 [数据库安装](postgres/install01)
+## [数据库安装](/postgres/install01)
 
-2 从主库复制数据
+## 从主库复制数据
 ```
 pg_basebackup -h 10.2.0.14 -U postgres -F p -P -R -D /var/lib/pgsql/10/data/ --checkpoint=fast -l postgresback20181219
 ```
@@ -99,7 +101,7 @@ primary_conninfo = 'user=postgres host=10.2.0.14 port=5432 sslmode=disable sslco
 
 ```
 
-3 从库配置  
+## 从库配置  
 
 启动从库
 ```
@@ -115,7 +117,7 @@ trigger_file = '/home/postgres.trigger' #从库变主库时应用
 ```
 
 
-4 验证
+## 验证
 
 ```
 主库创建一个数据库
@@ -202,8 +204,7 @@ pg_is_wal_replay_paused | f
 
 ```
 
-
-5 wal 日志保持时效
+## wal 日志保持时效
 
 PostgreSQL 9.4 新增的一个特性, replication slot, 
 -  可以被流复制的sender节点用于自动识别它xlog中的数据在下面的standby中是否还需要(例如, standby断开连接后, 还未接收到的XLOG), 如果还需要的话, 那么这些XLOG将不会被删除.
@@ -237,7 +238,7 @@ primary_slot_name = 'node_a_slot'
 - 在没有replication slot这个特性以前, 有两种方法来保持standby需要的xlog, wal keep或者归档, 因为主节点不知道standby到底需要哪些XLOG信息, 配置一般需要较大的余量. slot可以解决这个浪费sender端存储wal空间的问题, 因为sender可以做到保留更精准的wal信息.
 - 配合standby节点的feedback使用, 可以避免vacuum带来的冲突.
 
-6 同步复制VS异步复制
+## 同步复制VS异步复制
 
 PostgreSql的流复制是异步的，缺点是Standby上的数据落后于主库上的数据，如果使用Hot Standby做读写分离，就会存在数据一致性的问题。PostgreSql9.1版本后提供了同步流复制的架构。同步复制的要求在数据写入Standby数据库后，事务commit才返回。
 存在问题：当Standby数据出现问题时，会导致主库被hang住。
@@ -266,7 +267,7 @@ psql -U postgres
 postgres=# select sync_state from pg_stat_replication ;
 ```
 
-7 从变主
+## 从变主
 
 ##### 简单有效的方式
 
@@ -287,9 +288,9 @@ touch /home/postgres.trigger
 pg_ctl promte -D $PGDATA
 server promoting
 
-8 [pg_rewind](https://www.cnblogs.com/zhangeamon/p/7602269.html)
+## [pg_rewind](/postgres/pg_rewind/)
 
-9 从库有查询业务时注意事项
+## 从库有查询业务时注意事项
 
 ```
  1. 如果备库有LONG query，同时需要实时性，可以设置hot_standby_feedback=on，同时建议将主库的autovacuum_naptime，autovacuum_vacuum_scale_factor设置为较大值（例如60秒，0.1），
@@ -297,15 +298,15 @@ server promoting
  2. 如果备库有LONG QUERY，并且没有很高的实时性要求，建议设置设置hot_standby_feedback=off, 同时设置较大的max_standby_archive_delay， max_standby_streaming_delay。
 ```
 
-10 扩展阅读  
+## 扩展阅读  
  
  - PostgreSQL 10加入了quorum based的同步复制功能，用户可以配置若干standby节点，并配置需要将WAL发送多少份才返回给客户端事务结束的消息。
 
  - [性能](https://m.aliyun.com/yunqi/articles/73540)   
 
-11 冲突及解决
+## 冲突及解决
 
-###### 冲突
+## 冲突
 ```
 FATAL:  terminating connection due to conflict with recovery  
 DETAIL:  User query might have needed to see row versions that must be removed.  

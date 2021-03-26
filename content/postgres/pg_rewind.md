@@ -1,13 +1,15 @@
 ---
 title: "PG主从切换 pg_rewind"
 date: 2019-01-30T10:16:17+08:00
+categories: ["postgres"]
+#toc: true
 draft: false
 ---
 pg_rewind requires that the target server either has the wal_log_hints option enabled in postgresql.conf or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. full_page_writes must also be set to on, but is enabled by default.
 
 wal_log_hints
 
-##### 使用场景 
+## 使用场景 
 
 在数据库主从结构中，从变成主易。但是由主变为从却需要一番周折。  
 如果是数据量少时重新使用pg_backup拉一份从即可，但是如果数据量大时，这个过程非常的耗时耗能。对线上业务也会有影响。      
@@ -15,13 +17,13 @@ wal_log_hints
 有没有什么方式可以利用已有的数据，充分利用已有的数据呢？  
 pg_rewind登场 告别一下回到解放前。
 
-##### 基本原理
+## 基本原理
 
 数据库每次的主从切换时，timeLine会增加1。 新老数据库在不同的时间线上运行。
 使用pg_rewind 将数据拉回到时间线(timeLine)产生分裂的那个点上。重新选择时间线，重放新时间线上的wal日志，使两个数据库重新回到一个时间线，并且数据一致。  
 
 
-##### 开始实验
+## 开始实验
 
 背景: 
 
@@ -35,7 +37,7 @@ pg_rewind登场 告别一下回到解放前。
 数据库主从兑换， 主降为从时使用pg_rewind校对时间线
 
 
-##### 实际操作
+## 实际操作
 
 注意事项 : 
 
@@ -100,12 +102,12 @@ primary_conninfo = 'user=postgres passfile=''/root/.pgpass'' host=10.1.88.72 por
 4 启动数据库，并验证
 
 
-##### 备注
+## 备注
 
 以前操作时，主从切换后，主从状态是对的，但是向主库写数据，从库没有同步。（原因不详）    
 今天按照上面的操作，测试的多次都成功了！！！
 
-##### 扩展
+## 扩展
 
 查看数据库timeline 等信息
 
@@ -114,6 +116,6 @@ primary_conninfo = 'user=postgres passfile=''/root/.pgpass'' host=10.1.88.72 por
 /usr/pgsql-10/bin/pg_controldata .
 ```
 
-##### 更多
+## 更多
 
 https://github.com/digoal/blog/blob/master/201901/20190128_02.md

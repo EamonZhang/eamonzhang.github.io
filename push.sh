@@ -21,7 +21,7 @@ git branch -M main
 
 echo -e "\033[0;32mPush markdown code to GitHub...\033[0m"
 
-git push -u origin master
+git push -u origin main
 
 # Come Back up to the Project Root
 

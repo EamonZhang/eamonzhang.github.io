@@ -13,7 +13,7 @@ cd ..
 
 echo -e "\033[0;32mBuild pages to public folder...\033[0m"
 
-hugo -t simple # if using a theme, replace with `hugo -t <YOURTHEME>`
+hugo -t maupassant-hugo # if using a theme, replace with `hugo -t <YOURTHEME>`
 
 # Go To Public folder
 cd public
