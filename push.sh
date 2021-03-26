@@ -15,9 +15,12 @@ if [ $# -eq 1 ]
 fi
 git commit -m "$msg"
 
+git branch -M main
 # Push source and build repos.
 
+
 echo -e "\033[0;32mPush markdown code to GitHub...\033[0m"
+
 git push -u origin master
 
 # Come Back up to the Project Root
