@@ -28,8 +28,6 @@ toc: true
 - [锁等待](/postgres/lock_wait)
 - [cluster 聚族表](/postgres/cluster)
 - [咨询锁 adlock](/postgres/adlock)
-- [数据库视图之 pg_stat_activity](/postgres/pg_stat_activity)
-- 数据库试图之 pg_stat_bgwriter
 - [数据库年龄](/postgres/pgage)
 - [方法和函数](/postgres/functionsandoperators)
 - [高级SQL](/postgres/high_level_sql)
@@ -64,6 +62,11 @@ toc: true
 - [创建只读用户](/postgres/readonly)
 - [找回supper user 权限](/postgres/reback_supper_user)
 - [分区表](/postgres/partition)
+
+## 常用视图
+
+- [数据库视图之 pg_stat_activity](/postgres/view_pg_stat_activity)
+- 数据库试图之 pg_stat_bgwriter
 
 ## 备份恢复
 
