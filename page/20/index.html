@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/ansible/ansible-playbooks/" title="Ansible Playbooks">Ansible Playbooks</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月25日
+        </date>
+        
+        <div class="post-content">
+            Playbook核心元素 hosts 一个或多个组或主机的 patterns,以逗号为分隔符 。 - hosts: webservices remote_user: root Tasks 任务集 tasks: - name: install httpd yum: name=httpd - name: start httpd service: name=httpd state=started Handlers 和 notity 由特定条件触发的操作，满足条件方才执行，否则不执行。 Handlers也是task列表，这些task与前述的task并没有本质上的不同,用于当关注的资……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-playbooks/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/ansible/ansible-modules/" title="Ansible Modules">Ansible Modules</a>
             </h1>
         </header>
@@ -232,22 +248,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/wheel/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cmd-gpasswd/" title="gpasswd 命令">gpasswd 命令</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月18日
-        </date>
-        
-        <div class="post-content">
-            gpasswd 命令详解 gpasswd命令是Linux下工作组文件/etc/group和/etc/gshadow的管理工具，用于指定要管理的工作组。 选项详解： -a : 添加用户到组 -d : 从组删除用户 -A：指定管理员 -M：指定组成员和-A的用途差不多； -r：删除密码； -R：限制用户登入组，只有组中的成员……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-gpasswd/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -364,6 +364,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/pcie/" title="SSD IO request Time Out">SSD IO request Time Out</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
@@ -399,10 +403,6 @@
         <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -413,7 +413,9 @@
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     

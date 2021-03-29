@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/mdadm/" title="mdadm 软Raid 管理">mdadm 软Raid 管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月3日
+        </date>
+        
+        <div class="post-content">
+            背景 mdadm是linux下用于创建和管理软件RAID的命令，是一个模式化命令。但由于现在服务器一般都带有RAID阵列卡，并且RAID阵列卡也很廉价，且由于软件RAID的自身缺陷（不能用作启动分区、使用CPU实现，降低CPU利用率），因此在生产环境下并不适用。但为了学习和了解RA……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/mdadm/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/init-centos/" title="Centos 初始化配置">Centos 初始化配置</a>
             </h1>
         </header>
@@ -239,22 +255,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/monitor/prometheus-concepts/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/tidb/sql-optimize01/" title="Sql 优化">Sql 优化</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月21日
-        </date>
-        
-        <div class="post-content">
-            一条sql的执行过程 将 SQL 解析成抽象语法树(AST)，将 AST 变换到内部表示(IR)。然后优化器的输入就是 IR，它将生成最优的查询计划（Plan），然后会变成具体的执行器（Executor），里面有许多的算。 优化的阶段为IR 到生成 Plan 的过程，包括逻辑优化和物理优化 逻辑优化 逻辑优化主要是基……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/tidb/sql-optimize01/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -391,6 +391,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/pcie/" title="SSD IO request Time Out">SSD IO request Time Out</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
@@ -426,10 +430,6 @@
         <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -440,7 +440,9 @@
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     

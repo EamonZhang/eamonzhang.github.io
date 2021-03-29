@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月8日
+        </date>
+        
+        <div class="post-content">
+            git目录下object文件过大清理 一、删除仓库上的项目，重新提交代码。 二、彻底清除历史记录 查询大文件的文件名 git rev-list --objects --all | grep &quot;$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')&quot; 删除历史记录 git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch 你的大文件名' --prune-empty --tag-name-filter cat -- --all rm -rf .git/refs/original/ git reflog expire --expire=now --all git fsck --full --unreachable git repack -A -d 本地空间变小 git gc --aggressive --prune=now 推送远端 ，本地远端空间……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/git-objects-clean/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgresql/" title="Postgres  数据库">Postgres  数据库</a>
             </h1>
         </header>
@@ -246,22 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/auto_vacuum_trigger/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/partition/" title="分区表">分区表</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月31日
-        </date>
-        
-        <div class="post-content">
-            分区表 数据库分区是一种将数据做物理分片的数据库设计技术，虽然分区技术可以有多种实现方法， 但其主要目的是为了在特定的SQL操作中减少数据读取的总量以缩减响应时间。 分区方式 水平分区 订单按时间维度 垂直分区 范式规范 ： 订单数据 （客户表，商品表，订单表） 优点 性能 ，范围或点查询。 管理 归档，删除……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/partition/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -377,6 +377,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/pcie/" title="SSD IO request Time Out">SSD IO request Time Out</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
@@ -412,10 +416,6 @@
         <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -426,7 +426,9 @@
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     
