@@ -93,6 +93,42 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/hdparm/" title="hdparm 查看硬盘型号">hdparm 查看硬盘型号</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月19日
+        </date>
+        
+        <div class="post-content">
+            安装工具 yum install hdparm 查看 -i参数是在引导驱动器时获得的识别信息，这个信息有时候不完整也不一 定准确 hdparm -i /dev/sdb /dev/sdb: Model=INTEL SSDSC2KW512G8, FwRev=LHF002C, SerialNo=PHLA75210153512DGN Config={ Fixed } RawCHS=16383/16/63, TrkSize=0, SectSize=0, ECCbytes=0 BuffType=unknown, BuffSize=unknown, MaxMultSect=16, MultSect=off CurCHS=16383/16/63, CurSects=16514064, LBA=yes, LBAsects=1000215216 IORDY=on/off, tPIO={min:120,w/IORDY:120}, tDMA={min:120,rec:120} PIO modes: pio0 pio3 pio4 DMA modes: mdma0 mdma1 mdma2 UDMA modes: udma0 udma1 udma2 udma3 udma4 udma5 *udma6 AdvancedPM=yes: unknown setting WriteCache=enabled Drive conforms to: unknown: ATA/ATAPI-2,3,4,5,6,7 * signifies the current active mode -I参数是直接从驱动器获取识别信息, 并以原始的,未经过修改和更正的形式……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/hdparm/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/sysstat/" title="Linux 系统性能检测">Linux 系统性能检测</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月6日
+        </date>
+        
+        <div class="post-content">
+            整体篇 安装 yum install sysstat -y top htop atop vmstat -wt 1 dstat 内存篇 由于Linux 内存的占用属于饥饿式，所以看到的结果只能作为参考 cat /proc/meminfo 结果具体含义 I/O 篇 整体io情况 iostat -dmx 1 Linux 3.10.0-862.14.4.el7.x86_64 (rjyd) 2018年12月06日 _x86_64_ (40 CPU) Device: rrqm/s wrqm/s r/s w/s rMB/s wMB/s avgrq-sz avgqu-sz await r_await w_await svctm %util sda 0.00 0.05 0.06 0.11 0.00 0.00 53.87 0.00 1.35 0.60 1.78 0.23 0.00 sdb 0.00 0.02 0.08 6.65 0.00 0.07 21.00 0.00 0.49 0.42 0.50 0.26 0.17 详细说明 哪些进程占用 iotop -oP……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/sysstat/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/fio/" title="fio 硬盘性能测试">fio 硬盘性能测试</a>
             </h1>
         </header>
@@ -241,24 +277,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cmd-gpasswd/" title="gpasswd 命令">gpasswd 命令</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月18日
-        </date>
-        
-        <div class="post-content">
-            gpasswd 命令详解 gpasswd命令是Linux下工作组文件/etc/group和/etc/gshadow的管理工具，用于指定要管理的工作组。 选项详解： -a : 添加用户到组 -d : 从组删除用户 -A：指定管理员 -M：指定组成员和-A的用途差不多； -r：删除密码； -R：限制用户登入组，只有组中的成员……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-gpasswd/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -290,7 +308,15 @@
         <a href="https://zhangeamon.top/linux/page/5/">5</a>
     </li>
     
+    <li >
+        <a href="https://zhangeamon.top/linux/page/6/">6</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://zhangeamon.top/linux/page/6/">下一页</a>
+    </li>
     
 </ol>
 
@@ -338,7 +364,15 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zhangeamon.top/linux/pcie/" title="SSD IO request Time Out">SSD IO request Time Out</a>
+        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
     </li>
     
     <li>
@@ -369,14 +403,6 @@
         <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -387,9 +413,7 @@
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
-    
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     

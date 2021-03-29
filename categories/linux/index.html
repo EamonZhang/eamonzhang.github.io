@@ -100,6 +100,75 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/hard_store/">存储设备几个物理概念</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月29日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/linux.html'>linux</a>
+            
+        </div>
+        
+        <div class="post-content">
+            硬盘 HDD 机械硬盘 SSD 固态硬盘 物理接口 接口的物理形态 SATA mSTATA 迷你SATA m.2 曾用名NG(NEXT GERNERATION) 根据宽度分为(m.2 2242 2260 2280) u.2 统一了 SATA ，PCIe，SAS 接口 AIC ADD IN CARD 标准PCIe金手指 通信协议 数据通信逻辑协议标准 AHCI SAS NVME (Non-Volatile Memory Host Controller Interface) 总线标准 数据总线标准,硬盘与CPU通过总线传输数据 SATA PCIE 在传统SAT……
+            <p class="readmore"><a href="https://zhangeamon.top/linux/hard_store/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/bmcpasswd/">修改远程管理卡密码</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月29日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/linux.html'>linux</a>
+            
+        </div>
+        
+        <div class="post-content">
+            更改BMC密码 BMC：基板管理控制器 Baseboard Management Controller 更改BMC密码，需要基于Ipmitool工具实现，需要先下载该工具 安装ipmitool ubuntu安装命令： sudo apt-get -y install ipmitool centos安装命令： yum -y install epel-release（先） yum -y install ipmitool（后） 查看登陆账户名列表 ipmitool user list 2（技嘉主……
+            <p class="readmore"><a href="https://zhangeamon.top/linux/bmcpasswd/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/ssdiotimeout/">SSD IO request Time Out</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月29日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/linux.html'>linux</a>
+            
+        </div>
+        
+        <div class="post-content">
+            Intel 论坛相似问题讨论 https://community.intel.com/t5/Solid-State-Drives/I-O-request-timeouts-on-Linux-with-Intel-P3520-P4600-NVMe-PCIe/td-p/577474 临时解决 mkfs.xfs -K /dev/nvme01 -K Do not attempt to discard blocks at mkfs time.……
+            <p class="readmore"><a href="https://zhangeamon.top/linux/ssdiotimeout/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/smartctl/">smartctl 硬盘检测</a>
             </h1>
         </header>
@@ -169,6 +238,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
@@ -196,18 +277,6 @@
         <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -218,7 +287,7 @@
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     

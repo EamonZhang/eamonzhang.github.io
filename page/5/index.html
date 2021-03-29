@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/awsome-postgres/" title="工作中所使用的postgres">工作中所使用的postgres</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月27日
+        </date>
+        
+        <div class="post-content">
+            Postgres 实际应用概览 MVCC 多版本控制 一个绕不开的话题， 主要是对抗表空间的膨胀。解决垃圾回收问题，主从库之间从库查询冲突问题。 目前方法每日低峰期定时 vaccum ，gocron自定定时任务 。 根据pgstattuple对磁盘空间利用率进行分析。决定是否vaccum full ,pg_repack 流复制 主从复制，读写分离的基础。五种同……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/awsome-postgres/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_prewarm/" title="数据预加载">数据预加载</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月27日
+        </date>
+        
+        <div class="post-content">
+            https://blog.csdn.net/Hehuyi_In/article/details/102653909……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_prewarm/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/repo/" title="Centos7 私有源搭建">Centos7 私有源搭建</a>
             </h1>
         </header>
@@ -216,38 +248,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/cpu_temp/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/go/go_mod/" title="依赖管理工具go module">依赖管理工具go module</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年4月30日
-        </date>
-        
-        <div class="post-content">
-            背景 大多数语言都会有包管理工具，像Node有npm，PHP有composer，Java有Maven和Gradle。 在go1.11 版本中，新增了module管理模块功能，用来管理依赖包 开启module特性 要开始使用 go module 的特性， 需要先设置 GO111MODULE 环境变量。 开启 GO111MODULE 要使用go module,首先……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/go/go_mod/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/index-bloom/" title="Bloom 索引">Bloom 索引</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年4月23日
-        </date>
-        
-        <div class="post-content">
-            Bloom 索引 Bloom 过滤器代表的是一组值。它的作用是检测一个元素是否可能属于集合，它可以允许有一些false positive，但是不允许存在false negative。也就是说，尽管某个元素不在集合中，测试也可能返回true。然而，如果元素在集合中，就不可能返回false。 创建在一组列中的B……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/index-bloom/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -325,7 +325,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/21/">21</a>
+            <a href="https://zhangeamon.top/page/22/">22</a>
         </li>
         
     
@@ -384,7 +384,15 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zhangeamon.top/linux/pcie/" title="SSD IO request Time Out">SSD IO request Time Out</a>
+        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
     </li>
     
     <li>
@@ -415,14 +423,6 @@
         <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -433,9 +433,7 @@
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
-    
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     

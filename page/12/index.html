@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_lock/" title="锁机制">锁机制</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月24日
+        </date>
+        
+        <div class="post-content">
+            https://blog.csdn.net/pg_hgdb/article/details/79403651 https://habr.com/en/company/postgrespro/blog/500714/ 表锁 https://www.modb.pro/db/26462 查看被堵塞的任务 select * from pg_locks where not granted; locktype | database | relation | page | tuple | virtualxid | transactionid | classid | objid | objsubid | virtualtransaction | pid | mode | granted | fastpath ----------+----------+----------+------+-------+------------+---------------+---------+-------+----------+--------------------+-----+------+---------+---------- (0 行记录) 查看等待锁信息，是被谁堵塞了 select pg_blocking_pids(pid); pg_blocking_pids ------------------ {} 终止进程 select pg_cancel_backend(pid); # select select pg_terminate_backend(pid); # update insert delete 事务的隔离级别 Postgres 数据库共有三种数据隔离级别。 Read Commit 读看提交 默认级别 在读开始的时候建立数据快照 Repeat Read 可重复读。……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_lock/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pitr/" title="时间点恢复">时间点恢复</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月24日
+        </date>
+        
+        <div class="post-content">
+            PITR Point-in-time recovery https://blog.csdn.net/a964921988/article/details/84957241 https://github.com/digoal/blog/blob/master/201608/20160823_03.md https://github.com/digoal/blog/blob/master/201608/20160823_04.md 依赖条件 历史完整备份 不间断wal日志 以上都可有wal-g 备份系统提供支持 恢复到指定点 指定标签 具体时间点 具体事务 指定标签 recovery.conf recovery_target_action= 'pause' # promote ,shutdown --- 打lable select pg_create_restore_point('my_daily_process_ended'); --- 恢复到指定的lable recovery.conf recovery_target_name = 'my_daily_process_ended' 具体时间 restore_command = 'cp /data/arch/%f %p' # e.g. 'cp /mnt/server/archivedir/%f %p' recovery_target_time = '2020-12-23 09:37:17.010268' recovery_target_inclusive = false recovery_target_timeline = 'latest' 具体事务 restore_command = 'cp /data/arch/%f %p' # e.g. 'cp /mnt/server/archivedir/%f %p' recovery_target_xid = '26897309' recovery_target_inclusive = false……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pitr/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_pathman/" title="pg_pathman 分区表">pg_pathman 分区表</a>
             </h1>
         </header>
@@ -216,38 +248,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/monitor/postgres/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgfincore/" title="pgfincore">pgfincore</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月11日
-        </date>
-        
-        <div class="post-content">
-            ……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgfincore/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgbench/" title="pgbench 压力测试">pgbench 压力测试</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月9日
-        </date>
-        
-        <div class="post-content">
-            介绍 pgbench是一种在PostgreSQL上运行基准测试的简单程序。 官方文档 默认测试 自定义测试 默认测试 pgbench中默认自带一套测试数据库和测试sql脚本。 初始化默认数据库 使用 -i 初始化数据库 #pgbench -U postgres -i -s 10 pgbenchdb NOTICE: table &quot;pgbench_history&quot; does not exist, skipping NOTICE: table &quot;pgbench_tellers&quot; does not exist, skipping NOTICE: table &quot;pgbench_accounts&quot; does not exist, skipping NOTICE: table &quot;pgbench_branches&quot; does not exist, skipping creating tables... 100000 of 1000000 tuples (10%)……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgbench/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -325,7 +325,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/21/">21</a>
+            <a href="https://zhangeamon.top/page/22/">22</a>
         </li>
         
     
@@ -384,7 +384,15 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zhangeamon.top/linux/pcie/" title="SSD IO request Time Out">SSD IO request Time Out</a>
+        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
     </li>
     
     <li>
@@ -415,14 +423,6 @@
         <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -433,9 +433,7 @@
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
-    
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     

@@ -93,6 +93,42 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/fu-cmd/" title="Linux 常用命令">Linux 常用命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年2月18日
+        </date>
+        
+        <div class="post-content">
+            线上查询及帮助命令 man 查看命令帮助，命令的词典，更复杂的还有info，但不常用。 help 查看Linux内置命令的帮助，比如cd命令。 文件和目录操作命令 ls 全拼list，功能是列出目录的内容及其内容属性信息。 cd 全拼change directory，功能是从当前工作目录切换到指定的工作目录。 cp 全……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/fu-cmd/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/process-comm/" title="八种进程通信">八种进程通信</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年2月13日
+        </date>
+        
+        <div class="post-content">
+            1.无名管道( pipe )：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系。 2.高级管道(popen)：将另一个程序当做一个新的进程在当前程序进程中启动，则它算是当前程序的子进程，这种方式我们成为高级管道方式。 3.有名……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/process-comm/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/pid_m/" title="进程管理">进程管理</a>
             </h1>
         </header>
@@ -234,42 +270,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/nospace-device/" title="no space left on device">no space left on device</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月9日
-        </date>
-        
-        <div class="post-content">
-            问题描述 Linux 系统中出现磁盘空间不足错误： No space left on device … 在linux环境下，用vi打开某文件时，提示Write error in swap file 原因分析 导致该问题的可能原因包括： 磁盘分区空间使用率达到百分之百 磁盘分区inode使用率达到百分之百 僵尸文件：已删除文件因句柄被占用未释放导致相应空间未释放 解决方法 磁盘……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/nospace-device/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/meminfo/" title="meminfo Linux 内存信息">meminfo Linux 内存信息</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月8日
-        </date>
-        
-        <div class="post-content">
-            介绍 /proc/meminfo是了解Linux系统内存使用状况的主要接口，我们最常用的”free”、”vmstat”等命令就是通过它获取数据的 内容解读 cat /proc/meminfo MemTotal: 8009504 kB 除了bios ，kernel本身占用的内存以外，可以被kernel所分配的内存。一般这个值固定不变。 MemFree: 2385828 kB 未被使用的内存 MemAvailable:……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/meminfo/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -299,6 +299,10 @@
     
     <li >
         <a href="https://zhangeamon.top/linux/page/5/">5</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/linux/page/6/">6</a>
     </li>
     
 
@@ -353,7 +357,15 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zhangeamon.top/linux/pcie/" title="SSD IO request Time Out">SSD IO request Time Out</a>
+        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
     </li>
     
     <li>
@@ -384,14 +396,6 @@
         <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -402,9 +406,7 @@
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
-    
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     

@@ -91,6 +91,45 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/fio/" title="fio 硬盘性能测试">fio 硬盘性能测试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月4日
+        </date>
+        
+        <div class="post-content">
+            基本概念 使用FIO之前，首先要有一些SSD性能测试的基础知识。 包括线程，队列深度，Offset，同步异步，DirectIO，BIO。 线程 线程指的是同时有多少个读或写任务在并行执行，一般来说，CPU里面的一个核心同一时间只能运行一个线程。如果只有一个核心，要想运行多线程，只能使用时……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/fio/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/smartctl/" title="smartctl 硬盘检测">smartctl 硬盘检测</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月3日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux.html'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            SMART 简介 S.M.A.R.T.，全称为“Self-Monitoring Analysis and Reporting Technology”，即“自我监测、分析及报告技术”。是一种自动的硬盘状态检测与预警系统和规范。通过在硬盘硬件内的检测指令对硬盘的硬件如磁头、盘片、马达、电路的运行情况进行监控、记录并与厂商所设定的预设安全……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/smartctl/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/mdadm/" title="mdadm 软Raid 管理">mdadm 软Raid 管理</a>
             </h1>
         </header>
@@ -223,38 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/middleware/haproxy/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/monitor/prometheus-altermanager/" title="Promethues Altermanager 报警">Promethues Altermanager 报警</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月21日
-        </date>
-        
-        <div class="post-content">
-            Prometheus Alertmanager 概述 Alertmanager与Prometheus是相互分离的两个组件。Prometheus服务器根据报警规则将警报发送给Alertmanager，然后Alertmanager将silencing、inhibition、aggregation等消息通过电子邮件、PaperDu……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/monitor/prometheus-altermanager/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/monitor/prometheus-concepts/" title="Promethues 基本概念">Promethues 基本概念</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月21日
-        </date>
-        
-        <div class="post-content">
-            数据模型(Data Model) 由指标名称(metric)和一个或一组标签(lable)集合以及float64类型的值组成。 例如 up{instance=&quot;10.1.88.71:9115&quot;,job=&quot;blackbox_exporter_10.1.88.74_icmp&quot;} 1 metric类型 client libraries提供了四种metric类型，包括Counter、Gauge、Histogram、Summary。 Counter 计数器，只允许增加或重置为……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/monitor/prometheus-concepts/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -332,7 +339,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/21/">21</a>
+            <a href="https://zhangeamon.top/page/22/">22</a>
         </li>
         
     
@@ -391,7 +398,15 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zhangeamon.top/linux/pcie/" title="SSD IO request Time Out">SSD IO request Time Out</a>
+        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
     </li>
     
     <li>
@@ -422,14 +437,6 @@
         <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -440,9 +447,7 @@
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
-    
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     

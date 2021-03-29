@@ -91,6 +91,45 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月26日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres.html'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_performance/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月10日
+        </date>
+        
+        <div class="post-content">
+            一款轻量级的一体化监控工具 https://github.com/sqshq/sampler……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/smapler/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
             </h1>
         </header>
@@ -223,45 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/high_level_sql/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/thinking_in_db_fd/" title="数据库优化思考 - 结构设计">数据库优化思考 - 结构设计</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月11日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres.html'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_fd/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/auto_vacuum_trigger/" title="auto vacuum 触发机制">auto vacuum 触发机制</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月8日
-        </date>
-        
-        <div class="post-content">
-            数据库自动垃圾回收触发条件分析 在postgres 中 垃圾回收的重要意义及在执行垃圾回收时具体都做了些什么很多地方都有介绍。 但是何时触发垃圾回收，即垃圾回收的触发条件是什么。 官网的介绍一般是有如下几个参数决定 #autovacuum = on # Enable autovacuum subprocess? 'on' #autovacuum_vacuum_threshold = 50 # min number of row updates before vacuum #autovacuum_analyze_threshold = 50 # min number of row updates before analyze #autovacuum_vacuum_scale_factor = 0.2 # fraction of table size……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/auto_vacuum_trigger/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -318,7 +318,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/21/">21</a>
+            <a href="https://zhangeamon.top/page/22/">22</a>
         </li>
         
     
@@ -377,7 +377,15 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zhangeamon.top/linux/pcie/" title="SSD IO request Time Out">SSD IO request Time Out</a>
+        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
     </li>
     
     <li>
@@ -408,14 +416,6 @@
         <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -426,9 +426,7 @@
         <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
-    
-    <li><a href="https://zhangeamon.top/categories/Linux/">Linux (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
     
