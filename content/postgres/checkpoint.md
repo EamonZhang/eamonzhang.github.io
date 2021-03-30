@@ -10,21 +10,96 @@ categories: ["postgres"]
 
 一般checkpoint会将某个时间点之前的脏数据全部刷新到磁盘，以实现数据的一致性与完整性。其主要目的是为了缩短崩溃恢复时间。
 
-## 触发
+数据库靠谱的原因
+
+#### 一条DML 写入过程
+
+![images](/images/checkpoint01.jpg)
+
+在写入数据的时，当事务提交后修改信息顺序同步写入wal。shared buffer中信息并不是马上落盘。异步同步磁盘。
+
+这里实现双写:
+
+| 位置   | 是否同步  | 方式 | 负责进程|
+|  ----  | ----  | ---- | ---- |
+| WAL  | 同步 | 顺序写| backgroudwriter |
+| TableFile  | 异步 | 随机读写 | walwriter |
+
+即保障了数据的完整性又同时兼顾的性能。
+
+#### 意外发生时如何恢复
+
+有了wal 可以保证数据的完整性，数据不丢失。那么具体该如何恢复？
+
+因为产生wal是个顺序写的过程，只要回放wal就可重现写入过程。如重现一个一摸一样的从库。
+
+首先要确定一个问题就是当前数据库状态下应该从那个具体位置开始回放。 这里就需要checkpoint。
+
+这个具体位置（检查点）之前的数据已经同步到数据库，之后的数据要么在缓存中的脏数据，要么可能意外丢失。
+
+检查点可作为清理WAL的依据，从而避免WAL日志堆积。
+
+## Checkpoint 具体工作
+
+1. 记录检查点的开始位置，记录为 redo point（重做位点）
+2. 将 shared buffer 中的数据刷到磁盘里面去
+3. 刷脏结束，检查点之前的数据均已被刷到磁盘存储（数据1和2）
+5. 记录相关信息
+6. 将最新的检测点记录在 pg_control 文件中
+
+
+## 触发条件
 
 - 超级用户（其他用户不可）执行CHECKPOINT命令
 - 数据库shutdown
 - 数据库recovery完成
 - XLOG日志量达到了触发checkpoint阈值
-- 周期性地进行checkpoint
+- 周期性地进行checkpoint,周期内无写入不执行checkpoint
 - 需要刷新所有脏页
 
 ## 相关参数
+
+```
+Postgresql 10
+# - Checkpoints - 
+
+checkpoint_timeout = 5min               # range 30s-1d
+max_wal_size = 2GB
+min_wal_size = 1GB
+checkpoint_completion_target = 0.9      # checkpoint target duration, 0.0 - 1.0
+#checkpoint_flush_after = 256kB         # measured in pages, 0 disables
+#checkpoint_warning = 30s               # 0 disables
+```
 
 - checkpoint_segments  WAL log的最大数量，系统默认值是3。超过该数量的WAL日志，会自动触发checkpoint。 新版(9.6)使用min_wal_size, max_wal_size  来动态控制wal日志
 - checkpoint_timeout  系统自动执行checkpoint之间的最大时间间隔。系统默认值是5分钟。
 - checkpoint_completion_target 该参数表示checkpoint的完成时间占两次checkpoint时间间隔的比例，系统默认值是0.5,也就是说每个checkpoint需要在checkpoints间隔时间的50%内完成。
 - checkpoint_warning 系统默认值是30秒，如果checkpoints的实际发生间隔小于该参数，将会在server log中写入一条相关信息。可以通过设置为0禁用。
+
+## 记录日志
+
+```
+参数配置开启
+log_checkpoints = on
+```
+
+```
+日志信息
+restartpoint complete: wrote 12166 buffers (0.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=269.888 s, sync=0.002 s, total=269.892 s; sync files=489, longest=0.001 s, average=0.001 s; distance=156927 kB, estimate=156927 kB
+recovery restart point at 204F/41B7840","last completed transaction was at log time
+```
+
+通过 pg_stat_bgwriter 视图查看
+```
+select checkpoints_timed,checkpoints_req,checkpoint_write_time,buffers_checkpoint,buffers_clean from pg_stat_bgwriter ;
+-[ RECORD 1 ]---------+------------------------------
+checkpoints_timed     | 7
+checkpoints_req       | 0
+checkpoint_write_time | 1619504
+checkpoint_sync_time  | 125
+buffers_checkpoint    | 190388
+buffers_clean         | 13574
+```
 
 ## 应用
 

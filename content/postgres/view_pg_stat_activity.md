@@ -91,3 +91,34 @@ https://github.com/pgsentinel/pgsentinel
 
 pgsentinel 记录了历史活动状态，帮助对历史问题的追溯。
 
+## pg_top
+
+类似 Linux top
+
+安装
+```
+yum install pg_top
+```
+
+使用 (本机 & 远程)
+```
+#pg_top -U postgres -h **** 
+
+last pid: 55852;  load avg:  1.55,  1.25,  0.93;       up 0+23:44:48                                                                                                                09:17:30
+7 processes: 5 sleeping, 2 uninterruptable
+CPU states:  1.1% user,  0.0% nice,  0.5% system, 96.8% idle,  1.6% iowait
+Memory: 125G used, 561M free, 240K buffers, 117G cached
+DB activity: 242 tps, 12 rollbs/s,  12 buffer r/s, 99 hit%,  82120 row r/s,    0 row w/s
+DB I/O:     0 reads/s,     0 KB/s,     0 writes/s,     0 KB/s
+DB disk: 7450.0 GB total, 7055.5 GB free (5% used)
+Swap: 4096M free
+
+  PID USERNAME PRI NICE  SIZE   RES STATE   TIME   WCPU    CPU COMMAND
+40030 postgres  20    0   17G 5624K sleep   0:07  0.68%  0.60% postmaster
+40022 postgres  20    0   17G  946M sleep   0:05  0.42%  0.40% postmaster
+40023 postgres  20    0   17G 1061M sleep   0:02  0.25%  0.00% postmaster
+54528 postgres  20    0   17G 1220M disk    0:01  1.38%  0.00% postmaster
+54963 postgres  20    0   17G  747M disk    0:01  1.27%  0.00% postmaster
+40024 postgres  20    0   17G  130M sleep   0:00  0.03%  0.00% postmaster
+55853 postgres  20    0   17G 6900K sleep   0:00  0.00%  0.00% postmaster
+```
