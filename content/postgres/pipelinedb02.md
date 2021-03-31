@@ -1,10 +1,12 @@
 ---
 title: "Pipelinedb 简介"
 date: 2018-12-12T11:39:47+08:00
+categroies: ["postgres"]
+toc: true
 draft: false
 ---
 
-##### 项目已经停止维护
+### 项目已经停止维护
 
 适配支持版本
 ```
@@ -12,24 +14,28 @@ PostgreSQL 10: 10.1, 10.2, 10.3, 10.4, 10.5
 PostgreSQL 11: 11.0
 ```
 
-#### 基本概念
+## 基本概念
 
-##### 流(Stream) 
+### 流(Stream) 
+
 流是基础，Continuous Views和transform则是基于流中的数据进行处理的手段。
 对于同一份数据，只需要定义一个流，写入一份即可。
 如果对同一份数据有多个维度的统计，可以写在一条SQL完成的（如同一维度的运算或者可以支持窗口的多维度运算），只需定义一个Continuous Views或transform。如果不能在同一条SQL中完成计算，则定义多个Continuous Views或transform即可。
 如果有多份数据来源（例如设计时就已经区分了不同的表）时，定义不同的流即可；
 
-##### 流视图  
+### 流视图  
+
 流视图，其实就是定义统计分析的QUERY， 例如select id, count(*), avg(x), ... from stream_1 group by ...; 就属于一个流视图。
 定义好之后，数据插入流(stream_1)，这个流视图就会不断增量的进行统计，你只要查询这个流视图，就可以查看到实时的统计结果。
 数据库中存储的是实时统计的结果（实际上是在内存中进行增量合并的，增量的方式持久化）。
 
-##### Transforms   
+#### Transforms   
+
 与流视图不同的是，transform是用来触发事件的，所以它可以不保留数据，但是可以设定条件，当记录满足条件时，就触发事件。
 例如监视传感器的值，当值的范围超出时，触发报警（如通过REST接口发给指定的server），或者将报警记录下来（通过触发器函数）。
 
-##### 支持特性  
+## 支持特性 
+ 
 pipelinedb继承了PostgreSQL很好的扩展性，例如支持了概率统计相关的功能，例如HLL等。用起来也非常的爽，例如统计网站的UV，或者红绿灯通过的汽车编号唯一值车流，通过手机信号统计基站辐射方圆多少公里的按时UV等。
 Bloom Filter    
 Count-Min Sketch    
@@ -37,12 +43,13 @@ Filtered-Space Saving Top-K
 HyperLogLog    
 T-Digest    
 
-##### 滑窗(Sliding Windows)    
+## 滑窗(Sliding Windows)    
+
 因为很多场景的数据有时效，或者有时间窗口的概念，所以pipelinedb提供了窗口分片的接口，允许用户对数据的时效进行定义。
 例如仅仅统计最近一分钟的时间窗口内的统计数据。
 比如热力图，展示最近一分钟的热度，对于旧的数据不关心，就可以适应SW进行定义，从而保留的数据少，对机器的要求低，效率还高。
 
-#### 安装 base on centos7&postgres10  
+## 安装 base on centos7&postgres10  
 
 ```
 add repository
@@ -70,7 +77,7 @@ CREATE EXTENSION pipelinedb
  pipelinedb         | 1.0.0 | public     | PipelineDB
 ```
 
-#### 一个简单的例子
+## 一个简单的例子
 
 ```
 创建一个流

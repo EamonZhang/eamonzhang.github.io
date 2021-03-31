@@ -22,7 +22,6 @@ toc: true
 - [fillfactor 填充因子](/postgres/fillfactor)
 - [TOAST 技术](/postgres/toast)
 - [hot update](/postgres/hotupdate)
-- [checkpoint](/postgres/checkpoint)
 - [tablespace 表空间](/postgres/tablespace)
 - [锁机制](/postgres/pg_lock)
 - [锁等待](/postgres/lock_wait)
@@ -66,7 +65,16 @@ toc: true
 ## 常用视图
 
 - [数据库视图之 pg_stat_activity](/postgres/view_pg_stat_activity)
-- 数据库试图之 pg_stat_bgwriter
+- [数据库试图之 pg_stat_bgwriter](/postgres/view_pg_stat_bgwriter)
+
+## 服务进程
+
+- [checkpoint](/postgres/checkpoint)
+- background
+- wal writer
+- stat collector
+- logger 
+- [vacuum](/postgres/vacuum)  
 
 ## 备份恢复
 
