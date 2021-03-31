@@ -2,9 +2,11 @@
 title: "etcd 访问控制"
 date: 2021-01-29T09:37:26+08:00
 draft: false
+toc: true
+categories: ["etcd"]
 ---
 
-##### 介绍
+## 介绍
 
   etcd 默认没有开启访问控制。 在生产环境中使用属于裸奔。
 
@@ -16,11 +18,11 @@ draft: false
 
 本篇实验用户名密码验证方式
 
-##### 用户
+## 用户
 
 开启访问认证需要创建root 用户，root 用户默认自动拥有root角色的权限，及超级管理员。
 
-##### 角色
+## 角色
 
 角色理解为指定权限的集合，权限包括 read 、write、 readwrite
 
@@ -30,7 +32,7 @@ draft: false
 
 系统通过授权用户不同权限的角色，实现对用户的访问控制。
 
-##### 用户管理
+## 用户管理
 
 ```
  etcdctl user --help
@@ -53,7 +55,7 @@ OPTIONS:
    --help, -h  show help
 ```
 
-##### 角色管理
+## 角色管理
 
 ```
 etcdctl role --help
@@ -75,7 +77,7 @@ OPTIONS:
    --help, -h  show help
 ```
 
-##### 一个例子
+## 一个例子
 ```
 -- 创建测试目录
 etcdctl mkdir /service001
@@ -112,7 +114,7 @@ KV Write:
 
 ```
 
-##### 开启认证访问
+## 开启认证访问
 
 ```
 -- 开启认证需要系统拥有root用户，创建root用户会自动关联root角色
@@ -132,7 +134,7 @@ Authentication Enabled
 etcdctl ls /service001
 ```
 
-###### 注意事项
+## 注意事项
 
 因为在 Etcd 开启 Basic Auth 之后，默认会启用两个角色 root 和 guest， root 和 guest 角色都拥有所有权限，
 
@@ -141,7 +143,7 @@ etcdctl ls /service001
 那么为们可以通过收回权限的方式对 guest 的权限进行限制
 
 ```
--- 回收guest角色的所有权限
+-- 使用root用户回收guest角色的所有权限
 etcdctl --username root role revoke guest --path=/* --readwrite
 Password: 
 Role guest updated
