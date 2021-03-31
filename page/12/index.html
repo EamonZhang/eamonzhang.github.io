@@ -91,6 +91,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/mysql/performance-cmd/" title="MySQL常用性能分析命令">MySQL常用性能分析命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月29日
+        </date>
+        
+        <div class="post-content">
+            MySQL常用性能突发事件分析命令： SHOW PROCESSLIST; —当前MySQL数据库的运行的所有线程 INNODB_TRX; — 当前运行的所有事务 INNODB_LOCKS; — 当前出现的锁 INNODB_LOCK_WAITS; — 锁等待的对应关系计 SHOW OPEN TABLES where In_use &gt;0; — 当前打开表 SHOW ENGINE INNODB STATUS \G; —Innodb状态 SHOW STATUS LIKE &lsquo;innodb_row_lock_%'; — 锁性能状态 SQL语句EXPLAIN; — 查询优化器……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/mysql/performance-cmd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_citus/" title="citus 数据库分库">citus 数据库分库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月29日
+        </date>
+        
+        <div class="post-content">
+            数据库分库调研 Greenplum 更适用于AP场景 PGXL PGXC 社区不活跃，沟通问题反馈时间长。没找到用户群体. 在此基础上发展的有亚信antdb，腾讯tbase。没有那个研发实力，算了吧。 citus 插件方式，无侵入。很多牛X的特性企业版才支持。主要强调多租户。 mycat mysql支派，阿里开源（抛弃）项目。主要是对sql语……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_citus/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgwatch2/" title="pgwatch2 数据库指标监控查看">pgwatch2 数据库指标监控查看</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月29日
+        </date>
+        
+        <div class="post-content">
+            介绍 pgwatch2官方 官方演示示例 架构 agent server agent 在被监控的pg上自定义方法，用于收集数据库信息。这些自定义的方法需要依赖需要数据库扩展如pg_stat_statements,plpythonu. server 负责存储收集过来的信息，可以存放在postgres或influxdb中. 并将收集的信息……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgwatch2/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_lock/" title="锁机制">锁机制</a>
             </h1>
         </header>
@@ -198,54 +246,6 @@
             NAME memtest-setup - Install Memtest86+ into your GRUB boot loader menu SYNOPSIS memtest-setup [OPTIONS] DESCRIPTION memtest-setup installs Memtest86+ into your GRUB boot loader menu. It supports both GRUB 2 and GRUB Legacy (i.e. GRUB 0.9x). In case of GRUB 2 it installs GRUB 2 template into /etc/grub.d and GRUB 2 config needs to be regenerated manually by running grub2-mkconfig -o /boot/grub2/grub.cfg under root. This is not done automatically because it could overwrite any custom changes in /boot/grub2/grub.cfg. OPTIONS -h, --help Shows help. AUTHOR Jaroslav Škarvada &lt;jskarvad@redhat.com&gt; Manpage author. COPYRIGHT Copyright © 2014 Jaroslav Škarvada Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 or (at your option) any later version published by the Free……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/linux/memtest/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/dmidecode/" title="Linux查看内存条信息">Linux查看内存条信息</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月14日
-        </date>
-        
-        <div class="post-content">
-            1.查看内存槽及内存条 $ sudo dmidecode -t memory 2.查看内存的插槽数,已经使用多少插槽.每条内存多大 $ sudo dmidecode -t memory | grep Size 3.查看服务器型号、序列号 $ sudo dmidecode | grep &quot;System Information&quot; -A9 | egrep &quot;Manufacturer|Product|Serial&quot;……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/dmidecode/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cgroups/" title="cgroups">cgroups</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月14日
-        </date>
-        
-        <div class="post-content">
-            https://www.certdepot.net/rhel7-get-started-cgroups/ https://www.oracle.com/technical-resources/articles/linux/resource-controllers-linux.html iops和bps限制 限制sda 的读写 lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sda 8:0 0 931.5G 0 disk /data sdb 8:16 0 223.6G 0 disk ├─sdb1 8:17 0 200M 0 part /boot/efi ├─sdb2 8:18 0 1G 0 part /boot ├─sdb3 8:19 0 7.8G 0 part [SWAP] └─sdb4 8:20 0 214.6G 0 part / cd /sys/fs/cgroup/blkio/ echo &quot;8:0 102400&quot; &gt; blkio.throttle.read_bps_device echo &quot;8:0 10&quot; &gt; blkio.throttle.read_iops_device echo &quot;8:0 204800&quot; &gt; blkio.throttle.write_bps_device echo &quot;8:0 20&quot; &gt; blkio.throttle.write_iops_device……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cgroups/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/monitor/postgres/" title="Postgres">Postgres</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月11日
-        </date>
-        
-        <div class="post-content">
-            Postgresql 常用监控 , 巡检报表 直接利用PG提供的性能统计数据 PG的很多性能数据可以通过查询pg_stat_或pg_statio_开头的系统表获取 zabbix http://pg-monz.github.io/pg_monz/index-en.html zabbix-extensions PG专用的监控工具 pgsnap, pgstatspack,pgwatch,pg_statsinfo等。这些工具主要做PG的性能分析，状态查看的。不能做故障……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/monitor/postgres/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +384,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
     </li>
     
@@ -411,18 +423,6 @@
         <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -430,16 +430,18 @@
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
     
 </ul>
 

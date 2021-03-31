@@ -162,6 +162,7 @@
     <li><a href="#安装维护">安装维护</a></li>
     <li><a href="#管理">管理</a></li>
     <li><a href="#常用视图">常用视图</a></li>
+    <li><a href="#服务进程">服务进程</a></li>
     <li><a href="#备份恢复">备份恢复</a></li>
     <li><a href="#高可用">高可用</a></li>
     <li><a href="#索引">索引</a></li>
@@ -237,7 +238,6 @@
 <li><a href="/postgres/fillfactor">fillfactor 填充因子</a></li>
 <li><a href="/postgres/toast">TOAST 技术</a></li>
 <li><a href="/postgres/hotupdate">hot update</a></li>
-<li><a href="/postgres/checkpoint">checkpoint</a></li>
 <li><a href="/postgres/tablespace">tablespace 表空间</a></li>
 <li><a href="/postgres/pg_lock">锁机制</a></li>
 <li><a href="/postgres/lock_wait">锁等待</a></li>
@@ -281,7 +281,16 @@
 <h2 id="常用视图">常用视图</h2>
 <ul>
 <li><a href="/postgres/view_pg_stat_activity">数据库视图之 pg_stat_activity</a></li>
-<li>数据库试图之 pg_stat_bgwriter</li>
+<li><a href="/postgres/view_pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a></li>
+</ul>
+<h2 id="服务进程">服务进程</h2>
+<ul>
+<li><a href="/postgres/checkpoint">checkpoint</a></li>
+<li>background</li>
+<li>wal writer</li>
+<li>stat collector</li>
+<li>logger</li>
+<li><a href="/postgres/vacuum">vacuum</a></li>
 </ul>
 <h2 id="备份恢复">备份恢复</h2>
 <ul>
@@ -437,6 +446,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
     </li>
     
@@ -464,18 +485,6 @@
         <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -483,16 +492,18 @@
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
     
 </ul>
 

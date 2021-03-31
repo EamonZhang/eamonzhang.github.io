@@ -93,6 +93,42 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/archive/" title="Archive wal归档">Archive wal归档</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-content">
+            介绍 所谓WAL日志归档，其实就是把在线的WAL日志备份出来。 配置 vi postgresql.conf wal_level='replica' # - Archiving - archive_mode = on # enables archiving; off, on, or always # (change requires restart) archive_command = 'test ! -f /mnt/backup/%f &amp;&amp; cp %p /mnt/backup/%f' # command to use to archive a logfile segment # placeholders: %p = path of file to archive # %f = file name only # e.g. 'test ! -f /mnt/server/archivedir/%f &amp;&amp; cp %p /mnt/server/archivedir/%f' #archive_timeout = 0 # force a logfile segment switch after this # number of seconds; 0 disables 参数说明 wal_level archive 或更高级别 archive_mode on 开启归档模式，always……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/archive/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/timescaledb/" title="TimescaleDB 时序数据库">TimescaleDB 时序数据库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-content">
+            时序数据库 https://github.com/timescale/timescaledb 数据库配置 https://github.com/timescale/timescaledb-tune copy并行导入数据 https://github.com/timescale/timescaledb-parallel-copy 常用方法 创建拓展 CREATE EXTENSION timescaledb; 创建一个普通的表 CREATE TABLE conditions ( time TIMESTAMPTZ NOT NULL, location TEXT NOT NULL, temperature DOUBLE PRECISION NULL, humidity DOUBLE PRECISION NULL ); 转换成时序数据库表 SELECT create_hypertable('conditions', 'time'); conditions 表名 time 时序字段 修改时序间隔 对新表生效 SELECT set_chunk_time_interval('conditions', INTERVAL '24 hours'); 查看分区 SELECT show_chunks('conditions'); SELECT show_chunks('conditions', older_than =&gt; INTERVAL '3 months') SELECT show_chunks('conditions', older_than =&gt; DATE '2017-01-01'); SELECT show_chunks(newer_than =&gt; INTERVAL '3 months'); SELECT show_chunks(older_than =&gt; INTERVAL '3 months', newer_than =&gt; INTERVAL '4 months'); 查看数据大……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/timescaledb/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_rewind/" title="PG主从切换 pg_rewind">PG主从切换 pg_rewind</a>
             </h1>
         </header>
@@ -248,42 +284,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgbench/" title="pgbench 压力测试">pgbench 压力测试</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月9日
-        </date>
-        
-        <div class="post-content">
-            介绍 pgbench是一种在PostgreSQL上运行基准测试的简单程序。 官方文档 默认测试 自定义测试 默认测试 pgbench中默认自带一套测试数据库和测试sql脚本。 初始化默认数据库 使用 -i 初始化数据库 #pgbench -U postgres -i -s 10 pgbenchdb NOTICE: table &quot;pgbench_history&quot; does not exist, skipping NOTICE: table &quot;pgbench_tellers&quot; does not exist, skipping NOTICE: table &quot;pgbench_accounts&quot; does not exist, skipping NOTICE: table &quot;pgbench_branches&quot; does not exist, skipping creating tables... 100000 of 1000000 tuples (10%)……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgbench/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_trgm/" title="pg_trgm的gist和gin索引加速字符匹配查询">pg_trgm的gist和gin索引加速字符匹配查询</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月7日
-        </date>
-        
-        <div class="post-content">
-            背景 对车牌号的记忆有时可能记住的是前几位，有时可能是后几位，不同的人记车牌号的习惯也不同。 通常是是容易记住首尾，中间不清楚。 那么如何在大量已有车牌数据中快速根据模糊的信息来进行查询呢？ 模拟 数据库表中约有500w条车牌号记录，对表中的车牌号进行模糊查询。 即支持 car_id like &lsquo;%XXXX%XXX%&rsquo; 查询 ---创建表……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_trgm/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -379,6 +379,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
     </li>
     
@@ -406,18 +418,6 @@
         <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -425,16 +425,18 @@
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
     
 </ul>
 

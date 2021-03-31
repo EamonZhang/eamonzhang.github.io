@@ -91,6 +91,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/stat/" title="Access Modify Change 三种时间戳">Access Modify Change 三种时间戳</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月20日
+        </date>
+        
+        <div class="post-content">
+            三种时间对应关系 访问时间 Access atime 修改时间 Modify mtime 状态改动时间 Change ctime 如何查看文件文件的三种时间戳 stat filename 三种时间戳的解释 访问时间：读一次文件的内容，这个时间就会更新。比如more、cat等命令。ls、stat命令不会修改atime 修改时间：修改时间是文件内容最后一次被修改的时间。比如：vim操作……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/stat/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/role-manager/" title="权限管理">权限管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月20日
+        </date>
+        
+        <div class="post-content">
+            创建用户 # user 与 role 区别 ， user 具有login权限 postgres=# create user tester with password '123456'; CREATE ROLE 创建数据库,并关联所有者 postgres=# create database test owner tester ; CREATE DATABASE 变更数据库用户所有者 postgres=# alter database test owner to tester; ALTER DATABASE 修改用户&amp;数据库 #用户连接数 postgres=# alter user tester connection limit 100; ALTER ROLE #数据库连接数 postgres=# alter database test connection limit 100; ALTER DATABASE #用户其他属性修改 postgres=# alter user tester BYPASSRLS CREATEDB ENCRYPTED PASSWORD LOGIN NOCREATEDB NOINHERIT NOREPLICATION PASSWORD REPLICATION SET VALID UNTIL CONNECTION……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/role-manager/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/dba/" title="DBA 日常">DBA 日常</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月19日
+        </date>
+        
+        <div class="post-content">
+            备份 恢复 时时热备 定期冷备 升级 每年大版本小版本升级，新特性调研，性能测试，稳定性。 可用当前最新的上一个版本。 HA 手动 自动 读写分离 sharding 多副本 安全 权限管理 资源隔离 审计 ddl 慢sql 锁长时间占用 巡检 定期巡检 awr 报告 监控 系统 数据库 诊断 优化 背景 应用程序的野蛮生长，由产品为驱动的开发，一切以快速上线为目……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/dba/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/ln-s/" title="ln -s 建立软连接">ln -s 建立软连接</a>
             </h1>
         </header>
@@ -198,54 +246,6 @@
             zabbix zabbix-extensions promethues osquery m/monit……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/monitor/introduce/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/python/reference/" title="学习参考">学习参考</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月7日
-        </date>
-        
-        <div class="post-content">
-            廖雪峰 Python3 草根学 Python （基于Python3.6)……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/python/reference/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/storage/introduce/" title="云存储介绍">云存储介绍</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月7日
-        </date>
-        
-        <div class="post-content">
-            对象存储(oss) 适用于大量的小文件，RESFULL接口方式存储读取迅速,不能修改，不用担心元数据过大问题。通常的架构为使用其他的数据库软件如(Hbase,ES) 等来存放管理元数据。 swift minio 块存储 这种接口通常以QEMU Driver或者Kernel Module的方式存在，这种接口需要实……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/storage/introduce/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/k8s/install/" title="集群部署安装">集群部署安装</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月7日
-        </date>
-        
-        <div class="post-content">
-            kubeadm kubeadm 可当做体验版，证书可用时间一年 Kubespray Kubespray 是 Kubernetes incubator 中的项目，目标是提供 Production Ready Kubernetes 部署方案，该项目基础是通过 Ansible Playbook 来定义系统与 Kubernetes 集群部署的任务，具有以下几个特点： 可以部署在 AWS, GCE, Azure, OpenStack 以及裸机上. 部署 High Available Kubernetes 集群. 可组合性 (Composable)，可自行选择 Network Plugin (flannel, calico, canal, weave) 来部署. 多种 Linux distributions(CoreOS, Debian Jessie, Ubuntu 16.04, CentOS/RHEL7). kops kops……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/k8s/install/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +384,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
     </li>
     
@@ -411,18 +423,6 @@
         <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -430,16 +430,18 @@
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
     
 </ul>
 

@@ -91,6 +91,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/audit/" title="日志审计 audit">日志审计 audit</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月8日
+        </date>
+        
+        <div class="post-content">
+            介绍 auditd是Linux审计系统中用户空间的一个组件，负责将审计记录写到磁盘中。在CentOS7上默认就会有安装这个服务。 如果被卸载，可以直接使用yum进行安装： yum -y install audit auditd-libs 常用命令 1、auditctl : 即时控制审计守护进程的行为的工具，比如如添加规则等等。 audtitctl -l #查看规则 auditctl -D #……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/audit/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/dengbao3/" title="等保三指南">等保三指南</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月8日
+        </date>
+        
+        <div class="post-content">
+            等保三指南-上 等保三指南-下……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/dengbao3/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cpu_temp/" title="Linux 获取CPU温度">Linux 获取CPU温度</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月7日
+        </date>
+        
+        <div class="post-content">
+            直接读取系统信息 可以通过读取如下路径中的数据来获取cpu的温度信息，不过读取的数据没有经过处理。 cpu0： cat /sys/class/thermal/thermal_zone0/temp cpu1： cat /sys/class/thermal/thermal_zone1/temp 通过命令行的方式获取 安装 lm_sensors 软件包： # rpm yum install lm_sensors # deb apt-get install lm-sensors 执行命令sensors-detect，进行简单配置，此命令执行后会出现一系列选项，一直yes即可； 执行……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cpu_temp/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/go/go_mod/" title="依赖管理工具go module">依赖管理工具go module</a>
             </h1>
         </header>
@@ -198,61 +246,6 @@
             锁等待场景 一个事务尚未执行提交时持有锁，当另一个事务需要持有改行的锁时则需要等待。 Session 1 postgres=# \d+ wt Table &quot;public.wt&quot; Column | Type | Collation | Nullable | Default | Storage | Stats target | Description --------+---------+-----------+----------+---------+----------+--------------+------------- id | integer | | | | plain | | t | text | | | | extended | | postgres=# begin; BEGIN postgres=# update wt set t = 'aaaa' where id = 1; UPDATE 1 postgres=# select pg_backend_pid(); pg_backend_pid ---------------- 20034 (1 row) Session 2 postgres=# begin ; BEGIN postgres=# update wt set t = 'bbbb' where id = 1; Session 3 select * from pg_stat_activity; -[ RECORD 3 ]----+---------------------------------------- datid | 436980 datname……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/lock_wait/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/dw/algorithm/" title="数据挖掘算法">数据挖掘算法</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月26日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E4%BB%93.html'>数仓</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            机器学习，知识发现 数据挖掘算法 按照算法所解决的问题来进行划分，大致可以分为分类、聚类、回归和关联分析。 1.分类 分类算法是对已经确定好结果的数据进行学习，从而对未知的新数据进行分类的算法。 2.聚类 聚类算法只需要有一些数据，但是事先并不知道数据属于什么类别，通过对这些数据的学习，希望……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/dw/algorithm/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/install-cmd/" title="软件安装">软件安装</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月20日
-        </date>
-        
-        <div class="post-content">
-            Centos7 查看是否存在需要安装的软件 yum search xxxx 查看具体版本详情 yum list xxxx 查看已安装 rpm -qa | grep xxxx 安装 yum install xxxx rpm -i xxxx.rpm 删除 yum erase xxxx rpm -r xxxx Unbuntu 查看是否存在需要安装的软件 apt-cache search xxxx 查看具体版本及信息 apt show xxxx 查看已安装 dpkg -l 安装 apt-get install xxxx dpkg -l 删除 apt-get remove xxxx……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/install-cmd/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/install02/" title="数据库安装 Postgres12 Ubuntu18">数据库安装 Postgres12 Ubuntu18</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月19日
-        </date>
-        
-        <div class="post-content">
-            软件源 echo &quot;deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main&quot; &gt;&gt; /etc/apt/sources.list.d/pgdg.list wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - sudo apt-get update -y 安装 apt-get install postgresql-12 postgresql-client-12 postgresql-12-postgis-2.5 postgresql-contrib -y 初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb 启动 systemctl start postgresql systemctl stop postgresql systemctl status postgresql systemctl enable postgresql 配置 cd /etc/postgresql/12/main/ vi postgres.conf vi pg_hba.conf……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/install02/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +384,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
     </li>
     
@@ -418,18 +423,6 @@
         <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -437,16 +430,18 @@
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
     
 </ul>
 

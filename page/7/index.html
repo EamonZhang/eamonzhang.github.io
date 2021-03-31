@@ -91,6 +91,61 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/dw/algorithm/" title="数据挖掘算法">数据挖掘算法</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月26日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%95%B0%E4%BB%93'>数仓</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            机器学习，知识发现 数据挖掘算法 按照算法所解决的问题来进行划分，大致可以分为分类、聚类、回归和关联分析。 1.分类 分类算法是对已经确定好结果的数据进行学习，从而对未知的新数据进行分类的算法。 2.聚类 聚类算法只需要有一些数据，但是事先并不知道数据属于什么类别，通过对这些数据的学习，希望……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/dw/algorithm/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/install-cmd/" title="软件安装">软件安装</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月20日
+        </date>
+        
+        <div class="post-content">
+            Centos7 查看是否存在需要安装的软件 yum search xxxx 查看具体版本详情 yum list xxxx 查看已安装 rpm -qa | grep xxxx 安装 yum install xxxx rpm -i xxxx.rpm 删除 yum erase xxxx rpm -r xxxx Unbuntu 查看是否存在需要安装的软件 apt-cache search xxxx 查看具体版本及信息 apt show xxxx 查看已安装 dpkg -l 安装 apt-get install xxxx dpkg -l 删除 apt-get remove xxxx……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/install-cmd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/install02/" title="数据库安装 Postgres12 Ubuntu18">数据库安装 Postgres12 Ubuntu18</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月19日
+        </date>
+        
+        <div class="post-content">
+            软件源 echo &quot;deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main&quot; &gt;&gt; /etc/apt/sources.list.d/pgdg.list wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - sudo apt-get update -y 安装 apt-get install postgresql-12 postgresql-client-12 postgresql-12-postgis-2.5 postgresql-contrib -y 初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb 启动 systemctl start postgresql systemctl stop postgresql systemctl status postgresql systemctl enable postgresql 配置 cd /etc/postgresql/12/main/ vi postgres.conf vi pg_hba.conf……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/install02/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/git-nopassword/" title="Git 免输入密码">Git 免输入密码</a>
             </h1>
         </header>
@@ -181,7 +236,7 @@
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E4%BB%93.html'>数仓</a></span>
+            <span class="meta-category"><a href='/categories/%E6%95%B0%E4%BB%93'>数仓</a></span>
             
         </div>
         
@@ -205,54 +260,6 @@
             参数vm.dirty_ratio和vm.dirty_background_ratio https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/ 文件缓存是一项重要的性能改进，在大多数情况下，读缓存在绝大多数情况下是有益无害的（程序可以直接从RAM中读取数据）。写缓存比较复杂，Linux内核将磁盘写入缓存，过段时间再异步将它们刷新到磁盘。……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/linux/vm-config/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/postgres12/" title="postgres 12">postgres 12</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年11月19日
-        </date>
-        
-        <div class="post-content">
-            安装&amp;启动 #下载源 yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm #安装服务 yum install postgresql12 postgresql12-server postgresql12-contrib #初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb #启动服务 systemctl enable postgresql-12 systemctl start postgresql-12 流复制 #从机 建立从库 pg_basebackup -h 10.1.30.13 -U postgres -F p -P -R -D /var/lib/pgsql/12/data/ --checkpoint=fast -l postgresback #从库升级为主库 sudo su postgres -c &quot;/usr/pgsql-12/bin/pg_ctl promote -D /var/lib/pgsql/12/data/&quot; recovery.conf 配置文件不再支持，此文件中的参数合并到 postgresql.conf(postgresql.auto.conf) Recovery Target, 若 recovery.conf 存在，数据库无法启动 新增 recovery.signal 标识文件，表示数据库处于 recovery 模式 新增加 standby.signal……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/postgres12/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/dns/" title="DNS">DNS</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年10月28日
-        </date>
-        
-        <div class="post-content">
-            DNS：Domain Name System 域名管理系统 A记录 A（Address）记录是用来指定主机名（或域名）对应的IP地址记录 NS记录 NS（Name Server）记录是域名服务器记录，用来指定该域名由哪个DNS服务器来进行解析 MX记录 MX（Mail Exchanger）记录是邮件交换记录，它指向一……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/dns/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cmd-vim/" title="vi 编辑">vi 编辑</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年10月22日
-        </date>
-        
-        <div class="post-content">
-            字符串查找 a.查找一个字符串使用：“/你要查询的内容” b.查找下一个 ：“/你要查询的内容” 再输入”n“跳到下一个 字符串替换 a. 文件内全部替换： %s#abc#def#g（用def替换文件中所有的abc） 例如把一个文本文件里面的“linuxidc.com”全部替换成“linuxidc.……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-vim/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +398,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
     </li>
     
@@ -418,18 +437,6 @@
         <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -437,16 +444,18 @@
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
     
 </ul>
 

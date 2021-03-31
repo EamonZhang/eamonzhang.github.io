@@ -91,6 +91,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/nginx-log/" title="Nginx log 切割">Nginx log 切割</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月5日
+        </date>
+        
+        <div class="post-content">
+            Docker nginx 日志切割 docker 在运行 nginx 日志容器时，将日志挂载到实体机/var/log/nginx/* .log 中. 一般直接运行的nginx服务都会自带logrotate进行日志切分, 由docker方式安装的nginx 缺失日志切割功能! 添加logrotate cat /etc/logrotate.d/nginx /var/log/nginx/*.log { daily missingok rotate 52 compress delaycompress notifempty create 666 root root sharedscripts postrotate # [ -f /var/run/nginx.pid ] &amp;&amp; kill……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/nginx-log/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/vsftp/" title="Centos FTP 服务">Centos FTP 服务</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月5日
+        </date>
+        
+        <div class="post-content">
+            利用vsftpd 搭建FTP 服务器 安装 yum -y install vsftpd 添加用户及设置密码 useradd -s /sbin/nologin -d /home/ftp_test ftp_test passwd ftp_test -s 禁止ssh登录主机 -d 设置ftp_test 用户home 目录，用于存放数据 基础配置 vi /etc/vsftpd/vsftpd.conf # 禁止匿名访问 anonymous_enable=NO # 禁止dns解析 reverse_lookup_enable=NO 启动&amp;开机自启 systemctl start vsftpd.service systemctl enable vsftpd.service filezilla 客户端验证 host: 服务器IP port: 默认 user: password: 测试本地上传，远……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/vsftp/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/log/" title="数据库日志">数据库日志</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月4日
+        </date>
+        
+        <div class="post-content">
+            介绍 PostgreSQL有3种日志，分别是pg_log（数据库运行日志）、pg_xlog（WAL 日志，即重做日志）、pg_clog（事务提交日志，记录的是事务的元数据） postgres 10 版本将文件目录结构改为 log，pg_wal，pg_xact log默认是关闭的，需要设置其参数。wal和xac……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/log/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/fio/" title="fio 硬盘性能测试">fio 硬盘性能测试</a>
             </h1>
         </header>
@@ -117,7 +165,7 @@
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/linux.html'>linux</a></span>
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
             
         </div>
         
@@ -205,61 +253,6 @@
             流计算数据库产品 pipelineDB * 推荐数据库产品 recDB 时序数据库 timescaleDB * 分布式数据库插件 citus * 列存储插件 IMCS, cstore等 面向OLAP的codegen数据库 pg_LLVM 向量计算插件 vops 数据库性能分析 pg_stat_statements pg_buffercache 直接访问数据库文件系统 adminpack 加密数据 pgcrypto 预热缓存 pg_prewarm 检查存储，特别是表膨胀 pgstattuple 模糊搜索 pg_trgm 连接到远程服务器 postgres_fdw k近邻（KNN）搜索……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/extention/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/params/" title="数据库参数">数据库参数</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月27日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres.html'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            性能参数 pgtune pgconfig 日志参数 更多参数详解 管理 listen_addresses = &quot;*&quot; # 连接访问控制，哪些ip可以访问， * 全部。 结合pg_hba.conf , iptables设置。 superuser_reserved_connections = 3 # 预留给超级管理员的连接数。 port = 5432 # 默认访问端口 wal_keep_segments = 1024 # wal 日志保存数量 wal日志 wal_log_hints = on full_page_writes = on 成本因子 # - Planner Cost Constants - #seq_page_cost = 1.0 # measured on an arbitrary scale 顺序扫描 random_page_cost……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/params/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/tidb/lsm/" title="LSM Overview">LSM Overview</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月26日
-        </date>
-        
-        <div class="post-content">
-            介绍 LSM-Tree，全称为 log-structured merge-tree，是为了满足日益增长的数据量所带来的高效写性能的需求而提出的设计。考虑到磁盘随机写和顺序写上千倍的性能差距，传统的Btree 结构设计采取的分散的 update-in-place 策略在数据量庞大、写缓存作用有限的情况下，存在大批量的随机写操作，使得写性能完全满足……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/tidb/lsm/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/haproxy/" title="Haproxy 算法">Haproxy 算法</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月26日
-        </date>
-        
-        <div class="post-content">
-            blance roundrobin # 轮询，软负载均衡基本都具备这种算法 balance static-rr # 根据权重，建议使用 balance leastconn # 最少连接者先处理，建议使用 balance source # 根据请求源IP，建议使用 balance uri # 根据请求的URI balance url_param，# 根据请求的URl参数&rsquo;balance url_param' requires an URL parameter name balance hdr(name) # 根据HTTP请求头来锁定每一次HTTP请求……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/haproxy/">阅读全文</a></p>
     </article>
     
     
@@ -398,6 +391,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
     </li>
     
@@ -425,18 +430,6 @@
         <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -444,16 +437,18 @@
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
     
 </ul>
 

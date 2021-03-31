@@ -91,6 +91,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/cgroup-namespaces/" title="Cgroup Namespaces">Cgroup Namespaces</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月2日
+        </date>
+        
+        <div class="post-content">
+            cgroup 实现资源限额 cgroup 全称 Control Group。Linux 操作系统通过 cgroup 可以设置进程使用 CPU、内存 和 IO 资源的限额。 在启动容器时可使用参数 docker run &ndash;blkio-weight-device &ndash;cpu-shares &ndash;memory 等 。 ll /sys/fs/cgroup/cpu/docker/ ll /sys/fs/cgroup/memory/docker ll /sys/fs/cgroup/blkio/docker namespace 实现资源隔离 Mount Mount namespace 让容器看上去拥有整个文件系统。 容器有自己的 / 目录，可以执行 mount 和 umount 命令。当然我们知道这些操作只在当前容器中生效，……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/cgroup-namespaces/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/dumb-init/" title="Dumb Init">Dumb Init</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月1日
+        </date>
+        
+        <div class="post-content">
+            基础概念 孤儿进程：一个父进程退出，而它的一个或多个子进程还在运行，那么那些子进程将成为孤儿进程。孤儿进程将被init进程(进程号为1)所收养，并由init进程对它们完成状态收集工作。 僵尸进程：一个进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或waitpi……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/dumb-init/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/proxy/" title="代理">代理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月31日
+        </date>
+        
+        <div class="post-content">
+            科普 正向代理 对服务端来说是无感的，服务端无需配置，要在客户端指定。代理的是客户端。 访问原来无法访问的资源 用作缓存，加速访问速度 对客户端访问授权，上网进行认证 代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息 反向代理 对客户端来说的无感的，客户端无需配置，要在服务端实现。代理……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/proxy/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/backup_restore/" title="数据库备份和恢复">数据库备份和恢复</a>
             </h1>
         </header>
@@ -198,54 +246,6 @@
             需求 有些时候我们只想下载项目中的部分文件或文件夹下面的内容，而不是整个项目。这个时候使用git clone难免有些过重。 是时候来寻找一个合适的方式来满足我们的需求了。这就是Sparse Checkout模式 具体方法 比如我只想下载 https://github.com/bodani/bodani.github.io.git 中的k8s 目录的内容 mkdir gitSparse cd gitSparse git init git remote add -f origin https://github.com/bodani/bodani.github.io.git git config core.sparsecheckout true echo……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/linux/git-sparsecheckout/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/go/install/" title="Go 语言安装及配置">Go 语言安装及配置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月23日
-        </date>
-        
-        <div class="post-content">
-            1.下载安装包 https://golang.org/dl/ https://golang.google.cn/dl/ 将下载的二进制包解压至 /usr/local目录 2.配置环境变量 cat /etc/profile.d/go.sh export GOROOT=/usr/local/go export GOPATH=~/golib:~/goproject export GOBIN=~/gobin export PATH=$PATH:$GOROOT/bin:$GOBIN export GOPROXY=https://goproxy.cn export GO111MODULE=on 说明: GOROOT go安装包存放位置 GOPATH 工作区，多个工作区之间用冒号间隔 GOBIN 可执行文件目录 PATH 系统环境变量 Goproxy 中国完全实现了 Go 的模块代理协议。并且它是一个由中国备受信赖的云服务提供商七牛云支……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/go/install/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/letusencrypt/" title="Let&#39;s Encrypt 通配符证书">Let&#39;s Encrypt 通配符证书</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月22日
-        </date>
-        
-        <div class="post-content">
-            1.介绍 什么是 Let&rsquo;s Encrypt？ 部署 HTTPS 网站的时候需要证书，证书由 CA 机构签发，大部分传统 CA 机构签发证书是需要收费的，这不利于推动 HTTPS 协议的使用。 Let&rsquo;s Encrypt 也是一个 CA 机构，但这个 CA 机构是免费的！也就是说签发证书不需要任何费用。 Let&rsquo;s Encrypt 由于是非盈利性的组织，需要控制开支，他们搞了一个非常有创意的事……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/letusencrypt/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/cert/" title="自签名证书">自签名证书</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月22日
-        </date>
-        
-        <div class="post-content">
-            1.环境预备 curl -s -L -o /usr/local/bin/cfssl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 curl -s -L -o /usr/local/bin/cfssljson https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 chmod +x /usr/local/bin/{cfssl,cfssljson} 2.生成配置模板 三类证书：服务器证书server cert，客户端证书client cert，对等证书peer cert(表示既是server cert又是client cert) cfssl print-defaults config &gt; ca-config.json cat ca-config.json { &quot;signing&quot;: { &quot;default&quot;: { &quot;expiry&quot;: &quot;168h&quot; }, &quot;profiles&quot;: { &quot;www&quot;: { &quot;expiry&quot;: &quot;8760h&quot;, &quot;usages&quot;: [ &quot;signing&quot;, &quot;key encipherment&quot;, &quot;server auth&quot; ] }, &quot;client&quot;: { &quot;expiry&quot;: &quot;8760h&quot;, &quot;usages&quot;: [ &quot;signing&quot;, &quot;key……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/cert/">阅读全文</a></p>
     </article>
     
     
@@ -371,6 +371,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
     </li>
     
@@ -398,18 +410,6 @@
         <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -417,16 +417,18 @@
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
     
 </ul>
 

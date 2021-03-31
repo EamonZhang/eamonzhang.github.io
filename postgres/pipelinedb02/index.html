@@ -91,7 +91,118 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#项目已经停止维护">项目已经停止维护</a></li>
+      </ul>
+    </li>
+    <li><a href="#基本概念">基本概念</a>
+      <ul>
+        <li><a href="#流stream">流(Stream)</a></li>
+        <li><a href="#流视图">流视图</a></li>
+      </ul>
+    </li>
+    <li><a href="#支持特性">支持特性</a></li>
+    <li><a href="#滑窗sliding-windows">滑窗(Sliding Windows)</a></li>
+    <li><a href="#安装-base-on-centos7postgres10">安装 base on centos7&amp;postgres10</a></li>
+    <li><a href="#一个简单的例子">一个简单的例子</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -103,36 +214,42 @@
         
         
         
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
         <div class="post-content">
-            <h5 id="项目已经停止维护">项目已经停止维护</h5>
+            <h3 id="项目已经停止维护">项目已经停止维护</h3>
 <p>适配支持版本</p>
 <pre><code>PostgreSQL 10: 10.1, 10.2, 10.3, 10.4, 10.5
 PostgreSQL 11: 11.0
-</code></pre><h4 id="基本概念">基本概念</h4>
-<h5 id="流stream">流(Stream)</h5>
+</code></pre><h2 id="基本概念">基本概念</h2>
+<h3 id="流stream">流(Stream)</h3>
 <p>流是基础，Continuous Views和transform则是基于流中的数据进行处理的手段。
 对于同一份数据，只需要定义一个流，写入一份即可。
 如果对同一份数据有多个维度的统计，可以写在一条SQL完成的（如同一维度的运算或者可以支持窗口的多维度运算），只需定义一个Continuous Views或transform。如果不能在同一条SQL中完成计算，则定义多个Continuous Views或transform即可。
 如果有多份数据来源（例如设计时就已经区分了不同的表）时，定义不同的流即可；</p>
-<h5 id="流视图">流视图</h5>
+<h3 id="流视图">流视图</h3>
 <p>流视图，其实就是定义统计分析的QUERY， 例如select id, count(*), avg(x), &hellip; from stream_1 group by &hellip;; 就属于一个流视图。
 定义好之后，数据插入流(stream_1)，这个流视图就会不断增量的进行统计，你只要查询这个流视图，就可以查看到实时的统计结果。
 数据库中存储的是实时统计的结果（实际上是在内存中进行增量合并的，增量的方式持久化）。</p>
-<h5 id="transforms">Transforms</h5>
+<h4 id="transforms">Transforms</h4>
 <p>与流视图不同的是，transform是用来触发事件的，所以它可以不保留数据，但是可以设定条件，当记录满足条件时，就触发事件。
 例如监视传感器的值，当值的范围超出时，触发报警（如通过REST接口发给指定的server），或者将报警记录下来（通过触发器函数）。</p>
-<h5 id="支持特性">支持特性</h5>
+<h2 id="支持特性">支持特性</h2>
 <p>pipelinedb继承了PostgreSQL很好的扩展性，例如支持了概率统计相关的功能，例如HLL等。用起来也非常的爽，例如统计网站的UV，或者红绿灯通过的汽车编号唯一值车流，通过手机信号统计基站辐射方圆多少公里的按时UV等。
 Bloom Filter <br>
 Count-Min Sketch <br>
 Filtered-Space Saving Top-K <br>
 HyperLogLog <br>
 T-Digest</p>
-<h5 id="滑窗sliding-windows">滑窗(Sliding Windows)</h5>
+<h2 id="滑窗sliding-windows">滑窗(Sliding Windows)</h2>
 <p>因为很多场景的数据有时效，或者有时间窗口的概念，所以pipelinedb提供了窗口分片的接口，允许用户对数据的时效进行定义。
 例如仅仅统计最近一分钟的时间窗口内的统计数据。
 比如热力图，展示最近一分钟的热度，对于旧的数据不关心，就可以适应SW进行定义，从而保留的数据少，对机器的要求低，效率还高。</p>
-<h4 id="安装-base-on-centos7postgres10">安装 base on centos7&amp;postgres10</h4>
+<h2 id="安装-base-on-centos7postgres10">安装 base on centos7&amp;postgres10</h2>
 <pre><code>add repository
 curl -s http://download.pipelinedb.com/yum.sh | sudo bash
 
@@ -156,7 +273,7 @@ CREATE EXTENSION pipelinedb
         名称        | 版本  |  架构模式  |                               描述                                
 --------------------+-------+------------+-------------------------------------------------------------------
  pipelinedb         | 1.0.0 | public     | PipelineDB
-</code></pre><h4 id="一个简单的例子">一个简单的例子</h4>
+</code></pre><h2 id="一个简单的例子">一个简单的例子</h2>
 <pre><code>创建一个流
 
 CREATE  FOREIGN TABLE  s1 (id int, val int) SERVER pipelinedb;  // 理解为学生Id，成绩
@@ -379,6 +496,18 @@ pipelinedb=# \d+ v1_seq
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
     </li>
     
@@ -406,18 +535,6 @@ pipelinedb=# \d+ v1_seq
         <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -425,16 +542,18 @@ pipelinedb=# \d+ v1_seq
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/categories.html'>分类</a></h3>
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
     
 </ul>
 
