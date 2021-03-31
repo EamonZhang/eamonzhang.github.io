@@ -69,8 +69,8 @@ toc: true
 
 ## 服务进程
 
-- [checkpoint](/postgres/checkpoint)
-- background
+- [CheckPoint](/postgres/checkpoint)
+- [Backgroud Writer](/postgres/bgwriter)
 - wal writer
 - stat collector
 - logger 
