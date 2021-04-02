@@ -35,6 +35,15 @@
     </item>
     
     <item>
+      <title>Patroni 高可用管理进阶</title>
+      <link>https://zhangeamon.top/postgres/patroni02/</link>
+      <pubDate>Fri, 05 Mar 2021 17:06:18 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/patroni02/</guid>
+      <description>完成目标 主从同步策略 异地多机房策略 failover 触发详情 访问认证 watch-dog 配置文件详情 fencing DCS 失效处理 加入节点复制数据限流 主从切换流量,避免重新拉取 级联复制 callback 日志&amp;amp;监控 主从同步策略 数据库主从之间同步类型 Synchronous state of this standby server. Possible values are: async: This standby server is asynchronous. potential: This standby server is now asynchronous, but can potentially become synchronous if one of current synchronous ones fails. sync: This standby server is synchronous. quorum: This standby server is considered as</description>
+    </item>
+    
+    <item>
       <title>数据库优化思考-性能优化</title>
       <link>https://zhangeamon.top/postgres/thinking_in_db_performance/</link>
       <pubDate>Fri, 26 Feb 2021 13:33:23 +0800</pubDate>

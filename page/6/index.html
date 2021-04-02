@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/syslog/" title="系统日志 syslog">系统日志 syslog</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月9日
+        </date>
+        
+        <div class="post-content">
+            ……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/syslog/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/network-security/audit/" title="日志审计 audit">日志审计 audit</a>
             </h1>
         </header>
@@ -194,6 +210,13 @@
             2020年4月16日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
         <div class="post-content">
             Django使用postgresql做数据库 db_index创建索引时会创建第二个索引varchar_pattern_ops问题 创建默认索引 minion_id = models.CharField(max_length=100, db_index=True, blank=True, null=False, default=&quot;&quot;) 当字段类型是 models.CharField 或者 models.TextField 时 使用 db_index=True创建索引 会创建第二索引 django.db.backends.postgresql.schema class DatabaseSchemaEditor(BaseDatabaseSchemaEditor): sql_alter_column_type = &quot;ALTER COLUMN %(column)s TYPE %(type)s USING %(column)s::%(type)s&quot; sql_create_sequence = &quot;CREATE SEQUENCE %(sequence)s&quot; sql_delete_sequence = &quot;DROP SEQUENCE IF EXISTS %(sequence)s CASCADE&quot; sql_set_sequence_max……
         </div>
@@ -230,22 +253,6 @@
             日常管理 可用性 监测项 可用性 主从 HA 全量备份 增量备份 恢复 监测项 磁盘空间 全库 select pg_size_pretty(sum(pg_database_size(oid))) from pg_database; 数据库 select datname, pg_size_pretty(pg_database_size(oid)) from pg_database order by pg_database_size(oid) desc limit 10; 表总 SELECT table_schema || '.' || table_name AS table_full_name, pg_size_pretty(pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;')) AS size FROM information_schema.tables where table_schema = 'public' ORDER BY pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;') DESC limit 10; 表 索引 冷热数据 上次统计信息更新时间 热表dml qps io 热表qdml 冷数据 冷索引 索引利用 全表扫描次数……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/daily_management/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/lock_wait/" title="锁等待">锁等待</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月27日
-        </date>
-        
-        <div class="post-content">
-            锁等待场景 一个事务尚未执行提交时持有锁，当另一个事务需要持有改行的锁时则需要等待。 Session 1 postgres=# \d+ wt Table &quot;public.wt&quot; Column | Type | Collation | Nullable | Default | Storage | Stats target | Description --------+---------+-----------+----------+---------+----------+--------------+------------- id | integer | | | | plain | | t | text | | | | extended | | postgres=# begin; BEGIN postgres=# update wt set t = 'aaaa' where id = 1; UPDATE 1 postgres=# select pg_backend_pid(); pg_backend_pid ---------------- 20034 (1 row) Session 2 postgres=# begin ; BEGIN postgres=# update wt set t = 'bbbb' where id = 1; Session 3 select * from pg_stat_activity; -[ RECORD 3 ]----+---------------------------------------- datid | 436980 datname……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/lock_wait/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +391,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
@@ -419,10 +430,6 @@
         <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -433,13 +440,19 @@
         <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
     
@@ -454,6 +467,8 @@
 <div class="tagcloud">
     
     <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
     
     <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
     

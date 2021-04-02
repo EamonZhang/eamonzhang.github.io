@@ -91,7 +91,111 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#完成目标">完成目标</a></li>
+    <li><a href="#主从同步策略">主从同步策略</a></li>
+    <li><a href="#异地多机房策略">异地多机房策略</a></li>
+    <li><a href="#访问认证">访问认证</a></li>
+    <li><a href="#watch-dog">watch-dog</a></li>
+    <li><a href="#fencing">fencing</a></li>
+    <li><a href="#dcs失效处理">dcs失效处理</a></li>
+    <li><a href="#加入节点复制数据限流">加入节点复制数据限流</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -101,26 +205,39 @@
             2021年3月5日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
         
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
         
         <div class="post-content">
-            <h5 id="完成目标">完成目标</h5>
+            <h2 id="完成目标">完成目标</h2>
 <ul>
-<li><a href="postgres/patroni02/#%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5">主从同步策略</a></li>
-<li><a href="postgres/patroni02/#%E5%BC%82%E5%9C%B0%E5%A4%9A%E6%9C%BA%E6%88%BF%E7%AD%96%E7%95%A5">异地多机房策略</a></li>
+<li><a href="/postgres/patroni02/#%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5">主从同步策略</a></li>
+<li><a href="/postgres/patroni02/#%E5%BC%82%E5%9C%B0%E5%A4%9A%E6%9C%BA%E6%88%BF%E7%AD%96%E7%95%A5">异地多机房策略</a></li>
 <li><a href=".">failover 触发详情</a></li>
-<li><a href="postgres/patroni02/#%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81">访问认证</a></li>
-<li><a href="postgres/patroni02/#watch-dog">watch-dog</a></li>
+<li><a href="/postgres/patroni02/#%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81">访问认证</a></li>
+<li><a href="/postgres/patroni02/#watch-dog">watch-dog</a></li>
 <li>配置文件详情</li>
-<li><a href="postgres/patroni02/#fencing">fencing</a></li>
-<li><a href="postgres/patroni02/#dcs%E5%A4%B1%E6%95%88%E5%A4%84%E7%90%86">DCS 失效处理</a></li>
-<li><a href="postgres/patroni02/#%E5%8A%A0%E5%85%A5%E8%8A%82%E7%82%B9%E5%A4%8D%E5%88%B6%E6%95%B0%E6%8D%AE%E9%99%90%E6%B5%81">加入节点复制数据限流</a></li>
+<li><a href="/postgres/patroni02/#fencing">fencing</a></li>
+<li><a href="/postgres/patroni02/#dcs%E5%A4%B1%E6%95%88%E5%A4%84%E7%90%86">DCS 失效处理</a></li>
+<li><a href="/postgres/patroni02/#%E5%8A%A0%E5%85%A5%E8%8A%82%E7%82%B9%E5%A4%8D%E5%88%B6%E6%95%B0%E6%8D%AE%E9%99%90%E6%B5%81">加入节点复制数据限流</a></li>
 <li>主从切换流量,避免重新拉取</li>
 <li>级联复制</li>
 <li>callback</li>
 <li>日志&amp;监控</li>
 </ul>
-<h5 id="主从同步策略">主从同步策略</h5>
+<h2 id="主从同步策略">主从同步策略</h2>
 <p>数据库主从之间同步类型</p>
 <pre><code>Synchronous state of this standby server. Possible values are:
 async: This standby server is asynchronous.
@@ -157,7 +274,7 @@ patronictl -c /etc/patroni.yml list
 +-------------+------------+--------------+---------+----+-----------+------------------+
 | postgresql3 | 10.10.1.13 | Leader       | running | 31 |           |                  |
 +-------------+------------+--------------+---------+----+-----------+------------------+
-</code></pre><h5 id="异地多机房策略">异地多机房策略</h5>
+</code></pre><h2 id="异地多机房策略">异地多机房策略</h2>
 <p>A. 当异地节点为一个节点。</p>
 <ul>
 <li>备用机房节点在failover时不能选做主</li>
@@ -184,16 +301,19 @@ patronictl -c /etc/patroni.yml list
 <p>2 机房间网络延迟</p>
 <p>更合理的结构拓扑应该采用数据库级联复制模式</p>
 <p>Standby cluster</p>
-<h5 id="访问认证">访问认证</h5>
+<h2 id="访问认证">访问认证</h2>
 <ul>
-<li><a href="middleware/etcd_auth/">DSC 访问认证管理</a></li>
+<li><a href="/middleware/etcd_auth/">DSC 访问认证管理</a></li>
 </ul>
 <p>DSC 作为集群的配置管理中心，虽然不存储业务数据，但是安全性也是至关重要。</p>
-<ul>
+<pre><code>etcd 
+  username: 'user'
+  password: 'pwd'
+</code></pre><ul>
 <li>API 访问认证</li>
 </ul>
 <p>用于patroni可通过API 访问来进行管理，将端口暴露出来不加防护无疑是将管理权拱手相让。</p>
-<h5 id="watch-dog">watch-dog</h5>
+<h2 id="watch-dog">watch-dog</h2>
 <p>基本原理： 当patroni启动后会不停的向watch-dog发送心跳。当watch dog超过一定时间间隔没有收到心跳则认为patroni进程发生意外，watch dog重新系统。</p>
 <p>基本配置：</p>
 <pre><code>安装watchdog
@@ -207,7 +327,7 @@ ExecStartPre=-/usr/bin/sudo /bin/chown postgres /dev/watchdog
   mode: automatic # Allowed values: off, automatic, required
   device: /dev/watchdog
   safety_margin: 5
-</code></pre><h5 id="fencing">fencing</h5>
+</code></pre><h2 id="fencing">fencing</h2>
 <p>避免双主问题</p>
 <p>patroni 在主节点网络与dcs不通信发生故障时会降级为只读。但可能存在一个心跳周期的双主。</p>
 <p>更严格的方式是采用pg的同步模式，当主节点发现无任何可用的从库时写操作被hang住。</p>
@@ -217,7 +337,7 @@ patronictl edit-config -s 'synchronous_mode_strict:true'
 <p>pg 实现请自行结合 pg &lsquo;quorum&rsquo; 参数进行考量。具体结合业务数据安全等级要求。</p>
 <p>patroni</p>
 <pre><code>synchronous_node_count = 1 # default 1
-</code></pre><h5 id="dcs失效处理">dcs失效处理</h5>
+</code></pre><h2 id="dcs失效处理">dcs失效处理</h2>
 <p>首先当DCS失效后集群的反应：</p>
 <p>集群变为只读模式，原来集群中的所有pg服务都变为只读。主节点pg也被降级为只读。</p>
 <p>发生上述现在主要是patroni的failover机制。</p>
@@ -237,7 +357,7 @@ retry_timeout: timeout for DCS and PostgreSQL operation retries (in seconds). DC
 <pre><code>
 具体方法 
 
-</code></pre><h5 id="加入节点复制数据限流">加入节点复制数据限流</h5>
+</code></pre><h2 id="加入节点复制数据限流">加入节点复制数据限流</h2>
 <p>pg 流复制新加入节点限流</p>
 <pre><code>pg_basebackup -r
 </code></pre><p><a href="https://zhuanlan.zhihu.com/p/260958352">https://zhuanlan.zhihu.com/p/260958352</a></p>
@@ -337,6 +457,10 @@ retry_timeout: timeout for DCS and PostgreSQL operation retries (in seconds). DC
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
@@ -372,10 +496,6 @@ retry_timeout: timeout for DCS and PostgreSQL operation retries (in seconds). DC
         <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -386,13 +506,19 @@ retry_timeout: timeout for DCS and PostgreSQL operation retries (in seconds). DC
         <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
     
@@ -407,6 +533,8 @@ retry_timeout: timeout for DCS and PostgreSQL operation retries (in seconds). DC
 <div class="tagcloud">
     
     <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
     
     <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
     

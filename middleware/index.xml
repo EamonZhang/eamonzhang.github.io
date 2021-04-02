@@ -6,7 +6,16 @@
     <description>Recent content in Middlewares on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 29 Jan 2021 09:37:26 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/middleware/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Apr 2021 15:26:49 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/middleware/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置管理 confd</title>
+      <link>https://zhangeamon.top/middleware/confd/</link>
+      <pubDate>Fri, 02 Apr 2021 15:26:49 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/confd/</guid>
+      <description>https://github.com/kelseyhightower/confd 配置信息存放在ectd KV存储中 更新 ectd 中的内容， confd 负责将变更同步到本地服务配置文件，并通知本地服务进行重新加载重启等。</description>
+    </item>
+    
     <item>
       <title>etcd 访问控制</title>
       <link>https://zhangeamon.top/middleware/etcd_auth/</link>

@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/install/" title="Redis 6.0安装配置管理">Redis 6.0安装配置管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年6月12日
+        </date>
+        
+        <div class="post-content">
+            安装 yum 方式 yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm yum --enablerepo=remi install redis make 方式 升级gcc 版本临时生效,否则编译错误 yum -y install centos-release-scl yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils scl enable devtoolset-9 bash wget http://download.redis.io/releases/redis-6.0.1.tar.gz tar -xvf redis-6.0.1.tar.gz cd /usr/local/redis-6.0.1/ make PREFIX=/usr/local/redis install 启动 systemctl start redis systemctl enalbe redis 配置 系统参数 vi /etc/sysctl.conf net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1 kernel.shmmax = 68719476736 kernel.shmall = 4294967296 net.core.netdev_max_backlog = 262144 net.core.somaxconn = 40960 net.ipv4.tcp_max_orphans = 3276800 net.ipv4.tcp_max_syn_backlog = 262144 服务参数 vi /etc/redis.conf daemonize yes pidfile /var/run/redis.pid bind 0.0.0.0 timeout 300 #当客户端闲置多长时间后关闭连接，如果指定为0，表示永不……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/install/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/istio/servicediscovery/" title="服务发现">服务发现</a>
             </h1>
         </header>
@@ -210,6 +226,13 @@
             2020年5月12日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
         <div class="post-content">
             https://www.cnblogs.com/thismyblogs/p/9855801.html……
         </div>
@@ -230,22 +253,6 @@
             禁用root登陆 注意： 创建一个非root用户 并加入wheel用户组（拥有sudo权限） useradd NewUser passwd NewUser gpasswd -a NewUser wheel 本地禁用root登陆 修改/etc/pam.d/login文件增加下面一行 auth required pam_succeed_if.so user != root quiet 远程禁用root登陆 修改 /etc/ssh/sshd_config #PermitRootLogin yes PermitRootLogin no 修改ssh默认端口 修改 /etc/ssh/sshd_config #Port 22 Port 46608 安全认证 LoginGraceTime 2m PermitRootLogin no #StrictModes yes #MaxAuthTries 6 #MaxSessions……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/network-security/linux-user-passw/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/syslog/" title="系统日志 syslog">系统日志 syslog</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月9日
-        </date>
-        
-        <div class="post-content">
-            ……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/syslog/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +391,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
@@ -419,10 +430,6 @@
         <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -433,13 +440,19 @@
         <h3 class="widget-title"><a href='/categories'>分类</a></h3>
 <ul class="widget-list">
     
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (12)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
     
@@ -454,6 +467,8 @@
 <div class="tagcloud">
     
     <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
     
     <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
     

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>配置管理 on 故乡的云☁️</title>
+    <link>https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/</link>
+    <description>Recent content in 配置管理 on 故乡的云☁️</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 02 Apr 2021 15:26:49 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置管理 confd</title>
+      <link>https://zhangeamon.top/middleware/confd/</link>
+      <pubDate>Fri, 02 Apr 2021 15:26:49 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/confd/</guid>
+      <description>https://github.com/kelseyhightower/confd 配置信息存放在ectd KV存储中 更新 ectd 中的内容， confd 负责将变更同步到本地服务配置文件，并通知本地服务进行重新加载重启等。</description>
+    </item>
+    
+  </channel>
+</rss>
