@@ -2,6 +2,7 @@
 title: "学习参考"
 date: 2018-12-07T11:24:11+08:00
 draft: false
+categories: ["python"]
 ---
 
 

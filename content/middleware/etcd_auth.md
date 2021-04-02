@@ -3,7 +3,7 @@ title: "etcd 访问控制"
 date: 2021-01-29T09:37:26+08:00
 draft: false
 toc: true
-categories: ["etcd"]
+categories: ["etcd","中间件"]
 ---
 
 ## 介绍

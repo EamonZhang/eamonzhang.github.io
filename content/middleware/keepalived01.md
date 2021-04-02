@@ -2,6 +2,7 @@
 title: "Keepalived 问题集"
 date: 2018-11-05T10:08:23+08:00
 draft: false
+categories: ["中间件"]
 ---
 
 - Q1 

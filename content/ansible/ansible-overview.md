@@ -2,6 +2,7 @@
 title: "Ansible Overview"
 date: 2018-10-25T09:16:22+08:00
 draft: false
+categories: ["ansible"]
 ---
 
 + 主要模块

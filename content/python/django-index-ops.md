@@ -2,11 +2,12 @@
 title: "django 默认创建第二索引"
 date: 2020-04-16T11:40:02+08:00
 draft: false
+categories: ["python"]
 ---
 
-##### Django使用postgresql做数据库 db_index创建索引时会创建第二个索引varchar_pattern_ops问题
+## Django使用postgresql做数据库 db_index创建索引时会创建第二个索引varchar_pattern_ops问题
 
-##### 创建默认索引
+## 创建默认索引
 ```
 minion_id = models.CharField(max_length=100, db_index=True, blank=True, null=False, default="")
 ```
@@ -66,7 +67,7 @@ class DatabaseSchemaEditor(BaseDatabaseSchemaEditor):
 
 ```
 
-##### 自定义索引
+## 自定义索引
 
 若不需要创建运算符类text_pattern_ops，varchar_pattern_ops 索引，改用：索引的基类 django.db.models.indexes.Index（fields，name）通过模型的Meta类中的索引选项使用它们
 
@@ -86,7 +87,7 @@ class Person(models.Model):
         ]
 ```
 
-##### 组合索引
+## 组合索引
 
 ```
 from django.db import models
@@ -104,7 +105,7 @@ class Person(models.Model):
         ]
 ```
 
-##### 其他类型索引
+## 其他类型索引
 
 非btree类型索引的创建
 

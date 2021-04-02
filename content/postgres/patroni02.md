@@ -1,26 +1,28 @@
 ---
 title: "Patroni 高可用管理进阶"
 date: 2021-03-05T17:06:18+08:00
+categories: ["postgres"]
+toc : true
 draft: false
 ---
 
-##### 完成目标
+## 完成目标
 
-- [主从同步策略](postgres/patroni02/#主从同步策略)
-- [异地多机房策略](postgres/patroni02/#异地多机房策略)
+- [主从同步策略](/postgres/patroni02/#主从同步策略)
+- [异地多机房策略](/postgres/patroni02/#异地多机房策略)
 - [failover 触发详情](.)
-- [访问认证](postgres/patroni02/#访问认证)
-- [watch-dog](postgres/patroni02/#watch-dog)
+- [访问认证](/postgres/patroni02/#访问认证)
+- [watch-dog](/postgres/patroni02/#watch-dog)
 - 配置文件详情
-- [fencing](postgres/patroni02/#fencing)
-- [DCS 失效处理](postgres/patroni02/#dcs失效处理)
-- [加入节点复制数据限流](postgres/patroni02/#加入节点复制数据限流)
+- [fencing](/postgres/patroni02/#fencing)
+- [DCS 失效处理](/postgres/patroni02/#dcs失效处理)
+- [加入节点复制数据限流](/postgres/patroni02/#加入节点复制数据限流)
 - 主从切换流量,避免重新拉取
 - 级联复制
 - callback
 - 日志&监控
 
-##### 主从同步策略
+## 主从同步策略
 
 数据库主从之间同步类型
 ```
@@ -70,7 +72,7 @@ patronictl -c /etc/patroni.yml list
 +-------------+------------+--------------+---------+----+-----------+------------------+
 ```
 
-##### 异地多机房策略
+## 异地多机房策略
 
 A. 当异地节点为一个节点。
 
@@ -110,17 +112,23 @@ B. 当异地节点为多个节点时
 
  Standby cluster
 
-##### 访问认证
+## 访问认证
 
-- [DSC 访问认证管理](middleware/etcd_auth/)
+- [DSC 访问认证管理](/middleware/etcd_auth/)
 
 DSC 作为集群的配置管理中心，虽然不存储业务数据，但是安全性也是至关重要。
+
+```
+etcd 
+  username: 'user'
+  password: 'pwd'
+```
 
 - API 访问认证
 
 用于patroni可通过API 访问来进行管理，将端口暴露出来不加防护无疑是将管理权拱手相让。
 
-##### watch-dog 
+## watch-dog 
 
 基本原理： 当patroni启动后会不停的向watch-dog发送心跳。当watch dog超过一定时间间隔没有收到心跳则认为patroni进程发生意外，watch dog重新系统。
 
@@ -146,7 +154,7 @@ watchdog:
   safety_margin: 5
 ```
 
-##### fencing
+## fencing
 
 避免双主问题
 
@@ -167,7 +175,7 @@ patroni
 synchronous_node_count = 1 # default 1
 ```
 
-##### dcs失效处理
+## dcs失效处理
 
 首先当DCS失效后集群的反应：
 
@@ -198,7 +206,7 @@ retry_timeout: timeout for DCS and PostgreSQL operation retries (in seconds). DC
 
 ```
 
-##### 加入节点复制数据限流
+## 加入节点复制数据限流
 
 pg 流复制新加入节点限流 
 

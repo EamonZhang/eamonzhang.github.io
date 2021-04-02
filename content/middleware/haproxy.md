@@ -2,6 +2,7 @@
 title: "Haproxy 算法"
 date: 2018-11-26T08:53:09+08:00
 draft: false
+categories: ["中间件"]
 ---
 
 1. blance roundrobin # 轮询，软负载均衡基本都具备这种算法 

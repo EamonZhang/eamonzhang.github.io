@@ -2,6 +2,7 @@
 title: "Ansible Playbooks"
 date: 2018-10-25T15:47:50+08:00
 draft: false
+categories: ["ansible"]
 ---
 #### Playbook核心元素
 

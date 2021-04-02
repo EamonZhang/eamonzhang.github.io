@@ -2,6 +2,7 @@
 title: "Consul DNS 服务发现"
 date: 2020-06-29T11:09:52+08:00
 draft: false
+categories: ["中间件"]
 ---
 
 #### 实现目标

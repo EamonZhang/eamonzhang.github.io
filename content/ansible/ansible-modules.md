@@ -2,6 +2,7 @@
 title: "Ansible Modules"
 date: 2018-10-25T10:12:59+08:00
 draft: false
+categories: ["ansible"]
 ---
 
 ##### 准备工作

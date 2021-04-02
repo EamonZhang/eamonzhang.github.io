@@ -2,6 +2,7 @@
 title: "Ansible Roles"
 date: 2018-10-29T14:09:08+08:00
 draft: false
+categories: ["ansible"]
 ---
 
 以特定的层级目录结构进行组织的tasks、variables、handlers、templates、files等

@@ -2,6 +2,7 @@
 title: "nginx"
 date: 2019-04-09T15:42:15+08:00
 draft: false
+categories: ["中间件"]
 ---
 
 [性能优化](https://mp.weixin.qq.com/s/YoZDzY4Tmj8HpQkSgnZLvA)

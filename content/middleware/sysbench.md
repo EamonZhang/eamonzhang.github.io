@@ -2,6 +2,7 @@
 title: "Sysbench 测试"
 date: 2018-11-16T19:25:45+08:00
 draft: false
+categories: ["中间件"]
 ---
 
 ##### 下载安装 1.0.15 [sysbench官网](https://github.com/akopytov/sysbench)

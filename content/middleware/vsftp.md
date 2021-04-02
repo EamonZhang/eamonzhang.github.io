@@ -2,6 +2,7 @@
 title: "Centos FTP 服务"
 date: 2018-12-05T09:24:29+08:00
 draft: false
+categories: ["中间件"]
 ---
 
 #### 利用vsftpd 搭建FTP 服务器
