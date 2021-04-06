@@ -2,9 +2,10 @@
 title: "pg_rman 备份恢复数据库"
 date: 2021-03-09T13:35:31+08:00
 draft: false
+categories: ["postgres"]
 ---
 
-##### 适用场景
+## 适用场景
 
 PG_RMAN 基于本地数据拷贝的方式，要求与数据库需要安装在同一个机器节点上。
 
@@ -17,7 +18,7 @@ PG_RMAN 支持全备份，增量备份，备份验证，保留策略等
 应用软件包地址
 https://github.com/ossc-db/pg_rman/releases
 
-###### 基本用法
+## 基本用法
 
 ```
 -- 初始化

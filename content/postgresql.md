@@ -83,6 +83,7 @@ toc: true
 - [时间点恢复](/postgres/pitr)
 - [误操作闪回](/postgres/reback)
 - [使用PG_RMAN管理备份恢复](/postgres/pg_rman)
+- [wal-g 应用](/postgres/wal-g)
 - 使用pgbakrest备份恢复
 
 ## 高可用
