@@ -101,17 +101,24 @@
             2021年3月9日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
         
         
         <div class="post-content">
-            <h5 id="适用场景">适用场景</h5>
+            <h2 id="适用场景">适用场景</h2>
 <p>PG_RMAN 基于本地数据拷贝的方式，要求与数据库需要安装在同一个机器节点上。</p>
 <p>适用于项目初期，对数据库的规划处于初级阶段。实体机不充分的情况是个很好的选择。</p>
 <p>数据库使用ssd盘，备份磁盘采用企业sata大盘。或nfs网盘等。</p>
 <p>PG_RMAN 支持全备份，增量备份，备份验证，保留策略等</p>
 <p>应用软件包地址
 <a href="https://github.com/ossc-db/pg_rman/releases">https://github.com/ossc-db/pg_rman/releases</a></p>
-<h6 id="基本用法">基本用法</h6>
+<h2 id="基本用法">基本用法</h2>
 <pre><code>-- 初始化
 /usr/pgsql-13/bin/pg_rman -D /var/lib/pgsql/13/data/  -B /data/backup/ init
 
@@ -295,7 +302,7 @@ pg_rman restore -B /pgdata/backup -D /var/lib/pgsql/13/data/
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (13)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (16)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     
