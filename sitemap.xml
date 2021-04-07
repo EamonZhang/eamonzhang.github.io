@@ -3,7 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zhangeamon.top/categories/</loc>
-    <lastmod>2021-04-02T15:26:49+08:00</lastmod>
+    <lastmod>2021-04-07T10:12:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/postgres/repmgr/</loc>
+    <lastmod>2021-04-07T10:12:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/postgres/</loc>
+    <lastmod>2021-04-07T10:12:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/categories/postgres/</loc>
+    <lastmod>2021-04-07T10:12:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/</loc>
+    <lastmod>2021-04-07T10:12:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/python/</loc>
+    <lastmod>2021-04-06T17:20:07+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/python/module-argparse/</loc>
+    <lastmod>2021-04-06T17:20:07+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/middleware/</loc>
     <lastmod>2021-04-02T15:26:49+08:00</lastmod>
@@ -14,9 +32,6 @@
     <loc>https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</loc>
     <lastmod>2021-04-02T15:26:49+08:00</lastmod>
   </url><url>
-    <loc>https://zhangeamon.top/</loc>
-    <lastmod>2021-04-02T15:26:49+08:00</lastmod>
-  </url><url>
     <loc>https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2021-04-02T15:26:49+08:00</lastmod>
   </url><url>
@@ -24,12 +39,6 @@
     <lastmod>2021-04-02T15:26:49+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/postgres/bgwriter/</loc>
-    <lastmod>2021-03-31T15:13:50+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/postgres/</loc>
-    <lastmod>2021-03-31T15:13:50+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/categories/postgres/</loc>
     <lastmod>2021-03-31T15:13:50+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/postgres/view_pg_stat_bgwriter/</loc>
@@ -218,9 +227,6 @@
     <loc>https://zhangeamon.top/categories/python/</loc>
     <lastmod>2020-05-12T11:28:53+08:00</lastmod>
   </url><url>
-    <loc>https://zhangeamon.top/python/</loc>
-    <lastmod>2020-05-12T11:28:53+08:00</lastmod>
-  </url><url>
     <loc>https://zhangeamon.top/network-security/linux-user-passw/</loc>
     <lastmod>2020-05-09T16:20:05+08:00</lastmod>
   </url><url>
@@ -340,6 +346,12 @@
   </url><url>
     <loc>https://zhangeamon.top/middleware/bind9/</loc>
     <lastmod>2019-04-04T15:14:47+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/about/</loc>
+    <lastmod>2019-03-30T21:44:14+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/about/design/</loc>
+    <lastmod>2019-03-30T21:44:14+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/linux/tcpdump/</loc>
     <lastmod>2019-03-19T13:25:27+08:00</lastmod>
@@ -533,6 +545,9 @@
     <loc>https://zhangeamon.top/linux/hdparm/</loc>
     <lastmod>2018-12-19T08:53:10+08:00</lastmod>
   </url><url>
+    <loc>https://zhangeamon.top/about/3brothers/</loc>
+    <lastmod>2018-12-17T14:28:31+08:00</lastmod>
+  </url><url>
     <loc>https://zhangeamon.top/postgres/normal-form/</loc>
     <lastmod>2018-12-17T10:27:04+08:00</lastmod>
   </url><url>
@@ -611,6 +626,9 @@
     <loc>https://zhangeamon.top/postgres/extention/</loc>
     <lastmod>2018-11-27T15:20:33+08:00</lastmod>
   </url><url>
+    <loc>https://zhangeamon.top/about/en/</loc>
+    <lastmod>2018-11-27T10:15:16+08:00</lastmod>
+  </url><url>
     <loc>https://zhangeamon.top/postgres/params/</loc>
     <lastmod>2018-11-27T09:57:27+08:00</lastmod>
   </url><url>
@@ -683,6 +701,9 @@
     <loc>https://zhangeamon.top/middleware/proxy/</loc>
     <lastmod>2018-10-31T14:42:10+08:00</lastmod>
   </url><url>
+    <loc>https://zhangeamon.top/about/favorites/</loc>
+    <lastmod>2018-10-31T09:55:24+08:00</lastmod>
+  </url><url>
     <loc>https://zhangeamon.top/postgres/backup_restore/</loc>
     <lastmod>2018-10-30T10:18:57+08:00</lastmod>
   </url><url>
@@ -746,10 +767,13 @@
     <loc>https://zhangeamon.top/postgres/install01/</loc>
     <lastmod>2018-10-17T14:37:56+08:00</lastmod>
   </url><url>
+    <loc>https://zhangeamon.top/about/tech/</loc>
+    <lastmod>2018-10-16T11:25:47+08:00</lastmod>
+  </url><url>
     <loc>https://zhangeamon.top/dw/introduce/</loc>
     <lastmod>2018-09-21T09:54:50+08:00</lastmod>
   </url><url>
-    <loc>https://zhangeamon.top/about/</loc>
+    <loc>https://zhangeamon.top/about/me/</loc>
     <lastmod>2018-03-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/archives/</loc>

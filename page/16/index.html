@@ -72,7 +72,7 @@
                     
                     <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
                     
-                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -87,6 +87,70 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/normal-form/" title="数据库三范式五约束">数据库三范式五约束</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月17日
+        </date>
+        
+        <div class="post-content">
+            三范式 第一范式：数据表中的每一列（每个字段）必须是不可拆分的最小单元，也就是确保每一列的原子性； 第二范式（2NF）：满足1NF后，要求表中的所有列，都必须依赖于主键，而不能有任何一列与主键没有关系，也就是说一个表只描述一件事情； 第三范式：必须先满足第二范式（2NF），要求：表中的……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/normal-form/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/insert01/" title="快速生成大量数据">快速生成大量数据</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月14日
+        </date>
+        
+        <div class="post-content">
+            在数据库中快速生成1w条数据，或测试数据库的写入性能。 创建数据库表 postgres=# create table tbl(id int, info text, crt_time timestamp); CREATE TABLE 方法一 generate_series 查看方法函数 postgres=# \df generate_series 函数列表 架构模式 | 名称 | 结果数据类型 | 参数数据类型 | 类型 ------------+-----------------+-----------------------------------+--------------------------------------------------------------------+------ pg_catalog | generate_series | SETOF bigint | bigint, bigint | 常规 pg_catalog | generate_series | SETOF bigint | bigint, bigint, bigint | 常规 pg_catalog | generate_series | SETOF integer | integer, integer | 常规 pg_catalog | generate_series | SETOF integer | integer, integer, integer | 常规 pg_catalog | generate_series |……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/insert01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pipelinedb02/" title="Pipelinedb 简介">Pipelinedb 简介</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月12日
+        </date>
+        
+        <div class="post-content">
+            项目已经停止维护 适配支持版本 PostgreSQL 10: 10.1, 10.2, 10.3, 10.4, 10.5 PostgreSQL 11: 11.0 基本概念 流(Stream) 流是基础，Continuous Views和transform则是基于流中的数据进行处理的手段。 对于同一份数据，只需要定义一个流，写入一份即可。 如果对同一份数据有多个维度的统计，可以写在一条SQL完成的（如同……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pipelinedb02/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pipelinedb01/" title="Pipelinedb文档概览">Pipelinedb文档概览</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月12日
+        </date>
+        
+        <div class="post-content">
+            官方文档 介绍 What PipelineDB is What PipelineDB is not QuitStart 一个统计wiki浏览的例子 安装 各种环境安装 Continuous Views 定义流视图，其实就是定义 统计分析的QUERY， 例如select id, count(*), avg(x), &hellip; from table group by &hellip;; 定义好之后，数据插入table，这个流视图就会不断增量的进行统计，你只要查询这个流视图，就可以查看到实时的统计结果。 数据库中存……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pipelinedb01/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -191,70 +255,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/sysstat/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/tablespace/" title="tablespace 表空间">tablespace 表空间</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月6日
-        </date>
-        
-        <div class="post-content">
-            原文 注意主从架构时，主从软连接位置需要对应一致。 思考： 冷热数据分离 冷数据对热数据的影响，垃圾回收机制。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/tablespace/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/toast/" title="TOAST 技术">TOAST 技术</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月6日
-        </date>
-        
-        <div class="post-content">
-            原文……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/toast/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/fillfactor/" title="fillfactor 填充因子">fillfactor 填充因子</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月6日
-        </date>
-        
-        <div class="post-content">
-            介绍 PostgreSQL每个表和索引的数据都是由很多个固定尺寸的页面存储（通常是 8kB，不过在编译服务器时[–with-blocksize]可以选择其他不同的尺寸） 一个表的填充因子(fillfactor)是一个介于 10 和 100 之间的百分数。100(完全填充)是默认值。如果指定了较小的填……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/fillfactor/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/vacuum/" title="vacuum 垃圾回收器">vacuum 垃圾回收器</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月5日
-        </date>
-        
-        <div class="post-content">
-            介绍 数据库总是不断地在执行删除，更新等操作。良好的空间管理非常重要，能够对性能带来大幅提高。在postgresql中用于维护数据库磁盘空间的工具是VACUUM，其重要的作用是删除那些已经标示为删除的数据并释放空间。 postgresql中执行delete,update操作后，表中的……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/vacuum/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -332,7 +332,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/22/">22</a>
+            <a href="https://zhangeamon.top/page/23/">23</a>
         </li>
         
     
@@ -391,6 +391,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
     </li>
     
@@ -422,14 +430,6 @@
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -446,7 +446,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     

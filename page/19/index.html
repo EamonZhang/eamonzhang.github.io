@@ -72,7 +72,7 @@
                     
                     <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
                     
-                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -87,6 +87,93 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/prometheus-concepts/" title="Promethues 基本概念">Promethues 基本概念</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月21日
+        </date>
+        
+        <div class="post-content">
+            数据模型(Data Model) 由指标名称(metric)和一个或一组标签(lable)集合以及float64类型的值组成。 例如 up{instance=&quot;10.1.88.71:9115&quot;,job=&quot;blackbox_exporter_10.1.88.74_icmp&quot;} 1 metric类型 client libraries提供了四种metric类型，包括Counter、Gauge、Histogram、Summary。 Counter 计数器，只允许增加或重置为……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/prometheus-concepts/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/tidb/sql-optimize01/" title="Sql 优化">Sql 优化</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月21日
+        </date>
+        
+        <div class="post-content">
+            一条sql的执行过程 将 SQL 解析成抽象语法树(AST)，将 AST 变换到内部表示(IR)。然后优化器的输入就是 IR，它将生成最优的查询计划（Plan），然后会变成具体的执行器（Executor），里面有许多的算。 优化的阶段为IR 到生成 Plan 的过程，包括逻辑优化和物理优化 逻辑优化 逻辑优化主要是基……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/tidb/sql-optimize01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/index01/" title="数据库索引类型及使用场景">数据库索引类型及使用场景</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月19日
+        </date>
+        
+        <div class="post-content">
+            用途 优点 主键唯一约束 加速检索 排序 缺点 更新数据时需要同时维护对应索引 占用磁盘空间，甚至比表数据本身还要多 使用场景利弊分析 TP与AP应用 读写使用比例 点查询批量查询 创建索引 \h create index 命令： CREATE INDEX 描述： 建立新的索引 语法： CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ [ IF NOT EXISTS ] 名称 ] ON 表名 [ USING 方法 ] ( { 列名称 | ( 表达式 ) }……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/index01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/sysbench/" title="Sysbench 测试">Sysbench 测试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            下载安装 1.0.15 sysbench官网 curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh | sudo bash sudo yum -y install sysbench 参数说明 sysbench --help Usage: sysbench [options]... [testname] [command] Commands implemented by most tests: prepare run cleanup help General options: --threads=N number of threads to use [1] 线程数 --events=N limit for total number of events [0] 事务数 --time=N limit for total execution time in seconds [10] 测压时间 --forced-shutdown=STRING number of seconds to wait after the --time limit before forcing shutdown, or 'off' to disable [off] --thread-stack-size=SIZE size of stack per thread [64K] --rate=N average transactions rate. 0 for unlimited rate [0] --report-interval=N periodically report intermediate statistics with a specified interval in seconds. 0 disables intermediate reports [0] --report-checkpoints=[LIST,...] dump full statistics and reset all counters……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/sysbench/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/kill/" title="PostgreSQL 无法kill(pg_terminate_backend, pg_cancel_backend)的情况分析 - 进程hang strace,pstack">PostgreSQL 无法kill(pg_terminate_backend, pg_cancel_backend)的情况分析 - 进程hang strace,pstack</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月14日
+        </date>
+        
+        <div class="post-content">
+            先 mark 下 https://yq.aliyun.com/articles/647468……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/kill/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -168,93 +255,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/es/esrally/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/istio/concept02/" title="蓝绿、A/B测试、金丝雀发布">蓝绿、A/B测试、金丝雀发布</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月9日
-        </date>
-        
-        <div class="post-content">
-            蓝绿发布 准备两套环境，蓝和绿。绿环境为当前正式环境，现在将新版部署到蓝环境当中并进行测试。没有问题后将路由指向蓝环境。若发现问题可将路由指回到原来的绿环境中进行回滚。 问题： 如果是无状态应用还可以，如果应用有状态或类似数据库之类的应该很麻烦，还有新旧版本是否兼容的问题。 A/B 测试 用来测……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/istio/concept02/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/kvm/kvm01/" title="KVM">KVM</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月6日
-        </date>
-        
-        <div class="post-content">
-            安装 ubuntu14.04 .安装kvm apt-get install qemu-kvm libvirt0 virtinst bridge-utils virt-viewer .配置实体机网络 cat /etc/network/interfaces auto lo iface lo inet loopback auto br0 iface br0 inet static address 10.0.*.* netmask 255.255.0.0 gateway 10.1.0.1 type bridge bridge_ports eth0 dns-nameservers 114.114.114.114 .创建一个虚拟机 virt-install --connect qemu:///system -n test01 -r 1024 -f /home/kvm/test01.qcow2 -s 20 -c /home/kvm/ubuntu-12.04.1-server-amd64.iso --vnc --noautoconsole --os-type linux --os-variant ubuntuPrecise --accelerate --network=bridge:br0 centos7 yum install qemu-kvm libvirt virt-install bridge-utils .配置实体机网络 cat ifcfg-enp7s0 DEVICE=&quot;enp7s0&quot; ONBOOT=yes BOOTPROTO=static UUID=96a09db3-9b06-4a50-8d0c-9868cf531b84 #HWADDR=&quot;08:60:6E:06:C7:1A&quot; TYPE=Ethernet BRIDGE=br0 IPADDR=0.0.0.0 cat ifcfg-br0 DEVICE=br0 ONBOOT=yes BOOTPROTO=static TYPE=Bridge IPADDR=10.1.*.* PREFIX=16 GATEWAY=10.1.0.1 DNS1=223.5.5.5 查看 brctl show .启动 libvirt systemctl start libvirtd systemctl enable libvirtd .创建虚拟机 virt-install --virt-type kvm --name test01 --ram……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/kvm/kvm01/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/elk/apm/" title="APM">APM</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月6日
-        </date>
-        
-        <div class="post-content">
-            https://www.elastic.co/solutions/apm 应用程序性能监控 整体架构 先搞起来 agent 收集信息 apm-server 接受agent信息并发送到ES ES 存储信息 Kibana 信息检索展示 agent python django 安装扩展包 pip install elastic-apm django 配置 # Add the agent to the installed apps INSTALLED_APPS = ( 'elasticapm.contrib.django', #... ) ELASTIC_APM = { # Set required service name. # Allowed characters: # a-z, A-Z, 0-9, -, _, and space 'SERVICE_NAME': 'my-app', #后台进程 'TRANSPORT_CLASS': 'elasticapm.transport.http.AsyncTransport', # Use if APM Server requires a token #'SECRET_TOKEN': '', # 没有数据可以开启debug查看 # 'DEBUG': True, # Set custom APM Server……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/elk/apm/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/stat/" title="Postgresql指标查看&amp;stat统计信息">Postgresql指标查看&amp;stat统计信息</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月6日
-        </date>
-        
-        <div class="post-content">
-            当前连接数 SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid(); count ------- 3 (1 row) 数据库占用空间 select pg_size_pretty(pg_database_size('postgres')); pg_size_pretty ---------------- 14 MB (1 row) or \l+ 数据库表(不包括索引)或单条索引占用空间 select pg_size_pretty(pg_relation_size('t_name')); pg_size_pretty ---------------- 24 kB (1 行记录) or \d+ 表中所有索引占有的空间 select pg_size_pretty(pg_indexes_size('t_name')); pg_size_pretty ---------------- 280 kB (1 行记录) 表和索引占用总空间 select pg_size_pretty(pg_total_relation_size('t_name')); pg_size_pretty ---------------- 380 kB (1 行记录) 查看一条数据在数据库占用的空间 select pg_column_size('Let us go !!!'); pg_column_size ---------------- 14 (1 行记录) 查出所……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/stat/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/keepalived01/" title="Keepalived 问题集">Keepalived 问题集</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月5日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Q1 问题描述 ip address associated with VRID 51 not present in MASTER advert : 10.1.7.58 其中 51 为 virtual_router_id 10.1.7.58 为虚拟IP 可能原因 ntp 时间不同步 局域网内 virtual_router_id 与其他集群配置冲突。 另外 router_id 主机标示，一般为hostname即可。 解决方法： unicast_peer{ } 配置成单播模式……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/keepalived01/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -332,7 +332,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/22/">22</a>
+            <a href="https://zhangeamon.top/page/23/">23</a>
         </li>
         
     
@@ -391,6 +391,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
     </li>
     
@@ -422,14 +430,6 @@
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -446,7 +446,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     

@@ -72,7 +72,7 @@
                     
                     <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
                     
-                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -87,6 +87,38 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月17日
+        </date>
+        
+        <div class="post-content">
+            IP 查询 https://www.ipaddress.com/ 直接点击下面链接查询 github.com assets-cdn.github.com github.global.ssl.fastly.net 修改本地dns vi /etc/hosts 140.82.114.4 github.com 185.199.108.153 assets-cdn.github.com 199.232.69.194 github.global.ssl.fastly.net……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/github-dns/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月17日
+        </date>
+        
+        <div class="post-content">
+            流复制过程 synchronous_commit = on ） # synchronization level; on default # off, local, remote_write, or on 同步级别 remote_apply：事务commit或rollback时，等待其redo在primary、以及同步standby(s)已持久化，并且其redo在同步 standby(s)已apply。 on：事务commit或rollback时，……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/replication02/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -251,47 +283,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgresql/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/etcd_auth/" title="etcd 访问控制">etcd 访问控制</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/etcd'>etcd</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            介绍 etcd 默认没有开启访问控制。 在生产环境中使用属于裸奔。 开启访问控制有两种方式 密钥证书验证 用户名密码验证 本篇实验用户名密码验证方式 用户 开启访问认证需要创建root 用户，root 用户默认自动拥有root角色的权限，及超级管理员。 角色 角色理解为指定权限的集合，权限包括 read 、write、 readwrite……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/etcd_auth/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/hotupdate/" title="hot update">hot update</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月14日
-        </date>
-        
-        <div class="post-content">
-            What is HOT HOT是“Heap Only Tuple”（仅元组堆）的缩写, 用来提高update效率。 行的新版本和旧版本位于同一块中时，该行的外部地址（原始行指针）保持不变，利用hot link指针进行转发地址。索引不需要任何改动。 前提条件 包含更新行的块中必须有足够的空间 在已修改值的任何列上均未定义……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/hotupdate/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -348,7 +339,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/22/">22</a>
+            <a href="https://zhangeamon.top/page/23/">23</a>
         </li>
         
     
@@ -407,6 +398,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
     </li>
     
@@ -438,14 +437,6 @@
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -462,7 +453,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     

@@ -73,7 +73,7 @@
                     
                     <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
                     
-                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -96,6 +96,29 @@
     </h3>
     
 
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_rewind/">PG主从切换 pg_rewind</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            pg_rewind requires that the target server either has the wal_log_hints option enabled in postgresql.conf or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. full_page_writes must also be set to on, but is enabled by default. wal_log_hints 使用场景 在数据库主从结构中，从变成主易。但是由主变为从却需要一番周折。 如果是数据量少时重新使用pg_backup拉一份从即可，但是如果数据量大时，这个过程非常的耗时耗能。对线上业务也会有影……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_rewind/">阅读全文</a></p>
+        </div>
+    </article>
     
     <article class="post">
         <header>
@@ -304,6 +327,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
     </li>
     
@@ -335,14 +366,6 @@
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -359,7 +382,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     

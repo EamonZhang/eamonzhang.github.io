@@ -73,7 +73,7 @@
                     
                     <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
                     
-                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -88,6 +88,24 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/readonly/" title="创建只读用户">创建只读用户</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年9月8日
+        </date>
+        
+        <div class="post-content">
+            1.创建一个用户名为readonly密码为ropass的用户 CREATE USER readonly WITH ENCRYPTED PASSWORD 'ropass'; 2.用户只读事务 alter user readonly set default_transaction_read_only=on; 3.把所有库的语言的USAGE权限给到readonly GRANT USAGE ON SCHEMA public to readonly; 4.授予select权限(这句要进入具体数据库操作在哪个db环境执行就授予那个db的权) grant select on all tables in schema public to readonly;……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/readonly/">阅读全文</a></p>
+    </article>
+    
     
     
     <article class="post">
@@ -252,24 +270,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgage/" title="数据库年龄">数据库年龄</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年1月7日
-        </date>
-        
-        <div class="post-content">
-            背景 数据库的事务标识符使用的是32位的,最大可表示42个亿。当前事务的数据在20亿个事务之后将变的不可见。为了解决这个问题（回卷），Postgres引入了一个冻结事务标识的概念。 并实现了名为freeze的冻结过程。 冻结过程 两种模式 惰性模式 迫切模式 惰性模式回跳过页中所有的数据都位可……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgage/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -365,6 +365,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
     </li>
     
@@ -396,14 +404,6 @@
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -420,7 +420,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     

@@ -72,7 +72,7 @@
                     
                     <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
                     
-                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -87,6 +87,47 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/etcd_auth/" title="etcd 访问控制">etcd 访问控制</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/etcd'>etcd</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            介绍 etcd 默认没有开启访问控制。 在生产环境中使用属于裸奔。 开启访问控制有两种方式 密钥证书验证 用户名密码验证 本篇实验用户名密码验证方式 用户 开启访问认证需要创建root 用户，root 用户默认自动拥有root角色的权限，及超级管理员。 角色 角色理解为指定权限的集合，权限包括 read 、write、 readwrite……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/etcd_auth/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/hotupdate/" title="hot update">hot update</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月14日
+        </date>
+        
+        <div class="post-content">
+            What is HOT HOT是“Heap Only Tuple”（仅元组堆）的缩写, 用来提高update效率。 行的新版本和旧版本位于同一块中时，该行的外部地址（原始行指针）保持不变，利用hot link指针进行转发地址。索引不需要任何改动。 前提条件 包含更新行的块中必须有足够的空间 在已修改值的任何列上均未定义……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/hotupdate/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -230,38 +271,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_fdw/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/reback_supper_user/" title="找回supper user 权限">找回supper user 权限</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月22日
-        </date>
-        
-        <div class="post-content">
-            背景 意外删除postgres supper user 权限 找回方法 关闭数据库 用单用户模式重新启动 /usr/lib/postgresql/xxxx/bin/postgres --single -D $PGDATA 重新设置supper user 权限 alter user postgres with superuser;……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/reback_supper_user/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/monitor_explain/" title="数据库监控指标">数据库监控指标</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月20日
-        </date>
-        
-        <div class="post-content">
-            实体机 硬盘空间 cup利用率 内存利用率 IO 网络带宽 tcp连接情况 温度 数据库年龄 -- 数据库database 年龄 select datname,age(datfrozenxid),pg_size_pretty(pg_database_size(oid)) from pg_database order by age(datfrozenxid) desc limit 10 ; -- 表年龄 select relname,age(relfrozenxid), pg_size_pretty(pg_table_size(oid)) from pg_class where relkind in ('t','r') order by age(relfrozenxid) desc limit 10; 说明： 当age到达2亿（默认）时触发自动回卷，期间会大量占用系统资源。提前做好监控避免在业务高峰时发生。可在库级别操作……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/monitor_explain/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -325,7 +334,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/22/">22</a>
+            <a href="https://zhangeamon.top/page/23/">23</a>
         </li>
         
     
@@ -384,6 +393,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
     </li>
     
@@ -415,14 +432,6 @@
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -439,7 +448,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     

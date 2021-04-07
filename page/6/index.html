@@ -72,7 +72,7 @@
                     
                     <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
                     
-                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -87,6 +87,45 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/django-ndb/" title="Jdango 多数据库读写配置">Jdango 多数据库读写配置</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            https://www.cnblogs.com/thismyblogs/p/9855801.html……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/django-ndb/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/linux-user-passw/" title="Centos 登陆安全管理">Centos 登陆安全管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月9日
+        </date>
+        
+        <div class="post-content">
+            禁用root登陆 注意： 创建一个非root用户 并加入wheel用户组（拥有sudo权限） useradd NewUser passwd NewUser gpasswd -a NewUser wheel 本地禁用root登陆 修改/etc/pam.d/login文件增加下面一行 auth required pam_succeed_if.so user != root quiet 远程禁用root登陆 修改 /etc/ssh/sshd_config #PermitRootLogin yes PermitRootLogin no 修改ssh默认端口 修改 /etc/ssh/sshd_config #Port 22 Port 46608 安全认证 LoginGraceTime 2m PermitRootLogin no #StrictModes yes #MaxAuthTries 6 #MaxSessions……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/linux-user-passw/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -223,38 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/python/django-index-ops/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/FunctionsandOperators/" title="方法和函数">方法和函数</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年4月13日
-        </date>
-        
-        <div class="post-content">
-            条件表达式 https://www.postgresql.org/docs/10/functions-conditional.html postgresql支持CASE,COALESCE,NULLIF,GREATEST,LEAST条件表达式，使用它们有时候可以简化许多功能实现。 CASE CASE类似其他语言中的if/else等，当符合不同条件时则进行不同的运算 tbl_001表 create table tbl_001(id int,name varchar(32),sex varchar(1)); insert into tbl_001 values(1……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/FunctionsandOperators/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/daily_management/" title="数据库日常管理">数据库日常管理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年4月7日
-        </date>
-        
-        <div class="post-content">
-            日常管理 可用性 监测项 可用性 主从 HA 全量备份 增量备份 恢复 监测项 磁盘空间 全库 select pg_size_pretty(sum(pg_database_size(oid))) from pg_database; 数据库 select datname, pg_size_pretty(pg_database_size(oid)) from pg_database order by pg_database_size(oid) desc limit 10; 表总 SELECT table_schema || '.' || table_name AS table_full_name, pg_size_pretty(pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;')) AS size FROM information_schema.tables where table_schema = 'public' ORDER BY pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;') DESC limit 10; 表 索引 冷热数据 上次统计信息更新时间 热表dml qps io 热表qdml 冷数据 冷索引 索引利用 全表扫描次数……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/daily_management/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -332,7 +339,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/22/">22</a>
+            <a href="https://zhangeamon.top/page/23/">23</a>
         </li>
         
     
@@ -391,6 +398,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
     </li>
     
@@ -422,14 +437,6 @@
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -446,7 +453,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     

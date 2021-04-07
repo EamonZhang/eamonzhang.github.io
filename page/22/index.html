@@ -72,7 +72,7 @@
                     
                     <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
                     
-                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -87,6 +87,102 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/cert/" title="自签名证书">自签名证书</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月22日
+        </date>
+        
+        <div class="post-content">
+            1.环境预备 curl -s -L -o /usr/local/bin/cfssl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 curl -s -L -o /usr/local/bin/cfssljson https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 chmod +x /usr/local/bin/{cfssl,cfssljson} 2.生成配置模板 三类证书：服务器证书server cert，客户端证书client cert，对等证书peer cert(表示既是server cert又是client cert) cfssl print-defaults config &gt; ca-config.json cat ca-config.json { &quot;signing&quot;: { &quot;default&quot;: { &quot;expiry&quot;: &quot;168h&quot; }, &quot;profiles&quot;: { &quot;www&quot;: { &quot;expiry&quot;: &quot;8760h&quot;, &quot;usages&quot;: [ &quot;signing&quot;, &quot;key encipherment&quot;, &quot;server auth&quot; ] }, &quot;client&quot;: { &quot;expiry&quot;: &quot;8760h&quot;, &quot;usages&quot;: [ &quot;signing&quot;, &quot;key……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/cert/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/no-passwd/" title="ssh 免密码登&amp;跳板机配置">ssh 免密码登&amp;跳板机配置</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月18日
+        </date>
+        
+        <div class="post-content">
+            Linux 免密码登录实现 1.说明 DES算法 加/解速度快,密钥量短,采用对称加密 RSA算法好 算法复杂,加/解速度慢,采用非对称加密 2.生成秘钥 $ssh-keygen -t dsa -P '' Generating public/private dsa key pair. Enter file in which to save the key (/root/.ssh/id_dsa): Your identification has been saved in /root/.ssh/id_dsa. Your public key has been saved in /root/.ssh/id_dsa.pub. The key fingerprint is: SHA256:/K/dqHKbkmm/0qw9IOFvZwRAPx36+yQtXtLM353spns root@kvm71 The key's randomart image is: +---[DSA 1024]----+ | .. . | | .. o . | | .+ . | | ...o | | . .S.. | | o ...* | | o B*……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/no-passwd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/wheel/" title="Linux wheel 用户组">Linux wheel 用户组</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月18日
+        </date>
+        
+        <div class="post-content">
+            wheel 用户组 1.在Linux系统中root用户作为超级管理员拥有至高无上的权限，其他用户可以使用su命令将自己切换为root用户。为了加强系统的安全性,对系统用户权限进行限制。 设置为只有wheel用户组的成员拥有su 权利，其他用户不再具备切换到root 用户的权限。 2.设置 2.1 新建use……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/wheel/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cmd-gpasswd/" title="gpasswd 命令">gpasswd 命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月18日
+        </date>
+        
+        <div class="post-content">
+            gpasswd 命令详解 gpasswd命令是Linux下工作组文件/etc/group和/etc/gshadow的管理工具，用于指定要管理的工作组。 选项详解： -a : 添加用户到组 -d : 从组删除用户 -A：指定管理员 -M：指定组成员和-A的用途差不多； -r：删除密码； -R：限制用户登入组，只有组中的成员……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-gpasswd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/k8s/v1.10/" title="Kubernetes 安装　- V1.10">Kubernetes 安装　- V1.10</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月18日
+        </date>
+        
+        <div class="post-content">
+            ……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/k8s/v1.10/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/k8s/v1.11/" title="Kubernetes 安装　- V1.11">Kubernetes 安装　- V1.11</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月18日
+        </date>
+        
+        <div class="post-content">
+            ……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/k8s/v1.11/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -146,72 +242,17 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zhangeamon.top/dw/introduce/" title="数据仓库介绍">数据仓库介绍</a>
+                <a href="https://zhangeamon.top/about/tech/" title="技术图谱">技术图谱</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
-            2018年9月21日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E4%BB%93'>数仓</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            数据库与数据仓库的区别 数据库是面向事务的设计，数据仓库是面向主题设计的。 数据库一般服务于业务系统的，数据仓库一般是服务于分析系统的。 数据库一般存储在线交易数据，数据仓库存储的一般是历史数据。 数据库设计是尽量避免冗余，数据仓库在设计是有意引入冗余。 数据库是为捕获数据而设计，数据仓库……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/dw/introduce/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/about/" title="关于">关于</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年3月27日
+            2018年10月16日
         </date>
         
         <div class="post-content">
-            建站目的 用于记录总结本人在日常工作中遇到的问题及解决方法等。 技术在于积累，更重于分享和交流, 一个人可以跑的更快，一群人可以走的更远! 蹲在机房里查文档方便。 日常工作 私有云云原生建设者 Postgres DBA 代码搬运工 工作之余 马拉松爱好者，曾与国际顶尖级选手同场竞技 个人微信……
+            基础服务架构 Postgres架构 服务治理 接口层 限流，降级，路由 服务层 自动发布，依赖调用 资源层 动态扩容，缩容……
         </div>
-        <p class="readmore"><a href="https://zhangeamon.top/about/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/archives/" title="归档">归档</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            1年1月1日
-        </date>
-        
-        <div class="post-content">
-            ……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/archives/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/search/" title="搜索">搜索</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            1年1月1日
-        </date>
-        
-        <div class="post-content">
-            ……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/search/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zhangeamon.top/about/tech/">阅读全文</a></p>
     </article>
     
     
@@ -268,7 +309,20 @@
         </li>
         
     
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/23/">23</a>
+        </li>
+        
+    
 
+    
+    
+
+    <li class="next">
+        <a href="https://zhangeamon.top/page/23/">下一页</a>
+    </li>
     
 </ol>
 
@@ -317,6 +371,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
     </li>
     
@@ -348,14 +410,6 @@
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -372,7 +426,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abouts on 故乡的云☁️</title>
+    <link>https://zhangeamon.top/about/</link>
+    <description>Recent content in Abouts on 故乡的云☁️</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 30 Mar 2019 21:44:14 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/about/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于设计、划分</title>
+      <link>https://zhangeamon.top/about/design/</link>
+      <pubDate>Sat, 30 Mar 2019 21:44:14 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/about/design/</guid>
+      <description>在设计系统时，应该多考虑 墨菲定律： 任何事物都没有表面看起来那么简单。 所有的事都会比你预计的时间长。 可能出错的事总会出错。 如果你担心某种情况发生，那么他就更有可能发生。 在划分系统时，应该多考虑 康威定律： 系统架构是公司组织架构的反映。 应该按照业务闭环进行系统拆分／组织架构划分，实现闭</description>
+    </item>
+    
+    <item>
+      <title>扁鹊三兄弟</title>
+      <link>https://zhangeamon.top/about/3brothers/</link>
+      <pubDate>Mon, 17 Dec 2018 14:28:31 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/about/3brothers/</guid>
+      <description>系统运维与安全的三种境界 封侯非我意， 我愿海波平。 -- 戚继光</description>
+    </item>
+    
+    <item>
+      <title>英语单词</title>
+      <link>https://zhangeamon.top/about/en/</link>
+      <pubDate>Tue, 27 Nov 2018 10:15:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/about/en/</guid>
+      <description>单词表 utilizes 利用 degradation 退化，降级 hypertable 元数据表 monotonically 单调的 monotonically increase: 单调递增 solely 单独地，唯一地 cardinality 基数 excel 优于，擅长 eliminate 干掉，排除 refine 精致的，经过改良的 distilled 从..中萃取 robust 精力充沛的 fundamental 基础的 主要的</description>
+    </item>
+    
+    <item>
+      <title>我的收藏</title>
+      <link>https://zhangeamon.top/about/favorites/</link>
+      <pubDate>Wed, 31 Oct 2018 09:55:24 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/about/favorites/</guid>
+      <description>私有云访问管理 [SDN 网络] (https://github.com/feiskyer/sdn-handbook) LSM数据结构 LSM（Log-Structured Merge-Trees）和 B+ 树相比，是牺牲了部分读的性能来换取写的性能(通过批量写入)，实现读写之间的。 Hbase、LevelDB、Tair（Long DB）、nessDB 采用 LSM 树的结构。LSM可以快速建立索</description>
+    </item>
+    
+    <item>
+      <title>技术图谱</title>
+      <link>https://zhangeamon.top/about/tech/</link>
+      <pubDate>Tue, 16 Oct 2018 11:25:47 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/about/tech/</guid>
+      <description>基础服务架构 Postgres架构 服务治理 接口层 限流，降级，路由 服务层 自动发布，依赖调用 资源层 动态扩容，缩容</description>
+    </item>
+    
+    <item>
+      <title>关于</title>
+      <link>https://zhangeamon.top/about/me/</link>
+      <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhangeamon.top/about/me/</guid>
+      <description>建站目的 用于记录总结本人在日常工作中遇到的问题及解决方法等。 技术在于积累，更重于分享和交流, 一个人可以跑的更快，一群人可以走的更远! 蹲在机房里查文档方便。 日常工作 私有云云原生建设者 Postgres DBA 代码搬运工 工作之余 马拉松爱好者，曾与国际顶尖级选手同场竞技 个人微信</description>
+    </item>
+    
+  </channel>
+</rss>

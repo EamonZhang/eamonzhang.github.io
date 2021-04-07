@@ -72,7 +72,7 @@
                     
                     <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
                     
-                    <a  href="https://zhangeamon.top/about" title="关于">关于</a>
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -87,6 +87,70 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/tablespace/" title="tablespace 表空间">tablespace 表空间</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月6日
+        </date>
+        
+        <div class="post-content">
+            原文 注意主从架构时，主从软连接位置需要对应一致。 思考： 冷热数据分离 冷数据对热数据的影响，垃圾回收机制。……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/tablespace/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/toast/" title="TOAST 技术">TOAST 技术</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月6日
+        </date>
+        
+        <div class="post-content">
+            原文……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/toast/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/fillfactor/" title="fillfactor 填充因子">fillfactor 填充因子</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月6日
+        </date>
+        
+        <div class="post-content">
+            介绍 PostgreSQL每个表和索引的数据都是由很多个固定尺寸的页面存储（通常是 8kB，不过在编译服务器时[–with-blocksize]可以选择其他不同的尺寸） 一个表的填充因子(fillfactor)是一个介于 10 和 100 之间的百分数。100(完全填充)是默认值。如果指定了较小的填……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/fillfactor/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/vacuum/" title="vacuum 垃圾回收器">vacuum 垃圾回收器</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月5日
+        </date>
+        
+        <div class="post-content">
+            介绍 数据库总是不断地在执行删除，更新等操作。良好的空间管理非常重要，能够对性能带来大幅提高。在postgresql中用于维护数据库磁盘空间的工具是VACUUM，其重要的作用是删除那些已经标示为删除的数据并释放空间。 postgresql中执行delete,update操作后，表中的……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/vacuum/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -205,70 +269,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/smartctl/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/mdadm/" title="mdadm 软Raid 管理">mdadm 软Raid 管理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月3日
-        </date>
-        
-        <div class="post-content">
-            背景 mdadm是linux下用于创建和管理软件RAID的命令，是一个模式化命令。但由于现在服务器一般都带有RAID阵列卡，并且RAID阵列卡也很廉价，且由于软件RAID的自身缺陷（不能用作启动分区、使用CPU实现，降低CPU利用率），因此在生产环境下并不适用。但为了学习和了解RA……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/mdadm/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/init-centos/" title="Centos 初始化配置">Centos 初始化配置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月3日
-        </date>
-        
-        <div class="post-content">
-            网络配置 设置IP 略 ip_froward 查看 sysctl -a | grep ip_ 修改 vi /etc/sysctl.conf net.ipv4.ip_forward = 1 最大使用内存 vm.max_map_count=262144 生效 sysctl -p 系统更新 yum -y update 安装扩展及工具 yum -y install epel-release net-tools bind-utils telnet wget sysstat 文件链接限制 查看 ulimit -n 修改 vi /etc/security/limits.conf * - nofile 65536 * soft nproc 65536 * hard nproc 65536 * soft nofile 65536 * hard nofile 65536 rm /etc/security/limits.d/* -rf 安全 selinux 查看 getenforce 修改 临时 setenforce 0 永久 vi /etc/sysconfig/selinux 设置 firewalld 设置 ssh vi /etc/ssh/sshd_config 禁用root用户，密钥登陆 切换为其他用户登……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/init-centos/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/template/" title="模板数据库">模板数据库</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月30日
-        </date>
-        
-        <div class="post-content">
-            模板数据库 模板数据库就是创建新database时，PostgreSQL会基于模板数据库制作一份副本，其中会包含所有的数据库设置和数据文件。 PostgreSQL安装好以后会默认附带两个模板数据库：template0和template1。 template0 干净版，任何时候不要修改 template1 默认版，如果创建数……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/template/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_stat_statements/" title="pg_stat_statements 数据库统计信息">pg_stat_statements 数据库统计信息</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月29日
-        </date>
-        
-        <div class="post-content">
-            pg_stat_statements 扩展 安装 yum install postgresql10-contrib.x86_64 修改配置参数 vi $PGDATA/postgresql.conf shared_preload_libraries='pg_stat_statements' # 加载模块 需要重启 , 近期测试不需要添加也可以。自带扩展 track_io_timing = on # 跟踪IO耗时 (可选) track_activity_query_size = 2048 # 设置单条SQL的最长长度，超过被截断显示（可选) pg_stat_statements.max = 10000 #在pg_stat_statements中最多保留多少条统计信息，通过LRU算法，覆盖老的记录。 pg_stat_statements.track = all……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_stat_statements/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -346,7 +346,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/22/">22</a>
+            <a href="https://zhangeamon.top/page/23/">23</a>
         </li>
         
     
@@ -405,6 +405,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
     </li>
     
@@ -436,14 +444,6 @@
         <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/github-dns/" title="Github DNS 加速">Github DNS 加速</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -460,7 +460,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
     

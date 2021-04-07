@@ -6,7 +6,16 @@
     <description>Recent content in Postgres on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 31 Mar 2021 15:13:50 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Apr 2021 10:12:02 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PG高可用 repmgr 搭建</title>
+      <link>https://zhangeamon.top/postgres/repmgr/</link>
+      <pubDate>Wed, 07 Apr 2021 10:12:02 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/repmgr/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Backgroud Writer 进程</title>
       <link>https://zhangeamon.top/postgres/bgwriter/</link>
