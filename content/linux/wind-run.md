@@ -22,3 +22,4 @@ draft: false
 - D:            切换到D目录
 - dir           当前目录下文件信息
 - ipconfig  /flushdns 刷新本地dns缓存
+- ipconfig  /displaydns 显示dns缓存

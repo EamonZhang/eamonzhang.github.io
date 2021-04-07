@@ -15,21 +15,21 @@ tags: ["高可用"]
 
 ## 实现目标
 
-- [高可用方案对比](postgres/patroni/#高可用方案对比)
-- [patroni 结构分析](postgres/patroni/#patroni结构分析)
-- [patroni 搭建新集群](postgres/patroni/#patroni搭建新集群)
+- [高可用方案对比](/postgres/patroni/#高可用方案对比)
+- [patroni 结构分析](/postgres/patroni/#patroni结构分析)
+- [patroni 搭建新集群](/postgres/patroni/#patroni搭建新集群)
 - patroni 接管现有集群
-- [patroni 管理pg配置](postgres/patroni/#patroni管理pg配置)
-- [手动swithover](postgres/patroni/#手动swithover)
-- [自动failover](postgres/patroni/#自动failover)
-- [维护模式](postgres/patroni/#维护模式)
-- [弹性扩容，缩容](postgres/patroni/#弹性扩容缩容)
-- [对外提供统一服务](postgres/patroni/#对外提供统一服务)
-- [RestFULLAPI](postgres/patroni/#restFULLAPI)
-- [备份恢复](postgres/patroni/#备份恢复)
-- [监控](postgres/patroni/#监控)
-- [日志](postgres/patroni/#日志)
-- [升级](postgres/patroni/#升级)
+- [patroni 管理pg配置](/postgres/patroni/#patroni管理pg配置)
+- [手动swithover](/postgres/patroni/#手动swithover)
+- [自动failover](/postgres/patroni/#自动failover)
+- [维护模式](/postgres/patroni/#维护模式)
+- [弹性扩容，缩容](/postgres/patroni/#弹性扩容缩容)
+- [对外提供统一服务](/postgres/patroni/#对外提供统一服务)
+- [RestFULLAPI](/postgres/patroni/#restFULLAPI)
+- [备份恢复](/postgres/patroni/#备份恢复)
+- [监控](/postgres/patroni/#监控)
+- [日志](/postgres/patroni/#日志)
+- [升级](/postgres/patroni/#升级)
 
 
 

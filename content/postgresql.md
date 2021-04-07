@@ -93,6 +93,7 @@ toc: true
 - [PG主从切换 pg_rewind](/postgres/pg_rewind)
 - [PG高可用Patroni搭建](/postgres/patroni)
 - [PG高可用Patroni管理进阶](/postgres/patroni02)
+- [PG高可用Repmgr搭建](/postgres/repmgr)
 
 ## 索引
 

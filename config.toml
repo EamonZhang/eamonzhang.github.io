@@ -101,7 +101,7 @@ summaryLength = 140
   [[menu.main]]
     identifier = "about"
     name = "关于"
-    url = "about"
+    url = "about/me"
     weight = 20
   
   [[menu.main]]
