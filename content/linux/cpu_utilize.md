@@ -70,3 +70,9 @@ analyzing CPU 0:
 ```
 cpupower frequency-set --governor performance
 ```
+
+## 效果
+
+由 powersave 调整为 performance , cpu 利用率效果很显著
+
+![image](/images/cpufreset.jpg)
