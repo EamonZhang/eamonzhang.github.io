@@ -2,9 +2,10 @@
 title: "Ubuntu 20.04 网络配置"
 date: 2020-09-21T16:48:24+08:00
 draft: false
+categories: ["linux"]
 ---
 
-##### 配置
+## 配置
 
 vim /etc/netplan/00-installer-config.yaml 
 ```
@@ -20,7 +21,7 @@ network:
   version: 2
 ```
 
-##### 生效
+## 生效
 ```
 netplan apply
 ```
