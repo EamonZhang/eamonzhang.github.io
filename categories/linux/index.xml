@@ -6,7 +6,16 @@
     <description>Recent content in linux on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Apr 2021 09:35:25 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Apr 2021 11:26:16 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Centos7 重置密码</title>
+      <link>https://zhangeamon.top/linux/resetpasswd-centos7/</link>
+      <pubDate>Fri, 09 Apr 2021 11:26:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/resetpasswd-centos7/</guid>
+      <description>进入开机界面 按e 后 修改如下两处 ctrl+X 进入系统 上图中最后一个指令为保持设置 touch /.autorelabel 重新进入系统 exec /sbin/init</description>
+    </item>
+    
     <item>
       <title>CPU亲和性(亲和力)</title>
       <link>https://zhangeamon.top/linux/cpu-affinity/</link>
@@ -77,6 +86,15 @@
       
       <guid>https://zhangeamon.top/linux/smartctl/</guid>
       <description>SMART 简介 S.M.A.R.T.，全称为“Self-Monitoring Analysis and Reporting Technology”，即“自我监测、分析及报告技术”。是一种自动的硬盘状态检测与预警系统和规范。通过在硬盘硬件内的检测指令对硬盘的硬件如磁头、盘片、马达、电路的运行情况进行监控、记录并与厂商所设定的预设安全</description>
+    </item>
+    
+    <item>
+      <title>Centos 初始化配置</title>
+      <link>https://zhangeamon.top/linux/init-centos/</link>
+      <pubDate>Mon, 03 Dec 2018 10:34:06 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/init-centos/</guid>
+      <description>网络配置 设置IP 略 ip_froward 查看 sysctl -a | grep ip_ 修改 vi /etc/sysctl.conf net.ipv4.ip_forward = 1 最大使用内存 vm.max_map_count=262144 生效 sysctl -p 系统更新 yum -y update 安装扩展及工具 yum -y install epel-release net-tools bind-utils telnet wget sysstat 文件链接限制 查看 ulimit -n 修改 vi /etc/security/limits.conf * - nofile 65536 * soft nproc 65536 * hard nproc 65536 * soft nofile 65536 * hard nofile 65536 rm /etc/security/limits.d/* -rf 安全 selinux 查看 getenforce 修改 临时 setenforce 0 永久 vi /etc/sysconfig/selinux 设置 firewalld 设置 ssh vi /etc/ssh/sshd_config 禁用root用户，密钥登陆 切换为其他用户登</description>
     </item>
     
   </channel>

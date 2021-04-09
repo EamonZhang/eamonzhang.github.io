@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Centos7 私有源搭建 | 故乡的云☁️</title>
-    <meta property="og:title" content="Centos7 私有源搭建 - 故乡的云☁️">
+    <title>Centos7 重置密码 | 故乡的云☁️</title>
+    <meta property="og:title" content="Centos7 重置密码 - 故乡的云☁️">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-05-19T10:32:33&#43;08:00'>
+    <meta property="article:published_time" content='2021-04-09T11:26:16&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-05-19T10:32:33&#43;08:00'>
+    <meta property="article:modified_time" content='2021-04-09T11:26:16&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="Centos7 私有源搭建">
+    <meta name="description" content="Centos7 重置密码">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/linux/repo/">
+    <meta property="og:url" content="https://zhangeamon.top/linux/resetpasswd-centos7/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -95,30 +95,39 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">Centos7 私有源搭建</h1>
+            <h1 class="post-title">Centos7 重置密码</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年5月19日
+            2021年4月9日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
         
         
         
         <div class="post-content">
-            <h4 id="介绍">介绍</h4>
-<p>为了保证IDC内所有主机版本一致。</p>
-<p>目前问题， 当主机执行yum update 时，软件版本不可控。每个主机版本完全取决于更新的时机。</p>
-<p>造成了同一个IDC内的版本的差异，比如有的数据库的版本为10.06,有的为10.13。尤其是使用了如postgis等拓展的时候。版本混乱，甚至主从之间都不一致。</p>
-<h4 id="实现方法">实现方法</h4>
-<h6 id="思路">思路</h6>
-<p>一台机器做源服务统一管理所有软件的版本，更新策略（私有源服务中心）。其他主机指向私有源。</p>
-<h6 id="方法">方法</h6>
-<ul>
-<li>reposync , yumdownloader 下载源，将远程服务源下载到本地</li>
-<li>nginx 将本地源对外提供服务</li>
-<li>createrepo 生成本地源</li>
-</ul>
-<h6 id="heading"></h6>
-
+            <h4 id="进入开机界面">进入开机界面</h4>
+<p>
+        <img class="mx-auto" alt="images" src="/images/resetpassword01.png" />   
+    </p>
+<h4 id="按e-后-修改如下两处">按e 后 修改如下两处</h4>
+<p>
+        <img class="mx-auto" alt="images" src="/images/resetpassword02.png" />   
+    </p>
+<h4 id="ctrlx-进入系统">ctrl+X 进入系统</h4>
+<p>
+        <img class="mx-auto" alt="images" src="/images/resetpassword03.png" />   
+    </p>
+<p>上图中最后一个指令为保持设置</p>
+<pre><code>touch /.autorelabel
+</code></pre><h4 id="重新进入系统">重新进入系统</h4>
+<pre><code>exec /sbin/init
+</code></pre>
         </div>
 
         
@@ -130,11 +139,11 @@
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/linux/iperf/">带宽检测 - iperf</a></li>
+        <li><a href="/linux/cpu-affinity/">CPU亲和性(亲和力)</a></li>
         
-        <li><a href="/python/django-ndb/">Jdango 多数据库读写配置</a></li>
+        <li><a href="/linux/cpu_utilize/">CPU频率管理</a></li>
         
-        <li><a href="/network-security/linux-user-passw/">Centos 登陆安全管理</a></li>
+        <li><a href="/postgres/repmgr/">PG高可用 repmgr 搭建</a></li>
         
     </ul>
 </div>

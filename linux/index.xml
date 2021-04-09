@@ -6,7 +6,16 @@
     <description>Recent content in Linuxes on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Apr 2021 09:35:25 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Apr 2021 11:26:16 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Centos7 重置密码</title>
+      <link>https://zhangeamon.top/linux/resetpasswd-centos7/</link>
+      <pubDate>Fri, 09 Apr 2021 11:26:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/resetpasswd-centos7/</guid>
+      <description>进入开机界面 按e 后 修改如下两处 ctrl+X 进入系统 上图中最后一个指令为保持设置 touch /.autorelabel 重新进入系统 exec /sbin/init</description>
+    </item>
+    
     <item>
       <title>CPU亲和性(亲和力)</title>
       <link>https://zhangeamon.top/linux/cpu-affinity/</link>
