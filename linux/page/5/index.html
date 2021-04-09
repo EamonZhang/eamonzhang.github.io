@@ -93,6 +93,42 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/stat/" title="Access Modify Change 三种时间戳">Access Modify Change 三种时间戳</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月20日
+        </date>
+        
+        <div class="post-content">
+            三种时间对应关系 访问时间 Access atime 修改时间 Modify mtime 状态改动时间 Change ctime 如何查看文件文件的三种时间戳 stat filename 三种时间戳的解释 访问时间：读一次文件的内容，这个时间就会更新。比如more、cat等命令。ls、stat命令不会修改atime 修改时间：修改时间是文件内容最后一次被修改的时间。比如：vim操作……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/stat/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/ln-s/" title="ln -s 建立软连接">ln -s 建立软连接</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月19日
+        </date>
+        
+        <div class="post-content">
+            创建软连接 类似于windows中的创建快捷方式 ln -s source target 具体方法举例 需求 数据库的数据实际存放位置为 /data/pgsql/10/data/ 数据库的应用访问地址为 /var/lib/pgsql/10/data/ 创建软连接 1 切换目录到需要创建快捷方式的文件目录 cd /var/lib/pgsql/10/ 2.1 创建软连接 ln -s /data/pgsql/10/data/ data 2.2 删除软连接 rm data 删除软连接和数据 rm data/ 3 权限和所有者 chmod chown 修改软连接的所用者 使用 -h 参数 chown -h……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/ln-s/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/hdparm/" title="hdparm 查看硬盘型号">hdparm 查看硬盘型号</a>
             </h1>
         </header>
@@ -241,42 +277,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/no-passwd/" title="ssh 免密码登&amp;跳板机配置">ssh 免密码登&amp;跳板机配置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月18日
-        </date>
-        
-        <div class="post-content">
-            Linux 免密码登录实现 1.说明 DES算法 加/解速度快,密钥量短,采用对称加密 RSA算法好 算法复杂,加/解速度慢,采用非对称加密 2.生成秘钥 $ssh-keygen -t dsa -P '' Generating public/private dsa key pair. Enter file in which to save the key (/root/.ssh/id_dsa): Your identification has been saved in /root/.ssh/id_dsa. Your public key has been saved in /root/.ssh/id_dsa.pub. The key fingerprint is: SHA256:/K/dqHKbkmm/0qw9IOFvZwRAPx36+yQtXtLM353spns root@kvm71 The key's randomart image is: +---[DSA 1024]----+ | .. . | | .. o . | | .+ . | | ...o | | . .S.. | | o ...* | | o B*……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/no-passwd/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/wheel/" title="Linux wheel 用户组">Linux wheel 用户组</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月18日
-        </date>
-        
-        <div class="post-content">
-            wheel 用户组 1.在Linux系统中root用户作为超级管理员拥有至高无上的权限，其他用户可以使用su命令将自己切换为root用户。为了加强系统的安全性,对系统用户权限进行限制。 设置为只有wheel用户组的成员拥有su 权利，其他用户不再具备切换到root 用户的权限。 2.设置 2.1 新建use……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/wheel/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -364,6 +364,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -395,14 +403,6 @@
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -417,11 +417,11 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

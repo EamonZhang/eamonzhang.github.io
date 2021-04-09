@@ -91,6 +91,45 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/haproxy/" title="Haproxy 算法">Haproxy 算法</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月26日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            blance roundrobin # 轮询，软负载均衡基本都具备这种算法 balance static-rr # 根据权重，建议使用 balance leastconn # 最少连接者先处理，建议使用 balance source # 根据请求源IP，建议使用 balance uri # 根据请求的URI balance url_param，# 根据请求的URl参数&rsquo;balance url_param' requires an URL parameter name balance hdr(name) # 根据HTTP请求头来锁定每一次HTTP请求……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/haproxy/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/prometheus-altermanager/" title="Promethues Altermanager 报警">Promethues Altermanager 报警</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月21日
+        </date>
+        
+        <div class="post-content">
+            Prometheus Alertmanager 概述 Alertmanager与Prometheus是相互分离的两个组件。Prometheus服务器根据报警规则将警报发送给Alertmanager，然后Alertmanager将silencing、inhibition、aggregation等消息通过电子邮件、PaperDu……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/prometheus-altermanager/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/monitor/prometheus-concepts/" title="Promethues 基本概念">Promethues 基本概念</a>
             </h1>
         </header>
@@ -221,38 +260,6 @@
             写在前面 在学习Service Mesh前还是最好先清楚几个概念，如熔断，限流，降级。接下来一起揭开面纱，让陌生的名词变得没有那么神秘。一切都来自于现实的应用场景，及解决问题的方法方式。 consumer表示服务调用方 provider表示服务提供方 A调用B服务，一般是泛指调用B服务里面……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/istio/concept01/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/istio/install/" title="Istio 1.0.3 安装　">Istio 1.0.3 安装　</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月12日
-        </date>
-        
-        <div class="post-content">
-            Service Mesh(服务网格) Kubernetes 已经给我们带来了诸多的好处。但是仍有些需求比如 A/B 测试、金丝雀发布、限流、访问控制,端到端认证等需要运维人员进一步去解决。 Istio 是完全开源的服务网格,提供了一套完整的解决方案，可以透明地分层到现有的分布式应用程序上。对开发人员几乎无感的同时获得超能力。 如果想要现……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/istio/install/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/es/esrally/" title="Esrallyi 压力测试">Esrallyi 压力测试</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月12日
-        </date>
-        
-        <div class="post-content">
-            https://segmentfault.com/a/1190000011174694……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/es/esrally/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +398,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -422,14 +437,6 @@
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -444,11 +451,11 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

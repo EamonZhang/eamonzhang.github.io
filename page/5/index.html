@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/kvm/vagrant/" title="vagrant">vagrant</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年7月13日
+        </date>
+        
+        <div class="post-content">
+            介绍 通常用vagrant 来管理VirtualBox ,VMWare，方便测试环境的创建，销毁。不常折腾用virtualbox, 反复折腾用vagrant。 安装 下载virtualbox 下载vagrant -- 安装依赖 #yum --enablerepo=epel -y install fuse-sshfs #yum install bsdtar #yum -y install gcc kernel kernel-devel 常用方法 --- 镜像管理 添加镜像 #vagrant box add centos/7 查看镜像 #vagrant box……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/kvm/vagrant/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/oom/" title="数据库 OOM 预防">数据库 OOM 预防</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年6月30日
+        </date>
+        
+        <div class="post-content">
+            降低主进程被OOM kill 掉的风险 1. restart_after_crash 默认崩溃重启 postgres=# show restart_after_crash; restart_after_crash --------------------- on (1 row) 2. vm.overcommit # vi /etc/sysctl.conf # 0 表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程 # 1 表示内核允许分配所有的物理内存，而不管当前的内存状态如何 # 2 表示内核允许分……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/oom/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/middleware/consul/" title="Consul DNS 服务发现">Consul DNS 服务发现</a>
             </h1>
         </header>
@@ -221,38 +253,6 @@
             https://blog.csdn.net/Hehuyi_In/article/details/102653909……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_prewarm/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/repo/" title="Centos7 私有源搭建">Centos7 私有源搭建</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月19日
-        </date>
-        
-        <div class="post-content">
-            介绍 为了保证IDC内所有主机版本一致。 目前问题， 当主机执行yum update 时，软件版本不可控。每个主机版本完全取决于更新的时机。 造成了同一个IDC内的版本的差异，比如有的数据库的版本为10.06,有的为10.13。尤其是使用了如postgis等拓展的时候。版本混乱，甚至主从之间都不一致。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/repo/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/iperf/" title="带宽检测 - iperf">带宽检测 - iperf</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月12日
-        </date>
-        
-        <div class="post-content">
-            ……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/iperf/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +391,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -422,14 +430,6 @@
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -444,11 +444,11 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

@@ -101,16 +101,23 @@
             2020年5月7日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
         
         
         <div class="post-content">
-            <h4 id="直接读取系统信息">直接读取系统信息</h4>
+            <h2 id="直接读取系统信息">直接读取系统信息</h2>
 <p>可以通过读取如下路径中的数据来获取cpu的温度信息，不过读取的数据没有经过处理。</p>
 <pre><code>cpu0：
 cat /sys/class/thermal/thermal_zone0/temp
 cpu1：
 cat /sys/class/thermal/thermal_zone1/temp
-</code></pre><h4 id="通过命令行的方式获取">通过命令行的方式获取</h4>
+</code></pre><h2 id="通过命令行的方式获取">通过命令行的方式获取</h2>
 <p>安装 lm_sensors 软件包：</p>
 <pre><code># rpm
 yum install lm_sensors
@@ -254,6 +261,14 @@ Core 13:        +30.0°C  (high = +85.0°C, crit = +95.0°C)</p>
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -285,14 +300,6 @@ Core 13:        +30.0°C  (high = +85.0°C, crit = +95.0°C)</p>
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -307,11 +314,11 @@ Core 13:        +30.0°C  (high = +85.0°C, crit = +95.0°C)</p>
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

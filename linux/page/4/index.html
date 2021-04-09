@@ -93,6 +93,42 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cgroups/" title="cgroups">cgroups</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月14日
+        </date>
+        
+        <div class="post-content">
+            https://www.certdepot.net/rhel7-get-started-cgroups/ https://www.oracle.com/technical-resources/articles/linux/resource-controllers-linux.html iops和bps限制 限制sda 的读写 lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sda 8:0 0 931.5G 0 disk /data sdb 8:16 0 223.6G 0 disk ├─sdb1 8:17 0 200M 0 part /boot/efi ├─sdb2 8:18 0 1G 0 part /boot ├─sdb3 8:19 0 7.8G 0 part [SWAP] └─sdb4 8:20 0 214.6G 0 part / cd /sys/fs/cgroup/blkio/ echo &quot;8:0 102400&quot; &gt; blkio.throttle.read_bps_device echo &quot;8:0 10&quot; &gt; blkio.throttle.read_iops_device echo &quot;8:0 204800&quot; &gt; blkio.throttle.write_bps_device echo &quot;8:0 20&quot; &gt; blkio.throttle.write_iops_device……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cgroups/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/at-crontab/" title="定时任务">定时任务</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月9日
+        </date>
+        
+        <div class="post-content">
+            Linux 系统中的定时任务 重复执行 一次执行 重复执行 详见 /etc/crontab 配置 anacron 用于以天为单位的频率运行命令。它的工作与 cron 稍有不同，它假设机器不会一直开机。 cron 也适合在那些不会 24X7 运行如笔记本以及桌面电脑的机器上运行每日、每周以及每月的计划任务（LCTT 译注：不适合按小时、分钟执行任务）。 假设你有一个计划任务……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/at-crontab/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/nospace-device/" title="no space left on device">no space left on device</a>
             </h1>
         </header>
@@ -234,42 +270,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/stat/" title="Access Modify Change 三种时间戳">Access Modify Change 三种时间戳</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月20日
-        </date>
-        
-        <div class="post-content">
-            三种时间对应关系 访问时间 Access atime 修改时间 Modify mtime 状态改动时间 Change ctime 如何查看文件文件的三种时间戳 stat filename 三种时间戳的解释 访问时间：读一次文件的内容，这个时间就会更新。比如more、cat等命令。ls、stat命令不会修改atime 修改时间：修改时间是文件内容最后一次被修改的时间。比如：vim操作……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/stat/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/ln-s/" title="ln -s 建立软连接">ln -s 建立软连接</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月19日
-        </date>
-        
-        <div class="post-content">
-            创建软连接 类似于windows中的创建快捷方式 ln -s source target 具体方法举例 需求 数据库的数据实际存放位置为 /data/pgsql/10/data/ 数据库的应用访问地址为 /var/lib/pgsql/10/data/ 创建软连接 1 切换目录到需要创建快捷方式的文件目录 cd /var/lib/pgsql/10/ 2.1 创建软连接 ln -s /data/pgsql/10/data/ data 2.2 删除软连接 rm data 删除软连接和数据 rm data/ 3 权限和所有者 chmod chown 修改软连接的所用者 使用 -h 参数 chown -h……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/ln-s/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -357,6 +357,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -388,14 +396,6 @@
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -410,11 +410,11 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

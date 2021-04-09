@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/monitor/" title="Postgres 监控">Postgres 监控</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月6日
+        </date>
+        
+        <div class="post-content">
+            各种监控方式 zabbix Monitor PostgreSQL with Zabbix postgres_exporter A PostgresSQL metric exporter for Prometheus pgwatch2 PostgreSQL metrics monitor/dashboard pgmetrics Collect and display information and stats from a running PostgreSQL server pgdash (收费) pganalyze PostgreSQL Performance Monitoring 参考自己实现 状态查看 pgcenter pgcenter top pgcenter: 2018-12-20 11:10:25, load average: 0.94, 0.84, 0.86 state [ok]: ::1:5432 postgres@postgres (ver: 10.6, up 8 days 19:57:54, recovery: f) %cpu: 15.0 us, 3.7 sy, 0.0 ni, 75.3 id, 5.7 wa, 0.0 hi, 0.2 si, 0.0 st activity: 5/1000 conns, 0/0 prepared, 2 idle, 0 idle_xact, 3 active, 0 waiting, 0 others MiB mem: 7821 total, 162 free, 424 used, 7235 buff/cached autovacuum: 0/3 workers/max, 0 manual, 0 wraparound, 00:00:00 vac_maxtime MiB swap: 1023 total, 903 free, 120 used, 0/0 dirty/writeback statements: 1888 stmt/s,……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/monitor/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/sysstat/" title="Linux 系统性能检测">Linux 系统性能检测</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月6日
+        </date>
+        
+        <div class="post-content">
+            整体篇 安装 yum install sysstat -y top htop atop vmstat -wt 1 dstat 内存篇 由于Linux 内存的占用属于饥饿式，所以看到的结果只能作为参考 cat /proc/meminfo 结果具体含义 I/O 篇 整体io情况 iostat -dmx 1 Linux 3.10.0-862.14.4.el7.x86_64 (rjyd) 2018年12月06日 _x86_64_ (40 CPU) Device: rrqm/s wrqm/s r/s w/s rMB/s wMB/s avgrq-sz avgqu-sz await r_await w_await svctm %util sda 0.00 0.05 0.06 0.11 0.00 0.00 53.87 0.00 1.35 0.60 1.78 0.23 0.00 sdb 0.00 0.02 0.08 6.65 0.00 0.07 21.00 0.00 0.49 0.42 0.50 0.26 0.17 详细说明 哪些进程占用 iotop -oP……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/sysstat/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/tablespace/" title="tablespace 表空间">tablespace 表空间</a>
             </h1>
         </header>
@@ -230,45 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/log/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/fio/" title="fio 硬盘性能测试">fio 硬盘性能测试</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月4日
-        </date>
-        
-        <div class="post-content">
-            基本概念 使用FIO之前，首先要有一些SSD性能测试的基础知识。 包括线程，队列深度，Offset，同步异步，DirectIO，BIO。 线程 线程指的是同时有多少个读或写任务在并行执行，一般来说，CPU里面的一个核心同一时间只能运行一个线程。如果只有一个核心，要想运行多线程，只能使用时……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/fio/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/smartctl/" title="smartctl 硬盘检测">smartctl 硬盘检测</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月3日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            SMART 简介 S.M.A.R.T.，全称为“Self-Monitoring Analysis and Reporting Technology”，即“自我监测、分析及报告技术”。是一种自动的硬盘状态检测与预警系统和规范。通过在硬盘硬件内的检测指令对硬盘的硬件如磁头、盘片、马达、电路的运行情况进行监控、记录并与厂商所设定的预设安全……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/smartctl/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -405,6 +398,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -436,14 +437,6 @@
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -458,11 +451,11 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

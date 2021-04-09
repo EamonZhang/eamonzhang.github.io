@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cmd-awk/" title="awk 命令">awk 命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月25日
+        </date>
+        
+        <div class="post-content">
+            What is awk 官网 man 告诉我们 pattern scanning and processing language 那么awk能做什么，awk适合做什么 ？ awk最常用的工作一般是遍历一个文件中的每一行，然后分别对文件的每一行进行处理。 由于awk天生提供对文件中文本分列进行处理，所以如果一个文件中的每行都被特定的分隔符(常见的是空格)隔开， 我们可以将这个文件看成是由……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-awk/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/terminal-reuse/" title="终端复用">终端复用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月25日
+        </date>
+        
+        <div class="post-content">
+            背景 我们在linux服务器上的工作一般都是通过一个远程的终端连接软件连接到远端系统进行操作，例如使用xshell或者SecureCRT工具通过ssh进行远程连接。 在使用过程中，如果要做比较耗时的操作，例如有时候进行编译，或者下载大文件需要比较长的时间，一般情况下是下班之后直接运行……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/terminal-reuse/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/monitor/zabbix-postgres-fqa/" title="Zabbix Postgres Fqa">Zabbix Postgres Fqa</a>
             </h1>
         </header>
@@ -214,38 +246,6 @@
             创建软连接 类似于windows中的创建快捷方式 ln -s source target 具体方法举例 需求 数据库的数据实际存放位置为 /data/pgsql/10/data/ 数据库的应用访问地址为 /var/lib/pgsql/10/data/ 创建软连接 1 切换目录到需要创建快捷方式的文件目录 cd /var/lib/pgsql/10/ 2.1 创建软连接 ln -s /data/pgsql/10/data/ data 2.2 删除软连接 rm data 删除软连接和数据 rm data/ 3 权限和所有者 chmod chown 修改软连接的所用者 使用 -h 参数 chown -h……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/linux/ln-s/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/hdparm/" title="hdparm 查看硬盘型号">hdparm 查看硬盘型号</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月19日
-        </date>
-        
-        <div class="post-content">
-            安装工具 yum install hdparm 查看 -i参数是在引导驱动器时获得的识别信息，这个信息有时候不完整也不一 定准确 hdparm -i /dev/sdb /dev/sdb: Model=INTEL SSDSC2KW512G8, FwRev=LHF002C, SerialNo=PHLA75210153512DGN Config={ Fixed } RawCHS=16383/16/63, TrkSize=0, SectSize=0, ECCbytes=0 BuffType=unknown, BuffSize=unknown, MaxMultSect=16, MultSect=off CurCHS=16383/16/63, CurSects=16514064, LBA=yes, LBAsects=1000215216 IORDY=on/off, tPIO={min:120,w/IORDY:120}, tDMA={min:120,rec:120} PIO modes: pio0 pio3 pio4 DMA modes: mdma0 mdma1 mdma2 UDMA modes: udma0 udma1 udma2 udma3 udma4 udma5 *udma6 AdvancedPM=yes: unknown setting WriteCache=enabled Drive conforms to: unknown: ATA/ATAPI-2,3,4,5,6,7 * signifies the current active mode -I参数是直接从驱动器获取识别信息, 并以原始的,未经过修改和更正的形式……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/hdparm/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/about/3brothers/" title="扁鹊三兄弟">扁鹊三兄弟</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月17日
-        </date>
-        
-        <div class="post-content">
-            系统运维与安全的三种境界 封侯非我意， 我愿海波平。 -- 戚继光……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/about/3brothers/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +384,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -415,14 +423,6 @@
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -437,11 +437,11 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

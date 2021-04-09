@@ -91,6 +91,45 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/nginx-status/" title="Nginx 状态监控">Nginx 状态监控</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月20日
+        </date>
+        
+        <div class="post-content">
+            Nginx 开启status用以监控状态信息 Nginx 可以通过with-http_stub_status_module模块来监控nginx的一些状态信息。 通过nginx -V来查看是否有with-http_stub_status_module该模块。 # nginx -V nginx version: nginx/1.16.1 built by gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) built with OpenSSL 1.0.2k-fips 26 Jan 2017 TLS SNI support……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/nginx-status/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/django-index-ops/" title="django 默认创建第二索引">django 默认创建第二索引</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Django使用postgresql做数据库 db_index创建索引时会创建第二个索引varchar_pattern_ops问题 创建默认索引 minion_id = models.CharField(max_length=100, db_index=True, blank=True, null=False, default=&quot;&quot;) 当字段类型是 models.CharField 或者 models.TextField 时 使用 db_index=True创建索引 会创建第二索引 django.db.backends.postgresql.schema class DatabaseSchemaEditor(BaseDatabaseSchemaEditor): sql_alter_column_type = &quot;ALTER COLUMN %(column)s TYPE %(type)s USING %(column)s::%(type)s&quot; sql_create_sequence = &quot;CREATE SEQUENCE %(sequence)s&quot; sql_delete_sequence = &quot;DROP SEQUENCE IF EXISTS %(sequence)s CASCADE&quot; sql_set_sequence_max……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/django-index-ops/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/FunctionsandOperators/" title="方法和函数">方法和函数</a>
             </h1>
         </header>
@@ -221,38 +260,6 @@
             背景 数据库的事务标识符使用的是32位的,最大可表示42个亿。当前事务的数据在20亿个事务之后将变的不可见。为了解决这个问题（回卷），Postgres引入了一个冻结事务标识的概念。 并实现了名为freeze的冻结过程。 冻结过程 两种模式 惰性模式 迫切模式 惰性模式回跳过页中所有的数据都位可……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pgage/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/reject-ping/" title="Linux 禁Ping">Linux 禁Ping</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年1月2日
-        </date>
-        
-        <div class="post-content">
-            修改配置文件/etc/sysctl.conf 在这个文件的最后添加一行: net.ipv4.icmp_echo_ignore_all=1 （0 代表允许 1 代表禁止） 执行sysctl -p 使新配置生效……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/reject-ping/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/parted/" title="linux分区命令parted的用法">linux分区命令parted的用法</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年12月27日
-        </date>
-        
-        <div class="post-content">
-            linux分区命令parted的用法 parted的适用场景 创建操作大于2T的分区 一般情况下，我们都是选择使用fdisk工具来进行分区，但是目前在实际生产环境中使用的磁盘空间越来越大，呈TiB级别增长；而常用的fdisk这个工具对分区是有大小限制的，它只能划分小于2T的磁盘，所以在……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/parted/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +398,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -422,14 +437,6 @@
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -444,11 +451,11 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

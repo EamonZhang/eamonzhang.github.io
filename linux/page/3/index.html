@@ -93,6 +93,42 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/pmap/" title="pmap Linux 进程内存分析">pmap Linux 进程内存分析</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年3月19日
+        </date>
+        
+        <div class="post-content">
+            介绍 pmap - report memory map of a process(查看进程的内存映像信息) 参数说明 x extended Show the extended format. 显示扩展格式 d device Show the deviceformat. 显示设备格式 结果查看说明 Address: start address ofmap 映像起始地址 Kbytes: size of map in kilobytes 映像大小 RSS: resident set size inkilobytes 驻留集大小 Dirty: dirty pages (both sharedand private) in kilobytes 脏页大小 Mode: permissions on map 映像权限: r=read,w=write, x=execute, s=shared, p=private (copy on write) Mapping: file backing the map ,or &lsquo;[ anon ]&rsquo; for allocated memory, or &lsquo;[ stack ]&rsquo; for the program stack.……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/pmap/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/wind-run/" title="DOS 常用命令">DOS 常用命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年2月25日
+        </date>
+        
+        <div class="post-content">
+            运行 cmd command regedit 注册表 calc 计算器 notepad 笔记本 mspaint 图画板 winver window版本 shutdown 60秒关机 cmd ipconfig /all 查看 ip信息 cd 切换目录 D: 切换到D目录 dir 当前目录下文件信息 ipconfig /flushdns 刷新本地dns缓存 ipconfig /displaydns 显示dns缓存……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/wind-run/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/fu-cmd/" title="Linux 常用命令">Linux 常用命令</a>
             </h1>
         </header>
@@ -234,42 +270,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cgroups/" title="cgroups">cgroups</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月14日
-        </date>
-        
-        <div class="post-content">
-            https://www.certdepot.net/rhel7-get-started-cgroups/ https://www.oracle.com/technical-resources/articles/linux/resource-controllers-linux.html iops和bps限制 限制sda 的读写 lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sda 8:0 0 931.5G 0 disk /data sdb 8:16 0 223.6G 0 disk ├─sdb1 8:17 0 200M 0 part /boot/efi ├─sdb2 8:18 0 1G 0 part /boot ├─sdb3 8:19 0 7.8G 0 part [SWAP] └─sdb4 8:20 0 214.6G 0 part / cd /sys/fs/cgroup/blkio/ echo &quot;8:0 102400&quot; &gt; blkio.throttle.read_bps_device echo &quot;8:0 10&quot; &gt; blkio.throttle.read_iops_device echo &quot;8:0 204800&quot; &gt; blkio.throttle.write_bps_device echo &quot;8:0 20&quot; &gt; blkio.throttle.write_iops_device……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cgroups/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/at-crontab/" title="定时任务">定时任务</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月9日
-        </date>
-        
-        <div class="post-content">
-            Linux 系统中的定时任务 重复执行 一次执行 重复执行 详见 /etc/crontab 配置 anacron 用于以天为单位的频率运行命令。它的工作与 cron 稍有不同，它假设机器不会一直开机。 cron 也适合在那些不会 24X7 运行如笔记本以及桌面电脑的机器上运行每日、每周以及每月的计划任务（LCTT 译注：不适合按小时、分钟执行任务）。 假设你有一个计划任务……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/at-crontab/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -357,6 +357,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -388,14 +396,6 @@
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -410,11 +410,11 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

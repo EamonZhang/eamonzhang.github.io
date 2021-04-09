@@ -91,6 +91,52 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &quot;physical id&quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &quot;cpu cores&quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &quot;processor&quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &quot;name&quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core x Socket(s) x Core(s) per socket Linux查看某个进……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cpu-affinity/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月8日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            介绍 CPU动态节能技术用于降低服务器功耗，通过选择系统空闲状态不同的电源管理策略，可以实现不同程度降低服务器功耗，更低的功耗策略意味着CPU唤醒更慢对性能影响更大。对于对时延和性能要求高的应用，建议关闭CPU的动态调节功能，禁止 CPU休眠，并把CPU频率固定到最高。 cpufreq……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cpu_utilize/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
             </h1>
         </header>
@@ -121,8 +167,15 @@
             2021年4月6日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
         <div class="post-content">
-            ……
+            介绍 argparse 是 Python 内置的一个用于命令项选项与参数解析的模块，通过在程序中定义好我们需要的参数，argparse 将会从 sys.argv 中解析出这些参数，并自动生成帮助和使用信息 功能更加强悍的第三方包支持 click 简单说明……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/python/module-argparse/">阅读全文</a></p>
     </article>
@@ -265,52 +318,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/bmcpasswd/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Intel 论坛相似问题讨论 https://community.intel.com/t5/Solid-State-Drives/I-O-request-timeouts-on-Linux-with-Intel-P3520-P4600-NVMe-PCIe/td-p/577474 临时解决 mkfs.xfs -K /dev/nvme01 -K Do not attempt to discard blocks at mkfs time. 带来问题 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa8188cf9&gt;] schedule_preempt_disabled+0x29/0x70 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa8186c67&gt;] __mutex_lock_slowpath+0xc7/0x1d0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa818603f&gt;] mutex_lock+0x1f/0x2f [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7d2d596&gt;] ima_file_check+0xa6/0x1b0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c5dfba&gt;] do_last+0x59a/0x1340 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c28ba6&gt;] ? kmem_cache_alloc_trace+0x1d6/0x200 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c5ee2d&gt;] path_openat+0xcd/0x5a0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c01158&gt;] ? page_add_new_anon_rmap+0xb8/0x170 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c6107d&gt;] do_filp_open+0x4d/0xb0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c6f177&gt;] ? __alloc_fd+0x47/0x170 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c4cbc4&gt;] do_sys_open+0x124/0x220 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c4ccde&gt;] SyS_open+0x1e/0x20 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa8194f92&gt;] system_call_fastpath+0x25/0x2a [Tue Mar 30 12:19:12 2021] INFO: task postmaster:119438 blocked for more than 120 seconds. [Tue……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/ssdiotimeout/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月23日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            基本概念 集群： 一组多个同时对外提供相同服务的实体机组成一个集群。这里的集群为主从结构，可写节点为主节点，其他只读节点为从节点。 高可用： 在发生局部故障时对整体业务影响很低。即不可用的时间要尽量的短。 对外部应用的访问来说，无需关注如何实现，如同只访问一个节点。并能得到持续的服务能力。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/ha_fd/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -415,6 +422,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -446,14 +461,6 @@
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -468,11 +475,11 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

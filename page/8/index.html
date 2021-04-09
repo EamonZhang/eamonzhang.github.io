@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/reject-ping/" title="Linux 禁Ping">Linux 禁Ping</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年1月2日
+        </date>
+        
+        <div class="post-content">
+            修改配置文件/etc/sysctl.conf 在这个文件的最后添加一行: net.ipv4.icmp_echo_ignore_all=1 （0 代表允许 1 代表禁止） 执行sysctl -p 使新配置生效……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/reject-ping/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/parted/" title="linux分区命令parted的用法">linux分区命令parted的用法</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年12月27日
+        </date>
+        
+        <div class="post-content">
+            linux分区命令parted的用法 parted的适用场景 创建操作大于2T的分区 一般情况下，我们都是选择使用fdisk工具来进行分区，但是目前在实际生产环境中使用的磁盘空间越来越大，呈TiB级别增长；而常用的fdisk这个工具对分区是有大小限制的，它只能划分小于2T的磁盘，所以在……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/parted/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/time-cmd/" title="linux time 命令">linux time 命令</a>
             </h1>
         </header>
@@ -221,38 +253,6 @@
             实体机 Cpu 内存 IO 网络 磁盘大小 数据库基本信息 服务启动时间 select pg_postmaster_start_time(); 版本信息 select current_setting('server_version'); 主从角色 select pg_is_in_recovery();……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/monitor/postgres-indicators/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/wget/" title="wget">wget</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年9月19日
-        </date>
-        
-        <div class="post-content">
-            断点续传 后台运行 限速 wget -cb --limit-rate=300k &quot;http://...&quot;……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/wget/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/es/elasticalert/" title="ElasticAlert">ElasticAlert</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年9月19日
-        </date>
-        
-        <div class="post-content">
-            https://github.com/Yelp/elastalert……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/es/elasticalert/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +391,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -422,14 +430,6 @@
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -444,11 +444,11 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

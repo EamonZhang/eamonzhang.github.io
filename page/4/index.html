@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/partition/" title="分区表">分区表</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月31日
+        </date>
+        
+        <div class="post-content">
+            分区表 数据库分区是一种将数据做物理分片的数据库设计技术，虽然分区技术可以有多种实现方法， 但其主要目的是为了在特定的SQL操作中减少数据读取的总量以缩减响应时间。 分区方式 水平分区 订单按时间维度 垂直分区 范式规范 ： 订单数据 （客户表，商品表，订单表） 优点 性能 ，范围或点查询。 管理 归档，删除……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/partition/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_fdw/" title="跨库操作">跨库操作</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月24日
+        </date>
+        
+        <div class="post-content">
+            dblink https://www.cnblogs.com/lottu/p/13331387.html fdw https://www.cnblogs.com/lottu/p/13345187.html 注意事项 查询条件下推，新版本功能更全 ddl 操作 , fdw 如果用于历史归档……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_fdw/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/reback_supper_user/" title="找回supper user 权限">找回supper user 权限</a>
             </h1>
         </header>
@@ -145,6 +177,13 @@
         <date class="post-meta meta-date">
             2020年9月21日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
         
         <div class="post-content">
             配置 vim /etc/netplan/00-installer-config.yaml # This is the network config written by 'subiquity' network: ethernets: enp2s0: addresses: - 192.168.6.111/24 gateway4: 192.168.6.1 nameservers: addresses: [119.29.29.29] version: 2 生效 netplan apply……
@@ -214,38 +253,6 @@
             简介 主要用于Restful风格接口测试,指针对模块或系统间接口进行的测试 单一接口测试 多接口组合逻辑测试 定时自动，生成测试报告 失败通知 测试用例断言 返回状态码 返回结果 超时时间 基础应用需求 Postman 测试用例编写 Newman 执行测试用例命令行工具 Jenkins 自动化集成 Git 测试用例成果物管理 Allure 生成测试报告 TestLink 测试用例管理……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/istio/auto-api-test/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/kvm/vagrant/" title="vagrant">vagrant</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年7月13日
-        </date>
-        
-        <div class="post-content">
-            介绍 通常用vagrant 来管理VirtualBox ,VMWare，方便测试环境的创建，销毁。不常折腾用virtualbox, 反复折腾用vagrant。 安装 下载virtualbox 下载vagrant -- 安装依赖 #yum --enablerepo=epel -y install fuse-sshfs #yum install bsdtar #yum -y install gcc kernel kernel-devel 常用方法 --- 镜像管理 添加镜像 #vagrant box add centos/7 查看镜像 #vagrant box……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/kvm/vagrant/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/oom/" title="数据库 OOM 预防">数据库 OOM 预防</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年6月30日
-        </date>
-        
-        <div class="post-content">
-            降低主进程被OOM kill 掉的风险 1. restart_after_crash 默认崩溃重启 postgres=# show restart_after_crash; restart_after_crash --------------------- on (1 row) 2. vm.overcommit # vi /etc/sysctl.conf # 0 表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程 # 1 表示内核允许分配所有的物理内存，而不管当前的内存状态如何 # 2 表示内核允许分……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/oom/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +391,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
@@ -415,14 +430,6 @@
         <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -437,11 +444,11 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

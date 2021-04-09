@@ -6,7 +6,16 @@
     <description>Recent content in python on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 12 May 2020 11:28:53 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Apr 2021 17:20:07 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>模块 argparse</title>
+      <link>https://zhangeamon.top/python/module-argparse/</link>
+      <pubDate>Tue, 06 Apr 2021 17:20:07 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/module-argparse/</guid>
+      <description>介绍 argparse 是 Python 内置的一个用于命令项选项与参数解析的模块，通过在程序中定义好我们需要的参数，argparse 将会从 sys.argv 中解析出这些参数，并自动生成帮助和使用信息 功能更加强悍的第三方包支持 click 简单说明</description>
+    </item>
+    
     <item>
       <title>Jdango 多数据库读写配置</title>
       <link>https://zhangeamon.top/python/django-ndb/</link>
