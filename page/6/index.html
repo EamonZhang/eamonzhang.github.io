@@ -91,6 +91,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/firewalld/" title="Firewall">Firewall</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年6月3日
+        </date>
+        
+        <div class="post-content">
+            简单应用 服务管理 # 查看全部支持的服务 $ firewall-cmd --get-service # 查看开放的服务 $ firewall-cmd --list-service # 开放服务 $ firewall-cmd --add-service=postgresql --permanent # 关闭服务 $ firewall-cmd --remove-service=postgresql --permanent permanent 参数修改对应的配置文件 /etc/firewalld/zones/public.xml 端口管理 # 查看开放的端口 $ firewall-cmd --zone=public --list-ports # 开放指导端口 $ firewall-cmd --zone=public --add-port=80/tcp --permanent # 开放端口段 $ firewall-cmd --zone=public --add-port=8388-8389/tcp --permanent # 关闭端口 $ firewall-cmd --zone=public --remove-port=80/tcp --permanent 规则管理 # 对 147.152.139.197 开放10000端口 $ firewall-cmd --permanent --zone=public --add-rich-rule=' rule family=&quot;ipv4&quot; source address=&quot;147.152.139.197/32&quot; port protocol=&quot;tcp&quot; port=&quot;10000&quot;……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/firewalld/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/ssl/" title="数据库 ssl认证">数据库 ssl认证</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年6月3日
+        </date>
+        
+        <div class="post-content">
+            SSL双向认证和SSL单向认证的区别 双向认证 SSL 协议要求服务器和用户双方都有证书。单向认证 SSL 协议不需要客户拥有CA证书，服务器端不会验证客户证书，以及在协商对称密码方案，对称通话密钥时，服务器发送给客户的是没有加过密的(这并不影响 SSL 过程的安全性)密码方案。 这样，双方具体的通讯内容，……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/ssl/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/awsome-postgres/" title="工作中所使用的postgres">工作中所使用的postgres</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月27日
+        </date>
+        
+        <div class="post-content">
+            Postgres 实际应用概览 MVCC 多版本控制 一个绕不开的话题， 主要是对抗表空间的膨胀。解决垃圾回收问题，主从库之间从库查询冲突问题。 目前方法每日低峰期定时 vaccum ，gocron自定定时任务 。 根据pgstattuple对磁盘空间利用率进行分析。决定是否vaccum full ,pg_repack 流复制 主从复制，读写分离的基础。五种同……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/awsome-postgres/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_prewarm/" title="数据预加载">数据预加载</a>
             </h1>
         </header>
@@ -154,7 +202,7 @@
         </div>
         
         <div class="post-content">
-            https://www.cnblogs.com/thismyblogs/p/9855801.html……
+            https://www.cnblogs.com/wumingxiaoyao/p/8610791.html https://www.cnblogs.com/thismyblogs/p/9855801.html……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/python/django-ndb/">阅读全文</a></p>
     </article>
@@ -205,61 +253,6 @@
             介绍 auditd是Linux审计系统中用户空间的一个组件，负责将审计记录写到磁盘中。在CentOS7上默认就会有安装这个服务。 如果被卸载，可以直接使用yum进行安装： yum -y install audit auditd-libs 常用命令 1、auditctl : 即时控制审计守护进程的行为的工具，比如如添加规则等等。 audtitctl -l #查看规则 auditctl -D #……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/network-security/audit/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/dengbao3/" title="等保三指南">等保三指南</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月8日
-        </date>
-        
-        <div class="post-content">
-            等保三指南-上 等保三指南-下……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/dengbao3/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cpu_temp/" title="Linux 获取CPU温度">Linux 获取CPU温度</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月7日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            直接读取系统信息 可以通过读取如下路径中的数据来获取cpu的温度信息，不过读取的数据没有经过处理。 cpu0： cat /sys/class/thermal/thermal_zone0/temp cpu1： cat /sys/class/thermal/thermal_zone1/temp 通过命令行的方式获取 安装 lm_sensors 软件包： # rpm yum install lm_sensors # deb apt-get install lm-sensors 执行命令sensors-detect，进行简单配置，此命令执行后会出现一系列选项，一直yes即可； 执行……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cpu_temp/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/go/go_mod/" title="依赖管理工具go module">依赖管理工具go module</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年4月30日
-        </date>
-        
-        <div class="post-content">
-            背景 大多数语言都会有包管理工具，像Node有npm，PHP有composer，Java有Maven和Gradle。 在go1.11 版本中，新增了module管理模块功能，用来管理依赖包 开启module特性 要开始使用 go module 的特性， 需要先设置 GO111MODULE 环境变量。 开启 GO111MODULE 要使用go module,首先……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/go/go_mod/">阅读全文</a></p>
     </article>
     
     
@@ -398,6 +391,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -425,18 +430,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -455,7 +448,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

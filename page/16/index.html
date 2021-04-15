@@ -91,6 +91,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/stat/" title="Access Modify Change 三种时间戳">Access Modify Change 三种时间戳</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月20日
+        </date>
+        
+        <div class="post-content">
+            三种时间对应关系 访问时间 Access atime 修改时间 Modify mtime 状态改动时间 Change ctime 如何查看文件文件的三种时间戳 stat filename 三种时间戳的解释 访问时间：读一次文件的内容，这个时间就会更新。比如more、cat等命令。ls、stat命令不会修改atime 修改时间：修改时间是文件内容最后一次被修改的时间。比如：vim操作……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/stat/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/role-manager/" title="权限管理">权限管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月20日
+        </date>
+        
+        <div class="post-content">
+            创建用户 # user 与 role 区别 ， user 具有login权限 postgres=# create user tester with password '123456'; CREATE ROLE 创建数据库,并关联所有者 postgres=# create database test owner tester ; CREATE DATABASE 变更数据库用户所有者 postgres=# alter database test owner to tester; ALTER DATABASE 修改用户&amp;数据库 #用户连接数 postgres=# alter user tester connection limit 100; ALTER ROLE #数据库连接数 postgres=# alter database test connection limit 100; ALTER DATABASE #用户其他属性修改 postgres=# alter user tester BYPASSRLS CREATEDB ENCRYPTED PASSWORD LOGIN NOCREATEDB NOINHERIT NOREPLICATION PASSWORD REPLICATION SET VALID UNTIL CONNECTION……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/role-manager/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/dba/" title="DBA 日常">DBA 日常</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月19日
+        </date>
+        
+        <div class="post-content">
+            备份 恢复 时时热备 定期冷备 升级 每年大版本小版本升级，新特性调研，性能测试，稳定性。 可用当前最新的上一个版本。 HA 手动 自动 读写分离 sharding 多副本 安全 权限管理 资源隔离 审计 ddl 慢sql 锁长时间占用 巡检 定期巡检 awr 报告 监控 系统 数据库 诊断 优化 背景 应用程序的野蛮生长，由产品为驱动的开发，一切以快速上线为目……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/dba/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/ln-s/" title="ln -s 建立软连接">ln -s 建立软连接</a>
             </h1>
         </header>
@@ -198,61 +246,6 @@
             官方文档 介绍 What PipelineDB is What PipelineDB is not QuitStart 一个统计wiki浏览的例子 安装 各种环境安装 Continuous Views 定义流视图，其实就是定义 统计分析的QUERY， 例如select id, count(*), avg(x), &hellip; from table group by &hellip;; 定义好之后，数据插入table，这个流视图就会不断增量的进行统计，你只要查询这个流视图，就可以查看到实时的统计结果。 数据库中存……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pipelinedb01/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/monitor/introduce/" title="常用监控介绍">常用监控介绍</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月7日
-        </date>
-        
-        <div class="post-content">
-            zabbix zabbix-extensions promethues osquery m/monit……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/monitor/introduce/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/python/reference/" title="学习参考">学习参考</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月7日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            廖雪峰 Python3 草根学 Python （基于Python3.6)……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/python/reference/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/storage/introduce/" title="云存储介绍">云存储介绍</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月7日
-        </date>
-        
-        <div class="post-content">
-            对象存储(oss) 适用于大量的小文件，RESFULL接口方式存储读取迅速,不能修改，不用担心元数据过大问题。通常的架构为使用其他的数据库软件如(Hbase,ES) 等来存放管理元数据。 swift minio 块存储 这种接口通常以QEMU Driver或者Kernel Module的方式存在，这种接口需要实……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/storage/introduce/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +384,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -418,18 +423,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -448,7 +441,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

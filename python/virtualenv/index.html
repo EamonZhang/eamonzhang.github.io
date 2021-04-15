@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>virtualenv 管理 python 环境 | 故乡的云☁️</title>
+    <meta property="og:title" content="virtualenv 管理 python 环境 - 故乡的云☁️">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-04-14T09:11:30&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-04-14T09:11:30&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="virtualenv 管理 python 环境">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/python/virtualenv/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        故乡的云☁️
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">virtualenv 管理 python 环境</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月14日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="virtualenv-管理python-环境">virtualenv 管理python 环境</h2>
+<p>virualenv
+virtualenv用于创建独立的Python环境，多个Python相互独立，互不影响，它能够：</p>
+<ol>
+<li>在没有权限的情况下安装新套件</li>
+<li>不同应用可以使用不同的套件版本</li>
+<li>套件升级不影响其他应用</li>
+</ol>
+<h2 id="安装">安装</h2>
+<pre><code># ubuntu
+sudo apt-get install python-virtualenv
+
+# centos
+sudo yum install python-virtualenv
+</code></pre><h2 id="使用方法">使用方法</h2>
+<p>virtualenv [虚拟环境名称]
+如，创建<strong>ENV</strong>的虚拟环境</p>
+<pre><code>virtualenv ENV
+</code></pre><p>默认情况下，虚拟环境会依赖系统环境中的site packages，就是说系统中已经安装好的第三方package也会安装在虚拟环境中，如果不想依赖这些package，那么可以加上参数 &ndash;no-site-packages建立虚拟环境</p>
+<p>virtualenv &ndash;no-site-packages [虚拟环境名称]</p>
+<h2 id="启动虚拟环境">启动虚拟环境</h2>
+<pre><code>cd ENV
+source ./bin/activate
+</code></pre><p>注意此时命令行会多一个(ENV)，ENV为虚拟环境名称，接下来所有模块都只会安装到该目录中去。</p>
+<h2 id="退出虚拟环境">退出虚拟环境</h2>
+<pre><code>deactivate
+</code></pre><h2 id="在虚拟环境安装python套件">在虚拟环境安装Python套件</h2>
+<p>Virtualenv 附带有pip安装工具，因此需要安装的套件可以直接运行：</p>
+<pre><code>pip install [套件名称]
+</code></pre><p>如果没有启动虚拟环境，系统也安装了pip工具，那么套件将被安装在系统环境中，为了避免发生此事，可以在~/.bashrc文件中加上：</p>
+<pre><code>export PIP_REQUIRE_VIRTUALENV=true
+</code></pre><p>或者让在执行pip的时候让系统自动开启虚拟环境：</p>
+<pre><code>export PIP_RESPECT_VIRTUALENV=true
+</code></pre><h2 id="virtualenvwrapper">Virtualenvwrapper</h2>
+<p>Virtaulenvwrapper是virtualenv的扩展包，用于更方便管理虚拟环境，它可以做：</p>
+<ol>
+<li>将所有虚拟环境整合在一个目录下</li>
+<li>管理（新增，删除，复制）虚拟环境</li>
+<li>切换虚拟环境</li>
+<li>&hellip;</li>
+</ol>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/resetpasswd-centos7/">Centos7 重置密码</a></li>
+        
+        <li><a href="/linux/cpu-affinity/">CPU亲和性(亲和力)</a></li>
+        
+        <li><a href="/linux/cpu_utilize/">CPU频率管理</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

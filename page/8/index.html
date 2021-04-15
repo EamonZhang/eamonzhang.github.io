@@ -91,6 +91,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/install-cmd/" title="软件安装">软件安装</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月20日
+        </date>
+        
+        <div class="post-content">
+            Centos7 查看是否存在需要安装的软件 yum search xxxx 查看具体版本详情 yum list xxxx 查看已安装 rpm -qa | grep xxxx 安装 yum install xxxx rpm -i xxxx.rpm 删除 yum erase xxxx rpm -r xxxx Unbuntu 查看是否存在需要安装的软件 apt-cache search xxxx 查看具体版本及信息 apt show xxxx 查看已安装 dpkg -l 安装 apt-get install xxxx dpkg -l 删除 apt-get remove xxxx……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/install-cmd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/install02/" title="数据库安装 Postgres12 Ubuntu18">数据库安装 Postgres12 Ubuntu18</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月19日
+        </date>
+        
+        <div class="post-content">
+            软件源 echo &quot;deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main&quot; &gt;&gt; /etc/apt/sources.list.d/pgdg.list wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - sudo apt-get update -y 安装 apt-get install postgresql-12 postgresql-client-12 postgresql-12-postgis-2.5 postgresql-contrib -y 初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb 启动 systemctl start postgresql systemctl stop postgresql systemctl status postgresql systemctl enable postgresql 配置 cd /etc/postgresql/12/main/ vi postgres.conf vi pg_hba.conf……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/install02/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/git-nopassword/" title="Git 免输入密码">Git 免输入密码</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月19日
+        </date>
+        
+        <div class="post-content">
+            一、配置Git的 git config --global user.name [userName] git config --global user.email [userEmail] 二、配置存储模式 git config --global credential.helper store 执行之后会在linux用户主目录下的.gitconfig文件中多加 helper = store [user] name = eamonzhang email = xxxx@xxxx.com [credential] helper = store 之后cd到项目目录，执行git pull命令，会提示输入账号密码。输完这一次以后就不再需要，并且会在根目录生成一个.git-c……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/git-nopassword/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pgage/" title="数据库年龄">数据库年龄</a>
             </h1>
         </header>
@@ -205,54 +253,6 @@
             安装&amp;启动 #下载源 yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm #安装服务 yum install postgresql12 postgresql12-server postgresql12-contrib #初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb #启动服务 systemctl enable postgresql-12 systemctl start postgresql-12 流复制 #从机 建立从库 pg_basebackup -h 10.1.30.13 -U postgres -F p -P -R -D /var/lib/pgsql/12/data/ --checkpoint=fast -l postgresback #从库升级为主库 sudo su postgres -c &quot;/usr/pgsql-12/bin/pg_ctl promote -D /var/lib/pgsql/12/data/&quot; recovery.conf 配置文件不再支持，此文件中的参数合并到 postgresql.conf(postgresql.auto.conf) Recovery Target, 若 recovery.conf 存在，数据库无法启动 新增 recovery.signal 标识文件，表示数据库处于 recovery 模式 新增加 standby.signal……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/postgres12/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/dns/" title="DNS">DNS</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年10月28日
-        </date>
-        
-        <div class="post-content">
-            DNS：Domain Name System 域名管理系统 A记录 A（Address）记录是用来指定主机名（或域名）对应的IP地址记录 NS记录 NS（Name Server）记录是域名服务器记录，用来指定该域名由哪个DNS服务器来进行解析 MX记录 MX（Mail Exchanger）记录是邮件交换记录，它指向一……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/dns/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cmd-vim/" title="vi 编辑">vi 编辑</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年10月22日
-        </date>
-        
-        <div class="post-content">
-            字符串查找 a.查找一个字符串使用：“/你要查询的内容” b.查找下一个 ：“/你要查询的内容” 再输入”n“跳到下一个 字符串替换 a. 文件内全部替换： %s#abc#def#g（用def替换文件中所有的abc） 例如把一个文本文件里面的“linuxidc.com”全部替换成“linuxidc.……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-vim/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/es/curl-es/" title="使用curl命令操作elasticsearch">使用curl命令操作elasticsearch</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年10月16日
-        </date>
-        
-        <div class="post-content">
-            第一：_cat系列 _cat系列提供了一系列查询elasticsearch集群状态的接口。你可以通过执行 curl -XGET localhost:9200/_cat 获取所有_cat系列的操作 =^.^= /_cat/allocation /_cat/shards /_cat/shards/{index} /_cat/master /_cat/nodes /_cat/indices /_cat/indices/{index} /_cat/segments /_cat/segments/{index} /_cat/count /_cat/count/{index} /_cat/recovery /_cat/recovery/{index} /_cat/health /_cat/pending_tasks /_cat/aliases /_cat/aliases/{alias} /_cat/thread_pool /_cat/plugins /_cat/fielddata /_cat/fielddata/{fields} 你也可以后面加一个v，让输出内容表格显示表头，举例 curl -XGET http://10.1.80.85:9200/_cat/indices?v health status index uuid pri rep docs.count docs.deleted store.size pri.store.size green open filebeat-7.3.2-2019.09.27 agrhjW7KR_ObgdwrUOpJMA 1 1 218974 0 181.8mb 91mb 第二：……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/es/curl-es/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +391,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -418,18 +430,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -448,7 +448,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

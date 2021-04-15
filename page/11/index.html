@@ -91,6 +91,61 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/checkpoint/" title="checkpoint 检查点">checkpoint 检查点</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年3月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            作用 一般checkpoint会将某个时间点之前的脏数据全部刷新到磁盘，以实现数据的一致性与完整性。其主要目的是为了缩短崩溃恢复时间。 数据库靠谱的原因 一条DML 写入过程 在写入数据的时，当事务提交后修改信息顺序同步写入wal。shared buffer中信息并不是马上落盘。异步同步磁盘……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/checkpoint/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/adlock/" title="咨询锁 adlock">咨询锁 adlock</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年3月7日
+        </date>
+        
+        <div class="post-content">
+            https://github.com/digoal/blog/blob/master/201805/20180524_02.md 行级锁 select .. for update select .. for update skip locked select .. for share……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/adlock/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/rabbitmq/manager01/" title="rabbitmq 简单应用">rabbitmq 简单应用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年2月26日
+        </date>
+        
+        <div class="post-content">
+            启动 rabbitmq-server &amp; 队列重置（清空队列、用户等） rabbitmqctl stop_app rabbitmqctl reset rabbitmqctl stop 关闭 rabbitmqctl stop 列举所有用户 rabbitmqctl list_users 列举所有队列 rabbitmqctl list_queues 添加用户 rabbitmqctl add_user user_name user_passwd 设置用户角色为管理员 rabbitmqctl set_user_tags user_name administrator 权限设置 rabbitmqctl set_permissions -p / user_name &quot;.*&quot; &quot;.*&quot; &quot;.*&quot; 操作举例（添加用户admin） sudo rabbitmqctl add_user admin admin sudo rabbitmqctl set_user_tags admin administrator sudo rabbitmqctl set_permissions -p / admin &quot;.*&quot; &quot;.*&quot; &quot;.*&quot; 查看状态 rabbitmqctl status 安装 RabbitMQWeb管理插件 rabbitmq-plugins enable rabbitmq_management 可以……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/rabbitmq/manager01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/monitor/influxdb01/" title="Telegraf&#43;Influxdb&#43;Grafana">Telegraf&#43;Influxdb&#43;Grafana</a>
             </h1>
         </header>
@@ -198,54 +253,6 @@
             入门： 《涂抹MySQL：跟着三思一步一步学MySQL》 《MySQL数据库应用从入门到精通（第2版）》 《MySQL核心技术手册》 《MySQL技术内幕（第5版）》 运维实践： 《高性能MySQL》 经典必读 《MySQL管理之道：性能调优、高可用与监控（第2版） 》贺春旸 《深入理解MySQL核……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/mysql/book-list/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/redis/data-type/" title="Redis 常用数据结构">Redis 常用数据结构</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年2月13日
-        </date>
-        
-        <div class="post-content">
-            String： 字符串。整数，浮点数 Hash：健值对的无序散列列表 List：链表 Set：无序集合 Zset：有序集合 https://www.cnblogs.com/knowledgesea/category/722602.html……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/redis/data-type/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/process-comm/" title="八种进程通信">八种进程通信</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年2月13日
-        </date>
-        
-        <div class="post-content">
-            1.无名管道( pipe )：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系。 2.高级管道(popen)：将另一个程序当做一个新的进程在当前程序进程中启动，则它算是当前程序的子进程，这种方式我们成为高级管道方式。 3.有名……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/process-comm/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/pid_m/" title="进程管理">进程管理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月31日
-        </date>
-        
-        <div class="post-content">
-            监控进程 查看系统TOP(f进入field选择) top 打印系统进程 ps -efwL 统计每个进程的开销 pidstat -d -r -u -w -l -h -p ALL 5 1 打印进程stack pstack -p pid 打印进程系统调用 strace -p pid 结束和管理进程 结束进程 kill pid 强制结束进程(用户进程无法捕获-9信号，可能崩溃. -15信号稳妥些) kill -9 pid 管理周期进程 任务调度进程的管理……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/pid_m/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +391,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -411,18 +430,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -441,7 +448,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

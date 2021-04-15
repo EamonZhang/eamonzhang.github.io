@@ -91,6 +91,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/mail/" title="Centos mail">Centos mail</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月29日
+        </date>
+        
+        <div class="post-content">
+            介绍 电子邮件系统包括两个组件： MUA(Mail User Agent,邮件用户代理）为用户提供的可以读写邮件的界面,例如 Foxmail, Outlook MTA(Mail Transport Agent,邮件传送代理）MTA是运行在底层，能够处理邮件的收发工作的程序 邮件的接收是MTA和MUA配合完成的。远程的MUA首先向远程MTA连接并验证发信人身份，然后由远程MT……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/mail/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgbouncer/" title="pgbouncer 连接池">pgbouncer 连接池</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月27日
+        </date>
+        
+        <div class="post-content">
+            背景介绍 Pgbouncer是一个针对PostgreSQL数据库的轻量级连接池 pgbouncer 的目标是降低因为新连接到 PostgreSQL 的连接而导致的性能损失 使用术语说明： 为了后面的描述更清晰，使用如下术语 Client : 指访问者 Pgboucer: 指连接池 Postgres: 指数据库。 Connetions: 指彼此之间的连接 整体架构 原来: Client -&gt; Postgres 现在: Client -&gt; Pgbounce -&gt; Postgres 优势 内存消耗低(默……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgbouncer/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cmd-xargs/" title="xargs 命令">xargs 命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月25日
+        </date>
+        
+        <div class="post-content">
+            http://www.cnblogs.com/wangqiguo/p/6464234.html……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-xargs/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/cmd-sed/" title="sed 命令">sed 命令</a>
             </h1>
         </header>
@@ -198,54 +246,6 @@
             简介 索引的作用，加速检索，排序，分组。 优点： 检索 缺点： 新增，更新时需要维护索引，占磁盘空间，创建时锁表。 维护： 根据统计表发生全表扫描次数，索引使用次数。合理添加删除索引。 索引失效的场景 如果where过滤条件设置不合理，即使索引存在，且where过滤条件中包含索引列，也会导致全表扫……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/index-invalid/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/stat/" title="Access Modify Change 三种时间戳">Access Modify Change 三种时间戳</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月20日
-        </date>
-        
-        <div class="post-content">
-            三种时间对应关系 访问时间 Access atime 修改时间 Modify mtime 状态改动时间 Change ctime 如何查看文件文件的三种时间戳 stat filename 三种时间戳的解释 访问时间：读一次文件的内容，这个时间就会更新。比如more、cat等命令。ls、stat命令不会修改atime 修改时间：修改时间是文件内容最后一次被修改的时间。比如：vim操作……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/stat/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/role-manager/" title="权限管理">权限管理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月20日
-        </date>
-        
-        <div class="post-content">
-            创建用户 # user 与 role 区别 ， user 具有login权限 postgres=# create user tester with password '123456'; CREATE ROLE 创建数据库,并关联所有者 postgres=# create database test owner tester ; CREATE DATABASE 变更数据库用户所有者 postgres=# alter database test owner to tester; ALTER DATABASE 修改用户&amp;数据库 #用户连接数 postgres=# alter user tester connection limit 100; ALTER ROLE #数据库连接数 postgres=# alter database test connection limit 100; ALTER DATABASE #用户其他属性修改 postgres=# alter user tester BYPASSRLS CREATEDB ENCRYPTED PASSWORD LOGIN NOCREATEDB NOINHERIT NOREPLICATION PASSWORD REPLICATION SET VALID UNTIL CONNECTION……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/role-manager/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/dba/" title="DBA 日常">DBA 日常</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月19日
-        </date>
-        
-        <div class="post-content">
-            备份 恢复 时时热备 定期冷备 升级 每年大版本小版本升级，新特性调研，性能测试，稳定性。 可用当前最新的上一个版本。 HA 手动 自动 读写分离 sharding 多副本 安全 权限管理 资源隔离 审计 ddl 慢sql 锁长时间占用 巡检 定期巡检 awr 报告 监控 系统 数据库 诊断 优化 背景 应用程序的野蛮生长，由产品为驱动的开发，一切以快速上线为目……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/dba/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +384,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -411,18 +423,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -441,7 +441,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

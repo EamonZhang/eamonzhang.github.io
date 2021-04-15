@@ -91,6 +91,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/dns/" title="DNS">DNS</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年10月28日
+        </date>
+        
+        <div class="post-content">
+            DNS：Domain Name System 域名管理系统 A记录 A（Address）记录是用来指定主机名（或域名）对应的IP地址记录 NS记录 NS（Name Server）记录是域名服务器记录，用来指定该域名由哪个DNS服务器来进行解析 MX记录 MX（Mail Exchanger）记录是邮件交换记录，它指向一……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/dns/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cmd-vim/" title="vi 编辑">vi 编辑</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年10月22日
+        </date>
+        
+        <div class="post-content">
+            字符串查找 a.查找一个字符串使用：“/你要查询的内容” b.查找下一个 ：“/你要查询的内容” 再输入”n“跳到下一个 字符串替换 a. 文件内全部替换： %s#abc#def#g（用def替换文件中所有的abc） 例如把一个文本文件里面的“linuxidc.com”全部替换成“linuxidc.……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-vim/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/es/curl-es/" title="使用curl命令操作elasticsearch">使用curl命令操作elasticsearch</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年10月16日
+        </date>
+        
+        <div class="post-content">
+            第一：_cat系列 _cat系列提供了一系列查询elasticsearch集群状态的接口。你可以通过执行 curl -XGET localhost:9200/_cat 获取所有_cat系列的操作 =^.^= /_cat/allocation /_cat/shards /_cat/shards/{index} /_cat/master /_cat/nodes /_cat/indices /_cat/indices/{index} /_cat/segments /_cat/segments/{index} /_cat/count /_cat/count/{index} /_cat/recovery /_cat/recovery/{index} /_cat/health /_cat/pending_tasks /_cat/aliases /_cat/aliases/{alias} /_cat/thread_pool /_cat/plugins /_cat/fielddata /_cat/fielddata/{fields} 你也可以后面加一个v，让输出内容表格显示表头，举例 curl -XGET http://10.1.80.85:9200/_cat/indices?v health status index uuid pri rep docs.count docs.deleted store.size pri.store.size green open filebeat-7.3.2-2019.09.27 agrhjW7KR_ObgdwrUOpJMA 1 1 218974 0 181.8mb 91mb 第二：……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/es/curl-es/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/monitor/postgres-indicators/" title="Postgres 10 监控指标">Postgres 10 监控指标</a>
             </h1>
         </header>
@@ -198,54 +246,6 @@
             http://docs.jumpserver.org/zh/docs/index.html……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/network-security/jumpserver/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/citus01/" title="citus 简单应用">citus 简单应用</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年6月5日
-        </date>
-        
-        <div class="post-content">
-            常用方法 集群管理 加入节点 SELECT * from master_add_node('worker-101', 5432); 查看节点状态 SELECT * FROM master_get_active_worker_nodes(); select * from pg_dist_node; 数据库管理 分片表(distributed table ， hash | append ) 参考表(reference table 数据量小) 本地表(原生表，没有任何处理.兼容性高) 对表进行分片 SELECT create_distributed_table('companies', 'id'); 分片查看 SELECT * from pg_dist_shard; 元数据表 pg_dist_shard pg_dist_placement pg_dist_node 参数 更多参考 sql 限制 1 非亲和性表之间的ou……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/citus01/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/tpch/" title="tpch AP测试">tpch AP测试</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年6月5日
-        </date>
-        
-        <div class="post-content">
-            背景介绍 24sql TPC-H 基准测试 下载安装 tpch-tools安装包 修改makefile.suite 模版 CC=gcc DATABASE-TDAT MACHINE=LINUX WORKLOAD=TPCH 执行 make 进行编译 生成测试数据 生成20G测试数据 ./dbgen -s 20 ls -lrth *.tbl 自动生成的测试数据每行的结尾多余一个 &lsquo;|&rsquo; 需要处理 for i in `ls *.tbl`; do sed 's/|$//' $i &gt; ${i/tbl/csv}; echo $i; done; 创建表及索引 在下面的文件中分别是创建表和对应索引的s……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/tpch/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgstattuple/" title="表空间膨胀">表空间膨胀</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年5月22日
-        </date>
-        
-        <div class="post-content">
-            背景介绍 由于mvcc机制，数据被删除后只是被标记为删除，实际空间没有被释放，这是表空间膨胀的根本原因。 目前用于解决表空间膨胀方式有如下方式 1 删除dead tuple vacuum ,tuple被清理。数据库可以自动执行autovacuum vacuum full ,tuple被清理并且空间连续紧凑。弊端，在执行过程中会锁表。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgstattuple/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +384,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -411,18 +423,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -441,7 +441,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

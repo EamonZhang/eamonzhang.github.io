@@ -2,8 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://zhangeamon.top/python/django-models-querys/</loc>
+    <lastmod>2021-04-14T15:12:03+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/python/</loc>
+    <lastmod>2021-04-14T15:12:03+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/</loc>
+    <lastmod>2021-04-14T15:12:03+08:00</lastmod>
+  </url><url>
     <loc>https://zhangeamon.top/categories/</loc>
-    <lastmod>2021-04-09T11:26:16+08:00</lastmod>
+    <lastmod>2021-04-14T09:55:57+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/categories/python/</loc>
+    <lastmod>2021-04-14T09:55:57+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/python/pyinstaller/</loc>
+    <lastmod>2021-04-14T09:55:57+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/python/virtualenv/</loc>
+    <lastmod>2021-04-14T09:11:30+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/linux/resetpasswd-centos7/</loc>
     <lastmod>2021-04-09T11:26:16+08:00</lastmod>
@@ -12,9 +30,6 @@
     <lastmod>2021-04-09T11:26:16+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/linux/</loc>
-    <lastmod>2021-04-09T11:26:16+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/</loc>
     <lastmod>2021-04-09T11:26:16+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/linux/cpu-affinity/</loc>
@@ -31,12 +46,6 @@
   </url><url>
     <loc>https://zhangeamon.top/categories/postgres/</loc>
     <lastmod>2021-04-07T10:12:02+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/categories/python/</loc>
-    <lastmod>2021-04-06T17:20:07+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/python/</loc>
-    <lastmod>2021-04-06T17:20:07+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/python/module-argparse/</loc>
     <lastmod>2021-04-06T17:20:07+08:00</lastmod>

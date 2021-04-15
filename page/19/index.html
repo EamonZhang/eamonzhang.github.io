@@ -91,6 +91,61 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/extention/" title="数据库拓展">数据库拓展</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月27日
+        </date>
+        
+        <div class="post-content">
+            流计算数据库产品 pipelineDB * 推荐数据库产品 recDB 时序数据库 timescaleDB * 分布式数据库插件 citus * 列存储插件 IMCS, cstore等 面向OLAP的codegen数据库 pg_LLVM 向量计算插件 vops 数据库性能分析 pg_stat_statements pg_buffercache 直接访问数据库文件系统 adminpack 加密数据 pgcrypto 预热缓存 pg_prewarm 检查存储，特别是表膨胀 pgstattuple 模糊搜索 pg_trgm 连接到远程服务器 postgres_fdw k近邻（KNN）搜索……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/extention/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/about/en/" title="英语单词">英语单词</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月27日
+        </date>
+        
+        <div class="post-content">
+            单词表 utilizes 利用 degradation 退化，降级 hypertable 元数据表 monotonically 单调的 monotonically increase: 单调递增 solely 单独地，唯一地 cardinality 基数 excel 优于，擅长 eliminate 干掉，排除 refine 精致的，经过改良的 distilled 从..中萃取 robust 精力充沛的 fundamental 基础的 主要的……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/about/en/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/params/" title="数据库参数">数据库参数</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月27日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            性能参数 pgtune pgconfig 日志参数 更多参数详解 管理 listen_addresses = &quot;*&quot; # 连接访问控制，哪些ip可以访问， * 全部。 结合pg_hba.conf , iptables设置。 superuser_reserved_connections = 3 # 预留给超级管理员的连接数。 port = 5432 # 默认访问端口 wal_keep_segments = 1024 # wal 日志保存数量 wal日志 wal_log_hints = on full_page_writes = on 成本因子 # - Planner Cost Constants - #seq_page_cost = 1.0 # measured on an arbitrary scale 顺序扫描 random_page_cost……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/params/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/tidb/lsm/" title="LSM Overview">LSM Overview</a>
             </h1>
         </header>
@@ -212,54 +267,6 @@
             下载安装 1.0.15 sysbench官网 curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh | sudo bash sudo yum -y install sysbench 参数说明 sysbench --help Usage: sysbench [options]... [testname] [command] Commands implemented by most tests: prepare run cleanup help General options: --threads=N number of threads to use [1] 线程数 --events=N limit for total number of events [0] 事务数 --time=N limit for total execution time in seconds [10] 测压时间 --forced-shutdown=STRING number of seconds to wait after the --time limit before forcing shutdown, or 'off' to disable [off] --thread-stack-size=SIZE size of stack per thread [64K] --rate=N average transactions rate. 0 for unlimited rate [0] --report-interval=N periodically report intermediate statistics with a specified interval in seconds. 0 disables intermediate reports [0] --report-checkpoints=[LIST,...] dump full statistics and reset all counters……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/middleware/sysbench/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/kill/" title="PostgreSQL 无法kill(pg_terminate_backend, pg_cancel_backend)的情况分析 - 进程hang strace,pstack">PostgreSQL 无法kill(pg_terminate_backend, pg_cancel_backend)的情况分析 - 进程hang strace,pstack</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月14日
-        </date>
-        
-        <div class="post-content">
-            先 mark 下 https://yq.aliyun.com/articles/647468……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/kill/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cmd-pstack/" title="pstack">pstack</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月14日
-        </date>
-        
-        <div class="post-content">
-            安装 yum install gdb 使用 pstack pid gstack pid pstree……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-pstack/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/tidb/2013/" title=" ERROR 2013 (HY000): Lost connection to MySQL server during query "> ERROR 2013 (HY000): Lost connection to MySQL server during query </a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月14日
-        </date>
-        
-        <div class="post-content">
-            ERROR 2013 (HY000) Lost connection to MySQL server during query 错误出现场景 select count(id) from account_user where id&gt; 0; +----------+ | count(id) | +----------+ | 2940245 | +----------+ 1 row in set (0.78 sec) delete from account_user where id&gt; 0; ERROR 2013 (HY000): Lost connection to MySQL server during query tidb.log 2018/11/14 10:57:12.476 server.go:303: [info] con:261 new connection 10.1.88.32:54462 2018/11/14 10:57:15.387 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:792.561353ms txn_start_ts:404269101106331649 region_id:77367 store_addr:10.1.88.84:20160 kv_process_ms:537 2018/11/14 10:57:17.227 pd.go:107: [warning] get timestamp too slow: 135.012109ms 2018/11/14 10:57:17.812 pd.go:107: [warning] get timestamp too slow: 56.316863ms 2018/11/14 10:57:17.821 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.226284139s txn_start_ts:404269101106331649 region_id:77863 store_addr:10.1.88.85:20160 kv_process_ms:1580 scan_total_write:314161 scan_processed_write:314160 scan_total_data:314160 scan_processed_data:314160 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.826 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.231259247s txn_start_ts:404269101106331649 region_id:77590 store_addr:10.1.88.85:20160 kv_process_ms:1807 scan_total_write:355885 scan_processed_write:355884 scan_total_data:355884 scan_processed_data:355884 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.872 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.276994472s txn_start_ts:404269101106331649 region_id:77576 store_addr:10.1.88.86:20160 kv_process_ms:1684 scan_total_write:346208 scan_processed_write:346207 scan_total_data:346207 scan_processed_data:346207 scan_total_lock:1 scan_processed_lock:0 2018/11/14……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/tidb/2013/">阅读全文</a></p>
     </article>
     
     
@@ -398,6 +405,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -425,18 +444,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -455,7 +462,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

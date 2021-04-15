@@ -91,6 +91,61 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/keepalived01/" title="Keepalived 问题集">Keepalived 问题集</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Q1 问题描述 ip address associated with VRID 51 not present in MASTER advert : 10.1.7.58 其中 51 为 virtual_router_id 10.1.7.58 为虚拟IP 可能原因 ntp 时间不同步 局域网内 virtual_router_id 与其他集群配置冲突。 另外 router_id 主机标示，一般为hostname即可。 解决方法： unicast_peer{ } 配置成单播模式……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/keepalived01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/network01/" title="Docker 本地网络">Docker 本地网络</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月2日
+        </date>
+        
+        <div class="post-content">
+            基础命令概览 docker network --help Usage: docker network COMMAND Manage networks Commands: connect Connect a container to a network create Create a network disconnect Disconnect a container from a network inspect Display detailed information on one or more networks ls List networks prune Remove all unused networks rm Remove one or more networks 默认网络 docker network ls NETWORK ID NAME DRIVER SCOPE 0770a8275bff bridge bridge local b6617326f199 host host local 31c55ffcf0a8 none null local 创建容器时通过 &ndash;network= 指定网络类型 none 这个网络下的容器除了 lo，没有其他任何网卡。 host 共享Host的网络栈，容器的网络配置与 host 完……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/network01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/cgroup-namespaces/" title="Cgroup Namespaces">Cgroup Namespaces</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月2日
+        </date>
+        
+        <div class="post-content">
+            cgroup 实现资源限额 cgroup 全称 Control Group。Linux 操作系统通过 cgroup 可以设置进程使用 CPU、内存 和 IO 资源的限额。 在启动容器时可使用参数 docker run &ndash;blkio-weight-device &ndash;cpu-shares &ndash;memory 等 。 ll /sys/fs/cgroup/cpu/docker/ ll /sys/fs/cgroup/memory/docker ll /sys/fs/cgroup/blkio/docker namespace 实现资源隔离 Mount Mount namespace 让容器看上去拥有整个文件系统。 容器有自己的 / 目录，可以执行 mount 和 umount 命令。当然我们知道这些操作只在当前容器中生效，……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/cgroup-namespaces/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/docker/dumb-init/" title="Dumb Init">Dumb Init</a>
             </h1>
         </header>
@@ -235,68 +290,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-playbooks/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/ansible/ansible-modules/" title="Ansible Modules">Ansible Modules</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月25日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/ansible'>ansible</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            准备工作 安装 yum install ansible-doc.noarch ansible.noarch -y tree /etc/ansible/ /etc/ansible/ ├── ansible.cfg ├── hosts └── roles ansible --version ansible 2.7.0 config file = /etc/ansible/ansible.cfg configured module search path = [u'/root/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules'] ansible python module location = /usr/lib/python2.7/site-packages/ansible executable location = /usr/bin/ansible python version = 2.7.5 (default, Jul 13 2018, 13:06:57) [GCC 4.8.5 20150623 (Red Hat 4.8.5-28)] 配置清单 cat hosts [webservers] 10.1.88.72 10.1.88.73 免密登录 常用命令 Usage: ansible &lt;host-pattern&gt; [options] 常用选项： -m MOD_NAME -a MOD_ARGS 获取模块列表：ansible-doc -l 获取指定模块的使用帮助：ansible-doc -s MOD_NAME……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-modules/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/ansible/ansible-overview/" title="Ansible Overview">Ansible Overview</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月25日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/ansible'>ansible</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            主要模块 PLAYBOOKS： 任务剧本（任务集），编排定义Ansible任务集的配置文件，由Ansible顺序依次执行，通常是JSON格式的YML文件 INVENTORY： Ansible管理主机的清单/etc/anaible/hosts MODULES： Ansible执行命令的功能模块……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-overview/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/teleport/" title="Teleport 堡垒机">Teleport 堡垒机</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月24日
-        </date>
-        
-        <div class="post-content">
-            https://gravitational.com/teleport/ https://mritd.me/2017/11/09/set-up-teleport/……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/teleport/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -420,6 +413,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -447,18 +452,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -477,7 +470,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

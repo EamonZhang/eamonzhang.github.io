@@ -91,6 +91,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/citus01/" title="citus 简单应用">citus 简单应用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年6月5日
+        </date>
+        
+        <div class="post-content">
+            常用方法 集群管理 加入节点 SELECT * from master_add_node('worker-101', 5432); 查看节点状态 SELECT * FROM master_get_active_worker_nodes(); select * from pg_dist_node; 数据库管理 分片表(distributed table ， hash | append ) 参考表(reference table 数据量小) 本地表(原生表，没有任何处理.兼容性高) 对表进行分片 SELECT create_distributed_table('companies', 'id'); 分片查看 SELECT * from pg_dist_shard; 元数据表 pg_dist_shard pg_dist_placement pg_dist_node 参数 更多参考 sql 限制 1 非亲和性表之间的ou……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/citus01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/tpch/" title="tpch AP测试">tpch AP测试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年6月5日
+        </date>
+        
+        <div class="post-content">
+            背景介绍 24sql TPC-H 基准测试 下载安装 tpch-tools安装包 修改makefile.suite 模版 CC=gcc DATABASE-TDAT MACHINE=LINUX WORKLOAD=TPCH 执行 make 进行编译 生成测试数据 生成20G测试数据 ./dbgen -s 20 ls -lrth *.tbl 自动生成的测试数据每行的结尾多余一个 &lsquo;|&rsquo; 需要处理 for i in `ls *.tbl`; do sed 's/|$//' $i &gt; ${i/tbl/csv}; echo $i; done; 创建表及索引 在下面的文件中分别是创建表和对应索引的s……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/tpch/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgstattuple/" title="表空间膨胀">表空间膨胀</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年5月22日
+        </date>
+        
+        <div class="post-content">
+            背景介绍 由于mvcc机制，数据被删除后只是被标记为删除，实际空间没有被释放，这是表空间膨胀的根本原因。 目前用于解决表空间膨胀方式有如下方式 1 删除dead tuple vacuum ,tuple被清理。数据库可以自动执行autovacuum vacuum full ,tuple被清理并且空间连续紧凑。弊端，在执行过程中会锁表。……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgstattuple/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/middleware/nginx/" title="nginx">nginx</a>
             </h1>
         </header>
@@ -212,61 +260,6 @@
             查看docker占用的空间情况 # docker system df TYPE TOTAL ACTIVE SIZE RECLAIMABLE Images 58 36 6.091GB 2.119GB (34%) Containers 90 89 232.3MB 0B (0%) Local Volumes 137 16 232.7MB 194.2MB (83%) Build Cache 0 0 0B 0B 四大资源尽收眼底，可回收多少资源也了然于胸 清除不在需要的资源 This will remove: - all stopped containers - all networks not used by at least one container - all dangling images - all build cach # docker system prune -f 清除一切非活跃状态，将资源还给系统 清除volume 查看 # docker volume ls……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/docker/manager/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/checkpoint/" title="checkpoint 检查点">checkpoint 检查点</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年3月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            作用 一般checkpoint会将某个时间点之前的脏数据全部刷新到磁盘，以实现数据的一致性与完整性。其主要目的是为了缩短崩溃恢复时间。 数据库靠谱的原因 一条DML 写入过程 在写入数据的时，当事务提交后修改信息顺序同步写入wal。shared buffer中信息并不是马上落盘。异步同步磁盘……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/checkpoint/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/adlock/" title="咨询锁 adlock">咨询锁 adlock</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年3月7日
-        </date>
-        
-        <div class="post-content">
-            https://github.com/digoal/blog/blob/master/201805/20180524_02.md 行级锁 select .. for update select .. for update skip locked select .. for share……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/adlock/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/rabbitmq/manager01/" title="rabbitmq 简单应用">rabbitmq 简单应用</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年2月26日
-        </date>
-        
-        <div class="post-content">
-            启动 rabbitmq-server &amp; 队列重置（清空队列、用户等） rabbitmqctl stop_app rabbitmqctl reset rabbitmqctl stop 关闭 rabbitmqctl stop 列举所有用户 rabbitmqctl list_users 列举所有队列 rabbitmqctl list_queues 添加用户 rabbitmqctl add_user user_name user_passwd 设置用户角色为管理员 rabbitmqctl set_user_tags user_name administrator 权限设置 rabbitmqctl set_permissions -p / user_name &quot;.*&quot; &quot;.*&quot; &quot;.*&quot; 操作举例（添加用户admin） sudo rabbitmqctl add_user admin admin sudo rabbitmqctl set_user_tags admin administrator sudo rabbitmqctl set_permissions -p / admin &quot;.*&quot; &quot;.*&quot; &quot;.*&quot; 查看状态 rabbitmqctl status 安装 RabbitMQWeb管理插件 rabbitmq-plugins enable rabbitmq_management 可以……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/rabbitmq/manager01/">阅读全文</a></p>
     </article>
     
     
@@ -405,6 +398,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -432,18 +437,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -462,7 +455,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

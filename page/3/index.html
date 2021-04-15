@@ -91,6 +91,75 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            适用场景 PG_RMAN 基于本地数据拷贝的方式，要求与数据库需要安装在同一个机器节点上。 适用于项目初期，对数据库的规划处于初级阶段。实体机不充分的情况是个很好的选择。 数据库使用ssd盘，备份磁盘采用企业sata大盘。或nfs网盘等。 PG_RMAN 支持全备份，增量备份，备份验证，保留策略等 应用软件包地址 https://github.com/ossc-db/pg_rman/releases 基……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_rman/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            完成目标 主从同步策略 异地多机房策略 failover 触发详情 访问认证 watch-dog 配置文件详情 fencing DCS 失效处理 加入节点复制数据限流 主从切换流量,避免重新拉取 级联复制 callback 日志&amp;监控 主从同步策略 数据库主从之间同步类型 Synchronous state of this standby server. Possible values are: async: This standby server is asynchronous. potential: This standby server is now asynchronous, but can potentially become synchronous if one of current synchronous ones fails. sync: This standby server is synchronous. quorum: This standby server is considered as……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/patroni02/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月26日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_performance/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
             </h1>
         </header>
@@ -223,61 +292,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/unlogged_table/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/reback/" title="误操作闪回">误操作闪回</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月11日
-        </date>
-        
-        <div class="post-content">
-            原理 利用mvcc原理，数据在删除或更新时只是标记为删除。当没有发生过gc时历史数据仍然存在。只是对当前事务不可见。 通过修改当前事务号为误操作前的事务号就可以看到历史数据。 例如 T1 （添加数据） T2 - T8（其他操作） T9（删除了T1加入的数据）T10&hellip; (其他操作)。 自需要将……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/reback/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/high_level_sql/" title="高级SQL">高级SQL</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月11日
-        </date>
-        
-        <div class="post-content">
-            分组集 排序集 假象集 窗口函数 递归 递归应用 递归加速count(distint) 查询。 使用场景，数据分布：大数据集但其中的类型却很少 -- 创建表 test1=# create table recurive_t(user_id int,free float,info text); CREATE TABLE -- 加入数据 test1=# insert into recurive_t select 1 ,generate_series(0,1000000),'user 1 pay !!!'; test1=# insert into recurive_t select 2 ,generate_series(0,2000000),'user 2 pay !!!'; test1=# insert into recurive_t select 3 ,generate_series(0,3000000),'user 3 pay !!!'; test1=# insert into recurive_t select 4 ,generate_series(0,4000000),'user 4 pay !!!'; test1=# insert into recurive_t select 5 ,generate_series(0,4000000),'user 5 pay !!!'; test1=# analyze recurive_t ; ANALYZE -- count(distinct()) 查询……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/high_level_sql/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/thinking_in_db_fd/" title="数据库优化思考 - 结构设计">数据库优化思考 - 结构设计</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月11日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_fd/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -400,6 +414,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -427,18 +453,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -457,7 +471,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

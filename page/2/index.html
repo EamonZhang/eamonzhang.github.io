@@ -91,6 +91,75 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月31日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            介绍 可查看 backgroud writer， checkpoint ，backend 进程刷写 Shared buffer 情况视图 pg数据库在写入时先在内存中更新shared buffer ，然后有checkpoint机制将脏数据刷写到磁盘。 视图 select * from pg_stat_bgwriter ; -[ RECORD 1 ]---------+------------------------------ checkpoints_timed | 64017 checkpoints_req | 458 checkpoint_write_time | 9608302902 checkpoint_sync_time | 1189286 buffers_checkpoint | 578367652 buffers_clean | 329022 maxwritten_clean | 2353 buffers_backend | 29802728 buffers_backend_fsync | 0 buffers_alloc | 83826180 stats_reset | 2020-08-20 19:41:20.491551+08 负责将shared buffer 中的内容……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月31日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%9B%91%E6%8E%A7'>监控</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            一款监控 实体机 mysql pg mongodb 等的 监控工具集 https://www.percona.com/doc/percona-toolkit/LATEST/index.html……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/percona-toolkit/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            硬盘 HDD 机械硬盘 SSD 固态硬盘 物理接口 接口的物理形态 SATA mSTATA 迷你SATA m.2 曾用名NG(NEXT GERNERATION) 根据宽度分为(m.2 2242 2260 2280) u.2 统一了 SATA ，PCIe，SAS 接口 AIC ADD IN CARD 标准PCIe金手指 通信协议 数据通信逻辑协议标准 AHCI SAS NVME (Non-Volatile Memory Host Controller Interface) 总线标准 数据总线标准,硬盘与CPU通过总线传输数据 SATA PCIE 在传统SAT……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/hard_store/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
             </h1>
         </header>
@@ -228,75 +297,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/storage/rclone/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_rman/" title="pg_rman 备份恢复数据库">pg_rman 备份恢复数据库</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            适用场景 PG_RMAN 基于本地数据拷贝的方式，要求与数据库需要安装在同一个机器节点上。 适用于项目初期，对数据库的规划处于初级阶段。实体机不充分的情况是个很好的选择。 数据库使用ssd盘，备份磁盘采用企业sata大盘。或nfs网盘等。 PG_RMAN 支持全备份，增量备份，备份验证，保留策略等 应用软件包地址 https://github.com/ossc-db/pg_rman/releases 基……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_rman/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月5日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            完成目标 主从同步策略 异地多机房策略 failover 触发详情 访问认证 watch-dog 配置文件详情 fencing DCS 失效处理 加入节点复制数据限流 主从切换流量,避免重新拉取 级联复制 callback 日志&amp;监控 主从同步策略 数据库主从之间同步类型 Synchronous state of this standby server. Possible values are: async: This standby server is asynchronous. potential: This standby server is now asynchronous, but can potentially become synchronous if one of current synchronous ones fails. sync: This standby server is synchronous. quorum: This standby server is considered as……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/patroni02/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月26日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_performance/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -412,6 +412,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -439,18 +451,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -469,7 +469,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

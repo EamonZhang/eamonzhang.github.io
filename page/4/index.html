@@ -91,6 +91,61 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/reback/" title="误操作闪回">误操作闪回</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月11日
+        </date>
+        
+        <div class="post-content">
+            原理 利用mvcc原理，数据在删除或更新时只是标记为删除。当没有发生过gc时历史数据仍然存在。只是对当前事务不可见。 通过修改当前事务号为误操作前的事务号就可以看到历史数据。 例如 T1 （添加数据） T2 - T8（其他操作） T9（删除了T1加入的数据）T10&hellip; (其他操作)。 自需要将……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/reback/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/high_level_sql/" title="高级SQL">高级SQL</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月11日
+        </date>
+        
+        <div class="post-content">
+            分组集 排序集 假象集 窗口函数 递归 递归应用 递归加速count(distint) 查询。 使用场景，数据分布：大数据集但其中的类型却很少 -- 创建表 test1=# create table recurive_t(user_id int,free float,info text); CREATE TABLE -- 加入数据 test1=# insert into recurive_t select 1 ,generate_series(0,1000000),'user 1 pay !!!'; test1=# insert into recurive_t select 2 ,generate_series(0,2000000),'user 2 pay !!!'; test1=# insert into recurive_t select 3 ,generate_series(0,3000000),'user 3 pay !!!'; test1=# insert into recurive_t select 4 ,generate_series(0,4000000),'user 4 pay !!!'; test1=# insert into recurive_t select 5 ,generate_series(0,4000000),'user 5 pay !!!'; test1=# analyze recurive_t ; ANALYZE -- count(distinct()) 查询……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/high_level_sql/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/thinking_in_db_fd/" title="数据库优化思考 - 结构设计">数据库优化思考 - 结构设计</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月11日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_fd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/auto_vacuum_trigger/" title="auto vacuum 触发机制">auto vacuum 触发机制</a>
             </h1>
         </header>
@@ -205,54 +260,6 @@
             配置 vim /etc/netplan/00-installer-config.yaml # This is the network config written by 'subiquity' network: ethernets: enp2s0: addresses: - 192.168.6.111/24 gateway4: 192.168.6.1 nameservers: addresses: [119.29.29.29] version: 2 生效 netplan apply……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/linux/ubuntu2004-network/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/readonly/" title="创建只读用户">创建只读用户</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月8日
-        </date>
-        
-        <div class="post-content">
-            1.创建一个用户名为readonly密码为ropass的用户 CREATE USER readonly WITH ENCRYPTED PASSWORD 'ropass'; 2.用户只读事务 alter user readonly set default_transaction_read_only=on; 3.把所有库的语言的USAGE权限给到readonly GRANT USAGE ON SCHEMA public to readonly; 4.授予select权限(这句要进入具体数据库操作在哪个db环境执行就授予那个db的权) grant select on all tables in schema public to readonly;……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/readonly/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/dw/document/" title="文档">文档</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月25日
-        </date>
-        
-        <div class="post-content">
-            https://ask.greenplum.cn……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/dw/document/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/go/grpc/" title="go grpc">go grpc</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月13日
-        </date>
-        
-        <div class="post-content">
-            python 实现 cat Server.py from SimpleXMLRPCServer import SimpleXMLRPCServer def fun_add(a,b): total = a+b return total if __name__=='__main__': s = SimpleXMLRPCServer(('0.0.0.0',8081)) s.register_function(fun_add) print &quot;server in on line&quot; s.serve_forever() cat Client.py from xmlrpclib import ServerProxy s = ServerProxy(&quot;http://xx.xxx.xxx.xxx:8081&quot;) print s.fun_add(1,2) go 实现……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/go/grpc/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +398,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
     </li>
     
@@ -418,18 +437,6 @@
         <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -448,7 +455,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     
