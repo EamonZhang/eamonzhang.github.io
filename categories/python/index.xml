@@ -6,7 +6,34 @@
     <description>Recent content in python on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 14 Apr 2021 09:55:57 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Apr 2021 13:27:13 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Django CONN_MAX_AGE 对数据连接的影响</title>
+      <link>https://zhangeamon.top/python/django_max_con_age/</link>
+      <pubDate>Tue, 20 Apr 2021 13:27:13 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/django_max_con_age/</guid>
+      <description>Django的数据库连接 Django对数据库的链接处理是这样的，Django程序接受到请求之后，在第一访问数据库的时候会创建一个数据库连接,直到请求结束，关闭连接。下次请求也是如此。因此，这种情况下，随着访问的并发数越来越高，就会产生大量的数据库连接 使用CONN_MAX_AGE减</description>
+    </item>
+    
+    <item>
+      <title>使用setup打包</title>
+      <link>https://zhangeamon.top/python/setup-packet/</link>
+      <pubDate>Fri, 16 Apr 2021 17:17:12 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/setup-packet/</guid>
+      <description>使用setup 对python进行打包 将python打包后可在其他项目中直接引用 pip install *** 具体步骤 1 将代码复制到一个新的文件夹下 2 创建README.rst 3 创建 LICENSE 4 编写 setup.py setup.cfg setup.cfg [metadata] name = django-polls version = 0.1 description = A Django app to conduct Web-based polls. long_description = file: README.rst url = https://www.example.com/ author = Your Name author_email = yourname@example.com license = BSD-3-Clause # Example license classifiers = Environment :: Web Environment Framework :: Django Framework :: Django :: X.Y # Replace &amp;quot;X.Y&amp;quot; as appropriate Intended</description>
+    </item>
+    
+    <item>
+      <title>Django Models Querys</title>
+      <link>https://zhangeamon.top/python/django-models-querys/</link>
+      <pubDate>Wed, 14 Apr 2021 15:12:03 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/django-models-querys/</guid>
+      <description>SELECT id FROM users WHERE username=&amp;lsquo;test&amp;rsquo; User.objects.only(&amp;lsquo;id&amp;rsquo;).get(username=xxx)</description>
+    </item>
+    
     <item>
       <title>Python PyInstaller 生成可执行文件</title>
       <link>https://zhangeamon.top/python/pyinstaller/</link>

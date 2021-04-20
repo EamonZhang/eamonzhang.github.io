@@ -91,6 +91,45 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/lock_wait/" title="锁等待">锁等待</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月27日
+        </date>
+        
+        <div class="post-content">
+            锁等待场景 一个事务尚未执行提交时持有锁，当另一个事务需要持有改行的锁时则需要等待。 Session 1 postgres=# \d+ wt Table &quot;public.wt&quot; Column | Type | Collation | Nullable | Default | Storage | Stats target | Description --------+---------+-----------+----------+---------+----------+--------------+------------- id | integer | | | | plain | | t | text | | | | extended | | postgres=# begin; BEGIN postgres=# update wt set t = 'aaaa' where id = 1; UPDATE 1 postgres=# select pg_backend_pid(); pg_backend_pid ---------------- 20034 (1 row) Session 2 postgres=# begin ; BEGIN postgres=# update wt set t = 'bbbb' where id = 1; Session 3 select * from pg_stat_activity; -[ RECORD 3 ]----+---------------------------------------- datid | 436980 datname……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/lock_wait/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/dw/algorithm/" title="数据挖掘算法">数据挖掘算法</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月26日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%95%B0%E4%BB%93'>数仓</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            机器学习，知识发现 数据挖掘算法 按照算法所解决的问题来进行划分，大致可以分为分类、聚类、回归和关联分析。 1.分类 分类算法是对已经确定好结果的数据进行学习，从而对未知的新数据进行分类的算法。 2.聚类 聚类算法只需要有一些数据，但是事先并不知道数据属于什么类别，通过对这些数据的学习，希望……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/dw/algorithm/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/install-cmd/" title="软件安装">软件安装</a>
             </h1>
         </header>
@@ -223,38 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/dw/greenplum-install/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/vm-config/" title="内核设置">内核设置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年11月26日
-        </date>
-        
-        <div class="post-content">
-            参数vm.dirty_ratio和vm.dirty_background_ratio https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/ 文件缓存是一项重要的性能改进，在大多数情况下，读缓存在绝大多数情况下是有益无害的（程序可以直接从RAM中读取数据）。写缓存比较复杂，Linux内核将磁盘写入缓存，过段时间再异步将它们刷新到磁盘。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/vm-config/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/postgres12/" title="postgres 12">postgres 12</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年11月19日
-        </date>
-        
-        <div class="post-content">
-            安装&amp;启动 #下载源 yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm #安装服务 yum install postgresql12 postgresql12-server postgresql12-contrib #初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb #启动服务 systemctl enable postgresql-12 systemctl start postgresql-12 流复制 #从机 建立从库 pg_basebackup -h 10.1.30.13 -U postgres -F p -P -R -D /var/lib/pgsql/12/data/ --checkpoint=fast -l postgresback #从库升级为主库 sudo su postgres -c &quot;/usr/pgsql-12/bin/pg_ctl promote -D /var/lib/pgsql/12/data/&quot; recovery.conf 配置文件不再支持，此文件中的参数合并到 postgresql.conf(postgresql.auto.conf) Recovery Target, 若 recovery.conf 存在，数据库无法启动 新增 recovery.signal 标识文件，表示数据库处于 recovery 模式 新增加 standby.signal……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/postgres12/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -332,7 +339,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/23/">23</a>
+            <a href="https://zhangeamon.top/page/24/">24</a>
         </li>
         
     
@@ -391,6 +398,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
     </li>
     
@@ -422,14 +437,6 @@
         <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -446,9 +453,9 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (10)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

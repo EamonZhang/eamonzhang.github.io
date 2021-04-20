@@ -91,6 +91,52 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月2日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            https://github.com/kelseyhightower/confd 配置信息存放在ectd KV存储中 更新 ectd 中的内容， confd 负责将变更同步到本地服务配置文件，并通知本地服务进行重新加载重启等。……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/confd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月31日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            主要作用 负责将shared buffer 中的内容刷写到磁盘中，9.1版之后部分内容交给checkpoint完成。 参数配置 # - Background Writer - #bgwriter_delay = 200ms # 10-10000ms between rounds #bgwriter_lru_maxpages = 100 # 0-1000 max buffers written/round #bgwriter_lru_multiplier = 2.0 # 0-10.0 multiplier on buffers scanned/round #bgwriter_flush_after = 512kB # measured in pages, 0 disables bgwriter_delay 两次写入任务之间的睡眠间隔时间 bgwriter_lru_maxpages 每次bgwriter任务写buffer的最大page数，一旦达……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/bgwriter/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
             </h1>
         </header>
@@ -258,45 +304,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/replication02/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            应用场景 作为一名匠人，当熟悉手里各样工具的特点。用起来才能得心应手。什么时候使用锯子，什么时候当用斧子。 同理熟知产品的技术特性，方可灵活运用。 在面对不同的业务需求时才能提供具有针对性的解决方案。 不求十八般兵器样样精通，但求不置斧锯于一旁只顾轮打锤。 Redis 都能干点啥 缓存 消息队列 循环列表……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/redis/redis-scence/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月9日
-        </date>
-        
-        <div class="post-content">
-            云端对象同步 Rclone (&ldquo;rsync for cloud storage&rdquo;) is a command line program to sync files and directories to and from different cloud storage providers. https://github.com/rclone/rclone……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/storage/rclone/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -353,7 +360,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/23/">23</a>
+            <a href="https://zhangeamon.top/page/24/">24</a>
         </li>
         
     
@@ -412,6 +419,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
     </li>
     
@@ -443,14 +458,6 @@
         <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -467,9 +474,9 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (10)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

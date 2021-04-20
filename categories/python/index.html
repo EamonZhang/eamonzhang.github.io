@@ -100,6 +100,77 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/django_max_con_age/">Django CONN_MAX_AGE 对数据连接的影响</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月20日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/python'>python</a>
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            Django的数据库连接 Django对数据库的链接处理是这样的，Django程序接受到请求之后，在第一访问数据库的时候会创建一个数据库连接,直到请求结束，关闭连接。下次请求也是如此。因此，这种情况下，随着访问的并发数越来越高，就会产生大量的数据库连接 使用CONN_MAX_AGE减……
+            <p class="readmore"><a href="https://zhangeamon.top/python/django_max_con_age/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/setup-packet/">使用setup打包</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月16日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/python'>python</a>
+            
+        </div>
+        
+        <div class="post-content">
+            使用setup 对python进行打包 将python打包后可在其他项目中直接引用 pip install *** 具体步骤 1 将代码复制到一个新的文件夹下 2 创建README.rst 3 创建 LICENSE 4 编写 setup.py setup.cfg setup.cfg [metadata] name = django-polls version = 0.1 description = A Django app to conduct Web-based polls. long_description = file: README.rst url = https://www.example.com/ author = Your Name author_email = yourname@example.com license = BSD-3-Clause # Example license classifiers = Environment :: Web Environment Framework :: Django Framework :: Django :: X.Y # Replace &quot;X.Y&quot; as appropriate Intended……
+            <p class="readmore"><a href="https://zhangeamon.top/python/setup-packet/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/django-models-querys/">Django Models Querys</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月14日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/python'>python</a>
+            
+        </div>
+        
+        <div class="post-content">
+            SELECT id FROM users WHERE username=&lsquo;test&rsquo; User.objects.only(&lsquo;id&rsquo;).get(username=xxx)……
+            <p class="readmore"><a href="https://zhangeamon.top/python/django-models-querys/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/python/pyinstaller/">Python PyInstaller 生成可执行文件</a>
             </h1>
         </header>
@@ -284,6 +355,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
     </li>
     
@@ -315,14 +394,6 @@
         <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -339,9 +410,9 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (10)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

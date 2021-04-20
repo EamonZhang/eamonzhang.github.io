@@ -6,7 +6,16 @@
     <description>Recent content in postgres on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 07 Apr 2021 10:12:02 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Apr 2021 13:27:13 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Django CONN_MAX_AGE 对数据连接的影响</title>
+      <link>https://zhangeamon.top/python/django_max_con_age/</link>
+      <pubDate>Tue, 20 Apr 2021 13:27:13 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/django_max_con_age/</guid>
+      <description>Django的数据库连接 Django对数据库的链接处理是这样的，Django程序接受到请求之后，在第一访问数据库的时候会创建一个数据库连接,直到请求结束，关闭连接。下次请求也是如此。因此，这种情况下，随着访问的并发数越来越高，就会产生大量的数据库连接 使用CONN_MAX_AGE减</description>
+    </item>
+    
     <item>
       <title>PG高可用 repmgr 搭建</title>
       <link>https://zhangeamon.top/postgres/repmgr/</link>

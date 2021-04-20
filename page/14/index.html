@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/memtester/" title="memtester 内存压力测试">memtester 内存压力测试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月14日
+        </date>
+        
+        <div class="post-content">
+            memtester……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/memtester/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/memtest/" title="memtest 检测内存">memtest 检测内存</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月14日
+        </date>
+        
+        <div class="post-content">
+            NAME memtest-setup - Install Memtest86+ into your GRUB boot loader menu SYNOPSIS memtest-setup [OPTIONS] DESCRIPTION memtest-setup installs Memtest86+ into your GRUB boot loader menu. It supports both GRUB 2 and GRUB Legacy (i.e. GRUB 0.9x). In case of GRUB 2 it installs GRUB 2 template into /etc/grub.d and GRUB 2 config needs to be regenerated manually by running grub2-mkconfig -o /boot/grub2/grub.cfg under root. This is not done automatically because it could overwrite any custom changes in /boot/grub2/grub.cfg. OPTIONS -h, --help Shows help. AUTHOR Jaroslav Škarvada &lt;jskarvad@redhat.com&gt; Manpage author. COPYRIGHT Copyright © 2014 Jaroslav Škarvada Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 or (at your option) any later version published by the Free……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/memtest/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/dmidecode/" title="Linux查看内存条信息">Linux查看内存条信息</a>
             </h1>
         </header>
@@ -216,38 +248,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/meminfo/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_trgm/" title="pg_trgm的gist和gin索引加速字符匹配查询">pg_trgm的gist和gin索引加速字符匹配查询</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月7日
-        </date>
-        
-        <div class="post-content">
-            背景 对车牌号的记忆有时可能记住的是前几位，有时可能是后几位，不同的人记车牌号的习惯也不同。 通常是是容易记住首尾，中间不清楚。 那么如何在大量已有车牌数据中快速根据模糊的信息来进行查询呢？ 模拟 数据库表中约有500w条车牌号记录，对表中的车牌号进行模糊查询。 即支持 car_id like &lsquo;%XXXX%XXX%&rsquo; 查询 ---创建表……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_trgm/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/docker/troubles/" title="Docker 问题集">Docker 问题集</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月3日
-        </date>
-        
-        <div class="post-content">
-            Docker push: Received unexpected HTTP status: 500 Internal Server Error 描述: 使用jenkins 构建docker images时 push images到私有harbor中报错: Received unexpected HTTP status: 500 Internal Server Error,在build机上直接push没有问题。有的项目可以成功，有的失败。即使同一个项目有时执行成功，有时也会失败。 解决方式: 网上很多的关于500的……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/docker/troubles/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -325,7 +325,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/23/">23</a>
+            <a href="https://zhangeamon.top/page/24/">24</a>
         </li>
         
     
@@ -384,6 +384,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
     </li>
     
@@ -415,14 +423,6 @@
         <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -439,9 +439,9 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (10)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (17)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (6)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
     

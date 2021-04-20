@@ -6,11 +6,20 @@
     <description>Recent content in Categories on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 14 Apr 2021 09:55:57 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Apr 2021 13:27:13 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>postgres</title>
+      <link>https://zhangeamon.top/categories/postgres/</link>
+      <pubDate>Tue, 20 Apr 2021 13:27:13 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/categories/postgres/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>python</title>
       <link>https://zhangeamon.top/categories/python/</link>
-      <pubDate>Wed, 14 Apr 2021 09:55:57 +0800</pubDate>
+      <pubDate>Tue, 20 Apr 2021 13:27:13 +0800</pubDate>
       
       <guid>https://zhangeamon.top/categories/python/</guid>
       <description></description>
@@ -22,15 +31,6 @@
       <pubDate>Fri, 09 Apr 2021 11:26:16 +0800</pubDate>
       
       <guid>https://zhangeamon.top/categories/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>postgres</title>
-      <link>https://zhangeamon.top/categories/postgres/</link>
-      <pubDate>Wed, 07 Apr 2021 10:12:02 +0800</pubDate>
-      
-      <guid>https://zhangeamon.top/categories/postgres/</guid>
       <description></description>
     </item>
     
