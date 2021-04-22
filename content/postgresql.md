@@ -101,6 +101,7 @@ toc: true
 - [引起索引失效](/postgres/index-invalid)
 - [pg_trgm的gist和gin索引加速字符匹配查询](/postgres/pg_trgm)
 - [Bloom 索引](/postgres/index-bloom)
+- [创建假设索引](https://github.com/HypoPG/hypopg)
 
 ## 流数据库
 
