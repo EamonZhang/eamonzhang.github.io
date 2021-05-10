@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/monitor_explain/" title="数据库监控指标">数据库监控指标</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月20日
+        </date>
+        
+        <div class="post-content">
+            实体机 硬盘空间 cup利用率 内存利用率 IO 网络带宽 tcp连接情况 温度 数据库年龄 -- 数据库database 年龄 select datname,age(datfrozenxid),pg_size_pretty(pg_database_size(oid)) from pg_database order by age(datfrozenxid) desc limit 10 ; -- 表年龄 select relname,age(relfrozenxid), pg_size_pretty(pg_table_size(oid)) from pg_class where relkind in ('t','r') order by age(relfrozenxid) desc limit 10; 说明： 当age到达2亿（默认）时触发自动回卷，期间会大量占用系统资源。提前做好监控避免在业务高峰时发生。可在库级别操作……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/monitor_explain/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/compile_kylin/" title="kylin系统postgresql编译安装">kylin系统postgresql编译安装</a>
             </h1>
         </header>
@@ -246,22 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/middleware/consul/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/coredns/" title="coredns">coredns</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年6月22日
-        </date>
-        
-        <div class="post-content">
-            背景 致力于打造云原生中的dns服务和服务发现。 各种功能都是通过插件方式实现 简单例子 服务 cat /usr/lib/systemd/system/coredns.service [Unit] Description=CoreDNS DNS server Documentation=https://coredns.io After=network.target [Service] PermissionsStartOnly=true LimitNOFILE=1048576 LimitNPROC=512 CapabilityBoundingSet=CAP_NET_BIND_SERVICE AmbientCapabilities=CAP_NET_BIND_SERVICE NoNewPrivileges=true User=coredns WorkingDirectory=~ ExecStart=/usr/local/bin/coredns -conf=/etc/coredns/Corefile ExecReload=/bin/kill -SIGUSR1 $MAINPID Restart=on-failure [Install] WantedBy=multi-user.target 配置文件 cat /etc/coredns/Corefile .:53 { # 绑定interface ip bind 127.0.0.1 # 先走本机的hosts # https://coredns.io/plugins/hosts/ hosts { # 自定义sms.service search.service 的解析 # 因为解析的域名少我们这里直接……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/coredns/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -398,6 +398,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/ipmi/" title="ipmi 配置远程管理卡">ipmi 配置远程管理卡</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
@@ -433,10 +437,6 @@
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -451,7 +451,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (11)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     

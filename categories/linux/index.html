@@ -100,6 +100,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/ipmi/">ipmi 配置远程管理卡</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月10日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/linux'>linux</a>
+            
+        </div>
+        
+        <div class="post-content">
+            使用ipmi 配置远程管理 远程管理卡的基本信息通常通过BIOS进行配置 缺点： 需要重启机器。不灵活。 下面通过Linux 系统命令行工具实现对管理卡的配置 安装 yum install OpenIPMI OpenIPMI-tools 网络信息配置管理 查看现有管理卡配置信息 ipmitool lan print 1 设置网络信息 ipmitool -I open lan set 1 ipsrc static ipmitool -I open lan set 1 ipaddr x.x.x.x ipmitool -I open lan set 1 netmask x.x.x.x ipmitool -I open lan set 1 defgw ipaddr……
+            <p class="readmore"><a href="https://zhangeamon.top/linux/ipmi/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/resetpasswd-centos7/">Centos7 重置密码</a>
             </h1>
         </header>
@@ -138,7 +161,7 @@
         </div>
         
         <div class="post-content">
-            基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &quot;physical id&quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &quot;cpu cores&quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &quot;processor&quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &quot;name&quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core x Socket(s) x Core(s) per socket Linux查看某个进……
+            基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &quot;physical id&quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &quot;cpu cores&quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &quot;processor&quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &quot;name&quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core * Socket(s) * Core(s) per socket Linux查看某个进……
             <p class="readmore"><a href="https://zhangeamon.top/linux/cpu-affinity/">阅读全文</a></p>
         </div>
     </article>
@@ -304,33 +327,30 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/init-centos/">Centos 初始化配置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月3日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/linux'>linux</a>
-            
-        </div>
-        
-        <div class="post-content">
-            网络配置 设置IP 略 ip_froward 查看 sysctl -a | grep ip_ 修改 vi /etc/sysctl.conf net.ipv4.ip_forward = 1 最大使用内存 vm.max_map_count=262144 生效 sysctl -p 系统更新 yum -y update 安装扩展及工具 yum -y install epel-release net-tools bind-utils telnet wget sysstat 文件链接限制 查看 ulimit -n 修改 vi /etc/security/limits.conf * - nofile 65536 * soft nproc 65536 * hard nproc 65536 * soft nofile 65536 * hard nofile 65536 rm /etc/security/limits.d/* -rf 安全 selinux 查看 getenforce 修改 临时 setenforce 0 永久 vi /etc/sysconfig/selinux 设置 firewalld 设置 ssh vi /etc/ssh/sshd_config 禁用root用户，密钥登陆 切换为其他用户登……
-            <p class="readmore"><a href="https://zhangeamon.top/linux/init-centos/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
 
+
+<ol class="page-navigator">
+    
+
+    
+    <li  class="current">
+        <a href="https://zhangeamon.top/categories/linux/">1</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/categories/linux/page/2/">2</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://zhangeamon.top/categories/linux/page/2/">下一页</a>
+    </li>
+    
+</ol>
 
 
 
@@ -376,6 +396,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/ipmi/" title="ipmi 配置远程管理卡">ipmi 配置远程管理卡</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
@@ -411,10 +435,6 @@
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -429,7 +449,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (11)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     

@@ -93,6 +93,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/ipmi/" title="ipmi 配置远程管理卡">ipmi 配置远程管理卡</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用ipmi 配置远程管理 远程管理卡的基本信息通常通过BIOS进行配置 缺点： 需要重启机器。不灵活。 下面通过Linux 系统命令行工具实现对管理卡的配置 安装 yum install OpenIPMI OpenIPMI-tools 网络信息配置管理 查看现有管理卡配置信息 ipmitool lan print 1 设置网络信息 ipmitool -I open lan set 1 ipsrc static ipmitool -I open lan set 1 ipaddr x.x.x.x ipmitool -I open lan set 1 netmask x.x.x.x ipmitool -I open lan set 1 defgw ipaddr……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/ipmi/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
             </h1>
         </header>
@@ -133,7 +158,7 @@
         </div>
         
         <div class="post-content">
-            基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &quot;physical id&quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &quot;cpu cores&quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &quot;processor&quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &quot;name&quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core x Socket(s) x Core(s) per socket Linux查看某个进……
+            基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &quot;physical id&quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &quot;cpu cores&quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &quot;processor&quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &quot;name&quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core * Socket(s) * Core(s) per socket Linux查看某个进……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/linux/cpu-affinity/">阅读全文</a></p>
     </article>
@@ -301,24 +326,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/repo/" title="Centos7 私有源搭建">Centos7 私有源搭建</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月19日
-        </date>
-        
-        <div class="post-content">
-            介绍 为了保证IDC内所有主机版本一致。 目前问题， 当主机执行yum update 时，软件版本不可控。每个主机版本完全取决于更新的时机。 造成了同一个IDC内的版本的差异，比如有的数据库的版本为10.06,有的为10.13。尤其是使用了如postgis等拓展的时候。版本混乱，甚至主从之间都不一致。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/repo/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -402,6 +409,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/ipmi/" title="ipmi 配置远程管理卡">ipmi 配置远程管理卡</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
@@ -437,10 +448,6 @@
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -455,7 +462,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (11)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     

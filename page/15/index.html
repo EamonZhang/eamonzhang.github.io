@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/meminfo/" title="meminfo Linux 内存信息">meminfo Linux 内存信息</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月8日
+        </date>
+        
+        <div class="post-content">
+            介绍 /proc/meminfo是了解Linux系统内存使用状况的主要接口，我们最常用的”free”、”vmstat”等命令就是通过它获取数据的 内容解读 cat /proc/meminfo MemTotal: 8009504 kB 除了bios ，kernel本身占用的内存以外，可以被kernel所分配的内存。一般这个值固定不变。 MemFree: 2385828 kB 未被使用的内存 MemAvailable:……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/meminfo/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_trgm/" title="pg_trgm的gist和gin索引加速字符匹配查询">pg_trgm的gist和gin索引加速字符匹配查询</a>
             </h1>
         </header>
@@ -232,22 +248,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/monitor/zabbix-postgres-fqa/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/monitor/zabbix-fqa/" title="Zabbix FQA">Zabbix FQA</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月24日
-        </date>
-        
-        <div class="post-content">
-            如何使用篇 如何安装 安装文档 架构模型为服务端、被监控端。 被监控端agent安装在需要被监控的主机上，负责收集被监控主机相关状态的信息指标如内存，cup，网络等。 服务端负责汇总所有agent的信息，如存储，处理，展现。数据存放在指定的数据库中如mysql pg。 需安装软件说明 zabbix-server-pgsql 服务端 zabbix-web-pgsql……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/monitor/zabbix-fqa/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -384,6 +384,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/ipmi/" title="ipmi 配置远程管理卡">ipmi 配置远程管理卡</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
@@ -419,10 +423,6 @@
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -437,7 +437,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (11)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     

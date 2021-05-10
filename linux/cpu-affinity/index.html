@@ -244,7 +244,7 @@ cat /proc/cpuinfo|grep &quot;processor&quot;|wc -l
 # 查看CPU的名称型号
 cat /proc/cpuinfo|grep &quot;name&quot;|cut -f2 -d:|uniq
 </code></pre><ul>
-<li>关系 CPU数量 = Thread(s) per core x Socket(s) x Core(s) per socket</li>
+<li>关系 CPU数量 = Thread(s) per core * Socket(s) * Core(s) per socket</li>
 </ul>
 <h4 id="linux查看某个进程运行在哪个逻辑cpu上">Linux查看某个进程运行在哪个逻辑CPU上</h4>
 <pre><code>ps -eo pid,args,psr
@@ -377,6 +377,10 @@ pid 26349's current affinity list: 2,3
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/ipmi/" title="ipmi 配置远程管理卡">ipmi 配置远程管理卡</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
@@ -412,10 +416,6 @@ pid 26349's current affinity list: 2,3
         <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/module-argparse/" title="模块 argparse">模块 argparse</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -430,7 +430,7 @@ pid 26349's current affinity list: 2,3
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (11)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     

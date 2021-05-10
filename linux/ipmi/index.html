@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>ipmi 配置远程管理卡 | 故乡的云☁️</title>
+    <meta property="og:title" content="ipmi 配置远程管理卡 - 故乡的云☁️">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-05-10T16:58:56&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-05-10T16:58:56&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="ipmi 配置远程管理卡">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/linux/ipmi/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        故乡的云☁️
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">ipmi 配置远程管理卡</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="使用ipmi-配置远程管理">使用ipmi 配置远程管理</h2>
+<p>远程管理卡的基本信息通常通过BIOS进行配置</p>
+<p>缺点： 需要重启机器。不灵活。</p>
+<p>下面通过Linux 系统命令行工具实现对管理卡的配置</p>
+<h4 id="安装">安装</h4>
+<pre><code>yum install OpenIPMI OpenIPMI-tools
+</code></pre><h2 id="网络信息配置管理">网络信息配置管理</h2>
+<h4 id="查看现有管理卡配置信息">查看现有管理卡配置信息</h4>
+<pre><code>ipmitool lan print 1
+</code></pre><h4 id="设置网络信息">设置网络信息</h4>
+<pre><code>ipmitool -I open lan set 1 ipsrc static
+ipmitool -I open lan set 1 ipaddr x.x.x.x
+ipmitool -I open lan set 1 netmask x.x.x.x
+ipmitool -I open lan set 1 defgw ipaddr x.x.x.x
+ipmitool -I open lan set 1 access on
+</code></pre><h4 id="通信安全增强">通信安全增强</h4>
+<pre><code>ipmitool -I open lan set 1 snmp COMUNIATION
+</code></pre><h2 id="用户信息配置管理">用户信息配置管理</h2>
+<h4 id="查看现有用户配置">查看现有用户配置</h4>
+<pre><code># ipmitool -I open user list 1
+ID  Name             Callin  Link Auth  IPMI Msg   Channel Priv Limit
+1                    false   false      true       ADMINISTRATOR
+2   admin            false   false      true       ADMINISTRATOR
+</code></pre><h4 id="设置用户-2-密码">设置用户 2 密码</h4>
+<pre><code>ipmitool -I open user set password 2
+</code></pre><h2 id="验证测试">验证测试</h2>
+<h4 id="获取本机状态信息">获取本机状态信息</h4>
+<pre><code>ipmitool -H 管理卡IP地址 -U 用户名 -P 密码 sensor 
+</code></pre><h4 id="获取远程机器状态信息">获取远程机器状态信息</h4>
+<pre><code>ipmitool -I lan -H 远程机器管理卡IP地址 -U 用户名 -P 密码 sensor 
+</code></pre><h4 id="远程机器电源管理">远程机器电源管理</h4>
+<pre><code>ipmitool -I lan -H 远程机器管理卡IP地址 -U 用户名 -P 密码 chassis power off/reset/on/status
+</code></pre><p>其他管理扩展</p>
+<pre><code>#ipmitool chassis status
+
+System Power         : on
+Power Overload       : false
+Power Interlock      : inactive
+Main Power Fault     : false
+Power Control Fault  : false
+Power Restore Policy : always-off
+Last Power Event     : ac-failed
+Chassis Intrusion    : inactive
+Front-Panel Lockout  : inactive
+Drive Fault          : false
+Cooling/Fan Fault    : false
+Front Panel Control  : none
+</code></pre><h2 id="命令简单说明">命令简单说明</h2>
+<ul>
+<li>
+<p>channel</p>
+</li>
+<li>
+<p>-I open(本机) lan(远端)</p>
+</li>
+</ul>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/python/django_max_con_age/">Django CONN_MAX_AGE 对数据连接的影响</a></li>
+        
+        <li><a href="/python/setup-packet/">使用setup打包</a></li>
+        
+        <li><a href="/python/django-models-querys/">Django Models Querys</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/ipmi/" title="ipmi 配置远程管理卡">ipmi 配置远程管理卡</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (11)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

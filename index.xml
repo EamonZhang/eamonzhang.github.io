@@ -6,7 +6,16 @@
     <description>Recent content on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 20 Apr 2021 13:27:13 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 May 2021 16:58:56 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ipmi 配置远程管理卡</title>
+      <link>https://zhangeamon.top/linux/ipmi/</link>
+      <pubDate>Mon, 10 May 2021 16:58:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/ipmi/</guid>
+      <description>使用ipmi 配置远程管理 远程管理卡的基本信息通常通过BIOS进行配置 缺点： 需要重启机器。不灵活。 下面通过Linux 系统命令行工具实现对管理卡的配置 安装 yum install OpenIPMI OpenIPMI-tools 网络信息配置管理 查看现有管理卡配置信息 ipmitool lan print 1 设置网络信息 ipmitool -I open lan set 1 ipsrc static ipmitool -I open lan set 1 ipaddr x.x.x.x ipmitool -I open lan set 1 netmask x.x.x.x ipmitool -I open lan set 1 defgw ipaddr</description>
+    </item>
+    
     <item>
       <title>Django CONN_MAX_AGE 对数据连接的影响</title>
       <link>https://zhangeamon.top/python/django_max_con_age/</link>
@@ -31,7 +40,8 @@
       <pubDate>Wed, 14 Apr 2021 15:12:03 +0800</pubDate>
       
       <guid>https://zhangeamon.top/python/django-models-querys/</guid>
-      <description>SELECT id FROM users WHERE username=&amp;lsquo;test&amp;rsquo; User.objects.only(&amp;lsquo;id&amp;rsquo;).get(username=xxx)</description>
+      <description>SELECT id FROM users WHERE username=&amp;lsquo;test&amp;rsquo; User.objects.only(&amp;lsquo;id&amp;rsquo;).get(username=xxx)
+https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;amp;mid=2247483770&amp;amp;idx=1&amp;amp;sn=ea1e4f5c4abac3a61687971cd413bf3e&amp;amp;chksm=fe3bb134c94c3822d669400fb0f481e058bd2f65eb3e11904dce5435a1bb73d1f9e7b9598b0a&amp;amp;cur_album_id=1365834140322578434&amp;amp;scene=189#rd</description>
     </item>
     
     <item>
@@ -67,7 +77,7 @@
       <pubDate>Fri, 09 Apr 2021 09:35:25 +0800</pubDate>
       
       <guid>https://zhangeamon.top/linux/cpu-affinity/</guid>
-      <description>基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &amp;quot;physical id&amp;quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &amp;quot;cpu cores&amp;quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &amp;quot;processor&amp;quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &amp;quot;name&amp;quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core x Socket(s) x Core(s) per socket Linux查看某个进</description>
+      <description>基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &amp;quot;physical id&amp;quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &amp;quot;cpu cores&amp;quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &amp;quot;processor&amp;quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &amp;quot;name&amp;quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core * Socket(s) * Core(s) per socket Linux查看某个进</description>
     </item>
     
     <item>

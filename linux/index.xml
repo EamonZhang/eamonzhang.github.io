@@ -6,7 +6,16 @@
     <description>Recent content in Linuxes on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Apr 2021 11:26:16 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 May 2021 16:58:56 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ipmi 配置远程管理卡</title>
+      <link>https://zhangeamon.top/linux/ipmi/</link>
+      <pubDate>Mon, 10 May 2021 16:58:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/ipmi/</guid>
+      <description>使用ipmi 配置远程管理 远程管理卡的基本信息通常通过BIOS进行配置 缺点： 需要重启机器。不灵活。 下面通过Linux 系统命令行工具实现对管理卡的配置 安装 yum install OpenIPMI OpenIPMI-tools 网络信息配置管理 查看现有管理卡配置信息 ipmitool lan print 1 设置网络信息 ipmitool -I open lan set 1 ipsrc static ipmitool -I open lan set 1 ipaddr x.x.x.x ipmitool -I open lan set 1 netmask x.x.x.x ipmitool -I open lan set 1 defgw ipaddr</description>
+    </item>
+    
     <item>
       <title>Centos7 重置密码</title>
       <link>https://zhangeamon.top/linux/resetpasswd-centos7/</link>
@@ -22,7 +31,7 @@
       <pubDate>Fri, 09 Apr 2021 09:35:25 +0800</pubDate>
       
       <guid>https://zhangeamon.top/linux/cpu-affinity/</guid>
-      <description>基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &amp;quot;physical id&amp;quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &amp;quot;cpu cores&amp;quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &amp;quot;processor&amp;quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &amp;quot;name&amp;quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core x Socket(s) x Core(s) per socket Linux查看某个进</description>
+      <description>基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &amp;quot;physical id&amp;quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &amp;quot;cpu cores&amp;quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &amp;quot;processor&amp;quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &amp;quot;name&amp;quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core * Socket(s) * Core(s) per socket Linux查看某个进</description>
     </item>
     
     <item>
