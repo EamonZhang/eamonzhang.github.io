@@ -38,7 +38,7 @@ cat /proc/cpuinfo|grep "processor"|wc -l
 cat /proc/cpuinfo|grep "name"|cut -f2 -d:|uniq
 ```
 
-- 关系 CPU数量 = Thread(s) per core x Socket(s) x Core(s) per socket 
+- 关系 CPU数量 = Thread(s) per core * Socket(s) * Core(s) per socket 
 
 #### Linux查看某个进程运行在哪个逻辑CPU上
 
