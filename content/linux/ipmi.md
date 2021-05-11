@@ -102,6 +102,6 @@ Front Panel Control  : none
 
 ## 命令简单说明
 
-- channel 
+- channel 概念理解，所有的配置都对应着相应channel。 
 
-- -I open(本机) lan(远端)
+- -I 参数， open(本机) lan(远端)
