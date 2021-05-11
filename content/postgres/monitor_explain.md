@@ -73,4 +73,23 @@ pg_prepared_xact() > 5 分钟
 
 ##### 复制槽 
 
-##### 
+
+#####  主从
+
+
+```
+-- 主从流复制延时时间 （从库执行）
+10 版本以前
+SELECT CASE WHEN pg_last_xlog_receive_location() = pg_last_xlog_replay_location() THEN 0 ELSE EXTRACT (EPOCH FROM now() - pg_last_xact_replay_timestamp()) END
+
+10 版本及以后
+
+SELECT CASE WHEN pg_last_wal_receive_lsn() = pg_last_wal_replay_lsn() THEN 0 ELSE EXTRACT (EPOCH FROM now() - pg_last_xact_replay_timestamp()) END;
+```
+
+
+```
+-- 主从复制延迟字节 (主库执行)
+
+select greatest(0,pg_wal_lsn_diff(pg_current_wal_lsn(), replay_lsn)) from pg_stat_replication ; where client_addr = '从库IP'
+```
