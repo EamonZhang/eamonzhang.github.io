@@ -1,11 +1,15 @@
 ---
-title: "ipmi 配置远程管理卡"
+title: "远程管理卡 命令管理IPMI"
 date: 2021-05-10T16:58:56+08:00
 draft: false
 toc: false
 categories: ['linux']
 tags: []
 ---
+
+## IPMI
+
+IPMI，即智能平台管理接口（Intelligent Platform Management Interface），IPMI的核心是一个专用芯片/控制器(BMC)，独立于操作系统、BIOS和处理器，因此属于带外管理设备。正是因为如此，我们可以通过BMC来控制或者获取系统的各种信息，而不需要关注系统是否正常。比如，系统卡住了，可以通过ipmi reset系统，而不需要跑到机房断电；系统无法登录也可以远程屏幕查看是什么问题。
 
 ## 使用ipmi 配置远程管理
 
@@ -60,6 +64,12 @@ ID  Name             Callin  Link Auth  IPMI Msg   Channel Priv Limit
 
 ```
 ipmitool -I open user set password 2
+```
+
+#### 设置用户 2 可用(默认即可用)
+
+```
+ipmitool -I open user enable 2
 ````
 
 ## 验证测试
@@ -105,3 +115,60 @@ Front Panel Control  : none
 - channel 概念理解，所有的配置都对应着相应channel。 
 
 - -I 参数， open(本机) lan(远端)
+
+## 常用命令
+
+```
+1. 查看机箱电源状态：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power status
+2. 开机：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power on
+3. 关机：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power off
+4. 重启机器：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power reset
+5. pxe安装系统：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) chassis bootdev pxe
+6. 远程查看屏幕：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) sol activate
+7. 关闭当前远程查看屏幕的会话：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) sol deactivate
+8. 查看机器重启原因：
+ipmitool -I open chassis restart_cause
+```
+
+## 扩展功能 设置来电自启动
+
+当发生意外断电时，在来电后自启动，通常在bios中电源管理项中可配置。但是每天机器都重启进入bios配置太麻烦了。
+
+查看现有策略
+```
+#ipmitool  chassis status
+System Power         : on
+Power Overload       : false
+Power Interlock      : inactive
+Main Power Fault     : false
+Power Control Fault  : false
+Power Restore Policy : always-on
+```
+
+修改策略
+```
+支持策略类型
+#ipmitool  chassis policy list
+Supported chassis power policy:  always-off always-on previous
+```
+
+```
+设置策略
+# ipmitool  chassis policy always-on
+Set chassis power restore policy to always-on
+```
+
+## TODO 远程屏幕
+
+需要BIOS 中配置 Serial Communication 重定向到COM2 口。
+
+默认是将显示信息输出到COM1，本地显示器。
+
+
