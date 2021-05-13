@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>ipmi 配置远程管理卡 | 故乡的云☁️</title>
-    <meta property="og:title" content="ipmi 配置远程管理卡 - 故乡的云☁️">
+    <title>远程管理卡 命令管理IPMI | 故乡的云☁️</title>
+    <meta property="og:title" content="远程管理卡 命令管理IPMI - 故乡的云☁️">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2021-05-10T16:58:56&#43;08:00'>
@@ -17,7 +17,7 @@
     <meta property="article:modified_time" content='2021-05-10T16:58:56&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="ipmi 配置远程管理卡">
+    <meta name="description" content="远程管理卡 命令管理IPMI">
         
     <meta name="author" content="Eamon">
     <meta property="og:url" content="https://zhangeamon.top/linux/ipmi/">
@@ -95,7 +95,7 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">ipmi 配置远程管理卡</h1>
+            <h1 class="post-title">远程管理卡 命令管理IPMI</h1>
         </header>
         <date class="post-meta meta-date">
             2021年5月10日
@@ -111,7 +111,9 @@
         
         
         <div class="post-content">
-            <h2 id="使用ipmi-配置远程管理">使用ipmi 配置远程管理</h2>
+            <h2 id="ipmi">IPMI</h2>
+<p>IPMI，即智能平台管理接口（Intelligent Platform Management Interface），IPMI的核心是一个专用芯片/控制器(BMC)，独立于操作系统、BIOS和处理器，因此属于带外管理设备。正是因为如此，我们可以通过BMC来控制或者获取系统的各种信息，而不需要关注系统是否正常。比如，系统卡住了，可以通过ipmi reset系统，而不需要跑到机房断电；系统无法登录也可以远程屏幕查看是什么问题。</p>
+<h2 id="使用ipmi-配置远程管理">使用ipmi 配置远程管理</h2>
 <p>远程管理卡的基本信息通常通过BIOS进行配置</p>
 <p>缺点： 需要重启机器。不灵活。</p>
 <p>下面通过Linux 系统命令行工具实现对管理卡的配置</p>
@@ -136,6 +138,8 @@ ID  Name             Callin  Link Auth  IPMI Msg   Channel Priv Limit
 2   admin            false   false      true       ADMINISTRATOR
 </code></pre><h4 id="设置用户-2-密码">设置用户 2 密码</h4>
 <pre><code>ipmitool -I open user set password 2
+</code></pre><h4 id="设置用户-2-可用默认即可用">设置用户 2 可用(默认即可用)</h4>
+<pre><code>ipmitool -I open user enable 2
 </code></pre><h2 id="验证测试">验证测试</h2>
 <h4 id="获取本机状态信息">获取本机状态信息</h4>
 <pre><code>ipmitool -H 管理卡IP地址 -U 用户名 -P 密码 sensor 
@@ -167,6 +171,43 @@ Front Panel Control  : none
 <p>-I 参数， open(本机) lan(远端)</p>
 </li>
 </ul>
+<h2 id="常用命令">常用命令</h2>
+<pre><code>1. 查看机箱电源状态：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power status
+2. 开机：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power on
+3. 关机：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power off
+4. 重启机器：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power reset
+5. pxe安装系统：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) chassis bootdev pxe
+6. 远程查看屏幕：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) sol activate
+7. 关闭当前远程查看屏幕的会话：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) sol deactivate
+8. 查看机器重启原因：
+ipmitool -I open chassis restart_cause
+</code></pre><h2 id="扩展功能-设置来电自启动">扩展功能 设置来电自启动</h2>
+<p>当发生意外断电时，在来电后自启动，通常在bios中电源管理项中可配置。但是每天机器都重启进入bios配置太麻烦了。</p>
+<p>查看现有策略</p>
+<pre><code>#ipmitool  chassis status
+System Power         : on
+Power Overload       : false
+Power Interlock      : inactive
+Main Power Fault     : false
+Power Control Fault  : false
+Power Restore Policy : always-on
+</code></pre><p>修改策略</p>
+<pre><code>支持策略类型
+#ipmitool  chassis policy list
+Supported chassis power policy:  always-off always-on previous
+</code></pre><pre><code>设置策略
+# ipmitool  chassis policy always-on
+Set chassis power restore policy to always-on
+</code></pre><h2 id="todo-远程屏幕">TODO 远程屏幕</h2>
+<p>需要BIOS 中配置 Serial Communication 重定向到COM2 口。</p>
+<p>默认是将显示信息输出到COM1，本地显示器。</p>
 
         </div>
 
@@ -263,7 +304,7 @@ Front Panel Control  : none
 <ul class="widget-list">
     
     <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="ipmi 配置远程管理卡">ipmi 配置远程管理卡</a>
+        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
     </li>
     
     <li>
