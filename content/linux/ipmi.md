@@ -172,3 +172,51 @@ Set chassis power restore policy to always-on
 默认是将显示信息输出到COM1，本地显示器。
 
 
+## 补充 远程屏幕管理
+
+利用自带的远程管理卡功能
+
+1 登陆到远程管理卡界面
+
+2 Launch 下载jveiwer.jnlp 文件到本地
+
+3 本地运行
+
+```
+javaws --config jviewer.jnlp
+```
+
+可能遇见问题 1
+
+```
+cannot grant permissions to unsigned JARs
+```
+
+当前环境
+
+- Unbutu Desktop
+
+- jdk 1.8
+
+- javaws IcedTea
+
+IcedTea 是openjdk 的一个补充,封装，包含了javaws（java Web Start）。 修改javaws 的安全策略没用
+
+原因： java 安全配置问题，jdk 8 后默认安全等级发生变更， 解决方法
+
+vi /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
+
+删除 DM5
+```
+jdk.jar.disabledAlgorithms=MD2,MD5,RSA keySize < 1024
+jdk.jar.disabledAlgorithms=MD2,RSA keySize < 1024
+```
+
+可能问题 2
+
+```
+java Index OUT
+```
+
+jdk 版本问题。 请安装open JDK 8
+
