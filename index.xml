@@ -6,7 +6,16 @@
     <description>Recent content on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 10 May 2021 16:58:56 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 May 2021 09:03:44 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>搭建VPN服务</title>
+      <link>https://zhangeamon.top/linux/openvpn/</link>
+      <pubDate>Tue, 18 May 2021 09:03:44 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/openvpn/</guid>
+      <description>利用Openven搭建VPN服务 服务端 参考 https://github.com/kylemanna/docker-openvpn 初始化 OVPN_DATA=&amp;quot;ovpn-data-example&amp;quot; docker volume create --name $OVPN_DATA docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki 其中 VPN.SERVERNAME.COM 为访问域名 启动服务 docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn 生成key docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full CLIENTNAME nopass docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient CLIENTNAME &amp;gt; CLIENTNAME.ovpn 客户端 openven --config CLIENTNAME.ovpn 验证 curl ipinfo.io 查看upd 端口 nc -vu ip port</description>
+    </item>
+    
     <item>
       <title>远程管理卡 命令管理IPMI</title>
       <link>https://zhangeamon.top/linux/ipmi/</link>

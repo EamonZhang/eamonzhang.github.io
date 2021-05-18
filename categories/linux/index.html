@@ -100,6 +100,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/openvpn/">搭建VPN服务</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月18日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/linux'>linux</a>
+            
+        </div>
+        
+        <div class="post-content">
+            利用Openven搭建VPN服务 服务端 参考 https://github.com/kylemanna/docker-openvpn 初始化 OVPN_DATA=&quot;ovpn-data-example&quot; docker volume create --name $OVPN_DATA docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki 其中 VPN.SERVERNAME.COM 为访问域名 启动服务 docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn 生成key docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full CLIENTNAME nopass docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient CLIENTNAME &gt; CLIENTNAME.ovpn 客户端 openven --config CLIENTNAME.ovpn 验证 curl ipinfo.io 查看upd 端口 nc -vu ip port……
+            <p class="readmore"><a href="https://zhangeamon.top/linux/openvpn/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/ipmi/">远程管理卡 命令管理IPMI</a>
             </h1>
         </header>
@@ -304,29 +327,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/smartctl/">smartctl 硬盘检测</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月3日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/linux'>linux</a>
-            
-        </div>
-        
-        <div class="post-content">
-            SMART 简介 S.M.A.R.T.，全称为“Self-Monitoring Analysis and Reporting Technology”，即“自我监测、分析及报告技术”。是一种自动的硬盘状态检测与预警系统和规范。通过在硬盘硬件内的检测指令对硬盘的硬件如磁头、盘片、马达、电路的运行情况进行监控、记录并与厂商所设定的预设安全……
-            <p class="readmore"><a href="https://zhangeamon.top/linux/smartctl/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -396,6 +396,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
     </li>
     
@@ -431,10 +435,6 @@
         <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -449,7 +449,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (11)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
