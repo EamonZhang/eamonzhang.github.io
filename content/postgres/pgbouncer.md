@@ -39,7 +39,7 @@ Postgres的连接是进程模型，pogbouncer 使用libevent进行socket 通信�
 ```
 查看当前系统中版本
 yum list pgbouncer.x86_64
-pgbouncer.x86_64                         1.9.0-1.rhel7
+pgbouncer.x86_64                         1.15.0-1.rhel7
 
 升级到最新版
 yum update pgbouncer.x86_64
@@ -95,7 +95,7 @@ default_pool_size 表示默认连接池中建立多少个到后端数据库的�
 [databases]中 user 表示连接到后端数据库所使用的用户
 [pgbouncer]中 user 表示用户连接到pgbouncer中所使用的用户
 
-情况1： 如果在databases中指定user=zabbix Clinet无论使用的是哪个用户，连接postgres的用户都是zabbix
+情况1： 如果在databases中指定user=zabbix Client无论使用的是哪个用户，连接postgres的用户都是zabbix
 
 情况2:  如果在database中没有指定user ,连接postgres的用户为Client使用的用户
 
@@ -124,7 +124,7 @@ show config;
 auth_query | SELECT usename, passwd FROM pg_shadow WHERE usename=$1
 ```
 
-推荐： 不在database中配置user 在auth_file中配置user
+推荐： 不在database中配置user, 在auth_file中配置user
 
 #### 登陆pgboucer 控制台
 
