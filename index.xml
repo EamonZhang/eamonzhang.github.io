@@ -6,7 +6,16 @@
     <description>Recent content on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 18 May 2021 09:03:44 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 May 2021 14:52:35 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rabbitmq 基础</title>
+      <link>https://zhangeamon.top/rabbitmq/manager02/</link>
+      <pubDate>Sat, 22 May 2021 14:52:35 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/rabbitmq/manager02/</guid>
+      <description>AMQP 协议 AMQP，即Advanced Message Queuing Protocol，高级消息队列协议。 AMQP的主要特征是面向消息、队列、路由（包括点对点和发布/订阅）、可靠性、安全。 RabbitMQ是一个开源的AMQP实现，服务器端用Erlang语言编写，支持多种客户端。 组件 Broker：标识消息队列服务</description>
+    </item>
+    
     <item>
       <title>搭建VPN服务</title>
       <link>https://zhangeamon.top/linux/openvpn/</link>
