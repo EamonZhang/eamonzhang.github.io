@@ -2,8 +2,8 @@
 title: "Rabbitmq 基础"
 date: 2021-05-22T14:52:35+08:00
 draft: false
-toc: false
-categories: []
+toc: true 
+categories: ['rabbitmq']
 tags: []
 ---
 

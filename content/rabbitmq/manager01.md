@@ -2,6 +2,9 @@
 title: "rabbitmq 简单应用"
 date: 2019-02-26T14:57:21+08:00
 draft: false
+toc: false
+categories: ['rabbitmq']
+tags: []
 ---
 
 #### 启动
