@@ -74,6 +74,8 @@ pool_mode = session
 server_reset_query = DISCARD ALL
 max_client_conn = 100
 default_pool_size = 20
+log_connections = 0 
+log_disconnections = 0
 ```
 
 ##### 说明:
