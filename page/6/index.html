@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/istio/auto-api-test/" title="API 自动化测试">API 自动化测试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年7月21日
+        </date>
+        
+        <div class="post-content">
+            简介 主要用于Restful风格接口测试,指针对模块或系统间接口进行的测试 单一接口测试 多接口组合逻辑测试 定时自动，生成测试报告 失败通知 测试用例断言 返回状态码 返回结果 超时时间 基础应用需求 Postman 测试用例编写 Newman 执行测试用例命令行工具 Jenkins 自动化集成 Git 测试用例成果物管理 Allure 生成测试报告 TestLink 测试用例管理……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/istio/auto-api-test/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/kvm/vagrant/" title="vagrant">vagrant</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年7月13日
+        </date>
+        
+        <div class="post-content">
+            介绍 通常用vagrant 来管理VirtualBox ,VMWare，方便测试环境的创建，销毁。不常折腾用virtualbox, 反复折腾用vagrant。 安装 下载virtualbox 下载vagrant -- 安装依赖 #yum --enablerepo=epel -y install fuse-sshfs #yum install bsdtar #yum -y install gcc kernel kernel-devel 常用方法 --- 镜像管理 添加镜像 #vagrant box add centos/7 查看镜像 #vagrant box……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/kvm/vagrant/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/oom/" title="数据库 OOM 预防">数据库 OOM 预防</a>
             </h1>
         </header>
@@ -221,38 +253,6 @@
             Postgres 实际应用概览 MVCC 多版本控制 一个绕不开的话题， 主要是对抗表空间的膨胀。解决垃圾回收问题，主从库之间从库查询冲突问题。 目前方法每日低峰期定时 vaccum ，gocron自定定时任务 。 根据pgstattuple对磁盘空间利用率进行分析。决定是否vaccum full ,pg_repack 流复制 主从复制，读写分离的基础。五种同……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/awsome-postgres/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_prewarm/" title="数据预加载">数据预加载</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月27日
-        </date>
-        
-        <div class="post-content">
-            https://blog.csdn.net/Hehuyi_In/article/details/102653909……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_prewarm/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/repo/" title="Centos7 私有源搭建">Centos7 私有源搭建</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月19日
-        </date>
-        
-        <div class="post-content">
-            介绍 为了保证IDC内所有主机版本一致。 目前问题， 当主机执行yum update 时，软件版本不可控。每个主机版本完全取决于更新的时机。 造成了同一个IDC内的版本的差异，比如有的数据库的版本为10.06,有的为10.13。尤其是使用了如postgis等拓展的时候。版本混乱，甚至主从之间都不一致。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/repo/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +391,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
     </li>
     
@@ -422,14 +430,6 @@
         <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -448,7 +448,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

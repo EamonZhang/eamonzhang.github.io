@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/influxdb01/" title="Telegraf&#43;Influxdb&#43;Grafana">Telegraf&#43;Influxdb&#43;Grafana</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年2月26日
+        </date>
+        
+        <div class="post-content">
+            架构组建介绍 telegraf 数据采集 Agent for collecting and Reporting Metrics and Events. influxdb 时序数据库存储 Purpose Buid time series databases. granafa 数据展现……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/influxdb01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/iptables01/" title="iptables查看、添加、删除规则">iptables查看、添加、删除规则</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年2月25日
+        </date>
+        
+        <div class="post-content">
+            查看 iptables -nvL –line-number -L 查看当前表的所有规则，默认查看的是filter表，如果要查看NAT表，可以加上-t NAT参数 -n 不对ip地址进行反查，加上这个参数显示速度会快很多 -v 输出详细信息，包含通过该规则的数据包数量，总字节数及相应的网络接口 –line-number 显示规则的……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/iptables01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/wind-run/" title="DOS 常用命令">DOS 常用命令</a>
             </h1>
         </header>
@@ -214,38 +246,6 @@
             监控进程 查看系统TOP(f进入field选择) top 打印系统进程 ps -efwL 统计每个进程的开销 pidstat -d -r -u -w -l -h -p ALL 5 1 打印进程stack pstack -p pid 打印进程系统调用 strace -p pid 结束和管理进程 结束进程 kill pid 强制结束进程(用户进程无法捕获-9信号，可能崩溃. -15信号稳妥些) kill -9 pid 管理周期进程 任务调度进程的管理……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/linux/pid_m/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgpool2/" title="pgpoolii 读写分离">pgpoolii 读写分离</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月30日
-        </date>
-        
-        <div class="post-content">
-            https://www.pgpool.net/docs/pgpool-II-3.5.4/doc/tutorial-zh_cn.html#dist-def https://www.xiaomastack.com/2019/08/16/postgresql集群/……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgpool2/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/logical-replication/" title="Logical Replication 逻辑复制">Logical Replication 逻辑复制</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月30日
-        </date>
-        
-        <div class="post-content">
-            逻辑复制 Postgres 10 版本开始， 在内核层面支持基于REDO流的逻辑复制。 控制粒度为表级别 物理复制相同都是基于wal 可指定多个上游数据源 下游数据可读可写 可用于数据汇总，无停服数据迁移,大版本升级等。 基本概念 发布者（publication）， 上游数据 订阅者 (subscrition)， 下游数据 复……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/logical-replication/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +384,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
     </li>
     
@@ -415,14 +423,6 @@
         <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -441,7 +441,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

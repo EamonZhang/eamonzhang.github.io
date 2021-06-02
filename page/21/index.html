@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/istio/concept01/" title="熔断，限流，降级">熔断，限流，降级</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月13日
+        </date>
+        
+        <div class="post-content">
+            写在前面 在学习Service Mesh前还是最好先清楚几个概念，如熔断，限流，降级。接下来一起揭开面纱，让陌生的名词变得没有那么神秘。一切都来自于现实的应用场景，及解决问题的方法方式。 consumer表示服务调用方 provider表示服务提供方 A调用B服务，一般是泛指调用B服务里面……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/istio/concept01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/istio/install/" title="Istio 1.0.3 安装　">Istio 1.0.3 安装　</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月12日
+        </date>
+        
+        <div class="post-content">
+            Service Mesh(服务网格) Kubernetes 已经给我们带来了诸多的好处。但是仍有些需求比如 A/B 测试、金丝雀发布、限流、访问控制,端到端认证等需要运维人员进一步去解决。 Istio 是完全开源的服务网格,提供了一套完整的解决方案，可以透明地分层到现有的分布式应用程序上。对开发人员几乎无感的同时获得超能力。 如果想要现……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/istio/install/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/es/esrally/" title="Esrallyi 压力测试">Esrallyi 压力测试</a>
             </h1>
         </header>
@@ -221,45 +253,6 @@
             cgroup 实现资源限额 cgroup 全称 Control Group。Linux 操作系统通过 cgroup 可以设置进程使用 CPU、内存 和 IO 资源的限额。 在启动容器时可使用参数 docker run &ndash;blkio-weight-device &ndash;cpu-shares &ndash;memory 等 。 ll /sys/fs/cgroup/cpu/docker/ ll /sys/fs/cgroup/memory/docker ll /sys/fs/cgroup/blkio/docker namespace 实现资源隔离 Mount Mount namespace 让容器看上去拥有整个文件系统。 容器有自己的 / 目录，可以执行 mount 和 umount 命令。当然我们知道这些操作只在当前容器中生效，……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/docker/cgroup-namespaces/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/docker/dumb-init/" title="Dumb Init">Dumb Init</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月1日
-        </date>
-        
-        <div class="post-content">
-            基础概念 孤儿进程：一个父进程退出，而它的一个或多个子进程还在运行，那么那些子进程将成为孤儿进程。孤儿进程将被init进程(进程号为1)所收养，并由init进程对它们完成状态收集工作。 僵尸进程：一个进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或waitpi……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/docker/dumb-init/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/proxy/" title="代理">代理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月31日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            科普 正向代理 对服务端来说是无感的，服务端无需配置，要在客户端指定。代理的是客户端。 访问原来无法访问的资源 用作缓存，加速访问速度 对客户端访问授权，上网进行认证 代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息 反向代理 对客户端来说的无感的，客户端无需配置，要在服务端实现。代理……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/proxy/">阅读全文</a></p>
     </article>
     
     
@@ -398,6 +391,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
     </li>
     
@@ -429,14 +430,6 @@
         <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -455,7 +448,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

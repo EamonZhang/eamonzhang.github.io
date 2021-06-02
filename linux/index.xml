@@ -6,7 +6,16 @@
     <description>Recent content in Linuxes on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 18 May 2021 09:03:44 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 18:47:22 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>动态库</title>
+      <link>https://zhangeamon.top/linux/so/</link>
+      <pubDate>Tue, 01 Jun 2021 18:47:22 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/so/</guid>
+      <description>strings /usr/lib64/libstdc++.so.6 | grep GLIBC ldd ./**.so gcc 升级 https://my.oschina.net/michaelshu/blog/3024970</description>
+    </item>
+    
     <item>
       <title>搭建VPN服务</title>
       <link>https://zhangeamon.top/linux/openvpn/</link>

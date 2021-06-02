@@ -93,6 +93,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/git-objects-clean/" title="Git 文件过大清理">Git 文件过大清理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月8日
+        </date>
+        
+        <div class="post-content">
+            git目录下object文件过大清理 一、删除仓库上的项目，重新提交代码。 二、彻底清除历史记录 查询大文件的文件名 git rev-list --objects --all | grep &quot;$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')&quot; 删除历史记录 git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch 你的大文件名' --prune-empty --tag-name-filter cat -- --all rm -rf .git/refs/original/ git reflog expire --expire=now --all git fsck --full --unreachable git repack -A -d 本地空间变小 git gc --aggressive --prune=now 推送远端 ，本地远端空间……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/git-objects-clean/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/ubuntu2004-network/" title="Ubuntu 20.04 网络配置">Ubuntu 20.04 网络配置</a>
             </h1>
         </header>
@@ -266,24 +284,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/vm-config/" title="内核设置">内核设置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年11月26日
-        </date>
-        
-        <div class="post-content">
-            参数vm.dirty_ratio和vm.dirty_background_ratio https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/ 文件缓存是一项重要的性能改进，在大多数情况下，读缓存在绝大多数情况下是有益无害的（程序可以直接从RAM中读取数据）。写缓存比较复杂，Linux内核将磁盘写入缓存，过段时间再异步将它们刷新到磁盘。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/vm-config/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -371,6 +371,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
     </li>
     
@@ -402,14 +410,6 @@
         <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -428,7 +428,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

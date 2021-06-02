@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/index-bloom/" title="Bloom 索引">Bloom 索引</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月23日
+        </date>
+        
+        <div class="post-content">
+            Bloom 索引 Bloom 过滤器代表的是一组值。它的作用是检测一个元素是否可能属于集合，它可以允许有一些false positive，但是不允许存在false negative。也就是说，尽管某个元素不在集合中，测试也可能返回true。然而，如果元素在集合中，就不可能返回false。 创建在一组列中的B……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/index-bloom/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/nginx-status/" title="Nginx 状态监控">Nginx 状态监控</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月20日
+        </date>
+        
+        <div class="post-content">
+            Nginx 开启status用以监控状态信息 Nginx 可以通过with-http_stub_status_module模块来监控nginx的一些状态信息。 通过nginx -V来查看是否有with-http_stub_status_module该模块。 # nginx -V nginx version: nginx/1.16.1 built by gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) built with OpenSSL 1.0.2k-fips 26 Jan 2017 TLS SNI support……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/nginx-status/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/python/django-index-ops/" title="django 默认创建第二索引">django 默认创建第二索引</a>
             </h1>
         </header>
@@ -230,38 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/git-nopassword/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgage/" title="数据库年龄">数据库年龄</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年1月7日
-        </date>
-        
-        <div class="post-content">
-            背景 数据库的事务标识符使用的是32位的,最大可表示42个亿。当前事务的数据在20亿个事务之后将变的不可见。为了解决这个问题（回卷），Postgres引入了一个冻结事务标识的概念。 并实现了名为freeze的冻结过程。 冻结过程 两种模式 惰性模式 迫切模式 惰性模式回跳过页中所有的数据都位可……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgage/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/reject-ping/" title="Linux 禁Ping">Linux 禁Ping</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年1月2日
-        </date>
-        
-        <div class="post-content">
-            修改配置文件/etc/sysctl.conf 在这个文件的最后添加一行: net.ipv4.icmp_echo_ignore_all=1 （0 代表允许 1 代表禁止） 执行sysctl -p 使新配置生效……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/reject-ping/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -398,6 +398,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
     </li>
     
@@ -429,14 +437,6 @@
         <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -455,7 +455,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

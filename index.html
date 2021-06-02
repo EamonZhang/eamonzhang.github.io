@@ -91,6 +91,45 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年6月1日
+        </date>
+        
+        <div class="post-content">
+            strings /usr/lib64/libstdc++.so.6 | grep GLIBC ldd ./**.so gcc 升级 https://my.oschina.net/michaelshu/blog/3024970……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/so/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月28日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            python 访问C 动态库 很多核心的算法库都是C/C++写的,成果物通常以动态库的方式对外提供。 如何利用python访问动态代码库 python访问C/C++的方式 ctypes pybind11 cffi swig ctypes的优势 不要修改动态库的源码 只需要动态库和头文件 使用比较简单,而且目前大部分库都是兼容C/C++……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/ctypes/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
             </h1>
         </header>
@@ -275,52 +314,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <p class="readmore"><a href="https://zhangeamon.top/python/virtualenv/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年4月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            进入开机界面 按e 后 修改如下两处 ctrl+X 进入系统 上图中最后一个指令为保持设置 touch /.autorelabel 重新进入系统 exec /sbin/init……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/resetpasswd-centos7/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年4月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &quot;physical id&quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &quot;cpu cores&quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &quot;processor&quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &quot;name&quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core * Socket(s) * Core(s) per socket Linux查看某个进……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cpu-affinity/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -425,6 +418,14 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
     </li>
     
@@ -456,14 +457,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -482,7 +475,7 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

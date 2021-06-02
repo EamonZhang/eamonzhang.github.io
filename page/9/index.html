@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgage/" title="数据库年龄">数据库年龄</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年1月7日
+        </date>
+        
+        <div class="post-content">
+            背景 数据库的事务标识符使用的是32位的,最大可表示42个亿。当前事务的数据在20亿个事务之后将变的不可见。为了解决这个问题（回卷），Postgres引入了一个冻结事务标识的概念。 并实现了名为freeze的冻结过程。 冻结过程 两种模式 惰性模式 迫切模式 惰性模式回跳过页中所有的数据都位可……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgage/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/reject-ping/" title="Linux 禁Ping">Linux 禁Ping</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年1月2日
+        </date>
+        
+        <div class="post-content">
+            修改配置文件/etc/sysctl.conf 在这个文件的最后添加一行: net.ipv4.icmp_echo_ignore_all=1 （0 代表允许 1 代表禁止） 执行sysctl -p 使新配置生效……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/reject-ping/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/parted/" title="linux分区命令parted的用法">linux分区命令parted的用法</a>
             </h1>
         </header>
@@ -221,38 +253,6 @@
             第一：_cat系列 _cat系列提供了一系列查询elasticsearch集群状态的接口。你可以通过执行 curl -XGET localhost:9200/_cat 获取所有_cat系列的操作 =^.^= /_cat/allocation /_cat/shards /_cat/shards/{index} /_cat/master /_cat/nodes /_cat/indices /_cat/indices/{index} /_cat/segments /_cat/segments/{index} /_cat/count /_cat/count/{index} /_cat/recovery /_cat/recovery/{index} /_cat/health /_cat/pending_tasks /_cat/aliases /_cat/aliases/{alias} /_cat/thread_pool /_cat/plugins /_cat/fielddata /_cat/fielddata/{fields} 你也可以后面加一个v，让输出内容表格显示表头，举例 curl -XGET http://10.1.80.85:9200/_cat/indices?v health status index uuid pri rep docs.count docs.deleted store.size pri.store.size green open filebeat-7.3.2-2019.09.27 agrhjW7KR_ObgdwrUOpJMA 1 1 218974 0 181.8mb 91mb 第二：……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/es/curl-es/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/monitor/postgres-indicators/" title="Postgres 10 监控指标">Postgres 10 监控指标</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年9月27日
-        </date>
-        
-        <div class="post-content">
-            实体机 Cpu 内存 IO 网络 磁盘大小 数据库基本信息 服务启动时间 select pg_postmaster_start_time(); 版本信息 select current_setting('server_version'); 主从角色 select pg_is_in_recovery();……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/monitor/postgres-indicators/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/wget/" title="wget">wget</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年9月19日
-        </date>
-        
-        <div class="post-content">
-            断点续传 后台运行 限速 wget -cb --limit-rate=300k &quot;http://...&quot;……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/wget/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +391,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
     </li>
     
@@ -422,14 +430,6 @@
         <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -448,7 +448,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

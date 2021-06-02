@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_lock/" title="锁机制">锁机制</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月24日
+        </date>
+        
+        <div class="post-content">
+            https://blog.csdn.net/pg_hgdb/article/details/79403651 https://habr.com/en/company/postgrespro/blog/500714/ 表锁 https://www.modb.pro/db/26462 查看被堵塞的任务 select * from pg_locks where not granted; locktype | database | relation | page | tuple | virtualxid | transactionid | classid | objid | objsubid | virtualtransaction | pid | mode | granted | fastpath ----------+----------+----------+------+-------+------------+---------------+---------+-------+----------+--------------------+-----+------+---------+---------- (0 行记录) 查看等待锁信息，是被谁堵塞了 select pg_blocking_pids(pid); pg_blocking_pids ------------------ {} 终止进程 select pg_cancel_backend(pid); # select select pg_terminate_backend(pid); # update insert delete 事务的隔离级别 Postgres 数据库共有三种数据隔离级别。 Read Commit 读看提交 默认级别 在读开始的时候建立数据快照 Repeat Read 可重复读。……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_lock/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pitr/" title="时间点恢复">时间点恢复</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月24日
+        </date>
+        
+        <div class="post-content">
+            PITR Point-in-time recovery https://blog.csdn.net/a964921988/article/details/84957241 https://github.com/digoal/blog/blob/master/201608/20160823_03.md https://github.com/digoal/blog/blob/master/201608/20160823_04.md 依赖条件 历史完整备份 不间断wal日志 以上都可有wal-g 备份系统提供支持 恢复到指定点 指定标签 具体时间点 具体事务 指定标签 recovery.conf recovery_target_action= 'pause' # promote ,shutdown --- 打lable select pg_create_restore_point('my_daily_process_ended'); --- 恢复到指定的lable recovery.conf recovery_target_name = 'my_daily_process_ended' 具体时间 restore_command = 'cp /data/arch/%f %p' # e.g. 'cp /mnt/server/archivedir/%f %p' recovery_target_time = '2020-12-23 09:37:17.010268' recovery_target_inclusive = false recovery_target_timeline = 'latest' 具体事务 restore_command = 'cp /data/arch/%f %p' # e.g. 'cp /mnt/server/archivedir/%f %p' recovery_target_xid = '26897309' recovery_target_inclusive = false……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pitr/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_pathman/" title="pg_pathman 分区表">pg_pathman 分区表</a>
             </h1>
         </header>
@@ -214,38 +246,6 @@
             Postgresql 常用监控 , 巡检报表 直接利用PG提供的性能统计数据 PG的很多性能数据可以通过查询pg_stat_或pg_statio_开头的系统表获取 zabbix http://pg-monz.github.io/pg_monz/index-en.html zabbix-extensions PG专用的监控工具 pgsnap, pgstatspack,pgwatch,pg_statsinfo等。这些工具主要做PG的性能分析，状态查看的。不能做故障……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/monitor/postgres/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgfincore/" title="pgfincore">pgfincore</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月11日
-        </date>
-        
-        <div class="post-content">
-            ……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgfincore/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgbench/" title="pgbench 压力测试">pgbench 压力测试</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月9日
-        </date>
-        
-        <div class="post-content">
-            介绍 pgbench是一种在PostgreSQL上运行基准测试的简单程序。 官方文档 默认测试 自定义测试 默认测试 pgbench中默认自带一套测试数据库和测试sql脚本。 初始化默认数据库 使用 -i 初始化数据库 #pgbench -U postgres -i -s 10 pgbenchdb NOTICE: table &quot;pgbench_history&quot; does not exist, skipping NOTICE: table &quot;pgbench_tellers&quot; does not exist, skipping NOTICE: table &quot;pgbench_accounts&quot; does not exist, skipping NOTICE: table &quot;pgbench_branches&quot; does not exist, skipping creating tables... 100000 of 1000000 tuples (10%)……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgbench/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +384,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
     </li>
     
@@ -415,14 +423,6 @@
         <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -441,7 +441,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

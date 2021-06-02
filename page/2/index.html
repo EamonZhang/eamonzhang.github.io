@@ -91,6 +91,52 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            进入开机界面 按e 后 修改如下两处 ctrl+X 进入系统 上图中最后一个指令为保持设置 touch /.autorelabel 重新进入系统 exec /sbin/init……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/resetpasswd-centos7/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &quot;physical id&quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &quot;cpu cores&quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &quot;processor&quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &quot;name&quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core * Socket(s) * Core(s) per socket Linux查看某个进……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cpu-affinity/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/cpu_utilize/" title="CPU频率管理">CPU频率管理</a>
             </h1>
         </header>
@@ -272,52 +318,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/hard_store/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            更改BMC密码 BMC：基板管理控制器 Baseboard Management Controller 更改BMC密码，需要基于Ipmitool工具实现，需要先下载该工具 安装ipmitool ubuntu安装命令： sudo apt-get -y install ipmitool centos安装命令： yum -y install epel-release（先） yum -y install ipmitool（后） 查看登陆账户名列表 ipmitool user list 2（技嘉主……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/bmcpasswd/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Intel 论坛相似问题讨论 https://community.intel.com/t5/Solid-State-Drives/I-O-request-timeouts-on-Linux-with-Intel-P3520-P4600-NVMe-PCIe/td-p/577474 临时解决 mkfs.xfs -K /dev/nvme01 -K Do not attempt to discard blocks at mkfs time. 带来问题 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa8188cf9&gt;] schedule_preempt_disabled+0x29/0x70 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa8186c67&gt;] __mutex_lock_slowpath+0xc7/0x1d0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa818603f&gt;] mutex_lock+0x1f/0x2f [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7d2d596&gt;] ima_file_check+0xa6/0x1b0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c5dfba&gt;] do_last+0x59a/0x1340 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c28ba6&gt;] ? kmem_cache_alloc_trace+0x1d6/0x200 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c5ee2d&gt;] path_openat+0xcd/0x5a0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c01158&gt;] ? page_add_new_anon_rmap+0xb8/0x170 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c6107d&gt;] do_filp_open+0x4d/0xb0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c6f177&gt;] ? __alloc_fd+0x47/0x170 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c4cbc4&gt;] do_sys_open+0x124/0x220 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c4ccde&gt;] SyS_open+0x1e/0x20 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa8194f92&gt;] system_call_fastpath+0x25/0x2a [Tue Mar 30 12:19:12 2021] INFO: task postmaster:119438 blocked for more than 120 seconds. [Tue……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/ssdiotimeout/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -433,6 +433,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
     </li>
     
@@ -464,14 +472,6 @@
         <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -490,7 +490,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (9)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
