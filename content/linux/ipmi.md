@@ -201,6 +201,8 @@ Set chassis power restore policy to always-on
 javaws --config jviewer.jnlp
 ```
 
+注意事项 ⚠️ ： `请一定安装使用jdk 删除本地openjdk !!! openjdk 是jdk 的阉割版`
+
 可能遇见问题 1
 
 ```
@@ -217,9 +219,11 @@ cannot grant permissions to unsigned JARs
 
 IcedTea 是openjdk 的一个补充,封装，包含了javaws（java Web Start）。 修改javaws 的安全策略没用
 
+删除本地openjdk 包括 javaws, openjdk 是jdk 的阉割版。
+
 原因： java 安全配置问题，jdk 8 后默认安全等级发生变更， 解决方法
 
-vi /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
+vi ../jre/lib/security/java.security
 
 删除 DM5
 ```
@@ -227,11 +231,11 @@ jdk.jar.disabledAlgorithms=MD2,MD5,RSA keySize < 1024
 jdk.jar.disabledAlgorithms=MD2,RSA keySize < 1024
 ```
 
-可能问题 2
+可能问题 2 
 
+安全验证
 ```
-java Index OUT
+运行 jcontrol 加入ip 白名单
 ```
 
-jdk 版本问题。 请安装open JDK 8
 
