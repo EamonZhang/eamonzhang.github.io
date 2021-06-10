@@ -40,7 +40,7 @@ docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient CLIE
 客户端
 
 ```
-openven --config CLIENTNAME.ovpn
+openvpn --config CLIENTNAME.ovpn
 ```
 
 验证
