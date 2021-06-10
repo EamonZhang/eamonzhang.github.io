@@ -135,6 +135,21 @@ ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) sol activate
 ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) sol deactivate
 8. 查看机器重启原因：
 ipmitool -I open chassis restart_cause
+
+
+```
+
+## BMC 重启
+
+```
+ipmitool mc reset [warm/cold]
+```
+
+## BMC 恢复默认出厂设置
+
+```
+TODO 待验证
+ipmitool raw ** **
 ```
 
 ## 扩展功能 设置来电自启动
