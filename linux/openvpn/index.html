@@ -128,7 +128,7 @@ VPN.SERVERNAME.COM 为访问域名</p>
 <pre><code>docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full CLIENTNAME nopass
 docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient CLIENTNAME &gt; CLIENTNAME.ovpn
 </code></pre><p>客户端</p>
-<pre><code>openven --config CLIENTNAME.ovpn
+<pre><code>openvpn --config CLIENTNAME.ovpn
 </code></pre><p>验证</p>
 <pre><code>curl ipinfo.io
 </code></pre><p>查看upd 端口</p>
@@ -229,6 +229,10 @@ docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient CLIE
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
     </li>
     
@@ -262,10 +266,6 @@ docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient CLIE
     
     <li>
         <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/virtualenv/" title="virtualenv 管理 python 环境">virtualenv 管理 python 环境</a>
     </li>
     
 </ul>

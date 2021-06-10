@@ -6,7 +6,16 @@
     <description>Recent content in Linuxes on 故乡的云☁️</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 01 Jun 2021 18:47:22 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Jun 2021 17:20:31 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</title>
+      <link>https://zhangeamon.top/linux/lightdm/</link>
+      <pubDate>Wed, 09 Jun 2021 17:20:31 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/lightdm/</guid>
+      <description>在终端下运行以下命令 sudo apt-get update sudo apt-get upgrade sudo apt-get install lightdm 在安装lightdm时选择lightdm 切换lightdm图形页面 sudo dpkg-reconfigure lightdm 切换完成后重启电脑，就可以使用向日葵远程了</description>
+    </item>
+    
     <item>
       <title>动态库</title>
       <link>https://zhangeamon.top/linux/so/</link>
@@ -22,7 +31,7 @@
       <pubDate>Tue, 18 May 2021 09:03:44 +0800</pubDate>
       
       <guid>https://zhangeamon.top/linux/openvpn/</guid>
-      <description>利用Openven搭建VPN服务 服务端 参考 https://github.com/kylemanna/docker-openvpn 初始化 OVPN_DATA=&amp;quot;ovpn-data-example&amp;quot; docker volume create --name $OVPN_DATA docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki 其中 VPN.SERVERNAME.COM 为访问域名 启动服务 docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn 生成key docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full CLIENTNAME nopass docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient CLIENTNAME &amp;gt; CLIENTNAME.ovpn 客户端 openven --config CLIENTNAME.ovpn 验证 curl ipinfo.io 查看upd 端口 nc -vu ip port</description>
+      <description>利用Openven搭建VPN服务 服务端 参考 https://github.com/kylemanna/docker-openvpn 初始化 OVPN_DATA=&amp;quot;ovpn-data-example&amp;quot; docker volume create --name $OVPN_DATA docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki 其中 VPN.SERVERNAME.COM 为访问域名 启动服务 docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn 生成key docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full CLIENTNAME nopass docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient CLIENTNAME &amp;gt; CLIENTNAME.ovpn 客户端 openvpn --config CLIENTNAME.ovpn 验证 curl ipinfo.io 查看upd 端口 nc -vu ip port</description>
     </item>
     
     <item>
