@@ -221,7 +221,8 @@ Set chassis power restore policy to always-on
 <p>2 Launch 下载jveiwer.jnlp 文件到本地</p>
 <p>3 本地运行</p>
 <pre><code>javaws --config jviewer.jnlp
-</code></pre><p>可能遇见问题 1</p>
+</code></pre><p>注意事项 ⚠️ ： <code>请一定安装使用jdk 删除本地openjdk !!! openjdk 是jdk 的阉割版</code></p>
+<p>可能遇见问题 1</p>
 <pre><code>cannot grant permissions to unsigned JARs
 </code></pre><p>当前环境</p>
 <ul>
@@ -236,15 +237,16 @@ Set chassis power restore policy to always-on
 </li>
 </ul>
 <p>IcedTea 是openjdk 的一个补充,封装，包含了javaws（java Web Start）。 修改javaws 的安全策略没用</p>
+<p>删除本地openjdk 包括 javaws, openjdk 是jdk 的阉割版。</p>
 <p>原因： java 安全配置问题，jdk 8 后默认安全等级发生变更， 解决方法</p>
-<p>vi /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security</p>
+<p>vi ../jre/lib/security/java.security</p>
 <p>删除 DM5</p>
 <pre><code>jdk.jar.disabledAlgorithms=MD2,MD5,RSA keySize &lt; 1024
 jdk.jar.disabledAlgorithms=MD2,RSA keySize &lt; 1024
 </code></pre><p>可能问题 2</p>
-<pre><code>java Index OUT
-</code></pre><p>jdk 版本问题。 请安装open JDK 8</p>
-
+<p>安全验证</p>
+<pre><code>运行 jcontrol 加入ip 白名单
+</code></pre>
         </div>
 
         
@@ -340,6 +342,10 @@ jdk.jar.disabledAlgorithms=MD2,RSA keySize &lt; 1024
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
     </li>
     
@@ -373,10 +379,6 @@ jdk.jar.disabledAlgorithms=MD2,RSA keySize &lt; 1024
     
     <li>
         <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
     </li>
     
 </ul>

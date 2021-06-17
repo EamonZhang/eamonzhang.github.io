@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/nginx-log/" title="Nginx log 切割">Nginx log 切割</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月5日
+        </date>
+        
+        <div class="post-content">
+            Docker nginx 日志切割 docker 在运行 nginx 日志容器时，将日志挂载到实体机/var/log/nginx/* .log 中. 一般直接运行的nginx服务都会自带logrotate进行日志切分, 由docker方式安装的nginx 缺失日志切割功能! 添加logrotate cat /etc/logrotate.d/nginx /var/log/nginx/*.log { daily missingok rotate 52 compress delaycompress notifempty create 666 root root sharedscripts postrotate # [ -f /var/run/nginx.pid ] &amp;&amp; kill……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/nginx-log/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/middleware/vsftp/" title="Centos FTP 服务">Centos FTP 服务</a>
             </h1>
         </header>
@@ -253,22 +269,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/extention/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/about/en/" title="英语单词">英语单词</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月27日
-        </date>
-        
-        <div class="post-content">
-            单词表 utilizes 利用 degradation 退化，降级 hypertable 元数据表 monotonically 单调的 monotonically increase: 单调递增 solely 单独地，唯一地 cardinality 基数 excel 优于，擅长 eliminate 干掉，排除 refine 精致的，经过改良的 distilled 从..中萃取 robust 精力充沛的 fundamental 基础的 主要的……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/about/en/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -405,6 +405,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
     </li>
     
@@ -438,10 +442,6 @@
     
     <li>
         <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
     </li>
     
 </ul>
