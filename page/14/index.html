@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/mysql/performance-cmd/" title="MySQL常用性能分析命令">MySQL常用性能分析命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月29日
+        </date>
+        
+        <div class="post-content">
+            MySQL常用性能突发事件分析命令： SHOW PROCESSLIST; —当前MySQL数据库的运行的所有线程 INNODB_TRX; — 当前运行的所有事务 INNODB_LOCKS; — 当前出现的锁 INNODB_LOCK_WAITS; — 锁等待的对应关系计 SHOW OPEN TABLES where In_use &gt;0; — 当前打开表 SHOW ENGINE INNODB STATUS \G; —Innodb状态 SHOW STATUS LIKE &lsquo;innodb_row_lock_%'; — 锁性能状态 SQL语句EXPLAIN; — 查询优化器……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/mysql/performance-cmd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_citus/" title="citus 数据库分库">citus 数据库分库</a>
             </h1>
         </header>
@@ -230,22 +246,6 @@
             NAME memtest-setup - Install Memtest86+ into your GRUB boot loader menu SYNOPSIS memtest-setup [OPTIONS] DESCRIPTION memtest-setup installs Memtest86+ into your GRUB boot loader menu. It supports both GRUB 2 and GRUB Legacy (i.e. GRUB 0.9x). In case of GRUB 2 it installs GRUB 2 template into /etc/grub.d and GRUB 2 config needs to be regenerated manually by running grub2-mkconfig -o /boot/grub2/grub.cfg under root. This is not done automatically because it could overwrite any custom changes in /boot/grub2/grub.cfg. OPTIONS -h, --help Shows help. AUTHOR Jaroslav Škarvada &lt;jskarvad@redhat.com&gt; Manpage author. COPYRIGHT Copyright © 2014 Jaroslav Škarvada Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 or (at your option) any later version published by the Free……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/linux/memtest/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/dmidecode/" title="Linux查看内存条信息">Linux查看内存条信息</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月14日
-        </date>
-        
-        <div class="post-content">
-            1.查看内存槽及内存条 $ sudo dmidecode -t memory 2.查看内存的插槽数,已经使用多少插槽.每条内存多大 $ sudo dmidecode -t memory | grep Size 3.查看服务器型号、序列号 $ sudo dmidecode | grep &quot;System Information&quot; -A9 | egrep &quot;Manufacturer|Product|Serial&quot;……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/dmidecode/">阅读全文</a></p>
     </article>
     
     
@@ -388,6 +388,10 @@
     </li>
     
     <li>
+        <a href="https://zhangeamon.top/asr/basic_concept/" title="语音识别的基本概念">语音识别的基本概念</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
     </li>
     
@@ -417,10 +421,6 @@
     
     <li>
         <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
     </li>
     
 </ul>

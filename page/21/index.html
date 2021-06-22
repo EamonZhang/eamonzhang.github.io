@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/kill/" title="PostgreSQL 无法kill(pg_terminate_backend, pg_cancel_backend)的情况分析 - 进程hang strace,pstack">PostgreSQL 无法kill(pg_terminate_backend, pg_cancel_backend)的情况分析 - 进程hang strace,pstack</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月14日
+        </date>
+        
+        <div class="post-content">
+            先 mark 下 https://yq.aliyun.com/articles/647468……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/kill/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/cmd-pstack/" title="pstack">pstack</a>
             </h1>
         </header>
@@ -230,29 +246,6 @@
             当前连接数 SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid(); count ------- 3 (1 row) 数据库占用空间 select pg_size_pretty(pg_database_size('postgres')); pg_size_pretty ---------------- 14 MB (1 row) or \l+ 数据库表(不包括索引)或单条索引占用空间 select pg_size_pretty(pg_relation_size('t_name')); pg_size_pretty ---------------- 24 kB (1 行记录) or \d+ 表中所有索引占有的空间 select pg_size_pretty(pg_indexes_size('t_name')); pg_size_pretty ---------------- 280 kB (1 行记录) 表和索引占用总空间 select pg_size_pretty(pg_total_relation_size('t_name')); pg_size_pretty ---------------- 380 kB (1 行记录) 查看一条数据在数据库占用的空间 select pg_column_size('Let us go !!!'); pg_column_size ---------------- 14 (1 行记录) 查出所……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/stat/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/keepalived01/" title="Keepalived 问题集">Keepalived 问题集</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月5日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Q1 问题描述 ip address associated with VRID 51 not present in MASTER advert : 10.1.7.58 其中 51 为 virtual_router_id 10.1.7.58 为虚拟IP 可能原因 ntp 时间不同步 局域网内 virtual_router_id 与其他集群配置冲突。 另外 router_id 主机标示，一般为hostname即可。 解决方法： unicast_peer{ } 配置成单播模式……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/keepalived01/">阅读全文</a></p>
     </article>
     
     
@@ -395,6 +388,10 @@
     </li>
     
     <li>
+        <a href="https://zhangeamon.top/asr/basic_concept/" title="语音识别的基本概念">语音识别的基本概念</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
     </li>
     
@@ -424,10 +421,6 @@
     
     <li>
         <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
     </li>
     
 </ul>
