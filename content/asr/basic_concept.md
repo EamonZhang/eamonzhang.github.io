@@ -71,5 +71,15 @@ tags: []
 
 代码摘自HanLP（https://github.com/hankcs/HanLP）
 
+#### 开源语音识别对比
 
+![asr compare](/images/asr_compare.jpg)
 
+https://cmusphinx.github.io/wiki/
+
+基础知识介绍
+https://blog.csdn.net/zouxy09/article/details/7941585
+
+#### 算法总汇
+
+![算法](/images/asr_algorithm.png)
