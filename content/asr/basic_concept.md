@@ -1,7 +1,7 @@
 ---
 title: "语音识别的基本概念"
 date: 2021-06-11T09:13:57+08:00
-draft: false 
+draft: true 
 toc: false
 categories: []
 tags: []
