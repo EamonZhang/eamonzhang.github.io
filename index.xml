@@ -17,15 +17,6 @@
     </item>
     
     <item>
-      <title>语音识别的基本概念</title>
-      <link>https://zhangeamon.top/asr/basic_concept/</link>
-      <pubDate>Fri, 11 Jun 2021 09:13:57 +0800</pubDate>
-      
-      <guid>https://zhangeamon.top/asr/basic_concept/</guid>
-      <description>ASR ， Automatic Speech Recogntion 语音识别 VAD ， Voice Activity Detection 语音端点检测 LM ， Language Mode 语言模型 AM ， 声学模型 DNN-HMM 语音识别框架 WFST , Weighted Finite State Transducers 有限加权状态转换机 建立从HMM状态到单词的映射 Lattice Rescore 词图 Nbest 最优路径 NLP,Natural Language Processing 自然语言处理 参考 http://www.360doc.com/content/20/1211/20/7673502_950883057.shtml 导读 在语音识别系统中，有限加权状态转换机（Weighted Finite State Transducers, WFST）扮演着重要角色。本文主要</description>
-    </item>
-    
-    <item>
       <title>关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</title>
       <link>https://zhangeamon.top/linux/lightdm/</link>
       <pubDate>Wed, 09 Jun 2021 17:20:31 +0800</pubDate>

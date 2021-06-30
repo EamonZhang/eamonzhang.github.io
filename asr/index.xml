@@ -16,14 +16,5 @@
       <description>Centos7 cmake 版本升级（由 v2.8.12.2 升级至 v3.14.5） #cmake -version cmake version 2.8.12.2 安装基础工具 yum install -y gcc gcc-c++ mkdir /opt/cmake cd /opt/cmake/ wget https://cmake.org/files/v3.14/cmake-3.14.5.tar.gz tar zxvf cmake-3.14.5.tar.gz 安装 yum remove cmake -y ./configure --prefix=/usr/local/cmake make &amp;amp;&amp;amp; make install 查看版本 #/usr/local/cmake/bin/cmake --version cmake version 3.14.5 CMake suite maintained and supported by Kitware (kitware.com/cmake). 设置环境 ln -s /usr/local/cmake/bin/cmake /usr/bin/cmake Clion 中使用MakeFile 默认在Clion中使用CMakeList.txt,但是有些项目提供的是Makefile cmake_minimum_required(VERSION 3.12) project(test)</description>
     </item>
     
-    <item>
-      <title>语音识别的基本概念</title>
-      <link>https://zhangeamon.top/asr/basic_concept/</link>
-      <pubDate>Fri, 11 Jun 2021 09:13:57 +0800</pubDate>
-      
-      <guid>https://zhangeamon.top/asr/basic_concept/</guid>
-      <description>ASR ， Automatic Speech Recogntion 语音识别 VAD ， Voice Activity Detection 语音端点检测 LM ， Language Mode 语言模型 AM ， 声学模型 DNN-HMM 语音识别框架 WFST , Weighted Finite State Transducers 有限加权状态转换机 建立从HMM状态到单词的映射 Lattice Rescore 词图 Nbest 最优路径 NLP,Natural Language Processing 自然语言处理 参考 http://www.360doc.com/content/20/1211/20/7673502_950883057.shtml 导读 在语音识别系统中，有限加权状态转换机（Weighted Finite State Transducers, WFST）扮演着重要角色。本文主要</description>
-    </item>
-    
   </channel>
 </rss>

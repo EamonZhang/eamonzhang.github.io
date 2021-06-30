@@ -91,22 +91,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/dns/" title="DNS">DNS</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年10月28日
-        </date>
-        
-        <div class="post-content">
-            DNS：Domain Name System 域名管理系统 A记录 A（Address）记录是用来指定主机名（或域名）对应的IP地址记录 NS记录 NS（Name Server）记录是域名服务器记录，用来指定该域名由哪个DNS服务器来进行解析 MX记录 MX（Mail Exchanger）记录是邮件交换记录，它指向一……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/dns/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/cmd-vim/" title="vi 编辑">vi 编辑</a>
             </h1>
         </header>
@@ -246,6 +230,22 @@
             http://docs.jumpserver.org/zh/docs/index.html……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/network-security/jumpserver/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/citus01/" title="citus 简单应用">citus 简单应用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年6月5日
+        </date>
+        
+        <div class="post-content">
+            常用方法 集群管理 加入节点 SELECT * from master_add_node('worker-101', 5432); 查看节点状态 SELECT * FROM master_get_active_worker_nodes(); select * from pg_dist_node; 数据库管理 分片表(distributed table ， hash | append ) 参考表(reference table 数据量小) 本地表(原生表，没有任何处理.兼容性高) 对表进行分片 SELECT create_distributed_table('companies', 'id'); 分片查看 SELECT * from pg_dist_shard; 元数据表 pg_dist_shard pg_dist_placement pg_dist_node 参数 更多参考 sql 限制 1 非亲和性表之间的ou……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/citus01/">阅读全文</a></p>
     </article>
     
     
@@ -388,10 +388,6 @@
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/asr/basic_concept/" title="语音识别的基本概念">语音识别的基本概念</a>
-    </li>
-    
-    <li>
         <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
     </li>
     
@@ -421,6 +417,10 @@
     
     <li>
         <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
     </li>
     
 </ul>
