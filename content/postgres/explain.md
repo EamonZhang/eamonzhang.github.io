@@ -113,3 +113,9 @@ geqo_threshold
 
 [文档 官网](https://www.postgresql.org/docs/10/using-explain.html)  
 [文档 中文](http://www.postgres.cn/docs/10/sql-explain.html)
+
+## SQL 在线分析工具
+
+https://explain.depesz.com
+
+https://explain.dalibo.com/
