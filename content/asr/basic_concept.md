@@ -83,3 +83,7 @@ https://blog.csdn.net/zouxy09/article/details/7941585
 #### 算法总汇
 
 ![算法](/images/asr_algorithm.png)
+
+
+#### 语音识别 应用与原理
+https://speech.xmu.edu.cn/2020/0630/c18207a406063/page.htm
