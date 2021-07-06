@@ -171,6 +171,11 @@
         <li></li>
       </ul>
     </li>
+    <li><a href="#搭建集群">搭建集群</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -369,7 +374,36 @@ rabbitmq-queues delete_member [-p &lt;vhost&gt;] &lt;queue-name&gt; &lt;node&gt;
 <pre><code>./rabbitmq-queues add_member quorum.1 rabbit@pxc2
 ./rabbitmq-queues delete_member quorum.1 rabbit@pxc2
 </code></pre><p><a href="https://www.cnblogs.com/wuyongyin/p/13891450.html">https://www.cnblogs.com/wuyongyin/p/13891450.html</a></p>
-
+<h2 id="搭建集群">搭建集群</h2>
+<h4 id="每台集群上单独部署rabbitmq">每台集群上单独部署rabbitmq</h4>
+<h4 id="erlangcookie">.erlang.cookie</h4>
+<p>将所有机器上的.erlang.cookie文件里的值一样.</p>
+<p>erlang.cookie是erlang实现分布式的必要文件，erlang分布式的每一个节点上要保持相同的.erlang.cookie文件，同时该文件的权限为400</p>
+<p>.erlang.cookie一般会存在于两个地方，</p>
+<p>第一个是：$HOME/.erlang.cookie；</p>
+<p>第二个是：/var/lib/rabbitmq/.erlang.cookie。</p>
+<h4 id="设置hosts">设置hosts</h4>
+<pre><code>10.49.196.10 pxc1
+10.49.196.11 pxc2
+10.49.196.12 pxc3
+</code></pre><h4 id="将自身节点加入集群">将自身节点加入集群</h4>
+<p>10.49.196.11 pxc2 为例</p>
+<pre><code>./rabbitmqctl stop_app
+./rabbitmqctl reset
+./rabbitmqctl join_cluster rabbit@pxc1
+./rabbitmqctl start_app
+</code></pre><h4 id="重置移除节点">重置移除节点</h4>
+<pre><code>./rabbitmqctl stop_app
+./rabbitmqctl reset
+./rabbitmqctl start_app
+</code></pre><h4 id="镜像队列-1">镜像队列</h4>
+<p>在默认集群的基础上，可以设置镜像队列来保证数据的可靠性。如设置以ha.开头的队列在所有节点上为镜像队列</p>
+<pre><code>rabbitmqctl set_policy ha-all &quot;^ha\.&quot; '{&quot;ha-mode&quot;:&quot;all&quot;}'
+</code></pre><h4 id="仲裁队列">仲裁队列</h4>
+<p>如果还需进一步保证数据的安全性，可以使用仲裁队列。</p>
+<p>编码方式声明仲裁队列：</p>
+<pre><code>&quot;x-queue-type&quot;, &quot;quorum&quot;
+</code></pre>
         </div>
 
         
