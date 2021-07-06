@@ -152,4 +152,61 @@ rabbitmq-queues delete_member [-p <vhost>] <queue-name> <node> #删除成员
 
 https://www.cnblogs.com/wuyongyin/p/13891450.html
 
+## 搭建集群
 
+#### 每台集群上单独部署rabbitmq
+
+#### .erlang.cookie
+
+将所有机器上的.erlang.cookie文件里的值一样.
+
+erlang.cookie是erlang实现分布式的必要文件，erlang分布式的每一个节点上要保持相同的.erlang.cookie文件，同时该文件的权限为400
+
+.erlang.cookie一般会存在于两个地方，
+
+第一个是：$HOME/.erlang.cookie；
+
+第二个是：/var/lib/rabbitmq/.erlang.cookie。
+
+#### 设置hosts
+
+```
+10.49.196.10 pxc1
+10.49.196.11 pxc2
+10.49.196.12 pxc3
+```
+
+#### 将自身节点加入集群
+
+10.49.196.11 pxc2 为例
+
+```
+./rabbitmqctl stop_app
+./rabbitmqctl reset
+./rabbitmqctl join_cluster rabbit@pxc1
+./rabbitmqctl start_app
+```
+#### 重置移除节点 
+
+```
+./rabbitmqctl stop_app
+./rabbitmqctl reset
+./rabbitmqctl start_app
+```
+
+#### 镜像队列
+
+在默认集群的基础上，可以设置镜像队列来保证数据的可靠性。如设置以ha.开头的队列在所有节点上为镜像队列
+```
+rabbitmqctl set_policy ha-all "^ha\." '{"ha-mode":"all"}'
+```
+
+#### 仲裁队列
+
+如果还需进一步保证数据的安全性，可以使用仲裁队列。
+
+编码方式声明仲裁队列：
+
+```
+"x-queue-type", "quorum"
+```
