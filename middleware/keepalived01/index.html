@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Keepalived 问题集 | 故乡的云☁️</title>
-    <meta property="og:title" content="Keepalived 问题集 - 故乡的云☁️">
+    <title>Keepalived 问题集 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="Keepalived 问题集 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2018-11-05T10:08:23&#43;08:00'>
@@ -61,7 +61,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://zhangeamon.top">
-                        故乡的云☁️
+                        Let&#39;s go 🐌 🐌 🐌
                     </a>
                 
                 <p class="description">Let&#39;s build our own cloud native together  </p>
@@ -111,13 +111,13 @@
         
         
         <div class="post-content">
-            <ul>
+            <h2 id="问题描述">问题描述</h2>
+<ul>
 <li>Q1</li>
 </ul>
-<h5 id="问题描述">问题描述</h5>
 <pre><code>  ip address associated with VRID 51 not present in MASTER advert : 10.1.7.58
 </code></pre><p>其中 51 为 virtual_router_id 10.1.7.58 为虚拟IP</p>
-<h5 id="可能原因">可能原因</h5>
+<p>可能原因</p>
 <ol>
 <li>
 <p>ntp 时间不同步</p>
@@ -127,7 +127,107 @@
 </li>
 </ol>
 <p>解决方法： unicast_peer{ } 配置成单播模式</p>
+<ul>
+<li>Q2</li>
+</ul>
+<pre><code>keepalived ping不通
+</code></pre><p>解决办法,注释掉配置文件中的</p>
+<pre><code>vrrp_strict
+</code></pre><ul>
+<li>Q3</li>
+</ul>
+<pre><code>not a regular file
+</code></pre><p>解决方法</p>
+<pre><code>chmod 644 keepalived.conf
+</code></pre><ul>
+<li>Q4</li>
+</ul>
+<pre><code>virtual_server 
+</code></pre><p>该部分是用来管理LVS的，是实现keepalive和LVS相结合的模块</p>
+<ul>
+<li>Q5</li>
+</ul>
+<pre><code>VRRP , Virtual Router Redunday Protocol  。虚拟路由冗余协议
+</code></pre><ul>
+<li>Q6</li>
+</ul>
+<pre><code>Keepalived工作方式：抢占式、非抢占式
 
+抢占式 ， 主从模式 。 state: MASTER ，BUCKUP
+
+非抢占式， 在配置中添加 nopreempt 标识为非抢占模式
+</code></pre><h2 id="一个简单的配置demo">一个简单的配置DEMO</h2>
+<pre><code>! Configuration File for keepalived
+  
+global_defs {
+   router_id LVS_DEVEL # 组名。同一个网络空间，组名一致为同一个组
+   vrrp_skip_check_adv_addr
+   vrrp_garp_interval 0
+   vrrp_gna_interval 0
+}
+
+vrrp_instance VI_1 {
+    state MASTER       # MASTERE BACKUP 
+    interface eno1     # 网卡名
+    virtual_router_id 51  # 组内唯一标识
+    priority 100    # 优先等级
+    advert_int 1
+    authentication { # 组内安全认证
+        auth_type PASS
+        auth_pass admin
+    }
+    virtual_ipaddress { # VIP 设置
+        192.168.1.8/24
+    }
+}
+</code></pre><h2 id="检测后端程序">检测后端程序</h2>
+<p>以nginx为例</p>
+<p>cat /server/scripts/check_list</p>
+<pre><code>nginxpid=$(ps -C nginx --no-header|wc -l)
+#1.判断Nginx是否存活,如果不存活则尝试启动Nginx
+if [ $nginxpid -eq 0 ];then
+    systemctl start nginx
+    sleep 3
+    #2.等待3秒后再次获取一次Nginx状态
+    nginxpid=$(ps -C nginx --no-header|wc -l) 
+    #3.再次进行判断, 如Nginx还不存活则停止Keepalived,让地址进行漂移,并退出脚本  
+    if [ $nginxpid -eq 0 ];then
+        systemctl stop keepalived
+   fi
+fi
+</code></pre><p>cat /etc/keepalived/keepalived.conf</p>
+<pre><code>! Configuration File for keepalived
+global_defs {
+    router_id lb01
+}
+
+vrrp_script check {
+    script &quot;/server/scripts/check_list&quot;
+    interval  10
+}
+
+vrrp_instance VI_1 {
+    state MASTER
+    interface eth0
+    virtual_router_id 50
+    priority 150
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+}
+    virtual_ipaddress {
+       192.168.1.8/24
+    }
+    track_script  {
+    check
+   }
+}
+</code></pre><h2 id="发生主从切换通知">发生主从切换通知</h2>
+<pre><code>notify_master /server/scripts/tobe_master.sh  //当切换为MASTER时将触发
+
+notify_backup /server/scripts/tobe_slave.sh // 当切换为BACKUP时将触发
+</code></pre>
         </div>
 
         

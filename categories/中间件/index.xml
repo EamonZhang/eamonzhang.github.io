@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>中间件 on 故乡的云☁️</title>
+    <title>中间件 on Let&#39;s go 🐌 🐌 🐌</title>
     <link>https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
-    <description>Recent content in 中间件 on 故乡的云☁️</description>
+    <description>Recent content in 中间件 on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 02 Apr 2021 15:26:49 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
@@ -85,7 +85,7 @@
       <pubDate>Mon, 05 Nov 2018 10:08:23 +0800</pubDate>
       
       <guid>https://zhangeamon.top/middleware/keepalived01/</guid>
-      <description>Q1 问题描述 ip address associated with VRID 51 not present in MASTER advert : 10.1.7.58 其中 51 为 virtual_router_id 10.1.7.58 为虚拟IP 可能原因 ntp 时间不同步 局域网内 virtual_router_id 与其他集群配置冲突。 另外 router_id 主机标示，一般为hostname即可。 解决方法： unicast_peer{ } 配置成单播模式</description>
+      <description>问题描述 Q1 ip address associated with VRID 51 not present in MASTER advert : 10.1.7.58 其中 51 为 virtual_router_id 10.1.7.58 为虚拟IP 可能原因 ntp 时间不同步 局域网内 virtual_router_id 与其他集群配置冲突。 另外 router_id 主机标示，一般为hostname即可。 解决方法： unicast_peer{ } 配置成单播模式 Q2 keepalived ping不通 解决办法,注释掉配置文件中的 vrrp_strict Q3 not a regular file 解决方法 chmod 644 keepalived.conf Q4 virtual_server 该部分是用来管理LVS的，</description>
     </item>
     
     <item>
