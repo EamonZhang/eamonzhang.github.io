@@ -6,7 +6,16 @@
     <description>Recent content on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 16 Jun 2021 13:42:14 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Jul 2021 15:04:14 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Requests</title>
+      <link>https://zhangeamon.top/python/requests/</link>
+      <pubDate>Thu, 15 Jul 2021 15:04:14 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/requests/</guid>
+      <description>requests 模块 HTTP 协议接口的请求调用 安装, 引用 pip install requests import requests 测试URL https://httpbin.org/post GET 请求 发送数据: 以下为postman 请求示例 { &amp;quot;args&amp;quot;: { &amp;quot;arg1&amp;quot;: &amp;quot;arg_1&amp;quot; }, &amp;quot;headers&amp;quot;: { &amp;quot;Accept&amp;quot;: &amp;quot;*/*&amp;quot;, &amp;quot;Accept-Encoding&amp;quot;: &amp;quot;gzip, deflate, br&amp;quot;, &amp;quot;Content-Length&amp;quot;: &amp;quot;24&amp;quot;, &amp;quot;Content-Type&amp;quot;: &amp;quot;application/json&amp;quot;, &amp;quot;Host&amp;quot;: &amp;quot;httpbin.org&amp;quot;, &amp;quot;Postman-Token&amp;quot;: &amp;quot;187197c1-effa-4b4b-a499-7c3d66bc9049&amp;quot;, &amp;quot;User-Agent&amp;quot;: &amp;quot;PostmanRuntime/7.26.8&amp;quot;, &amp;quot;X-Amzn-Trace-Id&amp;quot;: &amp;quot;Root=1-60efdcf5-2c52d3eb46a1e19520fe108c&amp;quot; }, &amp;quot;origin&amp;quot;: &amp;quot;113.232.142.231&amp;quot;, &amp;quot;url&amp;quot;: &amp;quot;http://httpbin.org/get?arg1=arg_1&amp;quot; } POST 请求 发送数据 以下为postman 请求示例 { &amp;quot;args&amp;quot;: { &amp;quot;p &amp;quot;: &amp;quot;1&amp;quot; }, &amp;quot;data&amp;quot;: &amp;quot;{\n \&amp;quot;json\&amp;quot;: \&amp;quot;123456\&amp;quot;\n}&amp;quot;, &amp;quot;files&amp;quot;: {}, &amp;quot;form&amp;quot;: {}, &amp;quot;headers&amp;quot;: { &amp;quot;Accept&amp;quot;: &amp;quot;*/*&amp;quot;, &amp;quot;Accept-Encoding&amp;quot;: &amp;quot;gzip, deflate, br&amp;quot;, &amp;quot;Content-Length&amp;quot;: &amp;quot;24&amp;quot;, &amp;quot;Content-Type&amp;quot;: &amp;quot;application/json&amp;quot;, &amp;quot;Host&amp;quot;: &amp;quot;httpbin.org&amp;quot;, &amp;quot;Postman-Token&amp;quot;: &amp;quot;187879a8-fe0f-45a0-a94e-cf0b1d8e5184&amp;quot;, &amp;quot;User-Agent&amp;quot;: &amp;quot;PostmanRuntime/7.26.8&amp;quot;, &amp;quot;X-Amzn-Trace-Id&amp;quot;: &amp;quot;Root=1-60eff356-44291b474115a4e2111fbec4&amp;quot; },</description>
+    </item>
+    
     <item>
       <title>C 语言环境</title>
       <link>https://zhangeamon.top/asr/c/</link>
