@@ -143,12 +143,12 @@
     </item>
     
     <item>
-      <title>分区表</title>
+      <title>原生分区表</title>
       <link>https://zhangeamon.top/postgres/partition/</link>
       <pubDate>Thu, 31 Dec 2020 10:17:03 +0800</pubDate>
       
       <guid>https://zhangeamon.top/postgres/partition/</guid>
-      <description>分区表 数据库分区是一种将数据做物理分片的数据库设计技术，虽然分区技术可以有多种实现方法， 但其主要目的是为了在特定的SQL操作中减少数据读取的总量以缩减响应时间。 分区方式 水平分区 订单按时间维度 垂直分区 范式规范 ： 订单数据 （客户表，商品表，订单表） 优点 性能 ，范围或点查询。 管理 归档，删除</description>
+      <description>分区表 数据库分区是一种将数据做物理分片的数据库设计技术，虽然分区技术可以有多种实现方法， 但其主要目的是为了在特定的SQL操作中减少数据读取的总量以缩减响应时间。 使用分区表对应用程序是透明的，对于INSERT,UPDATE,DELETE,SELECT操作，都只需要对父表tbl进行操</description>
     </item>
     
     <item>
