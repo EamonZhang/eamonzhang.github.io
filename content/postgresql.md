@@ -60,7 +60,7 @@ toc: true
 - [应用实战](/postgres/awsome-postgres)
 - [创建只读用户](/postgres/readonly)
 - [找回supper user 权限](/postgres/reback_supper_user)
-- [分区表](/postgres/partition)
+- [原生分区表](/postgres/partition)
 
 ## 常用视图
 
