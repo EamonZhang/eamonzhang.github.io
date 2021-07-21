@@ -137,4 +137,9 @@ toc: true
 
 - [数据库 ssl认证](/postgres/ssl)
 
+## 新版本特性
 
+- [PostgreSQL 10 新特性汇总](https://postgres.fun/20170710155008.html)
+- [PostgreSQL 11 新特性汇总](https://postgres.fun/20181102084300.html)
+- [PostgreSQL 12 新特性汇总](https://postgres.fun/20190809161300.html)
+- [PostgreSQL 13 新特性汇总](https://postgres.fun/20200724165800.html)
