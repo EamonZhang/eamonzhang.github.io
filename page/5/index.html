@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/unlogged_table/" title="unlogged table">unlogged table</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月12日
+        </date>
+        
+        <div class="post-content">
+            介绍 在写数据的时候不记录wal的表。 在意外发生时表中的数据被trunce 。如断电、 主进程kill 、scrash 等。 正常关闭重启数据库时数据不会丢失。 优点： 提高写入效率 不足： 数据安全性不能得到保障。 由于没有wal 流复制从库不能同步 应用场景： 数据可丢失，如频繁更新，只保留最后状态信息……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/unlogged_table/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/reback/" title="误操作闪回">误操作闪回</a>
             </h1>
         </header>
@@ -239,29 +255,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/compile_kylin/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/ubuntu2004-network/" title="Ubuntu 20.04 网络配置">Ubuntu 20.04 网络配置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月21日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            配置 vim /etc/netplan/00-installer-config.yaml # This is the network config written by 'subiquity' network: ethernets: enp2s0: addresses: - 192.168.6.111/24 gateway4: 192.168.6.1 nameservers: addresses: [119.29.29.29] version: 2 生效 netplan apply……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/ubuntu2004-network/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -339,7 +332,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/24/">24</a>
+            <a href="https://zhangeamon.top/page/25/">25</a>
         </li>
         
     
@@ -398,6 +391,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
     </li>
     
@@ -431,10 +428,6 @@
     
     <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
     </li>
     
 </ul>

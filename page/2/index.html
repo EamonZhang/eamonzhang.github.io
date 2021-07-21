@@ -91,6 +91,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用setup 对python进行打包 将python打包后可在其他项目中直接引用 pip install *** 具体步骤 1 将代码复制到一个新的文件夹下 2 创建README.rst 3 创建 LICENSE 4 编写 setup.py setup.cfg setup.cfg [metadata] name = django-polls version = 0.1 description = A Django app to conduct Web-based polls. long_description = file: README.rst url = https://www.example.com/ author = Your Name author_email = yourname@example.com license = BSD-3-Clause # Example license classifiers = Environment :: Web Environment Framework :: Django Framework :: Django :: X.Y # Replace &quot;X.Y&quot; as appropriate Intended……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/setup-packet/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/python/django-models-querys/" title="Django Models Querys">Django Models Querys</a>
             </h1>
         </header>
@@ -296,29 +319,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <p class="readmore"><a href="https://zhangeamon.top/middleware/confd/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月31日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            主要作用 负责将shared buffer 中的内容刷写到磁盘中，9.1版之后部分内容交给checkpoint完成。 参数配置 # - Background Writer - #bgwriter_delay = 200ms # 10-10000ms between rounds #bgwriter_lru_maxpages = 100 # 0-1000 max buffers written/round #bgwriter_lru_multiplier = 2.0 # 0-10.0 multiplier on buffers scanned/round #bgwriter_flush_after = 512kB # measured in pages, 0 disables bgwriter_delay 两次写入任务之间的睡眠间隔时间 bgwriter_lru_maxpages 每次bgwriter任务写buffer的最大page数，一旦达……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/bgwriter/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -375,7 +375,7 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         
         
         <li >
-            <a href="https://zhangeamon.top/page/24/">24</a>
+            <a href="https://zhangeamon.top/page/25/">25</a>
         </li>
         
     
@@ -434,6 +434,10 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
     </li>
     
@@ -467,10 +471,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     
     <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
     </li>
     
 </ul>

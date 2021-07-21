@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/stat/" title="Postgresql指标查看&amp;stat统计信息">Postgresql指标查看&amp;stat统计信息</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月6日
+        </date>
+        
+        <div class="post-content">
+            当前连接数 SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid(); count ------- 3 (1 row) 数据库占用空间 select pg_size_pretty(pg_database_size('postgres')); pg_size_pretty ---------------- 14 MB (1 row) or \l+ 数据库表(不包括索引)或单条索引占用空间 select pg_size_pretty(pg_relation_size('t_name')); pg_size_pretty ---------------- 24 kB (1 行记录) or \d+ 表中所有索引占有的空间 select pg_size_pretty(pg_indexes_size('t_name')); pg_size_pretty ---------------- 280 kB (1 行记录) 表和索引占用总空间 select pg_size_pretty(pg_total_relation_size('t_name')); pg_size_pretty ---------------- 380 kB (1 行记录) 查看一条数据在数据库占用的空间 select pg_column_size('Let us go !!!'); pg_column_size ---------------- 14 (1 行记录) 查出所……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/stat/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/middleware/keepalived01/" title="Keepalived 问题集">Keepalived 问题集</a>
             </h1>
         </header>
@@ -267,29 +283,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-role/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/ansible/ansible-playbooks/" title="Ansible Playbooks">Ansible Playbooks</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月25日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/ansible'>ansible</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Playbook核心元素 hosts 一个或多个组或主机的 patterns,以逗号为分隔符 。 - hosts: webservices remote_user: root Tasks 任务集 tasks: - name: install httpd yum: name=httpd - name: start httpd service: name=httpd state=started Handlers 和 notity 由特定条件触发的操作，满足条件方才执行，否则不执行。 Handlers也是task列表，这些task与前述的task并没有本质上的不同,用于当关注的资……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-playbooks/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -358,6 +351,19 @@
         </li>
         
     
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/25/">25</a>
+        </li>
+        
+    
 
     
     
@@ -413,6 +419,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
     </li>
     
@@ -446,10 +456,6 @@
     
     <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
     </li>
     
 </ul>

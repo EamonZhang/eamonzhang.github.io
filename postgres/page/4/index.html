@@ -93,6 +93,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/install02/" title="数据库安装 Postgres12 Ubuntu18">数据库安装 Postgres12 Ubuntu18</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月19日
+        </date>
+        
+        <div class="post-content">
+            软件源 echo &quot;deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main&quot; &gt;&gt; /etc/apt/sources.list.d/pgdg.list wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - sudo apt-get update -y 安装 apt-get install postgresql-12 postgresql-client-12 postgresql-12-postgis-2.5 postgresql-contrib -y 初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb 启动 systemctl start postgresql systemctl stop postgresql systemctl status postgresql systemctl enable postgresql 配置 cd /etc/postgresql/12/main/ vi postgres.conf vi pg_hba.conf……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/install02/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pgage/" title="数据库年龄">数据库年龄</a>
             </h1>
         </header>
@@ -259,24 +277,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/logical-replication/" title="Logical Replication 逻辑复制">Logical Replication 逻辑复制</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月30日
-        </date>
-        
-        <div class="post-content">
-            逻辑复制 Postgres 10 版本开始， 在内核层面支持基于REDO流的逻辑复制。 控制粒度为表级别 物理复制相同都是基于wal 可指定多个上游数据源 下游数据可读可写 可用于数据汇总，无停服数据迁移,大版本升级等。 基本概念 发布者（publication）， 上游数据 订阅者 (subscrition)， 下游数据 复……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/logical-replication/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -372,6 +372,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
     </li>
     
@@ -405,10 +409,6 @@
     
     <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
     </li>
     
 </ul>

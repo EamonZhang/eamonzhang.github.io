@@ -6,7 +6,16 @@
     <description>Recent content on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 15 Jul 2021 15:04:14 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Jul 2021 15:43:34 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>物化视图</title>
+      <link>https://zhangeamon.top/postgres/materialized/</link>
+      <pubDate>Wed, 21 Jul 2021 15:43:34 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/materialized/</guid>
+      <description>物化视图 物化视图与普通视图的区别在于，物化视图是物理上真实存在的表。 物化视图的创建 \h create materialized view Command: CREATE MATERIALIZED VIEW Description: define a new materialized view Syntax: CREATE MATERIALIZED VIEW [ IF NOT EXISTS ] table_name [ (column_name [, ...] ) ] [ USING method ] [ WITH ( storage_parameter [= value] [, ... ] ) ] [ TABLESPACE tablespace_name ] AS query [ WITH [ NO ] DATA ] 与creat table as 基本相同，但是物化视图不同于table 的是物化时候中的数据内容可以</description>
+    </item>
+    
     <item>
       <title>Requests</title>
       <link>https://zhangeamon.top/python/requests/</link>
@@ -329,7 +338,7 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;amp;mid=2247483770&amp;amp
       <pubDate>Mon, 08 Feb 2021 10:10:01 +0800</pubDate>
       
       <guid>https://zhangeamon.top/postgresql/</guid>
-      <description>关于优化思考 数据库优化思考 - 性能优化 数据库优化思考 - 结构设计 数据库优化思考 - 模块调优 基础知识 模板数据库 数据库日志 Explain 执行计划 vacuum 垃圾回收器 表空间膨胀 fillfactor 填充因子 TOAST 技术 hot update tablespace 表空间 锁机制 锁等待 cluster 聚族表 咨询锁 adlock 数据库年龄 方法和函数 高级SQL 数据库 OOM 预防 跨库操作 auto vacuum 触发机制 unlogged table 安装维护 安装 Postgres</description>
+      <description>关于优化思考 数据库优化思考 - 性能优化 数据库优化思考 - 结构设计 数据库优化思考 - 模块调优 基础知识 模板数据库 数据库日志 Explain 执行计划 vacuum 垃圾回收器 表空间膨胀 fillfactor 填充因子 TOAST 技术 hot update tablespace 表空间 锁机制 锁等待 cluster 聚族表 咨询锁 adlock 数据库年龄 方法和函数 高级SQL 数据库 OOM 预防 跨库操作 auto vacuum 触发机制 unlogged table 物化视图 安装维</description>
     </item>
     
     <item>

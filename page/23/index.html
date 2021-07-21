@@ -91,6 +91,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/ansible/ansible-playbooks/" title="Ansible Playbooks">Ansible Playbooks</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月25日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/ansible'>ansible</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Playbook核心元素 hosts 一个或多个组或主机的 patterns,以逗号为分隔符 。 - hosts: webservices remote_user: root Tasks 任务集 tasks: - name: install httpd yum: name=httpd - name: start httpd service: name=httpd state=started Handlers 和 notity 由特定条件触发的操作，满足条件方才执行，否则不执行。 Handlers也是task列表，这些task与前述的task并没有本质上的不同,用于当关注的资……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-playbooks/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/ansible/ansible-modules/" title="Ansible Modules">Ansible Modules</a>
             </h1>
         </header>
@@ -246,22 +269,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/wheel/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cmd-gpasswd/" title="gpasswd 命令">gpasswd 命令</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月18日
-        </date>
-        
-        <div class="post-content">
-            gpasswd 命令详解 gpasswd命令是Linux下工作组文件/etc/group和/etc/gshadow的管理工具，用于指定要管理的工作组。 选项详解： -a : 添加用户到组 -d : 从组删除用户 -A：指定管理员 -M：指定组成员和-A的用途差不多； -r：删除密码； -R：限制用户登入组，只有组中的成员……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-gpasswd/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -323,6 +330,13 @@
         </li>
         
     
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/25/">25</a>
+        </li>
+        
+    
 
     
     
@@ -378,6 +392,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
     </li>
     
@@ -411,10 +429,6 @@
     
     <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
     </li>
     
 </ul>

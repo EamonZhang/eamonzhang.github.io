@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/postgres12/" title="postgres 12">postgres 12</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年11月19日
+        </date>
+        
+        <div class="post-content">
+            安装&amp;启动 #下载源 yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm #安装服务 yum install postgresql12 postgresql12-server postgresql12-contrib #初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb #启动服务 systemctl enable postgresql-12 systemctl start postgresql-12 流复制 #从机 建立从库 pg_basebackup -h 10.1.30.13 -U postgres -F p -P -R -D /var/lib/pgsql/12/data/ --checkpoint=fast -l postgresback #从库升级为主库 sudo su postgres -c &quot;/usr/pgsql-12/bin/pg_ctl promote -D /var/lib/pgsql/12/data/&quot; recovery.conf 配置文件不再支持，此文件中的参数合并到 postgresql.conf(postgresql.auto.conf) Recovery Target, 若 recovery.conf 存在，数据库无法启动 新增 recovery.signal 标识文件，表示数据库处于 recovery 模式 新增加 standby.signal……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/postgres12/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/network-security/dns/" title="DNS">DNS</a>
             </h1>
         </header>
@@ -232,22 +248,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/view_pg_stat_activity/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/jumpserver/" title="Jumpserver 跳板机">Jumpserver 跳板机</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年6月17日
-        </date>
-        
-        <div class="post-content">
-            http://docs.jumpserver.org/zh/docs/index.html……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/jumpserver/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -325,7 +325,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/24/">24</a>
+            <a href="https://zhangeamon.top/page/25/">25</a>
         </li>
         
     
@@ -384,6 +384,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
     </li>
     
@@ -417,10 +421,6 @@
     
     <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
     </li>
     
 </ul>

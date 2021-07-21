@@ -161,6 +161,7 @@
     <li><a href="#分区方式">分区方式</a></li>
     <li><a href="#优点">优点</a></li>
     <li><a href="#注意事项">注意事项</a></li>
+    <li><a href="#使用限制">使用限制</a></li>
     <li><a href="#普通表转换为分区表">普通表转换为分区表</a></li>
     <li><a href="#分区表示例">分区表示例</a></li>
   </ul>
@@ -236,36 +237,21 @@
 </ul>
 <h2 id="注意事项">注意事项</h2>
 <ul>
-<li>
-<p>分区键选取，如表单的创建时间。</p>
-</li>
-<li>
-<p>分区大小的划分。一个表多大时开始考虑分区。一个分区多大比较合适。（综合具体业务）</p>
-</li>
-<li>
-<p>分区表数量控制。过多的分区表可能是一种灾难。可以考虑合并分区，归档数据。</p>
-</li>
-<li>
-<p>默认分区</p>
-</li>
-<li>
-<p>表结构更改对现有表结构的影响。更新父表结构对已有子表结构的影响。</p>
-</li>
-<li>
-<p>索引操作，对子表无效</p>
-</li>
-<li>
-<p>分区键更新</p>
-</li>
-<li>
-<p>主键，唯一键约束。 全局还是子表有效。(唯一键+分区键),主表的主键,唯一键必须包含分区键。</p>
-</li>
-<li>
-<p>新分区创建方式。比如按照月分区，下个月的子表是手动还是自动创建。自动创建对新插入数据的分区键时间需要严格验证。</p>
-</li>
-<li>
-<p>enable_partition_pruning 需要开启</p>
-</li>
+<li>分区键选取，如表单的创建时间。</li>
+<li>分区大小的划分。一个表多大时开始考虑分区。一个分区多大比较合适。（综合具体业务）</li>
+<li>分区表数量控制。过多的分区表可能是一种灾难。可以考虑合并分区，归档数据。</li>
+<li>默认分区</li>
+<li>表结构更改对现有表结构的影响。更新父表结构对已有子表结构的影响。</li>
+<li>索引操作，对子表无效</li>
+<li>分区键更新</li>
+<li>主键，唯一键约束。 全局还是子表有效。(唯一键+分区键),主表的主键,唯一键必须包含分区键。</li>
+<li>新分区创建方式。比如按照月分区，下个月的子表是手动还是自动创建。自动创建对新插入数据的分区键时间需要严格验证。</li>
+<li>enable_partition_pruning 需要开启</li>
+</ul>
+<h2 id="使用限制">使用限制</h2>
+<ul>
+<li>没有办法创建跨越所有分区的排除约束，只可能单个约束每个叶子分区。</li>
+<li>分区表上的惟一约束（也就是主键）必须包括所有分区键列。存在此限制是因为PostgreSQL只能每个分区中分别强制实施唯一性。</li>
 </ul>
 <h2 id="普通表转换为分区表">普通表转换为分区表</h2>
 <ul>
@@ -414,6 +400,10 @@ create table tbl_hash_2 partition of tbl_hash for values WITH (MODULUS 3, REMAIN
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
     </li>
     
@@ -447,10 +437,6 @@ create table tbl_hash_2 partition of tbl_hash for values WITH (MODULUS 3, REMAIN
     
     <li>
         <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
     </li>
     
 </ul>
