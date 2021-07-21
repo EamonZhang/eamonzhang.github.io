@@ -34,6 +34,7 @@ toc: true
 - [跨库操作](/postgres/pg_fdw)
 - [auto vacuum 触发机制](/postgres/auto_vacuum_trigger)
 - [unlogged table](/postgres/unlogged_table)
+- [物化视图](/postgres/materialized)
 
 ## 安装维护
 
