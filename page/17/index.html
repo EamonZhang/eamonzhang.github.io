@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/zabbix-fqa/" title="Zabbix FQA">Zabbix FQA</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月24日
+        </date>
+        
+        <div class="post-content">
+            如何使用篇 如何安装 安装文档 架构模型为服务端、被监控端。 被监控端agent安装在需要被监控的主机上，负责收集被监控主机相关状态的信息指标如内存，cup，网络等。 服务端负责汇总所有agent的信息，如存储，处理，展现。数据存放在指定的数据库中如mysql pg。 需安装软件说明 zabbix-server-pgsql 服务端 zabbix-web-pgsql……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/zabbix-fqa/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/kworker/" title="Kworker ">Kworker </a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月24日
+        </date>
+        
+        <div class="post-content">
+            名字的意思 Kernel Worker 什么时候有的 kworker是3.x内核引入的 这么看 系统中查看 Linux下使用 ps -ef|grep kowrker 显示的内容怎么看 显示的格式kworker/%u:%d%s u：是unbound的缩写，代表没有绑定特定的CPU，kworker /u2:0中的 2 是 work_pool 的ID。 不带u的就是绑定特定cpu的wo……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/kworker/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/index-invalid/" title="引起索引失效">引起索引失效</a>
             </h1>
         </header>
@@ -214,38 +246,6 @@
             三范式 第一范式：数据表中的每一列（每个字段）必须是不可拆分的最小单元，也就是确保每一列的原子性； 第二范式（2NF）：满足1NF后，要求表中的所有列，都必须依赖于主键，而不能有任何一列与主键没有关系，也就是说一个表只描述一件事情； 第三范式：必须先满足第二范式（2NF），要求：表中的……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/normal-form/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/insert01/" title="快速生成大量数据">快速生成大量数据</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月14日
-        </date>
-        
-        <div class="post-content">
-            在数据库中快速生成1w条数据，或测试数据库的写入性能。 创建数据库表 postgres=# create table tbl(id int, info text, crt_time timestamp); CREATE TABLE 方法一 generate_series 查看方法函数 postgres=# \df generate_series 函数列表 架构模式 | 名称 | 结果数据类型 | 参数数据类型 | 类型 ------------+-----------------+-----------------------------------+--------------------------------------------------------------------+------ pg_catalog | generate_series | SETOF bigint | bigint, bigint | 常规 pg_catalog | generate_series | SETOF bigint | bigint, bigint, bigint | 常规 pg_catalog | generate_series | SETOF integer | integer, integer | 常规 pg_catalog | generate_series | SETOF integer | integer, integer, integer | 常规 pg_catalog | generate_series |……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/insert01/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pipelinedb02/" title="Pipelinedb 简介">Pipelinedb 简介</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月12日
-        </date>
-        
-        <div class="post-content">
-            项目已经停止维护 适配支持版本 PostgreSQL 10: 10.1, 10.2, 10.3, 10.4, 10.5 PostgreSQL 11: 11.0 基本概念 流(Stream) 流是基础，Continuous Views和transform则是基于流中的数据进行处理的手段。 对于同一份数据，只需要定义一个流，写入一份即可。 如果对同一份数据有多个维度的统计，可以写在一条SQL完成的（如同……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pipelinedb02/">阅读全文</a></p>
     </article>
     
     
@@ -384,6 +384,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -413,14 +421,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>

@@ -93,6 +93,42 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年7月22日
+        </date>
+        
+        <div class="post-content">
+            多主机连接 PostgreSQL libpq 是数据库的一个连接驱动，支持多主机配置，同时支持target_session_attrs 主机角色判断配置。 当配置了多个主机时，会按顺序尝试连接，之道获取到成功的连接为止。 利用libpq的这个特性，结合数据库自动HA的一些软件，可以实现在不引入VIP以及中间路由节点的……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/libpg/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年7月21日
+        </date>
+        
+        <div class="post-content">
+            使用预编译优势介绍 在执行一个SQL时，首先生成执行计划（进行语义分析、词法解析、逻辑优化、物理优化）、执行、结果传输等操作。 如果一个SQL在应用中反复使用，我们可以将此SQL参数化，只做一次prepare，后面执行时就不需要进行前面执行计划的生成操作，直接使用prepare好的执……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/prepare/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
             </h1>
         </header>
@@ -276,49 +312,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月26日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_performance/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/hotupdate/" title="hot update">hot update</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月14日
-        </date>
-        
-        <div class="post-content">
-            What is HOT HOT是“Heap Only Tuple”（仅元组堆）的缩写, 用来提高update效率。 行的新版本和旧版本位于同一块中时，该行的外部地址（原始行指针）保持不变，利用hot link指针进行转发地址。索引不需要任何改动。 前提条件 包含更新行的块中必须有足够的空间 在已修改值的任何列上均未定义……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/hotupdate/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -356,6 +349,10 @@
     
     <li >
         <a href="https://zhangeamon.top/postgres/page/8/">8</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/postgres/page/9/">9</a>
     </li>
     
 
@@ -410,6 +407,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -439,14 +444,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>

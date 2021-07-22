@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/insert01/" title="快速生成大量数据">快速生成大量数据</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月14日
+        </date>
+        
+        <div class="post-content">
+            在数据库中快速生成1w条数据，或测试数据库的写入性能。 创建数据库表 postgres=# create table tbl(id int, info text, crt_time timestamp); CREATE TABLE 方法一 generate_series 查看方法函数 postgres=# \df generate_series 函数列表 架构模式 | 名称 | 结果数据类型 | 参数数据类型 | 类型 ------------+-----------------+-----------------------------------+--------------------------------------------------------------------+------ pg_catalog | generate_series | SETOF bigint | bigint, bigint | 常规 pg_catalog | generate_series | SETOF bigint | bigint, bigint, bigint | 常规 pg_catalog | generate_series | SETOF integer | integer, integer | 常规 pg_catalog | generate_series | SETOF integer | integer, integer, integer | 常规 pg_catalog | generate_series |……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/insert01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pipelinedb02/" title="Pipelinedb 简介">Pipelinedb 简介</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月12日
+        </date>
+        
+        <div class="post-content">
+            项目已经停止维护 适配支持版本 PostgreSQL 10: 10.1, 10.2, 10.3, 10.4, 10.5 PostgreSQL 11: 11.0 基本概念 流(Stream) 流是基础，Continuous Views和transform则是基于流中的数据进行处理的手段。 对于同一份数据，只需要定义一个流，写入一份即可。 如果对同一份数据有多个维度的统计，可以写在一条SQL完成的（如同……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pipelinedb02/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pipelinedb01/" title="Pipelinedb文档概览">Pipelinedb文档概览</a>
             </h1>
         </header>
@@ -221,38 +253,6 @@
             原文 注意主从架构时，主从软连接位置需要对应一致。 思考： 冷热数据分离 冷数据对热数据的影响，垃圾回收机制。……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/tablespace/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/toast/" title="TOAST 技术">TOAST 技术</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月6日
-        </date>
-        
-        <div class="post-content">
-            原文……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/toast/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/fillfactor/" title="fillfactor 填充因子">fillfactor 填充因子</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月6日
-        </date>
-        
-        <div class="post-content">
-            介绍 PostgreSQL每个表和索引的数据都是由很多个固定尺寸的页面存储（通常是 8kB，不过在编译服务器时[–with-blocksize]可以选择其他不同的尺寸） 一个表的填充因子(fillfactor)是一个介于 10 和 100 之间的百分数。100(完全填充)是默认值。如果指定了较小的填……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/fillfactor/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +391,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -420,14 +428,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>

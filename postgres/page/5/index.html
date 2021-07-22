@@ -93,6 +93,42 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/adlock/" title="咨询锁 adlock">咨询锁 adlock</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年3月7日
+        </date>
+        
+        <div class="post-content">
+            https://github.com/digoal/blog/blob/master/201805/20180524_02.md 行级锁 select .. for update select .. for update skip locked select .. for share……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/adlock/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgpool2/" title="pgpoolii 读写分离">pgpoolii 读写分离</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-content">
+            https://www.pgpool.net/docs/pgpool-II-3.5.4/doc/tutorial-zh_cn.html#dist-def https://www.xiaomastack.com/2019/08/16/postgresql集群/……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgpool2/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/logical-replication/" title="Logical Replication 逻辑复制">Logical Replication 逻辑复制</a>
             </h1>
         </header>
@@ -248,42 +284,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_lock/" title="锁机制">锁机制</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月24日
-        </date>
-        
-        <div class="post-content">
-            https://blog.csdn.net/pg_hgdb/article/details/79403651 https://habr.com/en/company/postgrespro/blog/500714/ 表锁 https://www.modb.pro/db/26462 查看被堵塞的任务 select * from pg_locks where not granted; locktype | database | relation | page | tuple | virtualxid | transactionid | classid | objid | objsubid | virtualtransaction | pid | mode | granted | fastpath ----------+----------+----------+------+-------+------------+---------------+---------+-------+----------+--------------------+-----+------+---------+---------- (0 行记录) 查看等待锁信息，是被谁堵塞了 select pg_blocking_pids(pid); pg_blocking_pids ------------------ {} 终止进程 select pg_cancel_backend(pid); # select select pg_terminate_backend(pid); # update insert delete 事务的隔离级别 Postgres 数据库共有三种数据隔离级别。 Read Commit 读看提交 默认级别 在读开始的时候建立数据快照 Repeat Read 可重复读。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_lock/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pitr/" title="时间点恢复">时间点恢复</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月24日
-        </date>
-        
-        <div class="post-content">
-            PITR Point-in-time recovery https://blog.csdn.net/a964921988/article/details/84957241 https://github.com/digoal/blog/blob/master/201608/20160823_03.md https://github.com/digoal/blog/blob/master/201608/20160823_04.md 依赖条件 历史完整备份 不间断wal日志 以上都可有wal-g 备份系统提供支持 恢复到指定点 指定标签 具体时间点 具体事务 指定标签 recovery.conf recovery_target_action= 'pause' # promote ,shutdown --- 打lable select pg_create_restore_point('my_daily_process_ended'); --- 恢复到指定的lable recovery.conf recovery_target_name = 'my_daily_process_ended' 具体时间 restore_command = 'cp /data/arch/%f %p' # e.g. 'cp /mnt/server/archivedir/%f %p' recovery_target_time = '2020-12-23 09:37:17.010268' recovery_target_inclusive = false recovery_target_timeline = 'latest' 具体事务 restore_command = 'cp /data/arch/%f %p' # e.g. 'cp /mnt/server/archivedir/%f %p' recovery_target_xid = '26897309' recovery_target_inclusive = false……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pitr/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -325,6 +325,10 @@
     
     <li >
         <a href="https://zhangeamon.top/postgres/page/8/">8</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/postgres/page/9/">9</a>
     </li>
     
 
@@ -379,6 +383,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -408,14 +420,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>

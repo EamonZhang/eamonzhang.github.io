@@ -6,7 +6,25 @@
     <description>Recent content on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 21 Jul 2021 15:43:34 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Jul 2021 11:04:27 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>客户端故障转移</title>
+      <link>https://zhangeamon.top/postgres/libpg/</link>
+      <pubDate>Thu, 22 Jul 2021 11:04:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/libpg/</guid>
+      <description>多主机连接 PostgreSQL libpq 是数据库的一个连接驱动，支持多主机配置，同时支持target_session_attrs 主机角色判断配置。 当配置了多个主机时，会按顺序尝试连接，之道获取到成功的连接为止。 利用libpq的这个特性，结合数据库自动HA的一些软件，可以实现在不引入VIP以及中间路由节点的</description>
+    </item>
+    
+    <item>
+      <title>prepare</title>
+      <link>https://zhangeamon.top/postgres/prepare/</link>
+      <pubDate>Wed, 21 Jul 2021 16:37:53 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/prepare/</guid>
+      <description>使用预编译优势介绍 在执行一个SQL时，首先生成执行计划（进行语义分析、词法解析、逻辑优化、物理优化）、执行、结果传输等操作。 如果一个SQL在应用中反复使用，我们可以将此SQL参数化，只做一次prepare，后面执行时就不需要进行前面执行计划的生成操作，直接使用prepare好的执</description>
+    </item>
+    
     <item>
       <title>物化视图</title>
       <link>https://zhangeamon.top/postgres/materialized/</link>

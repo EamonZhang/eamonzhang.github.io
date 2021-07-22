@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/monitor_explain/" title="数据库监控指标">数据库监控指标</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月20日
+        </date>
+        
+        <div class="post-content">
+            实体机 硬盘空间 cup利用率 内存利用率 IO 网络带宽 tcp连接情况 温度 数据库年龄 -- 数据库database 年龄 select datname,age(datfrozenxid),pg_size_pretty(pg_database_size(oid)) from pg_database order by age(datfrozenxid) desc limit 10 ; -- 表年龄 select relname,age(relfrozenxid), pg_size_pretty(pg_table_size(oid)) from pg_class where relkind in ('t','r') order by age(relfrozenxid) desc limit 10; 说明： 当age到达2亿（默认）时触发自动回卷，期间会大量占用系统资源。提前做好监控避免在业务高峰时发生。可在库级别操作……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/monitor_explain/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/compile_kylin/" title="kylin系统postgresql编译安装">kylin系统postgresql编译安装</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月16日
+        </date>
+        
+        <div class="post-content">
+            背景 麒麟系统默认自带postgresql10.5 安装过程与centos基本相同 , 注意事项 1 安装postgresql-dev 2 编译 postgis 时./configure &ndash;with-pgconfig=/usr/bin/pg_config 但是如果想安装其他版本的postgres 需一番周折 首先第一个问题麒麟系统对openssl过进行改造。在编译postgres支……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/compile_kylin/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/ubuntu2004-network/" title="Ubuntu 20.04 网络配置">Ubuntu 20.04 网络配置</a>
             </h1>
         </header>
@@ -230,38 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/middleware/consul/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/coredns/" title="coredns">coredns</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年6月22日
-        </date>
-        
-        <div class="post-content">
-            背景 致力于打造云原生中的dns服务和服务发现。 各种功能都是通过插件方式实现 简单例子 服务 cat /usr/lib/systemd/system/coredns.service [Unit] Description=CoreDNS DNS server Documentation=https://coredns.io After=network.target [Service] PermissionsStartOnly=true LimitNOFILE=1048576 LimitNPROC=512 CapabilityBoundingSet=CAP_NET_BIND_SERVICE AmbientCapabilities=CAP_NET_BIND_SERVICE NoNewPrivileges=true User=coredns WorkingDirectory=~ ExecStart=/usr/local/bin/coredns -conf=/etc/coredns/Corefile ExecReload=/bin/kill -SIGUSR1 $MAINPID Restart=on-failure [Install] WantedBy=multi-user.target 配置文件 cat /etc/coredns/Corefile .:53 { # 绑定interface ip bind 127.0.0.1 # 先走本机的hosts # https://coredns.io/plugins/hosts/ hosts { # 自定义sms.service search.service 的解析 # 因为解析的域名少我们这里直接……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/coredns/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/redis/install/" title="Redis 6.0安装配置管理">Redis 6.0安装配置管理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年6月12日
-        </date>
-        
-        <div class="post-content">
-            安装 yum 方式 yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm yum --enablerepo=remi install redis make 方式 升级gcc 版本临时生效,否则编译错误 yum -y install centos-release-scl yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils scl enable devtoolset-9 bash wget http://download.redis.io/releases/redis-6.0.1.tar.gz tar -xvf redis-6.0.1.tar.gz cd /usr/local/redis-6.0.1/ make PREFIX=/usr/local/redis install 启动 systemctl start redis systemctl enalbe redis 配置 系统参数 vi /etc/sysctl.conf net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1 kernel.shmmax = 68719476736 kernel.shmall = 4294967296 net.core.netdev_max_backlog = 262144 net.core.somaxconn = 40960 net.ipv4.tcp_max_orphans = 3276800 net.ipv4.tcp_max_syn_backlog = 262144 服务参数 vi /etc/redis.conf daemonize yes pidfile /var/run/redis.pid bind 0.0.0.0 timeout 300 #当客户端闲置多长时间后关闭连接，如果指定为0，表示永不……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/redis/install/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -398,6 +398,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -427,14 +435,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>

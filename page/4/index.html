@@ -91,6 +91,45 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月17日
+        </date>
+        
+        <div class="post-content">
+            流复制过程 synchronous_commit = on ） # synchronization level; on default # off, local, remote_write, or on 同步级别 remote_apply：事务commit或rollback时，等待其redo在primary、以及同步standby(s)已持久化，并且其redo在同步 standby(s)已apply。 on：事务commit或rollback时，……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/replication02/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            应用场景 作为一名匠人，当熟悉手里各样工具的特点。用起来才能得心应手。什么时候使用锯子，什么时候当用斧子。 同理熟知产品的技术特性，方可灵活运用。 在面对不同的业务需求时才能提供具有针对性的解决方案。 不求十八般兵器样样精通，但求不置斧锯于一旁只顾轮打锤。 Redis 都能干点啥 缓存 消息队列 循环列表……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/redis-scence/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
             </h1>
         </header>
@@ -253,45 +292,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/middleware/etcd_auth/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/hotupdate/" title="hot update">hot update</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月14日
-        </date>
-        
-        <div class="post-content">
-            What is HOT HOT是“Heap Only Tuple”（仅元组堆）的缩写, 用来提高update效率。 行的新版本和旧版本位于同一块中时，该行的外部地址（原始行指针）保持不变，利用hot link指针进行转发地址。索引不需要任何改动。 前提条件 包含更新行的块中必须有足够的空间 在已修改值的任何列上均未定义……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/hotupdate/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/thinking_in_db_tune/" title="数据库优化思考 - 模块调优">数据库优化思考 - 模块调优</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            开始乱说 主要是结合postgres数据库自身特点，根据具体的业务场景，作出相应调整，使其更加合理。 数据库作为一个整体对外提供服务，单是其内部是由不同的功能模块组成，相互协调来共同完成任务。 各个功能模块完成不同的功能，每个模块的特点也不同，在调整的时候至少需要理解各个模块实现的基本……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_tune/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -428,6 +428,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -457,14 +465,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>

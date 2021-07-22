@@ -91,6 +91,45 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/hotupdate/" title="hot update">hot update</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月14日
+        </date>
+        
+        <div class="post-content">
+            What is HOT HOT是“Heap Only Tuple”（仅元组堆）的缩写, 用来提高update效率。 行的新版本和旧版本位于同一块中时，该行的外部地址（原始行指针）保持不变，利用hot link指针进行转发地址。索引不需要任何改动。 前提条件 包含更新行的块中必须有足够的空间 在已修改值的任何列上均未定义……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/hotupdate/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/thinking_in_db_tune/" title="数据库优化思考 - 模块调优">数据库优化思考 - 模块调优</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            开始乱说 主要是结合postgres数据库自身特点，根据具体的业务场景，作出相应调整，使其更加合理。 数据库作为一个整体对外提供服务，单是其内部是由不同的功能模块组成，相互协调来共同完成任务。 各个功能模块完成不同的功能，每个模块的特点也不同，在调整的时候至少需要理解各个模块实现的基本……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_tune/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/unlogged_table/" title="unlogged table">unlogged table</a>
             </h1>
         </header>
@@ -221,38 +260,6 @@
             背景 意外删除postgres supper user 权限 找回方法 关闭数据库 用单用户模式重新启动 /usr/lib/postgresql/xxxx/bin/postgres --single -D $PGDATA 重新设置supper user 权限 alter user postgres with superuser;……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/reback_supper_user/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/monitor_explain/" title="数据库监控指标">数据库监控指标</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月20日
-        </date>
-        
-        <div class="post-content">
-            实体机 硬盘空间 cup利用率 内存利用率 IO 网络带宽 tcp连接情况 温度 数据库年龄 -- 数据库database 年龄 select datname,age(datfrozenxid),pg_size_pretty(pg_database_size(oid)) from pg_database order by age(datfrozenxid) desc limit 10 ; -- 表年龄 select relname,age(relfrozenxid), pg_size_pretty(pg_table_size(oid)) from pg_class where relkind in ('t','r') order by age(relfrozenxid) desc limit 10; 说明： 当age到达2亿（默认）时触发自动回卷，期间会大量占用系统资源。提前做好监控避免在业务高峰时发生。可在库级别操作……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/monitor_explain/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/compile_kylin/" title="kylin系统postgresql编译安装">kylin系统postgresql编译安装</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月16日
-        </date>
-        
-        <div class="post-content">
-            背景 麒麟系统默认自带postgresql10.5 安装过程与centos基本相同 , 注意事项 1 安装postgresql-dev 2 编译 postgis 时./configure &ndash;with-pgconfig=/usr/bin/pg_config 但是如果想安装其他版本的postgres 需一番周折 首先第一个问题麒麟系统对openssl过进行改造。在编译postgres支……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/compile_kylin/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +398,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -420,14 +435,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>

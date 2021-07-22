@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/daily_management/" title="数据库日常管理">数据库日常管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月7日
+        </date>
+        
+        <div class="post-content">
+            日常管理 可用性 监测项 可用性 主从 HA 全量备份 增量备份 恢复 监测项 磁盘空间 全库 select pg_size_pretty(sum(pg_database_size(oid))) from pg_database; 数据库 select datname, pg_size_pretty(pg_database_size(oid)) from pg_database order by pg_database_size(oid) desc limit 10; 表总 SELECT table_schema || '.' || table_name AS table_full_name, pg_size_pretty(pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;')) AS size FROM information_schema.tables where table_schema = 'public' ORDER BY pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;') DESC limit 10; 表 索引 冷热数据 上次统计信息更新时间 热表dml qps io 热表qdml 冷数据 冷索引 索引利用 全表扫描次数……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/daily_management/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/lock_wait/" title="锁等待">锁等待</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月27日
+        </date>
+        
+        <div class="post-content">
+            锁等待场景 一个事务尚未执行提交时持有锁，当另一个事务需要持有改行的锁时则需要等待。 Session 1 postgres=# \d+ wt Table &quot;public.wt&quot; Column | Type | Collation | Nullable | Default | Storage | Stats target | Description --------+---------+-----------+----------+---------+----------+--------------+------------- id | integer | | | | plain | | t | text | | | | extended | | postgres=# begin; BEGIN postgres=# update wt set t = 'aaaa' where id = 1; UPDATE 1 postgres=# select pg_backend_pid(); pg_backend_pid ---------------- 20034 (1 row) Session 2 postgres=# begin ; BEGIN postgres=# update wt set t = 'bbbb' where id = 1; Session 3 select * from pg_stat_activity; -[ RECORD 3 ]----+---------------------------------------- datid | 436980 datname……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/lock_wait/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/dw/algorithm/" title="数据挖掘算法">数据挖掘算法</a>
             </h1>
         </header>
@@ -221,45 +253,6 @@
             Linux time命令的用途，在于量测特定指令执行时所需消耗的时间及系统资源等资讯。 例如 CPU 时间、记忆体、输入输出等等。需要特别注意的是，部分资讯在 Linux 上显示不出来。这是因为在 Linux 上部分资源的分配函式与 time 指令所预设的方式并不相同，以致于 time 指令无法取得这些资料。 语法 time [options] COMMAND [arguments] 参数： -o 或 &ndash……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/linux/time-cmd/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/dw/greenplum-install/" title="Greenplum6 安装">Greenplum6 安装</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年12月6日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E4%BB%93'>数仓</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            环境准备 /ect/hosts groupadd gpadmin useradd gpadmin -r -m -g gpadmin passwd gpadmin su gpadmin ssh-keygen -t rsa -b 4096 visudo %wheel ALL=(ALL) NOPASSWD: ALL usermod -aG wheel gpadmin 软件安装 wget https://github.com/greenplum-db/gpdb/releases/download/6.1.0/greenplum-db-6.1.0-rhel7-x86_64.rpm sudo yum install ./greenplum-db-&lt;version&gt;-&lt;platform&gt;.rpm sudo chown -R gpadmin:gpadmin /usr/local/greenplum* source /usr/local/greenplum-db-&lt;version&gt;/greenplum_path.sh vi /home/gpadmin/.bashrc ssh 免密打通 1-n ssh-copy-id mdw n-n vi /home/gpadmin/hostfile_exkeys mdw smdw sdw1 sdw2 sdw3 sdw4 sdw5 sdw6 gpssh-exkeys -f hostfile_exkeys 创建存储目录 master mkdir -p /data/master segment mkdir -p /data/primary1 mkdir -p /data/primary2 mkdir -p /data/mirror1 mkdir -p /data/mirror2 chown -R gpadmin /data/* 性能测试 网络 gpcheckperf -f hostfile_gpchecknet_ic1 -r N -d /tmp &gt; subnet1.out IO 250G gpcheckperf -f hostfile_gpcheckperf -r ds -D -d /data/primary1 -d /data/primary2 -d /data/mirror1 -d /data/mirror2 gpcheckperf -f gpconfigs/hostfile_gpcheckperf -r ds -D -d /data/primary1 -d /data/primary2……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/dw/greenplum-install/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/vm-config/" title="内核设置">内核设置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年11月26日
-        </date>
-        
-        <div class="post-content">
-            参数vm.dirty_ratio和vm.dirty_background_ratio https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/ 文件缓存是一项重要的性能改进，在大多数情况下，读缓存在绝大多数情况下是有益无害的（程序可以直接从RAM中读取数据）。写缓存比较复杂，Linux内核将磁盘写入缓存，过段时间再异步将它们刷新到磁盘。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/vm-config/">阅读全文</a></p>
     </article>
     
     
@@ -398,6 +391,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -427,14 +428,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>

@@ -91,6 +91,38 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/tidb/sql-optimize01/" title="Sql 优化">Sql 优化</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月21日
+        </date>
+        
+        <div class="post-content">
+            一条sql的执行过程 将 SQL 解析成抽象语法树(AST)，将 AST 变换到内部表示(IR)。然后优化器的输入就是 IR，它将生成最优的查询计划（Plan），然后会变成具体的执行器（Executor），里面有许多的算。 优化的阶段为IR 到生成 Plan 的过程，包括逻辑优化和物理优化 逻辑优化 逻辑优化主要是基……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/tidb/sql-optimize01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/index01/" title="数据库索引类型及使用场景">数据库索引类型及使用场景</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月19日
+        </date>
+        
+        <div class="post-content">
+            用途 优点 主键唯一约束 加速检索 排序 缺点 更新数据时需要同时维护对应索引 占用磁盘空间，甚至比表数据本身还要多 使用场景利弊分析 TP与AP应用 读写使用比例 点查询批量查询 创建索引 \h create index 命令： CREATE INDEX 描述： 建立新的索引 语法： CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ [ IF NOT EXISTS ] 名称 ] ON 表名 [ USING 方法 ] ( { 列名称 | ( 表达式 ) }……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/index01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/middleware/sysbench/" title="Sysbench 测试">Sysbench 测试</a>
             </h1>
         </header>
@@ -221,38 +253,6 @@
             蓝绿发布 准备两套环境，蓝和绿。绿环境为当前正式环境，现在将新版部署到蓝环境当中并进行测试。没有问题后将路由指向蓝环境。若发现问题可将路由指回到原来的绿环境中进行回滚。 问题： 如果是无状态应用还可以，如果应用有状态或类似数据库之类的应该很麻烦，还有新旧版本是否兼容的问题。 A/B 测试 用来测……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/istio/concept02/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/kvm/kvm01/" title="KVM">KVM</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月6日
-        </date>
-        
-        <div class="post-content">
-            安装 ubuntu14.04 .安装kvm apt-get install qemu-kvm libvirt0 virtinst bridge-utils virt-viewer .配置实体机网络 cat /etc/network/interfaces auto lo iface lo inet loopback auto br0 iface br0 inet static address 10.0.*.* netmask 255.255.0.0 gateway 10.1.0.1 type bridge bridge_ports eth0 dns-nameservers 114.114.114.114 .创建一个虚拟机 virt-install --connect qemu:///system -n test01 -r 1024 -f /home/kvm/test01.qcow2 -s 20 -c /home/kvm/ubuntu-12.04.1-server-amd64.iso --vnc --noautoconsole --os-type linux --os-variant ubuntuPrecise --accelerate --network=bridge:br0 centos7 yum install qemu-kvm libvirt virt-install bridge-utils .配置实体机网络 cat ifcfg-enp7s0 DEVICE=&quot;enp7s0&quot; ONBOOT=yes BOOTPROTO=static UUID=96a09db3-9b06-4a50-8d0c-9868cf531b84 #HWADDR=&quot;08:60:6E:06:C7:1A&quot; TYPE=Ethernet BRIDGE=br0 IPADDR=0.0.0.0 cat ifcfg-br0 DEVICE=br0 ONBOOT=yes BOOTPROTO=static TYPE=Bridge IPADDR=10.1.*.* PREFIX=16 GATEWAY=10.1.0.1 DNS1=223.5.5.5 查看 brctl show .启动 libvirt systemctl start libvirtd systemctl enable libvirtd .创建虚拟机 virt-install --virt-type kvm --name test01 --ram……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/kvm/kvm01/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/elk/apm/" title="APM">APM</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月6日
-        </date>
-        
-        <div class="post-content">
-            https://www.elastic.co/solutions/apm 应用程序性能监控 整体架构 先搞起来 agent 收集信息 apm-server 接受agent信息并发送到ES ES 存储信息 Kibana 信息检索展示 agent python django 安装扩展包 pip install elastic-apm django 配置 # Add the agent to the installed apps INSTALLED_APPS = ( 'elasticapm.contrib.django', #... ) ELASTIC_APM = { # Set required service name. # Allowed characters: # a-z, A-Z, 0-9, -, _, and space 'SERVICE_NAME': 'my-app', #后台进程 'TRANSPORT_CLASS': 'elasticapm.transport.http.AsyncTransport', # Use if APM Server requires a token #'SECRET_TOKEN': '', # 没有数据可以开启debug查看 # 'DEBUG': True, # Set custom APM Server……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/elk/apm/">阅读全文</a></p>
     </article>
     
     
@@ -391,6 +391,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -420,14 +428,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>

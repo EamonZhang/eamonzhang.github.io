@@ -93,6 +93,42 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_lock/" title="锁机制">锁机制</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月24日
+        </date>
+        
+        <div class="post-content">
+            https://blog.csdn.net/pg_hgdb/article/details/79403651 https://habr.com/en/company/postgrespro/blog/500714/ 表锁 https://www.modb.pro/db/26462 查看被堵塞的任务 select * from pg_locks where not granted; locktype | database | relation | page | tuple | virtualxid | transactionid | classid | objid | objsubid | virtualtransaction | pid | mode | granted | fastpath ----------+----------+----------+------+-------+------------+---------------+---------+-------+----------+--------------------+-----+------+---------+---------- (0 行记录) 查看等待锁信息，是被谁堵塞了 select pg_blocking_pids(pid); pg_blocking_pids ------------------ {} 终止进程 select pg_cancel_backend(pid); # select select pg_terminate_backend(pid); # update insert delete 事务的隔离级别 Postgres 数据库共有三种数据隔离级别。 Read Commit 读看提交 默认级别 在读开始的时候建立数据快照 Repeat Read 可重复读。……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_lock/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pitr/" title="时间点恢复">时间点恢复</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月24日
+        </date>
+        
+        <div class="post-content">
+            PITR Point-in-time recovery https://blog.csdn.net/a964921988/article/details/84957241 https://github.com/digoal/blog/blob/master/201608/20160823_03.md https://github.com/digoal/blog/blob/master/201608/20160823_04.md 依赖条件 历史完整备份 不间断wal日志 以上都可有wal-g 备份系统提供支持 恢复到指定点 指定标签 具体时间点 具体事务 指定标签 recovery.conf recovery_target_action= 'pause' # promote ,shutdown --- 打lable select pg_create_restore_point('my_daily_process_ended'); --- 恢复到指定的lable recovery.conf recovery_target_name = 'my_daily_process_ended' 具体时间 restore_command = 'cp /data/arch/%f %p' # e.g. 'cp /mnt/server/archivedir/%f %p' recovery_target_time = '2020-12-23 09:37:17.010268' recovery_target_inclusive = false recovery_target_timeline = 'latest' 具体事务 restore_command = 'cp /data/arch/%f %p' # e.g. 'cp /mnt/server/archivedir/%f %p' recovery_target_xid = '26897309' recovery_target_inclusive = false……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pitr/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_pathman/" title="pg_pathman 分区表">pg_pathman 分区表</a>
             </h1>
         </header>
@@ -234,42 +270,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/normal-form/" title="数据库三范式五约束">数据库三范式五约束</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月17日
-        </date>
-        
-        <div class="post-content">
-            三范式 第一范式：数据表中的每一列（每个字段）必须是不可拆分的最小单元，也就是确保每一列的原子性； 第二范式（2NF）：满足1NF后，要求表中的所有列，都必须依赖于主键，而不能有任何一列与主键没有关系，也就是说一个表只描述一件事情； 第三范式：必须先满足第二范式（2NF），要求：表中的……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/normal-form/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/insert01/" title="快速生成大量数据">快速生成大量数据</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月14日
-        </date>
-        
-        <div class="post-content">
-            在数据库中快速生成1w条数据，或测试数据库的写入性能。 创建数据库表 postgres=# create table tbl(id int, info text, crt_time timestamp); CREATE TABLE 方法一 generate_series 查看方法函数 postgres=# \df generate_series 函数列表 架构模式 | 名称 | 结果数据类型 | 参数数据类型 | 类型 ------------+-----------------+-----------------------------------+--------------------------------------------------------------------+------ pg_catalog | generate_series | SETOF bigint | bigint, bigint | 常规 pg_catalog | generate_series | SETOF bigint | bigint, bigint, bigint | 常规 pg_catalog | generate_series | SETOF integer | integer, integer | 常规 pg_catalog | generate_series | SETOF integer | integer, integer, integer | 常规 pg_catalog | generate_series |……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/insert01/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -311,6 +311,10 @@
     
     <li >
         <a href="https://zhangeamon.top/postgres/page/8/">8</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/postgres/page/9/">9</a>
     </li>
     
 
@@ -365,6 +369,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -394,14 +406,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>

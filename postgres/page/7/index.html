@@ -93,6 +93,42 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/normal-form/" title="数据库三范式五约束">数据库三范式五约束</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月17日
+        </date>
+        
+        <div class="post-content">
+            三范式 第一范式：数据表中的每一列（每个字段）必须是不可拆分的最小单元，也就是确保每一列的原子性； 第二范式（2NF）：满足1NF后，要求表中的所有列，都必须依赖于主键，而不能有任何一列与主键没有关系，也就是说一个表只描述一件事情； 第三范式：必须先满足第二范式（2NF），要求：表中的……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/normal-form/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/insert01/" title="快速生成大量数据">快速生成大量数据</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月14日
+        </date>
+        
+        <div class="post-content">
+            在数据库中快速生成1w条数据，或测试数据库的写入性能。 创建数据库表 postgres=# create table tbl(id int, info text, crt_time timestamp); CREATE TABLE 方法一 generate_series 查看方法函数 postgres=# \df generate_series 函数列表 架构模式 | 名称 | 结果数据类型 | 参数数据类型 | 类型 ------------+-----------------+-----------------------------------+--------------------------------------------------------------------+------ pg_catalog | generate_series | SETOF bigint | bigint, bigint | 常规 pg_catalog | generate_series | SETOF bigint | bigint, bigint, bigint | 常规 pg_catalog | generate_series | SETOF integer | integer, integer | 常规 pg_catalog | generate_series | SETOF integer | integer, integer, integer | 常规 pg_catalog | generate_series |……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/insert01/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pipelinedb02/" title="Pipelinedb 简介">Pipelinedb 简介</a>
             </h1>
         </header>
@@ -241,42 +277,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/log/" title="数据库日志">数据库日志</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月4日
-        </date>
-        
-        <div class="post-content">
-            介绍 PostgreSQL有3种日志，分别是pg_log（数据库运行日志）、pg_xlog（WAL 日志，即重做日志）、pg_clog（事务提交日志，记录的是事务的元数据） postgres 10 版本将文件目录结构改为 log，pg_wal，pg_xact log默认是关闭的，需要设置其参数。wal和xac……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/log/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/template/" title="模板数据库">模板数据库</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月30日
-        </date>
-        
-        <div class="post-content">
-            模板数据库 模板数据库就是创建新database时，PostgreSQL会基于模板数据库制作一份副本，其中会包含所有的数据库设置和数据文件。 PostgreSQL安装好以后会默认附带两个模板数据库：template0和template1。 template0 干净版，任何时候不要修改 template1 默认版，如果创建数……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/template/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -318,6 +318,10 @@
     
     <li >
         <a href="https://zhangeamon.top/postgres/page/8/">8</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/postgres/page/9/">9</a>
     </li>
     
 
@@ -372,6 +376,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -401,14 +413,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>

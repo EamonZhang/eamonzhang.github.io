@@ -93,6 +93,42 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/daily_management/" title="数据库日常管理">数据库日常管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月7日
+        </date>
+        
+        <div class="post-content">
+            日常管理 可用性 监测项 可用性 主从 HA 全量备份 增量备份 恢复 监测项 磁盘空间 全库 select pg_size_pretty(sum(pg_database_size(oid))) from pg_database; 数据库 select datname, pg_size_pretty(pg_database_size(oid)) from pg_database order by pg_database_size(oid) desc limit 10; 表总 SELECT table_schema || '.' || table_name AS table_full_name, pg_size_pretty(pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;')) AS size FROM information_schema.tables where table_schema = 'public' ORDER BY pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;') DESC limit 10; 表 索引 冷热数据 上次统计信息更新时间 热表dml qps io 热表qdml 冷数据 冷索引 索引利用 全表扫描次数……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/daily_management/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/lock_wait/" title="锁等待">锁等待</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月27日
+        </date>
+        
+        <div class="post-content">
+            锁等待场景 一个事务尚未执行提交时持有锁，当另一个事务需要持有改行的锁时则需要等待。 Session 1 postgres=# \d+ wt Table &quot;public.wt&quot; Column | Type | Collation | Nullable | Default | Storage | Stats target | Description --------+---------+-----------+----------+---------+----------+--------------+------------- id | integer | | | | plain | | t | text | | | | extended | | postgres=# begin; BEGIN postgres=# update wt set t = 'aaaa' where id = 1; UPDATE 1 postgres=# select pg_backend_pid(); pg_backend_pid ---------------- 20034 (1 row) Session 2 postgres=# begin ; BEGIN postgres=# update wt set t = 'bbbb' where id = 1; Session 3 select * from pg_stat_activity; -[ RECORD 3 ]----+---------------------------------------- datid | 436980 datname……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/lock_wait/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/install02/" title="数据库安装 Postgres12 Ubuntu18">数据库安装 Postgres12 Ubuntu18</a>
             </h1>
         </header>
@@ -241,42 +277,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/adlock/" title="咨询锁 adlock">咨询锁 adlock</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年3月7日
-        </date>
-        
-        <div class="post-content">
-            https://github.com/digoal/blog/blob/master/201805/20180524_02.md 行级锁 select .. for update select .. for update skip locked select .. for share……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/adlock/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgpool2/" title="pgpoolii 读写分离">pgpoolii 读写分离</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月30日
-        </date>
-        
-        <div class="post-content">
-            https://www.pgpool.net/docs/pgpool-II-3.5.4/doc/tutorial-zh_cn.html#dist-def https://www.xiaomastack.com/2019/08/16/postgresql集群/……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgpool2/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -318,6 +318,10 @@
     
     <li >
         <a href="https://zhangeamon.top/postgres/page/8/">8</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/postgres/page/9/">9</a>
     </li>
     
 
@@ -372,6 +376,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
@@ -401,14 +413,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
     </li>
     
 </ul>
