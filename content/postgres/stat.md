@@ -58,7 +58,7 @@ select pg_size_pretty(pg_indexes_size('t_name'));
 
 ```
 select indexname ,  pg_size_pretty(pg_relation_size(indexname::regclass)) ,indexdef 
-from pg_indexes where tablename = 'parking_records_parkingrecord' 
+from pg_indexes where tablename = 't_name' 
 order by pg_relation_size(indexname::regclass) desc limit 10;
 ```
 

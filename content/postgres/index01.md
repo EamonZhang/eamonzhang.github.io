@@ -148,8 +148,32 @@ END LOOP;
 END$$;
 ```
 
+一张表中的索引利用情况
+```
+select 
+    relname, indexrelname, idx_scan, idx_tup_read, idx_tup_fetch 
+from 
+    pg_stat_user_indexes 
+where
+    relname = 't_name' 
+order by 
+    idx_scan asc, idx_tup_read asc, idx_tup_fetch asc;
+```
+
+所有表中的索引利用情况
+```
+select 
+    relname, indexrelname, idx_scan, idx_tup_read, idx_tup_fetch 
+from 
+    pg_stat_user_indexes 
+order by 
+    idx_scan asc, idx_tup_read asc, idx_tup_fetch asc;
+
+```
 #### 索引管理
 
 ```
 reindex (verbose) table 
 ```
+
+并行重建索引
