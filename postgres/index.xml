@@ -706,7 +706,7 @@
       <pubDate>Tue, 06 Nov 2018 10:53:52 +0800</pubDate>
       
       <guid>https://zhangeamon.top/postgres/stat/</guid>
-      <description>当前连接数 SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid(); count ------- 3 (1 row) 数据库占用空间 select pg_size_pretty(pg_database_size(&#39;postgres&#39;)); pg_size_pretty ---------------- 14 MB (1 row) or \l+ 数据库表(不包括索引)或单条索引占用空间 select pg_size_pretty(pg_relation_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 24 kB (1 行记录) or \d+ 表中所有索引占有的空间 select pg_size_pretty(pg_indexes_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 280 kB (1 行记录) 表和索引占用总空间 select pg_size_pretty(pg_total_relation_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 380 kB (1 行记录) 查看一条数据在数据库占用的空间 select pg_column_size(&#39;Let us go !!!&#39;); pg_column_size ---------------- 14 (1 行记录) 查出所</description>
+      <description>当前连接数 SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid(); count ------- 3 (1 row) 数据库占用空间 select pg_size_pretty(pg_database_size(&#39;postgres&#39;)); pg_size_pretty ---------------- 14 MB (1 row) or \l+ 数据库表(不包括索引)或单条索引占用空间 select pg_size_pretty(pg_relation_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 24 kB (1 行记录) or \d+ 表中所有索引占有的空间 select pg_size_pretty(pg_indexes_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 280 kB (1 行记录) 表中索引占用的空间大小排序 select indexname , pg_size_pretty(pg_relation_size(indexname::regclass)) ,indexdef from pg_indexes where tablename = &#39;t_name&#39; order by pg_relation_size(indexname::regclass) desc limit 10; 表和索引占用总空间 select pg_size_pretty(pg_total_relation_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 380 kB (1 行记录) 查</description>
     </item>
     
     <item>

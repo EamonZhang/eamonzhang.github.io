@@ -216,9 +216,27 @@ LOOP
     EXECUTE 'drop index ' || r.indexrelname ||';';
 END LOOP;
 END$$;
+</code></pre><p>一张表中的索引利用情况</p>
+<pre><code>select 
+    relname, indexrelname, idx_scan, idx_tup_read, idx_tup_fetch 
+from 
+    pg_stat_user_indexes 
+where
+    relname = 't_name' 
+order by 
+    idx_scan asc, idx_tup_read asc, idx_tup_fetch asc;
+</code></pre><p>所有表中的索引利用情况</p>
+<pre><code>select 
+    relname, indexrelname, idx_scan, idx_tup_read, idx_tup_fetch 
+from 
+    pg_stat_user_indexes 
+order by 
+    idx_scan asc, idx_tup_read asc, idx_tup_fetch asc;
+
 </code></pre><h4 id="索引管理">索引管理</h4>
 <pre><code>reindex (verbose) table 
-</code></pre>
+</code></pre><p>并行重建索引</p>
+
         </div>
 
         
