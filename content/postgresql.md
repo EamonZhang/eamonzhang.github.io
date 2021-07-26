@@ -86,6 +86,7 @@ toc: true
 - [使用PG_RMAN管理备份恢复](/postgres/pg_rman)
 - [wal-g 应用](/postgres/wal-g)
 - 使用pgbakrest备份恢复
+- [备份恢复工具总汇](https://wiki.postgresql.org/wiki/Binary_Replication_Tools)
 
 ## 高可用
 
@@ -95,6 +96,7 @@ toc: true
 - [PG高可用Patroni搭建](/postgres/patroni)
 - [PG高可用Patroni管理进阶](/postgres/patroni02)
 - [PG高可用Repmgr搭建](/postgres/repmgr)
+- [来自citus的高可用方案 pg_auto_failover ](https://github.com/citusdata/pg_auto_failover)
 
 ## 索引
 

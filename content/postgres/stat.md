@@ -54,6 +54,14 @@ select pg_size_pretty(pg_indexes_size('t_name'));
 (1 行记录)
 ```
 
+- 表中索引占用的空间大小排序
+
+```
+select indexname ,  pg_size_pretty(pg_relation_size(indexname::regclass)) ,indexdef 
+from pg_indexes where tablename = 'parking_records_parkingrecord' 
+order by pg_relation_size(indexname::regclass) desc limit 10;
+```
+
 - 表和索引占用总空间
 
 ```
