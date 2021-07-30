@@ -29,3 +29,13 @@ distilled 从..中萃取
 robust 精力充沛的
 
 fundamental 基础的 主要的
+
+trademark 商标
+
+affilicate 隶属
+
+reference 参考
+
+constant development 持续发展
+
+convention 约定, 习惯
