@@ -1085,7 +1085,7 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;amp;mid=2247483770&amp;amp
       <pubDate>Thu, 21 Feb 2019 14:31:26 +0800</pubDate>
       
       <guid>https://zhangeamon.top/mysql/over-view/</guid>
-      <description>安装 &amp;amp; 启动 安装 rpm -i https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm yum install mysql-community-server.x86_64 启动 systemctl start mysqld systemctl enable mysqld 查看临时密码 sudo grep &#39;temporary password&#39; /var/log/mysqld.log 2019-05-15T06:42:54.826106Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: DVjSsl-ZX5f7 修改密码 mysql -uroot -p ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;MyNewPass4!&#39;; 常用命令 连接 mysql -h127.0.0.1 -P 3306 -uroot -p 权限管理 mysql登陆用户权限校验主要是通过用户名密码+访问来源主机方式 创建用户 CREATE USER &#39;finley&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;password&#39;; 赋权限 GRANT ALL ON *.* TO &#39;finley&#39;@&#39;localhost&#39; WITH GRANT OPTION; 收回权限 REVOKE ALL ON *.* FROM &#39;finley&#39;@&#39;localhost&#39;; 查看</description>
+      <description>安装 &amp;amp; 启动 安装 rpm -i https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm yum install mysql-community-server.x86_64 启动 systemctl start mysqld systemctl enable mysqld 查看临时密码 #sudo grep &#39;temporary password&#39; /var/log/mysqld.log 2019-05-15T06:42:54.826106Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: DVjSsl-ZX5f7 修改密码 #mysql -uroot -p ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;MyNewPass4!&#39;; 常用命令 连接 mysql -h127.0.0.1 -P 3306 -uroot -p 版本 #mysql -V mysql Ver 8.0.26 for Linux on x86_64 (MySQL Community Server - GPL) 数据库命令 mysql&amp;gt;help show 权限管理 mysql登陆用户权限校验主要是通过用户名密码+访问来源主机方式 创建用户 CREATE USER &#39;finley&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;password&#39;; 赋</description>
     </item>
     
     <item>
@@ -1760,7 +1760,7 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;amp;mid=2247483770&amp;amp
       <pubDate>Tue, 27 Nov 2018 10:15:16 +0800</pubDate>
       
       <guid>https://zhangeamon.top/about/en/</guid>
-      <description>单词表 utilizes 利用 degradation 退化，降级 hypertable 元数据表 monotonically 单调的 monotonically increase: 单调递增 solely 单独地，唯一地 cardinality 基数 excel 优于，擅长 eliminate 干掉，排除 refine 精致的，经过改良的 distilled 从..中萃取 robust 精力充沛的 fundamental 基础的 主要的</description>
+      <description>单词表 utilizes 利用 degradation 退化，降级 hypertable 元数据表 monotonically 单调的 monotonically increase: 单调递增 solely 单独地，唯一地 cardinality 基数 excel 优于，擅长 eliminate 干掉，排除 refine 精致的，经过改良的 distilled 从..中萃取 robust 精力充沛的 fundamental 基础的 主要的 trademark 商标 affilicate 隶属 reference 参考 constant development 持续发展 convention 约定, 习惯</description>
     </item>
     
     <item>

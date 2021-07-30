@@ -91,7 +91,132 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装--启动">安装 &amp; 启动</a>
+      <ul>
+        <li></li>
+        <li><a href="#查看临时密码">查看临时密码</a></li>
+      </ul>
+    </li>
+    <li><a href="#常用命令">常用命令</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#权限管理">权限管理</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#常见错误">常见错误</a></li>
+    <li><a href="#配置管理">配置管理</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#数据类型">数据类型</a></li>
+    <li><a href="#数据库备份">数据库备份</a></li>
+    <li><a href="#状态查看">状态查看</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -101,47 +226,60 @@
             2019年2月21日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/mysql'>mysql</a></span>
+            
+        </div>
         
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
         
         <div class="post-content">
-            <h4 id="安装--启动">安装 &amp; 启动</h4>
-<h5 id="安装">安装</h5>
+            <h2 id="安装--启动">安装 &amp; 启动</h2>
+<h4 id="安装">安装</h4>
 <pre><code>rpm -i https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
 yum install mysql-community-server.x86_64
-</code></pre><h5 id="启动">启动</h5>
+</code></pre><h4 id="启动">启动</h4>
 <pre><code>systemctl start mysqld
 systemctl enable mysqld
-</code></pre><h5 id="查看临时密码">查看临时密码</h5>
-<pre><code>sudo grep 'temporary password' /var/log/mysqld.log
+</code></pre><h3 id="查看临时密码">查看临时密码</h3>
+<pre><code>#sudo grep 'temporary password' /var/log/mysqld.log
 2019-05-15T06:42:54.826106Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: DVjSsl-ZX5f7
-</code></pre><h5 id="修改密码">修改密码</h5>
-<pre><code>mysql -uroot -p
+</code></pre><h4 id="修改密码">修改密码</h4>
+<pre><code>#mysql -uroot -p
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass4!';
-</code></pre><h4 id="常用命令">常用命令</h4>
-<h5 id="连接">连接</h5>
+</code></pre><h2 id="常用命令">常用命令</h2>
+<h4 id="连接">连接</h4>
 <pre><code>mysql -h127.0.0.1 -P 3306  -uroot -p
+</code></pre><h4 id="版本">版本</h4>
+<pre><code>#mysql -V
+mysql  Ver 8.0.26 for Linux on x86_64 (MySQL Community Server - GPL)
 
-</code></pre><h4 id="权限管理">权限管理</h4>
+</code></pre><p>数据库命令</p>
+<pre><code>mysql&gt;help show
+
+</code></pre><h2 id="权限管理">权限管理</h2>
 <p>mysql登陆用户权限校验主要是通过用户名密码+访问来源主机方式</p>
-<h5 id="创建用户">创建用户</h5>
-<pre><code>CREATE USER 'finley'@'localhost'
-  IDENTIFIED BY 'password';
-</code></pre><h5 id="赋权限">赋权限</h5>
-<pre><code>GRANT ALL
-  ON *.*
-  TO 'finley'@'localhost'
-  WITH GRANT OPTION;
-</code></pre><h5 id="收回权限">收回权限</h5>
-<pre><code>REVOKE ALL
-  ON *.*
-  FROM 'finley'@'localhost';
-</code></pre><h5 id="查看">查看</h5>
+<h4 id="创建用户">创建用户</h4>
+<pre><code>CREATE USER 'finley'@'localhost' IDENTIFIED BY 'password';
+</code></pre><h4 id="赋权限">赋权限</h4>
+<pre><code>GRANT ALL ON *.*  TO 'finley'@'localhost' WITH GRANT OPTION;
+</code></pre><h4 id="收回权限">收回权限</h4>
+<pre><code>REVOKE ALL ON *.*  FROM 'finley'@'localhost';
+</code></pre><h4 id="查看">查看</h4>
 <pre><code>select host,user from mysql.user;
 
 SHOW GRANTS FOR 'finley'@'localhost';
-</code></pre><h5 id="删除">删除</h5>
+</code></pre><h4 id="删除">删除</h4>
 <pre><code>DROP USER 'finley'@'localhost';
-</code></pre><h5 id="常见错误">常见错误</h5>
+</code></pre><h2 id="常见错误">常见错误</h2>
 <pre><code>连接时被拒绝
 ERROR 1130 (HY000): Host '10.1.88.32' is not allowed to connect to this MySQL server
 
@@ -154,10 +292,12 @@ ERROR 2059 (HY000): Authentication plugin 'caching_sha2_password' cannot be load
 修改plugin类型
 ALTER USER 'custom'@'%' IDENTIFIED WITH mysql_native_password BY '1qa@WS3ed';
 FLUSH PRIVILEGES;
-select host,user ,plugin from user;
-</code></pre><h4 id="配置管理">配置管理</h4>
+
+select host,user ,plugin from mysql.user;
+</code></pre><h2 id="配置管理">配置管理</h2>
+<h4 id="命令行配置">命令行配置</h4>
 <pre><code>查看所用配置参数
-show (global) variables;
+show variables;
 
 查看某个指定的配置参数
 show variables like '%max_heap_table_size%';  
@@ -168,12 +308,48 @@ show variables like '%max_heap_table_size%';
 +---------------------+----------+
 
 设置参数
-set max_heap_table_size = 167772160;                                                                                                                             
-</code></pre><h4 id="数据类型">数据类型</h4>
-<h4 id="数据导入导出">数据导入导出</h4>
-<pre><code>mysqldump -h 10.1.88.74 -u custom -P 3306 --databases sbtest  -v -p &gt; backup.sql
+set max_heap_table_size = 167772160;                                                   
+</code></pre><h4 id="配置文件基本配置">配置文件,基本配置</h4>
+<p>vi /etc/my.cnf</p>
+<pre><code>[mysql]
+prompt = [\\u@\\p][\\d]&gt;\\_
+tee = &quot;/tmp/tee.log&quot;  ##设置客户端的查询日志
+pager = &quot;less -i -n -S&quot;  ##分页显示查询出的数据，方便搜索查询到的数据
+auto-rehash  ##预读取元数据,可以tab 补齐表名
+#lower_case_table_names=1 ##对表名大小写不敏感
+max_allowed_packet = 20M ## 服务端接收最大数据包
 
-mysql -u custom -h 10.1.88.74 -P 3306  -D sbtest -p &lt; backup.sql 
+## 慢查询
+slow_query_log=on
+slow_query_log_file=/var/log/slow_mysql.log
+long_query_time=10
+
+skip-name-resolve # 跳过对连接的客户端进行DNS反向解析
+
+</code></pre><h2 id="数据类型">数据类型</h2>
+<h2 id="数据库备份">数据库备份</h2>
+<pre><code>-- 数据导出
+mysqldump -h 10.1.88.74 -u custom -P 3306 --databases sbtest  -v -p &gt; backup.sql
+
+-- 数据导入
+mysql -h 10.1.88.74 -u custom -P 3306  -D sbtest -p &lt; backup.sql 
+</code></pre><h2 id="状态查看">状态查看</h2>
+<pre><code>#1.显示状态信息：
+#1.1.session（默认）：取出当前窗口的执行；
+#1.2.global：从mysql启动到现在
+mysql&gt; SHOW [SESSION|GLOBAL] STATUS LIKE '%Status_name%';
+#2.查看查询次数（插入次数com_insert、修改次数com_insert、删除次数com_delete）
+mysql&gt; SHOW STATUS LIKE 'com_select';
+#3.查看连接数(登录次数)
+mysql&gt; SHOW STATUS LIKE 'connections';
+#4.数据库运行时间
+mysql&gt; SHOW STATUS LIKE 'uptime';
+#5.查看慢查询次数
+mysql&gt; SHOW STATUS LIKE 'slow_queries';
+#6.查看索引使用的情况：
+#6.1。handler_read_key：这个值越高越好，越高表示使用索引查询到的次数。
+#6.2.handler_read_rnd_next：这个值越高，说明查询低效。
+mysql&gt; SHOW STATUS LIKE 'handler_read%';
 </code></pre><h4 id="高可用主从架构">高可用&amp;主从架构</h4>
 <h4 id="监控">监控</h4>
 <h4 id="explain执行计划">explain执行计划</h4>
@@ -332,6 +508,8 @@ mysql -u custom -h 10.1.88.74 -P 3306  -D sbtest -p &lt; backup.sql
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
