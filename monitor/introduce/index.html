@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>常用监控介绍 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="常用监控介绍 - Let&#39;s go 🐌 🐌 🐌">
+    <title>监控介绍 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="监控介绍 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2018-12-07T11:32:43&#43;08:00'>
@@ -17,7 +17,7 @@
     <meta property="article:modified_time" content='2018-12-07T11:32:43&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="常用监控介绍">
+    <meta name="description" content="监控介绍">
         
     <meta name="author" content="Eamon">
     <meta property="og:url" content="https://zhangeamon.top/monitor/introduce/">
@@ -95,7 +95,7 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">常用监控介绍</h1>
+            <h1 class="post-title">监控介绍</h1>
         </header>
         <date class="post-meta meta-date">
             2018年12月7日
@@ -104,7 +104,32 @@
         
         
         <div class="post-content">
-            <p>zabbix</p>
+            <h2 id="监控目的">监控目的</h2>
+<p>改进传统的定期巡检方式，对在线运行系统进行7x24小时实时不间断自动监控，</p>
+<p>可随时了解到系统的整体运行情况及具体的性能指标。解放运维人员双手。</p>
+<p>通过监控系统可做到：</p>
+<ul>
+<li>根据历史监控数据，对未来做出预测</li>
+<li>可对感兴趣的系统指标进行自定义监测并设置预警、报警阀值</li>
+<li>发生异常时，及时预警，报警。</li>
+<li>根据报警信息可及时定位问题</li>
+<li>可视化图表展示，便于直观获取信息</li>
+</ul>
+<h2 id="监控内容">监控内容</h2>
+<p>大体包括如下内容</p>
+<h4 id="基础设施">基础设施</h4>
+<p>交换机，路由器等</p>
+<h4 id="物理机">物理机</h4>
+<p>硬盘空间、cup利用率、内存利用率、 IO、 网络带宽、tcp连接情况、cpu温度，及物理及之间的网络延迟等。</p>
+<h4 id="基础服务">基础服务</h4>
+<p>数据库，中间件（rabbitmq，redis，nginx， 等）</p>
+<h4 id="应用服务">应用服务</h4>
+<p>如果开发语言是java 需要监控 jmx ，tomcat 等</p>
+<h2 id="监控系统选择">监控系统选择</h2>
+<p>初期可选择比较成熟的 zabbix 监控系统</p>
+<p>1、 架构较简单，web配置方式。上手较容易且功能强大，稳定。</p>
+<p>2、 监控组建模版化，导入模版后可直接使用。</p>
+<p>3、 自带绘图功能，获取到数值型的数据，可自动生成图，且支持用户组，方便多人管理使用。</p>
 <p><a href="https://github.com/lesovsky/zabbix-extensions">zabbix-extensions</a></p>
 <p>promethues</p>
 <p>osquery</p>
