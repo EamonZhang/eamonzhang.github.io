@@ -6,11 +6,13 @@ draft: false
 
 ## 基本类型
 
-- String： 字符串。整数，浮点数  
-- Hash：健值对的无序散列列表  
-- List：链表 
+- String： 字符串。整数，浮点数 。底层数据结构 字符数组。 类似于ARRYLIST
+- Hash：健值对的无序散列列表  。
+- List：链表 。 底层数据结构 qucklist。 类似于LISKLIST
 - Set：无序集合 
-- Zset：有序集合
+- Zset：有序集合 。底层数据结构，跳跃列表
+
+## 
 
 ## 高级类型
 
