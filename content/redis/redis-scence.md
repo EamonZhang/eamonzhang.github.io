@@ -4,7 +4,6 @@ date: 2021-03-09T17:23:59+08:00
 draft: false
 toc: false
 categories: ["redis"]
-tags: [""]
 ---
 
 ## 应用场景
@@ -83,4 +82,6 @@ GeoHash 算法，经纬度使用52位的整数进行编码，放进zset里面。
 - 附近的xxx
 - 两点之间的距离
  
-常用指令： 增加 geoadd、  
+常用指令： 
+
+增加 geoadd、计算两点距离 deodis、 获取元素位置geopos 、 获取元素hash 值 geohash、 附近的元素 georadiusbymember 、根据坐标后去附近的元素 georadius  
