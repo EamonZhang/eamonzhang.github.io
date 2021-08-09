@@ -165,10 +165,15 @@
 <li>redis-cell 漏洞限流模块</li>
 </ul>
 <h2 id="基于-geo-地理位置">基于 GEO 地理位置</h2>
+<p>GeoHash 算法，经纬度使用52位的整数进行编码，放进zset里面。zset的value是元素的key. score 是geohash 的52位整数值。</p>
 <ul>
 <li>附近的xxx</li>
 <li>两点之间的距离</li>
 </ul>
+<p>常用指令：</p>
+<p>增加 geoadd、计算两点距离 deodis、 获取元素位置geopos 、 获取元素hash 值 geohash、 附近的元素 georadiusbymember 、根据坐标后去附近的元素 georadius</p>
+<p>底层为zset存储结构。删除可使用zrem</p>
+<p>注意事项，当个key过的的情况。 对key值进行划分。比如可按城市，区划分等。</p>
 
         </div>
 
@@ -181,11 +186,11 @@
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/postgres/params/">数据库参数</a></li>
-        
         <li><a href="/storage/rclone/">云存储同步 rclone</a></li>
         
         <li><a href="/postgres/pg_rman/">pg_rman 备份恢复数据库</a></li>
+        
+        <li><a href="/postgres/patroni02/">Patroni 高可用管理进阶</a></li>
         
     </ul>
 </div>
@@ -194,11 +199,7 @@
 
         <div class="post-meta meta-tags">
             
-            <ul class="clearfix">
-                
-                <li><a href='/tags/'></a></li>
-                
-            </ul>
+            没有标签
             
         </div>
     </article>
