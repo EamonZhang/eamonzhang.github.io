@@ -84,4 +84,10 @@ GeoHash 算法，经纬度使用52位的整数进行编码，放进zset里面。
  
 常用指令： 
 
-增加 geoadd、计算两点距离 deodis、 获取元素位置geopos 、 获取元素hash 值 geohash、 附近的元素 georadiusbymember 、根据坐标后去附近的元素 georadius  
+增加 geoadd、计算两点距离 deodis、 获取元素位置geopos 、 获取元素hash 值 geohash、 附近的元素 georadiusbymember 、根据坐标后去附近的元素 georadius 
+
+底层为zset存储结构。删除可使用zrem
+
+注意事项，当个key过的的情况。 对key值进行划分。比如可按城市，区划分等。
+
+ 
