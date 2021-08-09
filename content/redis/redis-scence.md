@@ -78,7 +78,9 @@ key ,userid+action ,value ts, score ts
 
 ## 基于 GEO 地理位置
 
+GeoHash 算法，经纬度使用52位的整数进行编码，放进zset里面。zset的value是元素的key. score 是geohash 的52位整数值。
 
 - 附近的xxx
 - 两点之间的距离
  
+常用指令： 增加 geoadd、  
