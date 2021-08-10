@@ -1,5 +1,5 @@
 ---
-title: "prepare"
+title: "使用prepare预编译SQL"
 date: 2021-07-21T16:37:53+08:00
 draft: false
 toc: false
