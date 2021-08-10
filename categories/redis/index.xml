@@ -6,7 +6,16 @@
     <description>Recent content in redis on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 09 Mar 2021 17:23:59 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/redis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Aug 2021 15:05:28 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于Redis 的分布式锁实现</title>
+      <link>https://zhangeamon.top/redis/distributedlock/</link>
+      <pubDate>Tue, 10 Aug 2021 15:05:28 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/redis/distributedlock/</guid>
+      <description>分布式锁场景 秒杀抢购茅台，车票 提前预约抢订车位，共享单车 特点，多个用户同一时间对同一个资源进行申请，并且只能允许一个用户申请成功。 分布式锁必要条件 布式系统环境下，一个方法在同一时间只能被一个机器的一个线程执行； 高可用的获取锁与释放锁； 高性能的获取锁与释放锁； 具备可重入特性； 具备锁</description>
+    </item>
+    
     <item>
       <title>Redis 应用场景</title>
       <link>https://zhangeamon.top/redis/redis-scence/</link>

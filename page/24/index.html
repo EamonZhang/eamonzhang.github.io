@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/cert/" title="自签名证书">自签名证书</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月22日
+        </date>
+        
+        <div class="post-content">
+            1.环境预备 curl -s -L -o /usr/local/bin/cfssl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 curl -s -L -o /usr/local/bin/cfssljson https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 chmod +x /usr/local/bin/{cfssl,cfssljson} 2.生成配置模板 三类证书：服务器证书server cert，客户端证书client cert，对等证书peer cert(表示既是server cert又是client cert) cfssl print-defaults config &gt; ca-config.json cat ca-config.json { &quot;signing&quot;: { &quot;default&quot;: { &quot;expiry&quot;: &quot;168h&quot; }, &quot;profiles&quot;: { &quot;www&quot;: { &quot;expiry&quot;: &quot;8760h&quot;, &quot;usages&quot;: [ &quot;signing&quot;, &quot;key encipherment&quot;, &quot;server auth&quot; ] }, &quot;client&quot;: { &quot;expiry&quot;: &quot;8760h&quot;, &quot;usages&quot;: [ &quot;signing&quot;, &quot;key……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/cert/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/no-passwd/" title="ssh 免密码登&amp;跳板机配置">ssh 免密码登&amp;跳板机配置</a>
             </h1>
         </header>
@@ -239,29 +255,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/about/tech/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/dw/introduce/" title="数据仓库介绍">数据仓库介绍</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年9月21日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E4%BB%93'>数仓</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            数据库与数据仓库的区别 数据库是面向事务的设计，数据仓库是面向主题设计的。 数据库一般服务于业务系统的，数据仓库一般是服务于分析系统的。 数据库一般存储在线交易数据，数据仓库存储的一般是历史数据。 数据库设计是尽量避免冗余，数据仓库在设计是有意引入冗余。 数据库是为捕获数据而设计，数据仓库……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/dw/introduce/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -378,11 +371,15 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
     </li>
     
     <li>
@@ -413,10 +410,6 @@
         <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -437,11 +430,11 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (11)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (2)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

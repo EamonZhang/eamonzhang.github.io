@@ -91,6 +91,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/consul/" title="Consul DNS 服务发现">Consul DNS 服务发现</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年6月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            实现目标 多IP解析，负载轮询 自动检查后端服务状态，自动剔除不可用后端 别名配置 上游DNS支持 ttl cache 支持 前两点由cousul实现 后两点由dnsmasq实现 别名配置未实现 简单应用 集群配置 10.1.88.84 10.1.88.85 10.1.88.86 consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.84 -bind=10.1.88.84 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -config-dir=/etc/consul.d -ui consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.85 -bind=10.1.88.85 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -join=10.1.88.84 -config-dir=/etc/consul.d -ui consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.86 -bind=10.1.88.86 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -join=10.1.88.84 -config-dir=/etc/consul.d -ui 服务发现配置 cat /etc/consul.d/web/json { &quot;services&quot;:[……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/consul/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/middleware/coredns/" title="coredns">coredns</a>
             </h1>
         </header>
@@ -232,29 +255,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/iperf/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/python/django-ndb/" title="Jdango 多数据库读写配置">Jdango 多数据库读写配置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月12日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            https://www.cnblogs.com/wumingxiaoyao/p/8610791.html https://www.cnblogs.com/thismyblogs/p/9855801.html……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/python/django-ndb/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -391,11 +391,15 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/postgres/prepare/" title="prepare">prepare</a>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
     </li>
     
     <li>
@@ -426,10 +430,6 @@
         <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -450,11 +450,11 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (11)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (2)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

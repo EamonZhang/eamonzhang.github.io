@@ -6,7 +6,16 @@
     <description>Recent content on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 22 Jul 2021 11:04:27 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Aug 2021 15:05:28 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于Redis 的分布式锁实现</title>
+      <link>https://zhangeamon.top/redis/distributedlock/</link>
+      <pubDate>Tue, 10 Aug 2021 15:05:28 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/redis/distributedlock/</guid>
+      <description>分布式锁场景 秒杀抢购茅台，车票 提前预约抢订车位，共享单车 特点，多个用户同一时间对同一个资源进行申请，并且只能允许一个用户申请成功。 分布式锁必要条件 布式系统环境下，一个方法在同一时间只能被一个机器的一个线程执行； 高可用的获取锁与释放锁； 高性能的获取锁与释放锁； 具备可重入特性； 具备锁</description>
+    </item>
+    
     <item>
       <title>客户端故障转移</title>
       <link>https://zhangeamon.top/postgres/libpg/</link>
@@ -17,7 +26,7 @@
     </item>
     
     <item>
-      <title>prepare</title>
+      <title>使用prepare预编译SQL</title>
       <link>https://zhangeamon.top/postgres/prepare/</link>
       <pubDate>Wed, 21 Jul 2021 16:37:53 +0800</pubDate>
       
