@@ -143,7 +143,7 @@ success = dlm.lock("acquire-lock",50)
 if success:
     print("申请成功")
     #do something
-    dlm.unlock("acuire-lock")
+    dlm.unlock("acquire-lock")
 else:
     print("申请锁失败")
 ```
