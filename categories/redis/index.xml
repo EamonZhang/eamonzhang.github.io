@@ -25,5 +25,14 @@
       <description>应用场景 作为一名匠人，当熟悉手里各样工具的特点。用起来才能得心应手。什么时候使用锯子，什么时候当用斧子。 同理熟知产品的技术特性，方可灵活运用。 在面对不同的业务需求时才能提供具有针对性的解决方案。 不求十八般兵器样样精通，但求不置斧锯于一旁只顾轮打锤。 Redis 都能干点啥 缓存 消息队列 循环列表</description>
     </item>
     
+    <item>
+      <title>Redis 持久化策略</title>
+      <link>https://zhangeamon.top/redis/redis-durability/</link>
+      <pubDate>Tue, 09 Mar 2021 17:04:58 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/redis/redis-durability/</guid>
+      <description>持久化的两种方式 RDB 快照 AOF 日志 RDB 快照 快照一次全量备份。 特点： 保存时比较耗系统资源容易造成业务卡顿，恢复比较快。 原理： 使用操作系统的多进程COW(COPY ON Write)机制来实现快照持久化 命令： 堵塞 save ，非堵塞后台执行 bgsave 配置： save m n #配置快照(rdb)促发规则，格式：save &amp;lt;seconds&amp;gt; &amp;lt;changes&amp;gt; #save 900 1</description>
+    </item>
+    
   </channel>
 </rss>

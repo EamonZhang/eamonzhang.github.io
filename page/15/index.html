@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_pathman/" title="pg_pathman 分区表">pg_pathman 分区表</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月24日
+        </date>
+        
+        <div class="post-content">
+            介绍 分区表的诉求在现实的生成中的意义不必多说，pg以前的实现方式多采用触发器，rules实现。数据量上来时性能明显不尽如意。 虽然pg10 ，11 版本在分区表的特性上不断发力。但是性能啥还是不够给力。 pg_pathman 分区表功能在目前的pg版本10.6 中优势还是非常明显的。 在期待pg自身分区表特性的……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_pathman/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/qos/" title="Qos">Qos</a>
             </h1>
         </header>
@@ -230,22 +246,6 @@
             介绍 pgbench是一种在PostgreSQL上运行基准测试的简单程序。 官方文档 默认测试 自定义测试 默认测试 pgbench中默认自带一套测试数据库和测试sql脚本。 初始化默认数据库 使用 -i 初始化数据库 #pgbench -U postgres -i -s 10 pgbenchdb NOTICE: table &quot;pgbench_history&quot; does not exist, skipping NOTICE: table &quot;pgbench_tellers&quot; does not exist, skipping NOTICE: table &quot;pgbench_accounts&quot; does not exist, skipping NOTICE: table &quot;pgbench_branches&quot; does not exist, skipping creating tables... 100000 of 1000000 tuples (10%)……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pgbench/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/at-crontab/" title="定时任务">定时任务</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月9日
-        </date>
-        
-        <div class="post-content">
-            Linux 系统中的定时任务 重复执行 一次执行 重复执行 详见 /etc/crontab 配置 anacron 用于以天为单位的频率运行命令。它的工作与 cron 稍有不同，它假设机器不会一直开机。 cron 也适合在那些不会 24X7 运行如笔记本以及桌面电脑的机器上运行每日、每周以及每月的计划任务（LCTT 译注：不适合按小时、分钟执行任务）。 假设你有一个计划任务……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/at-crontab/">阅读全文</a></p>
     </article>
     
     
@@ -443,11 +443,11 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (11)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (12)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (2)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (3)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     
