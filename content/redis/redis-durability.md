@@ -81,7 +81,7 @@ appendonly no
 appendfilename appendonly.aof
 #指定AOF文件名，4.0无法通过config set 设置，只能通过修改配置文件设置。
 
-dir /etc/redis
+dir /var/lib/redis
 #RDB文件和AOF文件存放目录
 ```
 
@@ -93,20 +93,17 @@ dir /etc/redis
 
 ## 相关命令
 
+```
 aof文件检查
-```
-redis-check-aof /etc/redis/appendonly.aof
-```
+redis-check-aof /var/lib/redis/appendonly.aof
+
 rdb文件检查
-```
-redis-check-rdb /etc/redis/dump.rdb
-```
+redis-check-rdb /var/lib/redis/dump.rdb
+
 查看持久化信息
-```
 info Persistence
-```
+
 查看状态信息
-```
 info stats
 ```
 
