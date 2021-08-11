@@ -147,3 +147,19 @@ if success:
 else:
     print("申请锁失败")
 ```
+## Redis 事务补充说明
+
+指令： multi exec discard watch
+
+基本用法
+
+```
+watch userkey
+multi 
+  do something1
+  do something2
+exec
+```
+Redis 事务不能保证原子性，即do something1 ,do something2 可以部分执行成功。仅保持了指令的串行化。
+
+WATCH 机制，就是一种乐观锁。在事务开始之前盯住一个或多个关键变量。当事务执行提交前如果关键变量被修改则事务执行失败。
