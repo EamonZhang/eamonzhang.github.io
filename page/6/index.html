@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/partition/" title="原生分区表">原生分区表</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月31日
+        </date>
+        
+        <div class="post-content">
+            分区表 数据库分区是一种将数据做物理分片的数据库设计技术，虽然分区技术可以有多种实现方法， 但其主要目的是为了在特定的SQL操作中减少数据读取的总量以缩减响应时间。 使用分区表对应用程序是透明的，对于INSERT,UPDATE,DELETE,SELECT操作，都只需要对父表tbl进行操……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/partition/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_fdw/" title="跨库操作">跨库操作</a>
             </h1>
         </header>
@@ -239,22 +255,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/istio/auto-api-test/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/kvm/vagrant/" title="vagrant">vagrant</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年7月13日
-        </date>
-        
-        <div class="post-content">
-            介绍 通常用vagrant 来管理VirtualBox ,VMWare，方便测试环境的创建，销毁。不常折腾用virtualbox, 反复折腾用vagrant。 安装 下载virtualbox 下载vagrant -- 安装依赖 #yum --enablerepo=epel -y install fuse-sshfs #yum install bsdtar #yum -y install gcc kernel kernel-devel 常用方法 --- 镜像管理 添加镜像 #vagrant box add centos/7 查看镜像 #vagrant box……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/kvm/vagrant/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -391,6 +391,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
     </li>
     
@@ -426,10 +430,6 @@
         <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -450,11 +450,11 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (12)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

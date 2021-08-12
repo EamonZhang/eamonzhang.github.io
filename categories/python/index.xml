@@ -6,7 +6,16 @@
     <description>Recent content in python on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 10 Aug 2021 15:05:28 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Aug 2021 10:44:01 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>发布订阅</title>
+      <link>https://zhangeamon.top/redis/pubsub/</link>
+      <pubDate>Thu, 12 Aug 2021 10:44:01 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/redis/pubsub/</guid>
+      <description>发布订阅 消息多播，一个发布消息可以同时被多个订阅者收听 常用命令 发布 PUBLISH channel message 订阅 SUBSCRIBE channel [channel ...] PSUBSCRIBE pattern [pattern ...] python demo #!/usr/bin/env python import redis import time redis_pool = redis.ConnectionPool(host=&amp;quot;192.168.6.14&amp;quot;,port=&amp;quot;6379&amp;quot;) redis_client = redis.Redis(connection_pool=redis_pool) #生产者 def publishMessages(): while True: redis_client.publish(&amp;quot;channel.shenyang&amp;quot;,&amp;quot;hello news &amp;quot;+time.asctime(time.localtime(time.time()))) time.sleep(2) #消费者 def subscibeMessages(): p = redis_client.pubsub() p.subscribe(&amp;quot;channel.shenyang&amp;quot;) while True: message = p.get_message() if not message: time.sleep(1) continue print(message) #阻塞消费者 def subscibeBlockMessages(): p = redis_client.pubsub() p.subscribe(&amp;quot;channel.shenyang&amp;quot;) for item in p.listen(): print(item[&#39;type&#39;]) if item[&#39;type&#39;] == &#39;message&#39;: print(item[&#39;channel&#39;]) print(item[&#39;data&#39;]) if __name__ == &#39;__main__&#39;: publishMessages() # subscibeMessages() # subscibeBlockMessages() Stream 一个可靠的消息队列 Redis 5.0 引入了</description>
+    </item>
+    
     <item>
       <title>基于Redis 的分布式锁实现</title>
       <link>https://zhangeamon.top/redis/distributedlock/</link>
