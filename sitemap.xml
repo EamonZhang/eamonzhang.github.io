@@ -26,6 +26,9 @@
     <loc>https://zhangeamon.top/postgres/</loc>
     <lastmod>2021-07-22T11:04:27+08:00</lastmod>
   </url><url>
+    <loc>https://zhangeamon.top/categories/postgres/</loc>
+    <lastmod>2021-07-22T11:04:27+08:00</lastmod>
+  </url><url>
     <loc>https://zhangeamon.top/postgres/libpg/</loc>
     <lastmod>2021-07-22T11:04:27+08:00</lastmod>
   </url><url>
@@ -78,9 +81,6 @@
     <lastmod>2021-05-10T16:58:56+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/python/django_max_con_age/</loc>
-    <lastmod>2021-04-20T13:27:13+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/categories/postgres/</loc>
     <lastmod>2021-04-20T13:27:13+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/python/setup-packet/</loc>

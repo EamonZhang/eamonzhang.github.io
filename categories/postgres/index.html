@@ -100,6 +100,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/libpg/">客户端故障转移</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年7月22日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            多主机连接 PostgreSQL libpq 是数据库的一个连接驱动，支持多主机配置，同时支持target_session_attrs 主机角色判断配置。 当配置了多个主机时，会按顺序尝试连接，之道获取到成功的连接为止。 利用libpq的这个特性，结合数据库自动HA的一些软件，可以实现在不引入VIP以及中间路由节点的……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/libpg/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/python/django_max_con_age/">Django CONN_MAX_AGE 对数据连接的影响</a>
             </h1>
         </header>
@@ -306,29 +329,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/thinking_in_db_fd/">数据库优化思考 - 结构设计</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月11日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/postgres'>postgres</a>
-            
-        </div>
-        
-        <div class="post-content">
-            DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_fd/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -455,7 +455,7 @@
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (19)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
     
