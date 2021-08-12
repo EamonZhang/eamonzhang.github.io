@@ -3,7 +3,7 @@ title: "客户端故障转移"
 date: 2021-07-22T11:04:27+08:00
 draft: false
 toc: false
-categories: []
+categories: ["postgres"]
 tags: []
 ---
 
