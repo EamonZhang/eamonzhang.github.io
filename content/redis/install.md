@@ -2,9 +2,12 @@
 title: "Redis 6.0安装配置管理"
 date: 2020-06-12T14:48:56+08:00
 draft: false
+toc: true
+categories: ['redis']
+tags: []
 ---
 
-#### 安装
+## 安装
 
 yum 方式
 ```
@@ -36,7 +39,7 @@ cd /usr/local/redis-6.0.1/
 make PREFIX=/usr/local/redis install
 ```
 
-#### 启动
+## 启动
 
 ```
 systemctl start redis 
@@ -44,9 +47,9 @@ systemctl start redis
 systemctl enalbe redis
 ```
 
-#### 配置
+## 配置
 
-##### 系统参数
+#### 系统参数
 
 vi /etc/sysctl.conf
 ```
@@ -60,13 +63,13 @@ net.ipv4.tcp_max_orphans = 3276800
 net.ipv4.tcp_max_syn_backlog = 262144
 ```
 
-##### 服务参数
+#### 服务参数
 
 vi /etc/redis.conf
 ```
-daemonize yes
+daemonize yes 
 pidfile /var/run/redis.pid
-bind 0.0.0.0
+bind * #绑定网卡
 timeout 300 #当客户端闲置多长时间后关闭连接，如果指定为0，表示永不关闭
 tcp-keepalive 60 #设置检测客户端网络中断时间间隔，单位为秒
 databases 16 #设置数据库数量，默认值为16
@@ -78,13 +81,13 @@ maxclients 1000 #设置同一时间最大客户端连接数，默认无限制
 maxmemory <bytes> #指定redis最大内存限制  1/4 
 ```
 
-##### 慢查询日志
+#### 慢查询日志
 ```
 slowlog-max-len 
 slowlog-log-slower-than 
 ```
 
-###### 密码认证
+#### 密码认证
 
 永久生效
 ```
@@ -97,12 +100,22 @@ masterauth <master-password> # 当master设置密码时，slave 需要设置
 config set requirepass foopassword 
 ```
 
+#### 危险命令重新命名或者禁用
+
+修改配置文件 rename-command 
+```
+FLUSHALL
+FLUSHDB
+KEYS 
+CONFIG
+```
+
 [更多](https://blog.csdn.net/gfl1427097103/article/details/106256691)
 
 
 https://www.cnblogs.com/richiewlq/p/12191278.html
 
-##### 压测 
+## 压测 
 
 ```
  redis-benchmark -h 127.0.0.1 -p 6379 -t set,lpush -n 10000 -q

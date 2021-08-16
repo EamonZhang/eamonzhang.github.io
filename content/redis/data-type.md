@@ -2,6 +2,9 @@
 title: "Redis 常用数据结构"
 date: 2019-02-13T14:41:54+08:00
 draft: false
+toc: false
+categories: ['redis']
+tags: []
 ---
 
 ## 基本类型
