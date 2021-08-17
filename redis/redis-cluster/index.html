@@ -280,6 +280,44 @@ sentinel parallel-syncs resque 5
 SENTINEL CONFIG SET 
 SENTINEL CKQUORUM &lt;master name&gt;
 SENTINEL FLUSHCONFIG 
+</code></pre><h4 id="python-连接sentinel">python 连接Sentinel</h4>
+<pre><code># import redis
+from redis.sentinel import Sentinel
+ 
+&quot;&quot;&quot;
+1、通过访问Sentinel服务的方式，获取redis的master、slave节点信息
+2、向master redis写入数据
+3、从slave redis读取数据
+&quot;&quot;&quot;
+ 
+# 连接哨兵服务器(主机名也可以用域名)
+sentinel = Sentinel([('192.168.196.129', 26379),
+                     ('192.168.196.132', 26379)
+             ],
+                    socket_timeout=0.5)
+ 
+# 获取主服务器地址
+master = sentinel.discover_master('mymaster')
+print(master)
+# 输出：('192.168.196.132', 6379)
+ 
+ 
+# 获取从服务器地址
+slave = sentinel.discover_slaves('mymaster')
+print(slave)
+# 输出：[('192.168.196.129', 6379)]
+ 
+ 
+# 获取主服务器进行写入
+master = sentinel.master_for('mymaster', socket_timeout=0.5, password='newpwd', db=0)
+w_ret = master.set('foo', 'bar')
+# 输出：True
+ 
+# 获取从服务器进行读取（默认是round-roubin,随机从多个slave服务中读取数据）
+slave = sentinel.slave_for('mymaster', socket_timeout=0.5, password='newpwd', db=0)
+r_ret = slave.get('foo')
+print(r_ret)
+# 输出：bar
 </code></pre>
         </div>
 
