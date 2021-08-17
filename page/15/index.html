@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_lock/" title="锁机制">锁机制</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月24日
+        </date>
+        
+        <div class="post-content">
+            https://blog.csdn.net/pg_hgdb/article/details/79403651 https://habr.com/en/company/postgrespro/blog/500714/ 表锁 https://www.modb.pro/db/26462 查看被堵塞的任务 select * from pg_locks where not granted; locktype | database | relation | page | tuple | virtualxid | transactionid | classid | objid | objsubid | virtualtransaction | pid | mode | granted | fastpath ----------+----------+----------+------+-------+------------+---------------+---------+-------+----------+--------------------+-----+------+---------+---------- (0 行记录) 查看等待锁信息，是被谁堵塞了 select pg_blocking_pids(pid); pg_blocking_pids ------------------ {} 终止进程 select pg_cancel_backend(pid); # select select pg_terminate_backend(pid); # update insert delete 事务的隔离级别 Postgres 数据库共有三种数据隔离级别。 Read Commit 读看提交 默认级别 在读开始的时候建立数据快照 Repeat Read 可重复读。……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_lock/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pitr/" title="时间点恢复">时间点恢复</a>
             </h1>
         </header>
@@ -230,22 +246,6 @@
             Postgresql 常用监控 , 巡检报表 直接利用PG提供的性能统计数据 PG的很多性能数据可以通过查询pg_stat_或pg_statio_开头的系统表获取 zabbix http://pg-monz.github.io/pg_monz/index-en.html zabbix-extensions PG专用的监控工具 pgsnap, pgstatspack,pgwatch,pg_statsinfo等。这些工具主要做PG的性能分析，状态查看的。不能做故障……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/monitor/postgres/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgfincore/" title="pgfincore">pgfincore</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月11日
-        </date>
-        
-        <div class="post-content">
-            ……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgfincore/">阅读全文</a></p>
     </article>
     
     
@@ -447,7 +447,7 @@
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

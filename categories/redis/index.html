@@ -195,6 +195,75 @@
         </div>
     </article>
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/redis-cluster/">Redis Cluster</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月9日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/redis'>redis</a>
+            
+        </div>
+        
+        <div class="post-content">
+            主从复制 原理说明参考 https://www.cnblogs.com/daofaziran/p/10978628.html 基本原理 主要是Redis没有wal日志机制。aof是先执行命令再记录。主从同步不是依赖aof日志。 通过单独的进程完成主从的同步。 初始时全量复制，SYNC。 然后进行增量复制PSYNC。在主库内存中维护一个偏移量master run id 。 当断开重新连接上比较偏移量，尝试……
+            <p class="readmore"><a href="https://zhangeamon.top/redis/redis-cluster/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/install/">Redis 6.0安装配置管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年6月12日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/redis'>redis</a>
+            
+        </div>
+        
+        <div class="post-content">
+            安装 yum 方式 yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm yum --enablerepo=remi install redis make 方式 升级gcc 版本临时生效,否则编译错误 yum -y install centos-release-scl yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils scl enable devtoolset-9 bash wget http://download.redis.io/releases/redis-6.0.1.tar.gz tar -xvf redis-6.0.1.tar.gz cd /usr/local/redis-6.0.1/ make PREFIX=/usr/local/redis install 启动 systemctl start redis systemctl enalbe redis 配置 系统参数 vi /etc/sysctl.conf net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1 kernel.shmmax = 68719476736 kernel.shmall = 4294967296 net.core.netdev_max_backlog = 262144 net.core.somaxconn = 40960 net.ipv4.tcp_max_orphans = 3276800 net.ipv4.tcp_max_syn_backlog = 262144 服务参数 vi /etc/redis.conf daemonize yes pidfile /var/run/redis.pid bind * #绑定网卡 timeout 300 #当客户端闲置多长时间后关闭连接，如果指定为0……
+            <p class="readmore"><a href="https://zhangeamon.top/redis/install/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/data-type/">Redis 常用数据结构</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年2月13日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/redis'>redis</a>
+            
+        </div>
+        
+        <div class="post-content">
+            基本类型 String： 字符串。整数，浮点数 。底层数据结构 字符数组。 类似于ARRYLIST Hash：健值对的无序散列列表 。 List：链表 。 底层数据结构 qucklist。 类似于LISKLIST Set：无序集合 Zset：有序集合 。底层数据结构，跳跃列表 高级类型 BitMap GEO HyperLogLog 其他 Stream https://www.cnblogs.com/knowledgesea/category/722602.html……
+            <p class="readmore"><a href="https://zhangeamon.top/redis/data-type/">阅读全文</a></p>
+        </div>
+    </article>
+    
 
     
 
@@ -307,7 +376,7 @@
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

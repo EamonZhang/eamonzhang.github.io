@@ -194,6 +194,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/redis-cluster/" title="Redis Cluster">Redis Cluster</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            主从复制 原理说明参考 https://www.cnblogs.com/daofaziran/p/10978628.html 基本原理 主要是Redis没有wal日志机制。aof是先执行命令再记录。主从同步不是依赖aof日志。 通过单独的进程完成主从的同步。 初始时全量复制，SYNC。 然后进行增量复制PSYNC。在主库内存中维护一个偏移量master run id 。 当断开重新连接上比较偏移量，尝试……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/redis-cluster/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
             </h1>
         </header>
@@ -274,29 +297,6 @@
             为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_performance/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/monitor/smapler/" title="Smapler">Smapler</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月10日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%9B%91%E6%8E%A7'>监控</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            一款轻量级的一体化监控工具 https://github.com/sqshq/sampler……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/monitor/smapler/">阅读全文</a></p>
     </article>
     
     
@@ -498,7 +498,7 @@
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

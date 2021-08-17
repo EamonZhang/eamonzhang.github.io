@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/postgres-indicators/" title="Postgres 10 监控指标">Postgres 10 监控指标</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年9月27日
+        </date>
+        
+        <div class="post-content">
+            实体机 Cpu 内存 IO 网络 磁盘大小 数据库基本信息 服务启动时间 select pg_postmaster_start_time(); 版本信息 select current_setting('server_version'); 主从角色 select pg_is_in_recovery();……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/postgres-indicators/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/wget/" title="wget">wget</a>
             </h1>
         </header>
@@ -230,29 +246,6 @@
             背景介绍 由于mvcc机制，数据被删除后只是被标记为删除，实际空间没有被释放，这是表空间膨胀的根本原因。 目前用于解决表空间膨胀方式有如下方式 1 删除dead tuple vacuum ,tuple被清理。数据库可以自动执行autovacuum vacuum full ,tuple被清理并且空间连续紧凑。弊端，在执行过程中会锁表。……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pgstattuple/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/nginx/" title="nginx">nginx</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年4月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            性能优化 错误码 502 ， error.log 中错误信息 [error] 236#236: *8371899 upstream sent too big header while reading response header from upstream, 问题 header 过大 proxy_buffer_size 64k; proxy_buffers 4 32k; proxy_busy_buffers_size 64k; 官网说明 利用nginx设置用户登陆认证 如下举例设置用户访问kibana时登陆认证 server { listen 80; server_name kibana.×××.com; location / { auth_basic &quot;secret&quot;; auth_basic_user_file /etc/nginx/db/passwd.db; proxy_pass http://****:5601; proxy_set_header Host $host:5601; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Via &quot;nginx&quot;; } access_log off; } 2、配置登录用户名(admi……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/nginx/">阅读全文</a></p>
     </article>
     
     
@@ -454,7 +447,7 @@
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

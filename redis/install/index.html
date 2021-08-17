@@ -91,7 +91,111 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#启动">启动</a></li>
+    <li><a href="#配置">配置</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#压测">压测</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -101,10 +205,23 @@
             2020年6月12日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+        </div>
         
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
         
         <div class="post-content">
-            <h4 id="安装">安装</h4>
+            <h2 id="安装">安装</h2>
 <p>yum 方式</p>
 <pre><code>yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 
@@ -125,12 +242,12 @@ tar -xvf redis-6.0.1.tar.gz
 cd /usr/local/redis-6.0.1/
 
 make PREFIX=/usr/local/redis install
-</code></pre><h4 id="启动">启动</h4>
+</code></pre><h2 id="启动">启动</h2>
 <pre><code>systemctl start redis 
 
 systemctl enalbe redis
-</code></pre><h4 id="配置">配置</h4>
-<h5 id="系统参数">系统参数</h5>
+</code></pre><h2 id="配置">配置</h2>
+<h4 id="系统参数">系统参数</h4>
 <p>vi /etc/sysctl.conf</p>
 <pre><code>net.ipv4.tcp_tw_recycle = 1
 net.ipv4.tcp_tw_reuse = 1
@@ -140,11 +257,11 @@ net.core.netdev_max_backlog = 262144
 net.core.somaxconn = 40960
 net.ipv4.tcp_max_orphans = 3276800
 net.ipv4.tcp_max_syn_backlog = 262144
-</code></pre><h5 id="服务参数">服务参数</h5>
+</code></pre><h4 id="服务参数">服务参数</h4>
 <p>vi /etc/redis.conf</p>
-<pre><code>daemonize yes
+<pre><code>daemonize yes 
 pidfile /var/run/redis.pid
-bind 0.0.0.0
+bind * #绑定网卡
 timeout 300 #当客户端闲置多长时间后关闭连接，如果指定为0，表示永不关闭
 tcp-keepalive 60 #设置检测客户端网络中断时间间隔，单位为秒
 databases 16 #设置数据库数量，默认值为16
@@ -154,18 +271,24 @@ dbfilename dump.rdb  #指定本地数据库文件名
 dir /data/redis6/  #指定本地数据库存放目录
 maxclients 1000 #设置同一时间最大客户端连接数，默认无限制
 maxmemory &lt;bytes&gt; #指定redis最大内存限制  1/4 
-</code></pre><h5 id="慢查询日志">慢查询日志</h5>
+</code></pre><h4 id="慢查询日志">慢查询日志</h4>
 <pre><code>slowlog-max-len 
 slowlog-log-slower-than 
-</code></pre><h6 id="密码认证">密码认证</h6>
+</code></pre><h4 id="密码认证">密码认证</h4>
 <p>永久生效</p>
 <pre><code>requirepass foopassword # 设置redis连接密码默认关闭
 masterauth &lt;master-password&gt; # 当master设置密码时，slave 需要设置
 </code></pre><p>临时生效</p>
 <pre><code>config set requirepass foopassword 
+</code></pre><h4 id="危险命令重新命名或者禁用">危险命令重新命名或者禁用</h4>
+<p>修改配置文件 rename-command</p>
+<pre><code>FLUSHALL
+FLUSHDB
+KEYS 
+CONFIG
 </code></pre><p><a href="https://blog.csdn.net/gfl1427097103/article/details/106256691">更多</a></p>
 <p><a href="https://www.cnblogs.com/richiewlq/p/12191278.html">https://www.cnblogs.com/richiewlq/p/12191278.html</a></p>
-<h5 id="压测">压测</h5>
+<h2 id="压测">压测</h2>
 <pre><code> redis-benchmark -h 127.0.0.1 -p 6379 -t set,lpush -n 10000 -q
 </code></pre>
         </div>
@@ -326,7 +449,7 @@ masterauth &lt;master-password&gt; # 当master设置密码时，slave 需要设�
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     
