@@ -4,7 +4,7 @@ echo -e "\033[0;32mDeploying markdown updates to GitHub...\033[0m"
 
 # Go To Public folder
 echo -e "\033[0;32mPull markdown code from GitHub...\033[0m"
-git pull git@github.com:EamonZhang/eamonzhang.github.io.git
+git pull 
 
 git add *
 
@@ -21,7 +21,7 @@ git branch -M main
 
 echo -e "\033[0;32mPush markdown code to GitHub...\033[0m"
 
-git push -u origin main git@github.com:EamonZhang/eamonzhang.github.io.git
+git push -u origin main 
 
 # Come Back up to the Project Root
 
