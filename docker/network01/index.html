@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Docker 本地网络 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="Docker 本地网络 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-11-02T16:34:06&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-11-02T16:34:06&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Docker 本地网络">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/docker/network01/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Docker 本地网络</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月2日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="基础命令概览">基础命令概览</h4>
+<pre><code>docker network --help
+
+Usage:	docker network COMMAND
+
+Manage networks
+
+Commands:
+  connect     Connect a container to a network
+  create      Create a network
+  disconnect  Disconnect a container from a network
+  inspect     Display detailed information on one or more networks
+  ls          List networks
+  prune       Remove all unused networks
+  rm          Remove one or more networks
+
+</code></pre><h4 id="默认网络">默认网络</h4>
+<pre><code>docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+0770a8275bff        bridge              bridge              local
+b6617326f199        host                host                local
+31c55ffcf0a8        none                null                local
+
+</code></pre><p>创建容器时通过 &ndash;network=  指定网络类型</p>
+<ul>
+<li>none 这个网络下的容器除了 lo，没有其他任何网卡。</li>
+<li>host 共享Host的网络栈，容器的网络配置与 host 完全一样。
+&ndash; 优点效率高
+&ndash; 不足由于没有隔离，与host资源容易冲突。</li>
+<li>bridge 默认的网络类型</li>
+</ul>
+<h4 id="bridge-网络">Bridge 网络</h4>
+<p>Linux提供了许多虚拟设备，这些虚拟设备有助于构建复杂的网络拓扑，满足各种网络需求。</p>
+<ul>
+<li>网桥（bridge）
+网桥是一个二层设备，工作在链路层，主要是根据MAC学习来转发数据到不同的port。 看做物理设备中的交换机 ，或vlan</li>
+</ul>
+<pre><code># 创建网桥
+brctl addbr br0
+# 添加设备到网桥
+brctl addif br0 eth1
+# 查询网桥mac表
+brctl showmacs br0
+</code></pre><ul>
+<li>veth
+veth pair是一对虚拟网络设备，一端发送的数据会由另外一端接受，常用于不同的网络命名空间。</li>
+</ul>
+<pre><code># 创建veth pair
+ip link add veth0 type veth peer name veth1
+# 将veth1放入另一个netns
+ip link set veth1 netns newns
+</code></pre><ul>
+<li>TAP/TUN
+TAP/TUN设备是一种让用户态程序向内核协议栈注入数据的设备，TAP等同于一个以太网设备，工作在二层；而TUN则是一个虚拟点对点设备，工作在三层。</li>
+</ul>
+<pre><code>ip tuntap add tap0 mode tap
+ip tuntap add tun0 mode tun
+</code></pre><p>Docker 安装后默认有一个名称为docker0 的bridge, 新建的容器都会挂接到docker0 上。</p>
+<pre><code>brctl show # yum install bridge-utils
+bridge name	bridge id		STP enabled	interfaces
+docker0		8000.024262081be1	no		veth16209e7
+</code></pre><p><!-- raw HTML omitted -->veth16209e7<!-- raw HTML omitted --></p>
+<p>实体机网络</p>
+<pre><code>ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 52:54:00:69:69:aa brd ff:ff:ff:ff:ff:ff
+    inet 10.1.88.72/16 brd 10.1.255.255 scope global noprefixroute eth0
+       valid_lft forever preferred_lft forever
+3: docker0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
+    link/ether 02:42:62:08:1b:e1 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+13: veth16209e7@if12: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue master docker0 state UP group default 
+    link/ether 92:94:68:8c:0d:2a brd ff:ff:ff:ff:ff:ff link-netnsid 1
+
+</code></pre><p>容器内网络</p>
+<pre><code> docker exec -it 8d525f4dae3c ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+12: eth0@if13: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt; mtu 1500 qdisc noqueue 
+    link/ether 02:42:ac:11:00:03 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.3/16 brd 172.17.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+</code></pre><h6 id="原来-veth16209e7-和-eth0if13-是一对-veth-pair">原来 veth16209e7 和 eth0@if13 是一对 veth pair</h6>
+<p>再看下现在的docker bridge network</p>
+<pre><code>docker inspect network bridge 
+[
+    {
+        &quot;Name&quot;: &quot;bridge&quot;,
+        &quot;Id&quot;: &quot;0770a8275bfffd2c036d1761576c30c7618be5e016013f9a202bc305a7d88c88&quot;,
+        &quot;Created&quot;: &quot;2018-11-02T13:21:53.778809347+08:00&quot;,
+        &quot;Scope&quot;: &quot;local&quot;,
+        &quot;Driver&quot;: &quot;bridge&quot;,
+        &quot;EnableIPv6&quot;: false,
+brew cask install emacs        &quot;IPAM&quot;: {
+            &quot;Driver&quot;: &quot;default&quot;,
+            &quot;Options&quot;: null,
+            &quot;Config&quot;: [
+                {
+                    &quot;Subnet&quot;: &quot;172.17.0.0/16&quot;,
+                    &quot;Gateway&quot;: &quot;172.17.0.1&quot;
+                }
+            ]
+        },
+
+</code></pre><p>网关 172.17.0.1 是实体机中docker0 网卡</p>
+<h4 id="自定义bridge-网络">自定义bridge 网络</h4>
+<pre><code>docker network create --driver bridge my_bridge
+a24a9805f63da7d0878e5791973cb340ab519d06c04f76c4b59503d9d1bc7797
+</code></pre><pre><code>docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+0770a8275bff        bridge              bridge              local
+b6617326f199        host                host                local
+a24a9805f63d        my_bridge           bridge              local
+31c55ffcf0a8        none                null                local
+
+</code></pre><pre><code>docker inspect network my_bridge 
+[
+    {
+        &quot;Name&quot;: &quot;my_bridge&quot;,
+        &quot;Id&quot;: &quot;a24a9805f63da7d0878e5791973cb340ab519d06c04f76c4b59503d9d1bc7797&quot;,
+        &quot;Created&quot;: &quot;2018-11-05T11:14:31.542338714+08:00&quot;,
+        &quot;Scope&quot;: &quot;local&quot;,
+        &quot;Driver&quot;: &quot;bridge&quot;,
+        &quot;EnableIPv6&quot;: false,
+        &quot;IPAM&quot;: {
+            &quot;Driver&quot;: &quot;default&quot;,
+            &quot;Options&quot;: {},
+            &quot;Config&quot;: [
+                {
+                    &quot;Subnet&quot;: &quot;172.18.0.0/16&quot;,
+                    &quot;Gateway&quot;: &quot;172.18.0.1&quot;
+                }
+            ]
+        },
+</code></pre><pre><code> brctl show
+bridge name	bridge id		STP enabled	interfaces
+br-a24a9805f63d		8000.0242a87f1d16	no		
+docker0		8000.024262081be1	no		veth16209e7
+
+</code></pre><p>创建了一个与默认的bridge类似的network</p>
+<p>下面创建一个新的容量挂载到 my_bridge 网络中</p>
+<pre><code> docker run -it --network=my_bridge busybox 
+/ # ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+17: eth0@if18: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt; mtu 1500 qdisc noqueue 
+    link/ether 02:42:ac:12:00:02 brd ff:ff:ff:ff:ff:ff
+    inet 172.18.0.2/16 brd 172.18.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+</code></pre><h5 id="不同的bridge间的网络不通相同bridge的网络可以通信">不同的bridge间的网络不通,相同bridge的网络可以通信。</h5>
+<h4 id="容器间的通信">容器间的通信</h4>
+<ul>
+<li>IP 容器创建时通过 &ndash;network 指定相应的网络，或者通过 docker network connect 将现有容器加入到指定网络</li>
+<li>DNS 通过 docker 自带的 DNS 服务, ping containername</li>
+<li>joined 共享一个网络栈，共享网卡和配置信息，joined 容器之间可以通过 127.0.0.1 直接通信. &ndash;network=container:name</li>
+</ul>
+<h4 id="实际应用">实际应用</h4>
+<hr>
+<h5 id="背景介绍">背景介绍</h5>
+<p>在使用过程中应用docker-compose 来管理本地的docker, docker-compose默认为每个docker-compose应用创建自己的网络.</p>
+<pre><code>ip r
+default via 10.1.7.50 dev eth0 proto static metric 100 
+10.1.0.0/16 dev eth0 proto kernel scope link src 10.1.88.74 metric 100 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 
+172.19.0.0/16 dev br-130b4184e72e proto kernel scope link src 172.19.0.1 
+172.21.0.0/16 dev br-f277f9a2b577 proto kernel scope link src 172.21.0.1 
+172.22.0.0/16 dev br-24d29dd54a64 proto kernel scope link src 172.22.0.1 
+172.23.0.0/16 dev br-caf35e9eae30 proto kernel scope link src 172.23.0.1 
+192.168.0.0/16
+</code></pre><p>很容易与实体机的网络环境发生冲突</p>
+<p>需要使用docker network 来统一管理分配</p>
+<h5 id="创建网桥">创建网桥</h5>
+<pre><code># 创建网络
+docker  network create --subnet 172.19.0.0/16 --gateway 172.19.0.1 service;
+docker  network create --subnet 172.18.0.0/16 --gateway 172.18.0.1 web;
+
+# 查看网络
+docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+201b9332eb9a        bridge              bridge              local
+ac97b8f65d31        host                host                local
+7ca81ce4f054        none                null                local
+130b4184e72e        service             bridge              local
+24d29dd54a64        web                 bridge              local
+
+# 具体信息
+
+docker inspect service
+docker inspect web
+
+</code></pre><h4 id="在docker-compose-中应用网络">在docker-compose 中应用网络</h4>
+<pre><code># 配置网络
+cat docker-compose.yaml 
+
+version: '2'
+services:
+  web:
+   image: busybox
+   command: sleep 3600
+   ports:
+     - &quot;8000:8000&quot;
+   container_name: web
+networks:
+  default:
+    external:
+      name: web 
+
+# 启动容器
+
+docker-compose up -d
+
+# 查看容器网络
+
+docker-compose ps  
+
+
+docker exec -it 容器ID ip a
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/docker/cgroup-namespaces/">Cgroup Namespaces</a></li>
+        
+        <li><a href="/docker/dumb-init/">Dumb Init</a></li>
+        
+        <li><a href="/middleware/proxy/">代理</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

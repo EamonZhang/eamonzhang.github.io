@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>no space left on device | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="no space left on device - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2019-01-09T08:32:26&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2019-01-09T08:32:26&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="no space left on device">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/linux/nospace-device/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">no space left on device</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月9日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="问题描述">问题描述</h4>
+<p>Linux 系统中出现磁盘空间不足错误：</p>
+<ul>
+<li>No space left on device …</li>
+<li>在linux环境下，用vi打开某文件时，提示Write error in swap file</li>
+</ul>
+<h4 id="原因分析">原因分析</h4>
+<p>导致该问题的可能原因包括：</p>
+<ul>
+<li>磁盘分区空间使用率达到百分之百</li>
+<li>磁盘分区inode使用率达到百分之百</li>
+<li>僵尸文件：已删除文件因句柄被占用未释放导致相应空间未释放</li>
+</ul>
+<h4 id="解决方法">解决方法</h4>
+<h5 id="磁盘分区空间使用率达到百分之百">磁盘分区空间使用率达到百分之百</h5>
+<p>查看磁盘使用情况</p>
+<pre><code> df -h
+文件系统        容量  已用  可用 已用% 挂载点
+/dev/vda2        91G   21G   70G   23% /
+devtmpfs        3.9G     0  3.9G    0% /dev
+tmpfs           3.9G   56K  3.9G    1% /dev/shm
+tmpfs           3.9G   49M  3.8G    2% /run
+tmpfs           3.9G     0  3.9G    0% /sys/fs/cgroup
+/dev/vda3      1014M   33M  982M    4% /home
+/dev/vda1      1014M  210M  805M   21% /boot
+tmpfs           783M     0  783M    0% /run/user/0
+</code></pre><p>进入对应目录找出文件占用情况</p>
+<pre><code>cd /home
+
+du -sh * 
+</code></pre><p>根据实际情况删除对应的文件或扩容磁盘</p>
+<h5 id="磁盘分区inode使用率达到百分之百">磁盘分区inode使用率达到百分之百</h5>
+<p>关于linux中<a href="http://www.ruanyifeng.com/blog/2011/12/inode.html">inode介绍</a></p>
+<p>查看磁盘inode情况</p>
+<pre><code>df -i
+文件系统          Inode 已用(I)  可用(I) 已用(I)% 挂载点
+/dev/vda2      47249920  110191 47139729       1% /
+devtmpfs         998480     382   998098       1% /dev
+tmpfs           1001188       2  1001186       1% /dev/shm
+tmpfs           1001188     534  1000654       1% /run
+tmpfs           1001188      16  1001172       1% /sys/fs/cgroup
+/dev/vda3        524288      10   524278       1% /home
+/dev/vda1        524288     341   523947       1% /boot
+tmpfs           1001188       1  1001187       1% /run/user/0
+</code></pre><p>进入对应目录找出文件使用inode情况</p>
+<pre><code>cd /home 
+for i in *; do echo $i; find $i | wc -l; done
+</code></pre><p>根据实际情况删除对应的文件或扩容文件。</p>
+<p>如果inode数量与磁盘的容量比例在实际的应用中严重失调的情况下，如磁盘剩余空间很大但是inode已经耗尽时也可修改inode数量。</p>
+<p>修改inode方法:</p>
+<p>1 卸载磁盘</p>
+<pre><code>umount /home 
+</code></pre><p>2 重新格式化磁盘，在格式化时使用 -N 指定inode数量</p>
+<pre><code>mkfs.ext4 /dev/sdb -N 2589666666
+</code></pre><p>3 挂在磁盘</p>
+<pre><code>mount /dev/sdb /home
+</code></pre><p>或修改/etc/fstab ,开机自动挂载。</p>
+<p>4 查看inode</p>
+<p>ext3 ext4 文件格式</p>
+<pre><code>dumpe2fs -h /dev/sdb
+</code></pre><p>xfs 文件格式对应命令</p>
+<pre><code>xfs_info 
+xfs_growfs
+</code></pre><h5 id="僵尸文件">僵尸文件</h5>
+<p>未被清除句柄的僵死文件。这些文件实际上已经被删除，但是有服务程序在使用这些文件，导致这些文件一直被占用，无法释放磁盘空间。如果这些文件过多，会占用很大的磁盘空间。</p>
+<p>查看僵尸文件情况</p>
+<pre><code>lsof | grep delete | more
+</code></pre><p>如果遇到如下情况</p>
+<pre><code>lsof: no pwd entry for UID 105
+
+ps -U 105 查看是哪个用户
+
+</code></pre><p>重启对应的服务</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/meminfo/">meminfo Linux 内存信息</a></li>
+        
+        <li><a href="/postgres/pg_trgm/">pg_trgm的gist和gin索引加速字符匹配查询</a></li>
+        
+        <li><a href="/docker/troubles/">Docker 问题集</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

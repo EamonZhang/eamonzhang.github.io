@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>C 语言环境 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="C 语言环境 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-06-16T13:42:14&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-06-16T13:42:14&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="C 语言环境">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/asr/c/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">C 语言环境</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年6月16日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="centos7-cmake-版本升级由-v28122-升级至-v3145">Centos7 cmake 版本升级（由 v2.8.12.2 升级至 v3.14.5）</h2>
+<pre><code>#cmake -version
+cmake version 2.8.12.2
+</code></pre><p>安装基础工具</p>
+<pre><code>yum install -y gcc gcc-c++
+
+mkdir /opt/cmake
+
+cd /opt/cmake/
+
+wget https://cmake.org/files/v3.14/cmake-3.14.5.tar.gz
+
+tar zxvf cmake-3.14.5.tar.gz
+</code></pre><p>安装</p>
+<pre><code>yum remove cmake -y
+
+./configure --prefix=/usr/local/cmake
+
+make &amp;&amp; make install
+</code></pre><p>查看版本</p>
+<pre><code>#/usr/local/cmake/bin/cmake --version
+cmake version 3.14.5
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+</code></pre><p>设置环境</p>
+<pre><code>ln -s /usr/local/cmake/bin/cmake /usr/bin/cmake
+</code></pre><h2 id="clion-中使用makefile">Clion 中使用MakeFile</h2>
+<p>默认在Clion中使用CMakeList.txt,但是有些项目提供的是Makefile</p>
+<pre><code>cmake_minimum_required(VERSION 3.12)
+project(test)
+
+set(CMAKE_CXX_STANDARD 11)
+set(BUILD_DIR ${PROJECT_SOURCE_DIR})  #设置编译目录,也就是Makefile文件所在目录
+message(${BUILD_DIR}) #打印目录路径
+set(CMAKE_CXX_FLAGS &quot;${CMAKE_CXX_FLAGS} -std=c++11&quot;)
+add_custom_target(test COMMAND make -C ${BUILD_DIR})
+add_executable(start main.cpp)
+</code></pre><h2 id="clion-远程调试">Clion 远程调试</h2>
+<p><a href="https://haolaoshi.blog.csdn.net/article/details/107460448">https://haolaoshi.blog.csdn.net/article/details/107460448</a></p>
+<h2 id="编写-cmakelisttxt">编写 CMakeList.txt</h2>
+<p>CMakeLists.txt主要包含以上的7个步骤：</p>
+<pre><code>#1.cmake verson，指定cmake版本
+
+cmake_minimum_required(VERSION 3.13)
+
+#2.project name，指定项目的名称，一般和项目的文件夹名称FirstProject对应
+
+PROJECT(FirstProject)
+
+#3.head file path，头文件目录
+
+INCLUDE_DIRECTORIES()
+
+#4.source directory，源文件目录
+
+AUX_SOURCE_DIRECTORY(src DIR_SRCS)
+
+#5.set environment variable，设置环境变量，编译用到的源文件全部都要放到这里，否则编译能够通过，但是执行的时候会出现各种问题，比如&quot;symbol lookup error xxxxx , undefined symbol&quot;
+
+SET(TEST_MATH)
+
+#6.add executable file，添加要编译的可执行文件
+
+ADD_EXECUTABLE(${PROJECT_NAME} ${TEST_MATH})
+
+#7.add link library，添加可执行文件所需要的库（命名规则：lib+name+.so）,就添加该库的名称
+
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} m)
+</code></pre><h2 id="一个例子">一个例子</h2>
+<pre><code>#指定CMake编译最低要求版本
+cmake_minimum_required(VERSION 3.14)
+#给项目命名
+project(iniTest)
+
+set(CMAKE_CXX_STANDARD 14)
+SET(SOURCE ${PROJECT_SOURCE_DIR}/iniTest.cpp)
+#指定头文件目录
+#INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/public)
+#INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/utils)
+#INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR})
+#源文件
+#AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR} DIR_SRCS)
+#AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/public DIR_PUB)
+AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/utils DIR_UTILS)
+#指定生成库文件的目录
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+
+#将iniTest.cpp生成可执行文件iniTest
+ADD_EXECUTABLE(iniTest ${SOURCE} ${DIR_PUB} ${DIR_UTILS})
+
+#指定链接库文件目录
+#LINK_DIRECTORIES(/usr/lib)
+#指定iniTest 链接库recognizer
+TARGET_LINK_LIBRARIES(iniTest recognizer)
+TARGET_LINK_LIBRARIES(iniTest pthread)
+
+</code></pre><h2 id="编译安装过程">编译安装过程</h2>
+<pre><code>./configure
+make
+make install
+</code></pre><pre><code>1.配置
+
+configure 脚本负责在你使用的系统上准备好软件的构建环境。确保接下来的构建和安装过程所需要的依赖准备好，并且搞清楚使用这些依赖需要的东西。
+
+Unix 程序一般是用 C 语言写的，所以我们通常需要一个 C 编译器去构建它们。在这个例子中 configure 要做的就是确保系统中有 C 编译器，并确定它的名字和路径。
+
+2. 构建
+
+当 configure 配置完毕后，可以使用 make 命令执行构建。这个过程会执行在 Makefile 文件中定义的一系列任务将软件源代码编译成可执行文件。
+
+你下载的源码包一般没有一个最终的 Makefile 文件，一般是一个模版文件 Makefile.in 文件，然后 configure 根据系统的参数生成一个定制化的 Makefile 文件。
+
+3. 安装
+
+现在软件已经被构建好并且可以执行，接下来要做的就是将可执行文件复制到最终的路径。make install 命令就是将可执行文件、第三方依赖包和文档复制到正确的路径。
+
+这通常意味着，可执行文件被复制到某个 PATH 包含的路径，程序的调用文档被复制到某个 MANPATH 包含的路径，还有程序依赖的文件也会被存放在合适的路径。
+
+因为安装这一步也是被定义在 Makefile 中，所以程序安装的路径可以通过 configure 命令的参数指定，或者 configure 通过系统参数决定。
+
+如果要将可执行文件安装在系统路径，执行这步需要赋予相应的权限，一般是通过 sudo。
+
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/lightdm/">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a></li>
+        
+        <li><a href="/linux/so/">动态库</a></li>
+        
+        <li><a href="/python/ctypes/">python 与 C 交互编程</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

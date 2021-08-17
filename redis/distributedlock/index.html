@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>基于Redis 的分布式锁实现 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="基于Redis 的分布式锁实现 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-08-10T15:05:28&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-08-10T15:05:28&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="基于Redis 的分布式锁实现">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/redis/distributedlock/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">基于Redis 的分布式锁实现</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年8月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="分布式锁场景">分布式锁场景</h2>
+<ul>
+<li>秒杀抢购茅台，车票</li>
+<li>提前预约抢订车位，共享单车</li>
+</ul>
+<p>特点，多个用户同一时间对同一个资源进行申请，并且只能允许一个用户申请成功。</p>
+<h2 id="分布式锁必要条件">分布式锁必要条件</h2>
+<ul>
+<li>布式系统环境下，一个方法在同一时间只能被一个机器的一个线程执行；</li>
+<li>高可用的获取锁与释放锁；</li>
+<li>高性能的获取锁与释放锁；</li>
+<li>具备可重入特性；</li>
+<li>具备锁失效机制，防止死锁；</li>
+<li>具备非阻塞锁特性，即没有获取到锁将直接返回获取锁失败。</li>
+</ul>
+<h2 id="单redis实例版实现">单redis实例版实现</h2>
+<p>局限： 单实例redis，在sentinel主从结构中当主节点failover从节点尚未同步时存在风险。</p>
+<pre><code>#!/usr/bin/env python
+#--*-- coding:utf-8 --*--
+&quot;&quot;&quot;
+  分布式锁demo。类似抢购秒杀等场景。
+&quot;&quot;&quot;
+
+import redis
+import uuid
+import time
+import threading
+
+redis_pool = redis.ConnectionPool(host=&quot;192.168.6.14&quot;, port=6379, db=0)
+redis_client = redis.Redis(connection_pool=redis_pool)
+
+#获取一个锁
+#lock_name：锁定名称
+#acquire_time: 客户端等待获取锁的时间
+#time_out: 锁的超时时间
+def acquire_lock(lock_name,acquire_time=10,time_out=5):
+
+    identifier = str(uuid.uuid4())
+    end_time = time.time() + acquire_time
+    lock = &quot;string:lock:&quot; + lock_name
+    # print(threading.current_thread().name, &quot;开始申请锁...&quot;, time.asctime(time.localtime(time.time())))
+    while time.time() &lt; end_time:
+        # 注意事项：
+        # 正确方式， 使用set 方法 nx 具有原子性
+        # 错误方式， setnx + expire 组合方法不具备原子性
+        if redis_client.set(lock,identifier,ex=time_out,nx=True): # 获取锁成功
+            print(threading.current_thread().name, &quot;获得了锁...&quot;, time.asctime(time.localtime(time.time())))
+            return identifier
+        time.sleep(0.1)
+
+    # 在指定时间周期内未获取到锁
+    print(threading.current_thread().name, &quot;放弃申请锁.####&quot;, time.asctime(time.localtime(time.time())))
+    return False
+
+#释放一个锁
+def release_lock(lock_name,identifier):
+    lock = &quot;string:lock:&quot; + lock_name
+    lock_value = redis_client.get(lock)
+    if not lock_value : # 锁已经被超时释放
+        print(threading.current_thread().name, &quot;超时释放了锁...&quot;, time.asctime(time.localtime(time.time())))
+        return True
+    try:
+        pipe = redis_client.pipeline(True)
+        pipe.watch(lock)
+        if lock_value.decode() == identifier: # 匹配成功 ，将锁释放
+            pipe.multi()
+            pipe.delete(lock)
+            pipe.execute()
+            print(threading.current_thread().name, &quot;主动释放了锁...&quot;, time.asctime(time.localtime(time.time())))
+            return True
+    except redis.exceptions.WatchError:
+        pass
+    finally:
+        try:
+            pipe.unwatch()
+        except redis.exceptions.WatchError:
+            pass
+    return False
+
+# 秒杀
+def seckill():
+    identifier = acquire_lock('resource')
+    print(threading.current_thread().name , &quot;正在执行任务&quot;)
+    time.sleep(3)
+    release_lock('resource',identifier)
+
+if __name__ == '__main__':
+    print(&quot;程序开始执行 ： &quot;,time.asctime(time.localtime(time.time())))
+    # 模拟30个用户同时抢购
+    for i in range(30):
+        t = threading.Thread(target=seckill)
+        t.start()
+        # t.join()
+</code></pre><h2 id="多实例redis-实现">多实例Redis 实现</h2>
+<p>多实例高可用redis版 请参考redlock. 原理，多个独立的redis通过选举机制</p>
+<p>加锁时，发送<code>set(key,value,nx=True,ex=xxx)</code> 指令。只要过半节点set成功，就认为加锁成功。释放时向所有节点发送del指令。</p>
+<p>缺点： 运维成本增加，性能下降</p>
+<p>示例代码</p>
+<pre><code>#!/usr/bin/env python
+#--*-- coding:utf-8 --*--
+
+import  redlock
+
+addrs = [{
+    &quot;host&quot;:&quot;host1&quot;,
+    &quot;port&quot;:6379,
+    &quot;db&quot;:0
+    },{
+   &quot;host&quot;:&quot;host2&quot;,
+    &quot;port&quot;:6379,
+    &quot;db&quot;:0
+    },{
+    &quot;host&quot;:&quot;host3&quot;,
+    &quot;port&quot;:6379,
+    &quot;db&quot;:0
+}]
+
+dlm = redlock.Redlock(addrs)
+# 申请锁
+success = dlm.lock(&quot;acquire-lock&quot;,50)
+
+if success:
+    print(&quot;申请成功&quot;)
+    #do something
+    dlm.unlock(&quot;acquire-lock&quot;)
+else:
+    print(&quot;申请锁失败&quot;)
+</code></pre><h2 id="redis-事务补充说明">Redis 事务补充说明</h2>
+<p>指令： multi exec discard watch</p>
+<p>基本用法</p>
+<pre><code>watch userkey
+multi 
+  do something1
+  do something2
+exec
+</code></pre><p>Redis 事务不能保证原子性，即do something1 ,do something2 可以部分执行成功。仅保持了指令的串行化。</p>
+<p>WATCH 机制，就是一种乐观锁。在事务开始之前盯住一个或多个关键变量。当事务执行提交前如果关键变量被修改则事务执行失败。</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/libpg/">客户端故障转移</a></li>
+        
+        <li><a href="/postgres/prepare/">使用prepare预编译SQL</a></li>
+        
+        <li><a href="/postgres/materialized/">物化视图</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

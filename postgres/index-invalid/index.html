@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>引起索引失效 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="引起索引失效 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-12-20T16:34:22&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-12-20T16:34:22&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="引起索引失效">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/index-invalid/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">引起索引失效</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月20日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h5 id="简介">简介</h5>
+<p>索引的作用，加速检索，排序，分组。</p>
+<p>优点： 检索</p>
+<p>缺点： 新增，更新时需要维护索引，占磁盘空间，创建时锁表。</p>
+<p>维护： 根据统计表发生全表扫描次数，索引使用次数。合理添加删除索引。</p>
+<h5 id="索引失效的场景">索引失效的场景</h5>
+<p>如果where过滤条件设置不合理，即使索引存在，且where过滤条件中包含索引列，也会导致全表扫描，索引不起作用。什么条件下会导致索引失效呢？</p>
+<p>1.任何计算、函数、类型转换</p>
+<p>2.!=</p>
+<p>3.NOT，相当于使用函数</p>
+<p>4.模糊查询通配符在开头</p>
+<p>5.索引字段在表中占比较高</p>
+<p>6.多字段btree索引查询条件不包含第一列</p>
+<p>7.多字段索引查询条件使用OR（有时也会走索引扫描，但查询效率不高）</p>
+<p>8.表中数据量太少时</p>
+<h5 id="实例">实例</h5>
+<p>测试表</p>
+<pre><code>创建表
+postgres#=create table tbl_index(a bigint,b timestamp without time zone ,c varchar(12));
+
+插入1kw数据，打开计时器 对比创建索引对数据插入的影响。
+
+postgres=# \timing 
+Timing is on.
+
+postgres=# insert into tbl_index select generate_series(1,10000000),clock_timestamp()::timestamp without time zone,'zhang';
+INSERT 0 10000000
+Time: 25004.214 ms (00:25.004)
+
+postgres=# create index tbl_index_a ON tbl_index using btree (a);
+CREATE INDEX
+Time: 4119.733 ms (00:04.120)
+
+postgres=# create index tbl_index_b ON tbl_index using btree (b);
+CREATE INDEX
+Time: 6229.857 ms (00:06.230)
+
+postgres=# insert into tbl_index select generate_series(1,10000000),clock_timestamp()::timestamp without time zone,'eamon';
+INSERT 0 10000000
+Time: 153963.850 ms (02:33.964)
+</code></pre><p>tips</p>
+<p>大量数据导入时建议先导入数据后创建索引</p>
+<p>更新频繁的字段不建议建索引，如update_time</p>
+<h5 id="1任何计算函数类型转换">1.任何计算、函数、类型转换</h5>
+<pre><code>#索引检索
+postgres=# explain analyze select * from tbl_index where a = 100;
+                                                       QUERY PLAN                                                        
+-------------------------------------------------------------------------------------------------------------------------
+ Index Scan using tbl_index_a on tbl_index  (cost=0.44..19.78 rows=4 width=22) (actual time=0.012..0.015 rows=2 loops=1)
+   Index Cond: (a = 100)
+ Planning time: 0.053 ms
+ Execution time: 0.027 ms
+(4 rows)
+
+#计算
+postgres=# explain analyze select * from tbl_index where a +1 = 100;
+                                                           QUERY PLAN                                                           
+--------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..263387.92 rows=99999 width=22) (actual time=0.495..478.375 rows=2 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   -&gt;  Parallel Seq Scan on tbl_index  (cost=0.00..252388.02 rows=41666 width=22) (actual time=220.138..465.801 rows=1 loops=3)
+         Filter: ((a + 1) = 100)
+         Rows Removed by Filter: 6666666
+ Planning time: 0.107 ms
+ Execution time: 478.411 ms
+(8 rows)
+#解决方法
+create index tbl_index_a_1 on tbl_index using btree ((a+1));
+
+#类型转换
+postgres=# explain analyze select * from tbl_index where a::varchar  = '100';
+                                                           QUERY PLAN                                                           
+--------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..284221.09 rows=99999 width=22) (actual time=0.529..724.035 rows=2 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   -&gt;  Parallel Seq Scan on tbl_index  (cost=0.00..273221.19 rows=41666 width=22) (actual time=355.491..713.103 rows=1 loops=3)
+         Filter: (((a)::character varying)::text = '100'::text)
+         Rows Removed by Filter: 6666666
+ Planning time: 0.168 ms
+ Execution time: 724.075 ms
+(8 rows)
+
+postgres=# explain analyze select * from tbl_index where b::date = '2020-04-15';
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..263387.92 rows=99999 width=22) (actual time=0.505..4764.531 rows=20000000 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   -&gt;  Parallel Seq Scan on tbl_index  (cost=0.00..252388.02 rows=41666 width=22) (actual time=0.021..789.147 rows=6666667 loops=3)
+         Filter: ((b)::date = '2020-04-15'::date)
+ Planning time: 0.146 ms
+ Execution time: 5182.919 ms
+(7 rows)
+
+Time: 5184.795 ms (00:05.185)
+
+#解决方法 
+
+create index tbl_index_a2str on tbl_index using btree ((a::varchar));
+create index tbl_index_b2date on tbl_index using btree ((b::date));
+
+select * from tbl_index where b &lt; '2020-04-16 00:00:00' and b &gt;= '2020-04-15 00:00:00';
+
+</code></pre><h5 id="2">2.!=</h5>
+<pre><code>postgres=# explain analyze select * from tbl_index where a != 100;
+                                                        QUERY PLAN                                                        
+--------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on tbl_index  (cost=0.00..377387.04 rows=19999839 width=22) (actual time=0.020..1384.726 rows=19999998 loops=1)
+   Filter: (a &lt;&gt; 100)
+   Rows Removed by Filter: 2
+ Planning time: 0.132 ms
+ Execution time: 1790.685 ms
+(5 rows)
+
+Time: 1792.412 ms (00:01.792)
+</code></pre><h5 id="3-not">3. NOT</h5>
+<pre><code>postgres=# explain analyze select * from tbl_index where a is null;
+                                                       QUERY PLAN                                                       
+------------------------------------------------------------------------------------------------------------------------
+ Index Scan using tbl_index_a on tbl_index  (cost=0.44..8.21 rows=1 width=22) (actual time=0.022..0.022 rows=0 loops=1)
+   Index Cond: (a IS NULL)
+ Planning time: 0.123 ms
+ Execution time: 0.055 ms
+(4 rows)
+
+Time: 1.694 ms
+postgres=# explain analyze select * from tbl_index where a is not null;
+                                                        QUERY PLAN                                                        
+--------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on tbl_index  (cost=0.00..327389.00 rows=20000000 width=22) (actual time=0.025..1375.125 rows=20000000 loops=1)
+   Filter: (a IS NOT NULL)
+ Planning time: 0.121 ms
+ Execution time: 1789.101 ms
+(4 rows)
+
+Time: 1790.625 ms (00:01.791)
+</code></pre><h6 id="4模糊查询通配符在开头">4.模糊查询通配符在开头</h6>
+<p><a href="../postgres/pg_trgm/">参见</a></p>
+<h5 id="5索引字段在表中占比较高">5.索引字段在表中占比较高</h5>
+<pre><code>postgres=# create index tbl_index_c on tbl_index using btree (c);
+CREATE INDEX
+Time: 10552.062 ms (00:10.552)
+
+postgres=# analyze tbl_index ;
+ANALYZE
+Time: 118.018 ms
+postgres=# explain analyze select * from tbl_index where c = 'zhang';
+                                                        QUERY PLAN                                                        
+--------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on tbl_index  (cost=0.00..377389.90 rows=10034703 width=22) (actual time=0.021..1409.096 rows=10000000 loops=1)
+   Filter: ((c)::text = 'zhang'::text)
+   Rows Removed by Filter: 10000000
+ Planning time: 0.562 ms
+ Execution time: 1612.769 ms
+(5 rows)
+
+Time: 1615.034 ms (00:01.615)
+
+postgres=# explain analyze select * from tbl_index where c = 'eamon';
+                                                        QUERY PLAN                                                         
+---------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on tbl_index  (cost=0.00..377389.90 rows=9965369 width=22) (actual time=616.952..1404.717 rows=10000000 loops=1)
+   Filter: ((c)::text = 'eamon'::text)
+   Rows Removed by Filter: 10000000
+ Planning time: 0.066 ms
+ Execution time: 1607.572 ms
+(5 rows)
+
+Time: 1609.019 ms (00:01.609)
+
+postgres=# insert into tbl_index values(1,clock_timestamp()::timestamp without time zone,'zhangeamon');
+INSERT 0 1
+Time: 2.598 ms
+
+postgres=# explain analyze select * from tbl_index where c = 'zhangeamon';
+                                                       QUERY PLAN                                                        
+-------------------------------------------------------------------------------------------------------------------------
+ Index Scan using tbl_index_c on tbl_index  (cost=0.44..7.46 rows=1 width=22) (actual time=0.086..96.848 rows=1 loops=1)
+   Index Cond: ((c)::text = 'zhangeamon'::text)
+ Planning time: 0.157 ms
+ Execution time: 96.881 ms
+(4 rows)
+
+Time: 98.464 ms
+</code></pre><h5 id="6多字段btree索引查询条件不包含第一列">6.多字段btree索引查询条件不包含第一列</h5>
+<pre><code>#创建表
+postgres=# create table tbl_indexes(a int ,b varchar,c varchar);
+CREATE TABLE
+Time: 6.942 ms
+
+#插入数据
+postgres=# insert into tbl_indexes select generate_series(1,5000000),substring(md5(random()::text),0,6),substring(md5(random()::text),0,6);
+INSERT 0 5000000
+Time: 15003.647 ms (00:15.004)
+
+#创建多值索引
+postgres=# create index tbl_indexes_a_b_c on tbl_indexes using btree (a,b,c);
+CREATE INDEX
+Time: 2207.480 ms (00:02.207)
+
+postgres=# select * from tbl_indexes limit 10;
+ a  |   b   |   c   
+----+-------+-------
+  1 | 0e7fb | d6370
+  2 | e2eb1 | 51d3e
+  3 | 93521 | 5f6b6
+  4 | 5880d | 23527
+  5 | 66f8e | f462f
+  6 | 6ceb3 | c9beb
+  7 | 18d44 | 11d64
+  8 | f76a4 | edd04
+  9 | 91975 | 4c79d
+ 10 | 56f26 | 09e16
+(10 rows)
+
+
+#走索引
+postgres=# explain analyze select * from tbl_indexes where a = 10;
+                                                           QUERY PLAN                                                           
+--------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on tbl_indexes  (cost=582.18..28488.04 rows=25000 width=68) (actual time=0.030..0.031 rows=1 loops=1)
+   Recheck Cond: (a = 10)
+   Heap Blocks: exact=1
+   -&gt;  Bitmap Index Scan on tbl_indexes_a_b_c  (cost=0.00..575.93 rows=25000 width=0) (actual time=0.022..0.022 rows=1 loops=1)
+         Index Cond: (a = 10)
+ Planning time: 0.127 ms
+ Execution time: 0.075 ms
+(7 rows)
+
+Time: 2.878 ms
+postgres=# explain analyze select * from tbl_indexes where a = 10 and b = '91975';
+                                                         QUERY PLAN                                                         
+----------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on tbl_indexes  (cost=5.71..482.09 rows=125 width=68) (actual time=0.025..0.025 rows=0 loops=1)
+   Recheck Cond: ((a = 10) AND ((b)::text = '91975'::text))
+   -&gt;  Bitmap Index Scan on tbl_indexes_a_b_c  (cost=0.00..5.68 rows=125 width=0) (actual time=0.022..0.022 rows=0 loops=1)
+         Index Cond: ((a = 10) AND ((b)::text = '91975'::text))
+ Planning time: 0.146 ms
+ Execution time: 0.074 ms
+(6 rows)
+
+Time: 2.886 ms
+postgres=# explain analyze select * from tbl_indexes where a = 10 and b = '91975' and c = '4c79d';
+                                                             QUERY PLAN                                                              
+-------------------------------------------------------------------------------------------------------------------------------------
+ Index Only Scan using tbl_indexes_a_b_c on tbl_indexes  (cost=0.43..8.45 rows=1 width=68) (actual time=0.025..0.025 rows=0 loops=1)
+   Index Cond: ((a = 10) AND (b = '91975'::text) AND (c = '4c79d'::text))
+   Heap Fetches: 0
+ Planning time: 0.158 ms
+ Execution time: 0.067 ms
+(5 rows)
+
+Time: 3.136 ms
+postgres=# explain analyze select * from tbl_indexes where a = 10  and c = '4c79d';
+                                                          QUERY PLAN                                                          
+------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on tbl_indexes  (cost=638.46..1114.84 rows=125 width=68) (actual time=0.027..0.027 rows=0 loops=1)
+   Recheck Cond: ((a = 10) AND ((c)::text = '4c79d'::text))
+   -&gt;  Bitmap Index Scan on tbl_indexes_a_b_c  (cost=0.00..638.43 rows=125 width=0) (actual time=0.023..0.024 rows=0 loops=1)
+         Index Cond: ((a = 10) AND ((c)::text = '4c79d'::text))
+ Planning time: 0.178 ms
+ Execution time: 0.077 ms
+(6 rows)
+
+Time: 2.917 ms
+
+#不走索引
+postgres=# explain analyze select * from tbl_indexes where b = '91975' and c = '4c79d';
+                                                         QUERY PLAN                                                          
+-----------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..59290.50 rows=125 width=68) (actual time=0.577..127.956 rows=1 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   -&gt;  Parallel Seq Scan on tbl_indexes  (cost=0.00..58278.00 rows=52 width=68) (actual time=78.366..119.555 rows=0 loops=3)
+         Filter: (((b)::text = '91975'::text) AND ((c)::text = '4c79d'::text))
+         Rows Removed by Filter: 1666666
+ Planning time: 0.154 ms
+ Execution time: 127.993 ms
+(8 rows)
+
+Time: 130.603 ms
+
+</code></pre><h5 id="7多字段索引查询条件使用or有时也会走索引扫描但查询效率不高">7.多字段索引查询条件使用OR（有时也会走索引扫描，但查询效率不高）</h5>
+<pre><code>postgres=# explain analyze select * from tbl_indexes where a = 10  or c = '4c79d';
+                                                           QUERY PLAN                                                           
+--------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..64265.50 rows=49875 width=68) (actual time=0.520..138.035 rows=5 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   -&gt;  Parallel Seq Scan on tbl_indexes  (cost=0.00..58278.00 rows=20781 width=68) (actual time=52.632..129.858 rows=2 loops=3)
+         Filter: ((a = 10) OR ((c)::text = '4c79d'::text))
+         Rows Removed by Filter: 1666665
+ Planning time: 0.151 ms
+ Execution time: 138.075 ms
+(8 rows)
+
+Time: 139.952 ms
+postgres=# explain analyze select * from tbl_indexes where a = 10  or b = '4c79d';
+                                                           QUERY PLAN                                                           
+--------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1000.00..64265.50 rows=49875 width=68) (actual time=0.513..131.024 rows=8 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   -&gt;  Parallel Seq Scan on tbl_indexes  (cost=0.00..58278.00 rows=20781 width=68) (actual time=51.260..123.413 rows=3 loops=3)
+         Filter: ((a = 10) OR ((b)::text = '4c79d'::text))
+         Rows Removed by Filter: 1666664
+ Planning time: 0.152 ms
+ Execution time: 131.064 ms
+(8 rows)
+
+Time: 132.946 ms
+postgres=# explain analyze select * from tbl_indexes where a = 10  or a = 11;
+                                                              QUERY PLAN                                                              
+--------------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on tbl_indexes  (cost=1176.80..29434.85 rows=49875 width=68) (actual time=0.034..0.036 rows=2 loops=1)
+   Recheck Cond: ((a = 10) OR (a = 11))
+   Heap Blocks: exact=1
+   -&gt;  BitmapOr  (cost=1176.80..1176.80 rows=50000 width=0) (actual time=0.026..0.027 rows=0 loops=1)
+         -&gt;  Bitmap Index Scan on tbl_indexes_a_b_c  (cost=0.00..575.93 rows=25000 width=0) (actual time=0.020..0.020 rows=1 loops=1)
+               Index Cond: (a = 10)
+         -&gt;  Bitmap Index Scan on tbl_indexes_a_b_c  (cost=0.00..575.93 rows=25000 width=0) (actual time=0.005..0.005 rows=1 loops=1)
+               Index Cond: (a = 11)
+ Planning time: 0.152 ms
+ Execution time: 0.090 ms
+(10 rows)
+
+Time: 2.928 ms
+
+如果检索条件为同一个字段 如a = 1 or a =2  转换为 a in (1,2) 会更优。
+</code></pre><p>如果多个字段为同一类型可使用数组化索引</p>
+<pre><code>indexdb=# CREATE TABLE tbloom AS
+indexdb-#    SELECT
+indexdb-#      (random() * 1000000)::int as i1,
+indexdb-#      (random() * 1000000)::int as i2,
+indexdb-#      (random() * 1000000)::int as i3,
+indexdb-#      (random() * 1000000)::int as i4,
+indexdb-#      (random() * 1000000)::int as i5,
+indexdb-#      (random() * 1000000)::int as i6
+indexdb-#    FROM
+indexdb-#   generate_series(1,10000000);
+SELECT 10000000
+
+-- 创建bloom索引
+indexdb=# CREATE index btreeidx ON tbloom (i1, i2, i3, i4, i5, i6);
+CREATE INDEX
+
+indexdb=# EXPLAIN ANALYZE SELECT * FROM tbloom WHERE i2 = 898732 OR i5 = 123451;
+                                                                  QUERY PLAN                                                                  
+----------------------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=249337.50..385507.50 rows=99750 width=24) (actual time=345.415..684.760 rows=19 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   -&gt;  Parallel Bitmap Heap Scan on tbloom  (cost=248337.50..374532.50 rows=41562 width=24) (actual time=397.157..672.875 rows=6 loops=3)
+         Filter: ((i2 = 898732) OR (i5 = 123451))
+         Rows Removed by Filter: 3333327
+         Heap Blocks: exact=21455
+         -&gt;  Bitmap Index Scan on btreeidx  (cost=0.00..248312.56 rows=10000000 width=0) (actual time=331.686..331.686 rows=10000000 loops=1)
+ Planning time: 0.165 ms
+ Execution time: 684.813 ms
+(10 rows)
+
+-- 创建数组化索引
+indexdb=# create index ON tbloom USING gin ( (array[i2,i5]));
+CREATE INDEX
+
+indexdb=# explain analyze select * from tbloom where (ARRAY[i2, i5]) &amp;&amp; array[898732] or (ARRAY[i2, i5]) &amp;&amp; array[123451];
+                                                              QUERY PLAN                                                              
+--------------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on tbloom  (cost=991.87..68961.41 rows=99750 width=24) (actual time=0.068..0.174 rows=41 loops=1)
+   Recheck Cond: ((ARRAY[i2, i5] &amp;&amp; '{898732}'::integer[]) OR (ARRAY[i2, i5] &amp;&amp; '{123451}'::integer[]))
+   Heap Blocks: exact=41
+   -&gt;  BitmapOr  (cost=991.87..991.87 rows=100000 width=0) (actual time=0.046..0.046 rows=0 loops=1)
+         -&gt;  Bitmap Index Scan on tbloom_array_idx  (cost=0.00..471.00 rows=50000 width=0) (actual time=0.030..0.030 rows=23 loops=1)
+               Index Cond: (ARRAY[i2, i5] &amp;&amp; '{898732}'::integer[])
+         -&gt;  Bitmap Index Scan on tbloom_array_idx  (cost=0.00..471.00 rows=50000 width=0) (actual time=0.015..0.015 rows=18 loops=1)
+               Index Cond: (ARRAY[i2, i5] &amp;&amp; '{123451}'::integer[])
+ Planning time: 0.266 ms
+ Execution time: 0.242 ms
+(10 rows)
+
+Time: 1.311 ms
+</code></pre><p>性能提升明显</p>
+<h5 id="8表中数据量少时">8.表中数据量少时</h5>
+<pre><code>postgres=# create table tbl_index_less(a int);
+CREATE TABLE
+
+postgres=# create index tbl_index_less_a on tbl_index_less using btree (a);
+CREATE INDEX
+
+-- 加10条
+postgres=# insert into tbl_index_less select generate_series(1,10);
+INSERT 0 10
+
+postgres=# analyze tbl_index_less ;
+ANALYZE
+
+postgres=# explain analyze select * from tbl_index_less where a = 4;
+                                               QUERY PLAN                                               
+--------------------------------------------------------------------------------------------------------
+ Seq Scan on tbl_index_less  (cost=0.00..1.12 rows=1 width=4) (actual time=0.013..0.016 rows=1 loops=1)
+   Filter: (a = 4)
+   Rows Removed by Filter: 9
+ Planning time: 0.276 ms
+ Execution time: 0.054 ms
+(5 rows)
+
+-- 加100条
+postgres=# insert into tbl_index_less select generate_series(10,100);
+INSERT 0 91
+
+postgres=# explain analyze select * from tbl_index_less where a = 4;
+                                               QUERY PLAN                                               
+--------------------------------------------------------------------------------------------------------
+ Seq Scan on tbl_index_less  (cost=0.00..2.26 rows=1 width=4) (actual time=0.017..0.033 rows=1 loops=1)
+   Filter: (a = 4)
+   Rows Removed by Filter: 100
+ Planning time: 0.236 ms
+ Execution time: 0.062 ms
+(5 rows)
+
+-- 1000条
+postgres=# insert into tbl_index_less select generate_series(100,1000);
+INSERT 0 901
+
+postgres=# analyze tbl_index_less ;
+ANALYZE
+postgres=# explain analyze select * from tbl_index_less where a = 4;
+                                                              QUERY PLAN                                                              
+--------------------------------------------------------------------------------------------------------------------------------------
+ Index Only Scan using tbl_index_less_a on tbl_index_less  (cost=0.28..8.29 rows=1 width=4) (actual time=0.010..0.010 rows=1 loops=1)
+   Index Cond: (a = 4)
+   Heap Fetches: 1
+ Planning time: 0.073 ms
+ Execution time: 0.023 ms
+(5 rows)
+
+</code></pre><p>tips</p>
+<p>数据库是如何知道表中的数据量及数据分布情况 ，主要是依赖统计信息 pg_class ,pg_stats。</p>
+<p>当表数据变更很大时，如批量导入数据或删除数据时。需要及时使用analyze更新统计信息。</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>关于 null
+<a href="https://yq.aliyun.com/articles/241219">https://yq.aliyun.com/articles/241219</a></p>
+<p>查看表顺序扫描和索引的次数</p>
+<pre><code>select * from pg_stat_all_tables where relname = 'tab_name';
+select * from pg_stat_all_indexes where relname = 'tbl_name';
+</code></pre><p>创建索引
+<a href="http://www.cnblogs.com/alianbog/p/5631505.html">http://www.cnblogs.com/alianbog/p/5631505.html</a></p>
+<p>mysql 索引建议 参考
+<a href="https://mp.weixin.qq.com/s/xdbo67F72a9eTV93TEuL6w">https://mp.weixin.qq.com/s/xdbo67F72a9eTV93TEuL6w</a></p>
+<p><a href="https://github.com/powa-team/pg_qualstats">索引利用统计</a></p>
+<pre><code>A PostgreSQL extension for collecting statistics about predicates, helping find what indices are missing
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/stat/">Access Modify Change 三种时间戳</a></li>
+        
+        <li><a href="/postgres/role-manager/">权限管理</a></li>
+        
+        <li><a href="/postgres/dba/">DBA 日常</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

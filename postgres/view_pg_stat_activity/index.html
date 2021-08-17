@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>数据库视图之 pg_stat_activity | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="数据库视图之 pg_stat_activity - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2019-08-23T13:47:12&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2019-08-23T13:47:12&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="数据库视图之 pg_stat_activity">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/view_pg_stat_activity/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">数据库视图之 pg_stat_activity</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年8月23日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="介绍">介绍</h2>
+<p>当需要了解数据库当前运行状态或需要排查问题时，首先需要查看的就是pg_stat_activity。该视图中包含了你想知道的数据库连接信息，正在执行的有哪些sql，并处于何状态。</p>
+<p>One row per server process, showing information related to the current activity of that process, such as state and current query.</p>
+<p>每一行都表示一个系统进程，显示与当前会话的活动进程的一些信息，比如当前回话的状态和查询等。</p>
+<h2 id="字段解读">字段解读</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Column</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">datid</td>
+<td style="text-align:left">oid</td>
+<td style="text-align:left">OID of the database this backend is connected to</td>
+</tr>
+<tr>
+<td style="text-align:left">datname</td>
+<td style="text-align:left">name</td>
+<td style="text-align:left">Name of the database this backend is connected to</td>
+</tr>
+<tr>
+<td style="text-align:left">pid</td>
+<td style="text-align:left">integer</td>
+<td style="text-align:left">Process ID of this backend</td>
+</tr>
+<tr>
+<td style="text-align:left">usesysid</td>
+<td style="text-align:left">oid</td>
+<td style="text-align:left">OID of the user logged into this backend</td>
+</tr>
+<tr>
+<td style="text-align:left">usename</td>
+<td style="text-align:left">name</td>
+<td style="text-align:left">Name of the user logged into this backend</td>
+</tr>
+<tr>
+<td style="text-align:left">application_name</td>
+<td style="text-align:left">text</td>
+<td style="text-align:left">Name of the application that is connected to this backend</td>
+</tr>
+<tr>
+<td style="text-align:left">client_addr</td>
+<td style="text-align:left">inet</td>
+<td style="text-align:left">IP address of the client connected to this backend. If this field is null, itindicates(表明) either that the client is connected via a Unixsocket(插座) on the server machine or that this is aninternal(内部的) process such as autovacuum.</td>
+</tr>
+<tr>
+<td style="text-align:left">client_hostname</td>
+<td style="text-align:left">text</td>
+<td style="text-align:left">Host name of the connected client, as reported by a reverse(相反) DNS lookup(查找) of client_addr. This field will only be non-null for IP connections, and only whenlog_hostname is enabled.</td>
+</tr>
+<tr>
+<td style="text-align:left">client_port</td>
+<td style="text-align:left">integer</td>
+<td style="text-align:left">TCP port number that the client is using for communication with this backend, or-1 if a Unixsocket(插座) is used</td>
+</tr>
+<tr>
+<td style="text-align:left">backend_start</td>
+<td style="text-align:left">timestamp(时间戳) with time zone</td>
+<td style="text-align:left">Time when this process was started, i.e., when the client connected to the server</td>
+</tr>
+<tr>
+<td style="text-align:left">xact_start</td>
+<td style="text-align:left">timestamp with time zone</td>
+<td style="text-align:left">Time when this process' current transaction(交易) was started, or null if no transaction is active. If the current query is the first of its transaction, this column is equal to the query_start column.</td>
+</tr>
+<tr>
+<td style="text-align:left">query_start</td>
+<td style="text-align:left">timestamp with time zone</td>
+<td style="text-align:left">Time when the currently active query was started, or if state is not active, when the last query was started</td>
+</tr>
+<tr>
+<td style="text-align:left">state_change</td>
+<td style="text-align:left">timestamp(时间戳) with time zone</td>
+<td style="text-align:left">Time when the state was last changed</td>
+</tr>
+<tr>
+<td style="text-align:left">waiting</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">True if this backend is currently waiting on a lock</td>
+</tr>
+<tr>
+<td style="text-align:left">state</td>
+<td style="text-align:left">text</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">query</td>
+<td style="text-align:left">text</td>
+<td style="text-align:left">Text of this backend&rsquo;s most recent query. Ifstate isactive this field shows the currently executing query. In all other states, it shows the last query that was executed.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="state-字段详解">state 字段详解</h2>
+<ul>
+<li>active: The backend isexecuting(实行) a query. 正在执行中</li>
+<li>idle: The backend is waiting for a new client command. 连接已经建立等待客户端命令</li>
+<li>idle in transaction: The backend is in atransaction(交易), but is not currentlyexecuting(实行) a query. 事务已经begin 尚未commit</li>
+<li>idle in transaction (aborted): This state is similar toidle in transaction, except one of thestatements(声明) in the transaction caused an error. 事务中断</li>
+<li>fastpath function call: The backend is executing a fast-path function.</li>
+<li>disabled: This state is reported iftrack_activities is disabled in this backend.</li>
+</ul>
+<h2 id="当前正在执行的查询所处的状态">当前正在执行的查询所处的状态</h2>
+<pre><code>select datname, count(*) AS open,count(*) FILTER (WHERE state = 'active') AS active,
+                count(*) FILTER(WHERE state = 'idle') AS idle ,
+                count(*) FILTER(WHERE state = 'idle in transaction') AS idle_in_trans
+                FROM pg_stat_activity GROUP BY ROLLUP(1);
+</code></pre><h2 id="一直有连接长时间处于idle-in-transaction的问题">一直有连接长时间处于idle in transaction的问题</h2>
+<p>配置postgresql.conf</p>
+<pre><code>idle_in_transaction_session_timeout=30000
+</code></pre><h2 id="query-内容显示不全">query 内容显示不全</h2>
+<p>配置postgresql.conf</p>
+<pre><code>track_activity_query_size=32768
+</code></pre><h2 id="杀死已挂掉的连接">杀死已挂掉的连接</h2>
+<pre><code>select pg_terminate_backend(pid)
+</code></pre><h2 id="取消正在执行的sql-pid-不会释放连接只会取消sql查询语句">取消正在执行的sql pid (不会释放连接，只会取消sql查询语句)</h2>
+<pre><code>SELECT pg_cancel_backend(pid);
+</code></pre><h2 id="进一步功能扩展">进一步功能扩展</h2>
+<p><a href="https://github.com/pgsentinel/pgsentinel">https://github.com/pgsentinel/pgsentinel</a></p>
+<ul>
+<li>postgresql extension providing Active session history</li>
+</ul>
+<p>类似 Oracle中的ASH(Active Session History)，ASH通过每秒钟抽取活动会话样本，为分析在最近时刻的性能问题提供最直接有效的依据。</p>
+<p>应用场景： 当监控显示，某个瞬间数据库连接数超过阀值。 查看日志显示too many connentions 。 使用pg_stat_activity 视图时只能查看当前的活动连接。故障瞬间抓取不到。</p>
+<p>pgsentinel 记录了历史活动状态，帮助对历史问题的追溯。</p>
+<h2 id="pg_top">pg_top</h2>
+<p>类似 Linux top</p>
+<p>安装</p>
+<pre><code>yum install pg_top
+</code></pre><p>使用 (本机 &amp; 远程)</p>
+<pre><code>#pg_top -U postgres -h **** 
+
+last pid: 55852;  load avg:  1.55,  1.25,  0.93;       up 0+23:44:48                                                                                                                09:17:30
+7 processes: 5 sleeping, 2 uninterruptable
+CPU states:  1.1% user,  0.0% nice,  0.5% system, 96.8% idle,  1.6% iowait
+Memory: 125G used, 561M free, 240K buffers, 117G cached
+DB activity: 242 tps, 12 rollbs/s,  12 buffer r/s, 99 hit%,  82120 row r/s,    0 row w/s
+DB I/O:     0 reads/s,     0 KB/s,     0 writes/s,     0 KB/s
+DB disk: 7450.0 GB total, 7055.5 GB free (5% used)
+Swap: 4096M free
+
+  PID USERNAME PRI NICE  SIZE   RES STATE   TIME   WCPU    CPU COMMAND
+40030 postgres  20    0   17G 5624K sleep   0:07  0.68%  0.60% postmaster
+40022 postgres  20    0   17G  946M sleep   0:05  0.42%  0.40% postmaster
+40023 postgres  20    0   17G 1061M sleep   0:02  0.25%  0.00% postmaster
+54528 postgres  20    0   17G 1220M disk    0:01  1.38%  0.00% postmaster
+54963 postgres  20    0   17G  747M disk    0:01  1.27%  0.00% postmaster
+40024 postgres  20    0   17G  130M sleep   0:00  0.03%  0.00% postmaster
+55853 postgres  20    0   17G 6900K sleep   0:00  0.00%  0.00% postmaster
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/network-security/jumpserver/">Jumpserver 跳板机</a></li>
+        
+        <li><a href="/postgres/citus01/">citus 简单应用</a></li>
+        
+        <li><a href="/postgres/tpch/">tpch AP测试</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

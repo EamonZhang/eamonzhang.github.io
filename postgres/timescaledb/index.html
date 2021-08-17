@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>TimescaleDB 时序数据库 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="TimescaleDB 时序数据库 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2019-01-30T10:20:51&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2019-01-30T10:20:51&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="TimescaleDB 时序数据库">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/timescaledb/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">TimescaleDB 时序数据库</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <p>时序数据库
+<a href="https://github.com/timescale/timescaledb">https://github.com/timescale/timescaledb</a></p>
+<p>数据库配置
+<a href="https://github.com/timescale/timescaledb-tune">https://github.com/timescale/timescaledb-tune</a></p>
+<p>copy并行导入数据
+<a href="https://github.com/timescale/timescaledb-parallel-copy">https://github.com/timescale/timescaledb-parallel-copy</a></p>
+<h4 id="常用方法">常用方法</h4>
+<p>创建拓展</p>
+<pre><code>CREATE EXTENSION timescaledb;
+</code></pre><p>创建一个普通的表</p>
+<pre><code>CREATE TABLE conditions (
+  time        TIMESTAMPTZ       NOT NULL,
+  location    TEXT              NOT NULL,
+  temperature DOUBLE PRECISION  NULL,
+  humidity    DOUBLE PRECISION  NULL
+);
+</code></pre><p>转换成时序数据库表</p>
+<pre><code>SELECT create_hypertable('conditions', 'time');
+</code></pre><ul>
+<li>conditions 表名</li>
+<li>time 时序字段</li>
+</ul>
+<p>修改时序间隔 对新表生效</p>
+<pre><code>SELECT set_chunk_time_interval('conditions', INTERVAL '24 hours');
+</code></pre><p>查看分区</p>
+<pre><code>SELECT show_chunks('conditions');
+
+SELECT show_chunks('conditions', older_than =&gt; INTERVAL '3 months')
+
+SELECT show_chunks('conditions', older_than =&gt; DATE '2017-01-01');
+
+SELECT show_chunks(newer_than =&gt; INTERVAL '3 months');
+
+SELECT show_chunks(older_than =&gt; INTERVAL '3 months', newer_than =&gt; INTERVAL '4 months');
+
+</code></pre><p>查看数据大小</p>
+<pre><code>SELECT * FROM timescaledb_information.hypertable;
+</code></pre><p>自动删除</p>
+<pre><code>添加规则
+SELECT add_drop_chunks_policy('conditions', INTERVAL '6 months');
+删除规则
+SELECT remove_drop_chunks_policy('conditions');
+</code></pre><h4 id="注意事项">注意事项</h4>
+<pre><code>When creating hypertables, one constraing that TimescaleDB imposes is that the partitioning column (in your case 'date_time') must be included in any unique indexes (and Primary Keys) for that table.
+</code></pre><p><a href="https://stackoverflow.com/questions/61205063/error-cannot-create-a-unique-index-without-the-column-date-time-used-in-part">https://stackoverflow.com/questions/61205063/error-cannot-create-a-unique-index-without-the-column-date-time-used-in-part</a></p>
+<h4 id="时序数据特征">时序数据特征</h4>
+<ul>
+<li>have a timestamp</li>
+<li>append only ,less update or delete</li>
+<li>recent hot</li>
+</ul>
+<h4 id="限制">限制</h4>
+<p>除分区列外不可以在其他列中有唯一约束</p>
+<p>原数据库中的唯一约束为全局表内唯一约束，在分区表（chunks）中不能够保证全局唯一</p>
+<pre><code>When converting a normal SQL table to a hypertable, pay attention to how you handle constraints.
+A hypertable can contain foreign keys to normal SQL table columns, but the reverse is not allowed. UNIQUE and PRIMARY constraints must include the partitioning key.
+</code></pre><h4 id="最佳实践">最佳实践</h4>
+<h5 id="chunk-时间范围">chunk 时间范围</h5>
+<p>与数据量有关，一个chunk容量约1/4 内存大小</p>
+<pre><code>SELECT * FROM create_hypertable('conditions', 'time',
+       chunk_time_interval =&gt; INTERVAL '1 day');
+</code></pre><h5 id="组合索引">组合索引</h5>
+<p>1 等值查询 （e,time）e 为等值查询列 time 为分区时间列<br>
+2 范围查询  (time,c) c 为连续值列</p>
+<h5 id="排序">排序</h5>
+<h5 id="压缩">压缩</h5>
+<p>设置历史数据压缩策略，压缩后变成列存，且为只读</p>
+<pre><code> alter table conditions set( timescaledb.compress);
+
+ timescaledb.compress_segmentby
+ timescaledb.compress_orderby
+</code></pre><p>设置压缩策略</p>
+<pre><code> SELECT add_compress_chunks_policy('conditions', INTERVAL '60d'); 
+</code></pre><p>删除压缩策略</p>
+<pre><code> remove_compress_chunks_policy()
+</code></pre><p>手动压缩</p>
+<pre><code>SELECT compress_chunk('_timescaledb_internal._hyper_1_2_chunk');
+</code></pre><p>解压缩</p>
+<pre><code>SELECT compress_chunk('_timescaledb_internal._hyper_1_2_chunk');
+</code></pre><p>查看压缩情况</p>
+<pre><code>SELECT * FROM timescaledb_information.compressed_chunk_stats;
+</code></pre><p>手动批量压缩</p>
+<pre><code>SELECT compress_chunk(i) from show_chunks('conditions', newer_than, older_than) i;	
+</code></pre><h5 id="保留策略">保留策略</h5>
+<p>设置保留数据策略</p>
+<pre><code>SELECT add_drop_chunks_policy('conditions', INTERVAL '24 hours');
+</code></pre><h5 id="连续分析窗口">连续分析窗口</h5>
+<p>物化视图自动持续更新</p>
+<h4 id="更多信息查看">更多信息查看</h4>
+<p>比如压缩策略，保留策略，持续集成策略等</p>
+<pre><code>\dv timescaledb_information.*
+                            List of relations
+         Schema          |            Name             | Type |  Owner   
+-------------------------+-----------------------------+------+----------
+ timescaledb_information | compressed_chunk_stats      | view | postgres
+ timescaledb_information | compressed_hypertable_stats | view | postgres
+ timescaledb_information | continuous_aggregate_stats  | view | postgres
+ timescaledb_information | continuous_aggregates       | view | postgres
+ timescaledb_information | drop_chunks_policies        | view | postgres
+ timescaledb_information | hypertable                  | view | postgres
+ timescaledb_information | license                     | view | postgres
+ timescaledb_information | policy_stats                | view | postgres
+ timescaledb_information | reorder_policies            | view | postgres
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/pg_rewind/">PG主从切换 pg_rewind</a></li>
+        
+        <li><a href="/postgres/patroni/">PG高可用Patroni</a></li>
+        
+        <li><a href="/mysql/performance-cmd/">MySQL常用性能分析命令</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>pgbouncer 连接池 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="pgbouncer 连接池 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-12-27T09:00:49&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-12-27T09:00:49&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="pgbouncer 连接池">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/pgbouncer/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">pgbouncer 连接池</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月27日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="背景介绍">背景介绍</h4>
+<ul>
+<li>Pgbouncer是一个针对PostgreSQL数据库的轻量级连接池</li>
+<li>pgbouncer 的目标是降低因为新连接到 PostgreSQL 的连接而导致的性能损失</li>
+</ul>
+<p>使用术语说明：<br>
+为了后面的描述更清晰，使用如下术语</p>
+<ul>
+<li>Client : 指访问者</li>
+<li>Pgboucer: 指连接池</li>
+<li>Postgres: 指数据库。</li>
+<li>Connetions: 指彼此之间的连接</li>
+</ul>
+<p>整体架构</p>
+<p>原来: Client -&gt; Postgres
+现在: Client -&gt; Pgbounce -&gt; Postgres</p>
+<h5 id="优势">优势</h5>
+<p>内存消耗低(默认为2k/连接)，因为Bouncer不需要每次都接受完整的数据包。<br>
+Postgres的连接是进程模型，pogbouncer 使用libevent进行socket 通信。</p>
+<p>总结： 数据访问过程中建立连接很耗资源，pgboucer就是为了减少数据访问中的建立连接次数，重复利用已建立的连接进而缓解数据库压力。</p>
+<h4 id="三种连接池模型">三种连接池模型</h4>
+<ul>
+<li>session 会话级 ； 比较友好</li>
+<li>transaction 事务级； 比较激进</li>
+<li>statement 一个sql ； 客户端强制autocommit 模式</li>
+</ul>
+<h4 id="安装">安装</h4>
+<pre><code>查看当前系统中版本
+yum list pgbouncer.x86_64
+pgbouncer.x86_64                         1.15.0-1.rhel7
+
+升级到最新版
+yum update pgbouncer.x86_64
+
+安装
+yum install pgbouncer.x86_64 -y
+
+启动
+systemctl start pgbouncer 
+systemctl enable pgbouncer
+
+</code></pre><h4 id="简单配置">简单配置</h4>
+<pre><code>cat /etc/pgbouncer/pgbouncer.ini | grep -v '^;' | grep -v '^$' 
+[databases]
+postgres= host=127.0.0.1 port=5432 user=postgres dbname=postgres connect_query='select 1' pool_size=40
+zabbix= host=10.1.88.74 port=5432 dbname=zabbix  connect_query='select 1' pool_size=40
+[pgbouncer]
+logfile = /var/log/pgbouncer/pgbouncer.log
+pidfile = /var/run/pgbouncer/pgbouncer.pid
+listen_addr = 0.0.0.0
+listen_port = 6432
+auth_type = md5
+auth_file = /etc/pgbouncer/userlist.txt
+admin_users = postgres
+stats_users = stats, postgres
+pool_mode = session
+server_reset_query = DISCARD ALL
+max_client_conn = 100
+default_pool_size = 20
+log_connections = 0 
+log_disconnections = 0
+</code></pre><h5 id="说明">说明:</h5>
+<h5 id="databases">[databases]</h5>
+<p>主要思想承上启下的作用相当于代理，呈上对访问者，启下对后端数据库。<br>
+第一项的名称是pgbouncer对外提供的数据库名 postgres ,等号后面是连接后端数据库名信息<br>
+pool_mode = session<br>
+pool_size , 指定database 连接到后端服务器的连接数的最大值。配合数据库中的database connection limit ;</p>
+<p>关于user 配置后面细说</p>
+<h5 id="pgbouncer">[pgbouncer]</h5>
+<p>pgbouncer自身的配置<br>
+max_client_conn=允许用户建立多少个连接到pgbouncer   ,类似于数据库中的max_connection。
+default_pool_size 表示默认连接池中建立多少个到后端数据库的连接,全局。</p>
+<h4 id="关于用户-user的配置说明">关于用户 User的配置说明</h4>
+<p>主要配置
+[databases]中 user 表示连接到后端数据库所使用的用户
+[pgbouncer]中 user 表示用户连接到pgbouncer中所使用的用户</p>
+<p>情况1： 如果在databases中指定user=zabbix Client无论使用的是哪个用户，连接postgres的用户都是zabbix</p>
+<p>情况2:  如果在database中没有指定user ,连接postgres的用户为Client使用的用户</p>
+<p>pg中查看当前用户</p>
+<pre><code>postgres=# select * from current_user;
+ current_user 
+--------------
+ postgres
+(1 行记录)
+</code></pre><p>auth_file 内容
+格式 &ldquo;user&rdquo; &ldquo;password&rdquo;,注意需要双引号<br>
+可以在数据库中获取内容</p>
+<pre><code>select usename,passwd from pg_shadow ; 
+</code></pre><pre><code>cat /etc/pgbouncer/userlist.txt  
+&quot;zabbix&quot; &quot;md520e0e8833ebe8947cd347f94b1c4977f&quot;
+</code></pre><p>认证方法: 在pgbouncer中执行</p>
+<pre><code>show config;
+auth_query | SELECT usename, passwd FROM pg_shadow WHERE usename=$1
+</code></pre><p>推荐： 不在database中配置user, 在auth_file中配置user</p>
+<h4 id="登陆pgboucer-控制台">登陆pgboucer 控制台</h4>
+<pre><code>psql -p 6432 -U postgres  -h 127.0.0.1 pgbouncer
+psql (10.4, 服务器 1.9.0/bouncer)
+输入 &quot;help&quot; 来获取帮助信息.
+
+pgbouncer=# show clients
+pgbouncer-# ;
+ type |   user   | database  | state  |   addr    | port  | local_addr | local_port |    connect_time     |    request_time     | wait | wait_us | close_needed |    ptr    | link | remote_pid | tls 
+------+----------+-----------+--------+-----------+-------+------------+------------+---------------------+---------------------+------+---------+--------------+-----------+------+------------+-----
+ C    | postgres | pgbouncer | active | 127.0.0.1 | 57048 | 127.0.0.1  |       6432 | 2019-01-02 16:22:22 | 2019-01-02 16:22:29 |    0 |       0 |            0 | 0x1a938c0 |      |          0 | 
+(1 行记录)
+
+pgbouncer=# show pools;
+     database     |   user    | cl_active | cl_waiting | sv_active | sv_idle | sv_used | sv_tested | sv_login | maxwait | maxwait_us | pool_mode 
+------------------+-----------+-----------+------------+-----------+---------+---------+-----------+----------+---------+------------+-----------
+ normandy_cloud_d | postgres  |         0 |          0 |         0 |       0 |       1 |         0 |        0 |       0 |          0 | session
+ pgbouncer        | pgbouncer |         1 |          0 |         0 |       0 |       0 |         0 |        0 |       0 |          0 | statement
+(2 行记录)
+
+更多
+
+show  help;
+NOTICE:  Console usage
+描述:  
+	SHOW HELP|CONFIG|DATABASES|POOLS|CLIENTS|SERVERS|VERSION
+	SHOW FDS|SOCKETS|ACTIVE_SOCKETS|LISTS|MEM
+	SHOW DNS_HOSTS|DNS_ZONES
+	SHOW STATS|STATS_TOTALS|STATS_AVERAGES
+	SET key = arg
+	RELOAD
+	PAUSE [&lt;db&gt;]
+	RESUME [&lt;db&gt;]
+	DISABLE &lt;db&gt;
+	ENABLE &lt;db&gt;
+	RECONNECT [&lt;db&gt;]
+	KILL &lt;db&gt;
+	SUSPEND
+	SHUTDOWN
+
+
+</code></pre><h4 id="关于poolsize的说明">关于poolsize的说明</h4>
+<p>[databases]中 pool_size: 配置连接池的大小,如果没有配置，使用[pgbouncer]default_pool_size
+[pgbouncer]中<br>
+default_pool_size: 连接池的默认大小<br>
+max_client_conn: client到pgbouncer的最大数<br>
+pool_mode: 连接模式<br>
+min_pool_size: 连接池的最小大小，即每个连接池至少会向后端数据库保持多少个连接。Pgboucer -&gt; Postgres  <br>
+reserve_pool_size: How many additional connections to allow to a pool. 0 disables.<br>
+reserve_pool_timeout: 保留连接的超时时间<br>
+max_user_connections: Client -&gt; pgbouncer 每个用户最大连接数
+max_db_connections: Client -&gt; Pgbouncer 每个数据库最大连接数
+disable_pqexec:  禁止简单查询。 简单查询协议允许一个请求发送多条Sql，但是容易造成Sql注入风险。</p>
+<h4 id="关于日志信息配置说明">关于日志信息配置说明</h4>
+<p>syslog: 是否打开syslog<br>
+syslog_ident: Under what name to send logs to syslog.  Default: pgbouncer (program name)
+log_disconnections:  <br>
+log_connections:  <br>
+log_pooler_errors: Client pgbouncer 之间的错误日志</p>
+<h4 id="关于访问pgbouncer配置">关于访问pgbouncer配置</h4>
+<p>admin_users:  可以登陆console执行所有命令的用户。 多个用户之间用',&lsquo;号分割
+stats_users:  可以登陆console执行SHOW 命令(except SHOW FDS)的用户。</p>
+<h4 id="关于监控检查超时设置">关于监控检查超时设置</h4>
+<p>server_reset_query: 当一个后端的数据库连接会话被某一个客户端使用时，它的属性可能会被修改。当这个后端数据库连接被第二个客户端使用的时就有可能产生问题。如上个连接中有 ABORT or ROLLBACK ,下个使用此连接的用户肯能会很惨。<br>
+所以需要将所有的属性清空。  Default: DISCARD ALL</p>
+<p>server_check_delay： Default: 30.0<br>
+server_check_query： select 1</p>
+<p><a href="http://pgbouncer.github.io/config.html#console-access-control">更多配置信息</a></p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/cmd-xargs/">xargs 命令</a></li>
+        
+        <li><a href="/linux/cmd-sed/">sed 命令</a></li>
+        
+        <li><a href="/linux/cmd-awk/">awk 命令</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

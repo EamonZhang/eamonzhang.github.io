@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>高级SQL | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="高级SQL - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-01-11T17:05:25&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-01-11T17:05:25&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="高级SQL">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/high_level_sql/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">高级SQL</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月11日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <ul>
+<li>分组集</li>
+<li>排序集</li>
+<li>假象集</li>
+<li>窗口函数</li>
+<li>递归</li>
+</ul>
+<h4 id="递归应用">递归应用</h4>
+<p>递归加速count(distint) 查询。 使用场景，数据分布：大数据集但其中的类型却很少</p>
+<pre><code>-- 创建表
+test1=# create table recurive_t(user_id int,free float,info text);
+CREATE TABLE
+-- 加入数据
+test1=# insert into recurive_t select 1 ,generate_series(0,1000000),'user 1 pay !!!';
+test1=# insert into recurive_t select 2 ,generate_series(0,2000000),'user 2 pay !!!';
+test1=# insert into recurive_t select 3 ,generate_series(0,3000000),'user 3 pay !!!';
+test1=# insert into recurive_t select 4 ,generate_series(0,4000000),'user 4 pay !!!';
+test1=# insert into recurive_t select 5 ,generate_series(0,4000000),'user 5 pay !!!';
+test1=# analyze recurive_t ;
+ANALYZE
+</code></pre><pre><code>-- count(distinct()) 查询
+test1=# explain analyze select count(distinct(user_id)) from recurive_t ;
+                                                                  QUERY PLAN                                                                   
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=10000412944.36..10000412944.37 rows=1 width=8) (actual time=2793.108..2793.108 rows=1 loops=1)
+   -&gt;  Seq Scan on recurive_t  (cost=10000000000.00..10000377992.29 rows=13980829 width=4) (actual time=0.006..1065.338 rows=14000005 loops=1)
+ Planning time: 0.054 ms
+ Execution time: 2793.144 ms
+(4 行记录)
+
+时间：2793.548 ms (00:02.794)
+</code></pre><pre><code>-- group by 查询
+test1=# explain analyze select user_id from recurive_t group by user_id;
+                                                                                      QUERY PLAN                                                                                      
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Group  (cost=1000.46..511742.60 rows=5 width=4) (actual time=8.073..1119.549 rows=5 loops=1)
+   Group Key: user_id
+   -&gt;  Gather Merge  (cost=1000.46..511742.57 rows=10 width=4) (actual time=8.072..1138.226 rows=15 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         -&gt;  Group  (cost=0.43..510741.40 rows=5 width=4) (actual time=0.053..845.258 rows=5 loops=3)
+               Group Key: user_id
+               -&gt;  Parallel Index Only Scan using recurive_t_user_id_idx on recurive_t  (cost=0.43..496178.03 rows=5825345 width=4) (actual time=0.050..694.273 rows=4666668 loops=3)
+                     Heap Fetches: 1803282
+ Planning time: 0.133 ms
+ Execution time: 1138.276 ms
+(11 行记录)
+
+时间：1139.009 ms (00:01.139)
+</code></pre><pre><code>-- 添加索引，对优化没有效果
+test1=# create index ON recurive_t (user_id );
+CREATE INDEX
+时间：5990.992 ms (00:05.991)
+test1=# explain analyze select count(distinct(user_id)) from recurive_t ;
+                                                                             QUERY PLAN                                                                             
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=613020.52..613020.53 rows=1 width=8) (actual time=3180.517..3180.517 rows=1 loops=1)
+   -&gt;  Index Only Scan using recurive_t_user_id_idx on recurive_t  (cost=0.43..578020.51 rows=14000005 width=4) (actual time=0.089..1531.050 rows=14000005 loops=1)
+         Heap Fetches: 14000005
+ Planning time: 0.288 ms
+ Execution time: 3180.570 ms
+(5 行记录)
+
+时间：3181.520 ms (00:03.182)
+</code></pre><pre><code>--- 画重点，利用递归查询。效果惊人
+test1=# explain analyze with recursive skip as(
+    (
+      select min(t.user_id) as user_id from recurive_t t
+    )
+    union
+    (
+      select (select min(t.user_id) from recurive_t t where t.user_id &gt; s.user_id )
+         from skip s
+    )
+)
+select count(*) from skip;
+                                                                                       QUERY PLAN                                                                                        
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=54.94..54.95 rows=1 width=8) (actual time=0.271..0.271 rows=1 loops=1)
+   CTE skip
+     -&gt;  Recursive Union  (cost=0.47..52.67 rows=101 width=4) (actual time=0.051..0.256 rows=6 loops=1)
+           -&gt;  Result  (cost=0.47..0.48 rows=1 width=4) (actual time=0.048..0.048 rows=1 loops=1)
+                 InitPlan 3 (returns $1)
+                   -&gt;  Limit  (cost=0.43..0.47 rows=1 width=4) (actual time=0.043..0.044 rows=1 loops=1)
+                         -&gt;  Index Only Scan using recurive_t_user_id_idx on recurive_t t_1  (cost=0.43..525904.40 rows=15394398 width=4) (actual time=0.042..0.042 rows=1 loops=1)
+                               Index Cond: (user_id IS NOT NULL)
+                               Heap Fetches: 1
+           -&gt;  WorkTable Scan on skip s  (cost=0.00..5.02 rows=10 width=4) (actual time=0.031..0.032 rows=1 loops=6)
+                 SubPlan 2
+                   -&gt;  Result  (cost=0.47..0.48 rows=1 width=4) (actual time=0.028..0.028 rows=1 loops=6)
+                         InitPlan 1 (returns $3)
+                           -&gt;  Limit  (cost=0.43..0.47 rows=1 width=4) (actual time=0.027..0.027 rows=1 loops=6)
+                                 -&gt;  Index Only Scan using recurive_t_user_id_idx on recurive_t t  (cost=0.43..188135.76 rows=5131466 width=4) (actual time=0.025..0.025 rows=1 loops=6)
+                                       Index Cond: ((user_id IS NOT NULL) AND (user_id &gt; s.user_id))
+                                       Heap Fetches: 4
+   -&gt;  CTE Scan on skip  (cost=0.00..2.02 rows=101 width=0) (actual time=0.054..0.263 rows=6 loops=1)
+ Planning time: 0.415 ms
+ Execution time: 0.373 ms
+(20 行记录)
+
+时间：1.872 ms
+</code></pre><h6 id="with">WITH</h6>
+<p>利用with as 不需要修改索引，指定查询计划</p>
+<pre><code>select * from T where A=1 and B = 2;
+
+执行计划可能使用A索引，也可能走B索引
+
+WITH T_a as (
+ select * from T where A = 1;
+)
+select * from T_a where B = 1;
+
+执行计划走A 索引 
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/thinking_in_db_fd/">数据库优化思考 - 结构设计</a></li>
+        
+        <li><a href="/postgres/auto_vacuum_trigger/">auto vacuum 触发机制</a></li>
+        
+        <li><a href="/postgres/partition/">原生分区表</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

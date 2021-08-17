@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Istios on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/istio/</link>
+    <description>Recent content in Istios on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 21 Jul 2020 15:22:08 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/istio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>API 自动化测试</title>
+      <link>https://zhangeamon.top/istio/auto-api-test/</link>
+      <pubDate>Tue, 21 Jul 2020 15:22:08 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/istio/auto-api-test/</guid>
+      <description>简介 主要用于Restful风格接口测试,指针对模块或系统间接口进行的测试 单一接口测试 多接口组合逻辑测试 定时自动，生成测试报告 失败通知 测试用例断言 返回状态码 返回结果 超时时间 基础应用需求 Postman 测试用例编写 Newman 执行测试用例命令行工具 Jenkins 自动化集成 Git 测试用例成果物管理 Allure 生成测试报告 TestLink 测试用例管理</description>
+    </item>
+    
+    <item>
+      <title>服务发现</title>
+      <link>https://zhangeamon.top/istio/servicediscovery/</link>
+      <pubDate>Fri, 05 Jun 2020 10:19:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/istio/servicediscovery/</guid>
+      <description>为什么需要服务发现 在传统的服务架构中，服务之间的依赖关系较为简单，服务部署的位置也通常不会变化。 前段的服务通常配置来发现后端服务具体的IP或端口。比如后端的服务原来部署在10.1.10.2的5522端口上，现在如果想把服务部署在10.1.10.3的5523端口上。 前段和后端都不许</description>
+    </item>
+    
+    <item>
+      <title>熔断，限流，降级</title>
+      <link>https://zhangeamon.top/istio/concept01/</link>
+      <pubDate>Tue, 13 Nov 2018 10:23:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/istio/concept01/</guid>
+      <description>写在前面 在学习Service Mesh前还是最好先清楚几个概念，如熔断，限流，降级。接下来一起揭开面纱，让陌生的名词变得没有那么神秘。一切都来自于现实的应用场景，及解决问题的方法方式。 consumer表示服务调用方 provider表示服务提供方 A调用B服务，一般是泛指调用B服务里面</description>
+    </item>
+    
+    <item>
+      <title>Istio 1.0.3 安装　</title>
+      <link>https://zhangeamon.top/istio/install/</link>
+      <pubDate>Mon, 12 Nov 2018 13:44:34 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/istio/install/</guid>
+      <description>Service Mesh(服务网格) Kubernetes 已经给我们带来了诸多的好处。但是仍有些需求比如 A/B 测试、金丝雀发布、限流、访问控制,端到端认证等需要运维人员进一步去解决。 Istio 是完全开源的服务网格,提供了一套完整的解决方案，可以透明地分层到现有的分布式应用程序上。对开发人员几乎无感的同时获得超能力。 如果想要现</description>
+    </item>
+    
+    <item>
+      <title>蓝绿、A/B测试、金丝雀发布</title>
+      <link>https://zhangeamon.top/istio/concept02/</link>
+      <pubDate>Fri, 09 Nov 2018 10:17:38 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/istio/concept02/</guid>
+      <description>蓝绿发布 准备两套环境，蓝和绿。绿环境为当前正式环境，现在将新版部署到蓝环境当中并进行测试。没有问题后将路由指向蓝环境。若发现问题可将路由指回到原来的绿环境中进行回滚。 问题： 如果是无状态应用还可以，如果应用有状态或类似数据库之类的应该很麻烦，还有新旧版本是否兼容的问题。 A/B 测试 用来测</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Storages on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/storage/</link>
+    <description>Recent content in Storages on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 09 Mar 2021 16:40:29 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/storage/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>云存储同步 rclone</title>
+      <link>https://zhangeamon.top/storage/rclone/</link>
+      <pubDate>Tue, 09 Mar 2021 16:40:29 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/storage/rclone/</guid>
+      <description>云端对象同步 Rclone (&amp;ldquo;rsync for cloud storage&amp;rdquo;) is a command line program to sync files and directories to and from different cloud storage providers. https://github.com/rclone/rclone</description>
+    </item>
+    
+    <item>
+      <title>minio 轻量级对象存储</title>
+      <link>https://zhangeamon.top/storage/minio/</link>
+      <pubDate>Mon, 18 Mar 2019 16:59:48 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/storage/minio/</guid>
+      <description>简单了解 minio 完全实现了s3协议，使用简单方便。 支持多机模式，提高数据可用性和整体容量。 限制， 最多5T存储。 单个文件最大5T。 缺点， 不能在线扩容。开发者认为扩容应该是开发人员需要解决的问题。 安装及简单使用 服务端 #下载 wget https://dl.minio.io/server/minio/release/linux-amd64/minio mv minio /usr/local/bin/ chmod 777 /usr/local/bin/minio #启动服务 minio server minidata/ Endpoint: http://10.1.88.74:9000 http://172.17.0.1:9000 http://172.19.0.1:9000 http://172.21.0.1:9000 http://172.22.0.1:9000 http://172.23.0.1:9000 http://127.0.0.1:9000 AccessKey: ZSYLNWA109W0Q4DWDS73 SecretKey: kuqn+i1MpR0yoE9RoT59gYjRuB5IJdz8IhIZOqP9 Browser Access: http://10.1.88.74:9000 http://172.17.0.1:9000 http://172.19.0.1:9000 http://172.21.0.1:9000</description>
+    </item>
+    
+    <item>
+      <title>云存储介绍</title>
+      <link>https://zhangeamon.top/storage/introduce/</link>
+      <pubDate>Fri, 07 Dec 2018 11:04:12 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/storage/introduce/</guid>
+      <description>对象存储(oss) 适用于大量的小文件，RESFULL接口方式存储读取迅速,不能修改，不用担心元数据过大问题。通常的架构为使用其他的数据库软件如(Hbase,ES) 等来存放管理元数据。 swift minio 块存储 这种接口通常以QEMU Driver或者Kernel Module的方式存在，这种接口需要实</description>
+    </item>
+    
+  </channel>
+</rss>

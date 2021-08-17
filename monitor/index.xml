@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Monitors on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/monitor/</link>
+    <description>Recent content in Monitors on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 31 Mar 2021 09:08:35 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/monitor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Percona Toolkit</title>
+      <link>https://zhangeamon.top/monitor/percona-toolkit/</link>
+      <pubDate>Wed, 31 Mar 2021 09:08:35 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/percona-toolkit/</guid>
+      <description>一款监控 实体机 mysql pg mongodb 等的 监控工具集 https://www.percona.com/doc/percona-toolkit/LATEST/index.html</description>
+    </item>
+    
+    <item>
+      <title>Smapler</title>
+      <link>https://zhangeamon.top/monitor/smapler/</link>
+      <pubDate>Wed, 10 Feb 2021 09:31:44 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/smapler/</guid>
+      <description>一款轻量级的一体化监控工具 https://github.com/sqshq/sampler</description>
+    </item>
+    
+    <item>
+      <title>Nginx 状态监控</title>
+      <link>https://zhangeamon.top/monitor/nginx-status/</link>
+      <pubDate>Mon, 20 Apr 2020 11:12:28 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/nginx-status/</guid>
+      <description>Nginx 开启status用以监控状态信息 Nginx 可以通过with-http_stub_status_module模块来监控nginx的一些状态信息。 通过nginx -V来查看是否有with-http_stub_status_module该模块。 # nginx -V nginx version: nginx/1.16.1 built by gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) built with OpenSSL 1.0.2k-fips 26 Jan 2017 TLS SNI support</description>
+    </item>
+    
+    <item>
+      <title>Postgres 10 监控指标</title>
+      <link>https://zhangeamon.top/monitor/postgres-indicators/</link>
+      <pubDate>Fri, 27 Sep 2019 15:13:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/postgres-indicators/</guid>
+      <description>实体机 Cpu 内存 IO 网络 磁盘大小 数据库基本信息 服务启动时间 select pg_postmaster_start_time(); 版本信息 select current_setting(&#39;server_version&#39;); 主从角色 select pg_is_in_recovery();</description>
+    </item>
+    
+    <item>
+      <title>Telegraf&#43;Influxdb&#43;Grafana</title>
+      <link>https://zhangeamon.top/monitor/influxdb01/</link>
+      <pubDate>Tue, 26 Feb 2019 09:42:08 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/influxdb01/</guid>
+      <description>架构组建介绍 telegraf 数据采集 Agent for collecting and Reporting Metrics and Events. influxdb 时序数据库存储 Purpose Buid time series databases. granafa 数据展现</description>
+    </item>
+    
+    <item>
+      <title>Postgres</title>
+      <link>https://zhangeamon.top/monitor/postgres/</link>
+      <pubDate>Fri, 11 Jan 2019 17:09:51 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/postgres/</guid>
+      <description>Postgresql 常用监控 , 巡检报表 直接利用PG提供的性能统计数据 PG的很多性能数据可以通过查询pg_stat_或pg_statio_开头的系统表获取 zabbix http://pg-monz.github.io/pg_monz/index-en.html zabbix-extensions PG专用的监控工具 pgsnap, pgstatspack,pgwatch,pg_statsinfo等。这些工具主要做PG的性能分析，状态查看的。不能做故障</description>
+    </item>
+    
+    <item>
+      <title>Zabbix Postgres Fqa</title>
+      <link>https://zhangeamon.top/monitor/zabbix-postgres-fqa/</link>
+      <pubDate>Mon, 24 Dec 2018 17:18:11 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/zabbix-postgres-fqa/</guid>
+      <description>如何使用篇 如何使用zabbix监控postgres 我们采用的是github中的开源项目zabbix-extensions中的postgres，iostat对Postgres数据库性能指标及系统IO进行监控。 以及对实体机进行监控，本文主要介绍对postgres的性能进行监控和分析 如</description>
+    </item>
+    
+    <item>
+      <title>Zabbix FQA</title>
+      <link>https://zhangeamon.top/monitor/zabbix-fqa/</link>
+      <pubDate>Mon, 24 Dec 2018 16:53:20 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/zabbix-fqa/</guid>
+      <description>如何使用篇 如何安装 安装文档 架构模型为服务端、被监控端。 被监控端agent安装在需要被监控的主机上，负责收集被监控主机相关状态的信息指标如内存，cup，网络等。 服务端负责汇总所有agent的信息，如存储，处理，展现。数据存放在指定的数据库中如mysql pg。 需安装软件说明 zabbix-server-pgsql 服务端 zabbix-web-pgsql</description>
+    </item>
+    
+    <item>
+      <title>监控介绍</title>
+      <link>https://zhangeamon.top/monitor/introduce/</link>
+      <pubDate>Fri, 07 Dec 2018 11:32:43 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/introduce/</guid>
+      <description>监控目的 改进传统的定期巡检方式，对在线运行系统进行7x24小时实时不间断自动监控， 可随时了解到系统的整体运行情况及具体的性能指标。解放运维人员双手。 通过监控系统可做到： 根据历史监控数据，对未来做出预测 可对感兴趣的系统指标进行自定义监测并设置预警、报警阀值 发生异常时，及时预警，报警</description>
+    </item>
+    
+    <item>
+      <title>Promethues Altermanager 报警</title>
+      <link>https://zhangeamon.top/monitor/prometheus-altermanager/</link>
+      <pubDate>Wed, 21 Nov 2018 17:29:01 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/prometheus-altermanager/</guid>
+      <description>Prometheus Alertmanager 概述 Alertmanager与Prometheus是相互分离的两个组件。Prometheus服务器根据报警规则将警报发送给Alertmanager，然后Alertmanager将silencing、inhibition、aggregation等消息通过电子邮件、PaperDu</description>
+    </item>
+    
+    <item>
+      <title>Promethues 基本概念</title>
+      <link>https://zhangeamon.top/monitor/prometheus-concepts/</link>
+      <pubDate>Wed, 21 Nov 2018 14:08:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/prometheus-concepts/</guid>
+      <description>数据模型(Data Model) 由指标名称(metric)和一个或一组标签(lable)集合以及float64类型的值组成。 例如 up{instance=&amp;quot;10.1.88.71:9115&amp;quot;,job=&amp;quot;blackbox_exporter_10.1.88.74_icmp&amp;quot;} 1 metric类型 client libraries提供了四种metric类型，包括Counter、Gauge、Histogram、Summary。 Counter 计数器，只允许增加或重置为</description>
+    </item>
+    
+  </channel>
+</rss>

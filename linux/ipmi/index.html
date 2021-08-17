@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>远程管理卡 命令管理IPMI | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="远程管理卡 命令管理IPMI - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-05-10T16:58:56&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-05-10T16:58:56&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="远程管理卡 命令管理IPMI">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/linux/ipmi/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">远程管理卡 命令管理IPMI</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="ipmi">IPMI</h2>
+<p>IPMI，即智能平台管理接口（Intelligent Platform Management Interface），IPMI的核心是一个专用芯片/控制器(BMC)，独立于操作系统、BIOS和处理器，因此属于带外管理设备。正是因为如此，我们可以通过BMC来控制或者获取系统的各种信息，而不需要关注系统是否正常。比如，系统卡住了，可以通过ipmi reset系统，而不需要跑到机房断电；系统无法登录也可以远程屏幕查看是什么问题。</p>
+<h2 id="使用ipmi-配置远程管理">使用ipmi 配置远程管理</h2>
+<p>远程管理卡的基本信息通常通过BIOS进行配置</p>
+<p>缺点： 需要重启机器。不灵活。</p>
+<p>下面通过Linux 系统命令行工具实现对管理卡的配置</p>
+<h4 id="安装">安装</h4>
+<pre><code>yum install OpenIPMI OpenIPMI-tools
+</code></pre><h2 id="网络信息配置管理">网络信息配置管理</h2>
+<h4 id="查看现有管理卡配置信息">查看现有管理卡配置信息</h4>
+<pre><code>ipmitool lan print 1
+</code></pre><h4 id="设置网络信息">设置网络信息</h4>
+<pre><code>ipmitool -I open lan set 1 ipsrc static
+ipmitool -I open lan set 1 ipaddr x.x.x.x
+ipmitool -I open lan set 1 netmask x.x.x.x
+ipmitool -I open lan set 1 defgw ipaddr x.x.x.x
+ipmitool -I open lan set 1 access on
+</code></pre><h4 id="通信安全增强">通信安全增强</h4>
+<pre><code>ipmitool -I open lan set 1 snmp COMUNIATION
+</code></pre><h2 id="用户信息配置管理">用户信息配置管理</h2>
+<h4 id="查看现有用户配置">查看现有用户配置</h4>
+<pre><code># ipmitool -I open user list 1
+ID  Name             Callin  Link Auth  IPMI Msg   Channel Priv Limit
+1                    false   false      true       ADMINISTRATOR
+2   admin            false   false      true       ADMINISTRATOR
+</code></pre><h4 id="设置用户-2-密码">设置用户 2 密码</h4>
+<pre><code>ipmitool -I open user set password 2
+</code></pre><h4 id="设置用户-2-可用默认即可用">设置用户 2 可用(默认即可用)</h4>
+<pre><code>ipmitool -I open user enable 2
+</code></pre><h2 id="验证测试">验证测试</h2>
+<h4 id="获取本机状态信息">获取本机状态信息</h4>
+<pre><code>ipmitool -H 管理卡IP地址 -U 用户名 -P 密码 sensor 
+</code></pre><h4 id="获取远程机器状态信息">获取远程机器状态信息</h4>
+<pre><code>ipmitool -I lan -H 远程机器管理卡IP地址 -U 用户名 -P 密码 sensor 
+</code></pre><h4 id="远程机器电源管理">远程机器电源管理</h4>
+<pre><code>ipmitool -I lan -H 远程机器管理卡IP地址 -U 用户名 -P 密码 chassis power off/reset/on/status
+</code></pre><p>其他管理扩展</p>
+<pre><code>#ipmitool chassis status
+
+System Power         : on
+Power Overload       : false
+Power Interlock      : inactive
+Main Power Fault     : false
+Power Control Fault  : false
+Power Restore Policy : always-off
+Last Power Event     : ac-failed
+Chassis Intrusion    : inactive
+Front-Panel Lockout  : inactive
+Drive Fault          : false
+Cooling/Fan Fault    : false
+Front Panel Control  : none
+</code></pre><h2 id="命令简单说明">命令简单说明</h2>
+<ul>
+<li>
+<p>channel 概念理解，所有的配置都对应着相应channel。</p>
+</li>
+<li>
+<p>-I 参数， open(本机) lan(远端)</p>
+</li>
+</ul>
+<h2 id="常用命令">常用命令</h2>
+<pre><code>1. 查看机箱电源状态：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power status
+2. 开机：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power on
+3. 关机：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power off
+4. 重启机器：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) power reset
+5. pxe安装系统：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) chassis bootdev pxe
+6. 远程查看屏幕：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) sol activate
+7. 关闭当前远程查看屏幕的会话：
+ipmitool -I lanplus -H (IP) -U (用户名) -P (密码) sol deactivate
+8. 查看机器重启原因：
+ipmitool -I open chassis restart_cause
+
+
+</code></pre><h2 id="bmc-重启">BMC 重启</h2>
+<pre><code>ipmitool mc reset [warm/cold]
+</code></pre><h2 id="bmc-恢复默认出厂设置">BMC 恢复默认出厂设置</h2>
+<pre><code>TODO 待验证
+ipmitool raw ** **
+</code></pre><h2 id="扩展功能-设置来电自启动">扩展功能 设置来电自启动</h2>
+<p>当发生意外断电时，在来电后自启动，通常在bios中电源管理项中可配置。但是每天机器都重启进入bios配置太麻烦了。</p>
+<p>查看现有策略</p>
+<pre><code>#ipmitool  chassis status
+System Power         : on
+Power Overload       : false
+Power Interlock      : inactive
+Main Power Fault     : false
+Power Control Fault  : false
+Power Restore Policy : always-on
+</code></pre><p>修改策略</p>
+<pre><code>支持策略类型
+#ipmitool  chassis policy list
+Supported chassis power policy:  always-off always-on previous
+</code></pre><pre><code>设置策略
+# ipmitool  chassis policy always-on
+Set chassis power restore policy to always-on
+</code></pre><h2 id="todo-远程屏幕">TODO 远程屏幕</h2>
+<p>需要BIOS 中配置 Serial Communication 重定向到COM2 口。</p>
+<p>默认是将显示信息输出到COM1，本地显示器。</p>
+<h2 id="补充-远程屏幕管理">补充 远程屏幕管理</h2>
+<p>利用自带的远程管理卡功能</p>
+<p>1 登陆到远程管理卡界面</p>
+<p>2 Launch 下载jveiwer.jnlp 文件到本地</p>
+<p>3 本地运行</p>
+<pre><code>javaws --config jviewer.jnlp
+</code></pre><p>注意事项 ⚠️ ： <code>请一定安装使用jdk 删除本地openjdk !!! openjdk 是jdk 的阉割版</code></p>
+<p>可能遇见问题 1</p>
+<pre><code>cannot grant permissions to unsigned JARs
+</code></pre><p>当前环境</p>
+<ul>
+<li>
+<p>Unbutu Desktop</p>
+</li>
+<li>
+<p>jdk 1.8</p>
+</li>
+<li>
+<p>javaws IcedTea</p>
+</li>
+</ul>
+<p>IcedTea 是openjdk 的一个补充,封装，包含了javaws（java Web Start）。 修改javaws 的安全策略没用</p>
+<p>删除本地openjdk 包括 javaws, openjdk 是jdk 的阉割版。</p>
+<p>原因： java 安全配置问题，jdk 8 后默认安全等级发生变更， 解决方法</p>
+<p>vi ../jre/lib/security/java.security</p>
+<p>删除 DM5</p>
+<pre><code>jdk.jar.disabledAlgorithms=MD2,MD5,RSA keySize &lt; 1024
+jdk.jar.disabledAlgorithms=MD2,RSA keySize &lt; 1024
+</code></pre><p>可能问题 2</p>
+<p>安全验证</p>
+<pre><code>运行 jcontrol 加入ip 白名单
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/python/django_max_con_age/">Django CONN_MAX_AGE 对数据连接的影响</a></li>
+        
+        <li><a href="/python/setup-packet/">使用setup打包</a></li>
+        
+        <li><a href="/python/django-models-querys/">Django Models Querys</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

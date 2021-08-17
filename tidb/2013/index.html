@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title> ERROR 2013 (HY000): Lost connection to MySQL server during query  | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content=" ERROR 2013 (HY000): Lost connection to MySQL server during query  - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-11-14T10:08:02&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-11-14T10:08:02&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content=" ERROR 2013 (HY000): Lost connection to MySQL server during query ">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/tidb/2013/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title"> ERROR 2013 (HY000): Lost connection to MySQL server during query </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月14日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="error-2013-hy000-lost-connection-to-mysql-server-during-query--错误出现场景">ERROR 2013 (HY000) Lost connection to MySQL server during query  错误出现场景</h4>
+<pre><code>select count(id) from account_user where id&gt; 0; 
++----------+
+| count(id) |
++----------+
+|  2940245 |
++----------+
+1 row in set (0.78 sec)
+
+delete from account_user where id&gt; 0; 
+ERROR 2013 (HY000): Lost connection to MySQL server during query
+
+</code></pre><p>tidb.log</p>
+<pre><code>2018/11/14 10:57:12.476 server.go:303: [info] con:261 new connection 10.1.88.32:54462
+2018/11/14 10:57:15.387 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:792.561353ms txn_start_ts:404269101106331649 region_id:77367 store_addr:10.1.88.84:20160 kv_process_ms:537
+2018/11/14 10:57:17.227 pd.go:107: [warning] get timestamp too slow: 135.012109ms
+2018/11/14 10:57:17.812 pd.go:107: [warning] get timestamp too slow: 56.316863ms
+2018/11/14 10:57:17.821 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.226284139s txn_start_ts:404269101106331649 region_id:77863 store_addr:10.1.88.85:20160 kv_process_ms:1580 scan_total_write:314161 scan_processed_write:314160 scan_total_data:314160 scan_processed_data:314160 scan_total_lock:1 scan_processed_lock:0
+2018/11/14 10:57:17.826 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.231259247s txn_start_ts:404269101106331649 region_id:77590 store_addr:10.1.88.85:20160 kv_process_ms:1807 scan_total_write:355885 scan_processed_write:355884 scan_total_data:355884 scan_processed_data:355884 scan_total_lock:1 scan_processed_lock:0
+2018/11/14 10:57:17.872 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.276994472s txn_start_ts:404269101106331649 region_id:77576 store_addr:10.1.88.86:20160 kv_process_ms:1684 scan_total_write:346208 scan_processed_write:346207 scan_total_data:346207 scan_processed_data:346207 scan_total_lock:1 scan_processed_lock:0
+2018/11/14 10:57:18.074 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.48000411s txn_start_ts:404269101106331649 region_id:77448 store_addr:10.1.88.87:20160 kv_process_ms:2701 scan_total_write:431178 scan_processed_write:431177 scan_total_data:431177 scan_processed_data:431177 scan_total_lock:1 scan_processed_lock:0
+2018/11/14 10:57:18.270 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.675012935s txn_start_ts:404269101106331649 region_id:77664 store_addr:10.1.88.87:20160 kv_process_ms:2221 scan_total_write:343732 scan_processed_write:343731 scan_total_data:343731 scan_processed_data:343731 scan_total_lock:1 scan_processed_lock:0
+2018/11/14 10:57:18.273 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.679135567s txn_start_ts:404269101106331649 region_id:77463 store_addr:10.1.88.87:20160 kv_process_ms:2976 scan_total_write:363831 scan_processed_write:363830 scan_total_data:363830 scan_processed_data:363830 scan_total_lock:1 scan_processed_lock:0
+2018/11/14 10:57:18.347 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.751382793s txn_start_ts:404269101106331649 region_id:77698 store_addr:10.1.88.87:20160 kv_process_ms:3110 scan_total_write:334840 scan_processed_write:334839 scan_total_data:334839 scan_processed_data:334839 scan_total_lock:1 scan_processed_lock:0
+2018/11/14 10:57:18.402 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.807191939s txn_start_ts:404269101106331649 region_id:77509 store_addr:10.1.88.87:20160 kv_process_ms:3559 scan_total_write:354898 scan_processed_write:354897 scan_total_data:354897 scan_processed_data:354897 scan_total_lock:1 scan_processed_lock:0
+2018/11/14 10:58:01.645 server.go:303: [info] con:264 new connection 10.1.88.87:42824
+2018/11/14 10:58:01.647 set.go:180: [info] con:264 autocommit=0
+2018/11/14 10:58:01.649 set.go:180: [info] con:264 autocommit=1
+2018/11/14 10:58:01.657 server.go:305: [info] con:264 close connection
+2018/11/14 10:58:01.665 server.go:303: [info] con:265 new connection 10.1.88.87:42826
+2018/11/14 10:58:01.666 set.go:180: [info] con:265 autocommit=0
+2018/11/14 10:58:01.668 set.go:180: [info] con:265 autocommit=1
+2018/11/14 10:58:02.203 set.go:180: [info] con:265 autocommit=0
+2018/11/14 10:58:02.219 set.go:180: [info] con:265 autocommit=1
+2018/11/14 10:58:02.221 server.go:305: [info] con:265 close connection
+2018/11/14 10:58:30.110 adapter.go:364: [warning] [SLOW_QUERY] cost_time:1m15.522737043s succ:true con:261 user:root@10.1.88.32 txn_start_ts:404269101106331649 database:uupassport2 table_ids:[4881],sql:delete from account_user where id&gt; 0
+2018/11/14 10:58:36.647 pd.go:107: [warning] get timestamp too slow: 1.573956217s
+2018/11/14 10:58:38.888 pd.go:107: [warning] get timestamp too slow: 3.424160164s
+2018/11/14 10:58:40.357 pd.go:107: [warning] get timestamp too slow: 2.661202907s
+2018/11/14 10:58:42.318 pd.go:107: [warning] get timestamp too slow: 1.853675732s
+2018/11/14 10:58:42.318 pd.go:107: [warning] get timestamp too slow: 1.018879057s
+2018/11/14 10:58:43.093 pd.go:107: [warning] get timestamp too slow: 439.07566ms
+2018/11/14 10:58:43.818 pd.go:107: [warning] get timestamp too slow: 708.746703ms
+2018/11/14 10:58:44.127 pd.go:107: [warning] get timestamp too slow: 474.285287ms
+2018/11/14 10:58:44.900 pd.go:107: [warning] get timestamp too slow: 605.943549ms
+2018/11/14 10:58:45.904 pd.go:107: [warning] get timestamp too slow: 646.561164ms
+2018/11/14 10:58:46.480 pd.go:107: [warning] get timestamp too slow: 1.119621965s
+2018/11/14 10:58:47.590 pd.go:107: [warning] get timestamp too slow: 604.215764ms
+2018/11/14 10:58:48.315 pd.go:107: [warning] get timestamp too slow: 1.117343532s
+2018/11/14 10:58:48.827 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.782055966s txn_start_ts:404269123730931713 region_id:24 store_addr:10.1.88.87:20160 kv_process_ms:126 kv_wait_ms:1195
+2018/11/14 10:58:48.920 pd.go:107: [warning] get timestamp too slow: 1.049299486s
+2018/11/14 10:58:49.965 adapter.go:364: [warning] [SLOW_QUERY] cost_time:5.323485286s succ:true con:0 user:&lt;nil&gt; txn_start_ts:404269123730931713 database: table_ids:[19],index_ids:[1],sql:SELECT version, table_id, modify_count, count from mysql.stats_meta where version &gt; 404269119627329538 order by version
+2018/11/14 10:58:49.738 pd.go:107: [warning] get timestamp too slow: 1.390030711s
+2018/11/14 10:58:50.338 pd.go:107: [warning] get timestamp too slow: 1.223162983s
+2018/11/14 10:58:50.866 pd.go:107: [warning] get timestamp too slow: 226.798997ms
+2018/11/14 10:58:51.229 pd.go:107: [warning] get timestamp too slow: 144.901666ms
+2018/11/14 10:58:51.216 pd.go:107: [warning] get timestamp too slow: 136.546657ms
+2018/11/14 10:58:53.679 pd.go:107: [warning] get timestamp too slow: 1.193092043s
+2018/11/14 10:58:54.195 pd.go:107: [warning] get timestamp too slow: 1.115998075s
+2018/11/14 10:58:54.621 pd.go:107: [warning] get timestamp too slow: 256.939543ms
+2018/11/14 10:59:11.777 printer.go:38: [info] Welcome to TiDB.
+2018/11/14 10:59:11.778 printer.go:39: [info] Release Version: v2.0.6
+2018/11/14 10:59:11.778 printer.go:40: [info] Git Commit Hash: b13bc08462a584a085f377625a7bab0cc0351570
+2018/11/14 10:59:11.778 printer.go:41: [info] Git Branch: release-2.0
+2018/11/14 10:59:11.778 printer.go:42: [info] UTC Build Time:  2018-08-06 10:57:46
+2018/11/14 10:59:11.778 printer.go:43: [info] GoVersion:  go version go1.10.2 linux/amd64
+2018/11/14 10:59:11.778 printer.go:44: [info] TiKV Min Version: 2.0.0-rc.4.1
+2018/11/14 10:59:11.779 printer.go:49: [info] Config: {&quot;host&quot;:&quot;0.0.0.0&quot;,&quot;port&quot;:4000,&quot;store&quot;:&quot;tikv&quot;,&quot;path&quot;:&quot;10.1.88.33:2379,10.1.88.34:2379,10.1.88.35:2379,10.1.88.84:2379,10.1.88.85:2379,10.1.88.86:2379,10.1.88.87:2379,10.1.88.88:2379,10.1.88.89:2379&quot;,&quot;socket&quot;:&quot;&quot;,&quot;lease&quot;:&quot;45s&quot;,&quot;run-ddl&quot;:true,&quot;split-table&quot;:true,&quot;token-limit&quot;:1000,&quot;oom-action&quot;:&quot;log&quot;,&quot;mem-quota-query&quot;:34359738368,&quot;enable-streaming&quot;:false,&quot;lower-case-table-names&quot;:2,&quot;log&quot;:{&quot;level&quot;:&quot;info&quot;,&quot;format&quot;:&quot;text&quot;,&quot;disable-timestamp&quot;:false,&quot;file&quot;:{&quot;filename&quot;:&quot;/data-deploy/log/tidb.log&quot;,&quot;log-rotate&quot;:true,&quot;max-size&quot;:300,&quot;max-days&quot;:0,&quot;max-backups&quot;:0},&quot;slow-query-file&quot;:&quot;&quot;,&quot;slow-threshold&quot;:300,&quot;expensive-threshold&quot;:10000,&quot;query-log-max-len&quot;:2048},&quot;security&quot;:{&quot;skip-grant-table&quot;:false,&quot;ssl-ca&quot;:&quot;&quot;,&quot;ssl-cert&quot;:&quot;&quot;,&quot;ssl-key&quot;:&quot;&quot;,&quot;cluster-ssl-ca&quot;:&quot;&quot;,&quot;cluster-ssl-cert&quot;:&quot;&quot;,&quot;cluster-ssl-key&quot;:&quot;&quot;},&quot;status&quot;:{&quot;report-status&quot;:true,&quot;status-port&quot;:10080,&quot;metrics-addr&quot;:&quot;10.1.88.35:9091&quot;,&quot;metrics-interval&quot;:15},&quot;performance&quot;:{&quot;max-procs&quot;:0,&quot;tcp-keep-alive&quot;:true,&quot;retry-limit&quot;:10,&quot;cross-join&quot;:true,&quot;stats-lease&quot;:&quot;3s&quot;,&quot;run-auto-analyze&quot;:true,&quot;stmt-count-limit&quot;:5000,&quot;feedback-probability&quot;:0,&quot;query-feedback-limit&quot;:1024,&quot;pseudo-estimate-ratio&quot;:0.7},&quot;xprotocol&quot;:{&quot;xserver&quot;:false,&quot;xhost&quot;:&quot;&quot;,&quot;xport&quot;:0,&quot;xsocket&quot;:&quot;&quot;},&quot;plan-cache&quot;:{&quot;enabled&quot;:false,&quot;capacity&quot;:2560,&quot;shards&quot;:256},&quot;prepared-plan-cache&quot;:{&quot;enabled&quot;:false,&quot;capacity&quot;:100},&quot;opentracing&quot;:{&quot;enbale&quot;:false,&quot;sampler&quot;:{&quot;type&quot;:&quot;const&quot;,&quot;param&quot;:1,&quot;sampling-server-url&quot;:&quot;&quot;,&quot;max-operations&quot;:0,&quot;sampling-refresh-interval&quot;:0},&quot;reporter&quot;:{&quot;queue-size&quot;:0,&quot;buffer-flush-interval&quot;:0,&quot;log-spans&quot;:false,&quot;local-agent-host-port&quot;:&quot;&quot;},&quot;rpc-metrics&quot;:false},&quot;proxy-protocol&quot;:{&quot;networks&quot;:&quot;&quot;,&quot;header-timeout&quot;:5},&quot;tikv-client&quot;:{&quot;grpc-connection-count&quot;:16,&quot;grpc-keepalive-time&quot;:10,&quot;grpc-keepalive-timeout&quot;:3,&quot;commit-timeout&quot;:&quot;41s&quot;},&quot;binlog&quot;:{&quot;binlog-socket&quot;:&quot;&quot;,&quot;write-timeout&quot;:&quot;15s&quot;,&quot;ignore-error&quot;:false}}
+2018/11/14 10:59:11.779 main.go:193: [info] start Prometheus push client with server addr 10.1.88.35:9091 and interval 15s
+2018/11/14 10:59:11.779 tidb.go:279: [info] new store
+2018/11/14 10:59:11.779 systime_mon.go:24: [info] start system time monitor
+2018/11/14 10:59:11.779 client.go:114: [info] [pd] create pd client with endpoints [10.1.88.33:2379 10.1.88.34:2379 10.1.88.35:2379 10.1.88.84:2379 10.1.88.85:2379 10.1.88.86:2379 10.1.88.87:2379 10.1.88.88:2379 10.1.88.89:2379]
+2018/11/14 10:59:11.814 client.go:212: [info] [pd] leader switches to: http://10.1.88.86:2379, previous: 
+2018/11/14 10:59:11.814 client.go:133: [info] [pd] init cluster id 6545315499519871548
+2018/11/14 10:59:11.827 tidb.go:64: [info] store tikv-6545315499519871548 new domain, ddl lease 45s, stats lease 3000000000
+2018/11/14 10:59:11.830 ddl.go:292: [info] [ddl] start delRangeManager OK, with emulator: false
+2018/11/14 10:59:12.721 ddl.go:300: [info] [ddl] start DDL:c05296e4-e1bd-482a-a94d-918b59ef3682
+2018/11/14 10:59:12.722 ddl_worker.go:71: [info] [ddl] cleaning jobs in the adding index queue finished.
+2018/11/14 10:59:13.171 domain.go:117: [info] [ddl] full load InfoSchema from version 0 to 8513, in 85.842074ms
+2018/11/14 10:59:13.295 domain.go:309: [info] [ddl] full load and reset schema validator.
+2018/11/14 10:59:13.392 gc_worker.go:131: [info] [gc worker] 59c40a2455c0003 start.
+2018/11/14 10:59:13.483 server.go:188: [warning] Secure connection is NOT ENABLED
+2018/11/14 10:59:13.484 server.go:155: [info] Server is running MySQL Protocol at [0.0.0.0:4000]
+2018/11/14 10:59:13.486 http_status.go:75: [info] Listening on :10080 for status and metrics report.
+2018/11/14 10:59:13.797 domain.go:651: [info] [stats] init stats info takes 405.752354ms
+
+</code></pre><h4 id="官方对应解决方法">官方对应解决方法</h4>
+<h5 id="921-error-2013-hy000-lost-connection-to-mysql-server-during-query-问题的排查方法">9.2.1 ERROR 2013 (HY000): Lost connection to MySQL server during query 问题的排查方法？</h5>
+<ul>
+<li>
+<p>log 中是否有 panic</p>
+<p>未发现</p>
+</li>
+<li>
+<p>dmesg 中是否有 oom，命令： dmesg -T | grep -i oom</p>
+<p>内存当时确实存在飙升，但是未达到溢出的程度 87.5%</p>
+</li>
+<li>
+<p>长时间没有访问，也会收到这个报错，一般是 tcp 超时导致的，tcp 长时间不用, 会被操作系统 kill。</p>
+<p>略</p>
+</li>
+</ul>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/istio/concept01/">熔断，限流，降级</a></li>
+        
+        <li><a href="/istio/install/">Istio 1.0.3 安装　</a></li>
+        
+        <li><a href="/es/esrally/">Esrallyi 压力测试</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

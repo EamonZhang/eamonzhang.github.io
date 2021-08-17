@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rabbitmq on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/categories/rabbitmq/</link>
+    <description>Recent content in rabbitmq on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 22 May 2021 14:52:35 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/rabbitmq/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rabbitmq 基础</title>
+      <link>https://zhangeamon.top/rabbitmq/manager02/</link>
+      <pubDate>Sat, 22 May 2021 14:52:35 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/rabbitmq/manager02/</guid>
+      <description>AMQP 协议 AMQP，即Advanced Message Queuing Protocol，高级消息队列协议。 AMQP的主要特征是面向消息、队列、路由（包括点对点和发布/订阅）、可靠性、安全。 RabbitMQ是一个开源的AMQP实现，服务器端用Erlang语言编写，支持多种客户端。 组件 Broker：标识消息队列服务</description>
+    </item>
+    
+    <item>
+      <title>rabbitmq 简单应用</title>
+      <link>https://zhangeamon.top/rabbitmq/manager01/</link>
+      <pubDate>Tue, 26 Feb 2019 14:57:21 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/rabbitmq/manager01/</guid>
+      <description>启动 rabbitmq-server &amp;amp; 队列重置（清空队列、用户等） rabbitmqctl stop_app rabbitmqctl reset rabbitmqctl stop 关闭 rabbitmqctl stop 列举所有用户 rabbitmqctl list_users 列举所有队列 rabbitmqctl list_queues 添加用户 rabbitmqctl add_user user_name user_passwd 设置用户角色为管理员 rabbitmqctl set_user_tags user_name administrator 权限设置 rabbitmqctl set_permissions -p / user_name &amp;quot;.*&amp;quot; &amp;quot;.*&amp;quot; &amp;quot;.*&amp;quot; 操作举例（添加用户admin） sudo rabbitmqctl add_user admin admin sudo rabbitmqctl set_user_tags admin administrator sudo rabbitmqctl set_permissions -p / admin &amp;quot;.*&amp;quot; &amp;quot;.*&amp;quot; &amp;quot;.*&amp;quot; 查看状态 rabbitmqctl status 安装 RabbitMQWeb管理插件 rabbitmq-plugins enable rabbitmq_management 可以</description>
+    </item>
+    
+  </channel>
+</rss>

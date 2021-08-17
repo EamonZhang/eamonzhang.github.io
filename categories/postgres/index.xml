@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>postgres on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/categories/postgres/</link>
+    <description>Recent content in postgres on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 20 Apr 2021 13:27:13 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Django CONN_MAX_AGE 对数据连接的影响</title>
+      <link>https://zhangeamon.top/python/django_max_con_age/</link>
+      <pubDate>Tue, 20 Apr 2021 13:27:13 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/django_max_con_age/</guid>
+      <description>Django的数据库连接 Django对数据库的链接处理是这样的，Django程序接受到请求之后，在第一访问数据库的时候会创建一个数据库连接,直到请求结束，关闭连接。下次请求也是如此。因此，这种情况下，随着访问的并发数越来越高，就会产生大量的数据库连接 使用CONN_MAX_AGE减</description>
+    </item>
+    
+    <item>
+      <title>PG高可用 repmgr 搭建</title>
+      <link>https://zhangeamon.top/postgres/repmgr/</link>
+      <pubDate>Wed, 07 Apr 2021 10:12:02 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/repmgr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Backgroud Writer 进程</title>
+      <link>https://zhangeamon.top/postgres/bgwriter/</link>
+      <pubDate>Wed, 31 Mar 2021 15:13:50 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/bgwriter/</guid>
+      <description>主要作用 负责将shared buffer 中的内容刷写到磁盘中，9.1版之后部分内容交给checkpoint完成。 参数配置 # - Background Writer - #bgwriter_delay = 200ms # 10-10000ms between rounds #bgwriter_lru_maxpages = 100 # 0-1000 max buffers written/round #bgwriter_lru_multiplier = 2.0 # 0-10.0 multiplier on buffers scanned/round #bgwriter_flush_after = 512kB # measured in pages, 0 disables bgwriter_delay 两次写入任务之间的睡眠间隔时间 bgwriter_lru_maxpages 每次bgwriter任务写buffer的最大page数，一旦达</description>
+    </item>
+    
+    <item>
+      <title>数据库试图之 pg_stat_bgwriter</title>
+      <link>https://zhangeamon.top/postgres/view_pg_stat_bgwriter/</link>
+      <pubDate>Wed, 31 Mar 2021 09:32:17 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/view_pg_stat_bgwriter/</guid>
+      <description>介绍 可查看 backgroud writer， checkpoint ，backend 进程刷写 Shared buffer 情况视图 pg数据库在写入时先在内存中更新shared buffer ，然后有checkpoint机制将脏数据刷写到磁盘。 视图 select * from pg_stat_bgwriter ; -[ RECORD 1 ]---------+------------------------------ checkpoints_timed | 64017 checkpoints_req | 458 checkpoint_write_time | 9608302902 checkpoint_sync_time | 1189286 buffers_checkpoint | 578367652 buffers_clean | 329022 maxwritten_clean | 2353 buffers_backend | 29802728 buffers_backend_fsync | 0 buffers_alloc | 83826180 stats_reset | 2020-08-20 19:41:20.491551+08 负责将shared buffer 中的内容</description>
+    </item>
+    
+    <item>
+      <title>数据库高可用设计分析</title>
+      <link>https://zhangeamon.top/postgres/ha_fd/</link>
+      <pubDate>Tue, 23 Mar 2021 16:32:14 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/ha_fd/</guid>
+      <description>基本概念 集群： 一组多个同时对外提供相同服务的实体机组成一个集群。这里的集群为主从结构，可写节点为主节点，其他只读节点为从节点。 高可用： 在发生局部故障时对整体业务影响很低。即不可用的时间要尽量的短。 对外部应用的访问来说，无需关注如何实现，如同只访问一个节点。并能得到持续的服务能力。</description>
+    </item>
+    
+    <item>
+      <title>pg_rman 备份恢复数据库</title>
+      <link>https://zhangeamon.top/postgres/pg_rman/</link>
+      <pubDate>Tue, 09 Mar 2021 13:35:31 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_rman/</guid>
+      <description>适用场景 PG_RMAN 基于本地数据拷贝的方式，要求与数据库需要安装在同一个机器节点上。 适用于项目初期，对数据库的规划处于初级阶段。实体机不充分的情况是个很好的选择。 数据库使用ssd盘，备份磁盘采用企业sata大盘。或nfs网盘等。 PG_RMAN 支持全备份，增量备份，备份验证，保留策略等 应用软件包地址 https://github.com/ossc-db/pg_rman/releases 基</description>
+    </item>
+    
+    <item>
+      <title>Patroni 高可用管理进阶</title>
+      <link>https://zhangeamon.top/postgres/patroni02/</link>
+      <pubDate>Fri, 05 Mar 2021 17:06:18 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/patroni02/</guid>
+      <description>完成目标 主从同步策略 异地多机房策略 failover 触发详情 访问认证 watch-dog 配置文件详情 fencing DCS 失效处理 加入节点复制数据限流 主从切换流量,避免重新拉取 级联复制 callback 日志&amp;amp;监控 主从同步策略 数据库主从之间同步类型 Synchronous state of this standby server. Possible values are: async: This standby server is asynchronous. potential: This standby server is now asynchronous, but can potentially become synchronous if one of current synchronous ones fails. sync: This standby server is synchronous. quorum: This standby server is considered as</description>
+    </item>
+    
+    <item>
+      <title>数据库优化思考-性能优化</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_performance/</link>
+      <pubDate>Fri, 26 Feb 2021 13:33:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_performance/</guid>
+      <description>为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续</description>
+    </item>
+    
+    <item>
+      <title>数据库优化思考 - 模块调优</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_tune/</link>
+      <pubDate>Wed, 13 Jan 2021 09:04:35 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_tune/</guid>
+      <description>开始乱说 主要是结合postgres数据库自身特点，根据具体的业务场景，作出相应调整，使其更加合理。 数据库作为一个整体对外提供服务，单是其内部是由不同的功能模块组成，相互协调来共同完成任务。 各个功能模块完成不同的功能，每个模块的特点也不同，在调整的时候至少需要理解各个模块实现的基本</description>
+    </item>
+    
+    <item>
+      <title>数据库优化思考 - 结构设计</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_fd/</link>
+      <pubDate>Mon, 11 Jan 2021 10:10:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_fd/</guid>
+      <description>DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压</description>
+    </item>
+    
+    <item>
+      <title>checkpoint 检查点</title>
+      <link>https://zhangeamon.top/postgres/checkpoint/</link>
+      <pubDate>Wed, 13 Mar 2019 15:57:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/checkpoint/</guid>
+      <description>作用 一般checkpoint会将某个时间点之前的脏数据全部刷新到磁盘，以实现数据的一致性与完整性。其主要目的是为了缩短崩溃恢复时间。 数据库靠谱的原因 一条DML 写入过程 在写入数据的时，当事务提交后修改信息顺序同步写入wal。shared buffer中信息并不是马上落盘。异步同步磁盘</description>
+    </item>
+    
+    <item>
+      <title>PG主从切换 pg_rewind</title>
+      <link>https://zhangeamon.top/postgres/pg_rewind/</link>
+      <pubDate>Wed, 30 Jan 2019 10:16:17 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_rewind/</guid>
+      <description>pg_rewind requires that the target server either has the wal_log_hints option enabled in postgresql.conf or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. full_page_writes must also be set to on, but is enabled by default. wal_log_hints 使用场景 在数据库主从结构中，从变成主易。但是由主变为从却需要一番周折。 如果是数据量少时重新使用pg_backup拉一份从即可，但是如果数据量大时，这个过程非常的耗时耗能。对线上业务也会有影</description>
+    </item>
+    
+    <item>
+      <title>PG高可用Patroni</title>
+      <link>https://zhangeamon.top/postgres/patroni/</link>
+      <pubDate>Wed, 30 Jan 2019 10:14:55 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/patroni/</guid>
+      <description>环境 操作系统 Centos 7 patroni 版本 2.0.2 postgres 版本 13 实现目标 高可用方案对比 patroni 结构分析 patroni 搭建新集群 patroni 接管现有集群 patroni 管理pg配置 手动swithover 自动failover 维护模式 弹性扩容，缩容 对外提供统一服务 RestFULLAPI 备份恢复 监控 日志 升级 高可用方案对比 pg的高可用方案都是基于流复制来实现 PAF pacemaker + corosyns repmgr repmgr 手动流复制管</description>
+    </item>
+    
+    <item>
+      <title>Explain 执行计划</title>
+      <link>https://zhangeamon.top/postgres/explain/</link>
+      <pubDate>Wed, 05 Dec 2018 15:27:30 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/explain/</guid>
+      <description>文法 EXPLAIN [ ( option [, ...] ) ] statement EXPLAIN [ ANALYZE ] [ VERBOSE ] statement 这里 option可以是： ANALYZE [ boolean ] VERBOSE [ boolean ] COSTS [ boolean ] BUFFERS [ boolean ] TIMING [ boolean ] SUMMARY [ boolean ] FORMAT { TEXT | XML | JSON | YAML } 注意事项 记住当使用了ANALYZE选项时语句会被实际执行. 如执行dml 时将对数据库进行实际的操作。 避免污染数据的方式 BEGIN; EXPLAIN ANALYZE ...; ROLLBACK; 一个例子 postgres=# explain analyze select * from tbl; QUERY</description>
+    </item>
+    
+    <item>
+      <title>数据库参数</title>
+      <link>https://zhangeamon.top/postgres/params/</link>
+      <pubDate>Tue, 27 Nov 2018 09:57:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/params/</guid>
+      <description>性能参数 pgtune pgconfig 日志参数 更多参数详解 管理 listen_addresses = &amp;quot;*&amp;quot; # 连接访问控制，哪些ip可以访问， * 全部。 结合pg_hba.conf , iptables设置。 superuser_reserved_connections = 3 # 预留给超级管理员的连接数。 port = 5432 # 默认访问端口 wal_keep_segments = 1024 # wal 日志保存数量 wal日志 wal_log_hints = on full_page_writes = on 成本因子 # - Planner Cost Constants - #seq_page_cost = 1.0 # measured on an arbitrary scale 顺序扫描 random_page_cost</description>
+    </item>
+    
+    <item>
+      <title>数据库备份和恢复</title>
+      <link>https://zhangeamon.top/postgres/backup_restore/</link>
+      <pubDate>Tue, 30 Oct 2018 10:18:57 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/backup_restore/</guid>
+      <description>备份恢复命令 备份：pg_dump -U postgres -v -F c -Z 4 -f ***.backup dbname 9压缩率最狠 恢复：pg_restore -U postgres -v -j 8 -d dbname ***.backup 8是采用8个线程 备份表：pg_dump -U postgres -t tablename dbname &amp;gt; 33.sql 恢复表：psql -U postgres -d dbname &amp;lt; 33.sql 只备份表结构 pg_dump -U postgres -s -t tablename dbname &amp;gt; 33.sql 只备份数据 pg_dump -U postgres -a -t tablename dbname &amp;gt; 33.sql copy 拷贝数据 数据拷贝到本地： psql -U postgres -d databasename</description>
+    </item>
+    
+    <item>
+      <title>数据库备份和恢复wal-g 应用</title>
+      <link>https://zhangeamon.top/postgres/wal-g/</link>
+      <pubDate>Tue, 30 Oct 2018 10:18:57 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/wal-g/</guid>
+      <description>存储服务 minio 设置用户名和密码 docker run -d -p 9000:9000 -e MINIO_ACCESS_KEY=xxxxx(changeme) -e MINIO_SECRET_KEY=kkkkk(changeme) -v /data/minio/:/data minio/minio server /data 创建 bucket mc mb local/buecket003 wal-g 下载 wget https://github.com/wal-g/wal-g/releases/download/v0.2.9/wal-g.linux-amd64.tar.gz tar -zxvf wal-g.linux-amd64.tar.gz 设置环境变量 minio cat wal-g.env export PGDATA=/var/lib/pgsql/10/data/ export WALG_S3_PREFIX=s3://bucket003/ export PGPORT=5432 export PGUSER=postgres export AWS_SECRET_ACCESS_KEY=xxxxx(changeme) export AWS_REGION=us-east-1 export AWS_ACCESS_KEY_ID=kkkkk(changeme) export AWS_ENDPOINT=http://localhost:9000 export AWS_S3_FORCE_PATH_STYLE=true swift export PGDATA= export WALG_SWIFT_PREFIX=swift://buckt003/ export PGPORT= export PGUSER= export OS_USERNAME= export OS_PASSWORD= export OS_AUTH_URL=http://ip:port/auth/v1.0 全备份 source mydir/wal-g.env &amp;amp;&amp;amp; wal-g backup-push $PGDATA wal 备份 wal_level = archive archive_mode = on ## 从库 always archive_command = &#39;source mydir/wal-g.env &amp;amp;&amp;amp; wal-g wal-push %p&#39; archive_timeout = 60 恢复数据 查看所有全备份 wal-g backup-list name last_modified wal_segment_backup_start base_000000020000001E000000CB 2019-11-07T01:34:08Z 000000020000001E000000CB base_000000020000001E000000CD 2019-11-07T01:37:03Z 000000020000001E000000CD base_000000020000001E000000CF 2019-11-07T02:23:34Z</description>
+    </item>
+    
+    <item>
+      <title>主从流复制</title>
+      <link>https://zhangeamon.top/postgres/replication01/</link>
+      <pubDate>Wed, 17 Oct 2018 14:55:38 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/replication01/</guid>
+      <description>历史演变 replication 主库配置 根据实际情况分配流复制权限 vi pg_hba.conf host replication all 10.2.0.0/0 trust vi postgresql.conf max_wal_senders = 10 wal_level = logical # minimal, replica, or logical hot_standby = on # 正常在从库配置，如果在主库配置完毕，因为从库复制主库配置不需要再修改从库配置。 wal_log_hints = on 从库配置 数据库安装 从主库复制数据 pg_basebackup -h 10.2.0.14 -U postgres -F p -P -R -D /var/lib/pgsql/10/data/ --checkpoint=fast -l postgresback20181219 pg_basebackup支持两种全量备份的</description>
+    </item>
+    
+  </channel>
+</rss>

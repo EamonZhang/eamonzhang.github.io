@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Goes on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/go/</link>
+    <description>Recent content in Goes on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 13 Aug 2020 10:06:19 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go grpc</title>
+      <link>https://zhangeamon.top/go/grpc/</link>
+      <pubDate>Thu, 13 Aug 2020 10:06:19 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/go/grpc/</guid>
+      <description>python 实现 cat Server.py from SimpleXMLRPCServer import SimpleXMLRPCServer def fun_add(a,b): total = a+b return total if __name__==&#39;__main__&#39;: s = SimpleXMLRPCServer((&#39;0.0.0.0&#39;,8081)) s.register_function(fun_add) print &amp;quot;server in on line&amp;quot; s.serve_forever() cat Client.py from xmlrpclib import ServerProxy s = ServerProxy(&amp;quot;http://xx.xxx.xxx.xxx:8081&amp;quot;) print s.fun_add(1,2) go 实现</description>
+    </item>
+    
+    <item>
+      <title>依赖管理工具go module</title>
+      <link>https://zhangeamon.top/go/go_mod/</link>
+      <pubDate>Thu, 30 Apr 2020 13:25:38 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/go/go_mod/</guid>
+      <description>背景 大多数语言都会有包管理工具，像Node有npm，PHP有composer，Java有Maven和Gradle。 在go1.11 版本中，新增了module管理模块功能，用来管理依赖包 开启module特性 要开始使用 go module 的特性， 需要先设置 GO111MODULE 环境变量。 开启 GO111MODULE 要使用go module,首先</description>
+    </item>
+    
+    <item>
+      <title>Go 语言安装及配置</title>
+      <link>https://zhangeamon.top/go/install/</link>
+      <pubDate>Tue, 23 Oct 2018 14:10:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/go/install/</guid>
+      <description>1.下载安装包 https://golang.org/dl/ https://golang.google.cn/dl/ 将下载的二进制包解压至 /usr/local目录 2.配置环境变量 cat /etc/profile.d/go.sh export GOROOT=/usr/local/go export GOPATH=~/golib:~/goproject export GOBIN=~/gobin export PATH=$PATH:$GOROOT/bin:$GOBIN export GOPROXY=https://goproxy.cn export GO111MODULE=on 说明: GOROOT go安装包存放位置 GOPATH 工作区，多个工作区之间用冒号间隔 GOBIN 可执行文件目录 PATH 系统环境变量 Goproxy 中国完全实现了 Go 的模块代理协议。并且它是一个由中国备受信赖的云服务提供商七牛云支</description>
+    </item>
+    
+  </channel>
+</rss>

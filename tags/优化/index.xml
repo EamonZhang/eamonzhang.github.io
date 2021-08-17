@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>优化 on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/</link>
+    <description>Recent content in 优化 on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 26 Feb 2021 13:33:23 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库优化思考-性能优化</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_performance/</link>
+      <pubDate>Fri, 26 Feb 2021 13:33:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_performance/</guid>
+      <description>为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续</description>
+    </item>
+    
+    <item>
+      <title>数据库优化思考 - 模块调优</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_tune/</link>
+      <pubDate>Wed, 13 Jan 2021 09:04:35 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_tune/</guid>
+      <description>开始乱说 主要是结合postgres数据库自身特点，根据具体的业务场景，作出相应调整，使其更加合理。 数据库作为一个整体对外提供服务，单是其内部是由不同的功能模块组成，相互协调来共同完成任务。 各个功能模块完成不同的功能，每个模块的特点也不同，在调整的时候至少需要理解各个模块实现的基本</description>
+    </item>
+    
+    <item>
+      <title>数据库优化思考 - 结构设计</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_fd/</link>
+      <pubDate>Mon, 11 Jan 2021 10:10:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_fd/</guid>
+      <description>DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压</description>
+    </item>
+    
+  </channel>
+</rss>

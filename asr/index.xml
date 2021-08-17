@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Asrs on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/asr/</link>
+    <description>Recent content in Asrs on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 16 Jun 2021 13:42:14 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/asr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C 语言环境</title>
+      <link>https://zhangeamon.top/asr/c/</link>
+      <pubDate>Wed, 16 Jun 2021 13:42:14 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/asr/c/</guid>
+      <description>Centos7 cmake 版本升级（由 v2.8.12.2 升级至 v3.14.5） #cmake -version cmake version 2.8.12.2 安装基础工具 yum install -y gcc gcc-c++ mkdir /opt/cmake cd /opt/cmake/ wget https://cmake.org/files/v3.14/cmake-3.14.5.tar.gz tar zxvf cmake-3.14.5.tar.gz 安装 yum remove cmake -y ./configure --prefix=/usr/local/cmake make &amp;amp;&amp;amp; make install 查看版本 #/usr/local/cmake/bin/cmake --version cmake version 3.14.5 CMake suite maintained and supported by Kitware (kitware.com/cmake). 设置环境 ln -s /usr/local/cmake/bin/cmake /usr/bin/cmake Clion 中使用MakeFile 默认在Clion中使用CMakeList.txt,但是有些项目提供的是Makefile cmake_minimum_required(VERSION 3.12) project(test)</description>
+    </item>
+    
+  </channel>
+</rss>

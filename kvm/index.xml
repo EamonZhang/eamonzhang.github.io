@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kvms on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/kvm/</link>
+    <description>Recent content in Kvms on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 13 Jul 2020 09:32:49 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/kvm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vagrant</title>
+      <link>https://zhangeamon.top/kvm/vagrant/</link>
+      <pubDate>Mon, 13 Jul 2020 09:32:49 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/kvm/vagrant/</guid>
+      <description>介绍 通常用vagrant 来管理VirtualBox ,VMWare，方便测试环境的创建，销毁。不常折腾用virtualbox, 反复折腾用vagrant。 安装 下载virtualbox 下载vagrant -- 安装依赖 #yum --enablerepo=epel -y install fuse-sshfs #yum install bsdtar #yum -y install gcc kernel kernel-devel 常用方法 --- 镜像管理 添加镜像 #vagrant box add centos/7 查看镜像 #vagrant box</description>
+    </item>
+    
+    <item>
+      <title>KVM</title>
+      <link>https://zhangeamon.top/kvm/kvm01/</link>
+      <pubDate>Tue, 06 Nov 2018 16:23:07 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/kvm/kvm01/</guid>
+      <description>安装 ubuntu14.04 .安装kvm apt-get install qemu-kvm libvirt0 virtinst bridge-utils virt-viewer .配置实体机网络 cat /etc/network/interfaces auto lo iface lo inet loopback auto br0 iface br0 inet static address 10.0.*.* netmask 255.255.0.0 gateway 10.1.0.1 type bridge bridge_ports eth0 dns-nameservers 114.114.114.114 .创建一个虚拟机 virt-install --connect qemu:///system -n test01 -r 1024 -f /home/kvm/test01.qcow2 -s 20 -c /home/kvm/ubuntu-12.04.1-server-amd64.iso --vnc --noautoconsole --os-type linux --os-variant ubuntuPrecise --accelerate --network=bridge:br0 centos7 yum install qemu-kvm libvirt virt-install bridge-utils .配置实体机网络 cat ifcfg-enp7s0 DEVICE=&amp;quot;enp7s0&amp;quot; ONBOOT=yes BOOTPROTO=static UUID=96a09db3-9b06-4a50-8d0c-9868cf531b84 #HWADDR=&amp;quot;08:60:6E:06:C7:1A&amp;quot; TYPE=Ethernet BRIDGE=br0 IPADDR=0.0.0.0 cat ifcfg-br0 DEVICE=br0 ONBOOT=yes BOOTPROTO=static TYPE=Bridge IPADDR=10.1.*.* PREFIX=16 GATEWAY=10.1.0.1 DNS1=223.5.5.5 查看 brctl show .启动 libvirt systemctl start libvirtd systemctl enable libvirtd .创建虚拟机 virt-install --virt-type kvm --name test01 --ram</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pythons on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/python/</link>
+    <description>Recent content in Pythons on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 15 Jul 2021 15:04:14 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Requests</title>
+      <link>https://zhangeamon.top/python/requests/</link>
+      <pubDate>Thu, 15 Jul 2021 15:04:14 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/requests/</guid>
+      <description>requests 模块 HTTP 协议接口的请求调用 安装, 引用 pip install requests import requests 测试URL https://httpbin.org/post GET 请求 发送数据: 以下为postman 请求示例 { &amp;quot;args&amp;quot;: { &amp;quot;arg1&amp;quot;: &amp;quot;arg_1&amp;quot; }, &amp;quot;headers&amp;quot;: { &amp;quot;Accept&amp;quot;: &amp;quot;*/*&amp;quot;, &amp;quot;Accept-Encoding&amp;quot;: &amp;quot;gzip, deflate, br&amp;quot;, &amp;quot;Content-Length&amp;quot;: &amp;quot;24&amp;quot;, &amp;quot;Content-Type&amp;quot;: &amp;quot;application/json&amp;quot;, &amp;quot;Host&amp;quot;: &amp;quot;httpbin.org&amp;quot;, &amp;quot;Postman-Token&amp;quot;: &amp;quot;187197c1-effa-4b4b-a499-7c3d66bc9049&amp;quot;, &amp;quot;User-Agent&amp;quot;: &amp;quot;PostmanRuntime/7.26.8&amp;quot;, &amp;quot;X-Amzn-Trace-Id&amp;quot;: &amp;quot;Root=1-60efdcf5-2c52d3eb46a1e19520fe108c&amp;quot; }, &amp;quot;origin&amp;quot;: &amp;quot;113.232.142.231&amp;quot;, &amp;quot;url&amp;quot;: &amp;quot;http://httpbin.org/get?arg1=arg_1&amp;quot; } POST 请求 发送数据 以下为postman 请求示例 { &amp;quot;args&amp;quot;: { &amp;quot;p &amp;quot;: &amp;quot;1&amp;quot; }, &amp;quot;data&amp;quot;: &amp;quot;{\n \&amp;quot;json\&amp;quot;: \&amp;quot;123456\&amp;quot;\n}&amp;quot;, &amp;quot;files&amp;quot;: {}, &amp;quot;form&amp;quot;: {}, &amp;quot;headers&amp;quot;: { &amp;quot;Accept&amp;quot;: &amp;quot;*/*&amp;quot;, &amp;quot;Accept-Encoding&amp;quot;: &amp;quot;gzip, deflate, br&amp;quot;, &amp;quot;Content-Length&amp;quot;: &amp;quot;24&amp;quot;, &amp;quot;Content-Type&amp;quot;: &amp;quot;application/json&amp;quot;, &amp;quot;Host&amp;quot;: &amp;quot;httpbin.org&amp;quot;, &amp;quot;Postman-Token&amp;quot;: &amp;quot;187879a8-fe0f-45a0-a94e-cf0b1d8e5184&amp;quot;, &amp;quot;User-Agent&amp;quot;: &amp;quot;PostmanRuntime/7.26.8&amp;quot;, &amp;quot;X-Amzn-Trace-Id&amp;quot;: &amp;quot;Root=1-60eff356-44291b474115a4e2111fbec4&amp;quot; },</description>
+    </item>
+    
+    <item>
+      <title>python 与 C 交互编程</title>
+      <link>https://zhangeamon.top/python/ctypes/</link>
+      <pubDate>Fri, 28 May 2021 15:44:19 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/ctypes/</guid>
+      <description>python 访问C 动态库 很多核心的算法库都是C/C++写的,成果物通常以动态库的方式对外提供。 如何利用python访问动态代码库 python访问C/C++的方式 ctypes pybind11 cffi swig ctypes的优势 不要修改动态库的源码 只需要动态库和头文件 使用比较简单,而且目前大部分库都是兼容C/C++ 参考 https://www.cnblogs.com/gaowengang/p/7919219.html</description>
+    </item>
+    
+    <item>
+      <title>Django CONN_MAX_AGE 对数据连接的影响</title>
+      <link>https://zhangeamon.top/python/django_max_con_age/</link>
+      <pubDate>Tue, 20 Apr 2021 13:27:13 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/django_max_con_age/</guid>
+      <description>Django的数据库连接 Django对数据库的链接处理是这样的，Django程序接受到请求之后，在第一访问数据库的时候会创建一个数据库连接,直到请求结束，关闭连接。下次请求也是如此。因此，这种情况下，随着访问的并发数越来越高，就会产生大量的数据库连接 使用CONN_MAX_AGE减</description>
+    </item>
+    
+    <item>
+      <title>使用setup打包</title>
+      <link>https://zhangeamon.top/python/setup-packet/</link>
+      <pubDate>Fri, 16 Apr 2021 17:17:12 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/setup-packet/</guid>
+      <description>使用setup 对python进行打包 将python打包后可在其他项目中直接引用 pip install *** 具体步骤 1 将代码复制到一个新的文件夹下 2 创建README.rst 3 创建 LICENSE 4 编写 setup.py setup.cfg setup.cfg [metadata] name = django-polls version = 0.1 description = A Django app to conduct Web-based polls. long_description = file: README.rst url = https://www.example.com/ author = Your Name author_email = yourname@example.com license = BSD-3-Clause # Example license classifiers = Environment :: Web Environment Framework :: Django Framework :: Django :: X.Y # Replace &amp;quot;X.Y&amp;quot; as appropriate Intended</description>
+    </item>
+    
+    <item>
+      <title>Django Models Querys</title>
+      <link>https://zhangeamon.top/python/django-models-querys/</link>
+      <pubDate>Wed, 14 Apr 2021 15:12:03 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/django-models-querys/</guid>
+      <description>SELECT id FROM users WHERE username=&amp;lsquo;test&amp;rsquo; User.objects.only(&amp;lsquo;id&amp;rsquo;).get(username=xxx)
+https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;amp;mid=2247483770&amp;amp;idx=1&amp;amp;sn=ea1e4f5c4abac3a61687971cd413bf3e&amp;amp;chksm=fe3bb134c94c3822d669400fb0f481e058bd2f65eb3e11904dce5435a1bb73d1f9e7b9598b0a&amp;amp;cur_album_id=1365834140322578434&amp;amp;scene=189#rd</description>
+    </item>
+    
+    <item>
+      <title>Python PyInstaller 生成可执行文件</title>
+      <link>https://zhangeamon.top/python/pyinstaller/</link>
+      <pubDate>Wed, 14 Apr 2021 09:55:57 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/pyinstaller/</guid>
+      <description>Python PyInstaller Python 默认并不包含 PyInstaller 模块，因此需要自行安装 PyInstaller 模块。 pip3 install pyinstaller PyInstaller生成可执行程序 pyinstaller 选项 Python源文件 app.py print(&#39;hello everyone&#39;) 生成独立的可执行文件，包含可依赖 pyinstaller -F app.py 生成如下目录结构 . ├── app.py ├── app.spec ├── build │ └── app │ ├── Analysis-00.toc │ ├── base_library.zip │ ├── EXE-00.toc │ ├── PKG-00.pkg │ ├── PKG-00.toc │ ├── PYZ-00.pyz │ ├──</description>
+    </item>
+    
+    <item>
+      <title>virtualenv 管理 python 环境</title>
+      <link>https://zhangeamon.top/python/virtualenv/</link>
+      <pubDate>Wed, 14 Apr 2021 09:11:30 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/virtualenv/</guid>
+      <description>virtualenv 管理python 环境 virualenv virtualenv用于创建独立的Python环境，多个Python相互独立，互不影响，它能够： 在没有权限的情况下安装新套件 不同应用可以使用不同的套件版本 套件升级不影响其他应用 安装 # ubuntu sudo apt-get install python-virtualenv # centos sudo yum install python-virtualenv 使用方法 virtualenv [虚拟环境名称] 如，创建ENV的虚拟环境 virtualenv</description>
+    </item>
+    
+    <item>
+      <title>模块 argparse</title>
+      <link>https://zhangeamon.top/python/module-argparse/</link>
+      <pubDate>Tue, 06 Apr 2021 17:20:07 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/module-argparse/</guid>
+      <description>介绍 argparse 是 Python 内置的一个用于命令项选项与参数解析的模块，通过在程序中定义好我们需要的参数，argparse 将会从 sys.argv 中解析出这些参数，并自动生成帮助和使用信息 功能更加强悍的第三方包支持 click 简单说明</description>
+    </item>
+    
+    <item>
+      <title>Jdango 多数据库读写配置</title>
+      <link>https://zhangeamon.top/python/django-ndb/</link>
+      <pubDate>Tue, 12 May 2020 11:28:53 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/django-ndb/</guid>
+      <description>https://www.cnblogs.com/wumingxiaoyao/p/8610791.html https://www.cnblogs.com/thismyblogs/p/9855801.html</description>
+    </item>
+    
+    <item>
+      <title>django 默认创建第二索引</title>
+      <link>https://zhangeamon.top/python/django-index-ops/</link>
+      <pubDate>Thu, 16 Apr 2020 11:40:02 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/django-index-ops/</guid>
+      <description>Django使用postgresql做数据库 db_index创建索引时会创建第二个索引varchar_pattern_ops问题 创建默认索引 minion_id = models.CharField(max_length=100, db_index=True, blank=True, null=False, default=&amp;quot;&amp;quot;) 当字段类型是 models.CharField 或者 models.TextField 时 使用 db_index=True创建索引 会创建第二索引 django.db.backends.postgresql.schema class DatabaseSchemaEditor(BaseDatabaseSchemaEditor): sql_alter_column_type = &amp;quot;ALTER COLUMN %(column)s TYPE %(type)s USING %(column)s::%(type)s&amp;quot; sql_create_sequence = &amp;quot;CREATE SEQUENCE %(sequence)s&amp;quot; sql_delete_sequence = &amp;quot;DROP SEQUENCE IF EXISTS %(sequence)s CASCADE&amp;quot; sql_set_sequence_max</description>
+    </item>
+    
+    <item>
+      <title>学习参考</title>
+      <link>https://zhangeamon.top/python/reference/</link>
+      <pubDate>Fri, 07 Dec 2018 11:24:11 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/reference/</guid>
+      <description>廖雪峰 Python3 草根学 Python （基于Python3.6)</description>
+    </item>
+    
+  </channel>
+</rss>

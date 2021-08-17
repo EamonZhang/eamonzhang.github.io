@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ansibles on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/ansible/</link>
+    <description>Recent content in Ansibles on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 29 Oct 2018 14:09:08 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/ansible/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ansible Roles</title>
+      <link>https://zhangeamon.top/ansible/ansible-role/</link>
+      <pubDate>Mon, 29 Oct 2018 14:09:08 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/ansible/ansible-role/</guid>
+      <description>以特定的层级目录结构进行组织的tasks、variables、handlers、templates、files等 mkdir -pv ./{os_hard,nginx,memcached}/{files,templates,vars,handlers,meta,default,tasks}/main.yaml tree memcached/ memcached/ ├── default 设定默认变量 │ └── main.yaml ├── files 存储由copy或script等模块调用的文件 │ └── main.yaml ├── handlers │ └── main.yaml ├── meta 定义当前角色的特殊设定及其依赖关系 │ └</description>
+    </item>
+    
+    <item>
+      <title>Ansible Playbooks</title>
+      <link>https://zhangeamon.top/ansible/ansible-playbooks/</link>
+      <pubDate>Thu, 25 Oct 2018 15:47:50 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/ansible/ansible-playbooks/</guid>
+      <description>Playbook核心元素 hosts 一个或多个组或主机的 patterns,以逗号为分隔符 。 - hosts: webservices remote_user: root Tasks 任务集 tasks: - name: install httpd yum: name=httpd - name: start httpd service: name=httpd state=started Handlers 和 notity 由特定条件触发的操作，满足条件方才执行，否则不执行。 Handlers也是task列表，这些task与前述的task并没有本质上的不同,用于当关注的资</description>
+    </item>
+    
+    <item>
+      <title>Ansible Modules</title>
+      <link>https://zhangeamon.top/ansible/ansible-modules/</link>
+      <pubDate>Thu, 25 Oct 2018 10:12:59 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/ansible/ansible-modules/</guid>
+      <description>准备工作 安装 yum install ansible-doc.noarch ansible.noarch -y tree /etc/ansible/ /etc/ansible/ ├── ansible.cfg ├── hosts └── roles ansible --version ansible 2.7.0 config file = /etc/ansible/ansible.cfg configured module search path = [u&#39;/root/.ansible/plugins/modules&#39;, u&#39;/usr/share/ansible/plugins/modules&#39;] ansible python module location = /usr/lib/python2.7/site-packages/ansible executable location = /usr/bin/ansible python version = 2.7.5 (default, Jul 13 2018, 13:06:57) [GCC 4.8.5 20150623 (Red Hat 4.8.5-28)] 配置清单 cat hosts [webservers] 10.1.88.72 10.1.88.73 免密登录 常用命令 Usage: ansible &amp;lt;host-pattern&amp;gt; [options] 常用选项： -m MOD_NAME -a MOD_ARGS 获取模块列表：ansible-doc -l 获取指定模块的使用帮助：ansible-doc -s MOD_NAME</description>
+    </item>
+    
+    <item>
+      <title>Ansible Overview</title>
+      <link>https://zhangeamon.top/ansible/ansible-overview/</link>
+      <pubDate>Thu, 25 Oct 2018 09:16:22 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/ansible/ansible-overview/</guid>
+      <description>主要模块 PLAYBOOKS： 任务剧本（任务集），编排定义Ansible任务集的配置文件，由Ansible顺序依次执行，通常是JSON格式的YML文件 INVENTORY： Ansible管理主机的清单/etc/anaible/hosts MODULES： Ansible执行命令的功能模块</description>
+    </item>
+    
+  </channel>
+</rss>

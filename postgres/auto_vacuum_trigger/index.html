@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>auto vacuum 触发机制 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="auto vacuum 触发机制 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-01-08T09:20:56&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-01-08T09:20:56&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="auto vacuum 触发机制">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/auto_vacuum_trigger/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">auto vacuum 触发机制</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月8日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="数据库自动垃圾回收触发条件分析">数据库自动垃圾回收触发条件分析</h4>
+<p>在postgres 中 垃圾回收的重要意义及在执行垃圾回收时具体都做了些什么很多地方都有介绍。</p>
+<p>但是何时触发垃圾回收，即垃圾回收的触发条件是什么。</p>
+<p>官网的介绍一般是有如下几个参数决定</p>
+<pre><code>#autovacuum = on                        # Enable autovacuum subprocess?  'on'
+#autovacuum_vacuum_threshold = 50       # min number of row updates before vacuum
+#autovacuum_analyze_threshold = 50      # min number of row updates before analyze
+#autovacuum_vacuum_scale_factor = 0.2   # fraction of table size before vacuum
+#autovacuum_analyze_scale_factor = 0.1  # fraction of table size before analyze
+#autovacuum_freeze_max_age = 200000000 # maximum XID age before forced vacuum
+</code></pre><p>大概意思 当表中的数据更新为总数量的20% 是触发垃圾回收，但是当表中总数量小于50的时候20%来的太容易了，</p>
+<p>这样就会过于频繁的满足触发条件。于是50就相当于一个最低门槛。表中总数量在50以内的就暂时不触发垃圾回收了。</p>
+<ul>
+<li>threshold = pg_class.reltuples*autovacuum_vacuum_scale_factor+autovacuum_vacuum_threshold</li>
+</ul>
+<p>即：if (当前表更新数&gt; 触发阀值) do &hellip;</p>
+<h6 id="等号右边的理解">等号右边的理解</h6>
+<pre><code>-- 触发自动analyze
+pg_class.reltuples*autovacuum_analyze_scale_factor+autovacuum_analyze_threshold
+-- 触发自动autovacuum
+pg_class.reltuples*autovacuum_vacuum_scale_factor+autovacuum_vacuum_threshold
+</code></pre><p>两个公式相似。其中的值都除了pg_class.reltuples 以外都是来自于配置</p>
+<p>pg_class.reltuples 来自系统统计表，在analyze 后更新。</p>
+<p>所以通常配置触发参数时，尽量将analyze 触发条件要更敏感性。</p>
+<p><a href="https://blog.csdn.net/cmzhuang/article/details/84643618">测试参考</a></p>
+<h6 id="思考的是等号左边的事情">思考的是等号左边的事情</h6>
+<p>数据库是如何知道当前更的数量, 按照已有的经验（经验不足）。</p>
+<p>一般数据库中这种信息是存在的统计类信息中。但是统计信息通常是在analyze后更新的。根据上面的公式触发analyze的条件又是由当前表更新数有关。</p>
+<p>于是乎就陷入了一种循环♻️   。</p>
+<p>1 表更新数量 -&gt; analyze</p>
+<p>2 analyze  —&gt; 统计信息</p>
+<p>3 统计信息 -&gt; 表更新数量</p>
+<p>那是先有鸡还是先有蛋呢？</p>
+<p>只有继续思考才能找到事情的真相。。。</p>
+<p>首先表中更新的数据量统计应该是一个很轻量快速的方法。类似于计数器实现,并且独立于传统的统计信息。接下来在数据库开始寻找这种计数器。</p>
+<h5 id="真相">真相</h5>
+<p>‘计数器’ 是有stats collector 进程来维护。 当数据库进行dml操作时，stats collector 进行实时计数统计。该值存在于pg_stat_all_table 中</p>
+<p>查看pg_stats_all_table 表定义</p>
+<pre><code>postgres=# \d+ pg_stat_all_tables 
+                           视图 &quot;pg_catalog.pg_stat_all_tables&quot;
+        栏位         |           类型           | 校对规则 | 可空的 | 预设 | 存储  | 描述 
+---------------------+--------------------------+----------+--------+------+-------+------
+ relid               | oid                      |          |        |      | plain | 
+ schemaname          | name                     |          |        |      | plain | 
+ relname             | name                     |          |        |      | plain | 
+ seq_scan            | bigint                   |          |        |      | plain | 
+ seq_tup_read        | bigint                   |          |        |      | plain | 
+ idx_scan            | bigint                   |          |        |      | plain | 
+ idx_tup_fetch       | bigint                   |          |        |      | plain | 
+ n_tup_ins           | bigint                   |          |        |      | plain | 
+ n_tup_upd           | bigint                   |          |        |      | plain | 
+ n_tup_del           | bigint                   |          |        |      | plain | 
+ n_tup_hot_upd       | bigint                   |          |        |      | plain | 
+ n_live_tup          | bigint                   |          |        |      | plain | 
+ n_dead_tup          | bigint                   |          |        |      | plain | 
+ n_mod_since_analyze | bigint                   |          |        |      | plain | 
+ last_vacuum         | timestamp with time zone |          |        |      | plain | 
+ last_autovacuum     | timestamp with time zone |          |        |      | plain | 
+ last_analyze        | timestamp with time zone |          |        |      | plain | 
+ last_autoanalyze    | timestamp with time zone |          |        |      | plain | 
+ vacuum_count        | bigint                   |          |        |      | plain | 
+ autovacuum_count    | bigint                   |          |        |      | plain | 
+ analyze_count       | bigint                   |          |        |      | plain | 
+ autoanalyze_count   | bigint                   |          |        |      | plain | 
+视图定义:
+ SELECT c.oid AS relid,
+    n.nspname AS schemaname,
+    c.relname,
+    pg_stat_get_numscans(c.oid) AS seq_scan,
+    pg_stat_get_tuples_returned(c.oid) AS seq_tup_read,
+    sum(pg_stat_get_numscans(i.indexrelid))::bigint AS idx_scan,
+    sum(pg_stat_get_tuples_fetched(i.indexrelid))::bigint + pg_stat_get_tuples_fetched(c.oid) AS idx_tup_fetch,
+    pg_stat_get_tuples_inserted(c.oid) AS n_tup_ins,
+    pg_stat_get_tuples_updated(c.oid) AS n_tup_upd,
+    pg_stat_get_tuples_deleted(c.oid) AS n_tup_del,
+    pg_stat_get_tuples_hot_updated(c.oid) AS n_tup_hot_upd,
+    pg_stat_get_live_tuples(c.oid) AS n_live_tup,
+    pg_stat_get_dead_tuples(c.oid) AS n_dead_tup,
+    pg_stat_get_mod_since_analyze(c.oid) AS n_mod_since_analyze,
+    pg_stat_get_last_vacuum_time(c.oid) AS last_vacuum,
+    pg_stat_get_last_autovacuum_time(c.oid) AS last_autovacuum,
+    pg_stat_get_last_analyze_time(c.oid) AS last_analyze,
+    pg_stat_get_last_autoanalyze_time(c.oid) AS last_autoanalyze,
+    pg_stat_get_vacuum_count(c.oid) AS vacuum_count,
+    pg_stat_get_autovacuum_count(c.oid) AS autovacuum_count,
+    pg_stat_get_analyze_count(c.oid) AS analyze_count,
+    pg_stat_get_autoanalyze_count(c.oid) AS autoanalyze_count
+   FROM pg_class c
+     LEFT JOIN pg_index i ON c.oid = i.indrelid
+     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
+  WHERE c.relkind = ANY (ARRAY['r'::&quot;char&quot;, 't'::&quot;char&quot;, 'm'::&quot;char&quot;])
+  GROUP BY c.oid, n.nspname, c.relname;
+</code></pre><p>原来是表oid上各种维度的计数器，</p>
+<p>查看pg_class 结构</p>
+<pre><code>postgres=# \d+ pg_class
+                                 数据表 &quot;pg_catalog.pg_class&quot;
+        栏位         |     类型     | 校对规则 |  可空的  | 预设 |   存储   | 统计目标 | 描述 
+---------------------+--------------+----------+----------+------+----------+----------+------
+ relname             | name         |          | not null |      | plain    |          | 
+ relnamespace        | oid          |          | not null |      | plain    |          | 
+ reltype             | oid          |          | not null |      | plain    |          | 
+ reloftype           | oid          |          | not null |      | plain    |          | 
+ relowner            | oid          |          | not null |      | plain    |          | 
+ relam               | oid          |          | not null |      | plain    |          | 
+ relfilenode         | oid          |          | not null |      | plain    |          | 
+ reltablespace       | oid          |          | not null |      | plain    |          | 
+ relpages            | integer      |          | not null |      | plain    |          | 
+ reltuples           | real         |          | not null |      | plain    |          | 
+ relallvisible       | integer      |          | not null |      | plain    |          | 
+ reltoastrelid       | oid          |          | not null |      | plain    |          | 
+ relhasindex         | boolean      |          | not null |      | plain    |          | 
+ relisshared         | boolean      |          | not null |      | plain    |          | 
+ relpersistence      | &quot;char&quot;       |          | not null |      | plain    |          | 
+ relkind             | &quot;char&quot;       |          | not null |      | plain    |          | 
+ relnatts            | smallint     |          | not null |      | plain    |          | 
+ relchecks           | smallint     |          | not null |      | plain    |          | 
+ relhasoids          | boolean      |          | not null |      | plain    |          | 
+ relhaspkey          | boolean      |          | not null |      | plain    |          | 
+ relhasrules         | boolean      |          | not null |      | plain    |          | 
+ relhastriggers      | boolean      |          | not null |      | plain    |          | 
+ relhassubclass      | boolean      |          | not null |      | plain    |          | 
+ relrowsecurity      | boolean      |          | not null |      | plain    |          | 
+ relforcerowsecurity | boolean      |          | not null |      | plain    |          | 
+ relispopulated      | boolean      |          | not null |      | plain    |          | 
+ relreplident        | &quot;char&quot;       |          | not null |      | plain    |          | 
+ relispartition      | boolean      |          | not null |      | plain    |          | 
+ relfrozenxid        | xid          |          | not null |      | plain    |          | 
+ relminmxid          | xid          |          | not null |      | plain    |          | 
+ relacl              | aclitem[]    |          |          |      | extended |          | 
+ reloptions          | text[]       |          |          |      | extended |          | 
+ relpartbound        | pg_node_tree |          |          |      | extended |          | 
+索引：
+    &quot;pg_class_oid_index&quot; UNIQUE, btree (oid)
+    &quot;pg_class_relname_nsp_index&quot; UNIQUE, btree (relname, relnamespace)
+    &quot;pg_class_tblspc_relfilenode_index&quot; btree (reltablespace, relfilenode)
+有 OIDs:yes
+</code></pre><p>pg_class 中的信息是analyze 操作后更新，而计数器是oid上不同维度的统计。</p>
+<p>统计维度设置</p>
+<pre><code>#------------------------------------------------------------------------------
+# STATISTICS
+#------------------------------------------------------------------------------
+
+# - Query and Index Statistics Collector -
+
+#track_activities = on
+#track_counts = on
+#track_io_timing = off
+#track_functions = none                 # none, pl, all
+#track_activity_query_size = 1024       # (change requires restart)
+#stats_temp_directory = 'pg_stat_tmp  统计信息存放位置
+</code></pre><pre><code>tree pg_stat_tmp/
+pg_stat_tmp/
+├── db_0.stat
+├── db_14187.stat
+├── db_16384.stat
+├── db_20579.stat
+└── global.stat
+</code></pre><p>思考-&gt;迷惑-&gt;寻找答案-&gt;日渐清晰 ，日进一步</p>
+<p>pg_statistic 里面的内容太丰富了&hellip;</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/partition/">原生分区表</a></li>
+        
+        <li><a href="/postgres/pg_fdw/">跨库操作</a></li>
+        
+        <li><a href="/postgres/reback_supper_user/">找回supper user 权限</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

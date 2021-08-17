@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Rabbitmq 基础 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="Rabbitmq 基础 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-05-22T14:52:35&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-05-22T14:52:35&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Rabbitmq 基础">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/rabbitmq/manager02/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#amqp-协议">AMQP 协议</a></li>
+    <li><a href="#组件">组件</a></li>
+    <li><a href="#交换机模式">交换机模式</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#rabbitmq-可靠性保证">Rabbitmq 可靠性保证</a></li>
+    <li><a href="#消息-pullpush">消息 Pull/Push</a></li>
+    <li><a href="#rabbitmq-集群">Rabbitmq 集群</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#搭建集群">搭建集群</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Rabbitmq 基础</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/rabbitmq'>rabbitmq</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="amqp-协议">AMQP 协议</h2>
+<p>AMQP，即Advanced Message Queuing Protocol，高级消息队列协议。</p>
+<p>AMQP的主要特征是面向消息、队列、路由（包括点对点和发布/订阅）、可靠性、安全。</p>
+<p>RabbitMQ是一个开源的AMQP实现，服务器端用Erlang语言编写，支持多种客户端。</p>
+<h2 id="组件">组件</h2>
+<ul>
+<li>
+<p>Broker：标识消息队列服务器实体。</p>
+</li>
+<li>
+<p>Virtual Host：虚拟主机，标识一批交换机、消息队列和相关对象。RabbitMQ默认的vhost是&quot;/&quot;。 理解为数据库中的database</p>
+</li>
+<li>
+<p>Exchange：交换机，用来接收生产者发送的消息并将这些消息路由给服务器中的队列。 高级消息队列。</p>
+</li>
+<li>
+<p>Queue：消息队列，用来保存消息直到发送给消费者。它是消息的容器，也是消息的终点。一个消息可投入一个或多个队列。消息一直在队列里面，等待消费者连接到这个队列将其取走。</p>
+</li>
+<li>
+<p>Binding：绑定，用于消息队列和交换机之间的关联。一个绑定就是基于绑定键(bing-Key)将交换机和消息队列连接起来的路由规则，所以可以将交换器理解成一个由绑定构成的路由表。</p>
+</li>
+<li>
+<p>Channel：信道，多路复用连接中的一条独立的双向数据流通道。复用一条TCP连接。理解jdbc连接中的statement</p>
+</li>
+<li>
+<p>Connection：网络连接，比如一个TCP连接。</p>
+</li>
+<li>
+<p>Publisher：消息的生产者，表示一个向交换器发布消息的客户端应用程序。</p>
+</li>
+<li>
+<p>Consumer：消息的消费者，表示一个从一个消息队列中取得消息的客户端应用程序。</p>
+</li>
+<li>
+<p>Message：消息，消息包括消息内容及一系列的可选属性组成，这些属性包括routing-key(路由键)、priority(优先级)、headers(消息头)等。</p>
+</li>
+</ul>
+<h2 id="交换机模式">交换机模式</h2>
+<p><a href="https://www.rabbitmq.com/getstarted.html">https://www.rabbitmq.com/getstarted.html</a></p>
+<h4 id="无交换机模式">无交换机模式</h4>
+<ul>
+<li>
+<p>simple
+端对端</p>
+</li>
+<li>
+<p>worker
+多个消费端</p>
+<p>默认多个worker平均消费</p>
+<p>设置消费端手动确认，且预取为1</p>
+</li>
+</ul>
+<h4 id="交换机路由模式">交换机路由模式</h4>
+<ul>
+<li>
+<p>fanout</p>
+<p>fanout类型的exchange会忽略路由键的设置，直接将Message广播到所有绑定的Queue中</p>
+</li>
+<li>
+<p>direct</p>
+<p>交换机通过消息上的路由键匹配具有相同值的绑定键来路由消息到对应的队列上。</p>
+</li>
+<li>
+<p>topic</p>
+<p>与direct基本相同，唯一区别在于绑定键；topic的绑定键可以设置表达式，用来模糊匹配；表达式里的通配符可以是&quot;*&ldquo;或&rdquo;#&quot;</p>
+</li>
+</ul>
+<h4 id="其他模式">其他模式</h4>
+<ul>
+<li>
+<p>rpc</p>
+<p>远程方法调用，双向传递。生产端传入方法的参数。消费端返回方法的结果。</p>
+</li>
+<li>
+<p>confirms</p>
+<p>生产者与队列之间的消息确认</p>
+</li>
+</ul>
+<h2 id="rabbitmq-可靠性保证">Rabbitmq 可靠性保证</h2>
+<ol>
+<li>生产者与队列之间 confirm 确认机制</li>
+<li>rabbitmq 队列镜像复制</li>
+<li>rabbitmq 与消费者之间的ack机制</li>
+</ol>
+<h2 id="消息-pullpush">消息 Pull/Push</h2>
+<p>队列与消费者之间的消息传输的两种方式：Pull / Push</p>
+<pre><code>// push 
+channel.basicConsume
+
+// pull
+channel.basicGet
+</code></pre><p>通常都是采用push 模式。消息队列主动向worker 推送消息，worker 设置预留位channel.basicQos(1)。提高效率。</p>
+<p>pull 模式则需要消费端不断的轮询</p>
+<h2 id="rabbitmq-集群">Rabbitmq 集群</h2>
+<h4 id="默认集群">默认集群</h4>
+<p>集群模式下多节点只复制元数据。包括Exchange 但不包括messages , Queue只会存在于它所创建的那个节点上。</p>
+<h4 id="镜像队列">镜像队列</h4>
+<p>由于默认集群存在丢失数据的风险。使用镜像队列将会在所有其他节点上创建同样的队列。</p>
+<p>可以通过设置策略来设置镜像队列。设置策略时有两个关键参数：ha-mode和ha-params</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ha-mode</th>
+<th style="text-align:center">ha-params</th>
+<th style="text-align:center">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">all</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">在集群中的每个节点都有镜像。当一个节点添加到集群中时，这个节点同样会有相应的镜像</td>
+</tr>
+<tr>
+<td style="text-align:center">exactly</td>
+<td style="text-align:center">count</td>
+<td style="text-align:center">指定在集群中镜像的个数。如果集群中节点的个数小于count的值，那么所有的节点都会配置镜像。如果其中一个镜像挂掉，那么会在另一个节点生成新的镜像。</td>
+</tr>
+<tr>
+<td style="text-align:center">nodes</td>
+<td style="text-align:center">node names</td>
+<td style="text-align:center">在指定的节点列表中配置镜像。如果这些指定的节点都处于不可用状态(宕机或者关闭服务等)，那么客户端程序会在自己所连接的那么节点上创建queue。</td>
+</tr>
+</tbody>
+</table>
+<h5 id="设置策略">设置策略</h5>
+<p>a、ha.开头的队列在所有节点上设置为镜像队列</p>
+<pre><code>rabbitmqctl set_policy ha-all &quot;^ha\.&quot; '{&quot;ha-mode&quot;:&quot;all&quot;}'
+</code></pre><p>b、two.开头的队列设置镜像数为2，数据自动同步(默认为手动)</p>
+<pre><code>rabbitmqctl set_policy ha-two &quot;^two\.&quot; '{&quot;ha-mode&quot;:&quot;exactly&quot;,&quot;ha-params&quot;:2,&quot;ha-sync-mode&quot;:&quot;automatic&quot;}'
+</code></pre><p>c、nodes.开头的队列镜像设置在节点rabbit@pxc1,rabbit@pxc2上</p>
+<pre><code>rabbitmqctl set_policy ha-nodes &quot;^nodes\.&quot; '{&quot;ha-mode&quot;:&quot;nodes&quot;,&quot;ha-params&quot;:[&quot;rabbit@pxc1&quot;, &quot;rabbit@pxc2&quot;]}'
+</code></pre><h4 id="quorum-queues仲裁队列">Quorum Queues(仲裁队列)</h4>
+<p>仲裁队列是镜像队列(又称为HA队列)的替代方案，该队列把数据安全作为首要目标，在3.8.0版本可以使用。声明仲裁队列和声明普通队列方法一样，只需要把x-queue-type设置为<code>quorum</code>即可。</p>
+<p>x-queue-type(quorum、classic)，默认为classic</p>
+<p>仲裁队列有一个leader、多个成员；管理成员：</p>
+<pre><code>rabbitmq-queues add_member [-p &lt;vhost&gt;] &lt;queue-name&gt; &lt;node&gt; #增加成员
+rabbitmq-queues delete_member [-p &lt;vhost&gt;] &lt;queue-name&gt; &lt;node&gt; #删除成员
+</code></pre><p>如：</p>
+<pre><code>./rabbitmq-queues add_member quorum.1 rabbit@pxc2
+./rabbitmq-queues delete_member quorum.1 rabbit@pxc2
+</code></pre><p><a href="https://www.cnblogs.com/wuyongyin/p/13891450.html">https://www.cnblogs.com/wuyongyin/p/13891450.html</a></p>
+<h2 id="搭建集群">搭建集群</h2>
+<h4 id="每台集群上单独部署rabbitmq">每台集群上单独部署rabbitmq</h4>
+<h4 id="erlangcookie">.erlang.cookie</h4>
+<p>将所有机器上的.erlang.cookie文件里的值一样.</p>
+<p>erlang.cookie是erlang实现分布式的必要文件，erlang分布式的每一个节点上要保持相同的.erlang.cookie文件，同时该文件的权限为400</p>
+<p>.erlang.cookie一般会存在于两个地方，</p>
+<p>第一个是：$HOME/.erlang.cookie；</p>
+<p>第二个是：/var/lib/rabbitmq/.erlang.cookie。</p>
+<h4 id="设置hosts">设置hosts</h4>
+<pre><code>10.49.196.10 pxc1
+10.49.196.11 pxc2
+10.49.196.12 pxc3
+</code></pre><h4 id="将自身节点加入集群">将自身节点加入集群</h4>
+<p>10.49.196.11 pxc2 为例</p>
+<pre><code>./rabbitmqctl stop_app
+./rabbitmqctl reset
+./rabbitmqctl join_cluster rabbit@pxc1
+./rabbitmqctl start_app
+</code></pre><h4 id="重置移除节点">重置移除节点</h4>
+<pre><code>./rabbitmqctl stop_app
+./rabbitmqctl reset
+./rabbitmqctl start_app
+</code></pre><h4 id="镜像队列-1">镜像队列</h4>
+<p>在默认集群的基础上，可以设置镜像队列来保证数据的可靠性。如设置以ha.开头的队列在所有节点上为镜像队列</p>
+<pre><code>rabbitmqctl set_policy ha-all &quot;^ha\.&quot; '{&quot;ha-mode&quot;:&quot;all&quot;}'
+</code></pre><h4 id="仲裁队列">仲裁队列</h4>
+<p>如果还需进一步保证数据的安全性，可以使用仲裁队列。</p>
+<p>编码方式声明仲裁队列：</p>
+<pre><code>&quot;x-queue-type&quot;, &quot;quorum&quot;
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/openvpn/">搭建VPN服务</a></li>
+        
+        <li><a href="/linux/ipmi/">远程管理卡 命令管理IPMI</a></li>
+        
+        <li><a href="/python/django_max_con_age/">Django CONN_MAX_AGE 对数据连接的影响</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

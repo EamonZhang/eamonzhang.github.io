@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>高可用 on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/</link>
+    <description>Recent content in 高可用 on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 30 Jan 2019 10:14:55 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PG高可用Patroni</title>
+      <link>https://zhangeamon.top/postgres/patroni/</link>
+      <pubDate>Wed, 30 Jan 2019 10:14:55 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/patroni/</guid>
+      <description>环境 操作系统 Centos 7 patroni 版本 2.0.2 postgres 版本 13 实现目标 高可用方案对比 patroni 结构分析 patroni 搭建新集群 patroni 接管现有集群 patroni 管理pg配置 手动swithover 自动failover 维护模式 弹性扩容，缩容 对外提供统一服务 RestFULLAPI 备份恢复 监控 日志 升级 高可用方案对比 pg的高可用方案都是基于流复制来实现 PAF pacemaker + corosyns repmgr repmgr 手动流复制管</description>
+    </item>
+    
+  </channel>
+</rss>

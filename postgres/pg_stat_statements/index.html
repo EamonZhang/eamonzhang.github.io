@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>pg_stat_statements 数据库统计信息 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="pg_stat_statements 数据库统计信息 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-11-29T11:08:27&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-11-29T11:08:27&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="pg_stat_statements 数据库统计信息">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/pg_stat_statements/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">pg_stat_statements 数据库统计信息</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月29日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="pg_stat_statements-扩展">pg_stat_statements 扩展</h4>
+<h5 id="安装">安装　</h5>
+<pre><code>yum install postgresql10-contrib.x86_64
+
+</code></pre><h5 id="修改配置参数">修改配置参数</h5>
+<pre><code>vi $PGDATA/postgresql.conf  
+
+shared_preload_libraries='pg_stat_statements'  # 加载模块　需要重启 , 近期测试不需要添加也可以。自带扩展
+
+track_io_timing = on  # 跟踪IO耗时 (可选)
+
+track_activity_query_size = 2048 # 设置单条SQL的最长长度，超过被截断显示（可选)
+
+pg_stat_statements.max = 10000  #在pg_stat_statements中最多保留多少条统计信息，通过LRU算法，覆盖老的记录。
+
+pg_stat_statements.track = all  # all - (所有SQL包括函数内嵌套的SQL), top - 直接执行的SQL(函数内的sql不被跟踪), none - (不跟踪)
+
+pg_stat_statements.track_utility = off  #是否跟踪非DML语句 (例如DDL，DCL)，on表示跟踪, off表示不跟踪 
+
+pg_stat_statements.save = on #重启后是否保留统计信息  
+ 
+</code></pre><h5 id="重启数据库">重启数据库</h5>
+<pre><code>systemctl restart postgresql-10
+</code></pre><h5 id="创建扩展">创建扩展</h5>
+<pre><code>create extension pg_stat_statements;
+
+\d pg_stat_statements
+                    View &quot;public.pg_stat_statements&quot;
+       Column        |       Type       | Collation | Nullable | Description 
+---------------------+------------------+-----------+----------+---------
+ userid              | oid              |           |          | 执行该语句的用户的 OID
+ dbid                | oid              |           |          | 在其中执行该语句的数据库的 OID
+ queryid             | bigint           |           |          | 内部哈希码，从语句的解析树计算得来 
+ query               | text             |           |          | 语句的文本形式 
+ calls               | bigint           |           |          | 被执行的次数 
+ total_time          | double precision |           |          | 在该语句中花费的总时间，以毫秒计 
+ min_time            | double precision |           |          | 在该语句中花费的最小时间，以毫秒计 
+ max_time            | double precision |           |          | 在该语句中花费的最大时间，以毫秒计
+ mean_time           | double precision |           |          | 在该语句中花费的平均时间，以毫秒计 
+ stddev_time         | double precision |           |          | 在该语句中花费时间的总体标准偏差，以毫秒计 
+ rows                | bigint           |           |          | 该语句检索或影响的行总数 
+ shared_blks_hit     | bigint           |           |          | 该语句造成的共享块缓冲命中总数 
+ shared_blks_read    | bigint           |           |          | 该语句读取的共享块的总数 
+ shared_blks_dirtied | bigint           |           |          | 该语句弄脏的共享块的总数 
+ shared_blks_written | bigint           |           |          | 
+ local_blks_hit      | bigint           |           |          | 
+ local_blks_read     | bigint           |           |          | 该语句读取的本地块的总数 
+ local_blks_dirtied  | bigint           |           |          | 该语句弄脏的本地块的总数 
+ local_blks_written  | bigint           |           |          | 该语句写入的本地块的总数 
+ temp_blks_read      | bigint           |           |          | 
+ temp_blks_written   | bigint           |           |          | 
+ blk_read_time       | double precision |           |          | 该语句花在读取块上的总时间，以毫秒计（如果track_io_timing被启用，否则为零) 
+ blk_write_time      | double precision |           |          | 该语句花在写入块上的总时间，以毫秒计（如果track_io_timing被启用，否则为零) 
+
+</code></pre><p>在数据库中生成了一个名为 pg_stat_statements 的视图,对数据库的跟踪也是基于这个视图展开。</p>
+<h4 id="分析top-sql">分析TOP SQL</h4>
+<p>最耗IO SQL</p>
+<p>单次调用最耗IO SQL TOP 5</p>
+<pre><code>select userid::regrole, dbid, query from pg_stat_statements order by (blk_read_time+blk_write_time)/calls desc limit 5;  
+</code></pre><p>总最耗IO SQL TOP 5</p>
+<pre><code>select userid::regrole, dbid, query from pg_stat_statements order by (blk_read_time+blk_write_time) desc limit 5;  
+</code></pre><p>最耗时 SQL</p>
+<p>单次调用最耗时 SQL TOP 5</p>
+<pre><code>select userid::regrole, dbid, query from pg_stat_statements order by mean_time desc limit 5;  
+</code></pre><p>总最耗时 SQL TOP 5</p>
+<pre><code>select userid::regrole, dbid, query from pg_stat_statements order by total_time desc limit 5;  
+</code></pre><p>响应时间抖动最严重 SQL</p>
+<pre><code>select userid::regrole, dbid, query from pg_stat_statements order by stddev_time desc limit 5;  
+</code></pre><p>最耗共享内存 SQL</p>
+<pre><code>select userid::regrole, dbid, query from pg_stat_statements order by (shared_blks_hit+shared_blks_dirtied) desc limit 5;  
+</code></pre><p>最耗临时空间 SQL</p>
+<pre><code>select userid::regrole, dbid, query from pg_stat_statements order by temp_blks_written desc limit 5;  
+</code></pre><p>最访问频繁 SQL</p>
+<pre><code>select userid::regrole, dbid, query ,calls from pg_stat_statements order by calls desc limit 5;
+</code></pre><h4 id="重置统计信息">重置统计信息</h4>
+<p>pg_stat_statements是累积的统计，如果要查看某个时间段的统计，需要打快照</p>
+<pre><code>建快照表
+create table stat_pg_stat_statements as select now() ,* from pg_stat_statements where 1=2;
+插入数据
+insert into stat_pg_stat_statements select now() ,* from pg_stat_statements;
+</code></pre><p>用户也可以定期清理历史的统计信息，通过调用如下SQL</p>
+<pre><code>select pg_stat_statements_reset();  
+</code></pre><h4 id="heading"></h4>
+<p><a href="https://github.com/cybertec-postgresql/pgwatch2">https://github.com/cybertec-postgresql/pgwatch2</a></p>
+<p><a href="https://github.com/wrouesnel/postgres_exporter">https://github.com/wrouesnel/postgres_exporter</a></p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/extention/">数据库拓展</a></li>
+        
+        <li><a href="/about/en/">英语单词</a></li>
+        
+        <li><a href="/postgres/params/">数据库参数</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

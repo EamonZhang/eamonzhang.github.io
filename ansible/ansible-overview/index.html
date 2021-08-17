@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Ansible Overview | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="Ansible Overview - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-10-25T09:16:22&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-10-25T09:16:22&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Ansible Overview">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/ansible/ansible-overview/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Ansible Overview</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月25日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/ansible'>ansible</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <ul>
+<li>
+<p>主要模块</p>
+<ul>
+<li>PLAYBOOKS： 任务剧本（任务集），编排定义Ansible任务集的配置文件，由Ansible顺序依次执行，通常是JSON格式的YML文件</li>
+<li>INVENTORY： Ansible管理主机的清单/etc/anaible/hosts</li>
+<li>MODULES：   Ansible执行命令的功能模块，多数为内置的核心模块，也可自定义,ansible-doc –l 可查看模块</li>
+<li>PLUGINS：   模块功能的补充，如连接类型插件、循环插件、变量插件、过滤插件等，该功能不常用</li>
+<li>API：       供第三方程序调用的应用程序编程接口</li>
+<li>ANSIBLE：   ansible命令工具，其为核心执行工具</li>
+</ul>
+</li>
+<li>
+<p>常用命令</p>
+<ul>
+<li>/usr/bin/ansible	主程序，临时命令执行工具</li>
+<li>/usr/bin/ansible-doc	查看配置文档，模块功能查看工具</li>
+<li>/usr/bin/ansible-playbook	定制自动化任务，编排剧本工具</li>
+<li>/usr/bin/ansible-pull	远程执行命令的工具</li>
+<li>/usr/bin/ansible-vault	文件加密工具</li>
+<li>/usr/bin/ansible-console	基于Console界面与用户交互的执行工具</li>
+<li>/usr/bin/ansible-galaxy	下载/上传优秀代码或Roles模块的官网平台</li>
+</ul>
+</li>
+<li>
+<p>配置文件</p>
+<ul>
+<li>/etc/ansible/ansible.cfg        主配置文件，配置ansible工作特性</li>
+<li>/etc/ansible/hosts      主机清单</li>
+<li>/etc/ansible/roles/     存放角色的目录</li>
+</ul>
+</li>
+<li>
+<p>配置说明<br>
+/etc/ansible/ansible.cfg</p>
+</li>
+</ul>
+<pre><code>  [defaults]
+   #inventory = /etc/ansible/hosts # 主机列表配置文件
+   #library = /usr/share/my_modules/ # 库文件存放目录
+   #remote_tmp = $HOME/.ansible/tmp #临时py命令文件存放在远程主机目录
+   #local_tmp = $HOME/.ansible/tmp # 本机的临时命令执行目录
+   #forks = 5 # 默认并发数
+   #sudo_user = root # 默认sudo 用户
+   #ask_sudo_pass = True #每次执行ansible命令是否询问ssh密码
+   #ask_pass = True      #连接时提示输入ssh密码
+   #remote_port = 22     #远程主机的默认端口，生产中这个端口应该会不同
+   #log_path = /var/log/ansible.log #日志
+   #host_key_checking = False # 检查对应服务器的host_key，建议取消注释。也就是不会弹出
+  
+</code></pre><ul>
+<li>Inventory 主机清单<br>
+Ansible必须通过Inventory 来管理主机。Ansible 可同时操作属于一个组的多台主机,组和主机之间的关系通过 inventory 文件配置。</li>
+</ul>
+<h5 id="句法格式">句法格式</h5>
+<pre><code>单台主机
+green.example.com    &gt;   FQDN
+192.168.100.10       &gt;   IP地址
+192.168.100.11:2222  &gt;   非标准SSH端口
+
+[webservers]         &gt;   定义了一个组名     
+alpha.example.org    &gt;   组内的单台主机
+192.168.100.10 
+
+[dbservers]
+192.168.100.10       &gt;   一台主机可以是不同的组，这台主机同时属于[webservers] 
+
+[group:children]     &gt;  组嵌套组，group为自定义的组名，children是关键字，固定语法，必须填写。
+dns                  &gt;  group组内包含的其他组名
+db                   &gt;  group组内包含的其他组名
+
+[webservers] 
+www[001:003].hunk.tech &gt; 有规律的名称列表，
+这里表示相当于：
+www001.hunk.tech
+www002.hunk.tech
+www003.hunk.tech
+
+[databases]
+db-[a:c].example.com   &gt;   定义字母范围的简写模式,
+这里表示相当于：
+db-a.example.com
+db-b.example.com
+db-c.example.com
+
+最后还有一个隐藏的分组，那就是all，代表全部主机,这个是隐式的，不需要写出来的
+</code></pre><h5 id="参数说明">参数说明</h5>
+<pre><code>ansible_ssh_host
+      将要连接的远程主机名.与你想要设定的主机的别名不同的话,可通过此变量设置.
+
+ansible_ssh_port
+      ssh端口号.如果不是默认的端口号,通过此变量设置.这种可以使用 ip:端口 192.168.1.100:2222
+
+ansible_ssh_user
+      默认的 ssh 用户名
+
+ansible_ssh_pass
+      ssh 密码(这种方式并不安全,我们强烈建议使用 --ask-pass 或 SSH 密钥)
+
+ansible_sudo_pass
+      sudo 密码(这种方式并不安全,我们强烈建议使用 --ask-sudo-pass)
+
+ansible_sudo_exe (new in version 1.8)
+      sudo 命令路径(适用于1.8及以上版本)
+
+ansible_connection
+      与主机的连接类型.比如:local, ssh 或者 paramiko. 
+
+ansible_ssh_private_key_file
+      ssh 使用的私钥文件.适用于有多个密钥,而你不想使用 SSH 代理的情况.
+
+ansible_shell_type
+      目标系统的shell类型.默认情况下,命令的执行使用 'sh' 语法,可设置为 'csh' 或 'fish'.
+
+ansible_python_interpreter
+      目标主机的 python 路径
+</code></pre><ul>
+<li>Ansible 的命令执行过程</li>
+</ul>
+<pre><code>1. 加载自己的配置文件，默认/etc/ansible/ansible.cfg
+    Using /etc/ansible/ansible.cfg as config file
+
+2. 匹配主机清单
+    Parsed /etc/ansible/hosts inventory source with ini plugin
+
+3. 加载指令对应的模块文件，如command，生成.py的文件到本机的临时目录，这个目录就是在/etc/ansible/ansible.cfg定义的
+    Using module file /usr/lib/python2.7/site-packages/ansible/modules/commands/command.py
+    PUT /tmp/tmp4JvsLH TO /root/.ansible/tmp/ansible-tmp-1517301292.6-155771303493861/command.py
+
+4. 通过ansible将模块或命令生成对应的临时py文件，并将该文件传输至远程服务器的对应执行用户$HOME/.ansible/tmp/ansible-tmp-数字/XXX.PY文件，
+    这个目录就是在/etc/ansible/ansible.cfg定义的
+    ( umask 77 &amp;&amp; mkdir -p &quot;` echo /root/.ansible/tmp/ansible-tmp-1517301292.6-155771303493861 `&quot; ....)
+    sftp&gt; put /tmp/tmp4JvsLH /root/.ansible/tmp/ansible-tmp-1517301292.6-155771303493861/command.py\n'
+
+5. 给文件+x 权限
+    'chmod u+x /root/.ansible/tmp/ansible-tmp-1517301292.6-155771303493861/ /root/.ansible/tmp/ansible-tmp-1517301292.6-155771303493861/command.py &amp;&amp; sleep 0'
+
+6. 执行并返回结果
+    '/usr/bin/python /root/.ansible/tmp/ansible-tmp-1517301292.6-155771303493861/command.py;
+
+7. 删除临时py文件，sleep 0退出
+    rm -rf &quot;/root/.ansible/tmp/ansible-tmp-1517301292.6-155771303493861/&quot; &gt; /dev/null 2&gt;&amp;1 &amp;&amp; sleep 0
+
+8. 断开远程主机连接
+    'Shared connection to 7-db-3.hunk.tech closed.\r\n')
+
+</code></pre><ul>
+<li>执行结果状态<br>
+绿色：执行成功并且不需要做改变的操作<br>
+×××：执行成功并且对目标主机做变更<br>
+红色：执行失败</li>
+</ul>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/network-security/teleport/">Teleport 堡垒机</a></li>
+        
+        <li><a href="/linux/git-sparsecheckout/">Git 只下载指定文件或文件夹下的内容</a></li>
+        
+        <li><a href="/go/install/">Go 语言安装及配置</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>fillfactor 填充因子 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="fillfactor 填充因子 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-12-06T11:01:03&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-12-06T11:01:03&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="fillfactor 填充因子">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/fillfactor/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">fillfactor 填充因子</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月6日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="介绍">介绍</h4>
+<p>PostgreSQL每个表和索引的数据都是由很多个固定尺寸的页面存储（通常是 8kB，不过在编译服务器时[–with-blocksize]可以选择其他不同的尺寸）     <br>
+一个表的填充因子(fillfactor)是一个介于 10 和 100 之间的百分数。100(完全填充)是默认值。如果指定了较小的填充因子，INSERT 操作仅按照填充因子指定的百分率填充表页。每个页上的剩余空间将用于在该页上更新行，这就使得 UPDATE 有机会在同一页上放置同一条记录的新版本，这比把新版本放置在其它页上更有效。对于一个从不更新的表将填充因子设为 100 是最佳选择，但是对于频繁更新的表，较小的填充因子则更加有效。</p>
+<p>PostgresSQL 使用<a href="./postgres/hotupdate">Heap-Only Tuple 技术</a> 会在旧行与新行之间建立一个链表，这样一来就不需要更新索引了，索引项仍会指向旧行，通过链表可以找到新行。因此Heap-Only Tuple 的链表不能跨数据块。</p>
+<h4 id="示例">示例</h4>
+<pre><code>create table t_fillfactor01(id int ,name varchar  , blog text ) WITH (fillfactor=70);
+CREATE TABLE
+new_test=# \d+ t_fillfactor01
+                         Table &quot;public.t_fillfactor01&quot;
+ Column |       Type        | Modifiers | Storage  | Stats target | Description 
+--------+-------------------+-----------+----------+--------------+-------------
+ id     | integer           |           | plain    |              | 
+ name   | character varying |           | extended |              | 
+ blog   | text              |           | extended |              | 
+Options: fillfactor=70
+</code></pre><h4 id="测试">测试</h4>
+<pre><code>/****************************************************************************************
+    创建测试表
+    test1设置fillfactor=100
+    test2设置fillfactor=80
+    drop table if exists  test1;
+    drop table if exists  test2;
+****************************************************************************************/ 
+create table test1(
+    objectid bigserial not null,                --唯一编号，主键
+    name text not null,                         --名称
+    describe text,                              --备注
+    generate timestamptz default now() not null,--创建日期
+    constraint pk_test1_objectid primary key(objectid)
+)with (fillfactor=100); 
+
+create table test2(
+    objectid bigserial not null,                --唯一编号，主键
+    name text not null,                         --名称
+    describe text,                              --备注
+    generate timestamptz default now() not null,--创建日期
+    constraint pk_test2_objectid primary key(objectid)
+)with (fillfactor=80); 
+
+/****************************************************************************************
+    创建随机生成中文字符函数
+drop function if exists gen_random_zh(int,int);
+****************************************************************************************/ 
+
+create or replace function gen_random_zh(int,int)
+    returns text
+as $$
+	select string_agg(chr((random()*(20901-19968)+19968 )::integer) , '')  from generate_series(1,(random()*($2-$1)+$1)::integer); $$ language sql; 
+
+/****************************************************************************************
+    导入测试数据
+****************************************************************************************/ 
+insert into test1(name)
+  select gen_random_zh(8,32) from generate_series(1,10000); 
+
+insert into test2(name)
+    select gen_random_zh(8,32) from generate_series(1,10000);
+
+/****************************************************************************************
+    查看test1数据在页中的布局
+****************************************************************************************/
+
+select ctid,objectid from test1 limit 500;
+略
+
+select ctid,objectid from test2 limit 500;
+略
+
+---test1 --- fillfactor = 100
+ select ctid from test1 where objectid = 93;
+ ctid 
+-------- 
+(1,18) (1 row) 
+update test1 set name=gen_random_zh(8,32) where objectid = 93; 
+select ctid from test1 where objectid = 93; 
+ctid 
+---------- 
+(133,31) (1 row) 
+
+--test2 --- fillfactor = 80 
+select ctid from test2 where objectid = 93;
+ctid 
+-------- 
+(1,32) (1 row)
+update test2 set name=gen_random_zh(8,32) where objectid = 93;
+select ctid from test2 where objectid = 93; 
+ctid 
+-------- 
+(1,58) (1 row)
+
+--------------------- 
+</code></pre><p>可以看到test1中因为填充率为100%,update后第一页中没有位置存储新的数据了,所以检查最大的页文件是否还有位置,如果有直接插入,如果没有则再新建一页后插入,在本例中跳过了132个页文件.</p>
+<p>test2中因为填充率为80%,还有20%的空间可以存储数据,因此update后直接在历史数据所在的页后面插入数据.</p>
+<h4 id="fillfactor-的设置">fillfactor 的设置</h4>
+<p>fillfactor 的设置可直接影响hotupdate的比例， 通过wal日志的解析可以查看hotupdate的情况 <a href="./postgres/checkpoint">checkpoint</a></p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/vacuum/">vacuum 垃圾回收器</a></li>
+        
+        <li><a href="/postgres/explain/">Explain 执行计划</a></li>
+        
+        <li><a href="/docker/nginx-log/">Nginx log 切割</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

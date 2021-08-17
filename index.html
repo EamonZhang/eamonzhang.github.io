@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+	<meta name="generator" content="Hugo 0.81.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Let&#39;s go 🐌 🐌 🐌 | Let&#39;s build our own cloud native together  </title>
+    <meta property="og:title" content="Let&#39;s go 🐌 🐌 🐌 | Let&#39;s build our own cloud native together  ">
+    <meta property="og:type" content="website">
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="python 软件架构等">
+    <meta property="og:url" content="https://zhangeamon.top/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml+xml" href="https://zhangeamon.top/index.xml" title="Let's go 🐌 🐌 🐌" />
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <h1>
+                        <a id="logo" href="https://zhangeamon.top">
+                            Let&#39;s go 🐌 🐌 🐌
+                        </a>
+                    </h1>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年8月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            发布订阅 消息多播，一个发布消息可以同时被多个订阅者收听 常用命令 发布 PUBLISH channel message 订阅 SUBSCRIBE channel [channel ...] PSUBSCRIBE pattern [pattern ...] python demo #!/usr/bin/env python import redis import time redis_pool = redis.ConnectionPool(host=&quot;192.168.6.14&quot;,port=&quot;6379&quot;) redis_client = redis.Redis(connection_pool=redis_pool) #生产者 def publishMessages(): while True: redis_client.publish(&quot;channel.shenyang&quot;,&quot;hello news &quot;+time.asctime(time.localtime(time.time()))) time.sleep(2) #消费者 def subscibeMessages(): p = redis_client.pubsub() p.subscribe(&quot;channel.shenyang&quot;) while True: message = p.get_message() if not message: time.sleep(1) continue print(message) #阻塞消费者 def subscibeBlockMessages(): p = redis_client.pubsub() p.subscribe(&quot;channel.shenyang&quot;) for item in p.listen(): print(item['type']) if item['type'] == 'message': print(item['channel']) print(item['data']) if __name__ == '__main__': publishMessages() # subscibeMessages() # subscibeBlockMessages() Stream 一个可靠的消息队列 Redis 5.0 引入了……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/pubsub/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年8月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            分布式锁场景 秒杀抢购茅台，车票 提前预约抢订车位，共享单车 特点，多个用户同一时间对同一个资源进行申请，并且只能允许一个用户申请成功。 分布式锁必要条件 布式系统环境下，一个方法在同一时间只能被一个机器的一个线程执行； 高可用的获取锁与释放锁； 高性能的获取锁与释放锁； 具备可重入特性； 具备锁……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/distributedlock/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年7月22日
+        </date>
+        
+        <div class="post-content">
+            多主机连接 PostgreSQL libpq 是数据库的一个连接驱动，支持多主机配置，同时支持target_session_attrs 主机角色判断配置。 当配置了多个主机时，会按顺序尝试连接，之道获取到成功的连接为止。 利用libpq的这个特性，结合数据库自动HA的一些软件，可以实现在不引入VIP以及中间路由节点的……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/libpg/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年7月21日
+        </date>
+        
+        <div class="post-content">
+            使用预编译优势介绍 在执行一个SQL时，首先生成执行计划（进行语义分析、词法解析、逻辑优化、物理优化）、执行、结果传输等操作。 如果一个SQL在应用中反复使用，我们可以将此SQL参数化，只做一次prepare，后面执行时就不需要进行前面执行计划的生成操作，直接使用prepare好的执……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/prepare/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年7月21日
+        </date>
+        
+        <div class="post-content">
+            物化视图 物化视图与普通视图的区别在于，物化视图是物理上真实存在的表。 物化视图的创建 \h create materialized view Command: CREATE MATERIALIZED VIEW Description: define a new materialized view Syntax: CREATE MATERIALIZED VIEW [ IF NOT EXISTS ] table_name [ (column_name [, ...] ) ] [ USING method ] [ WITH ( storage_parameter [= value] [, ... ] ) ] [ TABLESPACE tablespace_name ] AS query [ WITH [ NO ] DATA ] 与creat table as 基本相同，但是物化视图不同于table 的是物化时候中的数据内容可以……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/materialized/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年7月15日
+        </date>
+        
+        <div class="post-content">
+            requests 模块 HTTP 协议接口的请求调用 安装, 引用 pip install requests import requests 测试URL https://httpbin.org/post GET 请求 发送数据: 以下为postman 请求示例 { &quot;args&quot;: { &quot;arg1&quot;: &quot;arg_1&quot; }, &quot;headers&quot;: { &quot;Accept&quot;: &quot;*/*&quot;, &quot;Accept-Encoding&quot;: &quot;gzip, deflate, br&quot;, &quot;Content-Length&quot;: &quot;24&quot;, &quot;Content-Type&quot;: &quot;application/json&quot;, &quot;Host&quot;: &quot;httpbin.org&quot;, &quot;Postman-Token&quot;: &quot;187197c1-effa-4b4b-a499-7c3d66bc9049&quot;, &quot;User-Agent&quot;: &quot;PostmanRuntime/7.26.8&quot;, &quot;X-Amzn-Trace-Id&quot;: &quot;Root=1-60efdcf5-2c52d3eb46a1e19520fe108c&quot; }, &quot;origin&quot;: &quot;113.232.142.231&quot;, &quot;url&quot;: &quot;http://httpbin.org/get?arg1=arg_1&quot; } POST 请求 发送数据 以下为postman 请求示例 { &quot;args&quot;: { &quot;p &quot;: &quot;1&quot; }, &quot;data&quot;: &quot;{\n \&quot;json\&quot;: \&quot;123456\&quot;\n}&quot;, &quot;files&quot;: {}, &quot;form&quot;: {}, &quot;headers&quot;: { &quot;Accept&quot;: &quot;*/*&quot;, &quot;Accept-Encoding&quot;: &quot;gzip, deflate, br&quot;, &quot;Content-Length&quot;: &quot;24&quot;, &quot;Content-Type&quot;: &quot;application/json&quot;, &quot;Host&quot;: &quot;httpbin.org&quot;, &quot;Postman-Token&quot;: &quot;187879a8-fe0f-45a0-a94e-cf0b1d8e5184&quot;, &quot;User-Agent&quot;: &quot;PostmanRuntime/7.26.8&quot;, &quot;X-Amzn-Trace-Id&quot;: &quot;Root=1-60eff356-44291b474115a4e2111fbec4&quot; },……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/requests/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年6月16日
+        </date>
+        
+        <div class="post-content">
+            Centos7 cmake 版本升级（由 v2.8.12.2 升级至 v3.14.5） #cmake -version cmake version 2.8.12.2 安装基础工具 yum install -y gcc gcc-c++ mkdir /opt/cmake cd /opt/cmake/ wget https://cmake.org/files/v3.14/cmake-3.14.5.tar.gz tar zxvf cmake-3.14.5.tar.gz 安装 yum remove cmake -y ./configure --prefix=/usr/local/cmake make &amp;&amp; make install 查看版本 #/usr/local/cmake/bin/cmake --version cmake version 3.14.5 CMake suite maintained and supported by Kitware (kitware.com/cmake). 设置环境 ln -s /usr/local/cmake/bin/cmake /usr/bin/cmake Clion 中使用MakeFile 默认在Clion中使用CMakeList.txt,但是有些项目提供的是Makefile cmake_minimum_required(VERSION 3.12) project(test)……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/asr/c/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年6月9日
+        </date>
+        
+        <div class="post-content">
+            在终端下运行以下命令 sudo apt-get update sudo apt-get upgrade sudo apt-get install lightdm 在安装lightdm时选择lightdm 切换lightdm图形页面 sudo dpkg-reconfigure lightdm 切换完成后重启电脑，就可以使用向日葵远程了……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/lightdm/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年6月1日
+        </date>
+        
+        <div class="post-content">
+            centos中运行程序出现&rsquo;GLIBCXX_3.4.21' not found 查看动态库依赖 #ldd ./**.so **.so: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found #strings /usr/lib64/libstdc++.so.6 |grep ^GLIBCXX GLIBCXX_3.4 GLIBCXX_3.4.1 GLIBCXX_3.4.2 GLIBCXX_3.4.3 GLIBCXX_3.4.4 GLIBCXX_3.4.5 GLIBCXX_3.4.6 GLIBCXX_3.4.7 GLIBCXX_3.4.8 GLIBCXX_3.4.9 GLIBCXX_3.4.10 GLIBCXX_3.4.11 GLIBCXX_3.4.12 GLIBCXX_3.4.13 GLIBCXX_3.4.14 GLIBCXX_3.4.15 GLIBCXX_3.4.16 GLIBCXX_3.4.17 GLIBCXX_3.4.18 GLIBCXX_3.4.19 GLIBCXX_DEBUG_MESSAGE_LENGTH centos7 中的gcc 版本太老，需要升级 gcc 升级 centos7 中的gcc 版本太老，需要升级 yum groupinstall &quot;Development Tools&quot; yum install glibc-static libstdc++-static 下载gcc http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/ 安装 tar -xvf gcc-5.4.0.tar.bz2 cd gcc-5.4.0 ./contrib/download_prerequisits mkdir build cd build ../configure --enable-checking=release --enable-languages=c,c++ --disable-multilib……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/so/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月28日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            python 访问C 动态库 很多核心的算法库都是C/C++写的,成果物通常以动态库的方式对外提供。 如何利用python访问动态代码库 python访问C/C++的方式 ctypes pybind11 cffi swig ctypes的优势 不要修改动态库的源码 只需要动态库和头文件 使用比较简单,而且目前大部分库都是兼容C/C++ 参考 https://www.cnblogs.com/gaowengang/p/7919219.html……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/ctypes/">阅读全文</a></p>
+    </article>
+    
+    
+
+
+
+<ol class="page-navigator">
+    
+
+    
+
+    
+        
+    
+    
+
+    
+        
+        
+        <li  class="current">
+            <a href="https://zhangeamon.top/">1</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/2/">2</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/3/">3</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zhangeamon.top/page/25/">25</a>
+        </li>
+        
+    
+
+    
+    
+
+    <li class="next">
+        <a href="https://zhangeamon.top/page/2/">下一页</a>
+    </li>
+    
+</ol>
+
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

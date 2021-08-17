@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>数据库参数 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="数据库参数 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-11-27T09:57:27&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-11-27T09:57:27&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="数据库参数">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/params/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#性能参数">性能参数</a></li>
+    <li><a href="#日志参数postgreslog"><a href="postgres/log/">日志参数</a></a></li>
+    <li><a href="#更多参数详解httpspostgresqlconfzhdocparam"><a href="https://postgresqlco.nf/zh/doc/param/">更多参数详解</a></a></li>
+    <li><a href="#管理">管理</a></li>
+    <li><a href="#wal日志">wal日志</a></li>
+    <li><a href="#成本因子">成本因子</a></li>
+    <li><a href="#tcp-连接">TCP 连接</a></li>
+    <li><a href="#检查点checkpoint">检查点checkpoint</a></li>
+    <li><a href="#垃圾回收autovacuum">垃圾回收autovacuum</a></li>
+    <li><a href="#并行计算">并行计算</a></li>
+    <li><a href="#同步提交synchronous_commit">同步提交synchronous_commit</a></li>
+    <li><a href="#修改">修改</a></li>
+    <li><a href="#策略">策略　</a></li>
+    <li><a href="#查看">查看</a></li>
+    <li><a href="#work_mem">work_mem</a></li>
+    <li><a href="#实验">实验</a></li>
+    <li><a href="#maintainance_work_mem">maintainance_work_mem</a></li>
+    <li><a href="#实验-1">实验</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">数据库参数</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月27日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="性能参数">性能参数</h2>
+<p><a href="https://github.com/le0pard/pgtune">pgtune</a> <a href="https://www.pgconfig.org/">pgconfig</a></p>
+<h2 id="日志参数postgreslog"><a href="postgres/log/">日志参数</a></h2>
+<h2 id="更多参数详解httpspostgresqlconfzhdocparam"><a href="https://postgresqlco.nf/zh/doc/param/">更多参数详解</a></h2>
+<h2 id="管理">管理</h2>
+<pre><code>listen_addresses = &quot;*&quot;             # 连接访问控制，哪些ip可以访问， * 全部。 结合pg_hba.conf , iptables设置。
+superuser_reserved_connections = 3 # 预留给超级管理员的连接数。
+port = 5432                        # 默认访问端口
+wal_keep_segments = 1024           # wal 日志保存数量
+</code></pre><h2 id="wal日志">wal日志</h2>
+<pre><code>wal_log_hints = on 
+full_page_writes = on
+</code></pre><h2 id="成本因子">成本因子</h2>
+<pre><code># - Planner Cost Constants -
+#seq_page_cost = 1.0                    # measured on an arbitrary scale 顺序扫描
+random_page_cost = 1.1                  # same scale as above            随机扫描。HDD 4 ;SSD 1.1; 由于SSD没有磁盘寻道时间，顺序扫描和随机扫描的差距不是那么大。比例设置的相近即可。 
+#cpu_tuple_cost = 0.01                  # same scale as above
+#cpu_index_tuple_cost = 0.005           # same scale as above
+#cpu_operator_cost = 0.0025             # same scale as above
+#parallel_tuple_cost = 0.1              # same scale as above
+#parallel_setup_cost = 1000.0   # same scale as above
+#min_parallel_table_scan_size = 8MB
+#min_parallel_index_scan_size = 512kB
+effective_cache_size = 666666          # 系统总内存减去数据库shared_buffer减去其他应用占有的内存。 理解为数据可加载到内存的大小。
+</code></pre><h2 id="tcp-连接">TCP 连接</h2>
+<p>Linux 中tcp默认连接超时时间2小时,如果2个小时没有数据包则认为该连接为空闲状态，系统自动关闭。</p>
+<pre><code># - TCP Keepalives -
+# see &quot;man 7 tcp&quot; for details
+
+#tcp_keepalives_idle = 60                # TCP_KEEPIDLE, in seconds;
+                                        # 0 selects the system default
+#tcp_keepalives_interval = 10            # TCP_KEEPINTVL, in seconds;  发个心跳数据包，告诉系统我没有空闲
+                                        # 0 selects the system default
+#tcp_keepalives_count = 6               # TCP_KEEPCNT;
+                                        # 0 selects the system default
+</code></pre><h2 id="检查点checkpoint">检查点checkpoint</h2>
+<p>具体根据磁盘的吞吐量进行设置 <a href="https://yq.aliyun.com/articles/582847">https://yq.aliyun.com/articles/582847</a></p>
+<pre><code>shared_buffers = 64GB                  # 1/4 内存 如果不使用huge page建议不要超过32GB   
+checkpoint_timeout = 30min              # range 30s-1d  
+max_wal_size = 124GB          # 2*shared_buffers  
+min_wal_size = 32GB           # shared_buffers * 1/2  
+checkpoint_completion_target = 0.9 
+</code></pre><h2 id="垃圾回收autovacuum">垃圾回收autovacuum</h2>
+<pre><code>autovacuum_work_mem = -1 # autovacuum所能使用的内存大小，当其为-1时，使用maintenance_work_mem参数的值，值越大，使用的内存越多
+autovacuum = on # 是否打开autovacuum
+autovacuum_max_workers =3 # 最多能够有多少个autovaccum进程运行，值越大，使用的内存越多
+autovacuum_naptime = 1min  # autovacuum进程间隔多长时间对表进行是否需要autovacuum操作
+autovacuum_vacuum_threshold = 50 # 当表上dml操作达到多少行时执行autovacuum操作
+autovacuum_analyze_threshold = 50  # 当表上dml操作达到多少行时执行autovacuum analyze操作
+autovacuum_vacuum_scale_factor = 0.2 # 当表上dml操作达到多少比例时执行autovacuum操作
+autovacuum_analyze_scale_factor = 0.1  # 当表上dml操作达到多少比例时执行autovacuum analyze操作
+autovacuum_vacuum_cost_limit = -1  # autovacuum 的cost超过此值时，vacuum会sleep一段时间，使用vacuum_cost_limit参数的值，值越大对系统IO压力越大
+</code></pre><h2 id="并行计算">并行计算</h2>
+<pre><code>1. 控制整个数据库集群同时能开启多少个work process，必须设置。
+max_worker_processes = 128              # (change requires restart)  
+
+2. 控制一个并行的EXEC NODE最多能开启多少个并行处理单元，同时还需要参考表级参数parallel_workers，或者PG内核内置的算法，根据表的大小计算需要开启多少和并行处理单元。  
+实际取小的。
+max_parallel_workers_per_gather = 16    # taken from max_worker_processes
+
+3. 计算并行处理的成本，如果成本高于非并行，则不会开启并行处理。
+#parallel_tuple_cost = 0.1              # same scale as above
+#parallel_setup_cost = 1000.0   # same scale as above
+
+4. 小于这个值的表，不会开启并行。
+#min_parallel_relation_size = 8MB
+
+5. 告诉优化器，强制开启并行。
+#force_parallel_mode = off
+
+6. 表级参数，不通过表的大小计算并行度，而是直接告诉优化器这个表需要开启多少个并行计算单元。
+parallel_workers (integer)
+
+alter table t_table set(parallel_workers = 4)
+</code></pre><h2 id="同步提交synchronous_commit">同步提交synchronous_commit</h2>
+<p>同步提交参数, 控制事务提交后返回客户端是否成功的策略
+可选值为:on, remote_write, local, off</p>
+<p>on</p>
+<pre><code>1 为on且没有开启同步备库的时候,会当wal日志真正刷新到磁盘永久存储后才会返回客户端事务已提交成功, 
+2 当为on且开启了同步备库的时候(设置了synchronous_standby_names),必须要等事务日志刷新到本地磁盘,并且还要等远程备库也提交到磁盘才能返回客户端已经提交.
+</code></pre><p>off</p>
+<pre><code>写到缓存中就会向客户端返回提交成功，但也不是一直不刷到磁盘，延迟写入磁盘,延迟的时间为最大3倍的wal_writer_delay参数的(默认200ms)的时间,所有如果即使关闭synchronous_commit,
+也只会造成最多600ms的事务丢失,此事务甚至包括已经提交的事务（会丢数据）,但数据库确可以安全启动,不会发生块折断,只是丢失了部分数据,但对高并发的小事务系统来说,性能来说提升较大。
+</code></pre><p>remote_write</p>
+<pre><code>当事务提交时,不仅要把wal刷新到磁盘,还需要等wal日志发送到备库操作系统(但不用等备库刷新到磁盘),因此如果备库此时发生实例中断不会有数据丢失,因为数据还在操作系统上,
+而如果操作系统故障,则此部分wal日志还没有来得及写入磁盘就会丢失,备库启动后还需要想主库索取wal日志。
+</code></pre><p>local</p>
+<pre><code>当事务提交时,仅写入本地磁盘即可返回客户端事务提交成功,而不管是否有同步备库
+如果没有设置同步备库,则 on/remote_write/local都是一样的,仅等待事务刷新到本地磁盘.
+</code></pre><p>此参数还可以局部设置,当有临时批量任务时可以这样设置:</p>
+<pre><code>SET LOCAL synchronous_commit TO OFF; 
+</code></pre><p>这样局部事务可向备库异步的方式同步，而其他重要的事务以同步的方式向备库同步。</p>
+<h2 id="修改">修改</h2>
+<pre><code>postgresql.conf 服务器启动时默认读取的配置
+
+postgresql.auto.conf 优先级高于postgresql.conf 9.4后引入,对标oracle sfile pfile 。　文件不能修改,需要通过ALTER SYSTE　修改，ALTER SYSTE　RESET | DEFAULT 删除
+</code></pre><h2 id="策略">策略　</h2>
+<pre><code>postgresql.conf 参数为默认值,不做修改，优化参数通过　postgresql.auto.conf 修改，一目了然。(个人习惯)
+</code></pre><h2 id="查看">查看</h2>
+<pre><code>SELECT name,setting,vartype,boot_val,min_val,max_val,reset_val FROM pg_settings;
+
+show all;
+</code></pre><h2 id="work_mem">work_mem</h2>
+<p>这些内存大小被用来完成内部排序与哈希表操作。
+如果未分配足够内存，会导致物理I/O。
+work_mem这个值是针对每个session的，所以不能设置的过大。</p>
+<h2 id="实验">实验</h2>
+<pre><code>创建测试表
+postgres=# create table myt (id serial);  
+CREATE TABLE
+
+插入测试数据  
+postgres=# insert into myt select generate_series(1,1000000);  
+INSERT 0 1000000  
+
+设置当前session work_mem
+
+postgres=#set work_me '64kb';
+SET  
+postgres=# show work_mem;  
+ work_mem  
+----------  
+ 64kB  
+(1 row)
+
+查看临时文件占用情况
+select temp_files, temp_bytes from pg_stat_database
+ temp_files | temp_bytes  
+------------+------------  
+          0 |          0  
+(1 row)  
+
+执行测试
+select * from (select * from myt order by id) t limit 1000; 
+
+再次查看临时文件占用情况
+select temp_files, temp_bytes from pg_stat_database
+ temp_files | temp_bytes
+------------+------------
+          1 |   14016512 
+(1 row)
+
+设置当前session work_mem
+
+postgres=#set work_mem = '16MB';  
+SET
+
+执行测试
+select * from (select * from myt order by id) t limit 1000;
+
+再次查看临时文件占用情况
+select temp_files, temp_bytes from pg_stat_database
+ temp_files | temp_bytes
+------------+------------
+          1 |   14016512
+</code></pre><p>没有新增临时文件 , 说明work_mem充足</p>
+<h2 id="maintainance_work_mem">maintainance_work_mem</h2>
+<p>主要用于analyzing，vacuum，create index, reindex等。</p>
+<p>如需进行如上操作时请适当调整maintainance_work_mem 值，提高效率</p>
+<h2 id="实验-1">实验</h2>
+<p>方法与上面类似，在统计表中观察临时文件使用情况。</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/tidb/lsm/">LSM Overview</a></li>
+        
+        <li><a href="/middleware/haproxy/">Haproxy 算法</a></li>
+        
+        <li><a href="/monitor/prometheus-altermanager/">Promethues Altermanager 报警</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/'></a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

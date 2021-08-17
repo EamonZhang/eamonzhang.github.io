@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 故乡的云☁️</title>
+    <link>https://zhangeamon.top/categories/Linux/</link>
+    <description>Recent content in Linux on 故乡的云☁️</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 29 Mar 2021 09:30:42 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/Linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SSD IO request Time Out</title>
+      <link>https://zhangeamon.top/linux/pcie/</link>
+      <pubDate>Mon, 29 Mar 2021 09:30:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/pcie/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>smartctl 硬盘检测</title>
+      <link>https://zhangeamon.top/linux/smartctl/</link>
+      <pubDate>Mon, 03 Dec 2018 14:21:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/smartctl/</guid>
+      <description>SMART 简介 S.M.A.R.T.，全称为“Self-Monitoring Analysis and Reporting Technology”，即“自我监测、分析及报告技术”。是一种自动的硬盘状态检测与预警系统和规范。通过在硬盘硬件内的检测指令对硬盘的硬件如磁头、盘片、马达、电路的运行情况进行监控、记录并与厂商所设定的预设安全</description>
+    </item>
+    
+  </channel>
+</rss>

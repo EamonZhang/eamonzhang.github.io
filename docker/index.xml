@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dockers on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/docker/</link>
+    <description>Recent content in Dockers on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 18 Mar 2019 08:58:07 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>docker 磁盘空间管理</title>
+      <link>https://zhangeamon.top/docker/manager/</link>
+      <pubDate>Mon, 18 Mar 2019 08:58:07 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/manager/</guid>
+      <description>查看docker占用的空间情况 # docker system df TYPE TOTAL ACTIVE SIZE RECLAIMABLE Images 58 36 6.091GB 2.119GB (34%) Containers 90 89 232.3MB 0B (0%) Local Volumes 137 16 232.7MB 194.2MB (83%) Build Cache 0 0 0B 0B 四大资源尽收眼底，可回收多少资源也了然于胸 清除不在需要的资源 This will remove: - all stopped containers - all networks not used by at least one container - all dangling images - all build cach # docker system prune -f 清除一切非活跃状态，将资源还给系统 清除volume 查看 # docker volume ls</description>
+    </item>
+    
+    <item>
+      <title>Docker 问题集</title>
+      <link>https://zhangeamon.top/docker/troubles/</link>
+      <pubDate>Thu, 03 Jan 2019 15:06:43 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/troubles/</guid>
+      <description>Docker push: Received unexpected HTTP status: 500 Internal Server Error 描述: 使用jenkins 构建docker images时 push images到私有harbor中报错: Received unexpected HTTP status: 500 Internal Server Error,在build机上直接push没有问题。有的项目可以成功，有的失败。即使同一个项目有时执行成功，有时也会失败。 解决方式: 网上很多的关于500的</description>
+    </item>
+    
+    <item>
+      <title>Nginx log 切割</title>
+      <link>https://zhangeamon.top/docker/nginx-log/</link>
+      <pubDate>Wed, 05 Dec 2018 11:00:10 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/nginx-log/</guid>
+      <description>Docker nginx 日志切割 docker 在运行 nginx 日志容器时，将日志挂载到实体机/var/log/nginx/* .log 中. 一般直接运行的nginx服务都会自带logrotate进行日志切分, 由docker方式安装的nginx 缺失日志切割功能! 添加logrotate cat /etc/logrotate.d/nginx /var/log/nginx/*.log { daily missingok rotate 52 compress delaycompress notifempty create 666 root root sharedscripts postrotate # [ -f /var/run/nginx.pid ] &amp;amp;&amp;amp; kill</description>
+    </item>
+    
+    <item>
+      <title>Docker 本地网络</title>
+      <link>https://zhangeamon.top/docker/network01/</link>
+      <pubDate>Fri, 02 Nov 2018 16:34:06 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/network01/</guid>
+      <description>基础命令概览 docker network --help Usage: docker network COMMAND Manage networks Commands: connect Connect a container to a network create Create a network disconnect Disconnect a container from a network inspect Display detailed information on one or more networks ls List networks prune Remove all unused networks rm Remove one or more networks 默认网络 docker network ls NETWORK ID NAME DRIVER SCOPE 0770a8275bff bridge bridge local b6617326f199 host host local 31c55ffcf0a8 none null local 创建容器时通过 &amp;ndash;network= 指定网络类型 none 这个网络下的容器除了 lo，没有其他任何网卡。 host 共享Host的网络栈，容器的网络配置与 host 完</description>
+    </item>
+    
+    <item>
+      <title>Cgroup Namespaces</title>
+      <link>https://zhangeamon.top/docker/cgroup-namespaces/</link>
+      <pubDate>Fri, 02 Nov 2018 14:17:44 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/cgroup-namespaces/</guid>
+      <description>cgroup 实现资源限额 cgroup 全称 Control Group。Linux 操作系统通过 cgroup 可以设置进程使用 CPU、内存 和 IO 资源的限额。 在启动容器时可使用参数 docker run &amp;ndash;blkio-weight-device &amp;ndash;cpu-shares &amp;ndash;memory 等 。 ll /sys/fs/cgroup/cpu/docker/ ll /sys/fs/cgroup/memory/docker ll /sys/fs/cgroup/blkio/docker namespace 实现资源隔离 Mount Mount namespace 让容器看上去拥有整个文件系统。 容器有自己的 / 目录，可以执行 mount 和 umount 命令。当然我们知道这些操作只在当前容器中生效，</description>
+    </item>
+    
+    <item>
+      <title>Dumb Init</title>
+      <link>https://zhangeamon.top/docker/dumb-init/</link>
+      <pubDate>Thu, 01 Nov 2018 11:43:35 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/docker/dumb-init/</guid>
+      <description>基础概念 孤儿进程：一个父进程退出，而它的一个或多个子进程还在运行，那么那些子进程将成为孤儿进程。孤儿进程将被init进程(进程号为1)所收养，并由init进程对它们完成状态收集工作。 僵尸进程：一个进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或waitpi</description>
+    </item>
+    
+  </channel>
+</rss>

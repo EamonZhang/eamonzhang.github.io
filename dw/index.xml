@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dws on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/dw/</link>
+    <description>Recent content in Dws on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 25 Aug 2020 10:25:55 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/dw/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>文档</title>
+      <link>https://zhangeamon.top/dw/document/</link>
+      <pubDate>Tue, 25 Aug 2020 10:25:55 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/dw/document/</guid>
+      <description>https://ask.greenplum.cn</description>
+    </item>
+    
+    <item>
+      <title>数据挖掘算法</title>
+      <link>https://zhangeamon.top/dw/algorithm/</link>
+      <pubDate>Thu, 26 Mar 2020 10:20:05 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/dw/algorithm/</guid>
+      <description>机器学习，知识发现 数据挖掘算法 按照算法所解决的问题来进行划分，大致可以分为分类、聚类、回归和关联分析。 1.分类 分类算法是对已经确定好结果的数据进行学习，从而对未知的新数据进行分类的算法。 2.聚类 聚类算法只需要有一些数据，但是事先并不知道数据属于什么类别，通过对这些数据的学习，希望</description>
+    </item>
+    
+    <item>
+      <title>Greenplum6 安装</title>
+      <link>https://zhangeamon.top/dw/greenplum-install/</link>
+      <pubDate>Fri, 06 Dec 2019 14:29:04 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/dw/greenplum-install/</guid>
+      <description>环境准备 /ect/hosts groupadd gpadmin useradd gpadmin -r -m -g gpadmin passwd gpadmin su gpadmin ssh-keygen -t rsa -b 4096 visudo %wheel ALL=(ALL) NOPASSWD: ALL usermod -aG wheel gpadmin 软件安装 wget https://github.com/greenplum-db/gpdb/releases/download/6.1.0/greenplum-db-6.1.0-rhel7-x86_64.rpm sudo yum install ./greenplum-db-&amp;lt;version&amp;gt;-&amp;lt;platform&amp;gt;.rpm sudo chown -R gpadmin:gpadmin /usr/local/greenplum* source /usr/local/greenplum-db-&amp;lt;version&amp;gt;/greenplum_path.sh vi /home/gpadmin/.bashrc ssh 免密打通 1-n ssh-copy-id mdw n-n vi /home/gpadmin/hostfile_exkeys mdw smdw sdw1 sdw2 sdw3 sdw4 sdw5 sdw6 gpssh-exkeys -f hostfile_exkeys 创建存储目录 master mkdir -p /data/master segment mkdir -p /data/primary1 mkdir -p /data/primary2 mkdir -p /data/mirror1 mkdir -p /data/mirror2 chown -R gpadmin /data/* 性能测试 网络 gpcheckperf -f hostfile_gpchecknet_ic1 -r N -d /tmp &amp;gt; subnet1.out IO 250G gpcheckperf -f hostfile_gpcheckperf -r ds -D -d /data/primary1 -d /data/primary2 -d /data/mirror1 -d /data/mirror2 gpcheckperf -f gpconfigs/hostfile_gpcheckperf -r ds -D -d /data/primary1 -d /data/primary2</description>
+    </item>
+    
+    <item>
+      <title>数据仓库介绍</title>
+      <link>https://zhangeamon.top/dw/introduce/</link>
+      <pubDate>Fri, 21 Sep 2018 09:54:50 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/dw/introduce/</guid>
+      <description>数据库与数据仓库的区别 数据库是面向事务的设计，数据仓库是面向主题设计的。 数据库一般服务于业务系统的，数据仓库一般是服务于分析系统的。 数据库一般存储在线交易数据，数据仓库存储的一般是历史数据。 数据库设计是尽量避免冗余，数据仓库在设计是有意引入冗余。 数据库是为捕获数据而设计，数据仓库</description>
+    </item>
+    
+  </channel>
+</rss>

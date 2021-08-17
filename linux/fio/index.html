@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>fio 硬盘性能测试 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="fio 硬盘性能测试 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-12-04T10:30:48&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-12-04T10:30:48&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="fio 硬盘性能测试">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/linux/fio/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">fio 硬盘性能测试</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月4日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h4 id="基本概念">基本概念</h4>
+<p>使用FIO之前，首先要有一些SSD性能测试的基础知识。 包括线程，队列深度，Offset，同步异步，DirectIO，BIO。</p>
+<h5 id="线程">线程</h5>
+<p>线程指的是同时有多少个读或写任务在并行执行，一般来说，CPU里面的一个核心同一时间只能运行一个线程。如果只有一个核心，要想运行多线程，只能使用时间切片，每个线程跑一段时间片，所有线程轮流使用这个核心。Linux使用Jiffies来代表一秒钟被划分成了多少个时间片，一般来说Jiffies是1000或100，所以时间片就是1毫秒或10毫秒。</p>
+<h5 id="同步">同步</h5>
+<p>一般电脑发送一个读写命令到SSD只需要几微秒，但是SSD要花几百微秒甚至几毫秒才能执行完这个命令。如果发一个读写命令，然后线程一直休眠，等待结果回来才唤醒处理结果，这种叫做同步模式。可以想象，同步模式是很浪费SSD性能的，因为SSD里面有很多并行单元，比如一般企业级SSD内部有8-16个数据通道，每个通道内部有4-16个并行逻辑单元（LUN，Plane），所以同一时间可以执行32-256个读写命令。同步模式就意味着，只有其中一个并行单元在工作，暴殄天物。</p>
+<h5 id="异步">异步</h5>
+<p>为了提高并行性，大部分情况下SSD读写采用的是异步模式。就是用几微秒发送命令，发完线程不会傻傻的在那里等，而是继续发后面的命令。如果前面的命令执行完了，SSD通知会通过中断或者轮询等方式告诉CPU，CPU来调用该命令的回调函数来处理结果。这样的好处是，SSD里面几十上百个并行单元大家都能分到活干，效率暴增。</p>
+<h5 id="队列深度">队列深度</h5>
+<p>不过，在异步模式下，CPU不能一直无限的发命令到SSD。比如SSD执行读写如果发生了卡顿，那有可能系统会一直不停的发命令，几千个，甚至几万个，这样一方面SSD扛不住，另一方面这么多命令会很占内存，系统也要挂掉了。这样，就带来一个参数叫做队列深度。举个例子，队列深度64就是说，系统发的命令都发到一个大小为64的队列，如果填满了就不能再发。等前面的读写命令执行完了，队列里面空出位置来，才能继续填命令。</p>
+<h5 id="offset">offset</h5>
+<p>一个SSD或者文件有大小，测试读写的时候设置Offset就可以从某个偏移地址开始测试。比如从offset=4G的偏移地址开始。</p>
+<h5 id="directio">DirectIO</h5>
+<p>Linux读写的时候，内核维护了缓存，数据先写到缓存，后面再后台写到SSD。读的时候也优先读缓存里的数据。这样速度可以加快，但是一旦掉电缓存里的数据就没了。所以有一种模式叫做DirectIO，跳过缓存，直接读写SSD。</p>
+<h5 id="bio">BIO</h5>
+<p>Linux读写SSD等块设备使用的是BIO，Block-IO，这是个数据结构，包含了数据块的逻辑地址LBA，数据大小和内存地址等。</p>
+<h4 id="安装">安装</h4>
+<p><a href="https://github.com/axboe/fio">官网地址</a></p>
+<pre><code>./configure;make &amp;&amp; make install
+</code></pre><p>DEMO 如果缺失libaio驱动引擎可通过 yum install -y libaio-devel 安装后重新编译安装</p>
+<pre><code>fio -rw=randwrite  -ioengine=libaio -direct=1 -thread -numjobs=1  -iodepth=64 -filename=/data/1.data -size=10G \
+  -name=job1 -offset=0MB -bs=4k -name=job2 -offset=10G -bs=16k \
+  -output TestResult.log
+</code></pre><p>简单说明</p>
+<pre><code>fio：软件名称。
+
+-rw=randwrite：读写模式，randwrite是随机写测试，还有顺序读read，顺序写write，随机读randread，混合读写等。
+
+-ioengine=libaio：libaio指的是异步模式，如果是同步就要用sync。
+
+-direct=1：是否使用directIO。
+
+-thread：使用pthread_create创建线程，另一种是fork创建进程。进程的开销比线程要大，一般都采用thread测试。
+
+–numjobs=1：每个job是1个线程，这里用了几，后面每个用-name指定的任务就开几个线程测试。所以最终线程数=任务数* numjobs。
+
+-iodepth=64：队列深度64.
+
+-filename=/dev/sdb4：数据写到/dev/sdb4这个盘（块设备）。这里可以是一个文件名，也可以是分区或者SSD。
+
+-size=10G：每个线程写入数据量是10GB。
+
+-name=job1：一个任务的名字，名字随便起，重复了也没关系。这个例子指定了job1和job2，建立了两个任务，共享-name=job1之前的参数。-name之后的就是这个任务独有的参数。
+
+-offset=0MB：从偏移地址0MB开始写。
+
+-bs=4k：每一个BIO命令包含的数据大小是4KB。一般4KB IOPS测试，就是在这里设置。
+
+-output TestResult.log：日志输出到TestResult.log。
+</code></pre><p>结果查看 TestResult.log</p>
+<pre><code>job2: (g=0): rw=randwrite, bs=(R) 16.0KiB-16.0KiB, (W) 16.0KiB-16.0KiB, (T) 16.0KiB-16.0KiB, ioengine=libaio, iodepth=64
+fio-3.12
+Starting 2 threads
+job1: Laying out IO file (1 file / 10240MiB)
+job2: Laying out IO file (1 file / 20480MiB)
+
+job1: (groupid=0, jobs=1): err= 0: pid=15506: Tue Dec  4 10:00:43 2018
+  write: IOPS=20.6k, BW=80.6MiB/s (84.5MB/s)(10.0GiB/127037msec)                 IOPS　每秒IO次数 
+    slat (usec): min=5, max=598750, avg=43.94, stdev=1586.09                     slat是发命令时间　min 最小　max 最大　avg 平均　stdev 方差
+    clat (usec): min=43, max=603566, avg=3052.73, stdev=12877.32                 clat是命令执行时间
+     lat (usec): min=54, max=603643, avg=3096.88, stdev=12981.71                 lat 总延迟
+    clat percentiles (usec):
+     |  1.00th=[   947],  5.00th=[  1483], 10.00th=[  1582], 20.00th=[  1680],
+     | 30.00th=[  1729], 40.00th=[  1762], 50.00th=[  1795], 60.00th=[  1844],
+     | 70.00th=[  2008], 80.00th=[  3130], 90.00th=[  3785], 95.00th=[  4490],
+     | 99.00th=[ 10028], 99.50th=[ 30802], 99.90th=[219153], 99.95th=[312476],
+     | 99.99th=[400557]
+   bw (  KiB/s): min=  488, max=137212, per=43.04%, avg=71046.59, stdev=42517.77, samples=253
+   iops        : min=  122, max=34303, avg=17761.47, stdev=10629.30, samples=253
+  lat (usec)   : 50=0.01%, 100=0.08%, 250=0.17%, 500=0.28%, 750=0.25%
+  lat (usec)   : 1000=0.31%
+  lat (msec)   : 2=68.89%, 4=22.19%, 10=6.83%, 20=0.42%, 50=0.17%
+  lat (msec)   : 100=0.11%, 250=0.23%, 500=0.07%, 750=0.01%
+  cpu          : usr=4.48%, sys=43.73%, ctx=1226774, majf=0, minf=8
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.1%, &gt;=64=0.0%
+     issued rwts: total=0,2621440,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=64
+job2: (groupid=0, jobs=1): err= 0: pid=15507: Tue Dec  4 10:00:43 2018
+  write: IOPS=9368, BW=146MiB/s (153MB/s)(10.0GiB/69957msec)
+    slat (usec): min=6, max=598777, avg=97.43, stdev=3165.14
+    clat (usec): min=85, max=603836, avg=6720.55, stdev=25230.77
+     lat (usec): min=111, max=603933, avg=6818.24, stdev=25431.27
+    clat percentiles (usec):
+     |  1.00th=[  1319],  5.00th=[  2245], 10.00th=[  2671], 20.00th=[  3064],
+     | 30.00th=[  3326], 40.00th=[  3490], 50.00th=[  3621], 60.00th=[  3752],
+     | 70.00th=[  4015], 80.00th=[  4359], 90.00th=[  5211], 95.00th=[  7767],
+     | 99.00th=[122160], 99.50th=[202376], 99.90th=[371196], 99.95th=[383779],
+     | 99.99th=[526386]
+   bw (  KiB/s): min= 2816, max=308704, per=91.17%, avg=150510.73, stdev=91950.50, samples=139
+   iops        : min=  176, max=19294, avg=9406.87, stdev=5746.90, samples=139
+  lat (usec)   : 100=0.01%, 250=0.10%, 500=0.13%, 750=0.14%, 1000=0.18%
+  lat (msec)   : 2=2.87%, 4=66.49%, 10=26.78%, 20=1.41%, 50=0.27%
+  lat (msec)   : 100=0.41%, 250=0.90%, 500=0.29%, 750=0.02%
+  cpu          : usr=2.51%, sys=25.66%, ctx=536398, majf=0, minf=2
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.1%, &gt;=64=0.0%
+     issued rwts: total=0,655360,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=64
+
+Run status group 0 (all jobs):
+  WRITE: bw=161MiB/s (169MB/s), 80.6MiB/s-146MiB/s (84.5MB/s-153MB/s), io=20.0GiB (21.5GB), run=69957-127037msec
+
+Disk stats (read/write):
+    md0: ios=4/3310805, merge=0/0, ticks=0/0, in_queue=0, util=0.00%, aggrios=1/1698898, aggrmerge=0/484, aggrticks=0/749089, aggrin_queue=749104, aggrutil=70.32%
+  sdb: ios=2/1698906, merge=0/486, ticks=1/780800, in_queue=780980, util=69.54%
+  sdc: ios=0/1698928, merge=0/464, ticks=0/661183, in_queue=661093, util=69.63%
+  sdd: ios=2/1698888, merge=0/487, ticks=1/798317, in_queue=798188, util=69.86%
+  sde: ios=0/1698873, merge=0/502, ticks=0/756057, in_queue=756156, util=70.32%
+
+</code></pre><p><a href="https://tobert.github.io/post/2014-04-17-fio-output-explained.html">更多详解英文</a>
+<a href="https://www.cnblogs.com/zhangeamon/p/7446814.html">更多详解中文</a></p>
+<h4 id="配置文件方式">配置文件方式</h4>
+<p>vi fio.conf</p>
+<pre><code>[global]
+  ioengine=libaio ;同步sync 异步libaio 
+  rw=randwrite ;randwrite randread wite read randrw
+  direct=1
+  thread
+  numjobs=1
+  iodepth=64 
+  filename=/data/1.data ;测试文件，块设备
+  size=10G
+;--start jobs
+[job1]
+  name=job1
+  offset=0MB 
+  bs=4k
+[job2]
+  name=job2
+  offset=10G 
+  bs=16k
+;--end jobs
+</code></pre><p>运行</p>
+<pre><code>$fio fio.conf 
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/smartctl/">smartctl 硬盘检测</a></li>
+        
+        <li><a href="/linux/mdadm/">mdadm 软Raid 管理</a></li>
+        
+        <li><a href="/linux/init-centos/">Centos 初始化配置</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Go 语言安装及配置 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="Go 语言安装及配置 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-10-23T14:10:27&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-10-23T14:10:27&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="Go 语言安装及配置">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/go/install/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">Go 语言安装及配置</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月23日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <p>1.下载安装包</p>
+<p><a href="https://golang.org/dl/">https://golang.org/dl/</a><br>
+<a href="https://golang.google.cn/dl/">https://golang.google.cn/dl/</a></p>
+<p>将下载的二进制包解压至 /usr/local目录</p>
+<p>2.配置环境变量</p>
+<p>cat /etc/profile.d/go.sh</p>
+<pre><code>export GOROOT=/usr/local/go
+export GOPATH=~/golib:~/goproject
+export GOBIN=~/gobin
+export PATH=$PATH:$GOROOT/bin:$GOBIN
+export GOPROXY=https://goproxy.cn
+export GO111MODULE=on
+</code></pre><p>说明:</p>
+<p>GOROOT go安装包存放位置<br>
+GOPATH 工作区，多个工作区之间用冒号间隔<br>
+GOBIN  可执行文件目录<br>
+PATH   系统环境变量<br>
+Goproxy 中国完全实现了 Go 的模块代理协议。并且它是一个由中国备受信赖的云服务提供商七牛云支持的非营利性项目。目标是为中国和世界上其他地方的 Gopher 们提供一个免费的、可靠的、持续在线的且经过 CDN 加速的模块代理。</p>
+<p>3.目录结构</p>
+<p>src 源码<br>
+pkg 归档文件 .a 后缀</p>
+<p>4.常用命令及参数</p>
+<p>go run  执行</p>
+<p>-a -n - p -w</p>
+<p>go build</p>
+<p>go install 编译并安装指定的代码包及它们的依赖包 　</p>
+<p>go get 下载远程代码到GOPATH第一个工作区中，并编译执行</p>
+<p>go clean</p>
+<p>go doc</p>
+<p>go list</p>
+<p>go fmt</p>
+<p>go fix</p>
+<p>4.墙内生存技能</p>
+<pre><code>export GOPROXY=https://goproxy.io
+</code></pre><p>基本就都可以下载了</p>
+<p> </p>
+<p>第三方库</p>
+<p>google 被墙了，很多相关的库都 go get 不下来。可以用下面的方法曲线下载</p>
+<p>cloud.google.com/go/pubsub</p>
+<p>对应的github仓库在这里   https://github.com/googleapis/google-cloud-go</p>
+<pre><code>mkdir -p $GOPATH/src/cloud.google.com                                                                               
+cd $GOPATH/src/cloud.google.com  
+git clone https://github.com/googleapis/google-cloud-go.git                                                         
+mv google-cloud-go go
+</code></pre><p>google.golang.org/api/iterator</p>
+<p>googleapis go 语言版本在这 https://github.com/googleapis/google-api-go-client</p>
+<pre><code>
+mkdir -p $GOPATH/src/google.golang.org 
+cd $GOPATH/src/google.golang.org
+git clone https://github.com/googleapis/google-api-go-client.git                                                  
+mv google-api-go-client/ api   
+</code></pre><p>golang.org/x/sync/errgroup
+golang.org/x/oauth2</p>
+<p>golang.org 的基本都在  https://github.com/golang， 到里面找同名的仓库</p>
+<p>详细参考如下 </p>
+<pre><code>cd $GOPATH/src/golang.org/x/
+git clone https://github.com/golang/sync.git
+git clone https://github.com/golang/oauth2.git
+git clone https://github.com/golang/crypto.git
+git clone https://github.com/golang/net.git
+git clone https://github.com/golang/oauth2.git
+git clone https://github.com/golang/sync.git
+git clone https://github.com/golang/sys.git
+git clone https://github.com/golang/text.git
+git clone https://github.com/golang/time.git
+git clone https://github.com/golang/xerrors.git
+</code></pre><p>grpc安装</p>
+<pre><code>mkdir -p $GOPATH/src/google.golang.org/
+cd $GOPATH/src/google.golang.org/
+git clone https://github.com/grpc/grpc-go.git
+mv grpc-go grpc
+</code></pre><p>genproto安装</p>
+<pre><code>cd $GOPATH/src/google.golang.org
+git clone https://github.com/google/go-genproto.git
+mv go-genproto/ genproto
+</code></pre><h5 id="idegoland-安装">IDE　goland 安装</h5>
+<h5 id="包管理器">包管理器</h5>
+<p>glide</p>
+<p>go mod</p>
+<h5 id="自动编译">自动编译</h5>
+<p>gin</p>
+<h5 id="类库">类库</h5>
+<p>日志　zap <a href="https://github.com/uber-go/zap">https://github.com/uber-go/zap</a></p>
+<p>命令行　cli <a href="https://github.com/urfave/cli">https://github.com/urfave/cli</a></p>
+<p>配置文件　https://github.com/jinzhu/configor</p>
+<h5 id="框架">框架</h5>
+<h6 id="web">web</h6>
+<ul>
+<li>beego</li>
+<li><a href="https://go-macaron.com/">macaron</a></li>
+</ul>
+<h6 id="orm">orm</h6>
+<ul>
+<li>gorm</li>
+<li>xorm</li>
+</ul>
+<h6 id="配置管理">配置管理</h6>
+<ul>
+<li>viper</li>
+</ul>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/network-security/letusencrypt/">Let&#39;s Encrypt 通配符证书</a></li>
+        
+        <li><a href="/network-security/cert/">自签名证书</a></li>
+        
+        <li><a href="/linux/no-passwd/">ssh 免密码登&amp;跳板机配置</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

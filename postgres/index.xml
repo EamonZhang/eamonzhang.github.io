@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Postgres on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/postgres/</link>
+    <description>Recent content in Postgres on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 22 Jul 2021 11:04:27 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>客户端故障转移</title>
+      <link>https://zhangeamon.top/postgres/libpg/</link>
+      <pubDate>Thu, 22 Jul 2021 11:04:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/libpg/</guid>
+      <description>多主机连接 PostgreSQL libpq 是数据库的一个连接驱动，支持多主机配置，同时支持target_session_attrs 主机角色判断配置。 当配置了多个主机时，会按顺序尝试连接，之道获取到成功的连接为止。 利用libpq的这个特性，结合数据库自动HA的一些软件，可以实现在不引入VIP以及中间路由节点的</description>
+    </item>
+    
+    <item>
+      <title>使用prepare预编译SQL</title>
+      <link>https://zhangeamon.top/postgres/prepare/</link>
+      <pubDate>Wed, 21 Jul 2021 16:37:53 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/prepare/</guid>
+      <description>使用预编译优势介绍 在执行一个SQL时，首先生成执行计划（进行语义分析、词法解析、逻辑优化、物理优化）、执行、结果传输等操作。 如果一个SQL在应用中反复使用，我们可以将此SQL参数化，只做一次prepare，后面执行时就不需要进行前面执行计划的生成操作，直接使用prepare好的执</description>
+    </item>
+    
+    <item>
+      <title>物化视图</title>
+      <link>https://zhangeamon.top/postgres/materialized/</link>
+      <pubDate>Wed, 21 Jul 2021 15:43:34 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/materialized/</guid>
+      <description>物化视图 物化视图与普通视图的区别在于，物化视图是物理上真实存在的表。 物化视图的创建 \h create materialized view Command: CREATE MATERIALIZED VIEW Description: define a new materialized view Syntax: CREATE MATERIALIZED VIEW [ IF NOT EXISTS ] table_name [ (column_name [, ...] ) ] [ USING method ] [ WITH ( storage_parameter [= value] [, ... ] ) ] [ TABLESPACE tablespace_name ] AS query [ WITH [ NO ] DATA ] 与creat table as 基本相同，但是物化视图不同于table 的是物化时候中的数据内容可以</description>
+    </item>
+    
+    <item>
+      <title>PG高可用 repmgr 搭建</title>
+      <link>https://zhangeamon.top/postgres/repmgr/</link>
+      <pubDate>Wed, 07 Apr 2021 10:12:02 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/repmgr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Backgroud Writer 进程</title>
+      <link>https://zhangeamon.top/postgres/bgwriter/</link>
+      <pubDate>Wed, 31 Mar 2021 15:13:50 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/bgwriter/</guid>
+      <description>主要作用 负责将shared buffer 中的内容刷写到磁盘中，9.1版之后部分内容交给checkpoint完成。 参数配置 # - Background Writer - #bgwriter_delay = 200ms # 10-10000ms between rounds #bgwriter_lru_maxpages = 100 # 0-1000 max buffers written/round #bgwriter_lru_multiplier = 2.0 # 0-10.0 multiplier on buffers scanned/round #bgwriter_flush_after = 512kB # measured in pages, 0 disables bgwriter_delay 两次写入任务之间的睡眠间隔时间 bgwriter_lru_maxpages 每次bgwriter任务写buffer的最大page数，一旦达</description>
+    </item>
+    
+    <item>
+      <title>数据库试图之 pg_stat_bgwriter</title>
+      <link>https://zhangeamon.top/postgres/view_pg_stat_bgwriter/</link>
+      <pubDate>Wed, 31 Mar 2021 09:32:17 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/view_pg_stat_bgwriter/</guid>
+      <description>介绍 可查看 backgroud writer， checkpoint ，backend 进程刷写 Shared buffer 情况视图 pg数据库在写入时先在内存中更新shared buffer ，然后有checkpoint机制将脏数据刷写到磁盘。 视图 select * from pg_stat_bgwriter ; -[ RECORD 1 ]---------+------------------------------ checkpoints_timed | 64017 checkpoints_req | 458 checkpoint_write_time | 9608302902 checkpoint_sync_time | 1189286 buffers_checkpoint | 578367652 buffers_clean | 329022 maxwritten_clean | 2353 buffers_backend | 29802728 buffers_backend_fsync | 0 buffers_alloc | 83826180 stats_reset | 2020-08-20 19:41:20.491551+08 负责将shared buffer 中的内容</description>
+    </item>
+    
+    <item>
+      <title>数据库高可用设计分析</title>
+      <link>https://zhangeamon.top/postgres/ha_fd/</link>
+      <pubDate>Tue, 23 Mar 2021 16:32:14 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/ha_fd/</guid>
+      <description>基本概念 集群： 一组多个同时对外提供相同服务的实体机组成一个集群。这里的集群为主从结构，可写节点为主节点，其他只读节点为从节点。 高可用： 在发生局部故障时对整体业务影响很低。即不可用的时间要尽量的短。 对外部应用的访问来说，无需关注如何实现，如同只访问一个节点。并能得到持续的服务能力。</description>
+    </item>
+    
+    <item>
+      <title>流复制同步级别</title>
+      <link>https://zhangeamon.top/postgres/replication02/</link>
+      <pubDate>Wed, 17 Mar 2021 11:14:17 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/replication02/</guid>
+      <description>流复制过程 synchronous_commit = on ） # synchronization level; on default # off, local, remote_write, or on 同步级别 remote_apply：事务commit或rollback时，等待其redo在primary、以及同步standby(s)已持久化，并且其redo在同步 standby(s)已apply。 on：事务commit或rollback时，</description>
+    </item>
+    
+    <item>
+      <title>pg_rman 备份恢复数据库</title>
+      <link>https://zhangeamon.top/postgres/pg_rman/</link>
+      <pubDate>Tue, 09 Mar 2021 13:35:31 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_rman/</guid>
+      <description>适用场景 PG_RMAN 基于本地数据拷贝的方式，要求与数据库需要安装在同一个机器节点上。 适用于项目初期，对数据库的规划处于初级阶段。实体机不充分的情况是个很好的选择。 数据库使用ssd盘，备份磁盘采用企业sata大盘。或nfs网盘等。 PG_RMAN 支持全备份，增量备份，备份验证，保留策略等 应用软件包地址 https://github.com/ossc-db/pg_rman/releases 基</description>
+    </item>
+    
+    <item>
+      <title>Patroni 高可用管理进阶</title>
+      <link>https://zhangeamon.top/postgres/patroni02/</link>
+      <pubDate>Fri, 05 Mar 2021 17:06:18 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/patroni02/</guid>
+      <description>完成目标 主从同步策略 异地多机房策略 failover 触发详情 访问认证 watch-dog 配置文件详情 fencing DCS 失效处理 加入节点复制数据限流 主从切换流量,避免重新拉取 级联复制 callback 日志&amp;amp;监控 主从同步策略 数据库主从之间同步类型 Synchronous state of this standby server. Possible values are: async: This standby server is asynchronous. potential: This standby server is now asynchronous, but can potentially become synchronous if one of current synchronous ones fails. sync: This standby server is synchronous. quorum: This standby server is considered as</description>
+    </item>
+    
+    <item>
+      <title>数据库优化思考-性能优化</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_performance/</link>
+      <pubDate>Fri, 26 Feb 2021 13:33:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_performance/</guid>
+      <description>为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续</description>
+    </item>
+    
+    <item>
+      <title>hot update</title>
+      <link>https://zhangeamon.top/postgres/hotupdate/</link>
+      <pubDate>Thu, 14 Jan 2021 13:49:11 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/hotupdate/</guid>
+      <description>What is HOT HOT是“Heap Only Tuple”（仅元组堆）的缩写, 用来提高update效率。 行的新版本和旧版本位于同一块中时，该行的外部地址（原始行指针）保持不变，利用hot link指针进行转发地址。索引不需要任何改动。 前提条件 包含更新行的块中必须有足够的空间 在已修改值的任何列上均未定义</description>
+    </item>
+    
+    <item>
+      <title>数据库优化思考 - 模块调优</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_tune/</link>
+      <pubDate>Wed, 13 Jan 2021 09:04:35 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_tune/</guid>
+      <description>开始乱说 主要是结合postgres数据库自身特点，根据具体的业务场景，作出相应调整，使其更加合理。 数据库作为一个整体对外提供服务，单是其内部是由不同的功能模块组成，相互协调来共同完成任务。 各个功能模块完成不同的功能，每个模块的特点也不同，在调整的时候至少需要理解各个模块实现的基本</description>
+    </item>
+    
+    <item>
+      <title>unlogged table</title>
+      <link>https://zhangeamon.top/postgres/unlogged_table/</link>
+      <pubDate>Tue, 12 Jan 2021 10:21:36 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/unlogged_table/</guid>
+      <description>介绍 在写数据的时候不记录wal的表。 在意外发生时表中的数据被trunce 。如断电、 主进程kill 、scrash 等。 正常关闭重启数据库时数据不会丢失。 优点： 提高写入效率 不足： 数据安全性不能得到保障。 由于没有wal 流复制从库不能同步 应用场景： 数据可丢失，如频繁更新，只保留最后状态信息</description>
+    </item>
+    
+    <item>
+      <title>误操作闪回</title>
+      <link>https://zhangeamon.top/postgres/reback/</link>
+      <pubDate>Mon, 11 Jan 2021 17:19:06 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/reback/</guid>
+      <description>原理 利用mvcc原理，数据在删除或更新时只是标记为删除。当没有发生过gc时历史数据仍然存在。只是对当前事务不可见。 通过修改当前事务号为误操作前的事务号就可以看到历史数据。 例如 T1 （添加数据） T2 - T8（其他操作） T9（删除了T1加入的数据）T10&amp;hellip; (其他操作)。 自需要将</description>
+    </item>
+    
+    <item>
+      <title>高级SQL</title>
+      <link>https://zhangeamon.top/postgres/high_level_sql/</link>
+      <pubDate>Mon, 11 Jan 2021 17:05:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/high_level_sql/</guid>
+      <description>分组集 排序集 假象集 窗口函数 递归 递归应用 递归加速count(distint) 查询。 使用场景，数据分布：大数据集但其中的类型却很少 -- 创建表 test1=# create table recurive_t(user_id int,free float,info text); CREATE TABLE -- 加入数据 test1=# insert into recurive_t select 1 ,generate_series(0,1000000),&#39;user 1 pay !!!&#39;; test1=# insert into recurive_t select 2 ,generate_series(0,2000000),&#39;user 2 pay !!!&#39;; test1=# insert into recurive_t select 3 ,generate_series(0,3000000),&#39;user 3 pay !!!&#39;; test1=# insert into recurive_t select 4 ,generate_series(0,4000000),&#39;user 4 pay !!!&#39;; test1=# insert into recurive_t select 5 ,generate_series(0,4000000),&#39;user 5 pay !!!&#39;; test1=# analyze recurive_t ; ANALYZE -- count(distinct()) 查询</description>
+    </item>
+    
+    <item>
+      <title>数据库优化思考 - 结构设计</title>
+      <link>https://zhangeamon.top/postgres/thinking_in_db_fd/</link>
+      <pubDate>Mon, 11 Jan 2021 10:10:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/thinking_in_db_fd/</guid>
+      <description>DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压</description>
+    </item>
+    
+    <item>
+      <title>auto vacuum 触发机制</title>
+      <link>https://zhangeamon.top/postgres/auto_vacuum_trigger/</link>
+      <pubDate>Fri, 08 Jan 2021 09:20:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/auto_vacuum_trigger/</guid>
+      <description>数据库自动垃圾回收触发条件分析 在postgres 中 垃圾回收的重要意义及在执行垃圾回收时具体都做了些什么很多地方都有介绍。 但是何时触发垃圾回收，即垃圾回收的触发条件是什么。 官网的介绍一般是有如下几个参数决定 #autovacuum = on # Enable autovacuum subprocess? &#39;on&#39; #autovacuum_vacuum_threshold = 50 # min number of row updates before vacuum #autovacuum_analyze_threshold = 50 # min number of row updates before analyze #autovacuum_vacuum_scale_factor = 0.2 # fraction of table size</description>
+    </item>
+    
+    <item>
+      <title>原生分区表</title>
+      <link>https://zhangeamon.top/postgres/partition/</link>
+      <pubDate>Thu, 31 Dec 2020 10:17:03 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/partition/</guid>
+      <description>分区表 数据库分区是一种将数据做物理分片的数据库设计技术，虽然分区技术可以有多种实现方法， 但其主要目的是为了在特定的SQL操作中减少数据读取的总量以缩减响应时间。 使用分区表对应用程序是透明的，对于INSERT,UPDATE,DELETE,SELECT操作，都只需要对父表tbl进行操</description>
+    </item>
+    
+    <item>
+      <title>跨库操作</title>
+      <link>https://zhangeamon.top/postgres/pg_fdw/</link>
+      <pubDate>Thu, 24 Dec 2020 09:11:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_fdw/</guid>
+      <description>dblink https://www.cnblogs.com/lottu/p/13331387.html fdw https://www.cnblogs.com/lottu/p/13345187.html 注意事项 查询条件下推，新版本功能更全 ddl 操作 , fdw 如果用于历史归档</description>
+    </item>
+    
+    <item>
+      <title>找回supper user 权限</title>
+      <link>https://zhangeamon.top/postgres/reback_supper_user/</link>
+      <pubDate>Tue, 22 Dec 2020 17:12:53 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/reback_supper_user/</guid>
+      <description>背景 意外删除postgres supper user 权限 找回方法 关闭数据库 用单用户模式重新启动 /usr/lib/postgresql/xxxx/bin/postgres --single -D $PGDATA 重新设置supper user 权限 alter user postgres with superuser;</description>
+    </item>
+    
+    <item>
+      <title>数据库监控指标</title>
+      <link>https://zhangeamon.top/postgres/monitor_explain/</link>
+      <pubDate>Fri, 20 Nov 2020 14:46:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/monitor_explain/</guid>
+      <description>实体机 硬盘空间 cup利用率 内存利用率 IO 网络带宽 tcp连接情况 温度 数据库年龄 -- 数据库database 年龄 select datname,age(datfrozenxid),pg_size_pretty(pg_database_size(oid)) from pg_database order by age(datfrozenxid) desc limit 10 ; -- 表年龄 select relname,age(relfrozenxid), pg_size_pretty(pg_table_size(oid)) from pg_class where relkind in (&#39;t&#39;,&#39;r&#39;) order by age(relfrozenxid) desc limit 10; 说明： 当age到达2亿（默认）时触发自动回卷，期间会大量占用系统资源。提前做好监控避免在业务高峰时发生。可在库级别操作</description>
+    </item>
+    
+    <item>
+      <title>kylin系统postgresql编译安装</title>
+      <link>https://zhangeamon.top/postgres/compile_kylin/</link>
+      <pubDate>Mon, 16 Nov 2020 15:26:59 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/compile_kylin/</guid>
+      <description>背景 麒麟系统默认自带postgresql10.5 安装过程与centos基本相同 , 注意事项 1 安装postgresql-dev 2 编译 postgis 时./configure &amp;ndash;with-pgconfig=/usr/bin/pg_config 但是如果想安装其他版本的postgres 需一番周折 首先第一个问题麒麟系统对openssl过进行改造。在编译postgres支</description>
+    </item>
+    
+    <item>
+      <title>创建只读用户</title>
+      <link>https://zhangeamon.top/postgres/readonly/</link>
+      <pubDate>Tue, 08 Sep 2020 09:28:59 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/readonly/</guid>
+      <description>1.创建一个用户名为readonly密码为ropass的用户 CREATE USER readonly WITH ENCRYPTED PASSWORD &#39;ropass&#39;; 2.用户只读事务 alter user readonly set default_transaction_read_only=on; 3.把所有库的语言的USAGE权限给到readonly GRANT USAGE ON SCHEMA public to readonly; 4.授予select权限(这句要进入具体数据库操作在哪个db环境执行就授予那个db的权) grant select on all tables in schema public to readonly;</description>
+    </item>
+    
+    <item>
+      <title>数据库 OOM 预防</title>
+      <link>https://zhangeamon.top/postgres/oom/</link>
+      <pubDate>Tue, 30 Jun 2020 09:26:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/oom/</guid>
+      <description>降低主进程被OOM kill 掉的风险 1. restart_after_crash 默认崩溃重启 postgres=# show restart_after_crash; restart_after_crash --------------------- on (1 row) 2. vm.overcommit # vi /etc/sysctl.conf # 0 表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程 # 1 表示内核允许分配所有的物理内存，而不管当前的内存状态如何 # 2 表示内核允许分</description>
+    </item>
+    
+    <item>
+      <title>数据库 ssl认证</title>
+      <link>https://zhangeamon.top/postgres/ssl/</link>
+      <pubDate>Wed, 03 Jun 2020 15:06:15 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/ssl/</guid>
+      <description>SSL双向认证和SSL单向认证的区别 双向认证 SSL 协议要求服务器和用户双方都有证书。单向认证 SSL 协议不需要客户拥有CA证书，服务器端不会验证客户证书，以及在协商对称密码方案，对称通话密钥时，服务器发送给客户的是没有加过密的(这并不影响 SSL 过程的安全性)密码方案。 这样，双方具体的通讯内容，</description>
+    </item>
+    
+    <item>
+      <title>工作中所使用的postgres</title>
+      <link>https://zhangeamon.top/postgres/awsome-postgres/</link>
+      <pubDate>Wed, 27 May 2020 11:34:24 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/awsome-postgres/</guid>
+      <description>Postgres 实际应用概览 MVCC 多版本控制 一个绕不开的话题， 主要是对抗表空间的膨胀。解决垃圾回收问题，主从库之间从库查询冲突问题。 目前方法每日低峰期定时 vaccum ，gocron自定定时任务 。 根据pgstattuple对磁盘空间利用率进行分析。决定是否vaccum full ,pg_repack 流复制 主从复制，读写分离的基础。五种同</description>
+    </item>
+    
+    <item>
+      <title>数据预加载</title>
+      <link>https://zhangeamon.top/postgres/pg_prewarm/</link>
+      <pubDate>Wed, 27 May 2020 10:26:10 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_prewarm/</guid>
+      <description>https://blog.csdn.net/Hehuyi_In/article/details/102653909</description>
+    </item>
+    
+    <item>
+      <title>Bloom 索引</title>
+      <link>https://zhangeamon.top/postgres/index-bloom/</link>
+      <pubDate>Thu, 23 Apr 2020 15:37:33 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/index-bloom/</guid>
+      <description>Bloom 索引 Bloom 过滤器代表的是一组值。它的作用是检测一个元素是否可能属于集合，它可以允许有一些false positive，但是不允许存在false negative。也就是说，尽管某个元素不在集合中，测试也可能返回true。然而，如果元素在集合中，就不可能返回false。 创建在一组列中的B</description>
+    </item>
+    
+    <item>
+      <title>方法和函数</title>
+      <link>https://zhangeamon.top/postgres/FunctionsandOperators/</link>
+      <pubDate>Mon, 13 Apr 2020 16:15:51 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/FunctionsandOperators/</guid>
+      <description>条件表达式 https://www.postgresql.org/docs/10/functions-conditional.html postgresql支持CASE,COALESCE,NULLIF,GREATEST,LEAST条件表达式，使用它们有时候可以简化许多功能实现。 CASE CASE类似其他语言中的if/else等，当符合不同条件时则进行不同的运算 tbl_001表 create table tbl_001(id int,name varchar(32),sex varchar(1)); insert into tbl_001 values(1</description>
+    </item>
+    
+    <item>
+      <title>数据库日常管理</title>
+      <link>https://zhangeamon.top/postgres/daily_management/</link>
+      <pubDate>Tue, 07 Apr 2020 10:38:45 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/daily_management/</guid>
+      <description>日常管理 可用性 监测项 可用性 主从 HA 全量备份 增量备份 恢复 监测项 磁盘空间 全库 select pg_size_pretty(sum(pg_database_size(oid))) from pg_database; 数据库 select datname, pg_size_pretty(pg_database_size(oid)) from pg_database order by pg_database_size(oid) desc limit 10; 表总 SELECT table_schema || &#39;.&#39; || table_name AS table_full_name, pg_size_pretty(pg_total_relation_size(&#39;&amp;quot;&#39; || table_schema || &#39;&amp;quot;.&amp;quot;&#39; || table_name || &#39;&amp;quot;&#39;)) AS size FROM information_schema.tables where table_schema = &#39;public&#39; ORDER BY pg_total_relation_size(&#39;&amp;quot;&#39; || table_schema || &#39;&amp;quot;.&amp;quot;&#39; || table_name || &#39;&amp;quot;&#39;) DESC limit 10; 表 索引 冷热数据 上次统计信息更新时间 热表dml qps io 热表qdml 冷数据 冷索引 索引利用 全表扫描次数</description>
+    </item>
+    
+    <item>
+      <title>锁等待</title>
+      <link>https://zhangeamon.top/postgres/lock_wait/</link>
+      <pubDate>Fri, 27 Mar 2020 16:27:02 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/lock_wait/</guid>
+      <description>锁等待场景 一个事务尚未执行提交时持有锁，当另一个事务需要持有改行的锁时则需要等待。 Session 1 postgres=# \d+ wt Table &amp;quot;public.wt&amp;quot; Column | Type | Collation | Nullable | Default | Storage | Stats target | Description --------+---------+-----------+----------+---------+----------+--------------+------------- id | integer | | | | plain | | t | text | | | | extended | | postgres=# begin; BEGIN postgres=# update wt set t = &#39;aaaa&#39; where id = 1; UPDATE 1 postgres=# select pg_backend_pid(); pg_backend_pid ---------------- 20034 (1 row) Session 2 postgres=# begin ; BEGIN postgres=# update wt set t = &#39;bbbb&#39; where id = 1; Session 3 select * from pg_stat_activity; -[ RECORD 3 ]----+---------------------------------------- datid | 436980 datname</description>
+    </item>
+    
+    <item>
+      <title>数据库安装 Postgres12 Ubuntu18</title>
+      <link>https://zhangeamon.top/postgres/install02/</link>
+      <pubDate>Thu, 19 Mar 2020 15:22:09 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/install02/</guid>
+      <description>软件源 echo &amp;quot;deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main&amp;quot; &amp;gt;&amp;gt; /etc/apt/sources.list.d/pgdg.list wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - sudo apt-get update -y 安装 apt-get install postgresql-12 postgresql-client-12 postgresql-12-postgis-2.5 postgresql-contrib -y 初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb 启动 systemctl start postgresql systemctl stop postgresql systemctl status postgresql systemctl enable postgresql 配置 cd /etc/postgresql/12/main/ vi postgres.conf vi pg_hba.conf</description>
+    </item>
+    
+    <item>
+      <title>数据库年龄</title>
+      <link>https://zhangeamon.top/postgres/pgage/</link>
+      <pubDate>Tue, 07 Jan 2020 09:47:18 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgage/</guid>
+      <description>背景 数据库的事务标识符使用的是32位的,最大可表示42个亿。当前事务的数据在20亿个事务之后将变的不可见。为了解决这个问题（回卷），Postgres引入了一个冻结事务标识的概念。 并实现了名为freeze的冻结过程。 冻结过程 两种模式 惰性模式 迫切模式 惰性模式回跳过页中所有的数据都位可</description>
+    </item>
+    
+    <item>
+      <title>postgres 12</title>
+      <link>https://zhangeamon.top/postgres/postgres12/</link>
+      <pubDate>Tue, 19 Nov 2019 08:43:36 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/postgres12/</guid>
+      <description>安装&amp;amp;启动 #下载源 yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm #安装服务 yum install postgresql12 postgresql12-server postgresql12-contrib #初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb #启动服务 systemctl enable postgresql-12 systemctl start postgresql-12 流复制 #从机 建立从库 pg_basebackup -h 10.1.30.13 -U postgres -F p -P -R -D /var/lib/pgsql/12/data/ --checkpoint=fast -l postgresback #从库升级为主库 sudo su postgres -c &amp;quot;/usr/pgsql-12/bin/pg_ctl promote -D /var/lib/pgsql/12/data/&amp;quot; recovery.conf 配置文件不再支持，此文件中的参数合并到 postgresql.conf(postgresql.auto.conf) Recovery Target, 若 recovery.conf 存在，数据库无法启动 新增 recovery.signal 标识文件，表示数据库处于 recovery 模式 新增加 standby.signal</description>
+    </item>
+    
+    <item>
+      <title>数据库视图之 pg_stat_activity</title>
+      <link>https://zhangeamon.top/postgres/view_pg_stat_activity/</link>
+      <pubDate>Fri, 23 Aug 2019 13:47:12 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/view_pg_stat_activity/</guid>
+      <description>介绍 当需要了解数据库当前运行状态或需要排查问题时，首先需要查看的就是pg_stat_activity。该视图中包含了你想知道的数据库连接信息，正在执行的有哪些sql，并处于何状态。 One row per server process, showing information related to the current activity of that process, such as state and current query. 每一行都表示一个系统进程，显示与当前会话的活动进程的一些信</description>
+    </item>
+    
+    <item>
+      <title>citus 简单应用</title>
+      <link>https://zhangeamon.top/postgres/citus01/</link>
+      <pubDate>Wed, 05 Jun 2019 10:40:09 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/citus01/</guid>
+      <description>常用方法 集群管理 加入节点 SELECT * from master_add_node(&#39;worker-101&#39;, 5432); 查看节点状态 SELECT * FROM master_get_active_worker_nodes(); select * from pg_dist_node; 数据库管理 分片表(distributed table ， hash | append ) 参考表(reference table 数据量小) 本地表(原生表，没有任何处理.兼容性高) 对表进行分片 SELECT create_distributed_table(&#39;companies&#39;, &#39;id&#39;); 分片查看 SELECT * from pg_dist_shard; 元数据表 pg_dist_shard pg_dist_placement pg_dist_node 参数 更多参考 sql 限制 1 非亲和性表之间的ou</description>
+    </item>
+    
+    <item>
+      <title>tpch AP测试</title>
+      <link>https://zhangeamon.top/postgres/tpch/</link>
+      <pubDate>Wed, 05 Jun 2019 09:36:21 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/tpch/</guid>
+      <description>背景介绍 24sql TPC-H 基准测试 下载安装 tpch-tools安装包 修改makefile.suite 模版 CC=gcc DATABASE-TDAT MACHINE=LINUX WORKLOAD=TPCH 执行 make 进行编译 生成测试数据 生成20G测试数据 ./dbgen -s 20 ls -lrth *.tbl 自动生成的测试数据每行的结尾多余一个 &amp;lsquo;|&amp;rsquo; 需要处理 for i in `ls *.tbl`; do sed &#39;s/|$//&#39; $i &amp;gt; ${i/tbl/csv}; echo $i; done; 创建表及索引 在下面的文件中分别是创建表和对应索引的s</description>
+    </item>
+    
+    <item>
+      <title>表空间膨胀</title>
+      <link>https://zhangeamon.top/postgres/pgstattuple/</link>
+      <pubDate>Wed, 22 May 2019 17:26:45 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgstattuple/</guid>
+      <description>背景介绍 由于mvcc机制，数据被删除后只是被标记为删除，实际空间没有被释放，这是表空间膨胀的根本原因。 目前用于解决表空间膨胀方式有如下方式 1 删除dead tuple vacuum ,tuple被清理。数据库可以自动执行autovacuum vacuum full ,tuple被清理并且空间连续紧凑。弊端，在执行过程中会锁表。</description>
+    </item>
+    
+    <item>
+      <title>checkpoint 检查点</title>
+      <link>https://zhangeamon.top/postgres/checkpoint/</link>
+      <pubDate>Wed, 13 Mar 2019 15:57:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/checkpoint/</guid>
+      <description>作用 一般checkpoint会将某个时间点之前的脏数据全部刷新到磁盘，以实现数据的一致性与完整性。其主要目的是为了缩短崩溃恢复时间。 数据库靠谱的原因 一条DML 写入过程 在写入数据的时，当事务提交后修改信息顺序同步写入wal。shared buffer中信息并不是马上落盘。异步同步磁盘</description>
+    </item>
+    
+    <item>
+      <title>咨询锁 adlock</title>
+      <link>https://zhangeamon.top/postgres/adlock/</link>
+      <pubDate>Thu, 07 Mar 2019 16:20:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/adlock/</guid>
+      <description>https://github.com/digoal/blog/blob/master/201805/20180524_02.md 行级锁 select .. for update select .. for update skip locked select .. for share</description>
+    </item>
+    
+    <item>
+      <title>pgpoolii 读写分离</title>
+      <link>https://zhangeamon.top/postgres/pgpool2/</link>
+      <pubDate>Wed, 30 Jan 2019 15:43:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgpool2/</guid>
+      <description>https://www.pgpool.net/docs/pgpool-II-3.5.4/doc/tutorial-zh_cn.html#dist-def https://www.xiaomastack.com/2019/08/16/postgresql集群/</description>
+    </item>
+    
+    <item>
+      <title>Logical Replication 逻辑复制</title>
+      <link>https://zhangeamon.top/postgres/logical-replication/</link>
+      <pubDate>Wed, 30 Jan 2019 15:42:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/logical-replication/</guid>
+      <description>逻辑复制 Postgres 10 版本开始， 在内核层面支持基于REDO流的逻辑复制。 控制粒度为表级别 物理复制相同都是基于wal 可指定多个上游数据源 下游数据可读可写 可用于数据汇总，无停服数据迁移,大版本升级等。 基本概念 发布者（publication）， 上游数据 订阅者 (subscrition)， 下游数据 复</description>
+    </item>
+    
+    <item>
+      <title>cluster 聚族表</title>
+      <link>https://zhangeamon.top/postgres/cluster/</link>
+      <pubDate>Wed, 30 Jan 2019 15:19:41 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/cluster/</guid>
+      <description>存储数据线性相关性 测试</description>
+    </item>
+    
+    <item>
+      <title>Archive wal归档</title>
+      <link>https://zhangeamon.top/postgres/archive/</link>
+      <pubDate>Wed, 30 Jan 2019 14:20:38 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/archive/</guid>
+      <description>介绍 所谓WAL日志归档，其实就是把在线的WAL日志备份出来。 配置 vi postgresql.conf wal_level=&#39;replica&#39; # - Archiving - archive_mode = on # enables archiving; off, on, or always # (change requires restart) archive_command = &#39;test ! -f /mnt/backup/%f &amp;amp;&amp;amp; cp %p /mnt/backup/%f&#39; # command to use to archive a logfile segment # placeholders: %p = path of file to archive # %f = file name only # e.g. &#39;test ! -f /mnt/server/archivedir/%f &amp;amp;&amp;amp; cp %p /mnt/server/archivedir/%f&#39; #archive_timeout = 0 # force a logfile segment switch after this # number of seconds; 0 disables 参数说明 wal_level archive 或更高级别 archive_mode on 开启归档模式，always</description>
+    </item>
+    
+    <item>
+      <title>TimescaleDB 时序数据库</title>
+      <link>https://zhangeamon.top/postgres/timescaledb/</link>
+      <pubDate>Wed, 30 Jan 2019 10:20:51 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/timescaledb/</guid>
+      <description>时序数据库 https://github.com/timescale/timescaledb 数据库配置 https://github.com/timescale/timescaledb-tune copy并行导入数据 https://github.com/timescale/timescaledb-parallel-copy 常用方法 创建拓展 CREATE EXTENSION timescaledb; 创建一个普通的表 CREATE TABLE conditions ( time TIMESTAMPTZ NOT NULL, location TEXT NOT NULL, temperature DOUBLE PRECISION NULL, humidity DOUBLE PRECISION NULL ); 转换成时序数据库表 SELECT create_hypertable(&#39;conditions&#39;, &#39;time&#39;); conditions 表名 time 时序字段 修改时序间隔 对新表生效 SELECT set_chunk_time_interval(&#39;conditions&#39;, INTERVAL &#39;24 hours&#39;); 查看分区 SELECT show_chunks(&#39;conditions&#39;); SELECT show_chunks(&#39;conditions&#39;, older_than =&amp;gt; INTERVAL &#39;3 months&#39;) SELECT show_chunks(&#39;conditions&#39;, older_than =&amp;gt; DATE &#39;2017-01-01&#39;); SELECT show_chunks(newer_than =&amp;gt; INTERVAL &#39;3 months&#39;); SELECT show_chunks(older_than =&amp;gt; INTERVAL &#39;3 months&#39;, newer_than =&amp;gt; INTERVAL &#39;4 months&#39;); 查看数据大</description>
+    </item>
+    
+    <item>
+      <title>PG主从切换 pg_rewind</title>
+      <link>https://zhangeamon.top/postgres/pg_rewind/</link>
+      <pubDate>Wed, 30 Jan 2019 10:16:17 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_rewind/</guid>
+      <description>pg_rewind requires that the target server either has the wal_log_hints option enabled in postgresql.conf or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. full_page_writes must also be set to on, but is enabled by default. wal_log_hints 使用场景 在数据库主从结构中，从变成主易。但是由主变为从却需要一番周折。 如果是数据量少时重新使用pg_backup拉一份从即可，但是如果数据量大时，这个过程非常的耗时耗能。对线上业务也会有影</description>
+    </item>
+    
+    <item>
+      <title>PG高可用Patroni</title>
+      <link>https://zhangeamon.top/postgres/patroni/</link>
+      <pubDate>Wed, 30 Jan 2019 10:14:55 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/patroni/</guid>
+      <description>环境 操作系统 Centos 7 patroni 版本 2.0.2 postgres 版本 13 实现目标 高可用方案对比 patroni 结构分析 patroni 搭建新集群 patroni 接管现有集群 patroni 管理pg配置 手动swithover 自动failover 维护模式 弹性扩容，缩容 对外提供统一服务 RestFULLAPI 备份恢复 监控 日志 升级 高可用方案对比 pg的高可用方案都是基于流复制来实现 PAF pacemaker + corosyns repmgr repmgr 手动流复制管</description>
+    </item>
+    
+    <item>
+      <title>citus 数据库分库</title>
+      <link>https://zhangeamon.top/postgres/pg_citus/</link>
+      <pubDate>Tue, 29 Jan 2019 13:19:26 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_citus/</guid>
+      <description>数据库分库调研 Greenplum 更适用于AP场景 PGXL PGXC 社区不活跃，沟通问题反馈时间长。没找到用户群体. 在此基础上发展的有亚信antdb，腾讯tbase。没有那个研发实力，算了吧。 citus 插件方式，无侵入。很多牛X的特性企业版才支持。主要强调多租户。 mycat mysql支派，阿里开源（抛弃）项目。主要是对sql语</description>
+    </item>
+    
+    <item>
+      <title>pgwatch2 数据库指标监控查看</title>
+      <link>https://zhangeamon.top/postgres/pgwatch2/</link>
+      <pubDate>Tue, 29 Jan 2019 11:19:05 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgwatch2/</guid>
+      <description>介绍 pgwatch2官方 官方演示示例 架构 agent server agent 在被监控的pg上自定义方法，用于收集数据库信息。这些自定义的方法需要依赖需要数据库扩展如pg_stat_statements,plpythonu. server 负责存储收集过来的信息，可以存放在postgres或influxdb中. 并将收集的信息</description>
+    </item>
+    
+    <item>
+      <title>锁机制</title>
+      <link>https://zhangeamon.top/postgres/pg_lock/</link>
+      <pubDate>Thu, 24 Jan 2019 11:26:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_lock/</guid>
+      <description>https://blog.csdn.net/pg_hgdb/article/details/79403651 https://habr.com/en/company/postgrespro/blog/500714/ 表锁 https://www.modb.pro/db/26462 查看被堵塞的任务 select * from pg_locks where not granted; locktype | database | relation | page | tuple | virtualxid | transactionid | classid | objid | objsubid | virtualtransaction | pid | mode | granted | fastpath ----------+----------+----------+------+-------+------------+---------------+---------+-------+----------+--------------------+-----+------+---------+---------- (0 行记录) 查看等待锁信息，是被谁堵塞了 select pg_blocking_pids(pid); pg_blocking_pids ------------------ {} 终止进程 select pg_cancel_backend(pid); # select select pg_terminate_backend(pid); # update insert delete 事务的隔离级别 Postgres 数据库共有三种数据隔离级别。 Read Commit 读看提交 默认级别 在读开始的时候建立数据快照 Repeat Read 可重复读。</description>
+    </item>
+    
+    <item>
+      <title>时间点恢复</title>
+      <link>https://zhangeamon.top/postgres/pitr/</link>
+      <pubDate>Thu, 24 Jan 2019 11:08:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pitr/</guid>
+      <description>PITR Point-in-time recovery https://blog.csdn.net/a964921988/article/details/84957241 https://github.com/digoal/blog/blob/master/201608/20160823_03.md https://github.com/digoal/blog/blob/master/201608/20160823_04.md 依赖条件 历史完整备份 不间断wal日志 以上都可有wal-g 备份系统提供支持 恢复到指定点 指定标签 具体时间点 具体事务 指定标签 recovery.conf recovery_target_action= &#39;pause&#39; # promote ,shutdown --- 打lable select pg_create_restore_point(&#39;my_daily_process_ended&#39;); --- 恢复到指定的lable recovery.conf recovery_target_name = &#39;my_daily_process_ended&#39; 具体时间 restore_command = &#39;cp /data/arch/%f %p&#39; # e.g. &#39;cp /mnt/server/archivedir/%f %p&#39; recovery_target_time = &#39;2020-12-23 09:37:17.010268&#39; recovery_target_inclusive = false recovery_target_timeline = &#39;latest&#39; 具体事务 restore_command = &#39;cp /data/arch/%f %p&#39; # e.g. &#39;cp /mnt/server/archivedir/%f %p&#39; recovery_target_xid = &#39;26897309&#39; recovery_target_inclusive = false</description>
+    </item>
+    
+    <item>
+      <title>pg_pathman 分区表</title>
+      <link>https://zhangeamon.top/postgres/pg_pathman/</link>
+      <pubDate>Thu, 24 Jan 2019 10:56:06 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_pathman/</guid>
+      <description>介绍 分区表的诉求在现实的生成中的意义不必多说，pg以前的实现方式多采用触发器，rules实现。数据量上来时性能明显不尽如意。 虽然pg10 ，11 版本在分区表的特性上不断发力。但是性能啥还是不够给力。 pg_pathman 分区表功能在目前的pg版本10.6 中优势还是非常明显的。 在期待pg自身分区表特性的</description>
+    </item>
+    
+    <item>
+      <title>pgfincore</title>
+      <link>https://zhangeamon.top/postgres/pgfincore/</link>
+      <pubDate>Fri, 11 Jan 2019 13:17:12 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgfincore/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pgbench 压力测试</title>
+      <link>https://zhangeamon.top/postgres/pgbench/</link>
+      <pubDate>Wed, 09 Jan 2019 16:36:47 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgbench/</guid>
+      <description>介绍 pgbench是一种在PostgreSQL上运行基准测试的简单程序。 官方文档 默认测试 自定义测试 默认测试 pgbench中默认自带一套测试数据库和测试sql脚本。 初始化默认数据库 使用 -i 初始化数据库 #pgbench -U postgres -i -s 10 pgbenchdb NOTICE: table &amp;quot;pgbench_history&amp;quot; does not exist, skipping NOTICE: table &amp;quot;pgbench_tellers&amp;quot; does not exist, skipping NOTICE: table &amp;quot;pgbench_accounts&amp;quot; does not exist, skipping NOTICE: table &amp;quot;pgbench_branches&amp;quot; does not exist, skipping creating tables... 100000 of 1000000 tuples (10%)</description>
+    </item>
+    
+    <item>
+      <title>pg_trgm的gist和gin索引加速字符匹配查询</title>
+      <link>https://zhangeamon.top/postgres/pg_trgm/</link>
+      <pubDate>Mon, 07 Jan 2019 09:37:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_trgm/</guid>
+      <description>背景 对车牌号的记忆有时可能记住的是前几位，有时可能是后几位，不同的人记车牌号的习惯也不同。 通常是是容易记住首尾，中间不清楚。 那么如何在大量已有车牌数据中快速根据模糊的信息来进行查询呢？ 模拟 数据库表中约有500w条车牌号记录，对表中的车牌号进行模糊查询。 即支持 car_id like &amp;lsquo;%XXXX%XXX%&amp;rsquo; 查询 ---创建表</description>
+    </item>
+    
+    <item>
+      <title>pgbouncer 连接池</title>
+      <link>https://zhangeamon.top/postgres/pgbouncer/</link>
+      <pubDate>Thu, 27 Dec 2018 09:00:49 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgbouncer/</guid>
+      <description>背景介绍 Pgbouncer是一个针对PostgreSQL数据库的轻量级连接池 pgbouncer 的目标是降低因为新连接到 PostgreSQL 的连接而导致的性能损失 使用术语说明： 为了后面的描述更清晰，使用如下术语 Client : 指访问者 Pgboucer: 指连接池 Postgres: 指数据库。 Connetions: 指彼此之间的连接 整体架构 原来: Client -&amp;gt; Postgres 现在: Client -&amp;gt; Pgbounce -&amp;gt; Postgres 优势 内存消耗低(默</description>
+    </item>
+    
+    <item>
+      <title>引起索引失效</title>
+      <link>https://zhangeamon.top/postgres/index-invalid/</link>
+      <pubDate>Thu, 20 Dec 2018 16:34:22 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/index-invalid/</guid>
+      <description>简介 索引的作用，加速检索，排序，分组。 优点： 检索 缺点： 新增，更新时需要维护索引，占磁盘空间，创建时锁表。 维护： 根据统计表发生全表扫描次数，索引使用次数。合理添加删除索引。 索引失效的场景 如果where过滤条件设置不合理，即使索引存在，且where过滤条件中包含索引列，也会导致全表扫</description>
+    </item>
+    
+    <item>
+      <title>权限管理</title>
+      <link>https://zhangeamon.top/postgres/role-manager/</link>
+      <pubDate>Thu, 20 Dec 2018 09:54:28 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/role-manager/</guid>
+      <description>创建用户 # user 与 role 区别 ， user 具有login权限 postgres=# create user tester with password &#39;123456&#39;; CREATE ROLE 创建数据库,并关联所有者 postgres=# create database test owner tester ; CREATE DATABASE 变更数据库用户所有者 postgres=# alter database test owner to tester; ALTER DATABASE 修改用户&amp;amp;数据库 #用户连接数 postgres=# alter user tester connection limit 100; ALTER ROLE #数据库连接数 postgres=# alter database test connection limit 100; ALTER DATABASE #用户其他属性修改 postgres=# alter user tester BYPASSRLS CREATEDB ENCRYPTED PASSWORD LOGIN NOCREATEDB NOINHERIT NOREPLICATION PASSWORD REPLICATION SET VALID UNTIL CONNECTION</description>
+    </item>
+    
+    <item>
+      <title>DBA 日常</title>
+      <link>https://zhangeamon.top/postgres/dba/</link>
+      <pubDate>Wed, 19 Dec 2018 11:33:43 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/dba/</guid>
+      <description>备份 恢复 时时热备 定期冷备 升级 每年大版本小版本升级，新特性调研，性能测试，稳定性。 可用当前最新的上一个版本。 HA 手动 自动 读写分离 sharding 多副本 安全 权限管理 资源隔离 审计 ddl 慢sql 锁长时间占用 巡检 定期巡检 awr 报告 监控 系统 数据库 诊断 优化 背景 应用程序的野蛮生长，由产品为驱动的开发，一切以快速上线为目</description>
+    </item>
+    
+    <item>
+      <title>数据库三范式五约束</title>
+      <link>https://zhangeamon.top/postgres/normal-form/</link>
+      <pubDate>Mon, 17 Dec 2018 10:27:04 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/normal-form/</guid>
+      <description>三范式 第一范式：数据表中的每一列（每个字段）必须是不可拆分的最小单元，也就是确保每一列的原子性； 第二范式（2NF）：满足1NF后，要求表中的所有列，都必须依赖于主键，而不能有任何一列与主键没有关系，也就是说一个表只描述一件事情； 第三范式：必须先满足第二范式（2NF），要求：表中的</description>
+    </item>
+    
+    <item>
+      <title>快速生成大量数据</title>
+      <link>https://zhangeamon.top/postgres/insert01/</link>
+      <pubDate>Fri, 14 Dec 2018 13:13:57 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/insert01/</guid>
+      <description>在数据库中快速生成1w条数据，或测试数据库的写入性能。 创建数据库表 postgres=# create table tbl(id int, info text, crt_time timestamp); CREATE TABLE 方法一 generate_series 查看方法函数 postgres=# \df generate_series 函数列表 架构模式 | 名称 | 结果数据类型 | 参数数据类型 | 类型 ------------+-----------------+-----------------------------------+--------------------------------------------------------------------+------ pg_catalog | generate_series | SETOF bigint | bigint, bigint | 常规 pg_catalog | generate_series | SETOF bigint | bigint, bigint, bigint | 常规 pg_catalog | generate_series | SETOF integer | integer, integer | 常规 pg_catalog | generate_series | SETOF integer | integer, integer, integer | 常规 pg_catalog | generate_series |</description>
+    </item>
+    
+    <item>
+      <title>Pipelinedb 简介</title>
+      <link>https://zhangeamon.top/postgres/pipelinedb02/</link>
+      <pubDate>Wed, 12 Dec 2018 11:39:47 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pipelinedb02/</guid>
+      <description>项目已经停止维护 适配支持版本 PostgreSQL 10: 10.1, 10.2, 10.3, 10.4, 10.5 PostgreSQL 11: 11.0 基本概念 流(Stream) 流是基础，Continuous Views和transform则是基于流中的数据进行处理的手段。 对于同一份数据，只需要定义一个流，写入一份即可。 如果对同一份数据有多个维度的统计，可以写在一条SQL完成的（如同</description>
+    </item>
+    
+    <item>
+      <title>Pipelinedb文档概览</title>
+      <link>https://zhangeamon.top/postgres/pipelinedb01/</link>
+      <pubDate>Wed, 12 Dec 2018 09:46:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pipelinedb01/</guid>
+      <description>官方文档 介绍 What PipelineDB is What PipelineDB is not QuitStart 一个统计wiki浏览的例子 安装 各种环境安装 Continuous Views 定义流视图，其实就是定义 统计分析的QUERY， 例如select id, count(*), avg(x), &amp;hellip; from table group by &amp;hellip;; 定义好之后，数据插入table，这个流视图就会不断增量的进行统计，你只要查询这个流视图，就可以查看到实时的统计结果。 数据库中存</description>
+    </item>
+    
+    <item>
+      <title>Postgres 监控</title>
+      <link>https://zhangeamon.top/postgres/monitor/</link>
+      <pubDate>Thu, 06 Dec 2018 16:21:08 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/monitor/</guid>
+      <description>各种监控方式 zabbix Monitor PostgreSQL with Zabbix postgres_exporter A PostgresSQL metric exporter for Prometheus pgwatch2 PostgreSQL metrics monitor/dashboard pgmetrics Collect and display information and stats from a running PostgreSQL server pgdash (收费) pganalyze PostgreSQL Performance Monitoring 参考自己实现 状态查看 pgcenter pgcenter top pgcenter: 2018-12-20 11:10:25, load average: 0.94, 0.84, 0.86 state [ok]: ::1:5432 postgres@postgres (ver: 10.6, up 8 days 19:57:54, recovery: f) %cpu: 15.0 us, 3.7 sy, 0.0 ni, 75.3 id, 5.7 wa, 0.0 hi, 0.2 si, 0.0 st activity: 5/1000 conns, 0/0 prepared, 2 idle, 0 idle_xact, 3 active, 0 waiting, 0 others MiB mem: 7821 total, 162 free, 424 used, 7235 buff/cached autovacuum: 0/3 workers/max, 0 manual, 0 wraparound, 00:00:00 vac_maxtime MiB swap: 1023 total, 903 free, 120 used, 0/0 dirty/writeback statements: 1888 stmt/s,</description>
+    </item>
+    
+    <item>
+      <title>tablespace 表空间</title>
+      <link>https://zhangeamon.top/postgres/tablespace/</link>
+      <pubDate>Thu, 06 Dec 2018 11:17:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/tablespace/</guid>
+      <description>原文 注意主从架构时，主从软连接位置需要对应一致。 思考： 冷热数据分离 冷数据对热数据的影响，垃圾回收机制。</description>
+    </item>
+    
+    <item>
+      <title>TOAST 技术</title>
+      <link>https://zhangeamon.top/postgres/toast/</link>
+      <pubDate>Thu, 06 Dec 2018 11:14:20 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/toast/</guid>
+      <description>原文</description>
+    </item>
+    
+    <item>
+      <title>fillfactor 填充因子</title>
+      <link>https://zhangeamon.top/postgres/fillfactor/</link>
+      <pubDate>Thu, 06 Dec 2018 11:01:03 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/fillfactor/</guid>
+      <description>介绍 PostgreSQL每个表和索引的数据都是由很多个固定尺寸的页面存储（通常是 8kB，不过在编译服务器时[–with-blocksize]可以选择其他不同的尺寸） 一个表的填充因子(fillfactor)是一个介于 10 和 100 之间的百分数。100(完全填充)是默认值。如果指定了较小的填</description>
+    </item>
+    
+    <item>
+      <title>vacuum 垃圾回收器</title>
+      <link>https://zhangeamon.top/postgres/vacuum/</link>
+      <pubDate>Wed, 05 Dec 2018 16:48:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/vacuum/</guid>
+      <description>介绍 数据库总是不断地在执行删除，更新等操作。良好的空间管理非常重要，能够对性能带来大幅提高。在postgresql中用于维护数据库磁盘空间的工具是VACUUM，其重要的作用是删除那些已经标示为删除的数据并释放空间。 postgresql中执行delete,update操作后，表中的</description>
+    </item>
+    
+    <item>
+      <title>Explain 执行计划</title>
+      <link>https://zhangeamon.top/postgres/explain/</link>
+      <pubDate>Wed, 05 Dec 2018 15:27:30 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/explain/</guid>
+      <description>文法 EXPLAIN [ ( option [, ...] ) ] statement EXPLAIN [ ANALYZE ] [ VERBOSE ] statement 这里 option可以是： ANALYZE [ boolean ] VERBOSE [ boolean ] COSTS [ boolean ] BUFFERS [ boolean ] TIMING [ boolean ] SUMMARY [ boolean ] FORMAT { TEXT | XML | JSON | YAML } 注意事项 记住当使用了ANALYZE选项时语句会被实际执行. 如执行dml 时将对数据库进行实际的操作。 避免污染数据的方式 BEGIN; EXPLAIN ANALYZE ...; ROLLBACK; 一个例子 postgres=# explain analyze select * from tbl; QUERY</description>
+    </item>
+    
+    <item>
+      <title>数据库日志</title>
+      <link>https://zhangeamon.top/postgres/log/</link>
+      <pubDate>Tue, 04 Dec 2018 15:45:33 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/log/</guid>
+      <description>介绍 PostgreSQL有3种日志，分别是pg_log（数据库运行日志）、pg_xlog（WAL 日志，即重做日志）、pg_clog（事务提交日志，记录的是事务的元数据） postgres 10 版本将文件目录结构改为 log，pg_wal，pg_xact log默认是关闭的，需要设置其参数。wal和xac</description>
+    </item>
+    
+    <item>
+      <title>模板数据库</title>
+      <link>https://zhangeamon.top/postgres/template/</link>
+      <pubDate>Fri, 30 Nov 2018 09:52:43 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/template/</guid>
+      <description>模板数据库 模板数据库就是创建新database时，PostgreSQL会基于模板数据库制作一份副本，其中会包含所有的数据库设置和数据文件。 PostgreSQL安装好以后会默认附带两个模板数据库：template0和template1。 template0 干净版，任何时候不要修改 template1 默认版，如果创建数</description>
+    </item>
+    
+    <item>
+      <title>pg_stat_statements 数据库统计信息</title>
+      <link>https://zhangeamon.top/postgres/pg_stat_statements/</link>
+      <pubDate>Thu, 29 Nov 2018 11:08:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_stat_statements/</guid>
+      <description>pg_stat_statements 扩展 安装 yum install postgresql10-contrib.x86_64 修改配置参数 vi $PGDATA/postgresql.conf shared_preload_libraries=&#39;pg_stat_statements&#39; # 加载模块 需要重启 , 近期测试不需要添加也可以。自带扩展 track_io_timing = on # 跟踪IO耗时 (可选) track_activity_query_size = 2048 # 设置单条SQL的最长长度，超过被截断显示（可选) pg_stat_statements.max = 10000 #在pg_stat_statements中最多保留多少条统计信息，通过LRU算法，覆盖老的记录。 pg_stat_statements.track = all</description>
+    </item>
+    
+    <item>
+      <title>数据库拓展</title>
+      <link>https://zhangeamon.top/postgres/extention/</link>
+      <pubDate>Tue, 27 Nov 2018 15:20:33 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/extention/</guid>
+      <description>流计算数据库产品 pipelineDB * 推荐数据库产品 recDB 时序数据库 timescaleDB * 分布式数据库插件 citus * 列存储插件 IMCS, cstore等 面向OLAP的codegen数据库 pg_LLVM 向量计算插件 vops 数据库性能分析 pg_stat_statements pg_buffercache 直接访问数据库文件系统 adminpack 加密数据 pgcrypto 预热缓存 pg_prewarm 检查存储，特别是表膨胀 pgstattuple 模糊搜索 pg_trgm 连接到远程服务器 postgres_fdw k近邻（KNN）搜索</description>
+    </item>
+    
+    <item>
+      <title>数据库参数</title>
+      <link>https://zhangeamon.top/postgres/params/</link>
+      <pubDate>Tue, 27 Nov 2018 09:57:27 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/params/</guid>
+      <description>性能参数 pgtune pgconfig 日志参数 更多参数详解 管理 listen_addresses = &amp;quot;*&amp;quot; # 连接访问控制，哪些ip可以访问， * 全部。 结合pg_hba.conf , iptables设置。 superuser_reserved_connections = 3 # 预留给超级管理员的连接数。 port = 5432 # 默认访问端口 wal_keep_segments = 1024 # wal 日志保存数量 wal日志 wal_log_hints = on full_page_writes = on 成本因子 # - Planner Cost Constants - #seq_page_cost = 1.0 # measured on an arbitrary scale 顺序扫描 random_page_cost</description>
+    </item>
+    
+    <item>
+      <title>数据库索引类型及使用场景</title>
+      <link>https://zhangeamon.top/postgres/index01/</link>
+      <pubDate>Mon, 19 Nov 2018 09:00:44 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/index01/</guid>
+      <description>用途 优点 主键唯一约束 加速检索 排序 缺点 更新数据时需要同时维护对应索引 占用磁盘空间，甚至比表数据本身还要多 使用场景利弊分析 TP与AP应用 读写使用比例 点查询批量查询 创建索引 \h create index 命令： CREATE INDEX 描述： 建立新的索引 语法： CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ [ IF NOT EXISTS ] 名称 ] ON 表名 [ USING 方法 ] ( { 列名称 | ( 表达式 ) }</description>
+    </item>
+    
+    <item>
+      <title>PostgreSQL 无法kill(pg_terminate_backend, pg_cancel_backend)的情况分析 - 进程hang strace,pstack</title>
+      <link>https://zhangeamon.top/postgres/kill/</link>
+      <pubDate>Wed, 14 Nov 2018 22:09:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/kill/</guid>
+      <description>先 mark 下 https://yq.aliyun.com/articles/647468</description>
+    </item>
+    
+    <item>
+      <title>Postgresql指标查看&amp;stat统计信息</title>
+      <link>https://zhangeamon.top/postgres/stat/</link>
+      <pubDate>Tue, 06 Nov 2018 10:53:52 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/stat/</guid>
+      <description>当前连接数 SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid(); count ------- 3 (1 row) 数据库占用空间 select pg_size_pretty(pg_database_size(&#39;postgres&#39;)); pg_size_pretty ---------------- 14 MB (1 row) or \l+ 数据库表(不包括索引)或单条索引占用空间 select pg_size_pretty(pg_relation_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 24 kB (1 行记录) or \d+ 表中所有索引占有的空间 select pg_size_pretty(pg_indexes_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 280 kB (1 行记录) 表中索引占用的空间大小排序 select indexname , pg_size_pretty(pg_relation_size(indexname::regclass)) ,indexdef from pg_indexes where tablename = &#39;t_name&#39; order by pg_relation_size(indexname::regclass) desc limit 10; 表和索引占用总空间 select pg_size_pretty(pg_total_relation_size(&#39;t_name&#39;)); pg_size_pretty ---------------- 380 kB (1 行记录) 查</description>
+    </item>
+    
+    <item>
+      <title>数据库备份和恢复</title>
+      <link>https://zhangeamon.top/postgres/backup_restore/</link>
+      <pubDate>Tue, 30 Oct 2018 10:18:57 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/backup_restore/</guid>
+      <description>备份恢复命令 备份：pg_dump -U postgres -v -F c -Z 4 -f ***.backup dbname 9压缩率最狠 恢复：pg_restore -U postgres -v -j 8 -d dbname ***.backup 8是采用8个线程 备份表：pg_dump -U postgres -t tablename dbname &amp;gt; 33.sql 恢复表：psql -U postgres -d dbname &amp;lt; 33.sql 只备份表结构 pg_dump -U postgres -s -t tablename dbname &amp;gt; 33.sql 只备份数据 pg_dump -U postgres -a -t tablename dbname &amp;gt; 33.sql copy 拷贝数据 数据拷贝到本地： psql -U postgres -d databasename</description>
+    </item>
+    
+    <item>
+      <title>数据库备份和恢复wal-g 应用</title>
+      <link>https://zhangeamon.top/postgres/wal-g/</link>
+      <pubDate>Tue, 30 Oct 2018 10:18:57 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/wal-g/</guid>
+      <description>存储服务 minio 设置用户名和密码 docker run -d -p 9000:9000 -e MINIO_ACCESS_KEY=xxxxx(changeme) -e MINIO_SECRET_KEY=kkkkk(changeme) -v /data/minio/:/data minio/minio server /data 创建 bucket mc mb local/buecket003 wal-g 下载 wget https://github.com/wal-g/wal-g/releases/download/v0.2.9/wal-g.linux-amd64.tar.gz tar -zxvf wal-g.linux-amd64.tar.gz 设置环境变量 minio cat wal-g.env export PGDATA=/var/lib/pgsql/10/data/ export WALG_S3_PREFIX=s3://bucket003/ export PGPORT=5432 export PGUSER=postgres export AWS_SECRET_ACCESS_KEY=xxxxx(changeme) export AWS_REGION=us-east-1 export AWS_ACCESS_KEY_ID=kkkkk(changeme) export AWS_ENDPOINT=http://localhost:9000 export AWS_S3_FORCE_PATH_STYLE=true swift export PGDATA= export WALG_SWIFT_PREFIX=swift://buckt003/ export PGPORT= export PGUSER= export OS_USERNAME= export OS_PASSWORD= export OS_AUTH_URL=http://ip:port/auth/v1.0 全备份 source mydir/wal-g.env &amp;amp;&amp;amp; wal-g backup-push $PGDATA wal 备份 wal_level = archive archive_mode = on ## 从库 always archive_command = &#39;source mydir/wal-g.env &amp;amp;&amp;amp; wal-g wal-push %p&#39; archive_timeout = 60 恢复数据 查看所有全备份 wal-g backup-list name last_modified wal_segment_backup_start base_000000020000001E000000CB 2019-11-07T01:34:08Z 000000020000001E000000CB base_000000020000001E000000CD 2019-11-07T01:37:03Z 000000020000001E000000CD base_000000020000001E000000CF 2019-11-07T02:23:34Z</description>
+    </item>
+    
+    <item>
+      <title>主从流复制</title>
+      <link>https://zhangeamon.top/postgres/replication01/</link>
+      <pubDate>Wed, 17 Oct 2018 14:55:38 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/replication01/</guid>
+      <description>历史演变 replication 主库配置 根据实际情况分配流复制权限 vi pg_hba.conf host replication all 10.2.0.0/0 trust vi postgresql.conf max_wal_senders = 10 wal_level = logical # minimal, replica, or logical hot_standby = on # 正常在从库配置，如果在主库配置完毕，因为从库复制主库配置不需要再修改从库配置。 wal_log_hints = on 从库配置 数据库安装 从主库复制数据 pg_basebackup -h 10.2.0.14 -U postgres -F p -P -R -D /var/lib/pgsql/10/data/ --checkpoint=fast -l postgresback20181219 pg_basebackup支持两种全量备份的</description>
+    </item>
+    
+    <item>
+      <title>安装 Postgresql</title>
+      <link>https://zhangeamon.top/postgres/install01/</link>
+      <pubDate>Wed, 17 Oct 2018 14:37:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/install01/</guid>
+      <description>官网 1.准备源 清除历史残余，有些是系统自带的旧版本数据库 rpm -qa | grep postgres rpm -r **** 安装新数据源 yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm 可将所有的软件更新到最新版本如 ， postgresql-10.2 更新到当前最新的postgresql-10.6 yum update -y 2.安装 yum install -y postgresql10-server postgresql10 postgresql10-contrib 3.初始化 默认 /usr/pgsql-10/bin/postgresql-10-setup initdb 自定义 /usr/pgsql-10/bin/initdb -D $PGDATA -U postgres -E UTF-8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8 -k -D 数据存放位置 -U 超级用户 -E 默认编码</description>
+    </item>
+    
+  </channel>
+</rss>

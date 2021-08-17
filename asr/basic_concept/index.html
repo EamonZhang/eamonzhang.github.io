@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>语音识别的基本概念 | 故乡的云☁️</title>
+    <meta property="og:title" content="语音识别的基本概念 - 故乡的云☁️">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-06-11T09:13:57&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-06-11T09:13:57&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="语音识别的基本概念">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/asr/basic_concept/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        故乡的云☁️
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">语音识别的基本概念</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年6月11日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <ul>
+<li>
+<p>ASR ， Automatic Speech Recogntion 语音识别</p>
+</li>
+<li>
+<p>VAD ， Voice Activity Detection 语音端点检测</p>
+</li>
+<li>
+<p>LM ， Language Mode 语言模型</p>
+</li>
+<li>
+<p>AM ， 声学模型</p>
+</li>
+<li>
+<p>DNN-HMM 语音识别框架</p>
+</li>
+<li>
+<p>WFST , Weighted Finite State Transducers  有限加权状态转换机 建立从HMM状态到单词的映射</p>
+</li>
+<li>
+<p>Lattice Rescore 词图</p>
+</li>
+<li>
+<p>Nbest 最优路径</p>
+</li>
+<li>
+<p>NLP,Natural Language Processing 自然语言处理</p>
+</li>
+</ul>
+<p>参考</p>
+<ul>
+<li><a href="http://www.360doc.com/content/20/1211/20/7673502_950883057.shtml">http://www.360doc.com/content/20/1211/20/7673502_950883057.shtml</a></li>
+</ul>
+<p>导读
+在语音识别系统中，有限加权状态转换机（Weighted Finite State Transducers, WFST）扮演着重要角色。本文主要介绍发音词典、语言模型和WFST的原理，以及在实践过程中的一些优化方法。</p>
+<p>背景
+目前的实际场景中的语音识别系统更多是基于HMM的传统语音识别框架，如：DNN-HMM，这种框架是由声学模型、发音词典、语言模型和解码器构成的pipeline结构，其中声学模型建模粒度为比音素还小的三音素状态，而语言模型和WFST在其中扮演着重要的角色。
+本文将主要围绕三个问题展开：（1）如何实现从HMM状态到句子的映射；（2）WFST如何优化解码效率；（3）在实际应用时，如何使用Lattice Rescore等方法适应不同的业务场景。
+首先，我们会回顾一下语音识别的背景知识，介绍传统语音识别的架构和基本概念，以及发音词典和语言模型的原理。进而，介绍WFST的定义和基本操作，以及WFST在语音识别中发挥的作用。最后，我们将以实际场景为例，从解码图的角度介绍一些语音识别的优化方法。</p>
+<p>语音识别简介
+语音识别（Automatic Speech Recognition, ASR）语音</p>
+<p>语音识别简介
+语音识别（Automatic Speech Recognition, ASR）的目标是将人类的语音内容转换为相应的文字。系统的输入通常是一段完整的长录音（或语音流），录音需要先经过语音端点检测（Voice Activity Detection, VAD）将人声的片段截取出来，语音识别会将语音中的内容转写为文字，其中会包含大量口语、重复、语法错误等情况，且语音识别不会为句子添加标点。
+这时，系统需要一个后处理模块，使用顺滑技术将明显的口语问题“整理”为通顺的句子，并为句子加上标点。同时，说话人分离、说话人识别、语音情绪识别等模块，会为每段语音打上说话人、性别、情绪等标签，与转写的文字一同作为下游NLP模块的输入，进而转化为意图、情感、槽位等可用信息。</p>
+<p>语音识别系统通常分为基于HMM的传统系统和端到端系统。传统系统分为声学模型、发音词典、语言模型和解码器，其结构从最开始的GMM-HMM，过渡到DNN/GMM-HMM混合系统。端到端系统的输入为声学特征序列，输出对应的单词/字序列，以CTC和Seq2Seq两种结构为主。语言模型在两种系统中都起着很大的作用，而WFST则主要应用于传统的系统。本文内容将基于HMM的传统语音识别展开介绍。
+语音识别问题通常可以用以下公式描述，其中W为单词序列，X为声学特征序列，如公式所示，语音识别的目的是在当前的声学特征序列下，找出让该条件概率最大的单词序列。</p>
+<h3 id="word-lattice-rescore--词网格">Word Lattice Rescore  词网格</h3>
+<p>以“南京市长江大桥”为例</p>
+<pre><code>南|南京|南京市
+京
+市|市长
+长|长江|长江大桥
+江
+大|大桥
+桥
+</code></pre><p>以每个字为中心可拆分成如上的词列表</p>
+<p>构成词网
+
+        <img class="mx-auto" alt="lat image" src="/images/wordlat.png" />   
+    </p>
+<p>这样计算每条路径的分数就可以知道那条路径最优了</p>
+<p>计算分数的方式可以使用Ngram模型</p>
+<p>代码摘自HanLP（https://github.com/hankcs/HanLP）</p>
+<h4 id="开源语音识别对比">开源语音识别对比</h4>
+<p>
+        <img class="mx-auto" alt="asr compare" src="/images/asr_compare.jpg" />   
+    </p>
+<p><a href="https://cmusphinx.github.io/wiki/">https://cmusphinx.github.io/wiki/</a></p>
+<p>基础知识介绍
+<a href="https://blog.csdn.net/zouxy09/article/details/7941585">https://blog.csdn.net/zouxy09/article/details/7941585</a></p>
+<h4 id="算法总汇">算法总汇</h4>
+<p>
+        <img class="mx-auto" alt="算法" src="/images/asr_algorithm.png" />   
+    </p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/lightdm/">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a></li>
+        
+        <li><a href="/linux/so/">动态库</a></li>
+        
+        <li><a href="/python/ctypes/">python 与 C 交互编程</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/basic_concept/" title="语音识别的基本概念">语音识别的基本概念</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/ipmi/" title="远程管理卡 命令管理IPMI">远程管理卡 命令管理IPMI</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

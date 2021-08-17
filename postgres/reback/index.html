@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>误操作闪回 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="误操作闪回 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-01-11T17:19:06&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-01-11T17:19:06&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="误操作闪回">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/reback/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">误操作闪回</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月11日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h5 id="原理">原理</h5>
+<p>利用mvcc原理，数据在删除或更新时只是标记为删除。当没有发生过gc时历史数据仍然存在。只是对当前事务不可见。</p>
+<p>通过修改当前事务号为误操作前的事务号就可以看到历史数据。</p>
+<p>例如 T1 （添加数据） T2 - T8（其他操作） T9（删除了T1加入的数据）T10&hellip; (其他操作)。 自需要将当前事务号修改为T1之后T9之前的任何时刻都可以看到T1 加入的数据。</p>
+<p>前提：误操作表在误操作后没有发生过gc</p>
+<pre><code>select  last_vacuum , last_autovacuum  from pg_stat_all_tables where = ?;
+</code></pre><p>修改方法：利用pg_resetwal工具重置当前事务号</p>
+<p>注意： 尽快将找到的数据导出，随着当前数据库事务号增加，数据将再次不可见，T10 也会同样不可见。</p>
+<h5 id="示例">示例</h5>
+<p>通过pg_xlogdump找到误删的事务号（xid），停止数据库，然后重置xlog，启动数据库，数据就是重置的xid位置可见</p>
+<p>模拟事故现场</p>
+<pre><code>-- 创建测试表
+postgres=# create table reback_t (i int);
+postgres=# select txid_current();
+ txid_current 
+--------------
+     26913040
+(1 行记录)
+
+-- 模拟业务插入数据 
+postgres=# insert into reback_t values (1);
+INSERT 0 1
+postgres=# insert into reback_t values (2);
+INSERT 0 1
+postgres=# insert into reback_t values (3);
+INSERT 0 1
+postgres=# insert into reback_t values (4);
+INSERT 0 1
+postgres=# select txid_current();
+ txid_current 
+--------------
+     26913045
+(1 行记录)
+
+postgres=# insert into reback_t values (5);
+INSERT 0 1
+postgres=# insert into reback_t values (6);
+INSERT 0 1
+postgres=# insert into reback_t values (7);
+INSERT 0 1
+postgres=# insert into reback_t values (8);
+INSERT 0 1
+postgres=# insert into reback_t values (9);
+INSERT 0 1
+postgres=# insert into reback_t values (10);
+INSERT 0 1
+postgres=# select txid_current();
+ txid_current 
+--------------
+     26913052
+(1 行记录)
+
+-- 误删除数据,事故点 
+postgres=# delete from reback_t where i &lt; 4;
+DELETE 3
+-- 在线业务继续
+postgres=# insert into reback_t values (11);
+INSERT 0 1
+postgres=# insert into reback_t values (12);
+INSERT 0 1
+postgres=# insert into reback_t values (13);
+INSERT 0 1
+postgres=# select * from reback_t ;
+ i  
+----
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+(10 行记录)
+
+postgres=# \q
+
+</code></pre><pre><code>停服闪退
+[root@pg-d data]# systemctl stop  postgresql-10
+
+回退到指定事务号
+[root@pg-d data]# su postgres -c &quot;/usr/pgsql-10/bin/pg_resetwal -x 26913047 -D /var/lib/pgsql/10/data/&quot;
+Write-ahead log reset
+
+建议使用 --single 维护模式启动数据库
+</code></pre><pre><code>查看回退效果, 1,2 又可见
+postgres=# select * from reback_t ;
+ i 
+---
+ 1
+ 2
+ 3
+ 4
+ 5
+(5 行记录)
+
+事务号 +1
+postgres=# select txid_current();
+ txid_current 
+--------------
+     26913047
+(1 行记录)
+
+postgres=# select * from reback_t ;
+ i 
+---
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+(6 行记录)
+-- 其他操作 , 事务继续向前。。。
+postgres=# insert into reback_t values (21);
+INSERT 0 1
+postgres=# select * from reback_t ;
+ i  
+----
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+ 21
+(9 行记录)
+-- 当事务号增长到事故点26913053时，事故再次重现
+postgres=# select * from reback_t ;
+ i
+----
+  3
+  4
+  5
+  6
+  7
+  8
+ 21
+(7 行记录)
+</code></pre><pre><code>-- 事务真相
+postgres=# select xmin,xmax,* from reback_t ;
+   xmin   | xmax | i  
+----------+------+----
+ 26913044 |    0 |  4
+ 26913046 |    0 |  5
+ 26913047 |    0 |  6
+ 26913048 |    0 |  7
+ 26913049 |    0 |  8
+ 26913050 |    0 |  9
+ 26913051 |    0 | 10
+ 26913054 |    0 | 11
+ 26913055 |    0 | 12
+ 26913049 |    0 | 21
+
+</code></pre><p>思考 trunce 后是否能够闪回</p>
+<pre><code>postgres=# select txid_current();
+ txid_current 
+--------------
+     26913056
+(1 行记录)
+
+postgres=# truncate reback_t ;
+TRUNCATE TABLE
+postgres=# \q
+ 
+#systemctl stop  postgresql-10
+ 
+#su postgres -c &quot;/usr/pgsql-10/bin/pg_resetwal -x 26913050 -D /var/lib/pgsql/10/data/&quot;
+Write-ahead log reset
+
+# systemctl start  postgresql-10
+# psql 
+psql (12.5, 服务器 10.13)
+输入 &quot;help&quot; 来获取帮助信息.
+
+postgres=# select xmin,xmax,* from reback_t ;
+   xmin   |   xmax   | i  
+----------+----------+----
+ 26913041 | 26913053 |  1
+ 26913042 | 26913053 |  2
+ 26913043 | 26913053 |  3
+ 26913044 |        0 |  4
+ 26913046 |        0 |  5
+ 26913047 |        0 |  6
+ 26913048 |        0 |  7
+ 26913049 |        0 |  8
+ 26913049 | 26913056 | 21
+(9 行记录)
+</code></pre><p>封侯非我意，我愿海波平。</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/high_level_sql/">高级SQL</a></li>
+        
+        <li><a href="/postgres/thinking_in_db_fd/">数据库优化思考 - 结构设计</a></li>
+        
+        <li><a href="/postgres/auto_vacuum_trigger/">auto vacuum 触发机制</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (12)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (18)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

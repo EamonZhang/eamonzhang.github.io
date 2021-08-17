@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/categories/linux/</link>
+    <description>Recent content in linux on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 18 May 2021 09:03:44 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>搭建VPN服务</title>
+      <link>https://zhangeamon.top/linux/openvpn/</link>
+      <pubDate>Tue, 18 May 2021 09:03:44 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/openvpn/</guid>
+      <description>利用Openven搭建VPN服务 服务端 参考 https://github.com/kylemanna/docker-openvpn 初始化 OVPN_DATA=&amp;quot;ovpn-data-example&amp;quot; docker volume create --name $OVPN_DATA docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki 其中 VPN.SERVERNAME.COM 为访问域名 启动服务 docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn 生成key docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full CLIENTNAME nopass docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient CLIENTNAME &amp;gt; CLIENTNAME.ovpn 客户端 openvpn --config CLIENTNAME.ovpn 验证 curl ipinfo.io 查看upd 端口 nc -vu ip port</description>
+    </item>
+    
+    <item>
+      <title>远程管理卡 命令管理IPMI</title>
+      <link>https://zhangeamon.top/linux/ipmi/</link>
+      <pubDate>Mon, 10 May 2021 16:58:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/ipmi/</guid>
+      <description>IPMI IPMI，即智能平台管理接口（Intelligent Platform Management Interface），IPMI的核心是一个专用芯片/控制器(BMC)，独立于操作系统、BIOS和处理器，因此属于带外管理设备。正是因为如此，我们可以通过BMC来控制或者获取系统的各种信息，而不需要关注系统是否正常。比如，系</description>
+    </item>
+    
+    <item>
+      <title>Centos7 重置密码</title>
+      <link>https://zhangeamon.top/linux/resetpasswd-centos7/</link>
+      <pubDate>Fri, 09 Apr 2021 11:26:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/resetpasswd-centos7/</guid>
+      <description>进入开机界面 按e 后 修改如下两处 ctrl+X 进入系统 上图中最后一个指令为保持设置 touch /.autorelabel 重新进入系统 exec /sbin/init</description>
+    </item>
+    
+    <item>
+      <title>CPU亲和性(亲和力)</title>
+      <link>https://zhangeamon.top/linux/cpu-affinity/</link>
+      <pubDate>Fri, 09 Apr 2021 09:35:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/cpu-affinity/</guid>
+      <description>基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &amp;quot;physical id&amp;quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &amp;quot;cpu cores&amp;quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &amp;quot;processor&amp;quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &amp;quot;name&amp;quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core * Socket(s) * Core(s) per socket Linux查看某个进</description>
+    </item>
+    
+    <item>
+      <title>CPU频率管理</title>
+      <link>https://zhangeamon.top/linux/cpu_utilize/</link>
+      <pubDate>Thu, 08 Apr 2021 09:44:39 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/cpu_utilize/</guid>
+      <description>介绍 CPU动态节能技术用于降低服务器功耗，通过选择系统空闲状态不同的电源管理策略，可以实现不同程度降低服务器功耗，更低的功耗策略意味着CPU唤醒更慢对性能影响更大。对于对时延和性能要求高的应用，建议关闭CPU的动态调节功能，禁止 CPU休眠，并把CPU频率固定到最高。 cpufreq</description>
+    </item>
+    
+    <item>
+      <title>存储设备几个物理概念</title>
+      <link>https://zhangeamon.top/linux/hard_store/</link>
+      <pubDate>Mon, 29 Mar 2021 16:16:38 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/hard_store/</guid>
+      <description>硬盘 HDD 机械硬盘 SSD 固态硬盘 物理接口 接口的物理形态 SATA mSTATA 迷你SATA m.2 曾用名NG(NEXT GERNERATION) 根据宽度分为(m.2 2242 2260 2280) u.2 统一了 SATA ，PCIe，SAS 接口 AIC ADD IN CARD 标准PCIe金手指 通信协议 数据通信逻辑协议标准 AHCI SAS NVME (Non-Volatile Memory Host Controller Interface) 总线标准 数据总线标准,硬盘与CPU通过总线传输数据 SATA PCIE 在传统SAT</description>
+    </item>
+    
+    <item>
+      <title>修改远程管理卡密码</title>
+      <link>https://zhangeamon.top/linux/bmcpasswd/</link>
+      <pubDate>Mon, 29 Mar 2021 16:09:34 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/bmcpasswd/</guid>
+      <description>更改BMC密码 BMC：基板管理控制器 Baseboard Management Controller 更改BMC密码，需要基于Ipmitool工具实现，需要先下载该工具 安装ipmitool ubuntu安装命令： sudo apt-get -y install ipmitool centos安装命令： yum -y install epel-release（先） yum -y install ipmitool（后） 查看登陆账户名列表 ipmitool user list 2（技嘉主</description>
+    </item>
+    
+    <item>
+      <title>SSD IO request Time Out</title>
+      <link>https://zhangeamon.top/linux/ssdiotimeout/</link>
+      <pubDate>Mon, 29 Mar 2021 09:30:42 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/ssdiotimeout/</guid>
+      <description>Intel 论坛相似问题讨论 https://community.intel.com/t5/Solid-State-Drives/I-O-request-timeouts-on-Linux-with-Intel-P3520-P4600-NVMe-PCIe/td-p/577474 临时解决 mkfs.xfs -K /dev/nvme01 -K Do not attempt to discard blocks at mkfs time. 带来问题 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa8188cf9&amp;gt;] schedule_preempt_disabled+0x29/0x70 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa8186c67&amp;gt;] __mutex_lock_slowpath+0xc7/0x1d0 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa818603f&amp;gt;] mutex_lock+0x1f/0x2f [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa7d2d596&amp;gt;] ima_file_check+0xa6/0x1b0 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa7c5dfba&amp;gt;] do_last+0x59a/0x1340 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa7c28ba6&amp;gt;] ? kmem_cache_alloc_trace+0x1d6/0x200 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa7c5ee2d&amp;gt;] path_openat+0xcd/0x5a0 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa7c01158&amp;gt;] ? page_add_new_anon_rmap+0xb8/0x170 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa7c6107d&amp;gt;] do_filp_open+0x4d/0xb0 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa7c6f177&amp;gt;] ? __alloc_fd+0x47/0x170 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa7c4cbc4&amp;gt;] do_sys_open+0x124/0x220 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa7c4ccde&amp;gt;] SyS_open+0x1e/0x20 [Tue Mar 30 12:19:12 2021] [&amp;lt;ffffffffa8194f92&amp;gt;] system_call_fastpath+0x25/0x2a [Tue Mar 30 12:19:12 2021] INFO: task postmaster:119438 blocked for more than 120 seconds. [Tue</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 20.04 网络配置</title>
+      <link>https://zhangeamon.top/linux/ubuntu2004-network/</link>
+      <pubDate>Mon, 21 Sep 2020 16:48:24 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/ubuntu2004-network/</guid>
+      <description>配置 vim /etc/netplan/00-installer-config.yaml # This is the network config written by &#39;subiquity&#39; network: ethernets: enp2s0: addresses: - 192.168.6.111/24 gateway4: 192.168.6.1 nameservers: addresses: [119.29.29.29] version: 2 生效 netplan apply</description>
+    </item>
+    
+    <item>
+      <title>Linux 获取CPU温度</title>
+      <link>https://zhangeamon.top/linux/cpu_temp/</link>
+      <pubDate>Thu, 07 May 2020 14:02:02 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/cpu_temp/</guid>
+      <description>直接读取系统信息 可以通过读取如下路径中的数据来获取cpu的温度信息，不过读取的数据没有经过处理。 cpu0： cat /sys/class/thermal/thermal_zone0/temp cpu1： cat /sys/class/thermal/thermal_zone1/temp 通过命令行的方式获取 安装 lm_sensors 软件包： # rpm yum install lm_sensors # deb apt-get install lm-sensors 执行命令sensors-detect，进行简单配置，此命令执行后会出现一系列选项，一直yes即可； 执行</description>
+    </item>
+    
+    <item>
+      <title>smartctl 硬盘检测</title>
+      <link>https://zhangeamon.top/linux/smartctl/</link>
+      <pubDate>Mon, 03 Dec 2018 14:21:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/smartctl/</guid>
+      <description>SMART 简介 S.M.A.R.T.，全称为“Self-Monitoring Analysis and Reporting Technology”，即“自我监测、分析及报告技术”。是一种自动的硬盘状态检测与预警系统和规范。通过在硬盘硬件内的检测指令对硬盘的硬件如磁头、盘片、马达、电路的运行情况进行监控、记录并与厂商所设定的预设安全</description>
+    </item>
+    
+    <item>
+      <title>Centos 初始化配置</title>
+      <link>https://zhangeamon.top/linux/init-centos/</link>
+      <pubDate>Mon, 03 Dec 2018 10:34:06 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/init-centos/</guid>
+      <description>网络配置 设置IP 略 ip_froward 查看 sysctl -a | grep ip_ 修改 vi /etc/sysctl.conf net.ipv4.ip_forward = 1 最大使用内存 vm.max_map_count=262144 生效 sysctl -p 系统更新 yum -y update 安装扩展及工具 yum -y install epel-release net-tools bind-utils telnet wget sysstat 文件链接限制 查看 ulimit -n 修改 vi /etc/security/limits.conf * - nofile 65536 * soft nproc 65536 * hard nproc 65536 * soft nofile 65536 * hard nofile 65536 rm /etc/security/limits.d/* -rf 安全 selinux 查看 getenforce 修改 临时 setenforce 0 永久 vi /etc/sysconfig/selinux 设置 firewalld 设置 ssh vi /etc/ssh/sshd_config 禁用root用户，密钥登陆 切换为其他用户登</description>
+    </item>
+    
+  </channel>
+</rss>
