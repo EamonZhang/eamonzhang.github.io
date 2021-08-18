@@ -364,7 +364,11 @@
 <li><a href="https://postgres.fun/20190809161300.html">PostgreSQL 12 新特性汇总</a></li>
 <li><a href="https://postgres.fun/20200724165800.html">PostgreSQL 13 新特性汇总</a></li>
 </ul>
+<p>postgres 13</p>
+<pre><code>wal_keep_segments 已经取消，改用 wal_keep_size
 
+wal_keep_size = wal_keep_segments * wal_segment_size(16MB) 
+</code></pre>
         </div>
 
         
