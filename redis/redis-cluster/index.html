@@ -167,6 +167,7 @@
         <li></li>
       </ul>
     </li>
+    <li><a href="#cluster">Cluster</a></li>
   </ul>
 </nav>
     </div>
@@ -318,7 +319,15 @@ slave = sentinel.slave_for('mymaster', socket_timeout=0.5, password='newpwd', db
 r_ret = slave.get('foo')
 print(r_ret)
 # 输出：bar
-</code></pre>
+</code></pre><h2 id="cluster">Cluster</h2>
+<p>去中心化</p>
+<p>16384 个槽位，槽位信息存储在每个节点，纠正机制</p>
+<p>key 可以挂在特定的槽位上 tag指定</p>
+<p>槽位迁移</p>
+<p>每个节点之间采用Gossip协议</p>
+<p>两个特殊指令 moved asking</p>
+<p>只能使用第0号库。不像独立的redis 有16 个库</p>
+
         </div>
 
         
