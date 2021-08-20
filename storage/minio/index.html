@@ -307,10 +307,20 @@ WantedBy=multi-user.target
 <pre><code>systemctl daemon-reload
 systemctl restart minio
 systemctl enable minio
+</code></pre><h4 id="压缩存储">压缩存储</h4>
+<p>查看可压缩类型</p>
+<pre><code>mc admin config get myminio compression
+compression enable=off allow_encryption=off extensions=.txt,.log,.csv,.json,.tar,.xml,.bin mime_types=text/*,application/json,application/xml,binary/octet-stream 
+</code></pre><p>开启压缩</p>
+<pre><code>export MINIO_COMPRESS=&quot;on&quot;
+export MINIO_COMPRESS_EXTENSIONS=&quot;.pdf,.doc&quot;
+export MINIO_COMPRESS_MIME_TYPES=&quot;application/pdf&quot;
 </code></pre><h4 id="查看日志">查看日志</h4>
 <pre><code>tail -f /var/log/
 </code></pre><h4 id="控制台管理">控制台管理</h4>
 <p>在浏览器中访问 http://192.168.6.14:19000</p>
+<h4 id="用户及权限管理">用户及权限管理</h4>
+<p>略</p>
 <h4 id="ningx-代理">ningx 代理</h4>
 <p>负载均衡 略</p>
 <h2 id="监控">监控</h2>
