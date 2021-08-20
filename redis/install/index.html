@@ -270,8 +270,13 @@ rdbcompssion yes #指定存储至本地数据库时是否压缩数据，默认�
 dbfilename dump.rdb  #指定本地数据库文件名
 dir /data/redis6/  #指定本地数据库存放目录
 maxclients 1000 #设置同一时间最大客户端连接数，默认无限制
-maxmemory &lt;bytes&gt; #指定redis最大内存限制  1/4 
-</code></pre><h4 id="慢查询日志">慢查询日志</h4>
+maxmemory &lt;bytes&gt; #指定redis最大内存限制  1/4 .  
+</code></pre><ul>
+<li>使用maxmemory参数限制最大可用内存</li>
+</ul>
+<p>得益于Redis单线程架构和内存限制机制， 即使没有采用虚拟化， 不同的Redis进程之间也可以很好地实现CPU和内存的
+隔离性。可以通过config set maxmemory进行动态修改。</p>
+<h4 id="慢查询日志">慢查询日志</h4>
 <pre><code>slowlog-max-len 
 slowlog-log-slower-than 
 </code></pre><h4 id="密码认证">密码认证</h4>
