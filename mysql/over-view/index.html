@@ -180,7 +180,11 @@
       </ul>
     </li>
     <li><a href="#数据类型">数据类型</a></li>
-    <li><a href="#数据库备份">数据库备份</a></li>
+    <li><a href="#数据库备份">数据库备份</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
     <li><a href="#状态查看">状态查看</a>
       <ul>
         <li></li>
@@ -328,11 +332,43 @@ skip-name-resolve # 跳过对连接的客户端进行DNS反向解析
 
 </code></pre><h2 id="数据类型">数据类型</h2>
 <h2 id="数据库备份">数据库备份</h2>
-<pre><code>-- 数据导出
-mysqldump -h 10.1.88.74 -u custom -P 3306 --databases sbtest  -v -p &gt; backup.sql
+<h4 id="物理备份">物理备份</h4>
+<p>xtrabackup</p>
+<h4 id="逻辑备份">逻辑备份</h4>
+<pre><code>-- 备份所有库 --all-databases 或 -A
+mysqldump -uroot -pxxxxxx --all-databases &gt; /tmp/all_database.sql
 
--- 数据导入
-mysql -h 10.1.88.74 -u custom -P 3306  -D sbtest -p &lt; backup.sql 
+-- 备份部分数据库 --databases 或 -B
+mysqldump -uroot -pxxxxxx --databases testdb1 testdb2 &gt; /tmp/testdb.sql
+
+-- 备份一个库中的多个表
+mysqldump -uroot -pxxxxxx testdb tb1 tb2 tb3 &gt; /tmp/tb.sql
+
+-- 备份一个表中的部分数据
+mysqldump -uroot -pxxxxxx testdb tb1 --where=&quot; create_time &gt;= '2019-08-01 00:00:00' &quot; &gt; /tmp/tb1.sql
+
+-- 备份一个库中的表（排除部分表）--ignore-table
+mysqldump -uroot -pxxxxxx testdb --ignore-table=testdb.tb1 &gt; /tmp/testdb.sql
+
+
+-- mysqldump备份默认是不包含存储过程，自定义函数及事件
+-- --routines 或 -R 选项来备份存储过程及函数，使用 --events 或 -E 参数来备份事件
+mysqldump -uroot -pxxxxxx -R -E --databases testdb &gt; /tmp/testdb.sql
+
+-- InnoDB 引擎备份不锁表  --single-transaction 
+mysqldump -uroot -pxxxxxx --single-transaction --databases testdb &gt; /tmp/testdb.sql
+
+
+-- 数据恢复
+mysql -uroot -pxxxxxx &lt; /tmp/all_database.sql
+
+-- 在全量恢复的备份中恢复部分库
+sed -n '/^-- Current Database: `testdb`/,/^-- Current Database: `/p' all_databases.sql &gt; testdb.sql
+
+-- 只恢复单库备份中的一张表
+cat testdb.sql | sed -e '/./{H;$!d;}' -e 'x;/CREATE TABLE `tb1`/!d;q' &gt; /tmp/tb1_jiegou.sql
+cat testdb.sql | grep --ignore-case  'insert into `tb1`' &gt; /tmp/tb1_data.sql
+
 </code></pre><h2 id="状态查看">状态查看</h2>
 <pre><code>#1.显示状态信息：
 #1.1.session（默认）：取出当前窗口的执行；
