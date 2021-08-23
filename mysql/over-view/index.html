@@ -350,14 +350,12 @@ mysqldump -uroot -pxxxxxx testdb tb1 --where=&quot; create_time &gt;= '2019-08-0
 -- 备份一个库中的表（排除部分表）--ignore-table
 mysqldump -uroot -pxxxxxx testdb --ignore-table=testdb.tb1 &gt; /tmp/testdb.sql
 
-
 -- mysqldump备份默认是不包含存储过程，自定义函数及事件
 -- --routines 或 -R 选项来备份存储过程及函数，使用 --events 或 -E 参数来备份事件
 mysqldump -uroot -pxxxxxx -R -E --databases testdb &gt; /tmp/testdb.sql
 
 -- InnoDB 引擎备份不锁表  --single-transaction 
 mysqldump -uroot -pxxxxxx --single-transaction --databases testdb &gt; /tmp/testdb.sql
-
 
 -- 数据恢复
 mysql -uroot -pxxxxxx &lt; /tmp/all_database.sql
@@ -368,7 +366,6 @@ sed -n '/^-- Current Database: `testdb`/,/^-- Current Database: `/p' all_databas
 -- 只恢复单库备份中的一张表
 cat testdb.sql | sed -e '/./{H;$!d;}' -e 'x;/CREATE TABLE `tb1`/!d;q' &gt; /tmp/tb1_jiegou.sql
 cat testdb.sql | grep --ignore-case  'insert into `tb1`' &gt; /tmp/tb1_data.sql
-
 </code></pre><h2 id="状态查看">状态查看</h2>
 <pre><code>#1.显示状态信息：
 #1.1.session（默认）：取出当前窗口的执行；
