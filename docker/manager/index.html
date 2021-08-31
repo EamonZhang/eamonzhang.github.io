@@ -275,7 +275,7 @@ for log in $logs
 </code></pre><h4 id="修改docker-服务配置">修改docker 服务配置</h4>
 <p>vi /etc/docker/daemon.json</p>
 <pre><code>&quot;log-driver&quot;:&quot;json-file&quot;,
-  &quot;log-opts&quot;:{ &quot;max-size&quot; :&quot;50m&quot;,&quot;max-file&quot;:&quot;1&quot;}
+&quot;log-opts&quot;:{ &quot;max-size&quot; :&quot;50m&quot;,&quot;max-file&quot;:&quot;1&quot;}
 </code></pre><p><a href="https://docs.docker.com/config/containers/logging/configure/">https://docs.docker.com/config/containers/logging/configure/</a></p>
 <p>注意： 我们需要重新创建容器才可以实现该配置的生效。</p>
 <p>创建好以后，通过docker inspect ，或者 docker inspect -f &lsquo;{{.HostConfig.LogConfig}}&rsquo; 容器名xxx 来查看是否生效了</p>
