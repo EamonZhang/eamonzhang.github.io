@@ -513,10 +513,11 @@ max_standby_archive_delay和max_standby_streaming_delay
 <h2 id="主从延迟查看">主从延迟查看</h2>
 <p>主库查看/字节大小</p>
 <pre><code>#数据延迟
-select pg_wal_lsn_diff(pg_current_wal_lsn(),replay_lsn)/(1024/1024) as latency_mb from pg_stat_replication ;
+select pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(),replay_lsn)) as latency from pg_stat_replication ;
 
 #wal 不同阶段延迟
-select pg_wal_lsn_diff(pg_current_wal_lsn(),sent_lsn)/(1024/1024) as sent_latency_mb,pg_wal_lsn_diff(pg_current_wal_lsn(),write_lsn)/(1024/1024) as write_latency_mb ,pg_wal_lsn_diff(pg_current_wal_lsn(),flush_lsn)/(1024/1024) as flush_latency_mb,pg_wal_lsn_diff(pg_current_wal_lsn(),replay_lsn)/(1024/1024) as replay_latency_mb from pg_stat_replication ;
+select pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(),sent_lsn)) as sent_latency, pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(),write_lsn)) as write_latency ,pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(),flush_lsn)) as flush_latency,pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(),replay_lsn)) as replay_latency from pg_stat_replication ;
+
 </code></pre><p>从库查看/时间</p>
 <pre><code>select now() - pg_last_xact_replay_timestamp();
 </code></pre>
@@ -615,6 +616,10 @@ select pg_wal_lsn_diff(pg_current_wal_lsn(),sent_lsn)/(1024/1024) as sent_latenc
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/mysql/connections/" title="连接数管理">连接数管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
     </li>
     
@@ -650,10 +655,6 @@ select pg_wal_lsn_diff(pg_current_wal_lsn(),sent_lsn)/(1024/1024) as sent_latenc
         <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -672,7 +673,7 @@ select pg_wal_lsn_diff(pg_current_wal_lsn(),sent_lsn)/(1024/1024) as sent_latenc
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (13)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (3)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (19)</a></li>
     
@@ -680,7 +681,7 @@ select pg_wal_lsn_diff(pg_current_wal_lsn(),sent_lsn)/(1024/1024) as sent_latenc
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

@@ -6,7 +6,16 @@
     <description>Recent content in mysql on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 21 Feb 2019 14:31:26 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Sep 2021 17:18:25 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>连接数管理</title>
+      <link>https://zhangeamon.top/mysql/connections/</link>
+      <pubDate>Fri, 24 Sep 2021 17:18:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/mysql/connections/</guid>
+      <description>连接池 show variables like &amp;quot;thread%&amp;quot;; +-------------------+---------------------------+ | Variable_name | Value | +-------------------+---------------------------+ | thread_cache_size | 9 | | thread_handling | one-thread-per-connection | | thread_stack | 286720 | +-------------------+---------------------------+ 3 rows in set (0.01 sec) 全局设置 -- 查看全局连接 show variables like &amp;quot;%connections%&amp;quot;; +------------------------+-------+ | Variable_name | Value | +------------------------+-------+ | max_connections | 151 | | max_user_connections | 0 | | mysqlx_max_connections | 100 | +------------------------+-------+ -- 超级用户连接 show variables like &amp;quot;admin_%&amp;quot;; +------------------------+-------------------------------+ | Variable_name | Value | +------------------------+-------------------------------+ | admin_address | 127.0.0.1 | | admin_port | 33062 | -- 运行状态 show status like &amp;quot;thread%&amp;quot;; +-------------------+-------+ | Variable_name | Value | +-------------------+-------+ | Threads_cached | 0 | | Threads_connected | 1 | | Threads_created | 1 | | Threads_running | 2 | +-------------------+-------+ user</description>
+    </item>
+    
     <item>
       <title>Mysql 入门</title>
       <link>https://zhangeamon.top/mysql/over-view/</link>
@@ -14,6 +23,15 @@
       
       <guid>https://zhangeamon.top/mysql/over-view/</guid>
       <description>安装 &amp;amp; 启动 安装 rpm -i https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm yum install mysql-community-server.x86_64 启动 systemctl start mysqld systemctl enable mysqld 查看临时密码 #sudo grep &#39;temporary password&#39; /var/log/mysqld.log 2019-05-15T06:42:54.826106Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: DVjSsl-ZX5f7 修改密码 #mysql -uroot -p ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;MyNewPass4!&#39;; 常用命令 连接 mysql -h127.0.0.1 -P 3306 -uroot -p 版本 #mysql -V mysql Ver 8.0.26 for Linux on x86_64 (MySQL Community Server - GPL) 数据库命令 mysql&amp;gt;help show 权限管理 mysql登陆用户权限校验主要是通过用户名密码+访问来源主机方式 创建用户 CREATE USER &#39;finley&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;password&#39;; 赋</description>
+    </item>
+    
+    <item>
+      <title>MySQL常用性能分析命令</title>
+      <link>https://zhangeamon.top/mysql/performance-cmd/</link>
+      <pubDate>Tue, 29 Jan 2019 14:06:55 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/mysql/performance-cmd/</guid>
+      <description>MySQL常用性能突发事件分析命令： SHOW PROCESSLIST; —当前MySQL数据库的运行的所有线程 INNODB_TRX; — 当前运行的所有事务 INNODB_LOCKS; — 当前出现的锁 INNODB_LOCK_WAITS; — 锁等待的对应关系计 SHOW OPEN TABLES where In_use &amp;gt;0; — 当前打开表 SHOW ENGINE INNODB STATUS \G; —Innodb状态 SHOW STATUS LIKE &amp;lsquo;innodb_row_lock_%&#39;; — 锁性能状态 SQL语句EXPLAIN; — 查询优化器 数据库size查看 -- databases size select table_schema as &#39;</description>
     </item>
     
   </channel>

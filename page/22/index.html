@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/tidb/2013/" title=" ERROR 2013 (HY000): Lost connection to MySQL server during query "> ERROR 2013 (HY000): Lost connection to MySQL server during query </a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月14日
+        </date>
+        
+        <div class="post-content">
+            ERROR 2013 (HY000) Lost connection to MySQL server during query 错误出现场景 select count(id) from account_user where id&gt; 0; +----------+ | count(id) | +----------+ | 2940245 | +----------+ 1 row in set (0.78 sec) delete from account_user where id&gt; 0; ERROR 2013 (HY000): Lost connection to MySQL server during query tidb.log 2018/11/14 10:57:12.476 server.go:303: [info] con:261 new connection 10.1.88.32:54462 2018/11/14 10:57:15.387 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:792.561353ms txn_start_ts:404269101106331649 region_id:77367 store_addr:10.1.88.84:20160 kv_process_ms:537 2018/11/14 10:57:17.227 pd.go:107: [warning] get timestamp too slow: 135.012109ms 2018/11/14 10:57:17.812 pd.go:107: [warning] get timestamp too slow: 56.316863ms 2018/11/14 10:57:17.821 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.226284139s txn_start_ts:404269101106331649 region_id:77863 store_addr:10.1.88.85:20160 kv_process_ms:1580 scan_total_write:314161 scan_processed_write:314160 scan_total_data:314160 scan_processed_data:314160 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.826 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.231259247s txn_start_ts:404269101106331649 region_id:77590 store_addr:10.1.88.85:20160 kv_process_ms:1807 scan_total_write:355885 scan_processed_write:355884 scan_total_data:355884 scan_processed_data:355884 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.872 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.276994472s txn_start_ts:404269101106331649 region_id:77576 store_addr:10.1.88.86:20160 kv_process_ms:1684 scan_total_write:346208 scan_processed_write:346207 scan_total_data:346207 scan_processed_data:346207 scan_total_lock:1 scan_processed_lock:0 2018/11/14……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/tidb/2013/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/istio/concept01/" title="熔断，限流，降级">熔断，限流，降级</a>
             </h1>
         </header>
@@ -239,22 +255,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/docker/network01/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/docker/cgroup-namespaces/" title="Cgroup Namespaces">Cgroup Namespaces</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月2日
-        </date>
-        
-        <div class="post-content">
-            cgroup 实现资源限额 cgroup 全称 Control Group。Linux 操作系统通过 cgroup 可以设置进程使用 CPU、内存 和 IO 资源的限额。 在启动容器时可使用参数 docker run &ndash;blkio-weight-device &ndash;cpu-shares &ndash;memory 等 。 ll /sys/fs/cgroup/cpu/docker/ ll /sys/fs/cgroup/memory/docker ll /sys/fs/cgroup/blkio/docker namespace 实现资源隔离 Mount Mount namespace 让容器看上去拥有整个文件系统。 容器有自己的 / 目录，可以执行 mount 和 umount 命令。当然我们知道这些操作只在当前容器中生效，……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/docker/cgroup-namespaces/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -391,6 +391,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/mysql/connections/" title="连接数管理">连接数管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
     </li>
     
@@ -426,10 +430,6 @@
         <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -448,7 +448,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (13)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (3)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (19)</a></li>
     
@@ -456,7 +456,7 @@
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

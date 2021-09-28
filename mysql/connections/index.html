@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>tpch AP测试 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="tpch AP测试 - Let&#39;s go 🐌 🐌 🐌">
+    <title>连接数管理 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="连接数管理 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2019-06-05T09:36:21&#43;08:00'>
+    <meta property="article:published_time" content='2021-09-24T17:18:25&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2019-06-05T09:36:21&#43;08:00'>
+    <meta property="article:modified_time" content='2021-09-24T17:18:25&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="tpch AP测试">
+    <meta name="description" content="连接数管理">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/postgres/tpch/">
+    <meta property="og:url" content="https://zhangeamon.top/mysql/connections/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -95,47 +95,76 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">tpch AP测试</h1>
+            <h1 class="post-title">连接数管理</h1>
         </header>
         <date class="post-meta meta-date">
-            2019年6月5日
+            2021年9月24日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/mysql'>mysql</a></span>
+            
+        </div>
         
         
         
         <div class="post-content">
-            <h4 id="背景介绍">背景介绍</h4>
-<p>24sql</p>
-<h4 id="tpc-h-基准测试">TPC-H 基准测试</h4>
-<h5 id="下载安装">下载安装</h5>
-<p><a href="./tools/tpch-tools.tgz">tpch-tools安装包</a></p>
-<p>修改makefile.suite 模版</p>
-<pre><code>CC=gcc 
-DATABASE-TDAT
-MACHINE=LINUX
-WORKLOAD=TPCH
-</code></pre><p>执行 make 进行编译</p>
-<h5 id="生成测试数据">生成测试数据</h5>
-<p>生成20G测试数据</p>
-<pre><code>./dbgen -s 20
-ls -lrth *.tbl
-</code></pre><p>自动生成的测试数据每行的结尾多余一个 &lsquo;|&rsquo; 需要处理</p>
-<pre><code>for i in `ls *.tbl`; do sed 's/|$//' $i &gt; ${i/tbl/csv}; echo $i; done;
-</code></pre><h5 id="创建表及索引">创建表及索引</h5>
-<p>在下面的文件中分别是创建表和对应索引的sql</p>
-<p>dss.ddl   <br>
-dss.ri</p>
-<h5 id="导入数据">导入数据</h5>
-<pre><code>copy customer from '/opt/tpch-tools/dbgen/customer.csv' with DELIMITER '|';
-copy lineitem from '/opt/tpch-tools/dbgen/lineitem.csv' with DELIMITER '|';
-copy nation from '/opt/tpch-tools/dbgen/nation.csv' with DELIMITER '|';
-copy orders from '/opt/tpch-tools/dbgen/orders.csv' with DELIMITER '|';
-copy partsupp from '/opt/tpch-tools/dbgen/partsupp.csv' with DELIMITER '|';
-copy region from '/opt/tpch-tools/dbgen/region.csv' with DELIMITER '|';
-copy supplier from '/opt/tpch-tools/dbgen/supplier.csv' with DELIMITER '|';
-</code></pre><h5 id="基准测试">基准测试</h5>
-<p>在queries 目录下存放的是24条sql</p>
+            <h2 id="连接池">连接池</h2>
+<pre><code>show variables like &quot;thread%&quot;;
++-------------------+---------------------------+
+| Variable_name     | Value                     |
++-------------------+---------------------------+
+| thread_cache_size | 9                         |
+| thread_handling   | one-thread-per-connection |
+| thread_stack      | 286720                    |
++-------------------+---------------------------+
+3 rows in set (0.01 sec)
 
+</code></pre><h2 id="全局设置">全局设置</h2>
+<pre><code>-- 查看全局连接
+ show variables like &quot;%connections%&quot;;
++------------------------+-------+
+| Variable_name          | Value |
++------------------------+-------+
+| max_connections        | 151   |
+| max_user_connections   | 0     |
+| mysqlx_max_connections | 100   |
++------------------------+-------+
+</code></pre><pre><code>-- 超级用户连接
+show variables like &quot;admin_%&quot;;
++------------------------+-------------------------------+
+| Variable_name          | Value                         |
++------------------------+-------------------------------+
+| admin_address          | 127.0.0.1                     |
+| admin_port             | 33062                         |
+
+</code></pre><pre><code>-- 运行状态
+show status like &quot;thread%&quot;;
++-------------------+-------+
+| Variable_name     | Value |
++-------------------+-------+
+| Threads_cached    | 0     |
+| Threads_connected | 1     |
+| Threads_created   | 1     |
+| Threads_running   | 2     |
++-------------------+-------+
+</code></pre><h2 id="user-级别设置">user 级别设置</h2>
+<pre><code>[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+max_connections = 10000
+max_user_connections=2000
+
+2、通过其它方式处理一下，针对指定用户设置的，比如：
+方式1
+GRANT USAGE ON *.* TO test_user@localhost MAX_USER_CONNECTIONS 2000;
+方式2
+UPDATE mysql.user SET max_user_connections = 2000 WHERE user='test_user' AND host='localhost'; FLUSH PRIVILEGES
+
+</code></pre>
         </div>
 
         
@@ -147,11 +176,11 @@ copy supplier from '/opt/tpch-tools/dbgen/supplier.csv' with DELIMITER '|';
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/postgres/pgstattuple/">表空间膨胀</a></li>
+        <li><a href="/redis/pubsub/">发布订阅</a></li>
         
-        <li><a href="/middleware/nginx/">nginx</a></li>
+        <li><a href="/redis/distributedlock/">基于Redis 的分布式锁实现</a></li>
         
-        <li><a href="/middleware/bind9/">DNS Bind9 &amp; NamedManager </a></li>
+        <li><a href="/postgres/libpg/">客户端故障转移</a></li>
         
     </ul>
 </div>

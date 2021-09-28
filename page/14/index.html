@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/pid_m/" title="进程管理">进程管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月31日
+        </date>
+        
+        <div class="post-content">
+            监控进程 查看系统TOP(f进入field选择) top 打印系统进程 ps -efwL 统计每个进程的开销 pidstat -d -r -u -w -l -h -p ALL 5 1 打印进程stack pstack -p pid 打印进程系统调用 strace -p pid 结束和管理进程 结束进程 kill pid 强制结束进程(用户进程无法捕获-9信号，可能崩溃. -15信号稳妥些) kill -9 pid 管理周期进程 任务调度进程的管理……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/pid_m/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pgpool2/" title="pgpoolii 读写分离">pgpoolii 读写分离</a>
             </h1>
         </header>
@@ -224,8 +240,15 @@
             2019年1月29日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/mysql'>mysql</a></span>
+            
+        </div>
+        
         <div class="post-content">
-            MySQL常用性能突发事件分析命令： SHOW PROCESSLIST; —当前MySQL数据库的运行的所有线程 INNODB_TRX; — 当前运行的所有事务 INNODB_LOCKS; — 当前出现的锁 INNODB_LOCK_WAITS; — 锁等待的对应关系计 SHOW OPEN TABLES where In_use &gt;0; — 当前打开表 SHOW ENGINE INNODB STATUS \G; —Innodb状态 SHOW STATUS LIKE &lsquo;innodb_row_lock_%'; — 锁性能状态 SQL语句EXPLAIN; — 查询优化器……
+            MySQL常用性能突发事件分析命令： SHOW PROCESSLIST; —当前MySQL数据库的运行的所有线程 INNODB_TRX; — 当前运行的所有事务 INNODB_LOCKS; — 当前出现的锁 INNODB_LOCK_WAITS; — 锁等待的对应关系计 SHOW OPEN TABLES where In_use &gt;0; — 当前打开表 SHOW ENGINE INNODB STATUS \G; —Innodb状态 SHOW STATUS LIKE &lsquo;innodb_row_lock_%'; — 锁性能状态 SQL语句EXPLAIN; — 查询优化器 数据库size查看 -- databases size select table_schema as '……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/mysql/performance-cmd/">阅读全文</a></p>
     </article>
@@ -244,22 +267,6 @@
             数据库分库调研 Greenplum 更适用于AP场景 PGXL PGXC 社区不活跃，沟通问题反馈时间长。没找到用户群体. 在此基础上发展的有亚信antdb，腾讯tbase。没有那个研发实力，算了吧。 citus 插件方式，无侵入。很多牛X的特性企业版才支持。主要强调多租户。 mycat mysql支派，阿里开源（抛弃）项目。主要是对sql语……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_citus/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgwatch2/" title="pgwatch2 数据库指标监控查看">pgwatch2 数据库指标监控查看</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月29日
-        </date>
-        
-        <div class="post-content">
-            介绍 pgwatch2官方 官方演示示例 架构 agent server agent 在被监控的pg上自定义方法，用于收集数据库信息。这些自定义的方法需要依赖需要数据库扩展如pg_stat_statements,plpythonu. server 负责存储收集过来的信息，可以存放在postgres或influxdb中. 并将收集的信息……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgwatch2/">阅读全文</a></p>
     </article>
     
     
@@ -398,6 +405,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/mysql/connections/" title="连接数管理">连接数管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
     </li>
     
@@ -433,10 +444,6 @@
         <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -455,7 +462,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (13)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (3)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (19)</a></li>
     
@@ -463,7 +470,7 @@
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

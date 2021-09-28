@@ -70,5 +70,14 @@
       <description>基本类型 String： 字符串。整数，浮点数 。底层数据结构 字符数组。 类似于ARRYLIST Hash：健值对的无序散列列表 。 List：链表 。 底层数据结构 qucklist。 类似于LISKLIST Set：无序集合 Zset：有序集合 。底层数据结构，跳跃列表 高级类型 BitMap GEO HyperLogLog 其他 Stream https://www.cnblogs.com/knowledgesea/category/722602.html</description>
     </item>
     
+    <item>
+      <title>Let&#39;s Encrypt 通配符证书</title>
+      <link>https://zhangeamon.top/network-security/letusencrypt/</link>
+      <pubDate>Mon, 22 Oct 2018 13:56:11 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/letusencrypt/</guid>
+      <description>1.介绍 什么是 Let&amp;rsquo;s Encrypt？ 部署 HTTPS 网站的时候需要证书，证书由 CA 机构签发，大部分传统 CA 机构签发证书是需要收费的，这不利于推动 HTTPS 协议的使用。 Let&amp;rsquo;s Encrypt 也是一个 CA 机构，但这个 CA 机构是免费的！也就是说签发证书不需要任何费用。 Let&amp;rsquo;s Encrypt 由于是非盈利性的组织，需要控制开支，他们搞了一个非常有创意的事</description>
+    </item>
+    
   </channel>
 </rss>

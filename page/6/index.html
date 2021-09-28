@@ -91,6 +91,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/thinking_in_db_fd/" title="数据库优化思考 - 结构设计">数据库优化思考 - 结构设计</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月11日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_fd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/auto_vacuum_trigger/" title="auto vacuum 触发机制">auto vacuum 触发机制</a>
             </h1>
         </header>
@@ -239,22 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/dw/document/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/go/grpc/" title="go grpc">go grpc</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月13日
-        </date>
-        
-        <div class="post-content">
-            python 实现 cat Server.py from SimpleXMLRPCServer import SimpleXMLRPCServer def fun_add(a,b): total = a+b return total if __name__=='__main__': s = SimpleXMLRPCServer(('0.0.0.0',8081)) s.register_function(fun_add) print &quot;server in on line&quot; s.serve_forever() cat Client.py from xmlrpclib import ServerProxy s = ServerProxy(&quot;http://xx.xxx.xxx.xxx:8081&quot;) print s.fun_add(1,2) go 实现……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/go/grpc/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -391,6 +398,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/mysql/connections/" title="连接数管理">连接数管理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
     </li>
     
@@ -426,10 +437,6 @@
         <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -448,7 +455,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (13)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (3)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (19)</a></li>
     
@@ -456,7 +463,7 @@
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     
