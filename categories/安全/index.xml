@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>安全 on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/</link>
+    <description>Recent content in 安全 on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 22 Oct 2018 13:56:11 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Let&#39;s Encrypt 通配符证书</title>
+      <link>https://zhangeamon.top/network-security/letusencrypt/</link>
+      <pubDate>Mon, 22 Oct 2018 13:56:11 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/letusencrypt/</guid>
+      <description>1.介绍 什么是 Let&amp;rsquo;s Encrypt？ 部署 HTTPS 网站的时候需要证书，证书由 CA 机构签发，大部分传统 CA 机构签发证书是需要收费的，这不利于推动 HTTPS 协议的使用。 Let&amp;rsquo;s Encrypt 也是一个 CA 机构，但这个 CA 机构是免费的！也就是说签发证书不需要任何费用。 Let&amp;rsquo;s Encrypt 由于是非盈利性的组织，需要控制开支，他们搞了一个非常有创意的事</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -91,7 +91,108 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是-lets-encrypt">什么是 Let&rsquo;s Encrypt？</a></li>
+    <li><a href="#什么是通配符证书">什么是通配符证书</a></li>
+    <li><a href="#lets-encrypt-通配符证书">Let&rsquo;s Encrypt 通配符证书</a></li>
+    <li><a href="#如何申请-lets-encrypt-通配符证书">如何申请 Let&rsquo;s Encrypt 通配符证书</a></li>
+    <li><a href="#如何验证域名的所属权">如何验证域名的所属权</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -104,21 +205,27 @@
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            <span class="meta-category"><a href='/categories/%E5%AE%89%E5%85%A8'>安全</a></span>
             
         </div>
         
         
         
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
         <div class="post-content">
             <p>1.介绍</p>
-<h5 id="什么是-lets-encrypt">什么是 Let&rsquo;s Encrypt？</h5>
+<h2 id="什么是-lets-encrypt">什么是 Let&rsquo;s Encrypt？</h2>
 <p>部署 HTTPS 网站的时候需要证书，证书由 CA 机构签发，大部分传统 CA 机构签发证书是需要收费的，这不利于推动 HTTPS 协议的使用。
 Let&rsquo;s Encrypt 也是一个 CA 机构，但这个 CA 机构是免费的！也就是说签发证书不需要任何费用。
 Let&rsquo;s Encrypt 由于是非盈利性的组织，需要控制开支，他们搞了一个非常有创意的事情，设计了一个 ACME 协议，目前该协议的版本是 v1。
 那为什么要创建 ACME 协议呢，传统的 CA 机构是人工受理证书申请、证书更新、证书撤销，完全是手动处理的。而 ACME 协议规范化了证书申请、更新、撤销等流程，只要一个客户端实现了该协议的功能，通过客户端就可以向 Let&rsquo;s Encrypt 申请证书，也就是说 Let&rsquo;s Encrypt CA 完全是自动化操作的。
 任何人都可以基于 ACME 协议实现一个客户端，官方推荐的客户端是Certbot 。</p>
-<h5 id="什么是通配符证书">什么是通配符证书</h5>
+<h2 id="什么是通配符证书">什么是通配符证书</h2>
 <p>在没有出现通配符证书之前，Let&rsquo;s Encrypt 支持两种证书。</p>
 <p>1）单域名证书：证书仅仅包含一个主机。</p>
 <p>2）SAN 证书：一张证书可以包括多个主机（Let&rsquo;s Encrypt 限制是 20），也就是证书可以包含下列的主机：www.example.com、www.example.cn、blog.example.com 等等。
@@ -127,13 +234,13 @@ Let&rsquo;s Encrypt 由于是非盈利性的组织，需要控制开支，他们
 子域名非常多，而且过一段时间可能就要使用一个新的主机。
 注册域也非常多。
 读者可以思考下，对于大企业来说，SAN 证书可能并不能满足需求，类似于 sina 这样的网站，所有的主机全部包含在一张证书中，而使用 Let&rsquo;s Encrypt 证书是无法满足的。</p>
-<h5 id="lets-encrypt-通配符证书">Let&rsquo;s Encrypt 通配符证书</h5>
+<h2 id="lets-encrypt-通配符证书">Let&rsquo;s Encrypt 通配符证书</h2>
 <p>通配符证书就是证书中可以包含一个通配符，比如 .example.com、.example.cn，读者很快明白，大型企业也可以使用通配符证书了，一张证书可以防止更多的主机了。
 这个功能可以说非常重要，从功能上看 Let&rsquo;s Encrypt 和传统 CA 机构没有什么区别了，会不会触动传统 CA 机构的利益呢？</p>
-<h5 id="如何申请-lets-encrypt-通配符证书">如何申请 Let&rsquo;s Encrypt 通配符证书</h5>
+<h2 id="如何申请-lets-encrypt-通配符证书">如何申请 Let&rsquo;s Encrypt 通配符证书</h2>
 <p>为了实现通配符证书，Let&rsquo;s Encrypt 对 ACME 协议的实现进行了升级，只有 v2 协议才能支持通配符证书。
 也就是说任何客户端只要支持 ACME v2 版本，就可以申请通配符证书了，是不是很激动。</p>
-<h5 id="如何验证域名的所属权">如何验证域名的所属权</h5>
+<h2 id="如何验证域名的所属权">如何验证域名的所属权</h2>
 <p>客户在申请 Let&rsquo;s Encrypt 证书的时候，需要校验域名的所有权，证明操作者有权利为该域名申请证书，目前支持三种验证方式：
 dns-01：给域名添加一个 DNS TXT 记录。</p>
 <p>http-01：在域名对应的 Web 服务器下放置一个 HTTP well-known URL 资源文件。</p>
@@ -390,11 +497,13 @@ Found the following matching certs:
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (8)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E5%AD%98%E5%82%A8/">存储 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
     
