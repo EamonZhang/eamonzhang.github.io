@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/tpch/" title="tpch AP测试">tpch AP测试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年6月5日
+        </date>
+        
+        <div class="post-content">
+            背景介绍 24sql TPC-H 基准测试 下载安装 tpch-tools安装包 修改makefile.suite 模版 CC=gcc DATABASE-TDAT MACHINE=LINUX WORKLOAD=TPCH 执行 make 进行编译 生成测试数据 生成20G测试数据 ./dbgen -s 20 ls -lrth *.tbl 自动生成的测试数据每行的结尾多余一个 &lsquo;|&rsquo; 需要处理 for i in `ls *.tbl`; do sed 's/|$//' $i &gt; ${i/tbl/csv}; echo $i; done; 创建表及索引 在下面的文件中分别是创建表和对应索引的s……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/tpch/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pgstattuple/" title="表空间膨胀">表空间膨胀</a>
             </h1>
         </header>
@@ -267,22 +283,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/checkpoint/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/adlock/" title="咨询锁 adlock">咨询锁 adlock</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年3月7日
-        </date>
-        
-        <div class="post-content">
-            https://github.com/digoal/blog/blob/master/201805/20180524_02.md 行级锁 select .. for update select .. for update skip locked select .. for share……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/adlock/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -419,6 +419,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/mysql/master-slave/" title="主从复制">主从复制</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/mysql/connections/" title="连接数管理">连接数管理</a>
     </li>
     
@@ -454,10 +458,6 @@
         <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -476,7 +476,7 @@
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (13)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (3)</a></li>
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (19)</a></li>
     
