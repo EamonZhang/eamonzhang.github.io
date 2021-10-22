@@ -3,10 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zhangeamon.top/categories/</loc>
-    <lastmod>2021-10-09T13:29:05+08:00</lastmod>
+    <lastmod>2021-10-20T15:04:04+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/</loc>
-    <lastmod>2021-10-09T13:29:05+08:00</lastmod>
+    <lastmod>2021-10-20T15:04:04+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/categories/linux/</loc>
+    <lastmod>2021-10-20T15:04:04+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/linux/</loc>
+    <lastmod>2021-10-20T15:04:04+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/linux/ubuntu2004-qa/</loc>
+    <lastmod>2021-10-20T15:04:04+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/categories/mysql/</loc>
     <lastmod>2021-10-09T13:29:05+08:00</lastmod>
@@ -62,9 +71,6 @@
     <loc>https://zhangeamon.top/asr/c/</loc>
     <lastmod>2021-06-16T13:42:14+08:00</lastmod>
   </url><url>
-    <loc>https://zhangeamon.top/linux/</loc>
-    <lastmod>2021-06-09T17:20:31+08:00</lastmod>
-  </url><url>
     <loc>https://zhangeamon.top/linux/lightdm/</loc>
     <lastmod>2021-06-09T17:20:31+08:00</lastmod>
   </url><url>
@@ -82,9 +88,6 @@
   </url><url>
     <loc>https://zhangeamon.top/rabbitmq/</loc>
     <lastmod>2021-05-22T14:52:35+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/categories/linux/</loc>
-    <lastmod>2021-05-18T09:03:44+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/linux/openvpn/</loc>
     <lastmod>2021-05-18T09:03:44+08:00</lastmod>

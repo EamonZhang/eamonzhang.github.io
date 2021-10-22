@@ -7,21 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>配置管理 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="配置管理 - Let&#39;s go 🐌 🐌 🐌">
+    <title>Ubuntu20.04 装机后 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="Ubuntu20.04 装机后 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2021-10-20T15:04:04&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-10-20T15:04:04&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="配置管理">
+    <meta name="description" content="Ubuntu20.04 装机后">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">
+    <meta property="og:url" content="https://zhangeamon.top/linux/ubuntu2004-qa/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml+xml" href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/index.xml" title="Let's go 🐌 🐌 🐌" />
     
     
     <script type="text/javascript" src="/js/jquery.min.js"></script>
@@ -89,44 +92,78 @@
                     
 <div class="res-cons">
     
-    <h3 class="archive-title">
-        包含标签
-        <span class="keyword">配置管理</span>
-        的文章
-    </h3>
-    
 
-    
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/confd/">配置管理 confd</a>
-            </h1>
+            <h1 class="post-title">Ubuntu20.04 装机后</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年4月2日
+            2021年10月20日
         </date>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
+            <span>|</span>
             
-            <a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a>
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
             
         </div>
         
+        
+        
         <div class="post-content">
-            https://github.com/kelseyhightower/confd 配置信息存放在ectd KV存储中 更新 ectd 中的内容， confd 负责将变更同步到本地服务配置文件，并通知本地服务进行重新加载重启等。……
-            <p class="readmore"><a href="https://zhangeamon.top/middleware/confd/">阅读全文</a></p>
+            <h2 id="关闭cloud-init">关闭cloud init</h2>
+<pre><code>systemctl stop cloud-init-local cloud-init cloud-config cloud-final
+
+systemctl disable  cloud-init-local cloud-init cloud-config cloud-final
+
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/params/">数据库参数</a></li>
+        
+        <li><a href="/mysql/master-slave/">主从复制</a></li>
+        
+        <li><a href="/mysql/connections/">连接数管理</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/'></a></li>
+                
+            </ul>
+            
         </div>
     </article>
     
-
     
 
-
-
-
-
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
 </div>
 
                     <footer id="footer">
@@ -139,6 +176,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>

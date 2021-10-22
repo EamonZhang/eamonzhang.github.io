@@ -125,6 +125,51 @@ network:
   version: 2
 </code></pre><h2 id="生效">生效</h2>
 <pre><code>netplan apply
+</code></pre><h2 id="查看网卡">查看网卡</h2>
+<pre><code>#ethtool  enp2s0 
+Settings for enp2s0:
+	Supported ports: [ TP MII ]
+	Supported link modes:   10baseT/Half 10baseT/Full 
+	                        100baseT/Half 100baseT/Full 
+	                        1000baseT/Full 
+	Supported pause frame use: Symmetric Receive-only
+	Supports auto-negotiation: Yes
+	Supported FEC modes: Not reported
+	Advertised link modes:  10baseT/Half 10baseT/Full 
+	                        100baseT/Half 100baseT/Full 
+	                        1000baseT/Full 
+	Advertised pause frame use: Symmetric Receive-only
+	Advertised auto-negotiation: Yes
+	Advertised FEC modes: Not reported
+	Link partner advertised link modes:  10baseT/Half 10baseT/Full 
+	                                     100baseT/Half 100baseT/Full 
+	Link partner advertised pause frame use: Symmetric Receive-only
+	Link partner advertised auto-negotiation: Yes
+	Link partner advertised FEC modes: Not reported
+	Speed: 100Mb/s
+	Duplex: Full
+	Port: MII
+	PHYAD: 0
+	Transceiver: internal
+	Auto-negotiation: on
+	Supports Wake-on: pumbg
+	Wake-on: d
+	Current message level: 0x00000033 (51)
+			       drv probe ifdown ifup
+	Link detected: yes
+
+</code></pre><h2 id="查看网卡驱动">查看网卡驱动</h2>
+<pre><code>#ethtool -i enp2s0 
+driver: r8169
+version: 
+firmware-version: rtl8168g-2_0.0.1 02/06/13
+expansion-rom-version: 
+bus-info: 0000:02:00.0
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: yes
+supports-priv-flags: no
 </code></pre>
         </div>
 
@@ -221,6 +266,10 @@ network:
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/ubuntu2004-qa/" title="Ubuntu20.04 装机后">Ubuntu20.04 装机后</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/mysql/master-slave/" title="主从复制">主从复制</a>
     </li>
     
@@ -256,10 +305,6 @@ network:
         <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -276,7 +321,7 @@ network:
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (13)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (14)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
