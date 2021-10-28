@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/unlogged_table/" title="unlogged table">unlogged table</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月12日
+        </date>
+        
+        <div class="post-content">
+            介绍 在写数据的时候不记录wal的表。 在意外发生时表中的数据被trunce 。如断电、 主进程kill 、scrash 等。 正常关闭重启数据库时数据不会丢失。 优点： 提高写入效率 不足： 数据安全性不能得到保障。 由于没有wal 流复制从库不能同步 应用场景： 数据可丢失，如频繁更新，只保留最后状态信息……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/unlogged_table/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/reback/" title="误操作闪回">误操作闪回</a>
             </h1>
         </header>
@@ -239,29 +255,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/compile_kylin/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/ubuntu2004-network/" title="Ubuntu 20.04 网络配置">Ubuntu 20.04 网络配置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月21日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            配置 vim /etc/netplan/00-installer-config.yaml # This is the network config written by 'subiquity' network: ethernets: enp2s0: addresses: - 192.168.6.111/24 gateway4: 192.168.6.1 nameservers: addresses: [119.29.29.29] version: 2 生效 netplan apply 查看网卡 #ethtool enp2s0 Settings for enp2s0: Supported ports: [ TP MII ] Supported link modes: 10baseT/Half 10baseT/Full 100baseT/Half 100baseT/Full 1000baseT/Full Supported pause frame use: Symmetric Receive-only Supports auto-negotiation: Yes Supported FEC modes: Not reported Advertised link modes: 10baseT/Half 10baseT/Full 100baseT/Half 100baseT/Full 1000baseT/Full Advertised pause frame use: Symmetric Receive-only Advertised auto-negotiation: Yes Advertised FEC modes: Not reported Link partner advertised link modes: 10baseT/Half 10baseT/Full 100baseT/Half 100baseT/Full Link partner advertised pause frame use: Symmetric Receive-only Link partner advertised auto-negotiation: Yes Link partner advertised FEC modes: Not reported Speed: 100Mb/s Duplex: Full Port: MII PHYAD: 0 Transceiver: internal Auto-negotiation: on Supports Wake-on: pumbg Wake-on: d Current message level: 0x00000033 (51)……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/ubuntu2004-network/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -339,7 +332,7 @@
         
         
         <li >
-            <a href="https://zhangeamon.top/page/25/">25</a>
+            <a href="https://zhangeamon.top/page/26/">26</a>
         </li>
         
     
@@ -398,6 +391,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/ubuntu2004-qa/" title="Ubuntu20.04 装机后">Ubuntu20.04 装机后</a>
     </li>
     
@@ -433,10 +430,6 @@
         <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -453,7 +446,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (14)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (15)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

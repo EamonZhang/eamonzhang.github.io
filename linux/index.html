@@ -93,6 +93,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月28日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            背景 登陆系统时，尤其是具有外网ip的主机时经常会看到类似如下信息。 There were 12039 failed login attempts since the last successful login. 说明你的系统被尝试登陆破解。 大部分的破解基本都是自动机器扫描，配合自己的数据字典暴力破解。 系统登陆成功记录 查看命令 last 原理 读取解析 /var/log/wtmp 例如: 查看最近十次登陆记录 last -10 查看某个时间段的登陆记录 last -s 2021-10-10 -t……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/last/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/ubuntu2004-qa/" title="Ubuntu20.04 装机后">Ubuntu20.04 装机后</a>
             </h1>
         </header>
@@ -301,31 +326,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            更改BMC密码 BMC：基板管理控制器 Baseboard Management Controller 更改BMC密码，需要基于Ipmitool工具实现，需要先下载该工具 安装ipmitool ubuntu安装命令： sudo apt-get -y install ipmitool centos安装命令： yum -y install epel-release（先） yum -y install ipmitool（后） 查看登陆账户名列表 ipmitool user list 2（技嘉主……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/bmcpasswd/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -409,6 +409,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/ubuntu2004-qa/" title="Ubuntu20.04 装机后">Ubuntu20.04 装机后</a>
     </li>
     
@@ -444,10 +448,6 @@
         <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -464,7 +464,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (14)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (15)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

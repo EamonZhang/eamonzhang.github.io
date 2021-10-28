@@ -93,6 +93,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/bmcpasswd/" title="修改远程管理卡密码">修改远程管理卡密码</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            更改BMC密码 BMC：基板管理控制器 Baseboard Management Controller 更改BMC密码，需要基于Ipmitool工具实现，需要先下载该工具 安装ipmitool ubuntu安装命令： sudo apt-get -y install ipmitool centos安装命令： yum -y install epel-release（先） yum -y install ipmitool（后） 查看登陆账户名列表 ipmitool user list 2（技嘉主……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/bmcpasswd/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
             </h1>
         </header>
@@ -273,24 +298,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/git-nopassword/" title="Git 免输入密码">Git 免输入密码</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月19日
-        </date>
-        
-        <div class="post-content">
-            一、配置Git的 git config --global user.name [userName] git config --global user.email [userEmail] 二、配置存储模式 git config --global credential.helper store 执行之后会在linux用户主目录下的.gitconfig文件中多加 helper = store [user] name = eamonzhang email = xxxx@xxxx.com [credential] helper = store 之后cd到项目目录，执行git pull命令，会提示输入账号密码。输完这一次以后就不再需要，并且会在根目录生成一个.git-c……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/git-nopassword/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -378,6 +385,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/ubuntu2004-qa/" title="Ubuntu20.04 装机后">Ubuntu20.04 装机后</a>
     </li>
     
@@ -413,10 +424,6 @@
         <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -433,7 +440,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (14)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (15)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
