@@ -91,6 +91,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/redis-cluster/" title="Redis Cluster">Redis Cluster</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            主从复制 原理说明参考 https://www.cnblogs.com/daofaziran/p/10978628.html 基本原理 主要是Redis没有wal日志机制。aof是先执行命令再记录。主从同步不是依赖aof日志。 通过单独的进程完成主从的同步。 初始时全量复制，SYNC。 然后进行增量复制PSYNC。在主库内存中维护一个偏移量master run id 。 当断开重新连接上比较偏移量，尝试……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/redis-cluster/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/storage/rclone/" title="云存储同步 rclone">云存储同步 rclone</a>
             </h1>
         </header>
@@ -276,29 +299,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/hotupdate/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/thinking_in_db_tune/" title="数据库优化思考 - 模块调优">数据库优化思考 - 模块调优</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            开始乱说 主要是结合postgres数据库自身特点，根据具体的业务场景，作出相应调整，使其更加合理。 数据库作为一个整体对外提供服务，单是其内部是由不同的功能模块组成，相互协调来共同完成任务。 各个功能模块完成不同的功能，每个模块的特点也不同，在调整的时候至少需要理解各个模块实现的基本……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_tune/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -435,6 +435,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
     </li>
     
@@ -470,10 +474,6 @@
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -506,7 +506,7 @@
     
     <li><a href="https://zhangeamon.top/categories/%E5%AD%98%E5%82%A8/">存储 (3)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (2)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
     

@@ -100,6 +100,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/wazuh/">Wazuh 功能简介</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月1日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E5%AE%89%E5%85%A8'> 安全</a>
+            
+        </div>
+        
+        <div class="post-content">
+            日志收集 客户端配置，指定需要收集系统日志及日志格式。默认如下 &lt;ossec_config&gt; &lt;localfile&gt; &lt;log_format&gt;audit&lt;/log_format&gt; &lt;location&gt;/var/log/audit/audit.log&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/ossec/logs/active-responses.log&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/log/messages&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/log/secure&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/log/maillog&lt;/location&gt; &lt;/localfile&gt; 系统命令 客户端配置，设置系统监控执行命令及频率。默认如下 # 系统文件 &lt;localfile&gt; &lt;log_format&gt;command&lt;/log_format&gt; &lt;command&gt;df -P&lt;/command&gt; &lt;frequency&gt;360&lt;/frequency&gt; &lt;/localfile&gt; # 端口 &lt;localfile&gt; &lt;log_format&gt;full_command&lt;/log_format&gt; &lt;command&gt;netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 = = \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d&lt;/command&gt; &lt;alias&gt;netstat listening ports&lt;/alias&gt; &lt;frequency&gt;360&lt;/frequency&gt; &lt;/localfile&gt; # 登陆日志 &lt;localfile&gt; &lt;log_format&gt;full_command&lt;/log_format&gt; &lt;command&gt;last -n……
+            <p class="readmore"><a href="https://zhangeamon.top/network-security/wazuh/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/network-security/letusencrypt/">Let&#39;s Encrypt 通配符证书</a>
             </h1>
         </header>
@@ -169,6 +192,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
     </li>
     
@@ -204,10 +231,6 @@
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -240,7 +263,7 @@
     
     <li><a href="https://zhangeamon.top/categories/%E5%AD%98%E5%82%A8/">存储 (3)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (2)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
     

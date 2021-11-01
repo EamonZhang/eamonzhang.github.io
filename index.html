@@ -91,6 +91,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AE%89%E5%85%A8'> 安全</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            日志收集 客户端配置，指定需要收集系统日志及日志格式。默认如下 &lt;ossec_config&gt; &lt;localfile&gt; &lt;log_format&gt;audit&lt;/log_format&gt; &lt;location&gt;/var/log/audit/audit.log&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/ossec/logs/active-responses.log&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/log/messages&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/log/secure&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/log/maillog&lt;/location&gt; &lt;/localfile&gt; 系统命令 客户端配置，设置系统监控执行命令及频率。默认如下 # 系统文件 &lt;localfile&gt; &lt;log_format&gt;command&lt;/log_format&gt; &lt;command&gt;df -P&lt;/command&gt; &lt;frequency&gt;360&lt;/frequency&gt; &lt;/localfile&gt; # 端口 &lt;localfile&gt; &lt;log_format&gt;full_command&lt;/log_format&gt; &lt;command&gt;netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 = = \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d&lt;/command&gt; &lt;alias&gt;netstat listening ports&lt;/alias&gt; &lt;frequency&gt;360&lt;/frequency&gt; &lt;/localfile&gt; # 登陆日志 &lt;localfile&gt; &lt;log_format&gt;full_command&lt;/log_format&gt; &lt;command&gt;last -n……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/wazuh/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
             </h1>
         </header>
@@ -285,22 +308,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/materialized/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年7月15日
-        </date>
-        
-        <div class="post-content">
-            requests 模块 HTTP 协议接口的请求调用 安装, 引用 pip install requests import requests 测试URL https://httpbin.org/post GET 请求 发送数据: 以下为postman 请求示例 { &quot;args&quot;: { &quot;arg1&quot;: &quot;arg_1&quot; }, &quot;headers&quot;: { &quot;Accept&quot;: &quot;*/*&quot;, &quot;Accept-Encoding&quot;: &quot;gzip, deflate, br&quot;, &quot;Content-Length&quot;: &quot;24&quot;, &quot;Content-Type&quot;: &quot;application/json&quot;, &quot;Host&quot;: &quot;httpbin.org&quot;, &quot;Postman-Token&quot;: &quot;187197c1-effa-4b4b-a499-7c3d66bc9049&quot;, &quot;User-Agent&quot;: &quot;PostmanRuntime/7.26.8&quot;, &quot;X-Amzn-Trace-Id&quot;: &quot;Root=1-60efdcf5-2c52d3eb46a1e19520fe108c&quot; }, &quot;origin&quot;: &quot;113.232.142.231&quot;, &quot;url&quot;: &quot;http://httpbin.org/get?arg1=arg_1&quot; } POST 请求 发送数据 以下为postman 请求示例 { &quot;args&quot;: { &quot;p &quot;: &quot;1&quot; }, &quot;data&quot;: &quot;{\n \&quot;json\&quot;: \&quot;123456\&quot;\n}&quot;, &quot;files&quot;: {}, &quot;form&quot;: {}, &quot;headers&quot;: { &quot;Accept&quot;: &quot;*/*&quot;, &quot;Accept-Encoding&quot;: &quot;gzip, deflate, br&quot;, &quot;Content-Length&quot;: &quot;24&quot;, &quot;Content-Type&quot;: &quot;application/json&quot;, &quot;Host&quot;: &quot;httpbin.org&quot;, &quot;Postman-Token&quot;: &quot;187879a8-fe0f-45a0-a94e-cf0b1d8e5184&quot;, &quot;User-Agent&quot;: &quot;PostmanRuntime/7.26.8&quot;, &quot;X-Amzn-Trace-Id&quot;: &quot;Root=1-60eff356-44291b474115a4e2111fbec4&quot; },……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/python/requests/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -405,6 +412,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
     </li>
     
@@ -440,10 +451,6 @@
         <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -476,7 +483,7 @@
     
     <li><a href="https://zhangeamon.top/categories/%E5%AD%98%E5%82%A8/">存储 (3)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (2)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
     

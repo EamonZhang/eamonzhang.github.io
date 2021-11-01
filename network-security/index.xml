@@ -6,7 +6,16 @@
     <description>Recent content in Network-securities on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 03 Jun 2020 16:15:35 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/network-security/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Nov 2021 09:34:45 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/network-security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Wazuh 功能简介</title>
+      <link>https://zhangeamon.top/network-security/wazuh/</link>
+      <pubDate>Mon, 01 Nov 2021 09:34:45 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/wazuh/</guid>
+      <description>日志收集 客户端配置，指定需要收集系统日志及日志格式。默认如下 &amp;lt;ossec_config&amp;gt; &amp;lt;localfile&amp;gt; &amp;lt;log_format&amp;gt;audit&amp;lt;/log_format&amp;gt; &amp;lt;location&amp;gt;/var/log/audit/audit.log&amp;lt;/location&amp;gt; &amp;lt;/localfile&amp;gt; &amp;lt;localfile&amp;gt; &amp;lt;log_format&amp;gt;syslog&amp;lt;/log_format&amp;gt; &amp;lt;location&amp;gt;/var/ossec/logs/active-responses.log&amp;lt;/location&amp;gt; &amp;lt;/localfile&amp;gt; &amp;lt;localfile&amp;gt; &amp;lt;log_format&amp;gt;syslog&amp;lt;/log_format&amp;gt; &amp;lt;location&amp;gt;/var/log/messages&amp;lt;/location&amp;gt; &amp;lt;/localfile&amp;gt; &amp;lt;localfile&amp;gt; &amp;lt;log_format&amp;gt;syslog&amp;lt;/log_format&amp;gt; &amp;lt;location&amp;gt;/var/log/secure&amp;lt;/location&amp;gt; &amp;lt;/localfile&amp;gt; &amp;lt;localfile&amp;gt; &amp;lt;log_format&amp;gt;syslog&amp;lt;/log_format&amp;gt; &amp;lt;location&amp;gt;/var/log/maillog&amp;lt;/location&amp;gt; &amp;lt;/localfile&amp;gt; 系统命令 客户端配置，设置系统监控执行命令及频率。默认如下 # 系统文件 &amp;lt;localfile&amp;gt; &amp;lt;log_format&amp;gt;command&amp;lt;/log_format&amp;gt; &amp;lt;command&amp;gt;df -P&amp;lt;/command&amp;gt; &amp;lt;frequency&amp;gt;360&amp;lt;/frequency&amp;gt; &amp;lt;/localfile&amp;gt; # 端口 &amp;lt;localfile&amp;gt; &amp;lt;log_format&amp;gt;full_command&amp;lt;/log_format&amp;gt; &amp;lt;command&amp;gt;netstat -tulpn | sed &#39;s/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 = = \4 \5/&#39; | sort -k 4 -g | sed &#39;s/ == \(.*\) ==/:\1/&#39; | sed 1,2d&amp;lt;/command&amp;gt; &amp;lt;alias&amp;gt;netstat listening ports&amp;lt;/alias&amp;gt; &amp;lt;frequency&amp;gt;360&amp;lt;/frequency&amp;gt; &amp;lt;/localfile&amp;gt; # 登陆日志 &amp;lt;localfile&amp;gt; &amp;lt;log_format&amp;gt;full_command&amp;lt;/log_format&amp;gt; &amp;lt;command&amp;gt;last -n</description>
+    </item>
+    
     <item>
       <title>Firewall</title>
       <link>https://zhangeamon.top/network-security/firewalld/</link>

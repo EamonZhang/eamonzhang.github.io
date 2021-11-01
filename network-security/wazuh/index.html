@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Postgres  数据库 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="Postgres  数据库 - Let&#39;s go 🐌 🐌 🐌">
+    <title>Wazuh 功能简介 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="Wazuh 功能简介 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2021-02-08T10:10:01&#43;08:00'>
+    <meta property="article:published_time" content='2021-11-01T09:34:45&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2021-02-08T10:10:01&#43;08:00'>
+    <meta property="article:modified_time" content='2021-11-01T09:34:45&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="Postgres  数据库">
+    <meta name="description" content="Wazuh 功能简介">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/postgresql/">
+    <meta property="og:url" content="https://zhangeamon.top/network-security/wazuh/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -157,23 +157,20 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#关于优化思考">关于优化思考</a></li>
-    <li><a href="#基础知识">基础知识</a></li>
-    <li><a href="#安装维护">安装维护</a></li>
-    <li><a href="#管理">管理</a></li>
-    <li><a href="#常用视图">常用视图</a></li>
-    <li><a href="#服务进程">服务进程</a></li>
-    <li><a href="#备份恢复">备份恢复</a></li>
-    <li><a href="#高可用">高可用</a></li>
-    <li><a href="#索引">索引</a></li>
-    <li><a href="#流数据库">流数据库</a></li>
-    <li><a href="#时序数据库">时序数据库</a></li>
-    <li><a href="#数据库测试">数据库测试</a></li>
-    <li><a href="#监控系统">监控系统</a></li>
-    <li><a href="#日志系统">日志系统</a></li>
-    <li><a href="#分布式">分布式</a></li>
-    <li><a href="#安全管理">安全管理</a></li>
-    <li><a href="#新版本特性">新版本特性</a></li>
+    <li><a href="#日志收集">日志收集</a></li>
+    <li><a href="#系统命令">系统命令</a></li>
+    <li><a href="#文件完整性监控">文件完整性监控</a></li>
+    <li><a href="#安全配置评估">安全配置评估</a></li>
+    <li><a href="#资产清单">资产清单</a></li>
+    <li><a href="#安全策略监控">安全策略监控</a></li>
+    <li><a href="#恶意软件检测">恶意软件检测</a></li>
+    <li><a href="#漏洞检测">漏洞检测</a></li>
+    <li><a href="#自动响应">自动响应</a></li>
+    <li><a href="#容器监控">容器监控</a></li>
+    <li><a href="#其他">其他</a></li>
+    <li><a href="#配置说明">配置说明</a></li>
+    <li><a href="#agent-与-mangager-通信">agent 与 mangager 通信</a></li>
+    <li><a href="#扩展">扩展</a></li>
   </ul>
 </nav>
     </div>
@@ -208,11 +205,18 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">Postgres  数据库</h1>
+            <h1 class="post-title">Wazuh 功能简介</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年2月8日
+            2021年11月1日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AE%89%E5%85%A8'> 安全</a></span>
+            
+        </div>
         
         
         
@@ -223,152 +227,216 @@
         </div>
         
         <div class="post-content">
-            <h2 id="关于优化思考">关于优化思考</h2>
-<ul>
-<li><a href="/postgres/thinking_in_db_performance">数据库优化思考 - 性能优化</a></li>
-<li><a href="/postgres/thinking_in_db_fd">数据库优化思考 - 结构设计</a></li>
-<li><a href="/postgres/thinking_in_db_tune">数据库优化思考 - 模块调优</a></li>
-</ul>
-<h2 id="基础知识">基础知识</h2>
-<ul>
-<li><a href="/postgres/template">模板数据库</a></li>
-<li><a href="/postgres/log">数据库日志</a></li>
-<li><a href="/postgres/explain">Explain 执行计划</a></li>
-<li><a href="/postgres/vacuum">vacuum 垃圾回收器</a></li>
-<li><a href="/postgres/pgstattuple">表空间膨胀</a></li>
-<li><a href="/postgres/fillfactor">fillfactor 填充因子</a></li>
-<li><a href="/postgres/toast">TOAST 技术</a></li>
-<li><a href="/postgres/hotupdate">hot update</a></li>
-<li><a href="/postgres/tablespace">tablespace 表空间</a></li>
-<li><a href="/postgres/pg_lock">锁机制</a></li>
-<li><a href="/postgres/lock_wait">锁等待</a></li>
-<li><a href="/postgres/cluster">cluster 聚族表</a></li>
-<li><a href="/postgres/adlock">咨询锁 adlock</a></li>
-<li><a href="/postgres/pgage">数据库年龄</a></li>
-<li><a href="/postgres/functionsandoperators">方法和函数</a></li>
-<li><a href="/postgres/high_level_sql">高级SQL</a></li>
-<li><a href="/postgres/oom">数据库 OOM 预防</a></li>
-<li><a href="/postgres/pg_fdw">跨库操作</a></li>
-<li><a href="/postgres/auto_vacuum_trigger">auto vacuum 触发机制</a></li>
-<li><a href="/postgres/unlogged_table">unlogged table</a></li>
-<li><a href="/postgres/materialized">物化视图</a></li>
-</ul>
-<h2 id="安装维护">安装维护</h2>
-<ul>
-<li><a href="/postgres/install01">安装 Postgres</a></li>
-<li><a href="/postgres/replication01">主从流复制</a></li>
-<li><a href="/logical-replication">Logical Replication 逻辑复制</a></li>
-<li><a href="/postgres/params">数据库参数</a></li>
-<li><a href="/postgres/stat">指标查看&amp;stat统计信息</a></li>
-<li><a href="/postgres/extention">拓展插件</a></li>
-<li><a href="/postgres/pg_stat_statements">pg_stat_statements统计信息</a></li>
-<li><a href="/postgres/pgpool2">pg-pool2</a></li>
-<li><a href="/postgres/pgbouncer">pgbouncer 连接池</a></li>
-<li><a href="/postgres/postgres12">postgres 12</a></li>
-<li><a href="/postgres/install02">Untunu18安装Postgres12</a></li>
-<li><a href="/postgres/pg_prewarm">数据预加载</a></li>
-<li><a href="/postgres/compile_kylin">kylin系统postgresql编译安装</a></li>
-</ul>
-<h2 id="管理">管理</h2>
-<ul>
-<li><a href="/postgres/pg_pathman">pg_pathman 分区表</a></li>
-<li><a href="/postgres/normal-form">范式约束</a></li>
-<li><a href="/postgres/dba">DBA 日常</a></li>
-<li><a href="/postgres/daily_management">数据库日常管理</a></li>
-<li><a href="/postgres/awsome-postgres">应用实战</a></li>
-<li><a href="/postgres/readonly">创建只读用户</a></li>
-<li><a href="/postgres/reback_supper_user">找回supper user 权限</a></li>
-<li><a href="/postgres/partition">原生分区表</a></li>
-</ul>
-<h2 id="常用视图">常用视图</h2>
-<ul>
-<li><a href="/postgres/view_pg_stat_activity">数据库视图之 pg_stat_activity</a></li>
-<li><a href="/postgres/view_pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a></li>
-</ul>
-<h2 id="服务进程">服务进程</h2>
-<ul>
-<li><a href="/postgres/checkpoint">CheckPoint</a></li>
-<li><a href="/postgres/bgwriter">Backgroud Writer</a></li>
-<li>wal writer</li>
-<li>stat collector</li>
-<li>logger</li>
-<li><a href="/postgres/vacuum">vacuum</a></li>
-</ul>
-<h2 id="备份恢复">备份恢复</h2>
-<ul>
-<li><a href="/postgres/backup_restore">备份&amp;恢复</a></li>
-<li><a href="/postgres/archive">Archive wal归档</a></li>
-<li><a href="/postgres/pitr">时间点恢复</a></li>
-<li><a href="/postgres/reback">误操作闪回</a></li>
-<li><a href="/postgres/pg_rman">使用PG_RMAN管理备份恢复</a></li>
-<li><a href="/postgres/wal-g">wal-g 应用</a></li>
-<li>使用pgbakrest备份恢复</li>
-<li><a href="https://wiki.postgresql.org/wiki/Binary_Replication_Tools">备份恢复工具总汇</a></li>
-</ul>
-<h2 id="高可用">高可用</h2>
-<ul>
-<li><a href="/postgres/ha_fd">数据库高可用设计分析</a></li>
-<li><a href="/postgres/replication01">主从流复制</a></li>
-<li><a href="/postgres/pg_rewind">PG主从切换 pg_rewind</a></li>
-<li><a href="/postgres/patroni">PG高可用Patroni搭建</a></li>
-<li><a href="/postgres/patroni02">PG高可用Patroni管理进阶</a></li>
-<li><a href="/postgres/repmgr">PG高可用Repmgr搭建</a></li>
-<li><a href="https://github.com/citusdata/pg_auto_failover">来自citus的高可用方案 pg_auto_failover </a></li>
-</ul>
-<h2 id="索引">索引</h2>
-<ul>
-<li><a href="/postgres/index01">索引类型及使用场景</a></li>
-<li><a href="/postgres/index-invalid">引起索引失效</a></li>
-<li><a href="/postgres/pg_trgm">pg_trgm的gist和gin索引加速字符匹配查询</a></li>
-<li><a href="/postgres/index-bloom">Bloom 索引</a></li>
-<li><a href="https://github.com/HypoPG/hypopg">创建假设索引</a></li>
-</ul>
-<h2 id="流数据库">流数据库</h2>
-<ul>
-<li><a href="/postgres/pipelinedb01">Pipelinedb文档概览</a></li>
-<li><a href="/postgres/pipelinedb02">Pipelinedb 简介</a></li>
-</ul>
-<h2 id="时序数据库">时序数据库</h2>
-<ul>
-<li><a href="/postgres/timescaledb">TimescaleDB 时序数据库</a></li>
-</ul>
-<h2 id="数据库测试">数据库测试</h2>
-<ul>
-<li><a href="/postgres/insert01">快速生成大量数据</a></li>
-<li><a href="/postgres/pgbench">pgbench 压力测试</a></li>
-<li><a href="/postgres/tpch">tpch AP测试</a></li>
-</ul>
-<h2 id="监控系统">监控系统</h2>
-<ul>
-<li><a href="/postgres/monitor">监控工具</a></li>
-<li><a href="/postgres/pgwatch2">pgwatch2 数据库指标监控查看</a></li>
-<li><a href="/postgres/monitor_explain">数据库监控指标</a></li>
-</ul>
-<h2 id="日志系统">日志系统</h2>
-<ul>
-<li>ELK</li>
-</ul>
-<h2 id="分布式">分布式</h2>
-<ul>
-<li><a href="/postgres/pg_citus">citus 数据库分库</a></li>
-<li><a href="/postgres/citus01">citus 简单应用</a></li>
-</ul>
-<h2 id="安全管理">安全管理</h2>
-<ul>
-<li><a href="/postgres/ssl">数据库 ssl认证</a></li>
-</ul>
-<h2 id="新版本特性">新版本特性</h2>
-<ul>
-<li><a href="https://postgres.fun/20170710155008.html">PostgreSQL 10 新特性汇总</a></li>
-<li><a href="https://postgres.fun/20181102084300.html">PostgreSQL 11 新特性汇总</a></li>
-<li><a href="https://postgres.fun/20190809161300.html">PostgreSQL 12 新特性汇总</a></li>
-<li><a href="https://postgres.fun/20200724165800.html">PostgreSQL 13 新特性汇总</a></li>
-</ul>
-<p>postgres 13</p>
-<pre><code>wal_keep_segments 已经取消，改用 wal_keep_size
+            <h2 id="日志收集">日志收集</h2>
+<p>客户端配置，指定需要收集系统日志及日志格式。默认如下</p>
+<pre><code>&lt;ossec_config&gt;
+  &lt;localfile&gt;
+    &lt;log_format&gt;audit&lt;/log_format&gt;
+    &lt;location&gt;/var/log/audit/audit.log&lt;/location&gt;
+  &lt;/localfile&gt;
+  &lt;localfile&gt;
+    &lt;log_format&gt;syslog&lt;/log_format&gt;
+    &lt;location&gt;/var/ossec/logs/active-responses.log&lt;/location&gt;
+  &lt;/localfile&gt;
+  &lt;localfile&gt;
+    &lt;log_format&gt;syslog&lt;/log_format&gt;
+    &lt;location&gt;/var/log/messages&lt;/location&gt;
+  &lt;/localfile&gt;
+  &lt;localfile&gt;
+    &lt;log_format&gt;syslog&lt;/log_format&gt;
+    &lt;location&gt;/var/log/secure&lt;/location&gt;
+  &lt;/localfile&gt;
+  &lt;localfile&gt;
+    &lt;log_format&gt;syslog&lt;/log_format&gt;
+    &lt;location&gt;/var/log/maillog&lt;/location&gt;
+  &lt;/localfile&gt;
+</code></pre><h2 id="系统命令">系统命令</h2>
+<p>客户端配置，设置系统监控执行命令及频率。默认如下</p>
+<pre><code># 系统文件
+&lt;localfile&gt;
+    &lt;log_format&gt;command&lt;/log_format&gt;
+    &lt;command&gt;df -P&lt;/command&gt;
+    &lt;frequency&gt;360&lt;/frequency&gt;
+  &lt;/localfile&gt;
+# 端口
+  &lt;localfile&gt;
+    &lt;log_format&gt;full_command&lt;/log_format&gt;
+    &lt;command&gt;netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 =
+= \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d&lt;/command&gt;
+    &lt;alias&gt;netstat listening ports&lt;/alias&gt;
+    &lt;frequency&gt;360&lt;/frequency&gt;
+  &lt;/localfile&gt;
+# 登陆日志
+  &lt;localfile&gt;
+    &lt;log_format&gt;full_command&lt;/log_format&gt;
+    &lt;command&gt;last -n 20&lt;/command&gt;
+    &lt;frequency&gt;360&lt;/frequency&gt;
+  &lt;/localfile&gt;
+</code></pre><h2 id="文件完整性监控">文件完整性监控</h2>
+<p>File integrity monitoring， FIM  。</p>
+<p>对指定目录下的文件完整性进行监控，包括对文件的新增，删除，修改。</p>
+<p>基本原理，对文件进行md5，sha1 等摘要提取。判断文件是否被篡改过。</p>
+<p>实现， 集成 osquery</p>
+<pre><code>  &lt;!-- File integrity monitoring --&gt;
+  &lt;syscheck&gt;
+    &lt;disabled&gt;no&lt;/disabled&gt;
 
-wal_keep_size = wal_keep_segments * wal_segment_size(16MB) 
-</code></pre>
+    &lt;!-- Frequency that syscheck is executed default every 12 hours --&gt;
+    &lt;frequency&gt;43200&lt;/frequency&gt;
+
+    &lt;scan_on_start&gt;yes&lt;/scan_on_start&gt;
+
+    &lt;!-- Directories to check  (perform all possible verifications) --&gt;
+    &lt;directories&gt;/etc,/usr/bin,/usr/sbin&lt;/directories&gt;
+    &lt;directories&gt;/bin,/sbin,/boot&lt;/directories&gt;
+
+    &lt;!-- Files/directories to ignore --&gt;
+    &lt;ignore&gt;/etc/mtab&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/hosts.deny&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/mail/statistics&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/random-seed&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/random.seed&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/adjtime&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/httpd/logs&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/utmpx&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/wtmpx&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/cups/certs&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/dumpdates&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/svc/volatile&lt;/ignore&gt;
+
+    &lt;!-- File types to ignore --&gt;
+    &lt;ignore type=&quot;sregex&quot;&gt;.log$|.swp$&lt;/ignore&gt;
+
+    &lt;!-- Check the file, but never compute the diff --&gt;
+    &lt;nodiff&gt;/etc/ssl/private.key&lt;/nodiff&gt;
+
+    &lt;skip_nfs&gt;yes&lt;/skip_nfs&gt;
+    &lt;skip_dev&gt;yes&lt;/skip_dev&gt;
+    &lt;skip_proc&gt;yes&lt;/skip_proc&gt;
+    &lt;skip_sys&gt;yes&lt;/skip_sys&gt;
+
+    &lt;!-- Nice value for Syscheck process --&gt;
+    &lt;process_priority&gt;10&lt;/process_priority&gt;
+
+    &lt;!-- Maximum output throughput --&gt;
+    &lt;max_eps&gt;100&lt;/max_eps&gt;
+
+    &lt;!-- Database synchronization settings --&gt;
+    &lt;synchronization&gt;
+      &lt;enabled&gt;yes&lt;/enabled&gt;
+      &lt;interval&gt;5m&lt;/interval&gt;
+      &lt;max_interval&gt;1h&lt;/max_interval&gt;
+      &lt;max_eps&gt;10&lt;/max_eps&gt;
+    &lt;/synchronization&gt;
+  &lt;/syscheck&gt;
+</code></pre><h2 id="安全配置评估">安全配置评估</h2>
+<p>Security configuration assessment，SCA</p>
+<p>监控系统的配置文件是否合乎安全配置基线</p>
+<pre><code>  &lt;sca&gt;
+    &lt;enabled&gt;yes&lt;/enabled&gt;
+    &lt;scan_on_start&gt;yes&lt;/scan_on_start&gt;
+    &lt;interval&gt;12h&lt;/interval&gt;
+    &lt;skip_nfs&gt;yes&lt;/skip_nfs&gt;
+  &lt;/sca&gt;
+</code></pre><h2 id="资产清单">资产清单</h2>
+<p>System inventory</p>
+<p>如操作系统版本，硬件，端口等。扫描结果保持在本地sqlite</p>
+<pre><code> &lt;!-- System inventory --&gt;
+  &lt;wodle name=&quot;syscollector&quot;&gt;
+    &lt;disabled&gt;no&lt;/disabled&gt;
+    &lt;interval&gt;1h&lt;/interval&gt;
+    &lt;scan_on_start&gt;yes&lt;/scan_on_start&gt;
+    &lt;hardware&gt;yes&lt;/hardware&gt;
+    &lt;os&gt;yes&lt;/os&gt;
+    &lt;network&gt;yes&lt;/network&gt;
+    &lt;packages&gt;yes&lt;/packages&gt;
+    &lt;ports all=&quot;no&quot;&gt;yes&lt;/ports&gt;
+    &lt;processes&gt;yes&lt;/processes&gt;
+
+    &lt;!-- Database synchronization settings --&gt;
+    &lt;synchronization&gt;
+      &lt;max_eps&gt;10&lt;/max_eps&gt;
+    &lt;/synchronization&gt;
+  &lt;/wodle&gt;
+</code></pre><h2 id="安全策略监控">安全策略监控</h2>
+<p>Policy monitoring</p>
+<pre><code>&lt;!-- Policy monitoring --&gt;
+  &lt;rootcheck&gt;
+    &lt;disabled&gt;no&lt;/disabled&gt;
+    &lt;check_files&gt;yes&lt;/check_files&gt;
+    &lt;check_trojans&gt;yes&lt;/check_trojans&gt;
+    &lt;check_dev&gt;yes&lt;/check_dev&gt;
+    &lt;check_sys&gt;yes&lt;/check_sys&gt;
+    &lt;check_pids&gt;yes&lt;/check_pids&gt;
+    &lt;check_ports&gt;yes&lt;/check_ports&gt;
+    &lt;check_if&gt;yes&lt;/check_if&gt;
+
+    &lt;!-- Frequency that rootcheck is executed - every 12 hours --&gt;
+    &lt;frequency&gt;43200&lt;/frequency&gt;
+
+    &lt;rootkit_files&gt;etc/shared/rootkit_files.txt&lt;/rootkit_files&gt;
+    &lt;rootkit_trojans&gt;etc/shared/rootkit_trojans.txt&lt;/rootkit_trojans&gt;
+
+    &lt;skip_nfs&gt;yes&lt;/skip_nfs&gt;
+  &lt;/rootcheck&gt;
+</code></pre><h2 id="恶意软件检测">恶意软件检测</h2>
+<p>Malware detection</p>
+<p>VirusTotal is an online portal, owned by Google, that uses many antivirus engines to check for viruses and malware</p>
+<p>默认不开启</p>
+<p>VirusTotal，是一个提供免费的可疑文件分析服务的网站， 只能扫描提交的文件。</p>
+<pre><code>&lt;ossec_config&gt;
+  &lt;integration&gt;
+    &lt;name&gt;virustotal&lt;/name&gt;
+    &lt;api_key&gt;${your_virustotal_api_key}&lt;/api_key&gt;
+    &lt;rule_id&gt;100200,100201&lt;/rule_id&gt;
+    &lt;alert_format&gt;json&lt;/alert_format&gt;
+  &lt;/integration&gt;
+&lt;/ossec_config&gt;
+</code></pre><h2 id="漏洞检测">漏洞检测</h2>
+<p>vulnerability detector</p>
+<p>默认不开启</p>
+<pre><code>{
+  &quot;vulnerability-detector&quot;: {
+    &quot;enabled&quot;: &quot;yes&quot;,
+    &quot;run_on_start&quot;: &quot;yes&quot;,
+    &quot;interval&quot;: 300,
+    &quot;ignore_time&quot;: 21600,
+    &quot;providers&quot;: [
+      {
+        &quot;name&quot;: &quot;nvd&quot;,
+        &quot;update_from_year&quot;: 2010,
+        &quot;update_interval&quot;: 3600,
+        &quot;download_timeout&quot;: 300
+      }
+    ]
+  }
+}
+</code></pre><h2 id="自动响应">自动响应</h2>
+<p>Active response</p>
+<pre><code>  &lt;!-- Active response --&gt;
+  &lt;active-response&gt;
+    &lt;disabled&gt;no&lt;/disabled&gt;
+    &lt;ca_store&gt;etc/wpk_root.pem&lt;/ca_store&gt;
+    &lt;ca_verification&gt;yes&lt;/ca_verification&gt;
+  &lt;/active-response&gt;
+</code></pre><h2 id="容器监控">容器监控</h2>
+<p>默认配置中没有如下配置，有需求自行添加</p>
+<pre><code>&lt;wodle name=&quot;docker-listener&quot;&gt;
+    &lt;interval&gt;10m&lt;/interval&gt;
+    &lt;attempts&gt;5&lt;/attempts&gt;
+    &lt;run_on_start&gt;no&lt;/run_on_start&gt;
+    &lt;disabled&gt;no&lt;/disabled&gt;
+&lt;/wodle&gt;
+</code></pre><h2 id="其他">其他</h2>
+<p>略</p>
+<h2 id="配置说明">配置说明</h2>
+<p>以上配置正确姿势</p>
+<p>在web管理界面中，Management -&gt; Configuration 。 生成模版</p>
+<h2 id="agent-与-mangager-通信">agent 与 mangager 通信</h2>
+<p>需要端口 1515 认证 1514 通信</p>
+<h2 id="扩展">扩展</h2>
+<p>利用 hydra 进行暴力破解，查看Wazuh监控情况。</p>
+
         </div>
 
         
@@ -380,11 +448,11 @@ wal_keep_size = wal_keep_segments * wal_segment_size(16MB)
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/middleware/etcd_auth/">etcd 访问控制</a></li>
+        <li><a href="/linux/last/">Linux 系统登陆记录</a></li>
         
-        <li><a href="/postgres/hotupdate/">hot update</a></li>
+        <li><a href="/linux/ubuntu2004-qa/">Ubuntu20.04 装机后</a></li>
         
-        <li><a href="/postgres/thinking_in_db_tune/">数据库优化思考 - 模块调优</a></li>
+        <li><a href="/mysql/master-slave/">主从复制</a></li>
         
     </ul>
 </div>
