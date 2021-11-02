@@ -91,7 +91,112 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装">安装</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#克隆">克隆</a></li>
+    <li><a href="#修改磁盘大小">修改磁盘大小</a></li>
+    <li><a href="#修改内存和cup">修改内存和CUP</a></li>
+    <li><a href="#管理界面">管理界面</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -103,12 +208,15 @@
         
         
         
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
         <div class="post-content">
-            <ul>
-<li>安装</li>
-</ul>
+            <h2 id="安装">安装</h2>
 <h4 id="ubuntu1404">ubuntu14.04</h4>
-<hr>
 <p>.安装kvm</p>
 <p>apt-get install qemu-kvm libvirt0 virtinst bridge-utils virt-viewer</p>
 <p>.配置实体机网络</p>
@@ -126,7 +234,6 @@ dns-nameservers 114.114.114.114
 </code></pre><p>.创建一个虚拟机</p>
 <pre><code>virt-install --connect qemu:///system -n test01 -r 1024 -f /home/kvm/test01.qcow2 -s 20 -c /home/kvm/ubuntu-12.04.1-server-amd64.iso --vnc --noautoconsole --os-type linux --os-variant ubuntuPrecise --accelerate --network=bridge:br0 
 </code></pre><h4 id="centos7">centos7</h4>
-<hr>
 <p>yum install qemu-kvm libvirt virt-install bridge-utils</p>
 <p>.配置实体机网络</p>
 <p>cat ifcfg-enp7s0</p>
@@ -159,10 +266,7 @@ DNS1=223.5.5.5
 连接本机的虚拟机:virt-viewer -c qemu:///system 虚拟机名<br>
 连接远程的虚拟机:virt-viewer -c qemu+ssh://ip/system 虚拟机名</p>
 <p>设置开机自启动 virsh autostart server01</p>
-<ul>
-<li>克隆</li>
-</ul>
-<hr>
+<h2 id="克隆">克隆</h2>
 <pre><code>virt-clone --connect=qemu:///system -o server-02 -n server-clone -f /var/lib/libvirt/images/server-clone.img
 </code></pre><p>参数说明<br>
 -o &ndash;original 原始被克隆镜像
@@ -175,9 +279,7 @@ virsh destroy server-02</p>
 <p>cat /etc/libvirt/qemu/server-02.xml | grep &ldquo;source&rdquo;
 cat /etc/libvirt/qemu/server-02.xml | grep &ldquo;mac&rdquo;</p>
 <p>在 vi /etc/sysconfig/network-scripts/ifcfg-eth0 中修改相应的mac</p>
-<ul>
-<li>修改磁盘大小</li>
-</ul>
+<h2 id="修改磁盘大小">修改磁盘大小</h2>
 <hr>
 <p>qemu-img resize [-q] filename [+ | -]size</p>
 <p>1.修改前查看</p>
@@ -221,22 +323,18 @@ I/O 大小(最小/最佳)：512 字节 / 512 字节
 /dev/vda2         1026048     3123199     1048576   82  Linux swap / Solaris
 /dev/vda3         3123200    20971519     8924160   83  Linux
 </code></pre><p>磁盘空间变大</p>
-<ul>
-<li>扩容分区</li>
-</ul>
-<hr>
-<p>1 fdisk 修改分区表　，　删除最后一个分区，新建分区，保持退出
-echo d; echo n; echo ; echo ; echo ; echo ; echo w;) | fdisk $rootdevicepath
-重启</p>
+<p>6.扩容分区</p>
+<p>fdisk 修改分区表，删除最后一个分区，新建分区，保持退出</p>
+<pre><code>echo d; echo n; echo ; echo ; echo ; echo ; echo w;) | fdisk $rootdevicepath
+</code></pre><p>重启</p>
 <p>resize2fs $partedpath　扩磁盘空间</p>
-<ul>
-<li>修改内存和CUP</li>
-</ul>
-<hr>
-<p>1 查看 virsh dominfo test01<br>
-2 改内存 virsh setmem [domain-id or domain-name] [count]<br>
-3 改CUP virsh setvcpus test01 2</p>
+<h2 id="修改内存和cup">修改内存和CUP</h2>
+<p>1 查看 virsh dominfo test01</p>
+<p>2 改内存 virsh setmem [domain-id or domain-name] [count]</p>
+<p>3 改CUP virsh setvcpus test01 2</p>
 <p><a href="https://www.cnblogs.com/zhangeamon/p/6734275.html">原文</a></p>
+<h2 id="管理界面">管理界面</h2>
+<p><a href="https://github.com/retspen/webvirtcloud">webvirtcloud</a></p>
 
         </div>
 
