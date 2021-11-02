@@ -395,22 +395,29 @@
 </code></pre><h2 id="漏洞检测">漏洞检测</h2>
 <p>vulnerability detector</p>
 <p>默认不开启</p>
-<pre><code>{
-  &quot;vulnerability-detector&quot;: {
-    &quot;enabled&quot;: &quot;yes&quot;,
-    &quot;run_on_start&quot;: &quot;yes&quot;,
-    &quot;interval&quot;: 300,
-    &quot;ignore_time&quot;: 21600,
-    &quot;providers&quot;: [
-      {
-        &quot;name&quot;: &quot;nvd&quot;,
-        &quot;update_from_year&quot;: 2010,
-        &quot;update_interval&quot;: 3600,
-        &quot;download_timeout&quot;: 300
-      }
-    ]
-  }
-}
+<pre><code>&lt;vulnerability-detector&gt;
+    &lt;enabled&gt;yes&lt;/enabled&gt;
+    &lt;interval&gt;5m&lt;/interval&gt;
+    &lt;ignore_time&gt;6h&lt;/ignore_time&gt;
+    &lt;run_on_start&gt;yes&lt;/run_on_start&gt;
+
+    &lt;!-- RedHat OS vulnerabilities --&gt;
+    &lt;provider name=&quot;redhat&quot;&gt;
+      &lt;enabled&gt;yes&lt;/enabled&gt;
+      &lt;os&gt;5&lt;/os&gt;
+      &lt;os&gt;6&lt;/os&gt;
+      &lt;os&gt;7&lt;/os&gt;
+      &lt;os&gt;8&lt;/os&gt;
+      &lt;update_interval&gt;1h&lt;/update_interval&gt;
+    &lt;/provider&gt;
+
+    &lt;!-- Aggregate vulnerabilities --&gt;
+    &lt;provider name=&quot;nvd&quot;&gt;
+      &lt;enabled&gt;yes&lt;/enabled&gt;
+      &lt;update_from_year&gt;2010&lt;/update_from_year&gt;
+      &lt;update_interval&gt;1h&lt;/update_interval&gt;
+    &lt;/provider&gt;
+&lt;/vulnerability-detector&gt;
 </code></pre><h2 id="自动响应">自动响应</h2>
 <p>Active response</p>
 <pre><code>  &lt;!-- Active response --&gt;
