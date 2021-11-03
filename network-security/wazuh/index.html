@@ -395,12 +395,31 @@
 &lt;/ossec_config&gt;
 </code></pre><h2 id="漏洞检测">漏洞检测</h2>
 <p>vulnerability detector</p>
-<p>默认不开启</p>
-<pre><code>&lt;vulnerability-detector&gt;
+<p><code>WARNING: vulnerability-detector configuration is only set in the manager</code></p>
+<p>在管理端配置</p>
+<pre><code> &lt;vulnerability-detector&gt;
     &lt;enabled&gt;yes&lt;/enabled&gt;
     &lt;interval&gt;5m&lt;/interval&gt;
     &lt;ignore_time&gt;6h&lt;/ignore_time&gt;
     &lt;run_on_start&gt;yes&lt;/run_on_start&gt;
+
+    &lt;!-- Ubuntu OS vulnerabilities --&gt;
+    &lt;provider name=&quot;canonical&quot;&gt;
+      &lt;enabled&gt;no&lt;/enabled&gt;
+      &lt;os&gt;trusty&lt;/os&gt;
+      &lt;os&gt;xenial&lt;/os&gt;
+      &lt;os&gt;bionic&lt;/os&gt;
+      &lt;os&gt;focal&lt;/os&gt;
+      &lt;update_interval&gt;1h&lt;/update_interval&gt;
+    &lt;/provider&gt;
+
+    &lt;!-- Debian OS vulnerabilities --&gt;
+    &lt;provider name=&quot;debian&quot;&gt;
+      &lt;enabled&gt;no&lt;/enabled&gt;
+      &lt;os&gt;stretch&lt;/os&gt;
+      &lt;os&gt;buster&lt;/os&gt;
+      &lt;update_interval&gt;1h&lt;/update_interval&gt;
+    &lt;/provider&gt;
 
     &lt;!-- RedHat OS vulnerabilities --&gt;
     &lt;provider name=&quot;redhat&quot;&gt;
@@ -412,13 +431,36 @@
       &lt;update_interval&gt;1h&lt;/update_interval&gt;
     &lt;/provider&gt;
 
+    &lt;!-- Windows OS vulnerabilities --&gt;
+    &lt;provider name=&quot;msu&quot;&gt;
+      &lt;enabled&gt;yes&lt;/enabled&gt;
+      &lt;update_interval&gt;1h&lt;/update_interval&gt;
+    &lt;/provider&gt;
+
     &lt;!-- Aggregate vulnerabilities --&gt;
     &lt;provider name=&quot;nvd&quot;&gt;
       &lt;enabled&gt;yes&lt;/enabled&gt;
       &lt;update_from_year&gt;2010&lt;/update_from_year&gt;
       &lt;update_interval&gt;1h&lt;/update_interval&gt;
     &lt;/provider&gt;
-&lt;/vulnerability-detector&gt;
+
+  &lt;/vulnerability-detector&gt;
+
+</code></pre><p>基本流程：</p>
+<ol>
+<li>
+<p>agent 扫描并上报本地信息到 manager</p>
+</li>
+<li>
+<p>manager 将上报的每个agent信息分别存储到各自sqlite , 存储目录<code>/var/ossec/queue/db/</code></p>
+</li>
+<li>
+<p>manager 从网络上下载更新最新的病毒库。然后利用病毒库进行检测。</p>
+</li>
+</ol>
+<p>注意： 由于病毒库需要从网络下载，在网络环境不能保证时采用离线模式。手动定期更新病毒库。 <a href="https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/offline_update.html">参见</a></p>
+<p>配置后需求重启服务</p>
+<pre><code>/var/ossec/bin/wazuh-control restart 
 </code></pre><h2 id="自动响应">自动响应</h2>
 <p>Active response</p>
 <pre><code>  &lt;!-- Active response --&gt;
@@ -545,6 +587,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
@@ -578,10 +624,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
 </ul>

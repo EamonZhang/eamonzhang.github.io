@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/insert01/" title="快速生成大量数据">快速生成大量数据</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月14日
+        </date>
+        
+        <div class="post-content">
+            在数据库中快速生成1w条数据，或测试数据库的写入性能。 创建数据库表 postgres=# create table tbl(id int, info text, crt_time timestamp); CREATE TABLE 方法一 generate_series 查看方法函数 postgres=# \df generate_series 函数列表 架构模式 | 名称 | 结果数据类型 | 参数数据类型 | 类型 ------------+-----------------+-----------------------------------+--------------------------------------------------------------------+------ pg_catalog | generate_series | SETOF bigint | bigint, bigint | 常规 pg_catalog | generate_series | SETOF bigint | bigint, bigint, bigint | 常规 pg_catalog | generate_series | SETOF integer | integer, integer | 常规 pg_catalog | generate_series | SETOF integer | integer, integer, integer | 常规 pg_catalog | generate_series |……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/insert01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pipelinedb02/" title="Pipelinedb 简介">Pipelinedb 简介</a>
             </h1>
         </header>
@@ -246,22 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/tablespace/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/toast/" title="TOAST 技术">TOAST 技术</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月6日
-        </date>
-        
-        <div class="post-content">
-            原文……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/toast/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -398,6 +398,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
@@ -431,10 +435,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
 </ul>

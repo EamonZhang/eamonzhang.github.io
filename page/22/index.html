@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/tidb/sql-optimize01/" title="Sql 优化">Sql 优化</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月21日
+        </date>
+        
+        <div class="post-content">
+            一条sql的执行过程 将 SQL 解析成抽象语法树(AST)，将 AST 变换到内部表示(IR)。然后优化器的输入就是 IR，它将生成最优的查询计划（Plan），然后会变成具体的执行器（Executor），里面有许多的算。 优化的阶段为IR 到生成 Plan 的过程，包括逻辑优化和物理优化 逻辑优化 逻辑优化主要是基……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/tidb/sql-optimize01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/index01/" title="数据库索引类型及使用场景">数据库索引类型及使用场景</a>
             </h1>
         </header>
@@ -239,22 +255,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/istio/concept02/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/kvm/kvm01/" title="KVM">KVM</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月6日
-        </date>
-        
-        <div class="post-content">
-            安装 ubuntu14.04 .安装kvm apt-get install qemu-kvm libvirt0 virtinst bridge-utils virt-viewer .配置实体机网络 cat /etc/network/interfaces auto lo iface lo inet loopback auto br0 iface br0 inet static address 10.0.*.* netmask 255.255.0.0 gateway 10.1.0.1 type bridge bridge_ports eth0 dns-nameservers 114.114.114.114 .创建一个虚拟机 virt-install --connect qemu:///system -n test01 -r 1024 -f /home/kvm/test01.qcow2 -s 20 -c /home/kvm/ubuntu-12.04.1-server-amd64.iso --vnc --noautoconsole --os-type linux --os-variant ubuntuPrecise --accelerate --network=bridge:br0 centos7 yum install qemu-kvm libvirt virt-install bridge-utils .配置实体机网络 cat ifcfg-enp7s0 DEVICE=&quot;enp7s0&quot; ONBOOT=yes BOOTPROTO=static UUID=96a09db3-9b06-4a50-8d0c-9868cf531b84 #HWADDR=&quot;08:60:6E:06:C7:1A&quot; TYPE=Ethernet BRIDGE=br0 IPADDR=0.0.0.0 cat ifcfg-br0 DEVICE=br0 ONBOOT=yes BOOTPROTO=static TYPE=Bridge IPADDR=10.1.*.* PREFIX=16 GATEWAY=10.1.0.1 DNS1=223.5.5.5 查看 brctl show .启动 libvirt systemctl start libvirtd systemctl enable libvirtd .创建虚拟机 virt-install --virt-type kvm --name test01 --ram……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/kvm/kvm01/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -391,6 +391,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
@@ -424,10 +428,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
 </ul>

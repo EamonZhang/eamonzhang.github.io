@@ -93,6 +93,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月3日
+        </date>
+        
+        <div class="post-content">
+            原理 在top ps 等命令被改写时，利用Linux一切皆文件。找出被隐藏的进程。 一下为python脚本 #!/usr/bin/env python # -*- coding: utf-8 -*- import os def get_max_pid(): out = os.popen('cat /proc/sys/kernel/pid_max') content = out.readline().strip('\n') if content.isdigit(): return int(content) def get_ps_proc_list(): pid_list = [] out = os.popen('ps -e --no-header') lines = out.readlines() for line in lines: parts = line.split(' ') for part in parts: if part == '': parts.remove(part) pid = int(parts[0]) pid_list.append(pid) return pid_list def get_ps_lwp_list(): lwp_list = [] out = os.popen('ps --no-header -eL o lwp') lines = out.readlines() for line in lines: tid = int(line) lwp_list.append(tid) return lwp_list def print_badpid_info(pid): out = os.popen('ls -l /proc/%d/exe' % pid)……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/findhidpid/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
             </h1>
         </header>
@@ -301,31 +319,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/hard_store/" title="存储设备几个物理概念">存储设备几个物理概念</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            硬盘 HDD 机械硬盘 SSD 固态硬盘 物理接口 接口的物理形态 SATA mSTATA 迷你SATA m.2 曾用名NG(NEXT GERNERATION) 根据宽度分为(m.2 2242 2260 2280) u.2 统一了 SATA ，PCIe，SAS 接口 AIC ADD IN CARD 标准PCIe金手指 通信协议 数据通信逻辑协议标准 AHCI SAS NVME (Non-Volatile Memory Host Controller Interface) 总线标准 数据总线标准,硬盘与CPU通过总线传输数据 SATA PCIE 在传统SAT……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/hard_store/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -355,6 +348,10 @@
     
     <li >
         <a href="https://zhangeamon.top/linux/page/6/">6</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/linux/page/7/">7</a>
     </li>
     
 
@@ -409,6 +406,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
@@ -442,10 +443,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
     </li>
     
 </ul>
