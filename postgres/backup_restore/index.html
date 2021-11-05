@@ -265,6 +265,7 @@ END$$;
 </code></pre><hr>
 <h2 id="删除数据-deleteupdate-limit">删除数据 DELETE|UPDATE LIMIT</h2>
 <p>postgres 暂不支持 delete limit 用法 。根据条件删除大量数据时。</p>
+<p>使用with模拟必须有PK或者非空UK</p>
 <pre><code>with t1 as (select id from t where create_time &lt; '2020-01-01 00:00:00' limit 10) 
                   delete from t where id in (select * from t1);
 </code></pre>
