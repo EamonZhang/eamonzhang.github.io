@@ -166,6 +166,7 @@
     </li>
     <li><a href="#实时备份恢复">实时备份恢复</a></li>
     <li><a href="#备份恢复管理">备份恢复管理</a></li>
+    <li><a href="#删除数据-deleteupdate-limit">删除数据 DELETE|UPDATE LIMIT</a></li>
   </ul>
 </nav>
     </div>
@@ -262,7 +263,11 @@ LOOP
 END LOOP;
 END$$;
 </code></pre><hr>
-
+<h2 id="删除数据-deleteupdate-limit">删除数据 DELETE|UPDATE LIMIT</h2>
+<p>postgres 暂不支持 delete limit 用法 。根据条件删除大量数据时。</p>
+<pre><code>with t1 as (select id from t where create_time &lt; '2020-01-01 00:00:00' limit 10) 
+                  delete from t where id in (select * from t1);
+</code></pre>
         </div>
 
         
