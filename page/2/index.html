@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年7月21日
+        </date>
+        
+        <div class="post-content">
+            使用预编译优势介绍 在执行一个SQL时，首先生成执行计划（进行语义分析、词法解析、逻辑优化、物理优化）、执行、结果传输等操作。 如果一个SQL在应用中反复使用，我们可以将此SQL参数化，只做一次prepare，后面执行时就不需要进行前面执行计划的生成操作，直接使用prepare好的执……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/prepare/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
             </h1>
         </header>
@@ -260,31 +276,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/ipmi/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年4月20日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Django的数据库连接 Django对数据库的链接处理是这样的，Django程序接受到请求之后，在第一访问数据库的时候会创建一个数据库连接,直到请求结束，关闭连接。下次请求也是如此。因此，这种情况下，随着访问的并发数越来越高，就会产生大量的数据库连接 使用CONN_MAX_AGE减……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/python/django_max_con_age/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -400,6 +391,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
     </li>
     
@@ -435,10 +430,6 @@
         <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -459,7 +450,7 @@
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (19)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
     

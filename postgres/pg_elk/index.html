@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>存储设备几个物理概念 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="存储设备几个物理概念 - Let&#39;s go 🐌 🐌 🐌">
+    <title>数据库日志分析 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="数据库日志分析 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2021-03-29T16:16:38&#43;08:00'>
+    <meta property="article:published_time" content='2021-11-05T09:44:17&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2021-03-29T16:16:38&#43;08:00'>
+    <meta property="article:modified_time" content='2021-11-05T09:44:17&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="存储设备几个物理概念">
+    <meta name="description" content="数据库日志分析">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/linux/hard_store/">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/pg_elk/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -95,65 +95,192 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">存储设备几个物理概念</h1>
+            <h1 class="post-title">数据库日志分析</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年3月29日
+            2021年11月5日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
             
         </div>
         
         
         
         <div class="post-content">
-            <h2 id="硬盘">硬盘</h2>
+            <h2 id="数据库日志分析">数据库日志分析</h2>
+<p>整体架构</p>
+<p>filebeat -&gt; logstash -&gt; elasticseach -&gt; kibana</p>
 <ul>
-<li>HDD 机械硬盘</li>
-<li>SSD 固态硬盘</li>
+<li>filebeat 收集日志</li>
+<li>logstash 中转及日志规则匹配过滤</li>
+<li>elasticsearch 日志存储检索库</li>
+<li>kibana 查看界面</li>
 </ul>
-<h2 id="物理接口">物理接口</h2>
-<p>接口的物理形态</p>
-<ul>
-<li>SATA</li>
-<li>mSTATA 迷你SATA</li>
-<li>m.2 曾用名NG(NEXT GERNERATION)<br>
-根据宽度分为(m.2 2242 2260 2280)</li>
-<li>u.2 统一了 SATA ，PCIe，SAS 接口</li>
-<li>AIC ADD IN CARD 标准PCIe金手指</li>
-</ul>
-<h2 id="通信协议">通信协议</h2>
-<p>数据通信逻辑协议标准</p>
-<ul>
-<li>AHCI</li>
-<li>SAS</li>
-<li>NVME (Non-Volatile Memory Host Controller Interface)</li>
-</ul>
-<h2 id="总线标准">总线标准</h2>
-<p>数据总线标准,硬盘与CPU通过总线传输数据</p>
-<ul>
-<li>SATA</li>
-<li>PCIE</li>
-</ul>
-<p>在传统SATA硬盘中，当我们进行数据操作时，数据会先从硬盘读取到内存，再将数据提取至CPU内部进行计算，计算后写入内存，存储至硬盘中；</p>
-<p>PCI-E就不一样了，数据直接通过总线与CPU直连，省去了内存调用硬盘的过程，传输效率与速度都成倍提升。</p>
-<h2 id="发展演变">发展演变</h2>
-<p>HDD和早期SSD绝大多数都是使用SATA接口，采用AHCI（Advanced Host Controller Interface），它是由intel联合多家公司研发的系统接口标准。</p>
-<p>AHCI支持NCQ（Native Command Queuing）功能和热插拔技术。NCQ最大深度为32，即主机可以发最多32条命令给HDD或者SSD执行，跟之前硬盘只能一条命令一条命令执行相比，硬盘性能大幅提升。</p>
-<p>这在HDD时代，或者SSD早期，AHCI协议和SATA接口足够满足系统性能需求，因为整个系统性能瓶颈在硬盘端（低速，高延时），而不是在协议和接口端。</p>
-<p>然而，随着SSD技术的飞速发展，SSD盘的性能飙升，底层闪存带宽越来越宽，介质访问延时越来越低，系统性能瓶颈已经由下转移到上面的接口和协议处了。AHCI和SATA已经不能满足高性能和低延时SSD的需求，因此SSD迫切需要自己更快、更高效的协议和接口。</p>
-<p>
-        <img class="mx-auto" alt="images" src="/images/hard_store02.jpg" />   
-    </p>
-<h2 id="搭配关系">搭配关系</h2>
-<p>
-        <img class="mx-auto" alt="images" src="/images/hard_store01.jpg" />   
-    </p>
+<h2 id="postgresql">postgresql</h2>
+<pre><code>log_destination = 'csvlog'
+logging_collector = 'on'
+log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'
+log_rotation_age = '1d'
+log_rotation_size = '100MB'
+log_min_messages = 'info'
+log_min_duration_statement = '1000'
+log_statement = 'ddl'
+</code></pre><h2 id="filebeat">filebeat</h2>
+<pre><code>filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/lib/pgsql/***/postgresql-*.csv
+  fields:
+    log_topics: postgresql
 
+  multiline.pattern: '^[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3} [A-Z]{3}'
+  multiline.negate: true
+  multiline.match: after
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+setup.template.settings:
+  index.number_of_shards: 1
+tags: [&quot;postgesql&quot;]
+setup.kibana:
+output.logstash:
+  hosts: [&quot;*.*.*.*:5044&quot;]
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+</code></pre><h2 id="logstash">logstash</h2>
+<pre><code>#
+# this config is use for version logstash 7.3.1
+#
+
+input {
+  beats {
+    port =&gt; 5044
+  }
+
+  #sdtin{
+  #
+  #}
+
+}
+
+
+# The filter part of this file is commented out to indicate that it
+# is optional.
+
+# use csv plugin against pglog , pglog neet set log format to csv first.
+filter {
+  csv {
+    columns =&gt; [
+      &quot;log_time&quot;,
+      &quot;user_name&quot;,
+      &quot;database_name&quot;,
+      &quot;process_id&quot;,
+      &quot;connection_from&quot;,
+      &quot;session_id&quot;,
+      &quot;session_line_num&quot;,
+      &quot;command_tag&quot;,
+      &quot;session_start_time&quot;,
+      &quot;virtual_transaction_id&quot;,
+      &quot;transaction_id&quot;,
+      &quot;error_severity&quot;,
+      &quot;sql_state_code&quot;,
+      &quot;message&quot;,
+      &quot;detail&quot;,
+      &quot;hint&quot;,
+      &quot;internal_query&quot;,
+      &quot;internal_query_pos&quot;,
+      &quot;context&quot;,
+      &quot;query&quot;,
+      &quot;query_pos&quot;,
+      &quot;location&quot;,
+      &quot;application_name&quot;
+    ]
+  }
+}
+
+#
+# different log type out put different log format
+# 1. log duration log
+# 2. norm log statment
+# 3. checkpint log
+# 4. other
+filter {
+ if [message] =~ /duration: [0-9]{1,8}[.]{0,1}[0-9]{1,5} ms/ {
+     mutate {
+         split =&gt; { &quot;message&quot; =&gt; &quot;statement:&quot; }
+         add_field =&gt; {&quot;duration&quot; =&gt; &quot;%{[message][0]}&quot;}
+         add_field =&gt; {&quot;statement&quot; =&gt; &quot;%{[message][1]}&quot;}
+     }
+    mutate { gsub =&gt; [ &quot;duration&quot;, &quot;duration: &quot;, &quot;&quot; ] }
+    mutate { gsub =&gt; [ &quot;duration&quot;, &quot; ms&quot;, &quot;&quot; ] }
+    mutate { convert =&gt; { &quot;duration&quot; =&gt; &quot;float&quot; } }
+    mutate {
+      add_field =&gt; {&quot;sqltype&quot; =&gt;  &quot;slowsql&quot; }
+      remove_field =&gt; &quot;message&quot;
+   }
+  } else if [message] =~ /statement: / {
+    mutate { gsub =&gt; [ &quot;message&quot;, &quot;statement: &quot;, &quot;&quot; ] }
+    mutate { rename =&gt; {&quot;message&quot; =&gt; &quot;statement&quot;}}
+    mutate {add_field =&gt; { &quot;sqltype&quot; =&gt; &quot;statementsql&quot; } }
+  } else if [message] =~ /checkpoint / {
+    mutate {add_field =&gt; { &quot;sqltype&quot; =&gt; &quot;checkpoint&quot; } }
+    mutate { rename =&gt; {&quot;message&quot; =&gt; &quot;statement&quot;}}
+  } else{
+    mutate {add_field =&gt; { &quot;sqltype&quot; =&gt; &quot;other&quot; } }
+  }
+
+  mutate { remove_field =&gt; [
+    &quot;connection_from&quot;,
+    &quot;session_line_num&quot;,
+    &quot;command_tag&quot;,
+    &quot;session_start_time&quot;,
+    &quot;virtual_transaction_id&quot;,
+    &quot;transaction_id&quot;,
+    &quot;error_severity&quot;,
+    &quot;sql_state_code&quot;,
+    &quot;detail&quot;,
+    &quot;hint&quot;,
+    &quot;internal_query&quot;,
+    &quot;internal_query_pos&quot;,
+    &quot;context&quot;,
+    &quot;query&quot;,
+    &quot;query_pos&quot;,
+    &quot;location&quot;,
+    &quot;application_name&quot;,
+    &quot;source&quot;,
+    &quot;input_type&quot;
+  ] }
+}
+
+output {
+# file {
+#   path =&gt; &quot;/etc/logstash/pg.log&quot;
+#   codec =&gt; line { format =&gt; &quot;custom format: %{message}&quot;}
+# }
+
+#   for debug
+
+#    stdout {
+#        codec =&gt; rubydebug
+#    }
+
+
+ elasticsearch {
+   hosts =&gt; &quot;*.*.*.*:9200&quot;
+#   manage_template =&gt; false
+   template_name =&gt; &quot;postgres_template&quot;
+   index =&gt; &quot;%{[@metadata][beat]}-%{[@metadata][version]}-%{+YYYY.MM.dd}&quot;
+   #user =&gt; &quot;elastic&quot;
+   #password =&gt; &quot;123456&quot;
+ }
+}
+</code></pre>
         </div>
 
         
@@ -165,11 +292,11 @@
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/linux/bmcpasswd/">修改远程管理卡密码</a></li>
+        <li><a href="/linux/findhidpid/">Linux 找出隐藏进程</a></li>
         
-        <li><a href="/linux/ssdiotimeout/">SSD IO request Time Out</a></li>
+        <li><a href="/network-security/wazuh/">Wazuh 功能简介</a></li>
         
-        <li><a href="/postgres/ha_fd/">数据库高可用设计分析</a></li>
+        <li><a href="/linux/last/">Linux 系统登陆记录</a></li>
         
     </ul>
 </div>

@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/archive/" title="Archive wal归档">Archive wal归档</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-content">
+            介绍 所谓WAL日志归档，其实就是把在线的WAL日志备份出来。 配置 vi postgresql.conf wal_level='replica' # - Archiving - archive_mode = on # enables archiving; off, on, or always # (change requires restart) archive_command = 'test ! -f /mnt/backup/%f &amp;&amp; cp %p /mnt/backup/%f' # command to use to archive a logfile segment # placeholders: %p = path of file to archive # %f = file name only # e.g. 'test ! -f /mnt/server/archivedir/%f &amp;&amp; cp %p /mnt/server/archivedir/%f' #archive_timeout = 0 # force a logfile segment switch after this # number of seconds; 0 disables 参数说明 wal_level archive 或更高级别 archive_mode on 开启归档模式，always……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/archive/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/timescaledb/" title="TimescaleDB 时序数据库">TimescaleDB 时序数据库</a>
             </h1>
         </header>
@@ -253,22 +269,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_pathman/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/qos/" title="Qos">Qos</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月21日
-        </date>
-        
-        <div class="post-content">
-            ……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/qos/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -405,6 +405,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
     </li>
     
@@ -440,10 +444,6 @@
         <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -464,7 +464,7 @@
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (19)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
     
