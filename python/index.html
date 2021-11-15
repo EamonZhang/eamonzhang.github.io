@@ -93,6 +93,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月15日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            基于jango channel 实现推送 在官方demo 的基础上自定义推送 Consumer 。 由于只是服务端到客户端单方向推送信息。类中只实现如下3个方法即可 &quot;&quot;&quot; connect 建立连接 disconnet 断开连接 push_messages 推送消息 &quot;&quot;&quot; from channels.generic.websocket import AsyncWebsocketConsumer # # 推送consumer class PushConsumer(AsyncWebsocketConsumer): async def connect(self): # 将username名称设定为 group 名 # self.group_name = self.scope['url_route']['kwargs']['username'] self.room_name = self.scope['url_route']['kwargs']['room_name'] self.room_group_name = 'chat_%s' % self.room_name await self.channel_layer.group_add( self.room_group_name, self.channel_name ) await self.accept() async def disconnect(self, close_code):……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/push_messages/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
             </h1>
         </header>
@@ -311,31 +336,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/python/django-index-ops/" title="django 默认创建第二索引">django 默认创建第二索引</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年4月16日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Django使用postgresql做数据库 db_index创建索引时会创建第二个索引varchar_pattern_ops问题 创建默认索引 minion_id = models.CharField(max_length=100, db_index=True, blank=True, null=False, default=&quot;&quot;) 当字段类型是 models.CharField 或者 models.TextField 时 使用 db_index=True创建索引 会创建第二索引 django.db.backends.postgresql.schema class DatabaseSchemaEditor(BaseDatabaseSchemaEditor): sql_alter_column_type = &quot;ALTER COLUMN %(column)s TYPE %(type)s USING %(column)s::%(type)s&quot; sql_create_sequence = &quot;CREATE SEQUENCE %(sequence)s&quot; sql_delete_sequence = &quot;DROP SEQUENCE IF EXISTS %(sequence)s CASCADE&quot; sql_set_sequence_max……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/python/django-index-ops/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -403,6 +403,10 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
     </li>
     
@@ -438,10 +442,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -464,7 +464,7 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (14)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

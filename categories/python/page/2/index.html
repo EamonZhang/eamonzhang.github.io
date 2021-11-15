@@ -100,6 +100,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/redis-durability/">Redis 持久化策略</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月9日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/redis'>redis</a>
+            
+            <a href='/categories/python'>python</a>
+            
+        </div>
+        
+        <div class="post-content">
+            持久化的两种方式 RDB 快照 AOF 日志 RDB 快照 快照一次全量备份。 特点： 保存时比较耗系统资源容易造成业务卡顿，恢复比较快。 原理： 使用操作系统的多进程COW(COPY ON Write)机制来实现快照持久化 命令： 堵塞 save ，非堵塞后台执行 bgsave 配置： save m n #配置快照(rdb)促发规则，格式：save &lt;seconds&gt; &lt;changes&gt; #save 900 1……
+            <p class="readmore"><a href="https://zhangeamon.top/redis/redis-durability/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/python/django-ndb/">Jdango 多数据库读写配置</a>
             </h1>
         </header>
@@ -235,6 +260,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
     </li>
     
@@ -270,10 +299,6 @@
         <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -296,7 +321,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (14)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

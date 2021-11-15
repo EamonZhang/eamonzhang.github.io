@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>SSD IO request Time Out | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="SSD IO request Time Out - Let&#39;s go 🐌 🐌 🐌">
+    <title>消息推送 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="消息推送 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2021-03-29T09:30:42&#43;08:00'>
+    <meta property="article:published_time" content='2021-11-15T13:47:33&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2021-03-29T09:30:42&#43;08:00'>
+    <meta property="article:modified_time" content='2021-11-15T13:47:33&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="SSD IO request Time Out">
+    <meta name="description" content="消息推送">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/linux/ssdiotimeout/">
+    <meta property="og:url" content="https://zhangeamon.top/python/push_messages/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -95,65 +95,106 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">SSD IO request Time Out</h1>
+            <h1 class="post-title">消息推送</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年3月29日
+            2021年11月15日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
             
         </div>
         
         
         
         <div class="post-content">
-            <p>
-        <img class="mx-auto" alt="images" src="/images/pcie_error_timeout.jpg" />   
-    </p>
-<p>Intel 论坛相似问题讨论</p>
-<p><a href="https://community.intel.com/t5/Solid-State-Drives/I-O-request-timeouts-on-Linux-with-Intel-P3520-P4600-NVMe-PCIe/td-p/577474">https://community.intel.com/t5/Solid-State-Drives/I-O-request-timeouts-on-Linux-with-Intel-P3520-P4600-NVMe-PCIe/td-p/577474</a></p>
-<p>临时解决</p>
-<pre><code> mkfs.xfs -K /dev/nvme01
+            <h2 id="基于jango-channel-实现推送">基于jango channel 实现推送</h2>
+<p>在官方demo 的基础上自定义推送 Consumer 。</p>
+<p>由于只是服务端到客户端单方向推送信息。类中只实现如下3个方法即可</p>
+<pre><code>
+&quot;&quot;&quot;
+connect 建立连接
+disconnet 断开连接
+push_messages 推送消息
+&quot;&quot;&quot;
 
- -K     Do not attempt to discard blocks at mkfs time.
-</code></pre><p>带来问题</p>
-<pre><code>[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa8188cf9&gt;] schedule_preempt_disabled+0x29/0x70
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa8186c67&gt;] __mutex_lock_slowpath+0xc7/0x1d0
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa818603f&gt;] mutex_lock+0x1f/0x2f
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7d2d596&gt;] ima_file_check+0xa6/0x1b0
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c5dfba&gt;] do_last+0x59a/0x1340
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c28ba6&gt;] ? kmem_cache_alloc_trace+0x1d6/0x200
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c5ee2d&gt;] path_openat+0xcd/0x5a0
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c01158&gt;] ? page_add_new_anon_rmap+0xb8/0x170
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c6107d&gt;] do_filp_open+0x4d/0xb0
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c6f177&gt;] ? __alloc_fd+0x47/0x170
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c4cbc4&gt;] do_sys_open+0x124/0x220
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c4ccde&gt;] SyS_open+0x1e/0x20
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa8194f92&gt;] system_call_fastpath+0x25/0x2a
-[Tue Mar 30 12:19:12 2021] INFO: task postmaster:119438 blocked for more than 120 seconds.
-[Tue Mar 30 12:19:12 2021] &quot;echo 0 &gt; /proc/sys/kernel/hung_task_timeout_secs&quot; disables this message.
-[Tue Mar 30 12:19:12 2021] postmaster      D ffff9180ced1acc0     0 119438  40020 0x00000084
-[Tue Mar 30 12:19:12 2021] Call Trace:
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa8188cf9&gt;] schedule_preempt_disabled+0x29/0x70
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa8186c67&gt;] __mutex_lock_slowpath+0xc7/0x1d0
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa818603f&gt;] mutex_lock+0x1f/0x2f
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7d2d596&gt;] ima_file_check+0xa6/0x1b0
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c5dfba&gt;] do_last+0x59a/0x1340
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c28ba6&gt;] ? kmem_cache_alloc_trace+0x1d6/0x200
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c5ee2d&gt;] path_openat+0xcd/0x5a0
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7bee659&gt;] ? do_read_fault.isra.63+0x139/0x1b0
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c6107d&gt;] do_filp_open+0x4d/0xb0
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c6f177&gt;] ? __alloc_fd+0x47/0x170
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c4cbc4&gt;] do_sys_open+0x124/0x220
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa7c4ccde&gt;] SyS_open+0x1e/0x20
-[Tue Mar 30 12:19:12 2021]  [&lt;ffffffffa8194f92&gt;] system_call_fastpath+0x25/0x2a
-</code></pre><p>由于是硬盘与主板之间的通信问题，操作系统和内核层面的解决不能治根。</p>
-<p>最后解决</p>
-<pre><code> 螺丝刀
+from channels.generic.websocket import  AsyncWebsocketConsumer
+
+# # 推送consumer
+class PushConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+      # 将username名称设定为 group 名
+      # self.group_name = self.scope['url_route']['kwargs']['username']
+      self.room_name = self.scope['url_route']['kwargs']['room_name']
+      self.room_group_name = 'chat_%s' % self.room_name
+      await self.channel_layer.group_add(
+        self.room_group_name,
+        self.channel_name
+      )
+      await self.accept()
+
+    async def disconnect(self, close_code):
+      await self.channel_layer.group_discard(
+        self.room_group_name,
+        self.channel_name
+      )
+    # print(PushConsumer.chats)
+    async def push_message(self, event):
+      message = event['message']
+      # 可记录消息是否推送成功
+      print(&quot;push messsage  %s to %s &quot; % (message, self.room_group_name))
+      await self.send(text_data=json.dumps({
+        &quot;message&quot;: message
+      }))
+</code></pre><h2 id="推送方法实现">推送方法实现</h2>
+<pre><code>### python manage.py shell
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+
+def push(username, message):
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        username,
+        {
+            &quot;type&quot;: &quot;push.message&quot;,
+            &quot;message&quot;: message
+        }
+    )
+</code></pre><h2 id="调用推送">调用推送</h2>
+<pre><code>push(&quot;username&quot;,&quot;your message&quot;)
+</code></pre><h2 id="点对点通信的一些思路">点对点通信的一些思路</h2>
+<p>聊天组的命名形式为user_a的id加上下划线_加上user_b的id，其中id值从小到大放置，例如： 123_125。 通信双方可以确定唯一groupname。</p>
+<p>在全局。比如redis中记录groupname中双方是否同时在线。如果同时在线，则发送方直接将信息发送的group中。如果对方不在先。则向对方发送一条推送消息唤醒对方连接到group中。</p>
+<pre><code>async def receive_json(self, message, **kwargs):
+   # 收到信息时调用
+   to_user = message.get('to_user')
+   # 信息发送
+   length = redis.connection.get[self.group_name]
+   # 判断对方是否在group中存在连接
+   if length == 2:
+     await self.channel_layer.group_send(
+       self.group_name,
+       {
+         &quot;type&quot;: &quot;chat.message&quot;,
+         &quot;message&quot;: message.get('message'),
+       },
+     )
+   else:
+     await self.channel_layer.group_send(
+       to_user,
+       {
+         &quot;type&quot;: &quot;push.message&quot;,
+         &quot;event&quot;: {'message': message.get('message'), 'group': self.group_name}
+       },
+     )
+ async def chat_message(self, event):
+   # Handles the &quot;chat.message&quot; event when it's sent to us.
+   await self.send_json({
+     &quot;message&quot;: event[&quot;message&quot;],
+   })
 </code></pre>
         </div>
 
@@ -166,11 +207,11 @@
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/postgres/ha_fd/">数据库高可用设计分析</a></li>
+        <li><a href="/postgres/pg_elk/">数据库日志分析</a></li>
         
-        <li><a href="/linux/github-dns/">Github DNS 加速</a></li>
+        <li><a href="/linux/findhidpid/">Linux 找出隐藏进程</a></li>
         
-        <li><a href="/postgres/replication02/">流复制同步级别</a></li>
+        <li><a href="/network-security/wazuh/">Wazuh 功能简介</a></li>
         
     </ul>
 </div>

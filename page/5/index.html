@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月17日
+        </date>
+        
+        <div class="post-content">
+            流复制过程 synchronous_commit = on ） # synchronization level; on default # off, local, remote_write, or on 同步级别 remote_apply：事务commit或rollback时，等待其redo在primary、以及同步standby(s)已持久化，并且其redo在同步 standby(s)已apply。 on：事务commit或rollback时，……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/replication02/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/redis/redis-scence/" title="Redis 应用场景">Redis 应用场景</a>
             </h1>
         </header>
@@ -290,22 +306,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/git-objects-clean/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgresql/" title="Postgres  数据库">Postgres  数据库</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月8日
-        </date>
-        
-        <div class="post-content">
-            关于优化思考 数据库优化思考 - 性能优化 数据库优化思考 - 结构设计 数据库优化思考 - 模块调优 基础知识 模板数据库 数据库日志 Explain 执行计划 vacuum 垃圾回收器 表空间膨胀 fillfactor 填充因子 TOAST 技术 hot update tablespace 表空间 锁机制 锁等待 cluster 聚族表 咨询锁 adlock 数据库年龄 方法和函数 高级SQL 数据库 OOM 预防 跨库操作 auto vacuum 触发机制 unlogged table 物化视图 安装维……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgresql/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -442,6 +442,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
     </li>
     
@@ -477,10 +481,6 @@
         <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -503,7 +503,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (14)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
