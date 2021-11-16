@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgpool2/" title="pgpoolii 读写分离">pgpoolii 读写分离</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-content">
+            https://www.pgpool.net/docs/pgpool-II-3.5.4/doc/tutorial-zh_cn.html#dist-def https://www.xiaomastack.com/2019/08/16/postgresql集群/……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgpool2/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/logical-replication/" title="Logical Replication 逻辑复制">Logical Replication 逻辑复制</a>
             </h1>
         </header>
@@ -253,22 +269,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pgwatch2/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_lock/" title="锁机制">锁机制</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月24日
-        </date>
-        
-        <div class="post-content">
-            https://blog.csdn.net/pg_hgdb/article/details/79403651 https://habr.com/en/company/postgrespro/blog/500714/ 表锁 https://www.modb.pro/db/26462 查看被堵塞的任务 select * from pg_locks where not granted; locktype | database | relation | page | tuple | virtualxid | transactionid | classid | objid | objsubid | virtualtransaction | pid | mode | granted | fastpath ----------+----------+----------+------+-------+------------+---------------+---------+-------+----------+--------------------+-----+------+---------+---------- (0 行记录) 查看等待锁信息，是被谁堵塞了 select pg_blocking_pids(pid); pg_blocking_pids ------------------ {} 终止进程 select pg_cancel_backend(pid); # select select pg_terminate_backend(pid); # update insert delete 事务的隔离级别 Postgres 数据库共有三种数据隔离级别。 Read Commit 读看提交 默认级别 在读开始的时候建立数据快照 Repeat Read 可重复读。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_lock/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -405,6 +405,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
     </li>
     
@@ -440,10 +444,6 @@
         <a href="https://zhangeamon.top/mysql/connections/" title="连接数管理">连接数管理</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -466,11 +466,11 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (15)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (16)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (8)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (9)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     
