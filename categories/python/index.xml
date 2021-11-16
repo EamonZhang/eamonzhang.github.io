@@ -6,7 +6,16 @@
     <description>Recent content in python on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 15 Nov 2021 13:47:33 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Nov 2021 10:30:23 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>联想搜索</title>
+      <link>https://zhangeamon.top/redis/automated-keyword/</link>
+      <pubDate>Tue, 16 Nov 2021 10:30:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/redis/automated-keyword/</guid>
+      <description>Redis 联想搜索实现 基于redis ZSET 例子: 当输入n时显示所有n开头的数据，当输入nb时显示所有nb开头的数据。 # 数据录入 127.0.0.1:6379&amp;gt; ZADD ss 0 &#39;n&#39; (integer) 1 127.0.0.1:6379&amp;gt; ZADD ss 0 &#39;nb&#39; (integer) 1 127.0.0.1:6379&amp;gt; ZADD ss 0 &#39;nba&#39; (integer) 1 # 搜索n 127.0.0.1:6379&amp;gt; ZRANK ss &#39;n&#39; (integer) 0 127.0.0.1:6379&amp;gt; ZRANGE ss 0 -1 1) &amp;quot;n&amp;quot; 2) &amp;quot;nb&amp;quot; 3) &amp;quot;nba&amp;quot; # 搜索nb 127.0.0.1:6379&amp;gt; ZRANK ss &#39;nb&#39; (integer) 1 127.0.0.1:6379&amp;gt; ZRANGE ss 1 -1 1) &amp;quot;nb&amp;quot; 2) &amp;quot;nba&amp;quot;</description>
+    </item>
+    
     <item>
       <title>消息推送</title>
       <link>https://zhangeamon.top/python/push_messages/</link>

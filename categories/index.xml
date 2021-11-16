@@ -6,13 +6,22 @@
     <description>Recent content in Categories on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 15 Nov 2021 13:47:33 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Nov 2021 10:30:23 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>python</title>
       <link>https://zhangeamon.top/categories/python/</link>
-      <pubDate>Mon, 15 Nov 2021 13:47:33 +0800</pubDate>
+      <pubDate>Tue, 16 Nov 2021 10:30:23 +0800</pubDate>
       
       <guid>https://zhangeamon.top/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>redis</title>
+      <link>https://zhangeamon.top/categories/redis/</link>
+      <pubDate>Tue, 16 Nov 2021 10:30:23 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/categories/redis/</guid>
       <description></description>
     </item>
     
@@ -49,15 +58,6 @@
       <pubDate>Sat, 09 Oct 2021 13:29:05 +0800</pubDate>
       
       <guid>https://zhangeamon.top/categories/mysql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>redis</title>
-      <link>https://zhangeamon.top/categories/redis/</link>
-      <pubDate>Thu, 12 Aug 2021 10:44:01 +0800</pubDate>
-      
-      <guid>https://zhangeamon.top/categories/redis/</guid>
       <description></description>
     </item>
     

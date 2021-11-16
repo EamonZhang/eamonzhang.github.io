@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>主从复制 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="主从复制 - Let&#39;s go 🐌 🐌 🐌">
+    <title>联想搜索 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="联想搜索 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2021-10-09T13:29:05&#43;08:00'>
+    <meta property="article:published_time" content='2021-11-16T10:30:23&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2021-10-09T13:29:05&#43;08:00'>
+    <meta property="article:modified_time" content='2021-11-16T10:30:23&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="主从复制">
+    <meta name="description" content="联想搜索">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/mysql/master-slave/">
+    <meta property="og:url" content="https://zhangeamon.top/redis/automated-keyword/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -95,24 +95,50 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">主从复制</h1>
+            <h1 class="post-title">联想搜索</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年10月9日
+            2021年11月16日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/mysql'>mysql</a></span>
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
             
         </div>
         
         
         
         <div class="post-content">
-            <p><a href="https://www.cnblogs.com/QicongLiang/p/9817533.html">https://www.cnblogs.com/QicongLiang/p/9817533.html</a></p>
-
+            <h2 id="redis-联想搜索实现">Redis 联想搜索实现</h2>
+<ul>
+<li>基于redis ZSET</li>
+</ul>
+<p>例子: 当输入<code>n</code>时显示所有n开头的数据，当输入<code>nb</code>时显示所有nb开头的数据。</p>
+<pre><code># 数据录入
+127.0.0.1:6379&gt; ZADD ss 0 'n'
+(integer) 1
+127.0.0.1:6379&gt; ZADD ss 0 'nb'
+(integer) 1
+127.0.0.1:6379&gt; ZADD ss 0 'nba'
+(integer) 1
+# 搜索n
+127.0.0.1:6379&gt; ZRANK ss 'n'
+(integer) 0
+127.0.0.1:6379&gt; ZRANGE ss 0 -1
+1) &quot;n&quot;
+2) &quot;nb&quot;
+3) &quot;nba&quot;
+# 搜索nb
+127.0.0.1:6379&gt; ZRANK ss 'nb'
+(integer) 1
+127.0.0.1:6379&gt; ZRANGE ss 1 -1
+1) &quot;nb&quot;
+2) &quot;nba&quot;
+</code></pre>
         </div>
 
         
@@ -124,11 +150,11 @@
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/mysql/connections/">连接数管理</a></li>
+        <li><a href="/python/push_messages/">消息推送</a></li>
         
-        <li><a href="/redis/pubsub/">发布订阅</a></li>
+        <li><a href="/postgres/pg_elk/">数据库日志分析</a></li>
         
-        <li><a href="/redis/distributedlock/">基于Redis 的分布式锁实现</a></li>
+        <li><a href="/linux/findhidpid/">Linux 找出隐藏进程</a></li>
         
     </ul>
 </div>

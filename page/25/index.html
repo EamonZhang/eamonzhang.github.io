@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/go/install/" title="Go 语言安装及配置">Go 语言安装及配置</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月23日
+        </date>
+        
+        <div class="post-content">
+            1.下载安装包 https://golang.org/dl/ https://golang.google.cn/dl/ 将下载的二进制包解压至 /usr/local目录 2.配置环境变量 cat /etc/profile.d/go.sh export GOROOT=/usr/local/go export GOPATH=~/golib:~/goproject export GOBIN=~/gobin export PATH=$PATH:$GOROOT/bin:$GOBIN export GOPROXY=https://goproxy.cn export GO111MODULE=on 说明: GOROOT go安装包存放位置 GOPATH 工作区，多个工作区之间用冒号间隔 GOBIN 可执行文件目录 PATH 系统环境变量 Goproxy 中国完全实现了 Go 的模块代理协议。并且它是一个由中国备受信赖的云服务提供商七牛云支……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/go/install/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/network-security/letusencrypt/" title="Let&#39;s Encrypt 通配符证书">Let&#39;s Encrypt 通配符证书</a>
             </h1>
         </header>
@@ -246,22 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/replication01/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/install01/" title="安装 Postgresql">安装 Postgresql</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月17日
-        </date>
-        
-        <div class="post-content">
-            官网 1.准备源 清除历史残余，有些是系统自带的旧版本数据库 rpm -qa | grep postgres rpm -r **** 安装新数据源 yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm 可将所有的软件更新到最新版本如 ， postgresql-10.2 更新到当前最新的postgresql-10.6 yum update -y 2.安装 yum install -y postgresql10-server postgresql10 postgresql10-contrib 3.初始化 默认 /usr/pgsql-10/bin/postgresql-10-setup initdb 自定义 /usr/pgsql-10/bin/initdb -D $PGDATA -U postgres -E UTF-8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8 -k -D 数据存放位置 -U 超级用户 -E 默认编码……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/install01/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -378,6 +378,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
     </li>
     
@@ -413,10 +417,6 @@
         <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -439,11 +439,11 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (14)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (15)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

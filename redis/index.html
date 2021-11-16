@@ -93,6 +93,33 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Redis 联想搜索实现 基于redis ZSET 例子: 当输入n时显示所有n开头的数据，当输入nb时显示所有nb开头的数据。 # 数据录入 127.0.0.1:6379&gt; ZADD ss 0 'n' (integer) 1 127.0.0.1:6379&gt; ZADD ss 0 'nb' (integer) 1 127.0.0.1:6379&gt; ZADD ss 0 'nba' (integer) 1 # 搜索n 127.0.0.1:6379&gt; ZRANK ss 'n' (integer) 0 127.0.0.1:6379&gt; ZRANGE ss 0 -1 1) &quot;n&quot; 2) &quot;nb&quot; 3) &quot;nba&quot; # 搜索nb 127.0.0.1:6379&gt; ZRANK ss 'nb' (integer) 1 127.0.0.1:6379&gt; ZRANGE ss 1 -1 1) &quot;nb&quot; 2) &quot;nba&quot;……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/automated-keyword/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
             </h1>
         </header>
@@ -318,6 +345,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
     </li>
     
@@ -353,10 +384,6 @@
         <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -379,11 +406,11 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (14)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (15)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     

@@ -91,6 +91,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/hdparm/" title="hdparm 查看硬盘型号">hdparm 查看硬盘型号</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月19日
+        </date>
+        
+        <div class="post-content">
+            安装工具 yum install hdparm 查看 -i参数是在引导驱动器时获得的识别信息，这个信息有时候不完整也不一 定准确 hdparm -i /dev/sdb /dev/sdb: Model=INTEL SSDSC2KW512G8, FwRev=LHF002C, SerialNo=PHLA75210153512DGN Config={ Fixed } RawCHS=16383/16/63, TrkSize=0, SectSize=0, ECCbytes=0 BuffType=unknown, BuffSize=unknown, MaxMultSect=16, MultSect=off CurCHS=16383/16/63, CurSects=16514064, LBA=yes, LBAsects=1000215216 IORDY=on/off, tPIO={min:120,w/IORDY:120}, tDMA={min:120,rec:120} PIO modes: pio0 pio3 pio4 DMA modes: mdma0 mdma1 mdma2 UDMA modes: udma0 udma1 udma2 udma3 udma4 udma5 *udma6 AdvancedPM=yes: unknown setting WriteCache=enabled Drive conforms to: unknown: ATA/ATAPI-2,3,4,5,6,7 * signifies the current active mode -I参数是直接从驱动器获取识别信息, 并以原始的,未经过修改和更正的形式……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/hdparm/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/about/3brothers/" title="扁鹊三兄弟">扁鹊三兄弟</a>
             </h1>
         </header>
@@ -246,22 +262,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/k8s/install/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/monitor/" title="Postgres 监控">Postgres 监控</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月6日
-        </date>
-        
-        <div class="post-content">
-            各种监控方式 zabbix Monitor PostgreSQL with Zabbix postgres_exporter A PostgresSQL metric exporter for Prometheus pgwatch2 PostgreSQL metrics monitor/dashboard pgmetrics Collect and display information and stats from a running PostgreSQL server pgdash (收费) pganalyze PostgreSQL Performance Monitoring 参考自己实现 状态查看 pgcenter pgcenter top pgcenter: 2018-12-20 11:10:25, load average: 0.94, 0.84, 0.86 state [ok]: ::1:5432 postgres@postgres (ver: 10.6, up 8 days 19:57:54, recovery: f) %cpu: 15.0 us, 3.7 sy, 0.0 ni, 75.3 id, 5.7 wa, 0.0 hi, 0.2 si, 0.0 st activity: 5/1000 conns, 0/0 prepared, 2 idle, 0 idle_xact, 3 active, 0 waiting, 0 others MiB mem: 7821 total, 162 free, 424 used, 7235 buff/cached autovacuum: 0/3 workers/max, 0 manual, 0 wraparound, 00:00:00 vac_maxtime MiB swap: 1023 total, 903 free, 120 used, 0/0 dirty/writeback statements: 1888 stmt/s,……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/monitor/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -398,6 +398,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
     </li>
     
@@ -433,10 +437,6 @@
         <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -459,11 +459,11 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (14)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (15)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (8)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
     
