@@ -195,7 +195,76 @@ def push(username, message):
    await self.send_json({
      &quot;message&quot;: event[&quot;message&quot;],
    })
-</code></pre>
+</code></pre><h2 id="客户端代码">客户端代码</h2>
+<h4 id="服务端准备">服务端准备</h4>
+<p>由于官方示例服务<code>ws://echo.websocket.org/</code> 不再维护。 以下利用channel 简单实现。</p>
+<p>consumers.py</p>
+<pre><code>from asgiref.sync import async_to_sync
+from channels.generic.websocket import WebsocketConsumer
+
+class EchoConsumer(WebsocketConsumer):
+
+   def connect(self):
+        self.accept()
+        print(&quot;已经建立连接&quot;)
+
+   def disconnect(self, code):
+        self.close()
+
+   def receive(self, text_data=None, bytes_data=None):
+        self.send(text_data=text_data)
+</code></pre><p>routing.py</p>
+<pre><code>websocket_urlpatterns = [
+    re_path(r'ws/echo/$', consumers.EchoConsumer.as_asgi()),
+]
+</code></pre><h4 id="长连接调用">长连接调用</h4>
+<pre><code>pip3 install websocket-client
+</code></pre><pre><code>import websocket
+import _thread
+import time
+
+def on_message(ws, message):
+    print(&quot;receive :&quot;+message)
+
+def on_error(ws, error):
+    print(error)
+
+def on_close(ws, close_status_code, close_msg):
+    print(&quot;### closed ###&quot;)
+
+def on_open(ws):
+    print(&quot;### open ###&quot;)
+    def run(*args):
+        for i in range(30):
+            time.sleep(1)
+            ws.send(&quot;Hello %d&quot; % i)
+            print(&quot;send : %d &quot; % (i))
+        time.sleep(1)
+        print(&quot;thread terminating...&quot;)
+        ws.close()
+    _thread.start_new_thread(run, ())
+
+if __name__ == &quot;__main__&quot;:
+    # websocket.enableTrace(True)
+    ws = websocket.WebSocketApp(&quot;ws://127.0.0.1:8000/ws/echo/&quot;,
+                              on_open=on_open,
+                              on_message=on_message,
+                              on_error=on_error,
+                              on_close=on_close)
+    ## 心跳保持连接
+    ws.run_forever(ping_interval=60,ping_timeout=50)
+</code></pre><h4 id="短连接调用">短连接调用</h4>
+<pre><code>from websocket import create_connection
+ws = create_connection(&quot;ws://127.0.0.1:8000/ws/echo/&quot;)
+print(&quot;Sending 'Hello, World'...&quot;)
+ws.send(&quot;Hello, World&quot;)
+print(&quot;Sent&quot;)
+print(&quot;Receiving...&quot;)
+result =  ws.recv()
+print(&quot;Received '%s'&quot; % result)
+ws.close()
+</code></pre><p>官网 <a href="https://pypi.org/project/websocket-client/">https://pypi.org/project/websocket-client/</a></p>
+
         </div>
 
         
