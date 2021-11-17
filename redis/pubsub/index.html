@@ -143,10 +143,20 @@ def subscibeMessages():
     p.subscribe(&quot;channel.shenyang&quot;)
     while True:
         message = p.get_message()
-        if not message:
+        if message:
+            print(message)   
+        else:
             time.sleep(1)
-            continue
-        print(message)
+
+##加入超时时间堵塞读
+def subscibeMessages():
+    p = redis_client.pubsub()
+    p.subscribe(&quot;channel.shenyang&quot;)
+    while True:
+        message = p.get_message(timeout=10) # 10秒等待
+        if message:
+            print(message)
+
 #阻塞消费者
 def subscibeBlockMessages():
     p = redis_client.pubsub()
