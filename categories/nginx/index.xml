@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nginx on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/categories/nginx/</link>
+    <description>Recent content in nginx on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 20 Apr 2020 11:12:28 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/nginx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nginx 状态监控</title>
+      <link>https://zhangeamon.top/monitor/nginx-status/</link>
+      <pubDate>Mon, 20 Apr 2020 11:12:28 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/nginx-status/</guid>
+      <description>Nginx 开启status用以监控状态信息 Nginx 可以通过with-http_stub_status_module模块来监控nginx的一些状态信息。 通过nginx -V来查看是否有with-http_stub_status_module该模块。 # nginx -V nginx version: nginx/1.16.1 built by gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) built with OpenSSL 1.0.2k-fips 26 Jan 2017 TLS SNI support</description>
+    </item>
+    
+  </channel>
+</rss>
