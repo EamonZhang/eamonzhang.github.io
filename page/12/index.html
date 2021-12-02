@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/es/curl-es/" title="使用curl命令操作elasticsearch">使用curl命令操作elasticsearch</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年10月16日
+        </date>
+        
+        <div class="post-content">
+            第一：_cat系列 _cat系列提供了一系列查询elasticsearch集群状态的接口。你可以通过执行 curl -XGET localhost:9200/_cat 获取所有_cat系列的操作 =^.^= /_cat/allocation /_cat/shards /_cat/shards/{index} /_cat/master /_cat/nodes /_cat/indices /_cat/indices/{index} /_cat/segments /_cat/segments/{index} /_cat/count /_cat/count/{index} /_cat/recovery /_cat/recovery/{index} /_cat/health /_cat/pending_tasks /_cat/aliases /_cat/aliases/{alias} /_cat/thread_pool /_cat/plugins /_cat/fielddata /_cat/fielddata/{fields} 你也可以后面加一个v，让输出内容表格显示表头，举例 curl -XGET http://10.1.80.85:9200/_cat/indices?v health status index uuid pri rep docs.count docs.deleted store.size pri.store.size green open filebeat-7.3.2-2019.09.27 agrhjW7KR_ObgdwrUOpJMA 1 1 218974 0 181.8mb 91mb 第二：……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/es/curl-es/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/monitor/postgres-indicators/" title="Postgres 10 监控指标">Postgres 10 监控指标</a>
             </h1>
         </header>
@@ -231,22 +247,6 @@
             背景介绍 24sql TPC-H 基准测试 下载安装 tpch-tools安装包 修改makefile.suite 模版 CC=gcc DATABASE-TDAT MACHINE=LINUX WORKLOAD=TPCH 执行 make 进行编译 生成测试数据 生成20G测试数据 ./dbgen -s 20 ls -lrth *.tbl 自动生成的测试数据每行的结尾多余一个 &lsquo;|&rsquo; 需要处理 for i in `ls *.tbl`; do sed 's/|$//' $i &gt; ${i/tbl/csv}; echo $i; done; 创建表及索引 在下面的文件中分别是创建表和对应索引的s……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/tpch/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgstattuple/" title="表空间膨胀">表空间膨胀</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年5月22日
-        </date>
-        
-        <div class="post-content">
-            背景介绍 由于mvcc机制，数据被删除后只是被标记为删除，实际空间没有被释放，这是表空间膨胀的根本原因。 目前用于解决表空间膨胀方式有如下方式 1 删除dead tuple vacuum ,tuple被清理。数据库可以自动执行autovacuum vacuum full ,tuple被清理并且空间连续紧凑。弊端，在执行过程中会锁表。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgstattuple/">阅读全文</a></p>
     </article>
     
     
@@ -440,7 +440,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (15)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

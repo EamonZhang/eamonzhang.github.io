@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>两地三机房方案落地 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="两地三机房方案落地 - Let&#39;s go 🐌 🐌 🐌">
+    <title>网络穿透 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="网络穿透 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2018-10-17T17:19:09&#43;08:00'>
+    <meta property="article:published_time" content='2020-11-01T17:03:10&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2018-10-17T17:19:09&#43;08:00'>
+    <meta property="article:modified_time" content='2020-11-01T17:03:10&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="两地三机房方案落地">
+    <meta name="description" content="网络穿透">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/tidb/%E4%B8%A4%E5%9C%B0%E4%B8%89%E6%9C%BA%E6%88%BF%E6%96%B9%E6%A1%88%E8%90%BD%E5%9C%B0/">
+    <meta property="og:url" content="https://zhangeamon.top/linux/frp/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -96,16 +96,100 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">两地三机房方案落地</h1>
+            <h1 class="post-title">网络穿透</h1>
         </header>
         <date class="post-meta meta-date">
-            2018年10月17日
+            2020年11月1日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
         
         
         
         <div class="post-content">
-            
+            <h2 id="背景">背景</h2>
+<p>一个类似于花生壳的服务。将一个内网服务暴露在公网中提供访问。</p>
+<h2 id="前提条件">前提条件</h2>
+<ul>
+<li>拥有公网IP的服务器。比如 xx云服务器</li>
+</ul>
+<h2 id="准备">准备</h2>
+<p>下载安装包</p>
+<pre><code>wget https://github.com/fatedier/frp/releases/download/v0.38.0/frp_0.38.0_linux_amd64.tar.gz
+</code></pre><p>解压后</p>
+<pre><code>.
+├── frpc
+├── frpc_full.ini
+├── frpc.ini
+├── frps
+├── frps_full.ini
+├── frps.ini
+├── LICENSE
+└── systemd
+    ├── frpc.service
+    ├── frpc@.service
+    ├── frps.service
+    └── frps@.service
+</code></pre><p>分为客户端和服务端</p>
+<p>客户端： 内网服务器</p>
+<p>服务端： 拥有公网ip的服务器</p>
+<h2 id="简单配置">简单配置</h2>
+<h4 id="服务端">服务端</h4>
+<pre><code>cp frps /usr/bin/
+cp frps.service /lib/systemd/system/frps.service
+</code></pre><p>cat /etc/frp/frps.ini</p>
+<pre><code>[common]
+# 用于客户端连接的端口
+bind_port = 6000 
+# 与客户端的保持一致。验证
+token = 'abcdefghijklmn'
+authentication_method = token
+# web 服务穿透是使用
+vhost_http_port = 8080
+</code></pre><h4 id="客户端">客户端</h4>
+<pre><code>cp frpc /usr/bin/
+cp frpc.service /lib/systemd/system/frpc.service
+</code></pre><p>cat /etc/frp/frpc.ini</p>
+<pre><code>[common]
+# 服务端IP
+server_addr = xxxxx 
+# 服务端口，服务端保持一致
+server_port = 6000
+# 与服务端的保持一致。验证
+authentication_method = token
+token = 'abcdefghijklmn'
+
+[ssh]
+type = tcp
+local_ip = 127.0.0.1
+#客户端本机ssh端口
+local_port = 22
+#登陆访问IP的端口
+remote_port = 2222
+use_encryption = true
+use_compression = true
+
+[web]
+type = http
+local_ip = 127.0.0.1
+#客户端服务端口
+local_port = 8000
+#dns
+custom_domains = xxx.zhangeamon.top
+# 如需要验证
+#http_user = abc
+#http_pwd = abc
+</code></pre><h4 id="测试">测试</h4>
+<p>ssh</p>
+<pre><code>ssh user@公网IP --port 2222
+</code></pre><p>web , 注意端口号</p>
+<pre><code>curl http://xxx.zhangeamon.top：8080
+</code></pre>
         </div>
 
         
@@ -117,11 +201,11 @@
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/postgres/replication01/">主从流复制</a></li>
+        <li><a href="/linux/ubuntu2004-network/">Ubuntu 20.04 网络配置</a></li>
         
-        <li><a href="/postgres/install01/">安装 Postgresql</a></li>
+        <li><a href="/postgres/readonly/">创建只读用户</a></li>
         
-        <li><a href="/about/tech/">技术图谱</a></li>
+        <li><a href="/dw/document/">文档</a></li>
         
     </ul>
 </div>

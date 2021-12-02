@@ -98,6 +98,15 @@
     </item>
     
     <item>
+      <title>网络穿透</title>
+      <link>https://zhangeamon.top/linux/frp/</link>
+      <pubDate>Sun, 01 Nov 2020 17:03:10 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/frp/</guid>
+      <description>背景 一个类似于花生壳的服务。将一个内网服务暴露在公网中提供访问。 前提条件 拥有公网IP的服务器。比如 xx云服务器 准备 下载安装包 wget https://github.com/fatedier/frp/releases/download/v0.38.0/frp_0.38.0_linux_amd64.tar.gz 解压后 . ├── frpc ├── frpc_full.ini ├── frpc.ini ├── frps ├── frps_full.ini ├── frps.ini ├── LICENSE └── systemd ├── frpc.service ├── frpc@.service ├── frps.service └── frps@.service 分为客户端和服务端 客户端： 内网服务器 服务端： 拥有</description>
+    </item>
+    
+    <item>
       <title>Ubuntu 20.04 网络配置</title>
       <link>https://zhangeamon.top/linux/ubuntu2004-network/</link>
       <pubDate>Mon, 21 Sep 2020 16:48:24 +0800</pubDate>

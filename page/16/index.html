@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgwatch2/" title="pgwatch2 数据库指标监控查看">pgwatch2 数据库指标监控查看</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月29日
+        </date>
+        
+        <div class="post-content">
+            介绍 pgwatch2官方 官方演示示例 架构 agent server agent 在被监控的pg上自定义方法，用于收集数据库信息。这些自定义的方法需要依赖需要数据库扩展如pg_stat_statements,plpythonu. server 负责存储收集过来的信息，可以存放在postgres或influxdb中. 并将收集的信息……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgwatch2/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_lock/" title="锁机制">锁机制</a>
             </h1>
         </header>
@@ -231,22 +247,6 @@
             https://www.certdepot.net/rhel7-get-started-cgroups/ https://www.oracle.com/technical-resources/articles/linux/resource-controllers-linux.html iops和bps限制 限制sda 的读写 lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sda 8:0 0 931.5G 0 disk /data sdb 8:16 0 223.6G 0 disk ├─sdb1 8:17 0 200M 0 part /boot/efi ├─sdb2 8:18 0 1G 0 part /boot ├─sdb3 8:19 0 7.8G 0 part [SWAP] └─sdb4 8:20 0 214.6G 0 part / cd /sys/fs/cgroup/blkio/ echo &quot;8:0 102400&quot; &gt; blkio.throttle.read_bps_device echo &quot;8:0 10&quot; &gt; blkio.throttle.read_iops_device echo &quot;8:0 204800&quot; &gt; blkio.throttle.write_bps_device echo &quot;8:0 20&quot; &gt; blkio.throttle.write_iops_device……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/linux/cgroups/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/monitor/postgres/" title="Postgres">Postgres</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月11日
-        </date>
-        
-        <div class="post-content">
-            Postgresql 常用监控 , 巡检报表 直接利用PG提供的性能统计数据 PG的很多性能数据可以通过查询pg_stat_或pg_statio_开头的系统表获取 zabbix http://pg-monz.github.io/pg_monz/index-en.html zabbix-extensions PG专用的监控工具 pgsnap, pgstatspack,pgwatch,pg_statsinfo等。这些工具主要做PG的性能分析，状态查看的。不能做故障……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/monitor/postgres/">阅读全文</a></p>
     </article>
     
     
@@ -440,7 +440,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (15)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

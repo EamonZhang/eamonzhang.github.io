@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/vsftp/" title="Centos FTP 服务">Centos FTP 服务</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            利用vsftpd 搭建FTP 服务器 安装 yum -y install vsftpd 添加用户及设置密码 useradd -s /sbin/nologin -d /home/ftp_test ftp_test passwd ftp_test -s 禁止ssh登录主机 -d 设置ftp_test 用户home 目录，用于存放数据 基础配置 vi /etc/vsftpd/vsftpd.conf # 禁止匿名访问 anonymous_enable=NO # 禁止dns解析 reverse_lookup_enable=NO 启动&amp;开机自启 systemctl start vsftpd.service systemctl enable vsftpd.service filezilla 客户端验证 host: 服务器IP port: 默认 user: password: 测试本地上传，远……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/vsftp/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/log/" title="数据库日志">数据库日志</a>
             </h1>
         </header>
@@ -245,29 +268,6 @@
             单词表 utilizes 利用 degradation 退化，降级 hypertable 元数据表 monotonically 单调的 monotonically increase: 单调递增 solely 单独地，唯一地 cardinality 基数 excel 优于，擅长 eliminate 干掉，排除 refine 精致的，经过改良的 distilled 从..中萃取 robust 精力充沛的 fundamental 基础的 主要的 trademark 商标 affilicate 隶属 reference 参考 constant development 持续发展 convention 约定, 习惯 collateral n. 抵押物; 担保品;i mandatory 强制的 simulation 模拟 irrespective 不用关心的 optimally 最优 from scratch 从零开始……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/about/en/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/params/" title="数据库参数">数据库参数</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月27日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            性能参数 pgtune pgconfig 日志参数 更多参数详解 管理 listen_addresses = &quot;*&quot; # 连接访问控制，哪些ip可以访问， * 全部。 结合pg_hba.conf , iptables设置。 superuser_reserved_connections = 3 # 预留给超级管理员的连接数。 port = 5432 # 默认访问端口 wal_keep_segments = 1024 # wal 日志保存数量 wal日志 wal_log_hints = on full_page_writes = on 成本因子 # - Planner Cost Constants - #seq_page_cost = 1.0 # measured on an arbitrary scale 顺序扫描 random_page_cost……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/params/">阅读全文</a></p>
     </article>
     
     
@@ -461,7 +461,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (15)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

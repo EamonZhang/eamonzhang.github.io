@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/go/grpc/" title="go grpc">go grpc</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月13日
+        </date>
+        
+        <div class="post-content">
+            python 实现 cat Server.py from SimpleXMLRPCServer import SimpleXMLRPCServer def fun_add(a,b): total = a+b return total if __name__=='__main__': s = SimpleXMLRPCServer(('0.0.0.0',8081)) s.register_function(fun_add) print &quot;server in on line&quot; s.serve_forever() cat Client.py from xmlrpclib import ServerProxy s = ServerProxy(&quot;http://xx.xxx.xxx.xxx:8081&quot;) print s.fun_add(1,2) go 实现……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/go/grpc/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/istio/auto-api-test/" title="API 自动化测试">API 自动化测试</a>
             </h1>
         </header>
@@ -245,22 +261,6 @@
             SSL双向认证和SSL单向认证的区别 双向认证 SSL 协议要求服务器和用户双方都有证书。单向认证 SSL 协议不需要客户拥有CA证书，服务器端不会验证客户证书，以及在协商对称密码方案，对称通话密钥时，服务器发送给客户的是没有加过密的(这并不影响 SSL 过程的安全性)密码方案。 这样，双方具体的通讯内容，……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/ssl/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/awsome-postgres/" title="工作中所使用的postgres">工作中所使用的postgres</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月27日
-        </date>
-        
-        <div class="post-content">
-            Postgres 实际应用概览 MVCC 多版本控制 一个绕不开的话题， 主要是对抗表空间的膨胀。解决垃圾回收问题，主从库之间从库查询冲突问题。 目前方法每日低峰期定时 vaccum ，gocron自定定时任务 。 根据pgstattuple对磁盘空间利用率进行分析。决定是否vaccum full ,pg_repack 流复制 主从复制，读写分离的基础。五种同……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/awsome-postgres/">阅读全文</a></p>
     </article>
     
     
@@ -454,7 +454,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (15)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

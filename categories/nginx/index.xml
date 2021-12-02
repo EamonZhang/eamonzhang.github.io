@@ -22,7 +22,7 @@
       <pubDate>Tue, 09 Apr 2019 15:42:15 +0800</pubDate>
       
       <guid>https://zhangeamon.top/middleware/nginx/</guid>
-      <description>性能优化 错误码 502 ， error.log 中错误信息 [error] 236#236: *8371899 upstream sent too big header while reading response header from upstream, 问题 header 过大 proxy_buffer_size 64k; proxy_buffers 4 32k; proxy_busy_buffers_size 64k; 官网说明 利用nginx设置用户登陆认证 如下举例设置用户访问kibana时登陆认证 server { listen 80; server_name kibana.×××.com; location / { auth_basic &amp;quot;secret&amp;quot;; auth_basic_user_file /etc/nginx/db/passwd.db; proxy_pass http://****:5601; proxy_set_header Host $host:5601; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Via &amp;quot;nginx&amp;quot;; } access_log off; } 2、配置登录用户名(admi</description>
+      <description>性能优化 错误码 502 ， error.log 中错误信息 [error] 236#236: *8371899 upstream sent too big header while reading response header from upstream, 问题 header 过大 proxy_buffer_size 64k; proxy_buffers 4 32k; proxy_busy_buffers_size 64k; 官网说明 基本配置 利用nginx设置用户登陆认证 如下举例设置用户访问kibana时登陆认证 server { listen 80; server_name kibana.×××.com; location / { auth_basic &amp;quot;secret&amp;quot;; auth_basic_user_file /etc/nginx/db/passwd.db; proxy_pass http://****:5601; proxy_set_header Host $host:5601; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Via &amp;quot;nginx&amp;quot;; } access_log off; } 2、配置登录用户名(</description>
     </item>
     
   </channel>
