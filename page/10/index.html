@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cpu_temp/" title="Linux 获取CPU温度">Linux 获取CPU温度</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月7日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            直接读取系统信息 可以通过读取如下路径中的数据来获取cpu的温度信息，不过读取的数据没有经过处理。 cpu0： cat /sys/class/thermal/thermal_zone0/temp cpu1： cat /sys/class/thermal/thermal_zone1/temp 通过命令行的方式获取 安装 lm_sensors 软件包： # rpm yum install lm_sensors # deb apt-get install lm-sensors 执行命令sensors-detect，进行简单配置，此命令执行后会出现一系列选项，一直yes即可； 执行……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cpu_temp/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/go/go_mod/" title="依赖管理工具go module">依赖管理工具go module</a>
             </h1>
         </header>
@@ -254,22 +277,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/install-cmd/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/install02/" title="数据库安装 Postgres12 Ubuntu18">数据库安装 Postgres12 Ubuntu18</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年3月19日
-        </date>
-        
-        <div class="post-content">
-            软件源 echo &quot;deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main&quot; &gt;&gt; /etc/apt/sources.list.d/pgdg.list wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - sudo apt-get update -y 安装 apt-get install postgresql-12 postgresql-client-12 postgresql-12-postgis-2.5 postgresql-contrib -y 初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb 启动 systemctl start postgresql systemctl stop postgresql systemctl status postgresql systemctl enable postgresql 配置 cd /etc/postgresql/12/main/ vi postgres.conf vi pg_hba.conf……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/install02/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -406,6 +413,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
     </li>
     
@@ -441,10 +452,6 @@
         <a href="https://zhangeamon.top/mysql/master-slave/" title="主从复制">主从复制</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/mysql/connections/" title="连接数管理">连接数管理</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -469,7 +476,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

@@ -6,7 +6,16 @@
     <description>Recent content in python on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 16 Nov 2021 13:56:39 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Dec 2021 13:36:56 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>python 简单示例</title>
+      <link>https://zhangeamon.top/python/simple-demo/</link>
+      <pubDate>Fri, 03 Dec 2021 13:36:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/python/simple-demo/</guid>
+      <description>快速启动一个本地服务 可临时充当文件下载服务 # python2 python -m SimpleHTTPServer 8888 # python3 python3 -m http.server 8888 flask 服务 from flask import Flask app = Flask(__name__) @app.route(&amp;quot;/&amp;quot;) def hello_world(): result = find_result() return result @app.route(&#39;/login&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;]) def login(): if request.method == &#39;POST&#39;: pass else: pass if __name__ == &#39;__main__&#39;: app.run(host=&#39;0.0.0.0&#39;,port=&#39;8000&#39;) python app.py gunicorn -w 1 -b 127.0.0.1:4000 app:app 操作PG数据库 import psycopg2 import time conn = None try: conn = psycopg2.connect(database=&amp;quot;postgres&amp;quot;, user=&amp;quot;postgres&amp;quot;, host=&amp;quot;192.168.*.*&amp;quot;, port=&amp;quot;5432&amp;quot;,password=&#39;*****&#39;) print(&amp;quot;Opened database successfully&amp;quot;) cur = conn.cursor() cur.execute(&amp;quot;select * from api&amp;quot;) rows = cur.fetchall() result = &#39;&#39; all_field = cur.description for filed in all_field: print(filed[0]) for row in rows: result += str(row[0]) result += &amp;quot;\n&amp;quot; print(result) print(&amp;quot;Operation done successfully&amp;quot;) conn.close() except Exception as e:</description>
+    </item>
+    
     <item>
       <title>长轮询</title>
       <link>https://zhangeamon.top/redis/long-polling/</link>

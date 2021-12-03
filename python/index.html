@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月3日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            快速启动一个本地服务 可临时充当文件下载服务 # python2 python -m SimpleHTTPServer 8888 # python3 python3 -m http.server 8888 flask 服务 from flask import Flask app = Flask(__name__) @app.route(&quot;/&quot;) def hello_world(): result = find_result() return result @app.route('/login', methods=['GET', 'POST']) def login(): if request.method == 'POST': pass else: pass if __name__ == '__main__': app.run(host='0.0.0.0',port='8000') python app.py gunicorn -w 1 -b 127.0.0.1:4000 app:app 操作PG数据库 import psycopg2 import time conn = None try: conn = psycopg2.connect(database=&quot;postgres&quot;, user=&quot;postgres&quot;, host=&quot;192.168.*.*&quot;, port=&quot;5432&quot;,password='*****') print(&quot;Opened database successfully&quot;) cur = conn.cursor() cur.execute(&quot;select * from api&quot;) rows = cur.fetchall() result = '' all_field = cur.description for filed in all_field: print(filed[0]) for row in rows: result += str(row[0]) result += &quot;\n&quot; print(result) print(&quot;Operation done successfully&quot;) conn.close() except Exception as e:……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/simple-demo/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
             </h1>
         </header>
@@ -312,31 +337,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/python/django-ndb/" title="Jdango 多数据库读写配置">Jdango 多数据库读写配置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月12日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            https://www.cnblogs.com/wumingxiaoyao/p/8610791.html https://www.cnblogs.com/thismyblogs/p/9855801.html……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/python/django-ndb/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -404,6 +404,10 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
     </li>
     
@@ -439,10 +443,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <a href="https://zhangeamon.top/mysql/master-slave/" title="主从复制">主从复制</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/mysql/connections/" title="连接数管理">连接数管理</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -467,7 +467,7 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

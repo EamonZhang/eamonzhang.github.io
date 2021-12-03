@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgbouncer/" title="pgbouncer 连接池">pgbouncer 连接池</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月27日
+        </date>
+        
+        <div class="post-content">
+            背景介绍 Pgbouncer是一个针对PostgreSQL数据库的轻量级连接池 pgbouncer 的目标是降低因为新连接到 PostgreSQL 的连接而导致的性能损失 使用术语说明： 为了后面的描述更清晰，使用如下术语 Client : 指访问者 Pgboucer: 指连接池 Postgres: 指数据库。 Connetions: 指彼此之间的连接 整体架构 原来: Client -&gt; Postgres 现在: Client -&gt; Pgbounce -&gt; Postgres 优势 内存消耗低(默……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgbouncer/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/cmd-xargs/" title="xargs 命令">xargs 命令</a>
             </h1>
         </header>
@@ -233,22 +249,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/stat/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/role-manager/" title="权限管理">权限管理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月20日
-        </date>
-        
-        <div class="post-content">
-            创建用户 # user 与 role 区别 ， user 具有login权限 postgres=# create user tester with password '123456'; CREATE ROLE 创建数据库,并关联所有者 postgres=# create database test owner tester ; CREATE DATABASE 变更数据库用户所有者 postgres=# alter database test owner to tester; ALTER DATABASE 修改用户&amp;数据库 #用户连接数 postgres=# alter user tester connection limit 100; ALTER ROLE #数据库连接数 postgres=# alter database test connection limit 100; ALTER DATABASE #用户其他属性修改 postgres=# alter user tester BYPASSRLS CREATEDB ENCRYPTED PASSWORD LOGIN NOCREATEDB NOINHERIT NOREPLICATION PASSWORD REPLICATION SET VALID UNTIL CONNECTION……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/role-manager/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -385,6 +385,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
     </li>
     
@@ -420,10 +424,6 @@
         <a href="https://zhangeamon.top/mysql/master-slave/" title="主从复制">主从复制</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/mysql/connections/" title="连接数管理">连接数管理</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -448,7 +448,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
