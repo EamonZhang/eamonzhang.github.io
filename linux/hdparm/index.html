@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>hdparm 查看硬盘型号 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="hdparm 查看硬盘型号 - Let&#39;s go 🐌 🐌 🐌">
+    <title>查看硬盘型号 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="查看硬盘型号 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2018-12-19T08:53:10&#43;08:00'>
@@ -17,7 +17,7 @@
     <meta property="article:modified_time" content='2018-12-19T08:53:10&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="hdparm 查看硬盘型号">
+    <meta name="description" content="查看硬盘型号">
         
     <meta name="author" content="Eamon">
     <meta property="og:url" content="https://zhangeamon.top/linux/hdparm/">
@@ -96,7 +96,7 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">hdparm 查看硬盘型号</h1>
+            <h1 class="post-title">查看硬盘型号</h1>
         </header>
         <date class="post-meta meta-date">
             2018年12月19日
@@ -105,7 +105,20 @@
         
         
         <div class="post-content">
-            <h4 id="安装工具">安装工具</h4>
+            <h2 id="通过总线查看硬盘连接">通过总线查看硬盘连接</h2>
+<p>cat /proc/scsi/scsi</p>
+<pre><code>Attached devices:
+Host: scsi0 Channel: 00 Id: 00 Lun: 00
+  Vendor: ATA      Model: INTEL SSDSC2KB24 Rev: 0110
+  Type:   Direct-Access                    ANSI  SCSI revision: 05
+Host: scsi1 Channel: 00 Id: 00 Lun: 00
+  Vendor: ATA      Model: INTEL SSDSC2KB96 Rev: 0110
+  Type:   Direct-Access                    ANSI  SCSI revision: 05
+Host: scsi2 Channel: 00 Id: 00 Lun: 00
+  Vendor: ATA      Model: INTEL SSDSC2KB96 Rev: 0110
+  Type:   Direct-Access                    ANSI  SCSI revision: 05
+</code></pre><h2 id="通过系统查看">通过系统查看</h2>
+<h4 id="安装">安装</h4>
 <pre><code>yum install hdparm
 </code></pre><h4 id="查看">查看</h4>
 <p>-i参数是在引导驱动器时获得的识别信息，这个信息有时候不完整也不一
