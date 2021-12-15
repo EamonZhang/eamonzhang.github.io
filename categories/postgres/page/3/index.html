@@ -7,24 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>找回supper user 权限 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="找回supper user 权限 - Let&#39;s go 🐌 🐌 🐌">
+    <title>postgres | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="postgres - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-12-22T17:12:53&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2020-12-22T17:12:53&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="找回supper user 权限">
+    <meta name="description" content="postgres">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/postgres/reback_supper_user/">
+    <meta property="og:url" content="https://zhangeamon.top/categories/postgres/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml+xml" href="https://zhangeamon.top/categories/postgres/index.xml" title="Let's go 🐌 🐌 🐌" />
     
     
     <script type="text/javascript" src="/js/jquery.min.js"></script>
@@ -93,70 +90,68 @@
                     
 <div class="res-cons">
     
+    <h3 class="archive-title">
+        分类
+        <span class="keyword">postgres</span>
+        中的文章
+    </h3>
+    
 
+    
     <article class="post">
         <header>
-            <h1 class="post-title">找回supper user 权限</h1>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/replication01/">主从流复制</a>
+            </h1>
         </header>
         <date class="post-meta meta-date">
-            2020年12月22日
+            2018年10月17日
         </date>
         
-        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
         
         <div class="post-content">
-            <h5 id="背景">背景</h5>
-<p>意外删除postgres supper user 权限</p>
-<h5 id="找回方法">找回方法</h5>
-<p>关闭数据库 用单用户模式重新启动</p>
-<pre><code>/usr/lib/postgresql/xxxx/bin/postgres --single -D $PGDATA
-
-</code></pre><p>重新设置supper user 权限</p>
-<pre><code>alter user postgres with superuser;
-</code></pre>
-        </div>
-
-        
-
-
-        
-
-<div class="post-archive">
-    <h2>其他文章</h2>
-    <ul class="listing">
-        
-        <li><a href="/postgres/monitor_explain/">数据库监控指标</a></li>
-        
-        <li><a href="/postgres/compile_kylin/">kylin系统postgresql编译安装</a></li>
-        
-        <li><a href="/linux/frp/">网络穿透</a></li>
-        
-    </ul>
-</div>
-
-
-
-        <div class="post-meta meta-tags">
-            
-            没有标签
-            
+            历史演变 replication 主库配置 根据实际情况分配流复制权限 vi pg_hba.conf host replication all 10.2.0.0/0 trust vi postgresql.conf max_wal_senders = 10 wal_level = logical # minimal, replica, or logical hot_standby = on # 正常在从库配置，如果在主库配置完毕，因为从库复制主库配置不需要再修改从库配置。 wal_log_hints = on 从库配置 数据库安装 从主库复制数据 pg_basebackup -h 10.2.0.14 -U postgres -F p -P -R -D /var/lib/pgsql/10/data/ --checkpoint=fast -l postgresback20181219 pg_basebackup支持两种全量备份的……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/replication01/">阅读全文</a></p>
         </div>
     </article>
     
+
+    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="https://zhangeamon.top/categories/postgres/page/2/">上一页</a>
+    </li>
     
 
     
+    <li >
+        <a href="https://zhangeamon.top/categories/postgres/">1</a>
+    </li>
     
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "your github repo"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
+    <li >
+        <a href="https://zhangeamon.top/categories/postgres/page/2/">2</a>
+    </li>
     
+    <li  class="current">
+        <a href="https://zhangeamon.top/categories/postgres/page/3/">3</a>
+    </li>
+    
+
+    
+</ol>
+
+
+
 </div>
 
                     <footer id="footer">
@@ -169,16 +164,6 @@
 </footer>
 
 
-    
-    <script type="text/javascript">
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
-    </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>

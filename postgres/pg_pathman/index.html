@@ -92,7 +92,114 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#pathman与pg11-对比">pathman与pg11 对比</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#简单应用">简单应用</a></li>
+    <li><a href="#分区表常用管理">分区表常用管理</a></li>
+    <li><a href="#参数">参数</a></li>
+    <li><a href="#遗留问题">遗留问题</a></li>
+    <li><a href="#注意事项-1">注意事项</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -102,28 +209,41 @@
             2019年1月24日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
         
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
         
         <div class="post-content">
-            <h4 id="介绍">介绍</h4>
+            <h2 id="介绍">介绍</h2>
 <p>分区表的诉求在现实的生成中的意义不必多说，pg以前的实现方式多采用触发器，rules实现。数据量上来时性能明显不尽如意。<br>
 虽然pg10 ，11 版本在分区表的特性上不断发力。但是性能啥还是不够给力。<br>
 pg_pathman 分区表功能在目前的pg版本10.6 中优势还是非常明显的。</p>
 <p>在期待pg自身分区表特性的同时，当前的pg10中还是使用pg_pathman来实现分区功能吧。</p>
-<h5 id="pathman与pg11-对比">pathman与pg11 对比</h5>
-<p>优点:
+<h2 id="pathman与pg11-对比">pathman与pg11 对比</h2>
+<p>优点:<br>
 支持HASH和RANGE分区，后续会支持LIST分区 支持自动和手动的分区维护<br>
 为分区表生成更有效的执行计划 通过引入两个自定义的执行计划节点RuntimeAppend &amp; RuntimeMergeAppend，<br>
 实现运行时动态添加分区到执行计划中 为新插入数据自动创建分区(只对RANGE分区) 提供用户callbacks接口处理创建分区事件。<br>
-提供在线分区实施(在线重定义)，父表数据迁移到子表，拆分， 合并分区
-不足:<br>
+提供在线分区实施(在线重定义)，父表数据迁移到子表，拆分， 合并分区</p>
+<p>不足:<br>
 不支持list分区;不支持二级分区;权限，索引，trigger等无法继承; 修改主键默认的seq需要重建分区。</p>
 <p>PG11内置分区<br>
 优点:<br>
 支持hash，range，list分区 支持多字段组合分区，支持表达式分区 支持创建主键，外键，索引，分区表自动继承。 支持update分区键 支持分区表DETACH，ATTACH，支持二级分区 分区自动创建<br>
-Default partition Partition improvements<br>
-不足:<br>
-在主表添加权限，索引，trigger等无法继承 分区表不可以作为其他表的外键主表</p>
+Default partition Partition improvements</p>
+<p>不足:</p>
+<p>在主表添加权限，索引，trigger等无法继承 分区表不可以作为其他表的外键主表</p>
 <h4 id="分区表数量对插入数据的影响">分区表数量对插入数据的影响</h4>
 <p><a href="https://www.jianshu.com/p/1cba77d18694">https://www.jianshu.com/p/1cba77d18694</a></p>
 <h4 id="pathman-分区表-转换为原生分区表">pathman 分区表 转换为原生分区表</h4>
@@ -146,8 +266,8 @@ CREATE EXTENSION pg_pathman WITH SCHEMA pathman;
 <h4 id="常见错误">常见错误</h4>
 <pre><code>FATAL:  could not load library &quot;/usr/pgsql-12/lib/pg_pathman.so&quot;: /usr/pgsql-12/lib/pg_pathman.so: undefined symbol: expandTableLikeClause
 postgres 版本问题
-</code></pre><h4 id="简单应用">简单应用</h4>
-<p>1 将现有表分区，禁止数据迁移</p>
+</code></pre><h2 id="简单应用">简单应用</h2>
+<p>1 创建表分区，禁止数据迁移</p>
 <p>2 并行迁移数据</p>
 <p>3 禁止主表</p>
 <p>表 log  必需满足</p>
@@ -176,7 +296,7 @@ postgres 版本问题
 <pre><code>select set_enable_parent('log'::regclass,false);
 </code></pre><p>查看数据</p>
 <pre><code>select count(1) from only log;
-</code></pre><h4 id="分区表常用管理">分区表常用管理</h4>
+</code></pre><h2 id="分区表常用管理">分区表常用管理</h2>
 <p>将一个分区拆分为两个分区</p>
 <pre><code>split_range_partition(partition_relid REGCLASS,
                       split_value     ANYELEMENT,
@@ -207,24 +327,26 @@ postgres 版本问题
                        partition_relid REGCLASS,
                        start_value     ANYELEMENT,
                        end_value       ANYELEMENT)
-</code></pre><h5 id="参数">参数</h5>
+</code></pre><h2 id="参数">参数</h2>
 <p>修改默认分区间隔</p>
 <pre><code>set_interval(relation REGCLASS, value ANYELEMENT)
 </code></pre><p>是否禁用主表,禁用后执行计划将不在走主表</p>
 <pre><code>set_enable_parent(relation REGCLASS, value BOOLEAN)
 </code></pre><p>是否自动创建分区. 开启后注意事项， 如果有一条数据的时间异常，会创建大量的分区表。灾难</p>
 <pre><code>set_auto(relation REGCLASS, value BOOLEAN)
-</code></pre><h4 id="遗留问题">遗留问题</h4>
+</code></pre><h2 id="遗留问题">遗留问题</h2>
 <p>1 原表分区后数据磁盘占用增加近一倍，需要vacuum full 解决. 主表残留</p>
 <p>数据全部分区后 vacuum 速度也很快</p>
 <p>2 分区后对父表添加或删除索引操作对现有分区表不产生作用，仅对新生成的分区有效。<a href="https://github.com/postgrespro/pg_pathman/wiki/How-do-I-create-indexes%3F">How do I create indexes?</a></p>
-<h4 id="注意事项-1">注意事项</h4>
+<h2 id="注意事项-1">注意事项</h2>
 <p>对已经分区的表使用copy 方式导入数据后数据只存在于父表中，此时执行partition_table_concurrently 无效果</p>
 <p>解决</p>
 <pre><code> 1 set_enable_parent('log'::regclass, true)
 </code></pre><pre><code> 2 创建分区表 如插入一条数据 ， 时间比最小时间还小，select min(create) from only log
 </code></pre><pre><code> 3 partition_table_concurrently
-</code></pre>
+</code></pre><p>分区表与原生表比较。管理上带来了很大的便利，尤其是数据的归档整理。</p>
+<p>性能上反而可能会变得更差，查询条件一定要带上分区健，否则会扫描所有子表。</p>
+
         </div>
 
         
@@ -236,11 +358,11 @@ postgres 版本问题
     <h2>其他文章</h2>
     <ul class="listing">
         
+        <li><a href="/postgres/params/">数据库参数</a></li>
+        
         <li><a href="/linux/qos/">Qos</a></li>
         
         <li><a href="/linux/4k-wa/">SSD 4k对齐写放大</a></li>
-        
-        <li><a href="/linux/memtester/">memtester 内存压力测试</a></li>
         
     </ul>
 </div>
@@ -249,7 +371,11 @@ postgres 版本问题
 
         <div class="post-meta meta-tags">
             
-            没有标签
+            <ul class="clearfix">
+                
+                <li><a href='/tags/'></a></li>
+                
+            </ul>
             
         </div>
     </article>
@@ -381,7 +507,7 @@ postgres 版本问题
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (20)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (21)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
