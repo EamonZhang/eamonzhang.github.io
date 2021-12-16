@@ -346,6 +346,7 @@ postgres 版本问题
 </code></pre><pre><code> 3 partition_table_concurrently
 </code></pre><p>分区表与原生表比较。管理上带来了很大的便利，尤其是数据的归档整理。</p>
 <p>性能上反而可能会变得更差，查询条件一定要带上分区健，否则会扫描所有子表。</p>
+<p>当单个索引的大小超过物理内存的一半时考虑分表</p>
 
         </div>
 
@@ -507,7 +508,7 @@ postgres 版本问题
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (21)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (22)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

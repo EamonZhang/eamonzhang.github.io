@@ -125,6 +125,15 @@
     </item>
     
     <item>
+      <title>逻辑复制</title>
+      <link>https://zhangeamon.top/postgres/logical-replication/</link>
+      <pubDate>Wed, 30 Jan 2019 15:42:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/logical-replication/</guid>
+      <description>逻辑复制 Postgres 10 版本开始， 在内核层面支持基于REDO流的逻辑复制。 控制粒度为表级别 物理复制相同都是基于wal 可指定多个上游数据源 下游数据可读可写 可用于数据汇总，无停服数据迁移,大版本升级等。 基本概念 发布者（publication）， 上游数据 订阅者 (subscrition)， 下游数据 复</description>
+    </item>
+    
+    <item>
       <title>PG主从切换 pg_rewind</title>
       <link>https://zhangeamon.top/postgres/pg_rewind/</link>
       <pubDate>Wed, 30 Jan 2019 10:16:17 +0800</pubDate>

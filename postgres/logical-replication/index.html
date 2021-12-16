@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Logical Replication 逻辑复制 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="Logical Replication 逻辑复制 - Let&#39;s go 🐌 🐌 🐌">
+    <title>逻辑复制 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="逻辑复制 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2019-01-30T15:42:25&#43;08:00'>
@@ -17,7 +17,7 @@
     <meta property="article:modified_time" content='2019-01-30T15:42:25&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="Logical Replication 逻辑复制">
+    <meta name="description" content="逻辑复制">
         
     <meta name="author" content="Eamon">
     <meta property="og:url" content="https://zhangeamon.top/postgres/logical-replication/">
@@ -92,35 +92,207 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#逻辑复制">逻辑复制</a></li>
+    <li><a href="#基本概念">基本概念</a></li>
+    <li><a href="#注意事项">注意事项</a></li>
+    <li><a href="#常用方式总结">常用方式总结</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#简单实践">简单实践</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#常用视图查看">常用视图查看</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#应用案例---升级数据库版本">应用案例 - 升级数据库版本</a></li>
+    <li><a href="#更多思考">更多思考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
-            <h1 class="post-title">Logical Replication 逻辑复制</h1>
+            <h1 class="post-title">逻辑复制</h1>
         </header>
         <date class="post-meta meta-date">
             2019年1月30日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
         
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
         
         <div class="post-content">
-            <h4 id="逻辑复制">逻辑复制</h4>
+            <h2 id="逻辑复制">逻辑复制</h2>
 <p>Postgres 10 版本开始， 在内核层面支持基于REDO流的逻辑复制。</p>
 <p>控制粒度为表级别</p>
 <p>物理复制相同都是基于wal</p>
 <p>可指定多个上游数据源</p>
 <p>下游数据可读可写</p>
 <p>可用于数据汇总，无停服数据迁移,大版本升级等。</p>
-<h4 id="基本概念">基本概念</h4>
-<h6 id="发布者publication-上游数据">发布者（publication）， 上游数据</h6>
-<h6 id="订阅者-subscrition-下游数据">订阅者 (subscrition)， 下游数据</h6>
-<h6 id="复制槽-slot-保存逻辑复制的信息">复制槽 (slot), 保存逻辑复制的信息</h6>
-<h4 id="简单实践">简单实践</h4>
+<h2 id="基本概念">基本概念</h2>
 <ul>
-<li>将10中的一张表同步到12中</li>
+<li>发布者（publication）， 上游数据</li>
+<li>订阅者 (subscrition)， 下游数据</li>
+<li>复制槽 (slot), 保存逻辑复制的信息</li>
 </ul>
-<p>发布者服务器配置</p>
+<h2 id="注意事项">注意事项</h2>
+<ul>
+<li>数据库模式和DDL命令不会被复制</li>
+<li>序列数据不被复制</li>
+<li>分区表,需要发布子表</li>
+</ul>
+<h2 id="常用方式总结">常用方式总结</h2>
+<h4 id="发布端">发布端</h4>
+<ul>
+<li>逻辑复制的前提是将数据库 wal_level 参数设置成 logical；</li>
+<li>源库上逻辑复制的用户必须具有 replicatoin 或 superuser 角色；</li>
+<li>逻辑复制目前仅支持数据库表逻辑复制，其它对象例如函数、视图不支持；</li>
+<li>逻辑复制支持DML(UPDATE、INSERT、DELETE)操作，TRUNCATE 和 DDL 操作不支持；</li>
+<li>需要发布逻辑复制的表，须配置表的 REPLICA IDENTITY 特性；</li>
+<li>一个数据库中可以有多个publication，通过 pg_publication 查看；</li>
+<li>允许一次发布所有表，语法： CREATE PUBLICATION alltables FOR ALL TABLES;</li>
+</ul>
+<h4 id="订阅端">订阅端</h4>
+<ul>
+<li>订阅节点需要指定发布者的连接信息；</li>
+<li>一个数据库中可以有多个订阅者；</li>
+<li>可以使用enable/disable启用/暂停该订阅；</li>
+<li>发布节点和订阅节点表的模式名、表名必须一致，订阅节点允许表有额外字段；</li>
+<li>发布节点增加表名，订阅节点需要执行： ALTER SUBSCRIPTION sub1 REFRESH PUBLICATION</li>
+</ul>
+<h4 id="复制标识">复制标识</h4>
+<p>为了能够复制UPDATE和DELETE操作，被发布的表必须配置有一个“复制标识”。
+这样在订阅者那一端才能标识对于更新或删除合适的行。默认情况下，复制标识就是主键（如果有主键）。也可以在复制标识上设置另一个唯一索引（有特定的额外要求）。如果表没有合适的键，那么可以设置成复制标识“full”，它表示整个行为键。</p>
+<p>如果没有复制标识，订阅端的UPDATE和DELETE操作将发生错误。INSERT可以执行。</p>
+<p>查看复制标识</p>
+<pre><code>select relreplident from pg_class where relname = ' xxx ';
+
+d 默认
+n 无
+f 所有列
+i 索引
+</code></pre><p>修改复制标识</p>
+<pre><code>alter table xxx replica identity using index xx_idx;
+</code></pre><h4 id="冲突">冲突</h4>
+<p>跳过冲突事务</p>
+<pre><code>pg_replication_origin_advance()
+</code></pre><p>查看冲突时的位置</p>
+<pre><code>pg_replication_origin_status
+</code></pre><h2 id="简单实践">简单实践</h2>
+<p>将PG10中的一张表同步到PG12中</p>
+<h4 id="发布者服务器配置">发布者服务器配置</h4>
 <p>postgresql.conf</p>
 <pre><code>wal_level = logical
 max_replication_slots = 10 # 每个slot 需要一个
@@ -129,29 +301,32 @@ max_worker_processes = 128
  
 </code></pre><p>pg_hba.conf</p>
 <pre><code>host replication postgres 10.1.0.0/16 md5
-</code></pre><p>订阅者服务器配置</p>
+</code></pre><h4 id="订阅者服务器配置">订阅者服务器配置</h4>
 <p>postgresql.conf</p>
 <pre><code>max_replication_slots = 10 # 每个slot 需要一个
 max_logical_replication_workers = 10 # 每个slot 需要一个
 max_worker_processes = 128
-</code></pre><p>在发布端创建发布</p>
+</code></pre><h4 id="在发布端创建发布">在发布端创建发布</h4>
 <pre><code>create publication test01 for table test01 ;
-</code></pre><p>在订阅端创建表结构</p>
-<pre><code>pg_dump -U postgres -s -t test01 pglogicaltestdb
-</code></pre><p>在订阅端创建订阅</p>
+</code></pre><h4 id="在订阅端创建表结构">在订阅端创建表结构</h4>
+<p>pg_dump &ndash;schema-only</p>
+<pre><code>pg_dump -U s -t test01 pglogicaltestdb
+</code></pre><h4 id="在订阅端创建订阅">在订阅端创建订阅</h4>
 <pre><code>create subscription sub1 connection 'host=10.1.7.55 port=25432 dbname=pglogicaltestdb password=123456' publication test01;
-</code></pre><h5 id="常用视图查看">常用视图查看</h5>
-<p>发布端视图</p>
+</code></pre><h2 id="常用视图查看">常用视图查看</h2>
+<h4 id="发布端视图">发布端视图</h4>
 <pre><code> select * from pg_stat_replication ;
 
  select * from pg_publication;
 
  select * from pg_publication_tables ;
-</code></pre><p>订阅端视图</p>
+</code></pre><h4 id="订阅端视图">订阅端视图</h4>
 <pre><code> select * from pg_stat_subscription;
 
  select * from pg_subscription
-</code></pre><p><a href="./book/PostgreSQL%E9%80%BB%E8%BE%91%E5%A4%8D%E5%88%B6%E6%8E%A2%E7%A9%B6.pdf">更多</a></p>
+</code></pre><h2 id="应用案例---升级数据库版本">应用案例 - 升级数据库版本</h2>
+<h2 id="更多思考">更多思考</h2>
+<p>多主方案， DBR</p>
 
         </div>
 
@@ -164,11 +339,11 @@ max_worker_processes = 128
     <h2>其他文章</h2>
     <ul class="listing">
         
+        <li><a href="/postgres/pg_pathman/">pg_pathman 分区表</a></li>
+        
+        <li><a href="/postgres/params/">数据库参数</a></li>
+        
         <li><a href="/postgres/cluster/">cluster 聚族表</a></li>
-        
-        <li><a href="/postgres/archive/">Archive wal归档</a></li>
-        
-        <li><a href="/postgres/timescaledb/">TimescaleDB 时序数据库</a></li>
         
     </ul>
 </div>
@@ -177,7 +352,11 @@ max_worker_processes = 128
 
         <div class="post-meta meta-tags">
             
-            没有标签
+            <ul class="clearfix">
+                
+                <li><a href='/tags/'></a></li>
+                
+            </ul>
             
         </div>
     </article>
@@ -309,7 +488,7 @@ max_worker_processes = 128
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (21)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (22)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

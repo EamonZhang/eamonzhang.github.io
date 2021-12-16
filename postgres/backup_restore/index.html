@@ -159,7 +159,11 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#备份恢复命令">备份恢复命令</a></li>
-    <li><a href="#copy-拷贝数据">copy 拷贝数据</a></li>
+    <li><a href="#copy-拷贝数据">copy 拷贝数据</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
     <li><a href="#pg_bulkload-与copy-区别">pg_bulkload 与copy 区别</a>
       <ul>
         <li></li>
@@ -238,7 +242,7 @@
 
 数据恢复到数据库: psql -U postgres -d databasename -p 5432 -h 127.0.0.1 -c &quot;\copy $tablename from '/tmp/db/$tablename.csv'&quot;; 
 </code></pre><p>说明： copy 与 \copy 区别， \copy cvs数据在client端、copy svs数据在server端。</p>
-<p>注意事项: 需要在新数据库中对序列进行更新</p>
+<h5 id="注意事项-需要在新数据库中对序列进行更新">注意事项: 需要在新数据库中对序列进行更新</h5>
 <pre><code>psql -U postgres -d databasename -p 5432 -h 127.0.0.1 -c &quot;select setval('xxxx_id_seq', max(id)) from xxx_table&quot;;
 
 </code></pre><p>copy from 数据量大时效率太低替代方法</p>
@@ -246,7 +250,7 @@
 </code></pre><p>说明： pg_bulkload 为拓展形式。 需要在数据库中&rsquo;create extends pg_bulkload' 。</p>
 <h2 id="pg_bulkload-与copy-区别">pg_bulkload 与copy 区别</h2>
 <p>copy将构造出的元组插入共享内存，同时写日志，pg_bulkload绕过了共享内存，不写日志，这样会减少磁盘I/O，但是也很危险。</p>
-<h6 id="使用pg_bulkload方式导入数据时一定要注意注意注意由于不写wal日志从库无法同步从库直接宕掉直接宕掉-测试用就好生产环境需谨慎">使用pg_bulkload方式导入数据时一定要注意，注意，注意！！！　由于不写wal日志从库无法同步，从库直接宕掉，直接宕掉！！！ 测试用就好,生产环境需谨慎</h6>
+<h5 id="使用pg_bulkload方式导入数据时一定要注意注意注意由于不写wal日志从库无法同步从库直接宕掉直接宕掉-测试用就好生产环境需谨慎">使用pg_bulkload方式导入数据时一定要注意，注意，注意！！！　由于不写wal日志从库无法同步，从库直接宕掉，直接宕掉！！！ 测试用就好,生产环境需谨慎</h5>
 <h2 id="实时备份恢复">实时备份恢复</h2>
 <p><a href="https://github.com/ossc-db/pg_rman">https://github.com/ossc-db/pg_rman</a></p>
 <p><a href="https://github.com/wal-e/wal-e">https://github.com/wal-e/wal-e</a></p>
@@ -265,6 +269,7 @@ END LOOP;
 END$$;
 </code></pre><hr>
 <h2 id="删除数据-deleteupdate-limit">删除数据 DELETE|UPDATE LIMIT</h2>
+<p>对数据进行归档完毕后，对数据进行清理。</p>
 <p>postgres 暂不支持 delete limit 用法 。根据条件删除大量数据时。</p>
 <p>使用with模拟必须有PK或者非空UK</p>
 <pre><code>with t1 as (select id from t where create_time &lt; '2020-01-01 00:00:00' limit 10) 
@@ -426,7 +431,7 @@ END$$;
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (21)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (22)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
