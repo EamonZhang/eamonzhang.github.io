@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/checkpoint/" title="checkpoint 检查点">checkpoint 检查点</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年3月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            作用 一般checkpoint会将某个时间点之前的脏数据全部刷新到磁盘，以实现数据的一致性与完整性。其主要目的是为了缩短崩溃恢复时间。 数据库靠谱的原因 一条DML 写入过程 在写入数据的时，当事务提交后修改信息顺序同步写入wal。shared buffer中信息并不是马上落盘。异步同步磁盘……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/checkpoint/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/adlock/" title="咨询锁 adlock">咨询锁 adlock</a>
             </h1>
         </header>
@@ -247,29 +270,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/mysql/book-list/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/redis/data-type/" title="Redis 常用数据结构">Redis 常用数据结构</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年2月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            基本类型 String： 字符串。整数，浮点数 。底层数据结构 字符数组。 类似于ARRYLIST Hash：健值对的无序散列列表 。 List：链表 。 底层数据结构 qucklist。 类似于LISKLIST Set：无序集合 Zset：有序集合 。底层数据结构，跳跃列表 高级类型 BitMap GEO HyperLogLog 其他 Stream https://www.cnblogs.com/knowledgesea/category/722602.html……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/redis/data-type/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -406,6 +406,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
@@ -441,10 +445,6 @@
         <a href="https://zhangeamon.top/linux/ubuntu2004-qa/" title="Ubuntu20.04 装机后">Ubuntu20.04 装机后</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/mysql/master-slave/" title="主从复制">主从复制</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -467,7 +467,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (22)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (23)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

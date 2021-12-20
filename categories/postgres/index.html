@@ -101,6 +101,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_json/">数据库的json类型</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月20日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            json 与 jsonb json 保持原始格式， jsonb是解析输入后保存的二进制，在解析时会过滤掉不必要的空格和重复的健。 SELECT '{&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;: 17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5}'::json; json ------------------------------------------------------------ {&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;: 17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5} SELECT '{&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;: 17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5}'::jsonb; jsonb ----------------------------------------------- {&quot;age&quot;: 17.5, &quot;sex&quot;: &quot;m&quot;, &quot;name&quot;: &quot;zhangsan&quot;} json 插入可能会更快些，jsonb的读取更快 操作符 json ,jsonb 操作符 操作符 右操作数类型 描述 示例 结果 -&gt; int 获取JSON数组元素（索引从0开始） select……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_json/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_elk/">数据库日志分析</a>
             </h1>
         </header>
@@ -307,29 +330,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/">数据库优化思考-性能优化</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月26日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/postgres'>postgres</a>
-            
-        </div>
-        
-        <div class="post-content">
-            为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_performance/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -403,6 +403,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
@@ -438,10 +442,6 @@
         <a href="https://zhangeamon.top/linux/ubuntu2004-qa/" title="Ubuntu20.04 装机后">Ubuntu20.04 装机后</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/mysql/master-slave/" title="主从复制">主从复制</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -464,7 +464,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (22)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (23)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

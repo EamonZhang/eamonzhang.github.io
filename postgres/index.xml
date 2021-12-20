@@ -6,7 +6,16 @@
     <description>Recent content in Postgres on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 05 Nov 2021 09:44:17 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Dec 2021 10:51:16 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库的json类型</title>
+      <link>https://zhangeamon.top/postgres/pg_json/</link>
+      <pubDate>Mon, 20 Dec 2021 10:51:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_json/</guid>
+      <description>json 与 jsonb json 保持原始格式， jsonb是解析输入后保存的二进制，在解析时会过滤掉不必要的空格和重复的健。 SELECT &#39;{&amp;quot;name&amp;quot;: &amp;quot;zhangsan&amp;quot;, &amp;quot;age&amp;quot;: 17, &amp;quot;sex&amp;quot;:&amp;quot;m&amp;quot;,&amp;quot;age&amp;quot;:17.5}&#39;::json; json ------------------------------------------------------------ {&amp;quot;name&amp;quot;: &amp;quot;zhangsan&amp;quot;, &amp;quot;age&amp;quot;: 17, &amp;quot;sex&amp;quot;:&amp;quot;m&amp;quot;,&amp;quot;age&amp;quot;:17.5} SELECT &#39;{&amp;quot;name&amp;quot;: &amp;quot;zhangsan&amp;quot;, &amp;quot;age&amp;quot;: 17, &amp;quot;sex&amp;quot;:&amp;quot;m&amp;quot;,&amp;quot;age&amp;quot;:17.5}&#39;::jsonb; jsonb ----------------------------------------------- {&amp;quot;age&amp;quot;: 17.5, &amp;quot;sex&amp;quot;: &amp;quot;m&amp;quot;, &amp;quot;name&amp;quot;: &amp;quot;zhangsan&amp;quot;} json 插入可能会更快些，jsonb的读取更快 操作符 json ,jsonb 操作符 操作符 右操作数类型 描述 示例 结果 -&amp;gt; int 获取JSON数组元素（索引从0开始） select</description>
+    </item>
+    
     <item>
       <title>数据库日志分析</title>
       <link>https://zhangeamon.top/postgres/pg_elk/</link>

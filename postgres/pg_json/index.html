@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>数据库的json类型 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="数据库的json类型 - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-12-20T10:51:16&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-12-20T10:51:16&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="数据库的json类型">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/pg_json/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            <!-- hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699"; -->
+            hm.src = "https://hm.baidu.com/hm.js?0010600e9ae6ff8f5814bb7ec6b36072";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">数据库的json类型</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月20日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="json-与-jsonb">json 与 jsonb</h2>
+<p>json 保持原始格式，<br>
+jsonb是解析输入后保存的二进制，在解析时会过滤掉不必要的空格和重复的健。</p>
+<pre><code>SELECT '{&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;:      17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5}'::json;
+                            json                            
+------------------------------------------------------------
+ {&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;:      17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5}
+</code></pre><pre><code>SELECT '{&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;:      17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5}'::jsonb;
+                     jsonb                     
+-----------------------------------------------
+ {&quot;age&quot;: 17.5, &quot;sex&quot;: &quot;m&quot;, &quot;name&quot;: &quot;zhangsan&quot;}
+</code></pre><p>json 插入可能会更快些，jsonb的读取更快</p>
+<h2 id="操作符">操作符</h2>
+<h4 id="json-jsonb-操作符">json ,jsonb 操作符</h4>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>右操作数类型</th>
+<th>描述</th>
+<th>示例</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-&gt;</td>
+<td>int</td>
+<td>获取JSON数组元素（索引从0开始）</td>
+<td>select &lsquo;[{&ldquo;a&rdquo;:&ldquo;foo&rdquo;},{&ldquo;b&rdquo;:&ldquo;bar&rdquo;},{&ldquo;c&rdquo;:&ldquo;baz&rdquo;}]'::json-&gt;2;</td>
+<td>{&ldquo;c&rdquo;:&ldquo;baz&rdquo;}</td>
+</tr>
+<tr>
+<td>-&gt;</td>
+<td>text</td>
+<td>通过键获取值</td>
+<td>select &lsquo;{&ldquo;a&rdquo;: {&ldquo;b&rdquo;:&ldquo;foo&rdquo;}}'::json-&gt;&lsquo;a&rsquo;;</td>
+<td>{&ldquo;b&rdquo;:&ldquo;foo&rdquo;}</td>
+</tr>
+<tr>
+<td>-&raquo;</td>
+<td>int</td>
+<td>获取JSON数组元素为 text</td>
+<td>select &lsquo;[1,2,3]'::json-&raquo;2;</td>
+<td>3</td>
+</tr>
+<tr>
+<td>-&raquo;</td>
+<td>text</td>
+<td>通过键获取值为text</td>
+<td>select &lsquo;{&ldquo;a&rdquo;:1,&ldquo;b&rdquo;:2}'::json-&raquo;&lsquo;b&rsquo;;</td>
+<td>2</td>
+</tr>
+<tr>
+<td>#&gt;</td>
+<td>text[]</td>
+<td>在指定的路径获取JSON对象</td>
+<td>select &lsquo;{&ldquo;a&rdquo;: {&ldquo;b&rdquo;:{&ldquo;c&rdquo;: &ldquo;foo&rdquo;}}}'::json#&gt;'{a,b}';</td>
+<td>{&ldquo;c&rdquo;: &ldquo;foo&rdquo;}</td>
+</tr>
+<tr>
+<td>#&raquo;</td>
+<td>text[]</td>
+<td>在指定的路径获取JSON对象为 text</td>
+<td>select &lsquo;{&ldquo;a&rdquo;:[1,2,3],&ldquo;b&rdquo;:[4,5,6]}'::json#&raquo;'{a,2}';</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h4 id="jsonb-操作符">jsonb 操作符</h4>
+<p>
+        <img class="mx-auto" alt="image" src="/images/jsonb_operator.png" />   
+    </p>
+<h2 id="索引查询">索引查询</h2>
+<h4 id="单key-查询btree-索引">单key 查询。btree 索引</h4>
+<pre><code>postgres=# create table test (id int, js jsonb);  
+CREATE TABLE  
+
+postgres=# create index idx_test_2 on test using btree (((js-&gt;&gt;'key1')::int));  
+CREATE INDEX  
+
+postgres=# explain select * from test where (js-&gt;&gt;'key1')::int between 1 and 10 ;  
+                                              QUERY PLAN                                                
+------------------------------------------------------------------------------------------------------  
+ Index Scan using idx_test_2 on test  (cost=0.15..24.27 rows=6 width=36)  
+   Index Cond: ((((js -&gt;&gt; 'key1'::text))::integer &gt;= 1) AND (((js -&gt;&gt; 'key1'::text))::integer &lt;= 10))  
+(2 rows)  
+
+</code></pre><h4 id="多key混合使用btree_gin-表达式索引">多KEY混合，使用btree_gin, 表达式索引</h4>
+<pre><code>postgres=# create extension btree_gin;  
+CREATE EXTENSION  
+
+postgres=# create index idx_test_1 on test using gin (((js-&gt;&gt;'key1')::int), ((js-&gt;&gt;'key2')::int), ((js-&gt;&gt;'key3')::int));  
+CREATE INDEX  
+
+postgres=# explain select * from test where (js-&gt;&gt;'key1')::int between 1 and 10   
+postgres-# ;  
+                                                 QUERY PLAN                                                   
+------------------------------------------------------------------------------------------------------------  
+ Bitmap Heap Scan on test  (cost=24.07..33.64 rows=6 width=36)  
+   Recheck Cond: ((((js -&gt;&gt; 'key1'::text))::integer &gt;= 1) AND (((js -&gt;&gt; 'key1'::text))::integer &lt;= 10))  
+   -&gt;  Bitmap Index Scan on idx_test_1  (cost=0.00..24.06 rows=6 width=0)  
+         Index Cond: ((((js -&gt;&gt; 'key1'::text))::integer &gt;= 1) AND (((js -&gt;&gt; 'key1'::text))::integer &lt;= 10))  
+(4 rows)  
+
+postgres=# explain select * from test where (js-&gt;&gt;'key1')::int between 1 and 10  or (js-&gt;&gt;'key2')::int between 1 and 15;  
+                                                                                             QUERY PLAN                                                                                               
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
+ Bitmap Heap Scan on test  (cost=48.13..59.32 rows=13 width=36)  
+   Recheck Cond: (((((js -&gt;&gt; 'key1'::text))::integer &gt;= 1) AND (((js -&gt;&gt; 'key1'::text))::integer &lt;= 10)) OR ((((js -&gt;&gt; 'key2'::text))::integer &gt;= 1) AND (((js -&gt;&gt; 'key2'::text))::integer &lt;= 15)))  
+   -&gt;  BitmapOr  (cost=48.13..48.13 rows=13 width=0)  
+         -&gt;  Bitmap Index Scan on idx_test_1  (cost=0.00..24.06 rows=6 width=0)  
+               Index Cond: ((((js -&gt;&gt; 'key1'::text))::integer &gt;= 1) AND (((js -&gt;&gt; 'key1'::text))::integer &lt;= 10))  
+         -&gt;  Bitmap Index Scan on idx_test_1  (cost=0.00..24.06 rows=6 width=0)  
+               Index Cond: ((((js -&gt;&gt; 'key2'::text))::integer &gt;= 1) AND (((js -&gt;&gt; 'key2'::text))::integer &lt;= 15))  
+(7 rows)  
+
+postgres=# explain select * from test where (js-&gt;&gt;'key1')::int between 1 and 10  and (js-&gt;&gt;'key2')::int between 1 and 15;  
+                                                                                             QUERY PLAN                                                                                                
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
+ Bitmap Heap Scan on test  (cost=40.00..44.05 rows=1 width=36)  
+   Recheck Cond: ((((js -&gt;&gt; 'key1'::text))::integer &gt;= 1) AND (((js -&gt;&gt; 'key1'::text))::integer &lt;= 10) AND (((js -&gt;&gt; 'key2'::text))::integer &gt;= 1) AND (((js -&gt;&gt; 'key2'::text))::integer &lt;= 15))  
+   -&gt;  Bitmap Index Scan on idx_test_1  (cost=0.00..40.00 rows=1 width=0)  
+         Index Cond: ((((js -&gt;&gt; 'key1'::text))::integer &gt;= 1) AND (((js -&gt;&gt; 'key1'::text))::integer &lt;= 10) AND (((js -&gt;&gt; 'key2'::text))::integer &gt;= 1) AND (((js -&gt;&gt; 'key2'::text))::integer &lt;= 15))  
+(4 rows)  
+
+</code></pre><h4 id="gin-索引的支持">gin 索引的支持</h4>
+<pre><code>The default GIN operator class for jsonb supports queries with top-level key-exists operators ?, ?&amp; and ?| operators and path/value-exists operator @&gt;.  
+  
+The non-default GIN operator class jsonb_path_ops supports indexing the @&gt; operator only.  
+</code></pre><p>支持 @&gt; 操作符的索引如下（jsonb_path_ops只支持@&gt;操作符，索引的体积要小些但是效率高）</p>
+<pre><code>create table tbl(id int, js jsonb);
+
+create index idx_tbl_1 on tbl using gin (js jsonb_path_ops);
+</code></pre><p>支持除范围查询以外的所有查询的索引如下</p>
+<pre><code>create table tbl(id int, js jsonb);  
+
+postgres=# create index idx_tbl_1 on tbl using gin (js);  -- 使用默认ops即可 
+
+</code></pre><h4 id="json-key-value值范围查询加速">JSON KEY VALUE值范围查询加速</h4>
+<p>把范围查询的类型提取出来，创建btree表达式索引，如果有任意组合的范围查询，使用gin或rum表达式索引。</p>
+<pre><code>create extension btree_gin;  
+create index idx1 on tbl using gin( ((js-&gt;&gt;'k1')::float8), ((js-&gt;&gt;'k2')::numeric), ... ((js-&gt;&gt;'kn')::float8) );   
+</code></pre><pre><code>create extension rum;  
+create index idx1 on tbl using rum( ((js-&gt;&gt;'k1')::float8), ((js-&gt;&gt;'k2')::numeric), ... ((js-&gt;&gt;'kn')::float8) );
+</code></pre><h4 id="模糊匹配索引">模糊匹配索引</h4>
+<p><a href="https://pgxn.org/dist/parray_gin/1.3.3/">https://pgxn.org/dist/parray_gin/1.3.3/</a></p>
+<p>结合了pg_trgm, 将数组或JSON中的value打散成token后进行索引构建. 实现数组或JSON元素级别的模糊匹配</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/python/simple-demo/">python 简单示例</a></li>
+        
+        <li><a href="/redis/long-polling/">长轮询</a></li>
+        
+        <li><a href="/redis/automated-keyword/">联想搜索</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/ubuntu2004-qa/" title="Ubuntu20.04 装机后">Ubuntu20.04 装机后</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/docker/">docker (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (23)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (9)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (9)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AD%98%E5%82%A8/">存储 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/readonly/" title="创建只读用户">创建只读用户</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年9月8日
+        </date>
+        
+        <div class="post-content">
+            创建只读用户readonly 1.创建一个用户名为readonly密码为ropass的用户 CREATE USER readonly WITH ENCRYPTED PASSWORD 'ropass'; 2.用户只读事务 alter user readonly set default_transaction_read_only=on; 3.把所有库的语言的USAGE权限给到readonly GRANT USAGE ON SCHEMA public to readonly; 4.授予select权限(这句要进入具体数据库操作在哪个db环境执行就授予那个db的……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/readonly/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/dw/document/" title="文档">文档</a>
             </h1>
         </header>
@@ -247,22 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/istio/servicediscovery/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/firewalld/" title="Firewall">Firewall</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年6月3日
-        </date>
-        
-        <div class="post-content">
-            简单应用 服务管理 # 查看全部支持的服务 $ firewall-cmd --get-service # 查看开放的服务 $ firewall-cmd --list-service # 开放服务 $ firewall-cmd --add-service=postgresql --permanent # 关闭服务 $ firewall-cmd --remove-service=postgresql --permanent permanent 参数修改对应的配置文件 /etc/firewalld/zones/public.xml 端口管理 # 查看开放的端口 $ firewall-cmd --zone=public --list-ports # 开放指导端口 $ firewall-cmd --zone=public --add-port=80/tcp --permanent # 开放端口段 $ firewall-cmd --zone=public --add-port=8388-8389/tcp --permanent # 关闭端口 $ firewall-cmd --zone=public --remove-port=80/tcp --permanent 规则管理 # 对 147.152.139.197 开放10000端口 $ firewall-cmd --permanent --zone=public --add-rich-rule=' rule family=&quot;ipv4&quot; source address=&quot;147.152.139.197/32&quot; port protocol=&quot;tcp&quot; port=&quot;10000&quot;……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/firewalld/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -399,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
@@ -434,10 +438,6 @@
         <a href="https://zhangeamon.top/linux/ubuntu2004-qa/" title="Ubuntu20.04 装机后">Ubuntu20.04 装机后</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/mysql/master-slave/" title="主从复制">主从复制</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -460,7 +460,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (22)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (23)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/high_level_sql/" title="高级SQL">高级SQL</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月11日
+        </date>
+        
+        <div class="post-content">
+            分组集 排序集 假象集 窗口函数 递归 递归应用 递归加速count(distint) 查询。 使用场景，数据分布：大数据集但其中的类型却很少 -- 创建表 test1=# create table recurive_t(user_id int,free float,info text); CREATE TABLE -- 加入数据 test1=# insert into recurive_t select 1 ,generate_series(0,1000000),'user 1 pay !!!'; test1=# insert into recurive_t select 2 ,generate_series(0,2000000),'user 2 pay !!!'; test1=# insert into recurive_t select 3 ,generate_series(0,3000000),'user 3 pay !!!'; test1=# insert into recurive_t select 4 ,generate_series(0,4000000),'user 4 pay !!!'; test1=# insert into recurive_t select 5 ,generate_series(0,4000000),'user 5 pay !!!'; test1=# analyze recurive_t ; ANALYZE -- count(distinct()) 查询……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/high_level_sql/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/thinking_in_db_fd/" title="数据库优化思考 - 结构设计">数据库优化思考 - 结构设计</a>
             </h1>
         </header>
@@ -254,22 +270,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/ubuntu2004-network/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/readonly/" title="创建只读用户">创建只读用户</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月8日
-        </date>
-        
-        <div class="post-content">
-            创建只读用户readonly 1.创建一个用户名为readonly密码为ropass的用户 CREATE USER readonly WITH ENCRYPTED PASSWORD 'ropass'; 2.用户只读事务 alter user readonly set default_transaction_read_only=on; 3.把所有库的语言的USAGE权限给到readonly GRANT USAGE ON SCHEMA public to readonly; 4.授予select权限(这句要进入具体数据库操作在哪个db环境执行就授予那个db的……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/readonly/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -406,6 +406,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
@@ -441,10 +445,6 @@
         <a href="https://zhangeamon.top/linux/ubuntu2004-qa/" title="Ubuntu20.04 装机后">Ubuntu20.04 装机后</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/mysql/master-slave/" title="主从复制">主从复制</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -467,7 +467,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (22)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (23)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
