@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/view_pg_stat_activity/" title="数据库视图之 pg_stat_activity">数据库视图之 pg_stat_activity</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年8月23日
+        </date>
+        
+        <div class="post-content">
+            介绍 当需要了解数据库当前运行状态或需要排查问题时，首先需要查看的就是pg_stat_activity。该视图中包含了你想知道的数据库连接信息，正在执行的有哪些sql，并处于何状态。 One row per server process, showing information related to the current activity of that process, such as state and current query. 每一行都表示一个系统进程，显示与当前会话的活动进程的一些信……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/view_pg_stat_activity/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/network-security/jumpserver/" title="Jumpserver 跳板机">Jumpserver 跳板机</a>
             </h1>
         </header>
@@ -247,29 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/pmap/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/storage/minio/" title="minio 轻量级对象存储">minio 轻量级对象存储</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年3月18日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E5%AD%98%E5%82%A8'>存储</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            简单了解 minio 完全实现了s3协议，使用简单方便。 支持多机模式，提高数据可用性和整体容量。 限制， 最多5T存储。 单个文件最大5T。 缺点， 不能在线扩容。开发者认为扩容应该是开发人员需要解决的问题。 安装及简单使用 服务端 #下载 wget https://dl.minio.io/server/minio/release/linux-amd64/minio mv minio /usr/local/bin/ chmod 777 /usr/local/bin/minio #启动服务 minio server minidata/ Endpoint: http://10.1.88.74:9000 http://172.17.0.1:9000 http://172.19.0.1:9000 http://172.21.0.1:9000 http://172.22.0.1:9000 http://172.23.0.1:9000 http://127.0.0.1:9000 AccessKey: ZSYLNWA109W0Q4DWDS73 SecretKey: kuqn+i1MpR0yoE9RoT59gYjRuB5IJdz8IhIZOqP9 Browser Access: http://10.1.88.74:9000 http://172.17.0.1:9000 http://172.19.0.1:9000 http://172.21.0.1:9000……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/storage/minio/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -406,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/ch/install/" title="ClickHouse安装">ClickHouse安装</a>
     </li>
     
@@ -441,10 +438,6 @@
         <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -461,7 +454,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

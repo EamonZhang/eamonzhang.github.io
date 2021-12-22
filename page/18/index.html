@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_trgm/" title="pg_trgm的gist和gin索引加速字符匹配查询">pg_trgm的gist和gin索引加速字符匹配查询</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月7日
+        </date>
+        
+        <div class="post-content">
+            背景 对车牌号的记忆有时可能记住的是前几位，有时可能是后几位，不同的人记车牌号的习惯也不同。 通常是是容易记住首尾，中间不清楚。 那么如何在大量已有车牌数据中快速根据模糊的信息来进行查询呢？ 模拟 数据库表中约有500w条车牌号记录，对表中的车牌号进行模糊查询。 即支持 car_id like &lsquo;%XXXX%XXX%&rsquo; 查询 ---创建表……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_trgm/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/docker/troubles/" title="Docker 问题集">Docker 问题集</a>
             </h1>
         </header>
@@ -233,22 +249,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/monitor/zabbix-fqa/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/kworker/" title="Kworker ">Kworker </a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月24日
-        </date>
-        
-        <div class="post-content">
-            名字的意思 Kernel Worker 什么时候有的 kworker是3.x内核引入的 这么看 系统中查看 Linux下使用 ps -ef|grep kowrker 显示的内容怎么看 显示的格式kworker/%u:%d%s u：是unbound的缩写，代表没有绑定特定的CPU，kworker /u2:0中的 2 是 work_pool 的ID。 不带u的就是绑定特定cpu的wo……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/kworker/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -385,6 +385,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/ch/install/" title="ClickHouse安装">ClickHouse安装</a>
     </li>
     
@@ -420,10 +424,6 @@
         <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -440,7 +440,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/index01/" title="数据库索引类型及使用场景">数据库索引类型及使用场景</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月19日
+        </date>
+        
+        <div class="post-content">
+            用途 优点 主键唯一约束 加速检索 排序 缺点 更新数据时需要同时维护对应索引 占用磁盘空间，甚至比表数据本身还要多 使用场景利弊分析 TP与AP应用 读写使用比例 点查询批量查询 创建索引 \h create index 命令： CREATE INDEX 描述： 建立新的索引 语法： CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ [ IF NOT EXISTS ] 名称 ] ON 表名 [ USING 方法 ] ( { 列名称 | ( 表达式 ) }……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/index01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/middleware/sysbench/" title="Sysbench 测试">Sysbench 测试</a>
             </h1>
         </header>
@@ -240,22 +256,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/kvm/kvm01/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/elk/apm/" title="APM">APM</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月6日
-        </date>
-        
-        <div class="post-content">
-            https://www.elastic.co/solutions/apm 应用程序性能监控 整体架构 先搞起来 agent 收集信息 apm-server 接受agent信息并发送到ES ES 存储信息 Kibana 信息检索展示 agent python django 安装扩展包 pip install elastic-apm django 配置 # Add the agent to the installed apps INSTALLED_APPS = ( 'elasticapm.contrib.django', #... ) ELASTIC_APM = { # Set required service name. # Allowed characters: # a-z, A-Z, 0-9, -, _, and space 'SERVICE_NAME': 'my-app', #后台进程 'TRANSPORT_CLASS': 'elasticapm.transport.http.AsyncTransport', # Use if APM Server requires a token #'SECRET_TOKEN': '', # 没有数据可以开启debug查看 # 'DEBUG': True, # Set custom APM Server……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/elk/apm/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -392,6 +392,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/ch/install/" title="ClickHouse安装">ClickHouse安装</a>
     </li>
     
@@ -427,10 +431,6 @@
         <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -447,7 +447,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

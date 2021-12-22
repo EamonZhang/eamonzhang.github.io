@@ -94,6 +94,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cgroups/" title="cgroups">cgroups</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月14日
+        </date>
+        
+        <div class="post-content">
+            https://www.certdepot.net/rhel7-get-started-cgroups/ https://www.oracle.com/technical-resources/articles/linux/resource-controllers-linux.html iops和bps限制 限制sda 的读写 lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sda 8:0 0 931.5G 0 disk /data sdb 8:16 0 223.6G 0 disk ├─sdb1 8:17 0 200M 0 part /boot/efi ├─sdb2 8:18 0 1G 0 part /boot ├─sdb3 8:19 0 7.8G 0 part [SWAP] └─sdb4 8:20 0 214.6G 0 part / cd /sys/fs/cgroup/blkio/ echo &quot;8:0 102400&quot; &gt; blkio.throttle.read_bps_device echo &quot;8:0 10&quot; &gt; blkio.throttle.read_iops_device echo &quot;8:0 204800&quot; &gt; blkio.throttle.write_bps_device echo &quot;8:0 20&quot; &gt; blkio.throttle.write_iops_device……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cgroups/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/at-crontab/" title="定时任务">定时任务</a>
             </h1>
         </header>
@@ -253,24 +271,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/stat/" title="Access Modify Change 三种时间戳">Access Modify Change 三种时间戳</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月20日
-        </date>
-        
-        <div class="post-content">
-            三种时间对应关系 访问时间 Access atime 修改时间 Modify mtime 状态改动时间 Change ctime 如何查看文件文件的三种时间戳 stat filename 三种时间戳的解释 访问时间：读一次文件的内容，这个时间就会更新。比如more、cat等命令。ls、stat命令不会修改atime 修改时间：修改时间是文件内容最后一次被修改的时间。比如：vim操作……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/stat/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -362,6 +362,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/ch/install/" title="ClickHouse安装">ClickHouse安装</a>
     </li>
     
@@ -397,10 +401,6 @@
         <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -417,7 +417,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

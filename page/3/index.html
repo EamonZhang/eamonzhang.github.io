@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年6月16日
+        </date>
+        
+        <div class="post-content">
+            Centos7 cmake 版本升级（由 v2.8.12.2 升级至 v3.14.5） #cmake -version cmake version 2.8.12.2 安装基础工具 yum install -y gcc gcc-c++ mkdir /opt/cmake cd /opt/cmake/ wget https://cmake.org/files/v3.14/cmake-3.14.5.tar.gz tar zxvf cmake-3.14.5.tar.gz 安装 yum remove cmake -y ./configure --prefix=/usr/local/cmake make &amp;&amp; make install 查看版本 #/usr/local/cmake/bin/cmake --version cmake version 3.14.5 CMake suite maintained and supported by Kitware (kitware.com/cmake). 设置环境 ln -s /usr/local/cmake/bin/cmake /usr/bin/cmake Clion 中使用MakeFile 默认在Clion中使用CMakeList.txt,但是有些项目提供的是Makefile cmake_minimum_required(VERSION 3.12) project(test)……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/asr/c/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
             </h1>
         </header>
@@ -285,29 +301,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <p class="readmore"><a href="https://zhangeamon.top/python/django-models-querys/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/python/pyinstaller/" title="Python PyInstaller 生成可执行文件">Python PyInstaller 生成可执行文件</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年4月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Python PyInstaller Python 默认并不包含 PyInstaller 模块，因此需要自行安装 PyInstaller 模块。 pip3 install pyinstaller PyInstaller生成可执行程序 pyinstaller 选项 Python源文件 app.py print('hello everyone') 生成独立的可执行文件，包含可依赖 pyinstaller -F app.py 生成如下目录结构 . ├── app.py ├── app.spec ├── build │ └── app │ ├── Analysis-00.toc │ ├── base_library.zip │ ├── EXE-00.toc │ ├── PKG-00.pkg │ ├── PKG-00.toc │ ├── PYZ-00.pyz │ ├──……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/python/pyinstaller/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -430,6 +423,10 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/ch/install/" title="ClickHouse安装">ClickHouse安装</a>
     </li>
     
@@ -465,10 +462,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -485,7 +478,7 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

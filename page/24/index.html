@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/elk/apm/" title="APM">APM</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月6日
+        </date>
+        
+        <div class="post-content">
+            https://www.elastic.co/solutions/apm 应用程序性能监控 整体架构 先搞起来 agent 收集信息 apm-server 接受agent信息并发送到ES ES 存储信息 Kibana 信息检索展示 agent python django 安装扩展包 pip install elastic-apm django 配置 # Add the agent to the installed apps INSTALLED_APPS = ( 'elasticapm.contrib.django', #... ) ELASTIC_APM = { # Set required service name. # Allowed characters: # a-z, A-Z, 0-9, -, _, and space 'SERVICE_NAME': 'my-app', #后台进程 'TRANSPORT_CLASS': 'elasticapm.transport.http.AsyncTransport', # Use if APM Server requires a token #'SECRET_TOKEN': '', # 没有数据可以开启debug查看 # 'DEBUG': True, # Set custom APM Server……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/elk/apm/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/stat/" title="Postgresql指标查看&amp;stat统计信息">Postgresql指标查看&amp;stat统计信息</a>
             </h1>
         </header>
@@ -261,29 +277,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/wal-g/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/ansible/ansible-role/" title="Ansible Roles">Ansible Roles</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/ansible'>ansible</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            以特定的层级目录结构进行组织的tasks、variables、handlers、templates、files等 mkdir -pv ./{os_hard,nginx,memcached}/{files,templates,vars,handlers,meta,default,tasks}/main.yaml tree memcached/ memcached/ ├── default 设定默认变量 │ └── main.yaml ├── files 存储由copy或script等模块调用的文件 │ └── main.yaml ├── handlers │ └── main.yaml ├── meta 定义当前角色的特殊设定及其依赖关系 │ └……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-role/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -420,6 +413,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/ch/install/" title="ClickHouse安装">ClickHouse安装</a>
     </li>
     
@@ -455,10 +452,6 @@
         <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -475,7 +468,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

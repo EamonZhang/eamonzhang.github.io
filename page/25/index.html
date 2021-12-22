@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/ansible/ansible-role/" title="Ansible Roles">Ansible Roles</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/ansible'>ansible</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            以特定的层级目录结构进行组织的tasks、variables、handlers、templates、files等 mkdir -pv ./{os_hard,nginx,memcached}/{files,templates,vars,handlers,meta,default,tasks}/main.yaml tree memcached/ memcached/ ├── default 设定默认变量 │ └── main.yaml ├── files 存储由copy或script等模块调用的文件 │ └── main.yaml ├── handlers │ └── main.yaml ├── meta 定义当前角色的特殊设定及其依赖关系 │ └……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-role/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/ansible/ansible-playbooks/" title="Ansible Playbooks">Ansible Playbooks</a>
             </h1>
         </header>
@@ -261,22 +284,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/no-passwd/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/wheel/" title="Linux wheel 用户组">Linux wheel 用户组</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月18日
-        </date>
-        
-        <div class="post-content">
-            wheel 用户组 1.在Linux系统中root用户作为超级管理员拥有至高无上的权限，其他用户可以使用su命令将自己切换为root用户。为了加强系统的安全性,对系统用户权限进行限制。 设置为只有wheel用户组的成员拥有su 权利，其他用户不再具备切换到root 用户的权限。 2.设置 2.1 新建use……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/wheel/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -400,6 +407,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/ch/install/" title="ClickHouse安装">ClickHouse安装</a>
     </li>
     
@@ -435,10 +446,6 @@
         <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -455,7 +462,7 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (16)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
