@@ -266,7 +266,10 @@ alias acme.sh=~/.acme.sh/acme.sh
 </code></pre><h4 id="安装证书">安装证书</h4>
 <p>是 service nginx force-reload, 不是 service nginx reload, 据测试, reload 并不会重新加载证书, 所以用的 force-reload)</p>
 <p>Nginx 的配置 ssl_certificate 使用 /etc/nginx/ssl/fullchain.cer ，而非 /etc/nginx/ssl/<!-- raw HTML omitted -->.cer ，否则 SSL Labs 的测试会报 Chain issues Incomplete 错误。</p>
-<h4 id="更新-acmesh">更新 acme.sh</h4>
+<pre><code>acme.sh --install-cert -d example.com --key-file   /path/to/keyfile/in/nginx/key.pem  --fullchain-file /path/to/fullchain/nginx/cert.pem 
+</code></pre><p>nginx 证书生效</p>
+<pre><code> &quot;service nginx force-reload&quot;
+</code></pre><h4 id="更新-acmesh">更新 acme.sh</h4>
 <p>目前由于 acme 协议和 letsencrypt CA 都在频繁的更新, 因此 acme.sh 也经常更新以保持同步.</p>
 <pre><code>acme.sh --upgrade
 </code></pre><p><a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E">更多参考</a></p>
