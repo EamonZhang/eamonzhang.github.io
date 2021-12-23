@@ -163,6 +163,12 @@
     <li><a href="#lets-encrypt-通配符证书">Let&rsquo;s Encrypt 通配符证书</a></li>
     <li><a href="#如何申请-lets-encrypt-通配符证书">如何申请 Let&rsquo;s Encrypt 通配符证书</a></li>
     <li><a href="#如何验证域名的所属权">如何验证域名的所属权</a></li>
+    <li><a href="#2实践">2.实践</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#以下方式过期">以下方式过期</a></li>
   </ul>
 </nav>
     </div>
@@ -247,13 +253,30 @@ dns-01：给域名添加一个 DNS TXT 记录。</p>
 <p>http-01：在域名对应的 Web 服务器下放置一个 HTTP well-known URL 资源文件。</p>
 <p>tls-sni-01：在域名对应的 Web 服务器下放置一个 HTTPS well-known URL 资源文件。</p>
 <p>而申请通配符证书，只能使用 dns-01 的方式。</p>
-<p>2.实践</p>
+<h2 id="2实践">2.实践</h2>
+<h4 id="安装">安装</h4>
+<pre><code>curl  https://get.acme.sh | sh -s email=my@example.com
+</code></pre><pre><code>cd ~/.acme.sh/
+alias acme.sh=~/.acme.sh/acme.sh
+</code></pre><h4 id="手动方式认证">手动方式认证</h4>
+<p>将生产的txt记录填入dns解析中</p>
+<pre><code>acme.sh  --issue  --dns   -d mydomain.com --yes-I-know-dns-manual-mode-enough-go-ahead-please
+</code></pre><h4 id="生成证书">生成证书</h4>
+<pre><code>acme.sh  --renew   -d mydomain.com  --yes-I-know-dns-manual-mode-enough-go-ahead-please
+</code></pre><h4 id="安装证书">安装证书</h4>
+<p>是 service nginx force-reload, 不是 service nginx reload, 据测试, reload 并不会重新加载证书, 所以用的 force-reload)</p>
+<p>Nginx 的配置 ssl_certificate 使用 /etc/nginx/ssl/fullchain.cer ，而非 /etc/nginx/ssl/<!-- raw HTML omitted -->.cer ，否则 SSL Labs 的测试会报 Chain issues Incomplete 错误。</p>
+<h4 id="更新-acmesh">更新 acme.sh</h4>
+<p>目前由于 acme 协议和 letsencrypt CA 都在频繁的更新, 因此 acme.sh 也经常更新以保持同步.</p>
+<pre><code>acme.sh --upgrade
+</code></pre><p><a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E">更多参考</a></p>
+<h2 id="以下方式过期">以下方式过期</h2>
 <p>2.1 基本环境准备</p>
-<p>yum -y install yum-utils<br>
-yum-config-manager &ndash;enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional<br>
-sudo yum install python2-certbot-nginx</p>
-<p>2.2 申请证书</p>
-<p>certbot  &ndash;server <a href="https://acme-v02.api.letsencrypt.org/directory">https://acme-v02.api.letsencrypt.org/directory</a> -d &ldquo;*.zhangeamon.top&rdquo; &ndash;manual &ndash;preferred-challenges dns-01 certonly</p>
+<pre><code>yum -y install yum-utils  
+yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional  
+sudo yum install python2-certbot-nginx  
+</code></pre><p>2.2 申请证书</p>
+<p><code>certbot  --server https://acme-v02.api.letsencrypt.org/directory -d &quot;*.zhangeamon.top&quot; --manual --preferred-challenges dns-01 certonly</code></p>
 <pre><code>Saving debug log to /var/log/letsencrypt/letsencrypt.log
 Plugins selected: Authenticator manual, Installer None
 Starting new HTTPS connection (1): acme-v02.api.letsencrypt.org
@@ -297,8 +320,8 @@ IMPORTANT NOTES:
    Donating to EFF:                    https://eff.org/donate-le
 
 </code></pre><p>2.3 注意事项</p>
-<p>在执行上面的命令时，需要使用txt类型的DNS记录。　在DNS上新建一条Txt 记录,并验证。
-dig  -t txt  _acme-challenge.zhangeamon.top @8.8.8.8</p>
+<p>在执行上面的命令时，需要使用txt类型的DNS记录。　在DNS上新建一条Txt 记录,并验证。</p>
+<p><code>dig  -t txt  _acme-challenge.zhangeamon.top @8.8.8.8</code></p>
 <pre><code>; &lt;&lt;&gt;&gt; DiG 9.9.4-RedHat-9.9.4-61.el7_5.1 &lt;&lt;&gt;&gt; -t txt _acme-challenge.zhangeamon.top @8.8.8.8
 ;; global options: +cmd
 ;; Got answer:
@@ -321,7 +344,7 @@ _acme-challenge.zhangeamon.top.	599 IN	TXT	&quot;Nyej3i187An7ZqIEeUQ_MC6-OrS0jyK
 <p>/etc/letsencrypt/live/zhangeamon.top/fullchain.pem<br>
 /etc/letsencrypt/live/zhangeamon.top/privkey.pem</p>
 <p>3.查看</p>
-<p>certbot certificates -d &ldquo;*.zhangeamon.top&rdquo;</p>
+<p><code>certbot certificates -d &quot;*.zhangeamon.top&quot;</code></p>
 <pre><code>Saving debug log to /var/log/letsencrypt/letsencrypt.log
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
