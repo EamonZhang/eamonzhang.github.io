@@ -17,12 +17,12 @@
     </item>
     
     <item>
-      <title>ClickHouse安装</title>
+      <title>ClickHouse</title>
       <link>https://zhangeamon.top/ch/install/</link>
       <pubDate>Tue, 21 Dec 2021 09:10:29 +0800</pubDate>
       
       <guid>https://zhangeamon.top/ch/install/</guid>
-      <description>标题</description>
+      <description>调研总结 不适用于多个大表的join操作 没有事务保障机制 merage最终一致性 不适合财务相关系统 对数据精度要求不高，实时性有要求的场景比较适合。</description>
     </item>
     
     <item>
