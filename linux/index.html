@@ -94,6 +94,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月29日
+        </date>
+        
+        <div class="post-content">
+            收集数据 sudo perf record -F 99 -p 13204 -g -- sleep 30 -F 99表示每秒99次， -p 13204是进程号 -g表示记录调用栈 sleep 30则是持续30秒 数据解析 perf script -i perf.data &amp;&gt; perf.unfold 数据展现 git clone https://github.com/brendangregg/FlameGraph.git 将perf.unfold中的符号进行折叠 ./stackcollapse-perf.pl perf.unfold &amp;&gt; perf.folded 生成svg图 ./flamegraph.pl perf.folded &gt; perf.svg 用浏览器打开查看 结果解读 https://www.ruanyifeng.com/blog/2017/09/flame-graph.html……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/perf/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
             </h1>
         </header>
@@ -295,31 +313,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年4月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &quot;physical id&quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &quot;cpu cores&quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &quot;processor&quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &quot;name&quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core * Socket(s) * Core(s) per socket Linux查看某个进……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cpu-affinity/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -407,6 +400,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
     </li>
     
@@ -440,10 +437,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
 </ul>

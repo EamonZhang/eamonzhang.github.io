@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>进程管理 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="进程管理 - Let&#39;s go 🐌 🐌 🐌">
+    <title>perf linux 性能分析 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="perf linux 性能分析 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2019-01-31T10:56:47&#43;08:00'>
+    <meta property="article:published_time" content='2021-12-29T14:16:15&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2019-01-31T10:56:47&#43;08:00'>
+    <meta property="article:modified_time" content='2021-12-29T14:16:15&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="进程管理">
+    <meta name="description" content="perf linux 性能分析">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/linux/pid_m/">
+    <meta property="og:url" content="https://zhangeamon.top/linux/perf/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -96,62 +96,34 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">进程管理</h1>
+            <h1 class="post-title">perf linux 性能分析</h1>
         </header>
         <date class="post-meta meta-date">
-            2019年1月31日
+            2021年12月29日
         </date>
         
         
         
         <div class="post-content">
-            <h5 id="监控进程">监控进程</h5>
-<p>查看系统TOP(f进入field选择)</p>
-<pre><code>top  
-</code></pre><p>打印系统进程</p>
-<pre><code>ps -efwL  
-</code></pre><p>统计每个进程的开销</p>
-<pre><code>pidstat -d -r -u -w -l -h -p ALL 5 1  
-</code></pre><p>打印进程stack</p>
-<pre><code>pstack -p pid  
-</code></pre><p>打印进程系统调用</p>
-<pre><code>strace -p pid  
-</code></pre><h5 id="结束和管理进程">结束和管理进程</h5>
-<p>结束进程</p>
-<pre><code>kill pid  
-</code></pre><p>强制结束进程(用户进程无法捕获-9信号，可能崩溃. -15信号稳妥些)</p>
-<pre><code>kill -9 pid  
-</code></pre><p>管理周期进程</p>
-<p>任务调度进程的管理</p>
-<p>查看当前用户的当前调度任务</p>
-<pre><code>crontab -l  
-</code></pre><p>配置当前用户的调度任务(命令一定要有user:x权限，否则不会被执行)</p>
-<pre><code>crontab -e  
-  
-# * 表示所有，支持-号范围，支持,号枚举  
-# Example of job definition:  
-# .---------------- minute (0 - 59)  
-# |  .------------- hour (0 - 23)  
-# |  |  .---------- day of month (1 - 31)  
-# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...  
-# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat  
-# |  |  |  |  |  
-# *  *  *  *  * user-name command to be executed  
-</code></pre><h5 id="调整进程">调整进程</h5>
-<p>进程优先级，Linux在分配计算资源时，优先分配给nice值低的进程。</p>
-<p>nice等级的范围从-20-19，其中-20最高，19最低，只有系统管理者可以设置负数的等级。</p>
-<p>启动时调整进程的优先级</p>
-<p>启动时设置为-5</p>
-<pre><code>nice -n -5 命令 &amp;  
-</code></pre><p>调整已存在进程的优先级</p>
-<pre><code>renice -5 -p 5200  
-</code></pre><p>PID为5200的进程nice设为-5<br>
-查看进程优先级</p>
-<pre><code>top -p pid  
-</code></pre><p>NI 字段表示<br>
-调整进程的CPU亲和(绑定CPU)</p>
-<pre><code>numactl --physcpubind=1,2,3 命令  
-</code></pre><p>将命令的CPU绑定到1,2,3号核</p>
+            <h4 id="收集数据">收集数据</h4>
+<pre><code>sudo perf record -F 99 -p 13204 -g -- sleep 30
+</code></pre><pre><code>-F 99表示每秒99次，
+-p 13204是进程号
+-g表示记录调用栈
+sleep 30则是持续30秒
+</code></pre><h4 id="数据解析">数据解析</h4>
+<pre><code>perf script -i perf.data &amp;&gt; perf.unfold
+</code></pre><h4 id="数据展现">数据展现</h4>
+<pre><code>git clone https://github.com/brendangregg/FlameGraph.git
+
+将perf.unfold中的符号进行折叠
+./stackcollapse-perf.pl perf.unfold &amp;&gt; perf.folded
+
+生成svg图
+./flamegraph.pl perf.folded &gt; perf.svg
+</code></pre><h4 id="用浏览器打开查看">用浏览器打开查看</h4>
+<h4 id="结果解读">结果解读</h4>
+<p><a href="https://www.ruanyifeng.com/blog/2017/09/flame-graph.html">https://www.ruanyifeng.com/blog/2017/09/flame-graph.html</a></p>
 
         </div>
 
@@ -164,11 +136,11 @@
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/postgres/pgpool2/">pgpoolii 读写分离</a></li>
+        <li><a href="/linux/xz/">高压缩比工具 XZ</a></li>
         
-        <li><a href="/postgres/logical-replication/">逻辑复制</a></li>
+        <li><a href="/ch/install/">ClickHouse</a></li>
         
-        <li><a href="/postgres/cluster/">cluster 聚族表</a></li>
+        <li><a href="/postgres/pg_json/">数据库的json类型</a></li>
         
     </ul>
 </div>

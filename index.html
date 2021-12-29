@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月29日
+        </date>
+        
+        <div class="post-content">
+            收集数据 sudo perf record -F 99 -p 13204 -g -- sleep 30 -F 99表示每秒99次， -p 13204是进程号 -g表示记录调用栈 sleep 30则是持续30秒 数据解析 perf script -i perf.data &amp;&gt; perf.unfold 数据展现 git clone https://github.com/brendangregg/FlameGraph.git 将perf.unfold中的符号进行折叠 ./stackcollapse-perf.pl perf.unfold &amp;&gt; perf.folded 生成svg图 ./flamegraph.pl perf.folded &gt; perf.svg 用浏览器打开查看 结果解读 https://www.ruanyifeng.com/blog/2017/09/flame-graph.html……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/perf/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
             </h1>
         </header>
@@ -286,29 +302,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/findhidpid/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年11月1日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E5%AE%89%E5%85%A8'> 安全</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            日志收集 客户端配置，指定需要收集系统日志及日志格式。默认如下 &lt;ossec_config&gt; &lt;localfile&gt; &lt;log_format&gt;audit&lt;/log_format&gt; &lt;location&gt;/var/log/audit/audit.log&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/ossec/logs/active-responses.log&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/log/messages&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/log/secure&lt;/location&gt; &lt;/localfile&gt; &lt;localfile&gt; &lt;log_format&gt;syslog&lt;/log_format&gt; &lt;location&gt;/var/log/maillog&lt;/location&gt; &lt;/localfile&gt; 系统命令 客户端配置，设置系统监控执行命令及频率。默认如下 # 系统文件 &lt;localfile&gt; &lt;log_format&gt;command&lt;/log_format&gt; &lt;command&gt;df -P&lt;/command&gt; &lt;frequency&gt;360&lt;/frequency&gt; &lt;/localfile&gt; # 端口 &lt;localfile&gt; &lt;log_format&gt;full_command&lt;/log_format&gt; &lt;command&gt;netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 = = \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d&lt;/command&gt; &lt;alias&gt;netstat listening ports&lt;/alias&gt; &lt;frequency&gt;360&lt;/frequency&gt; &lt;/localfile&gt; # 登陆日志 &lt;localfile&gt; &lt;log_format&gt;full_command&lt;/log_format&gt; &lt;command&gt;last -n……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/wazuh/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -413,6 +406,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
     </li>
     
@@ -446,10 +443,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
 </ul>

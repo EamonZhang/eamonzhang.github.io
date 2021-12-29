@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/tidb/tree/" title="二叉树、B-Tree、B&#43;Tree、B*Tree">二叉树、B-Tree、B&#43;Tree、B*Tree</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年2月18日
+        </date>
+        
+        <div class="post-content">
+            二叉树：二叉树，每个结点只存储一个关键字，等于则命中，小于走左边，大于走右边； B-Tree：多路搜索树，每个结点存储【M/2-1，M-1]个关键字，非叶子结点存储指向关键字范围的子节点；所有关键字在整棵树中出现【且只出现一次】，非叶子结点可以命中。 B+Tree：在B-Tree基础……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/tidb/tree/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/fu-cmd/" title="Linux 常用命令">Linux 常用命令</a>
             </h1>
         </header>
@@ -247,22 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/archive/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/timescaledb/" title="TimescaleDB 时序数据库">TimescaleDB 时序数据库</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月30日
-        </date>
-        
-        <div class="post-content">
-            时序数据库 https://github.com/timescale/timescaledb 数据库配置 https://github.com/timescale/timescaledb-tune copy并行导入数据 https://github.com/timescale/timescaledb-parallel-copy 常用方法 创建拓展 CREATE EXTENSION timescaledb; 创建一个普通的表 CREATE TABLE conditions ( time TIMESTAMPTZ NOT NULL, location TEXT NOT NULL, temperature DOUBLE PRECISION NULL, humidity DOUBLE PRECISION NULL ); 转换成时序数据库表 SELECT create_hypertable('conditions', 'time'); conditions 表名 time 时序字段 修改时序间隔 对新表生效 SELECT set_chunk_time_interval('conditions', INTERVAL '24 hours'); 查看分区 SELECT show_chunks('conditions'); SELECT show_chunks('conditions', older_than =&gt; INTERVAL '3 months') SELECT show_chunks('conditions', older_than =&gt; DATE '2017-01-01'); SELECT show_chunks(newer_than =&gt; INTERVAL '3 months'); SELECT show_chunks(older_than =&gt; INTERVAL '3 months', newer_than =&gt; INTERVAL '4 months'); 查看数据大……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/timescaledb/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -399,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
     </li>
     
@@ -432,10 +436,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
     </li>
     
 </ul>
