@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/mysql/over-view/" title="Mysql 入门">Mysql 入门</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年2月21日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/mysql'>mysql</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            安装 &amp; 启动 安装 rpm -i https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm yum install mysql-community-server.x86_64 启动 systemctl start mysqld systemctl enable mysqld 查看临时密码 #sudo grep 'temporary password' /var/log/mysqld.log 2019-05-15T06:42:54.826106Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: DVjSsl-ZX5f7 修改密码 #mysql -uroot -p ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass4!'; 常用命令 连接 mysql -h127.0.0.1 -P 3306 -uroot -p 版本 #mysql -V mysql Ver 8.0.26 for Linux on x86_64 (MySQL Community Server - GPL) 数据库命令 mysql&gt;help show 权限管理 mysql登陆用户权限校验主要是通过用户名密码+访问来源主机方式 创建用户 CREATE USER 'finley'@'localhost' IDENTIFIED BY 'password'; 赋……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/mysql/over-view/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/tidb/tree/" title="二叉树、B-Tree、B&#43;Tree、B*Tree">二叉树、B-Tree、B&#43;Tree、B*Tree</a>
             </h1>
         </header>
@@ -247,22 +270,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/cluster/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/archive/" title="Archive wal归档">Archive wal归档</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月30日
-        </date>
-        
-        <div class="post-content">
-            介绍 所谓WAL日志归档，其实就是把在线的WAL日志备份出来。 配置 vi postgresql.conf wal_level='replica' # - Archiving - archive_mode = on # enables archiving; off, on, or always # (change requires restart) archive_command = 'test ! -f /mnt/backup/%f &amp;&amp; cp %p /mnt/backup/%f' # command to use to archive a logfile segment # placeholders: %p = path of file to archive # %f = file name only # e.g. 'test ! -f /mnt/server/archivedir/%f &amp;&amp; cp %p /mnt/server/archivedir/%f' #archive_timeout = 0 # force a logfile segment switch after this # number of seconds; 0 disables 参数说明 wal_level archive 或更高级别 archive_mode on 开启归档模式，always……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/archive/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -399,6 +406,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
     </li>
     
@@ -432,10 +443,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
     </li>
     
 </ul>

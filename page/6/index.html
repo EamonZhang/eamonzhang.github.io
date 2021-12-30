@@ -92,6 +92,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/redis-durability/" title="Redis 持久化策略">Redis 持久化策略</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            持久化的两种方式 RDB 快照 AOF 日志 RDB 快照 快照一次全量备份。 特点： 保存时比较耗系统资源容易造成业务卡顿，恢复比较快。 原理： 使用操作系统的多进程COW(COPY ON Write)机制来实现快照持久化 命令： 堵塞 save ，非堵塞后台执行 bgsave 配置： save m n #配置快照(rdb)促发规则，格式：save &lt;seconds&gt; &lt;changes&gt; #save 900 1……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/redis-durability/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/redis/redis-cluster/" title="Redis Cluster">Redis Cluster</a>
             </h1>
         </header>
@@ -284,22 +309,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/middleware/etcd_auth/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/hotupdate/" title="hot update">hot update</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月14日
-        </date>
-        
-        <div class="post-content">
-            What is HOT HOT是“Heap Only Tuple”（仅元组堆）的缩写, 用来提高update效率。 行的新版本和旧版本位于同一块中时，该行的外部地址（原始行指针）保持不变，利用hot link指针进行转发地址。索引不需要任何改动。 前提条件 包含更新行的块中必须有足够的空间 在已修改值的任何列上均未定义……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/hotupdate/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -436,6 +445,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
     </li>
     
@@ -469,10 +482,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
     </li>
     
 </ul>

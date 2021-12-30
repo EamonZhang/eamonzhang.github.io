@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/bgwriter/" title="Backgroud Writer 进程">Backgroud Writer 进程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月31日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            主要作用 负责将shared buffer 中的内容刷写到磁盘中，9.1版之后部分内容交给checkpoint完成。 参数配置 # - Background Writer - #bgwriter_delay = 200ms # 10-10000ms between rounds #bgwriter_lru_maxpages = 100 # 0-1000 max buffers written/round #bgwriter_lru_multiplier = 2.0 # 0-10.0 multiplier on buffers scanned/round #bgwriter_flush_after = 512kB # measured in pages, 0 disables bgwriter_delay 两次写入任务之间的睡眠间隔时间 bgwriter_lru_maxpages 每次bgwriter任务写buffer的最大page数，一旦达……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/bgwriter/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
             </h1>
         </header>
@@ -282,31 +305,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/redis/redis-scence/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/redis/redis-durability/" title="Redis 持久化策略">Redis 持久化策略</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            持久化的两种方式 RDB 快照 AOF 日志 RDB 快照 快照一次全量备份。 特点： 保存时比较耗系统资源容易造成业务卡顿，恢复比较快。 原理： 使用操作系统的多进程COW(COPY ON Write)机制来实现快照持久化 命令： 堵塞 save ，非堵塞后台执行 bgsave 配置： save m n #配置快照(rdb)促发规则，格式：save &lt;seconds&gt; &lt;changes&gt; #save 900 1……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/redis/redis-durability/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -443,6 +441,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
     </li>
     
@@ -476,10 +478,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
     </li>
     
 </ul>
