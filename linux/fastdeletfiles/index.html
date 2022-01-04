@@ -106,9 +106,9 @@
         
         <div class="post-content">
             <h2 id="生成大量文件">生成大量文件</h2>
-<p>mkdir lostfiles
-cd lostfiles</p>
-<p>cat create_files.sh</p>
+<pre><code>mkdir lostfiles
+cd lostfiles
+</code></pre><p>cat create_files.sh</p>
 <pre><code>for i in $(seq 1 1500000)
 do
   echo test &gt;&gt;$i.txt
@@ -140,6 +140,15 @@ sys	0m41.294s
 real	1m9.959s
 user	0m2.955s
 sys	0m50.202s
+</code></pre><h2 id="应用">应用</h2>
+<ul>
+<li>快速清除minio bucket 数据</li>
+</ul>
+<pre><code>清除bucket数据
+time find ./bucket001/ -type f  -delete
+
+清除bucket元数据
+.minio.sys/buckets/bucket001
 </code></pre>
         </div>
 
@@ -188,7 +197,7 @@ sys	0m50.202s
 
                     <footer id="footer">
     <div>
-        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        &copy; 2018 - 2022 <a href="https://zhangeamon.top"> By Eamon</a>
         
     </div>
     <br />
