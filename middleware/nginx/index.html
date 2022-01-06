@@ -92,7 +92,106 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#性能优化">性能优化</a></li>
+    <li><a href="#常见错误">常见错误</a></li>
+    <li><a href="#设置用户登陆认证">设置用户登陆认证</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -111,8 +210,133 @@
         
         
         
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
         <div class="post-content">
-            <p><a href="https://mp.weixin.qq.com/s/YoZDzY4Tmj8HpQkSgnZLvA">性能优化</a></p>
+            <h2 id="性能优化">性能优化</h2>
+<ul>
+<li>CPU 亲和性</li>
+</ul>
+<pre><code>worker_processes 4; # 比如物理CPU的数量为4
+worker_cpu_affinity 0001 0010 0100 1000;
+</code></pre><ul>
+<li>Nginx最大打开文件数</li>
+</ul>
+<pre><code>worker_rlimit_nofile 65535; ulimit -n的值保持一致
+</code></pre><ul>
+<li>GZIP 压缩</li>
+</ul>
+<p>节约带宽，加快传输速度。需要CPU资源</p>
+<p>压缩： 文本，js，html，css，不压缩: 图片，视频，flash</p>
+<pre><code>gzip on; # 开启
+gzip_min_length 2k; # 小于 2k 不压缩
+gzip_buffers   4 32k; # 压缩缓冲区
+gzip_http_version 1.1;
+gzip_comp_level 6; # 压缩比例 1-9 ,9 压缩的比例最大，需要的cpu也最多
+gzip_types text/plain text/css text/javascript application/json application/javascript application/x-javascriptapplication/xml; # 压缩类型，都压缩哪些内容
+gzip_vary on; # 代理服务器 ，例如用Squid缓存经过nginx压缩的数据
+gzip_proxied any;
+</code></pre><ul>
+<li>expires 缓存调优</li>
+</ul>
+<p>缓存，主要针对于图片，css，js等元素更改机会比较少的情况</p>
+<pre><code>location ~* \.(ico|jpe?g|gif|png|bmp|swf|flv)$ {
+  expires 30d;
+  #log_not_found off;
+  access_log off;
+}
+
+location ~* \.(js|css)$ {
+  expires 7d;
+  log_not_found off;
+  access_log off;
+} 
+</code></pre><ul>
+<li>启用 HTTP2 协议</li>
+</ul>
+<p>在 Nginx1.9.5 及更高版本中已经支持了 HTTP/2 协议,HTTP/2 是用于服务网页的下一代协议，旨在更好地利用网络和主机服务器</p>
+<pre><code>listen 443 ssl http2;
+</code></pre><p>验证
+<a href="https://http2.pro">https://http2.pro</a></p>
+<ul>
+<li>日志部分性能优化</li>
+</ul>
+<p>禁用页面资源请求的日志记录</p>
+<pre><code>location ~* \.(?:jpg|jpeg|gif|png|ico|woff2|js|css)$ {
+    access_log off;
+}
+</code></pre><p>启用IO写缓存</p>
+<p>填满 512KB 缓冲区或自上次刷新以来已过了 1 分钟</p>
+<pre><code>access_log /var/log/nginx/access.log buffer=512k flush=1m;
+</code></pre><ul>
+<li>下载限速</li>
+</ul>
+<p>限制下载速度会留下更多带宽，以使应用程序的关键部分保持响应，这是硬件制造商使用的非常受欢迎的解决方案。</p>
+<pre><code>location /down {
+    limit_rate_after 500k;
+    limit_rate 50k;
+}
+</code></pre><ul>
+<li>开启高效传输模式</li>
+</ul>
+<p>开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off</p>
+<pre><code>http {
+  sendfile on;
+  tcp_nopush on
+}
+</code></pre><ul>
+<li>防盗链</li>
+</ul>
+<p>防止别人直接从你网站引用图片等链接，消耗了你的资源和网络流量</p>
+<pre><code>location ~*^.+\.(jpg|gif|png|swf|flv|wma|wmv|asf|mp3|mmf|zip|rar)$ {
+valid_referers none blocked zhangeamon.top doc.zhangeamon.top localhost;
+if($invalid_referer) {
+  return 404;
+  break;
+}
+access_log off;
+}
+</code></pre><ul>
+<li>内核参数优化</li>
+</ul>
+<pre><code>fs.file-max = 999999
+net.ipv4.ip_forward = 0
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.conf.default.accept_source_route = 0
+kernel.sysrq = 0
+kernel.core_uses_pid = 1
+net.ipv4.tcp_syncookies = 1
+kernel.msgmnb = 65536
+kernel.msgmax = 65536
+kernel.shmmax = 68719476736
+kernel.shmall = 4294967296
+net.ipv4.tcp_max_tw_buckets = 6000
+net.ipv4.tcp_sack = 1
+net.ipv4.tcp_window_scaling = 1
+net.ipv4.tcp_rmem = 10240 87380 12582912
+net.ipv4.tcp_wmem = 10240 87380 12582912
+net.core.wmem_default = 8388608
+net.core.rmem_default = 8388608
+net.core.rmem_max = 16777216
+net.core.wmem_max = 16777216
+net.core.netdev_max_backlog = 262144
+net.core.somaxconn = 40960
+net.ipv4.tcp_max_orphans = 3276800
+net.ipv4.tcp_max_syn_backlog = 262144
+net.ipv4.tcp_timestamps = 0
+net.ipv4.tcp_synack_retries = 1
+net.ipv4.tcp_syn_retries = 1
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_mem = 94500000 915000000 927000000
+net.ipv4.tcp_fin_timeout = 1
+net.ipv4.tcp_keepalive_time = 30
+net.ipv4.ip_local_port_range = 1024 65000
+</code></pre><h2 id="常见错误">常见错误</h2>
 <ul>
 <li>错误码 502   ， error.log 中错误信息 [error] 236#236: *8371899 upstream sent too big header while reading response header from upstream,</li>
 </ul>
@@ -122,7 +346,7 @@ proxy_buffers   4 32k;
 proxy_busy_buffers_size 64k;
 </code></pre><p><a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffer_size">官网说明</a></p>
 <p><a href="https://www.cnblogs.com/dongye95/p/11096785.html">基本配置</a></p>
-<h2 id="利用nginx设置用户登陆认证">利用nginx设置用户登陆认证</h2>
+<h2 id="设置用户登陆认证">设置用户登陆认证</h2>
 <p>如下举例设置用户访问kibana时登陆认证</p>
 <pre><code>server {
    listen 80;

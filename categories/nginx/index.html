@@ -139,7 +139,7 @@
         </div>
         
         <div class="post-content">
-            性能优化 错误码 502 ， error.log 中错误信息 [error] 236#236: *8371899 upstream sent too big header while reading response header from upstream, 问题 header 过大 proxy_buffer_size 64k; proxy_buffers 4 32k; proxy_busy_buffers_size 64k; 官网说明 基本配置 利用nginx设置用户登陆认证 如下举例设置用户访问kibana时登陆认证 server { listen 80; server_name kibana.×××.com; location / { auth_basic &quot;secret&quot;; auth_basic_user_file /etc/nginx/db/passwd.db; proxy_pass http://****:5601; proxy_set_header Host $host:5601; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Via &quot;nginx&quot;; } access_log off; } 2、配置登录用户名(……
+            性能优化 CPU 亲和性 worker_processes 4; # 比如物理CPU的数量为4 worker_cpu_affinity 0001 0010 0100 1000; Nginx最大打开文件数 worker_rlimit_nofile 65535; ulimit -n的值保持一致 GZIP 压缩 节约带宽，加快传输速度。需要CPU资源 压缩： 文本，js，html，css，不压缩: 图片，视频，flash gzip on; # 开启 gzip_min_length 2k; # 小于 2k 不压缩 gzip_buffers 4 32k; # 压缩缓冲区 gzip_http_version 1.1; gzip_comp_level 6; # 压缩比例 1-9 ,9……
             <p class="readmore"><a href="https://zhangeamon.top/middleware/nginx/">阅读全文</a></p>
         </div>
     </article>
