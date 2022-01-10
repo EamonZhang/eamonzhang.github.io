@@ -188,6 +188,15 @@
     </item>
     
     <item>
+      <title>引起索引失效</title>
+      <link>https://zhangeamon.top/postgres/index-invalid/</link>
+      <pubDate>Thu, 20 Dec 2018 16:34:22 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/index-invalid/</guid>
+      <description>简介 索引的作用，加速检索，排序，分组。 优点： 检索 缺点： 新增，更新时需要维护索引，占磁盘空间，创建时锁表。 维护： 根据统计表发生全表扫描次数，索引使用次数。合理添加删除索引。 索引失效的场景 如果where过滤条件设置不合理，即使索引存在，且where过滤条件中包含索引列，也会导致全表扫</description>
+    </item>
+    
+    <item>
       <title>Explain 执行计划</title>
       <link>https://zhangeamon.top/postgres/explain/</link>
       <pubDate>Wed, 05 Dec 2018 15:27:30 +0800</pubDate>

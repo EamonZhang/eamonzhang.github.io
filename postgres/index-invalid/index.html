@@ -92,7 +92,115 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#索引失效的场景">索引失效的场景</a></li>
+    <li><a href="#实例">实例</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#利用索引失效改变执行计划案例">利用索引失效改变执行计划案例</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -102,15 +210,28 @@
             2018年12月20日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
         
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
         
         <div class="post-content">
-            <h5 id="简介">简介</h5>
+            <h2 id="简介">简介</h2>
 <p>索引的作用，加速检索，排序，分组。</p>
 <p>优点： 检索</p>
 <p>缺点： 新增，更新时需要维护索引，占磁盘空间，创建时锁表。</p>
 <p>维护： 根据统计表发生全表扫描次数，索引使用次数。合理添加删除索引。</p>
-<h5 id="索引失效的场景">索引失效的场景</h5>
+<h2 id="索引失效的场景">索引失效的场景</h2>
 <p>如果where过滤条件设置不合理，即使索引存在，且where过滤条件中包含索引列，也会导致全表扫描，索引不起作用。什么条件下会导致索引失效呢？</p>
 <p>1.任何计算、函数、类型转换</p>
 <p>2.!=</p>
@@ -120,7 +241,7 @@
 <p>6.多字段btree索引查询条件不包含第一列</p>
 <p>7.多字段索引查询条件使用OR（有时也会走索引扫描，但查询效率不高）</p>
 <p>8.表中数据量太少时</p>
-<h5 id="实例">实例</h5>
+<h2 id="实例">实例</h2>
 <p>测试表</p>
 <pre><code>创建表
 postgres#=create table tbl_index(a bigint,b timestamp without time zone ,c varchar(12));
@@ -148,7 +269,7 @@ Time: 153963.850 ms (02:33.964)
 </code></pre><p>tips</p>
 <p>大量数据导入时建议先导入数据后创建索引</p>
 <p>更新频繁的字段不建议建索引，如update_time</p>
-<h5 id="1任何计算函数类型转换">1.任何计算、函数、类型转换</h5>
+<h4 id="1任何计算函数类型转换">1.任何计算、函数、类型转换</h4>
 <pre><code>#索引检索
 postgres=# explain analyze select * from tbl_index where a = 100;
                                                        QUERY PLAN                                                        
@@ -210,7 +331,7 @@ create index tbl_index_b2date on tbl_index using btree ((b::date));
 
 select * from tbl_index where b &lt; '2020-04-16 00:00:00' and b &gt;= '2020-04-15 00:00:00';
 
-</code></pre><h5 id="2">2.!=</h5>
+</code></pre><h4 id="2">2.!=</h4>
 <pre><code>postgres=# explain analyze select * from tbl_index where a != 100;
                                                         QUERY PLAN                                                        
 --------------------------------------------------------------------------------------------------------------------------
@@ -222,7 +343,7 @@ select * from tbl_index where b &lt; '2020-04-16 00:00:00' and b &gt;= '2020-04-
 (5 rows)
 
 Time: 1792.412 ms (00:01.792)
-</code></pre><h5 id="3-not">3. NOT</h5>
+</code></pre><h4 id="3-not">3. NOT</h4>
 <pre><code>postgres=# explain analyze select * from tbl_index where a is null;
                                                        QUERY PLAN                                                       
 ------------------------------------------------------------------------------------------------------------------------
@@ -243,9 +364,9 @@ postgres=# explain analyze select * from tbl_index where a is not null;
 (4 rows)
 
 Time: 1790.625 ms (00:01.791)
-</code></pre><h6 id="4模糊查询通配符在开头">4.模糊查询通配符在开头</h6>
+</code></pre><h4 id="4模糊查询通配符在开头">4.模糊查询通配符在开头</h4>
 <p><a href="../postgres/pg_trgm/">参见</a></p>
-<h5 id="5索引字段在表中占比较高">5.索引字段在表中占比较高</h5>
+<h4 id="5索引字段在表中占比较高">5.索引字段在表中占比较高</h4>
 <pre><code>postgres=# create index tbl_index_c on tbl_index using btree (c);
 CREATE INDEX
 Time: 10552.062 ms (00:10.552)
@@ -291,7 +412,7 @@ postgres=# explain analyze select * from tbl_index where c = 'zhangeamon';
 (4 rows)
 
 Time: 98.464 ms
-</code></pre><h5 id="6多字段btree索引查询条件不包含第一列">6.多字段btree索引查询条件不包含第一列</h5>
+</code></pre><h4 id="6多字段btree索引查询条件不包含第一列">6.多字段btree索引查询条件不包含第一列</h4>
 <pre><code>#创建表
 postgres=# create table tbl_indexes(a int ,b varchar,c varchar);
 CREATE TABLE
@@ -389,7 +510,7 @@ postgres=# explain analyze select * from tbl_indexes where b = '91975' and c = '
 
 Time: 130.603 ms
 
-</code></pre><h5 id="7多字段索引查询条件使用or有时也会走索引扫描但查询效率不高">7.多字段索引查询条件使用OR（有时也会走索引扫描，但查询效率不高）</h5>
+</code></pre><h4 id="7多字段索引查询条件使用or有时也会走索引扫描但查询效率不高">7.多字段索引查询条件使用OR（有时也会走索引扫描，但查询效率不高）</h4>
 <pre><code>postgres=# explain analyze select * from tbl_indexes where a = 10  or c = '4c79d';
                                                            QUERY PLAN                                                           
 --------------------------------------------------------------------------------------------------------------------------------
@@ -489,7 +610,7 @@ indexdb=# explain analyze select * from tbloom where (ARRAY[i2, i5]) &amp;&amp; 
 
 Time: 1.311 ms
 </code></pre><p>性能提升明显</p>
-<h5 id="8表中数据量少时">8.表中数据量少时</h5>
+<h4 id="8表中数据量少时">8.表中数据量少时</h4>
 <pre><code>postgres=# create table tbl_index_less(a int);
 CREATE TABLE
 
@@ -559,6 +680,27 @@ select * from pg_stat_all_indexes where relname = 'tbl_name';
 <a href="https://mp.weixin.qq.com/s/xdbo67F72a9eTV93TEuL6w">https://mp.weixin.qq.com/s/xdbo67F72a9eTV93TEuL6w</a></p>
 <p><a href="https://github.com/powa-team/pg_qualstats">索引利用统计</a></p>
 <pre><code>A PostgreSQL extension for collecting statistics about predicates, helping find what indices are missing
+</code></pre><h2 id="利用索引失效改变执行计划案例">利用索引失效改变执行计划案例</h2>
+<p>表定义&amp;数据分布</p>
+<pre><code>create table tb1(id int primary key,c1 int);
+create index on tb1(c1);
+insert into tb1 select id, id/10000 from generate_series(1,10000000)id;
+</code></pre><p>SQL&amp;执行计划</p>
+<pre><code>postgres=# explain analyze select * from tb1 where c1=999 order by id limit 10; QUERY PLAN
+-------------------------------------------------------------------------------------------------------------------------------- Limit (cost=0.43..332.29 rows=10 width=8) (actual time=1571.315..1571.319 rows=10 loops=1)
+-&gt; Index Scan using tb1_pkey on tb1 (cost=0.43..328935.03 rows=9912 width=8) (actual time=1571.314..1571.316 rows=10 loops=1)
+Filter: (c1 = 999)
+Rows Removed by Filter: 9989999 Planning Time: 0.112 ms
+Execution Time: 1571.337 ms
+(6 rows)
+</code></pre><p>上面Index Scan估算的行数和cost都比较准确，但评估LIMIT子句时，优化器假设数据分布是均匀的， 只需扫描主键索引的 10/9912即可找到10条匹配的记录，最终的估算代价也被LIMIT降到10/9921。但实际上满足条件的记录都集中在索引的尾部。</p>
+<h4 id="sql-改写">sql 改写</h4>
+<p>SQL改写方法1:破坏索引排序</p>
+<pre><code>select * from tb1 where c1=999 order by id+0 limit 10;
+</code></pre><p>SQL改写方法2:物化子查询</p>
+<pre><code>WITH t AS MATERIALIZED(
+select * from tb1 where c1=999 )
+select * from t order by id limit 10
 </code></pre>
         </div>
 
@@ -716,7 +858,7 @@ select * from pg_stat_all_indexes where relname = 'tbl_name';
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (25)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (26)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
