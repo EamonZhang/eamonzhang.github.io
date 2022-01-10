@@ -548,6 +548,15 @@
     </item>
     
     <item>
+      <title>进程分析 strace,pstack</title>
+      <link>https://zhangeamon.top/linux/pstack_strace/</link>
+      <pubDate>Wed, 14 Nov 2018 22:09:54 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/pstack_strace/</guid>
+      <description>https://yq.aliyun.com/articles/647468 基本用法 pstack pid strace -e trace=all -T -tt -p pid strace -o server.strace -Ttt -p pid 应用举例 python while True: print(&#39;hello&#39;) 查看应用进程 ps -ef | grep python root 13491 13054 13 13:27 pts/0 00:00:06 python pstack 13491 #0 0x0000726388f9ea90 in __write_nocancel () at ../sysdeps/unix/syscall-template.S:81 #1 0x0000726388f292f3 in _IO_new_file_write (f=0x726389277400 &amp;lt;_IO_2_1_stdout_&amp;gt;, data=0x72638a18d000, n=2) at fileops.c:1258 #2 0x0000726388f2ab0e in new_do_write (to_do=2, data=0x72638a18d000 &amp;quot;1\n. \b[8@while True:\033[C&amp;quot;, fp=0x726389277400 &amp;lt;_IO_2_1_stdout_&amp;gt;) at fileops.c:519 #3 _IO_new_do_write (fp=0x726389277400 &amp;lt;_IO_2_1_stdout_&amp;gt;, data=0x72638a18d000 &amp;quot;1\n. \b[8@while True:\033[C&amp;quot;, to_do=2) at fileops.c:495 #4 0x0000726388f29a50 in _IO_new_file_xsputn (f=0x726389277400 &amp;lt;_IO_2_1_stdout_&amp;gt;, data=&amp;lt;optimized out&amp;gt;, n=1) at fileops.c:1326 #5 0x0000726388f1e05b in __GI__IO_fputs (str=0x726389cd2a8d &amp;quot;\n&amp;quot;, fp=0x726389277400 &amp;lt;_IO_2_1_stdout_&amp;gt;) at iofputs.c:39 #6 0x0000726389c0b9c0 in PyFile_WriteString () from /lib64/libpython2.7.so.1.0 #7 0x0000726389c80d48 in PyEval_EvalFrameEx () from /lib64/libpython2.7.so.1.0 #8 0x0000726389c8908d in PyEval_EvalCodeEx () from /lib64/libpython2.7.so.1.0 #9 0x0000726389c89192 in PyEval_EvalCode () from /lib64/libpython2.7.so.1.0 #10</description>
+    </item>
+    
+    <item>
       <title>pstack</title>
       <link>https://zhangeamon.top/linux/cmd-pstack/</link>
       <pubDate>Wed, 14 Nov 2018 22:05:59 +0800</pubDate>

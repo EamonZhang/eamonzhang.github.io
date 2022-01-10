@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>依赖管理工具go module | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="依赖管理工具go module - Let&#39;s go 🐌 🐌 🐌">
+    <title>进程分析 strace,pstack | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="进程分析 strace,pstack - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-04-30T13:25:38&#43;08:00'>
+    <meta property="article:published_time" content='2018-11-14T22:09:54&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-04-30T13:25:38&#43;08:00'>
+    <meta property="article:modified_time" content='2018-11-14T22:09:54&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="依赖管理工具go module">
+    <meta name="description" content="进程分析 strace,pstack">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/go/go_mod/">
+    <meta property="og:url" content="https://zhangeamon.top/linux/pstack_strace/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -92,58 +92,171 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本用法">基本用法</a></li>
+    <li><a href="#应用举例">应用举例</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
-            <h1 class="post-title">依赖管理工具go module</h1>
+            <h1 class="post-title">进程分析 strace,pstack</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年4月30日
+            2018年11月14日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
         
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
         
         <div class="post-content">
-            <h4 id="背景">背景</h4>
-<p>大多数语言都会有包管理工具，像Node有npm，PHP有composer，Java有Maven和Gradle。</p>
-<p>在go1.11 版本中，新增了module管理模块功能，用来管理依赖包</p>
-<h4 id="开启module特性">开启module特性</h4>
-<p>要开始使用 go module 的特性， 需要先设置 GO111MODULE 环境变量。</p>
-<p>开启 GO111MODULE</p>
-<p>要使用go module,首先要设置GO111MODULE=on</p>
-<p>这是因为，默认设置的GO111MODULE=auto, 导致 modules 默认在 GOPATH/src 路径下是不启用的。</p>
-<p>如果需要在 GOPATH/src 也能使用modules, 需要把 GO111MODULE 环境变量设置为 on.</p>
-<pre><code>export GO111MODULE=on
-</code></pre><h6 id="goland-中可独立配置gopath-gomod">Goland 中可独立配置，GOPATH GOMOD</h6>
-<h4 id="使用module">使用module</h4>
-<pre><code>Usage:
+            <p><a href="https://yq.aliyun.com/articles/647468">https://yq.aliyun.com/articles/647468</a></p>
+<h2 id="基本用法">基本用法</h2>
+<pre><code>pstack pid
+</code></pre><pre><code>strace -e trace=all -T -tt -p pid
 
-	go mod &lt;command&gt; [arguments]
-
-The commands are:
-
-	download    download modules to local cache
-	edit        edit go.mod from tools or scripts
-	graph       print module requirement graph
-	init        initialize new module in current directory
-	tidy        add missing and remove unused modules
-	vendor      make vendored copy of dependencies
-	verify      verify dependencies have expected content
-	why         explain why packages or modules are needed
-
-Use &quot;go help mod &lt;command&gt;&quot; for more information about a command.
-</code></pre><p>经常使用</p>
-<pre><code>go mod init 
-</code></pre><p>生成 go.mod 文件 例如</p>
-<pre><code>require (
-	github.com/Tang-RoseChild/mahonia v0.0.0-20131226213531-0eef680515cc
-	github.com/Unknwon/com v0.0.0-20190321035513-0fed4efef755 // indirect
-	github.com/cihub/seelog v0.0.0-20170130134532-f561c5e57575
-)
-</code></pre><pre><code>go tidy 
-</code></pre><p>添加需要的删除无用的</p>
-
+strace -o server.strace -Ttt -p pid
+</code></pre><h2 id="应用举例">应用举例</h2>
+<p>python</p>
+<pre><code>while True:
+    print('hello')
+</code></pre><p>查看应用进程</p>
+<pre><code>ps -ef | grep python
+root     13491 13054 13 13:27 pts/0    00:00:06 python
+</code></pre><pre><code> pstack 13491
+#0  0x0000726388f9ea90 in __write_nocancel () at ../sysdeps/unix/syscall-template.S:81
+#1  0x0000726388f292f3 in _IO_new_file_write (f=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=0x72638a18d000, n=2) at fileops.c:1258
+#2  0x0000726388f2ab0e in new_do_write (to_do=2, data=0x72638a18d000 &quot;1\n. \b[8@while True:\033[C&quot;, fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;) at fileops.c:519
+#3  _IO_new_do_write (fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=0x72638a18d000 &quot;1\n. \b[8@while True:\033[C&quot;, to_do=2) at fileops.c:495
+#4  0x0000726388f29a50 in _IO_new_file_xsputn (f=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=&lt;optimized out&gt;, n=1) at fileops.c:1326
+#5  0x0000726388f1e05b in __GI__IO_fputs (str=0x726389cd2a8d &quot;\n&quot;, fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;) at iofputs.c:39
+#6  0x0000726389c0b9c0 in PyFile_WriteString () from /lib64/libpython2.7.so.1.0
+#7  0x0000726389c80d48 in PyEval_EvalFrameEx () from /lib64/libpython2.7.so.1.0
+#8  0x0000726389c8908d in PyEval_EvalCodeEx () from /lib64/libpython2.7.so.1.0
+#9  0x0000726389c89192 in PyEval_EvalCode () from /lib64/libpython2.7.so.1.0
+#10 0x0000726389ca25cf in run_mod () from /lib64/libpython2.7.so.1.0
+#11 0x0000726389ca4690 in PyRun_InteractiveOneFlags () from /lib64/libpython2.7.so.1.0
+#12 0x0000726389ca487e in PyRun_InteractiveLoopFlags () from /lib64/libpython2.7.so.1.0
+#13 0x0000726389ca4f0e in PyRun_AnyFileExFlags () from /lib64/libpython2.7.so.1.0
+#14 0x0000726389cb5bdf in Py_Main () from /lib64/libpython2.7.so.1.0
+#15 0x0000726388ed1555 in __libc_start_main (main=0x400640 &lt;main&gt;, argc=1, argv=0x7ffdadefef28, init=&lt;optimized out&gt;, fini=&lt;optimized out&gt;, rtld_fini=&lt;optimized out&gt;, stack_end=0x7ffdadefef18) at ../csu/libc-start.c:266
+#16 0x000000000040066e in _start ()
+</code></pre><pre><code>strace -e trace=all -T -tt -p 13491
+strace: Process 13491 attached
+13:30:43.938900 write(1, &quot;hello\n&quot;, 6)  = 6 &lt;0.000032&gt;
+13:30:43.939029 write(1, &quot;hello\n&quot;, 6)  = 6 &lt;0.000034&gt;
+13:30:43.939124 write(1, &quot;hello\n&quot;, 6)  = 6 &lt;0.000014&gt;
+13:30:43.939176 write(1, &quot;hello\n&quot;, 6)  = 6 &lt;0.000009&gt;
+13:30:43.939212 write(1, &quot;hello\n&quot;, 6)  = 6 &lt;0.000022&gt;
+13:30:43.939258 write(1, &quot;hello\n&quot;, 6)  = 6 &lt;0.000009&gt;
+13:30:43.939294 write(1, &quot;hello\n&quot;, 6)  = 6 &lt;0.000011&gt;
+</code></pre>
         </div>
 
         
@@ -155,11 +268,11 @@ Use &quot;go help mod &lt;command&gt;&quot; for more information about a command
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/postgres/index-bloom/">Bloom 索引</a></li>
+        <li><a href="/linux/cmd-pstack/">pstack</a></li>
         
-        <li><a href="/monitor/nginx-status/">Nginx 状态监控</a></li>
+        <li><a href="/tidb/2013/"> ERROR 2013 (HY000): Lost connection to MySQL server during query </a></li>
         
-        <li><a href="/python/django-index-ops/">django 默认创建第二索引</a></li>
+        <li><a href="/istio/concept01/">熔断，限流，降级</a></li>
         
     </ul>
 </div>

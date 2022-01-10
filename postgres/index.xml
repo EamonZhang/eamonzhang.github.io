@@ -710,15 +710,6 @@
     </item>
     
     <item>
-      <title>PostgreSQL 无法kill(pg_terminate_backend, pg_cancel_backend)的情况分析 - 进程hang strace,pstack</title>
-      <link>https://zhangeamon.top/postgres/kill/</link>
-      <pubDate>Wed, 14 Nov 2018 22:09:54 +0800</pubDate>
-      
-      <guid>https://zhangeamon.top/postgres/kill/</guid>
-      <description>先 mark 下 https://yq.aliyun.com/articles/647468</description>
-    </item>
-    
-    <item>
       <title>Postgresql指标查看&amp;stat统计信息</title>
       <link>https://zhangeamon.top/postgres/stat/</link>
       <pubDate>Tue, 06 Nov 2018 10:53:52 +0800</pubDate>

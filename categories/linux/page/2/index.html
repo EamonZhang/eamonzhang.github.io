@@ -259,6 +259,29 @@
         </div>
     </article>
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/pstack_strace/">进程分析 strace,pstack</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月14日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/linux'>linux</a>
+            
+        </div>
+        
+        <div class="post-content">
+            https://yq.aliyun.com/articles/647468 基本用法 pstack pid strace -e trace=all -T -tt -p pid strace -o server.strace -Ttt -p pid 应用举例 python while True: print('hello') 查看应用进程 ps -ef | grep python root 13491 13054 13 13:27 pts/0 00:00:06 python pstack 13491 #0 0x0000726388f9ea90 in __write_nocancel () at ../sysdeps/unix/syscall-template.S:81 #1 0x0000726388f292f3 in _IO_new_file_write (f=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=0x72638a18d000, n=2) at fileops.c:1258 #2 0x0000726388f2ab0e in new_do_write (to_do=2, data=0x72638a18d000 &quot;1\n. \b[8@while True:\033[C&quot;, fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;) at fileops.c:519 #3 _IO_new_do_write (fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=0x72638a18d000 &quot;1\n. \b[8@while True:\033[C&quot;, to_do=2) at fileops.c:495 #4 0x0000726388f29a50 in _IO_new_file_xsputn (f=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=&lt;optimized out&gt;, n=1) at fileops.c:1326 #5 0x0000726388f1e05b in __GI__IO_fputs (str=0x726389cd2a8d &quot;\n&quot;, fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;) at iofputs.c:39 #6 0x0000726389c0b9c0 in PyFile_WriteString () from /lib64/libpython2.7.so.1.0 #7 0x0000726389c80d48 in PyEval_EvalFrameEx () from /lib64/libpython2.7.so.1.0 #8 0x0000726389c8908d in PyEval_EvalCodeEx () from /lib64/libpython2.7.so.1.0 #9 0x0000726389c89192 in PyEval_EvalCode () from /lib64/libpython2.7.so.1.0 #10……
+            <p class="readmore"><a href="https://zhangeamon.top/linux/pstack_strace/">阅读全文</a></p>
+        </div>
+    </article>
+    
 
     
 
@@ -383,13 +406,13 @@
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (17)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (18)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (23)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (25)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
