@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>postgresql on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/categories/postgresql/</link>
+    <description>Recent content in postgresql on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 12 Jan 2022 15:47:07 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库实时运行信息查看</title>
+      <link>https://zhangeamon.top/postgres/pg_activity/</link>
+      <pubDate>Wed, 12 Jan 2022 15:47:07 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_activity/</guid>
+      <description>介绍 类似Linux top 命令 查看数据实时运行情况 https://github.com/dalibo/pg_activity 安装 测试环境centos7 postgresql10 查看已安装的PG版本 如果有9.2 版本，清理,如果没有postgresql10-devel 需要安装 yum list installed | grep postgres 设置环境变量 export PG_HOME=/usr/pgsql-10 export PATH=$PATH:$PG_HOME/bin/ 安装pg_activity python3 -m pip install pg_activity psycopg2-binary 使用 与psql 连接方式相同 pg_activity -U xxx -p xxx 更多</description>
+    </item>
+    
+  </channel>
+</rss>

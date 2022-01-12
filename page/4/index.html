@@ -92,6 +92,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/django_max_con_age/" title="Django CONN_MAX_AGE 对数据连接的影响">Django CONN_MAX_AGE 对数据连接的影响</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月20日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Django的数据库连接 Django对数据库的链接处理是这样的，Django程序接受到请求之后，在第一访问数据库的时候会创建一个数据库连接,直到请求结束，关闭连接。下次请求也是如此。因此，这种情况下，随着访问的并发数越来越高，就会产生大量的数据库连接 使用CONN_MAX_AGE减……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/django_max_con_age/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/python/setup-packet/" title="使用setup打包">使用setup打包</a>
             </h1>
         </header>
@@ -297,29 +322,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <p class="readmore"><a href="https://zhangeamon.top/python/module-argparse/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/confd/" title="配置管理 confd">配置管理 confd</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年4月2日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            https://github.com/kelseyhightower/confd 配置信息存放在ectd KV存储中 更新 ectd 中的内容， confd 负责将变更同步到本地服务配置文件，并通知本地服务进行重新加载重启等。……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/confd/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -456,6 +458,10 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
     </li>
     
@@ -491,10 +497,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -518,6 +520,8 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (26)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgresql/">postgresql (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

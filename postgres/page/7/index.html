@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/index-invalid/" title="引起索引失效">引起索引失效</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月20日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            简介 索引的作用，加速检索，排序，分组。 优点： 检索 缺点： 新增，更新时需要维护索引，占磁盘空间，创建时锁表。 维护： 根据统计表发生全表扫描次数，索引使用次数。合理添加删除索引。 索引失效的场景 如果where过滤条件设置不合理，即使索引存在，且where过滤条件中包含索引列，也会导致全表扫……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/index-invalid/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/role-manager/" title="权限管理">权限管理</a>
             </h1>
         </header>
@@ -253,24 +278,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/fillfactor/" title="fillfactor 填充因子">fillfactor 填充因子</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月6日
-        </date>
-        
-        <div class="post-content">
-            介绍 PostgreSQL每个表和索引的数据都是由很多个固定尺寸的页面存储（通常是 8kB，不过在编译服务器时[–with-blocksize]可以选择其他不同的尺寸） 一个表的填充因子(fillfactor)是一个介于 10 和 100 之间的百分数。100(完全填充)是默认值。如果指定了较小的填……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/fillfactor/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -370,6 +377,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
     </li>
     
@@ -405,10 +416,6 @@
         <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -432,6 +439,8 @@
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (26)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgresql/">postgresql (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
