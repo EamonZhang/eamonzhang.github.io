@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/monitor/" title="Postgres 监控常用工具">Postgres 监控常用工具</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月6日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            各种监控方式 zabbix Monitor PostgreSQL with Zabbix postgres_exporter A PostgresSQL metric exporter for Prometheus pgwatch2 PostgreSQL metrics monitor/dashboard pgmetrics Collect and display information and stats from a running PostgreSQL server pgdash (收费) pganalyze PostgreSQL Performance Monitoring 参考自己实现 状态查看 pgcenter pgcenter top pgcenter: 2018-12-20 11:10:25, load average: 0.94, 0.84, 0.86 state [ok]: ::1:5432 postgres@postgres (ver: 10.6, up 8 days 19:57:54, recovery: f) %cpu: 15.0 us, 3.7 sy, 0.0 ni, 75.3 id, 5.7 wa, 0.0 hi, 0.2 si, 0.0 st activity: 5/1000 conns, 0/0 prepared, 2 idle, 0 idle_xact, 3 active, 0 waiting, 0 others MiB mem: 7821 total, 162 free, 424 used, 7235 buff/cached autovacuum: 0/3 workers/max, 0 manual, 0 wraparound, 00:00:00 vac_maxtime MiB swap: 1023 total, 903 free, 120 used, 0/0 dirty/writeback statements: 1888 stmt/s,……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/monitor/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/sysstat/" title="Linux 系统性能检测">Linux 系统性能检测</a>
             </h1>
         </header>
@@ -162,6 +185,13 @@
         <date class="post-meta meta-date">
             2018年12月5日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
         
         <div class="post-content">
             介绍 数据库总是不断地在执行删除，更新等操作。良好的空间管理非常重要，能够对性能带来大幅提高。在postgresql中用于维护数据库磁盘空间的工具是VACUUM，其重要的作用是删除那些已经标示为删除的数据并释放空间。 postgresql中执行delete,update操作后，表中的……
@@ -245,22 +275,6 @@
             介绍 PostgreSQL有3种日志，分别是pg_log（数据库运行日志）、pg_xlog（WAL 日志，即重做日志）、pg_clog（事务提交日志，记录的是事务的元数据） postgres 10 版本将文件目录结构改为 log，pg_wal，pg_xact log默认是关闭的，需要设置其参数。wal和xac……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/log/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/fio/" title="fio 硬盘性能测试">fio 硬盘性能测试</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月4日
-        </date>
-        
-        <div class="post-content">
-            基本概念 使用FIO之前，首先要有一些SSD性能测试的基础知识。 包括线程，队列深度，Offset，同步异步，DirectIO，BIO。 线程 线程指的是同时有多少个读或写任务在并行执行，一般来说，CPU里面的一个核心同一时间只能运行一个线程。如果只有一个核心，要想运行多线程，只能使用时……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/fio/">阅读全文</a></p>
     </article>
     
     
@@ -399,6 +413,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
     </li>
     
@@ -434,10 +452,6 @@
         <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -460,9 +474,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (28)</a></li>
-    
-    <li><a href="https://zhangeamon.top/categories/postgresql/">postgresql (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (33)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

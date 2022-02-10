@@ -6,7 +6,16 @@
     <description>Recent content on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 12 Jan 2022 15:47:07 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Feb 2022 10:21:07 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>查看数据信息常用sql整理</title>
+      <link>https://zhangeamon.top/postgres/monitor-sql/</link>
+      <pubDate>Thu, 10 Feb 2022 10:21:07 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/monitor-sql/</guid>
+      <description>库内存命中率 SELECT &#39;index hit rate&#39; AS name, (sum(idx_blks_hit)) / nullif(sum(idx_blks_hit + idx_blks_read),0) AS ratio FROM pg_statio_user_indexes UNION ALL SELECT &#39;table hit rate&#39; AS name, sum(heap_blks_hit) / nullif(sum(heap_blks_hit) + sum(heap_blks_read),0) AS ratio FROM pg_statio_user_tables; 表内存命中率 SELECT relname AS relation, heap_blks_read AS heap_read, heap_blks_hit AS heap_hit, ((heap_blks_hit*100) / NULLIF((heap_blks_hit + heap_blks_read), 0)) AS ratio FROM pg_statio_user_tables order by ratio; 读IO内存占比 磁盘中读取和在内存中直接读取之间的数字和比 SELECT relname AS &amp;quot;relation&amp;quot;, heap_blks_read AS heap_read, heap_blks_hit AS heap_hit, ( (heap_blks_hit*100) / NULLIF((heap_blks_hit + heap_blks_read), 0)) AS ratioFROM pg_statio_user_tables; 表中索引命中率 SELECT relname, CASE idx_scan WHEN 0 THEN NULL ELSE round(100.0 * idx_scan / (seq_scan + idx_scan), 5) END</description>
+    </item>
+    
     <item>
       <title>数据库实时运行信息查看</title>
       <link>https://zhangeamon.top/postgres/pg_activity/</link>

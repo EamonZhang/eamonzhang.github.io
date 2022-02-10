@@ -6,13 +6,13 @@
     <description>Recent content in Categories on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 12 Jan 2022 15:47:07 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Feb 2022 10:21:07 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>postgresql</title>
-      <link>https://zhangeamon.top/categories/postgresql/</link>
-      <pubDate>Wed, 12 Jan 2022 15:47:07 +0800</pubDate>
+      <title>postgres</title>
+      <link>https://zhangeamon.top/categories/postgres/</link>
+      <pubDate>Thu, 10 Feb 2022 10:21:07 +0800</pubDate>
       
-      <guid>https://zhangeamon.top/categories/postgresql/</guid>
+      <guid>https://zhangeamon.top/categories/postgres/</guid>
       <description></description>
     </item>
     
@@ -22,15 +22,6 @@
       <pubDate>Wed, 22 Dec 2021 10:08:23 +0800</pubDate>
       
       <guid>https://zhangeamon.top/categories/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>postgres</title>
-      <link>https://zhangeamon.top/categories/postgres/</link>
-      <pubDate>Mon, 20 Dec 2021 10:51:16 +0800</pubDate>
-      
-      <guid>https://zhangeamon.top/categories/postgres/</guid>
       <description></description>
     </item>
     

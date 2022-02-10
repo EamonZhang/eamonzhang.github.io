@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_rewind/" title="PG主从切换 pg_rewind">PG主从切换 pg_rewind</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            pg_rewind requires that the target server either has the wal_log_hints option enabled in postgresql.conf or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. full_page_writes must also be set to on, but is enabled by default. wal_log_hints 使用场景 在数据库主从结构中，从变成主易。但是由主变为从却需要一番周折。 如果是数据量少时重新使用pg_backup拉一份从即可，但是如果数据量大时，这个过程非常的耗时耗能。对线上业务也会有影……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_rewind/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/patroni/" title="PG高可用Patroni">PG高可用Patroni</a>
             </h1>
         </header>
@@ -267,24 +292,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgbouncer/" title="pgbouncer 连接池">pgbouncer 连接池</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月27日
-        </date>
-        
-        <div class="post-content">
-            背景介绍 Pgbouncer是一个针对PostgreSQL数据库的轻量级连接池 pgbouncer 的目标是降低因为新连接到 PostgreSQL 的连接而导致的性能损失 使用术语说明： 为了后面的描述更清晰，使用如下术语 Client : 指访问者 Pgboucer: 指连接池 Postgres: 指数据库。 Connetions: 指彼此之间的连接 整体架构 原来: Client -&gt; Postgres 现在: Client -&gt; Pgbounce -&gt; Postgres 优势 内存消耗低(默……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgbouncer/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -384,6 +391,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
     </li>
     
@@ -419,10 +430,6 @@
         <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -445,9 +452,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (28)</a></li>
-    
-    <li><a href="https://zhangeamon.top/categories/postgresql/">postgresql (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (33)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

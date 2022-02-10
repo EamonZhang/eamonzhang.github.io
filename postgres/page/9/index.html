@@ -94,6 +94,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/stat/" title="Postgresql指标查看&amp;stat统计信息">Postgresql指标查看&amp;stat统计信息</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月6日
+        </date>
+        
+        <div class="post-content">
+            当前连接数 SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid(); count ------- 3 (1 row) 数据库占用空间 select pg_size_pretty(pg_database_size('postgres')); pg_size_pretty ---------------- 14 MB (1 row) or \l+ 数据库表(不包括索引)或单条索引占用空间 select pg_size_pretty(pg_relation_size('t_name')); pg_size_pretty ---------------- 24 kB (1 行记录) or \d+ 表中所有索引占有的空间 select pg_size_pretty(pg_indexes_size('t_name')); pg_size_pretty ---------------- 280 kB (1 行记录) 表中索引占用的空间大小排序 select indexname , pg_size_pretty(pg_relation_size(indexname::regclass)) ,indexdef from pg_indexes where tablename = 't_name' order by pg_relation_size(indexname::regclass) desc limit 10; 表和索引占用总空间 select pg_size_pretty(pg_total_relation_size('t_name')); pg_size_pretty ---------------- 380 kB (1 行记录) 查……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/stat/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/wal-g/" title="数据库备份和恢复wal-g 应用">数据库备份和恢复wal-g 应用</a>
             </h1>
         </header>
@@ -279,6 +297,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
     </li>
     
@@ -314,10 +336,6 @@
         <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -340,9 +358,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (28)</a></li>
-    
-    <li><a href="https://zhangeamon.top/categories/postgresql/">postgresql (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (33)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

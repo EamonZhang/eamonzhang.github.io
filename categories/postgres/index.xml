@@ -6,7 +6,25 @@
     <description>Recent content in postgres on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 20 Dec 2021 10:51:16 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Feb 2022 10:21:07 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>查看数据信息常用sql整理</title>
+      <link>https://zhangeamon.top/postgres/monitor-sql/</link>
+      <pubDate>Thu, 10 Feb 2022 10:21:07 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/monitor-sql/</guid>
+      <description>库内存命中率 SELECT &#39;index hit rate&#39; AS name, (sum(idx_blks_hit)) / nullif(sum(idx_blks_hit + idx_blks_read),0) AS ratio FROM pg_statio_user_indexes UNION ALL SELECT &#39;table hit rate&#39; AS name, sum(heap_blks_hit) / nullif(sum(heap_blks_hit) + sum(heap_blks_read),0) AS ratio FROM pg_statio_user_tables; 表内存命中率 SELECT relname AS relation, heap_blks_read AS heap_read, heap_blks_hit AS heap_hit, ((heap_blks_hit*100) / NULLIF((heap_blks_hit + heap_blks_read), 0)) AS ratio FROM pg_statio_user_tables order by ratio; 读IO内存占比 磁盘中读取和在内存中直接读取之间的数字和比 SELECT relname AS &amp;quot;relation&amp;quot;, heap_blks_read AS heap_read, heap_blks_hit AS heap_hit, ( (heap_blks_hit*100) / NULLIF((heap_blks_hit + heap_blks_read), 0)) AS ratioFROM pg_statio_user_tables; 表中索引命中率 SELECT relname, CASE idx_scan WHEN 0 THEN NULL ELSE round(100.0 * idx_scan / (seq_scan + idx_scan), 5) END</description>
+    </item>
+    
+    <item>
+      <title>数据库实时运行信息查看</title>
+      <link>https://zhangeamon.top/postgres/pg_activity/</link>
+      <pubDate>Wed, 12 Jan 2022 15:47:07 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_activity/</guid>
+      <description>介绍 类似Linux top 命令 查看数据实时运行情况 https://github.com/dalibo/pg_activity 安装 测试环境centos7 postgresql10 查看已安装的PG版本 如果有9.2 版本，清理,如果没有postgresql10-devel 需要安装 yum list installed | grep postgres 设置环境变量 export PG_HOME=/usr/pgsql-10 export PATH=$PATH:$PG_HOME/bin/ 安装pg_activity python3 -m pip install pg_activity psycopg2-binary 使用 与psql 连接方式相同 pg_activity -U xxx -p xxx 更多</description>
+    </item>
+    
     <item>
       <title>数据库的json类型</title>
       <link>https://zhangeamon.top/postgres/pg_json/</link>
@@ -134,6 +152,15 @@
     </item>
     
     <item>
+      <title>auto vacuum 触发机制</title>
+      <link>https://zhangeamon.top/postgres/auto_vacuum_trigger/</link>
+      <pubDate>Fri, 08 Jan 2021 09:20:56 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/auto_vacuum_trigger/</guid>
+      <description>数据库自动垃圾回收触发条件分析 在postgres 中 垃圾回收的重要意义及在执行垃圾回收时具体都做了些什么很多地方都有介绍。 但是何时触发垃圾回收，即垃圾回收的触发条件是什么。 官网的介绍一般是有如下几个参数决定 #autovacuum = on # Enable autovacuum subprocess? &#39;on&#39; #autovacuum_vacuum_threshold = 50 # min number of row updates before vacuum #autovacuum_analyze_threshold = 50 # min number of row updates before analyze #autovacuum_vacuum_scale_factor = 0.2 # fraction of table size</description>
+    </item>
+    
+    <item>
       <title>创建只读用户</title>
       <link>https://zhangeamon.top/postgres/readonly/</link>
       <pubDate>Tue, 08 Sep 2020 09:28:59 +0800</pubDate>
@@ -149,6 +176,15 @@
       
       <guid>https://zhangeamon.top/postgres/checkpoint/</guid>
       <description>作用 一般checkpoint会将某个时间点之前的脏数据全部刷新到磁盘，以实现数据的一致性与完整性。其主要目的是为了缩短崩溃恢复时间。 数据库靠谱的原因 一条DML 写入过程 在写入数据的时，当事务提交后修改信息顺序同步写入wal。shared buffer中信息并不是马上落盘。异步同步磁盘</description>
+    </item>
+    
+    <item>
+      <title>pgpoolii 读写分离</title>
+      <link>https://zhangeamon.top/postgres/pgpool2/</link>
+      <pubDate>Wed, 30 Jan 2019 15:43:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pgpool2/</guid>
+      <description>https://www.pgpool.net/docs/pgpool-II-3.5.4/doc/tutorial-zh_cn.html#dist-def https://www.xiaomastack.com/2019/08/16/postgresql集群/</description>
     </item>
     
     <item>
@@ -212,6 +248,15 @@
       
       <guid>https://zhangeamon.top/postgres/monitor/</guid>
       <description>各种监控方式 zabbix Monitor PostgreSQL with Zabbix postgres_exporter A PostgresSQL metric exporter for Prometheus pgwatch2 PostgreSQL metrics monitor/dashboard pgmetrics Collect and display information and stats from a running PostgreSQL server pgdash (收费) pganalyze PostgreSQL Performance Monitoring 参考自己实现 状态查看 pgcenter pgcenter top pgcenter: 2018-12-20 11:10:25, load average: 0.94, 0.84, 0.86 state [ok]: ::1:5432 postgres@postgres (ver: 10.6, up 8 days 19:57:54, recovery: f) %cpu: 15.0 us, 3.7 sy, 0.0 ni, 75.3 id, 5.7 wa, 0.0 hi, 0.2 si, 0.0 st activity: 5/1000 conns, 0/0 prepared, 2 idle, 0 idle_xact, 3 active, 0 waiting, 0 others MiB mem: 7821 total, 162 free, 424 used, 7235 buff/cached autovacuum: 0/3 workers/max, 0 manual, 0 wraparound, 00:00:00 vac_maxtime MiB swap: 1023 total, 903 free, 120 used, 0/0 dirty/writeback statements: 1888 stmt/s,</description>
+    </item>
+    
+    <item>
+      <title>vacuum 垃圾回收器</title>
+      <link>https://zhangeamon.top/postgres/vacuum/</link>
+      <pubDate>Wed, 05 Dec 2018 16:48:00 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/vacuum/</guid>
+      <description>介绍 数据库总是不断地在执行删除，更新等操作。良好的空间管理非常重要，能够对性能带来大幅提高。在postgresql中用于维护数据库磁盘空间的工具是VACUUM，其重要的作用是删除那些已经标示为删除的数据并释放空间。 postgresql中执行delete,update操作后，表中的</description>
     </item>
     
     <item>

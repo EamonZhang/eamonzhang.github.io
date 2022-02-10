@@ -102,10 +102,17 @@
             2021年1月8日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
         
         
         <div class="post-content">
-            <h4 id="数据库自动垃圾回收触发条件分析">数据库自动垃圾回收触发条件分析</h4>
+            <h2 id="数据库自动垃圾回收触发条件分析">数据库自动垃圾回收触发条件分析</h2>
 <p>在postgres 中 垃圾回收的重要意义及在执行垃圾回收时具体都做了些什么很多地方都有介绍。</p>
 <p>但是何时触发垃圾回收，即垃圾回收的触发条件是什么。</p>
 <p>官网的介绍一般是有如下几个参数决定</p>
@@ -121,7 +128,7 @@
 <li>threshold = pg_class.reltuples*autovacuum_vacuum_scale_factor+autovacuum_vacuum_threshold</li>
 </ul>
 <p>即：if (当前表更新数&gt; 触发阀值) do &hellip;</p>
-<h6 id="等号右边的理解">等号右边的理解</h6>
+<h4 id="等号右边的理解">等号右边的理解</h4>
 <pre><code>-- 触发自动analyze
 pg_class.reltuples*autovacuum_analyze_scale_factor+autovacuum_analyze_threshold
 -- 触发自动autovacuum
@@ -130,8 +137,8 @@ pg_class.reltuples*autovacuum_vacuum_scale_factor+autovacuum_vacuum_threshold
 <p>pg_class.reltuples 来自系统统计表，在analyze 后更新。</p>
 <p>所以通常配置触发参数时，尽量将analyze 触发条件要更敏感性。</p>
 <p><a href="https://blog.csdn.net/cmzhuang/article/details/84643618">测试参考</a></p>
-<h6 id="思考的是等号左边的事情">思考的是等号左边的事情</h6>
-<p>数据库是如何知道当前更的数量, 按照已有的经验（经验不足）。</p>
+<h4 id="思考的是等号左边的事情">思考的是等号左边的事情</h4>
+<p>数据库是如何知道当前更新的数量, 按照已有的经验（经验不足）。</p>
 <p>一般数据库中这种信息是存在的统计类信息中。但是统计信息通常是在analyze后更新的。根据上面的公式触发analyze的条件又是由当前表更新数有关。</p>
 <p>于是乎就陷入了一种循环♻️   。</p>
 <p>1 表更新数量 -&gt; analyze</p>
@@ -140,7 +147,7 @@ pg_class.reltuples*autovacuum_vacuum_scale_factor+autovacuum_vacuum_threshold
 <p>那是先有鸡还是先有蛋呢？</p>
 <p>只有继续思考才能找到事情的真相。。。</p>
 <p>首先表中更新的数据量统计应该是一个很轻量快速的方法。类似于计数器实现,并且独立于传统的统计信息。接下来在数据库开始寻找这种计数器。</p>
-<h5 id="真相">真相</h5>
+<h4 id="真相">真相</h4>
 <p>‘计数器’ 是有stats collector 进程来维护。 当数据库进行dml操作时，stats collector 进行实时计数统计。该值存在于pg_stat_all_table 中</p>
 <p>查看pg_stats_all_table 表定义</p>
 <pre><code>postgres=# \d+ pg_stat_all_tables 
@@ -360,6 +367,10 @@ pg_stat_tmp/
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
     </li>
     
@@ -395,10 +406,6 @@ pg_stat_tmp/
         <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -421,9 +428,7 @@ pg_stat_tmp/
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (28)</a></li>
-    
-    <li><a href="https://zhangeamon.top/categories/postgresql/">postgresql (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (33)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

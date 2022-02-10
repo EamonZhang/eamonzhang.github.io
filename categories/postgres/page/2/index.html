@@ -101,6 +101,52 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_rman/">pg_rman 备份恢复数据库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月9日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            适用场景 PG_RMAN 基于本地数据拷贝的方式，要求与数据库需要安装在同一个机器节点上。 适用于项目初期，对数据库的规划处于初级阶段。实体机不充分的情况是个很好的选择。 数据库使用ssd盘，备份磁盘采用企业sata大盘。或nfs网盘等。 PG_RMAN 支持全备份，增量备份，备份验证，保留策略等 应用软件包地址 https://github.com/ossc-db/pg_rman/releases 基……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_rman/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/patroni02/">Patroni 高可用管理进阶</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月5日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            完成目标 主从同步策略 异地多机房策略 failover 触发详情 访问认证 watch-dog 配置文件详情 fencing DCS 失效处理 加入节点复制数据限流 主从切换流量,避免重新拉取 级联复制 callback 日志&amp;监控 主从同步策略 数据库主从之间同步类型 Synchronous state of this standby server. Possible values are: async: This standby server is asynchronous. potential: This standby server is now asynchronous, but can potentially become synchronous if one of current synchronous ones fails. sync: This standby server is synchronous. quorum: This standby server is considered as……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/patroni02/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/">数据库优化思考-性能优化</a>
             </h1>
         </header>
@@ -193,6 +239,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/auto_vacuum_trigger/">auto vacuum 触发机制</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月8日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            数据库自动垃圾回收触发条件分析 在postgres 中 垃圾回收的重要意义及在执行垃圾回收时具体都做了些什么很多地方都有介绍。 但是何时触发垃圾回收，即垃圾回收的触发条件是什么。 官网的介绍一般是有如下几个参数决定 #autovacuum = on # Enable autovacuum subprocess? 'on' #autovacuum_vacuum_threshold = 50 # min number of row updates before vacuum #autovacuum_analyze_threshold = 50 # min number of row updates before analyze #autovacuum_vacuum_scale_factor = 0.2 # fraction of table size……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/auto_vacuum_trigger/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/readonly/">创建只读用户</a>
             </h1>
         </header>
@@ -239,7 +308,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/logical-replication/">逻辑复制</a>
+                <a href="https://zhangeamon.top/postgres/pgpool2/">pgpoolii 读写分离</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -254,77 +323,8 @@
         </div>
         
         <div class="post-content">
-            逻辑复制 Postgres 10 版本开始， 在内核层面支持基于REDO流的逻辑复制。 控制粒度为表级别 物理复制相同都是基于wal 可指定多个上游数据源 下游数据可读可写 可用于数据汇总，无停服数据迁移,大版本升级等。 基本概念 发布者（publication）， 上游数据 订阅者 (subscrition)， 下游数据 复……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/logical-replication/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_rewind/">PG主从切换 pg_rewind</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月30日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/postgres'>postgres</a>
-            
-        </div>
-        
-        <div class="post-content">
-            pg_rewind requires that the target server either has the wal_log_hints option enabled in postgresql.conf or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. full_page_writes must also be set to on, but is enabled by default. wal_log_hints 使用场景 在数据库主从结构中，从变成主易。但是由主变为从却需要一番周折。 如果是数据量少时重新使用pg_backup拉一份从即可，但是如果数据量大时，这个过程非常的耗时耗能。对线上业务也会有影……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_rewind/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/patroni/">PG高可用Patroni</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月30日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/postgres'>postgres</a>
-            
-        </div>
-        
-        <div class="post-content">
-            环境 操作系统 Centos 7 patroni 版本 2.0.2 postgres 版本 13 实现目标 高可用方案对比 patroni 结构分析 patroni 搭建新集群 patroni 接管现有集群 patroni 管理pg配置 手动swithover 自动failover 维护模式 弹性扩容，缩容 对外提供统一服务 RestFULLAPI 备份恢复 监控 日志 升级 高可用方案对比 pg的高可用方案都是基于流复制来实现 PAF pacemaker + corosyns repmgr repmgr 手动流复制管……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/patroni/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_pathman/">pg_pathman 分区表</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月24日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/postgres'>postgres</a>
-            
-        </div>
-        
-        <div class="post-content">
-            介绍 分区表的诉求在现实的生成中的意义不必多说，pg以前的实现方式多采用触发器，rules实现。数据量上来时性能明显不尽如意。 虽然pg10 ，11 版本在分区表的特性上不断发力。但是性能啥还是不够给力。 pg_pathman 分区表功能在目前的pg版本10.6 中优势还是非常明显的。 在期待pg自身分区表特性的……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_pathman/">阅读全文</a></p>
+            https://www.pgpool.net/docs/pgpool-II-3.5.4/doc/tutorial-zh_cn.html#dist-def https://www.xiaomastack.com/2019/08/16/postgresql集群/……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/pgpool2/">阅读全文</a></p>
         </div>
     </article>
     
@@ -351,6 +351,10 @@
     
     <li >
         <a href="https://zhangeamon.top/categories/postgres/page/3/">3</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/categories/postgres/page/4/">4</a>
     </li>
     
 
@@ -405,6 +409,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
     </li>
     
@@ -440,10 +448,6 @@
         <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -466,9 +470,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (28)</a></li>
-    
-    <li><a href="https://zhangeamon.top/categories/postgresql/">postgresql (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (33)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
