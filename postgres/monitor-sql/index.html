@@ -168,7 +168,7 @@
     <li><a href="#索引膨胀率">索引膨胀率</a></li>
     <li><a href="#表中锁状态">表中锁状态</a></li>
     <li><a href="#auto-vacuum-预测">auto vacuum 预测</a></li>
-    <li><a href="#auto-analysis-预测">auto analysis 预测</a></li>
+    <li><a href="#auto-analyze-预测">auto analyze 预测</a></li>
   </ul>
 </nav>
     </div>
@@ -281,7 +281,7 @@ AND query NOT ILIKE '%application_name%' AND query NOT ILIKE '%inet%' AND age(CU
 wait_event, usename, locktype, mode, granted  ORDER BY max_wait_time DESC;
 </code></pre><h2 id="auto-vacuum-预测">auto vacuum 预测</h2>
 <pre><code>pg_class.reltuples*autovacuum_vacuum_scale_factor+autovacuum_vacuum_threshold
-</code></pre><h2 id="auto-analysis-预测">auto analysis 预测</h2>
+</code></pre><h2 id="auto-analyze-预测">auto analyze 预测</h2>
 <pre><code>pg_class.reltuples*autovacuum_vacuum_scale_factor+autovacuum_vacuum_threshold
 </code></pre>
         </div>
