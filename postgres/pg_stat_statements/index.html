@@ -102,14 +102,21 @@
             2018年11月29日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
         
         
         <div class="post-content">
-            <h4 id="pg_stat_statements-扩展">pg_stat_statements 扩展</h4>
-<h5 id="安装">安装　</h5>
+            <h2 id="pg_stat_statements-扩展">pg_stat_statements 扩展</h2>
+<h4 id="安装">安装　</h4>
 <pre><code>yum install postgresql10-contrib.x86_64
 
-</code></pre><h5 id="修改配置参数">修改配置参数</h5>
+</code></pre><h4 id="修改配置参数">修改配置参数</h4>
 <pre><code>vi $PGDATA/postgresql.conf  
 
 shared_preload_libraries='pg_stat_statements'  # 加载模块　需要重启 , 近期测试不需要添加也可以。自带扩展
@@ -126,9 +133,9 @@ pg_stat_statements.track_utility = off  #是否跟踪非DML语句 (例如DDL，D
 
 pg_stat_statements.save = on #重启后是否保留统计信息  
  
-</code></pre><h5 id="重启数据库">重启数据库</h5>
+</code></pre><h4 id="重启数据库">重启数据库</h4>
 <pre><code>systemctl restart postgresql-10
-</code></pre><h5 id="创建扩展">创建扩展</h5>
+</code></pre><h4 id="创建扩展">创建扩展</h4>
 <pre><code>create extension pg_stat_statements;
 
 \d pg_stat_statements
@@ -347,7 +354,7 @@ insert into stat_pg_stat_statements select now() ,* from pg_stat_statements;
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (33)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (34)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
