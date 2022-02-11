@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月31日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            介绍 可查看 backgroud writer， checkpoint ，backend 进程刷写 Shared buffer 情况视图 pg数据库在写入时先在内存中更新shared buffer ，然后有checkpoint机制将脏数据刷写到磁盘。 视图 select * from pg_stat_bgwriter ; -[ RECORD 1 ]---------+------------------------------ checkpoints_timed | 64017 checkpoints_req | 458 checkpoint_write_time | 9608302902 checkpoint_sync_time | 1189286 buffers_checkpoint | 578367652 buffers_clean | 329022 maxwritten_clean | 2353 buffers_backend | 29802728 buffers_backend_fsync | 0 buffers_alloc | 83826180 stats_reset | 2020-08-20 19:41:20.491551+08 负责将shared buffer 中的内容……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
             </h1>
         </header>
@@ -295,24 +320,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/high_level_sql/" title="高级SQL">高级SQL</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月11日
-        </date>
-        
-        <div class="post-content">
-            分组集 排序集 假象集 窗口函数 递归 递归应用 递归加速count(distint) 查询。 使用场景，数据分布：大数据集但其中的类型却很少 -- 创建表 test1=# create table recurive_t(user_id int,free float,info text); CREATE TABLE -- 加入数据 test1=# insert into recurive_t select 1 ,generate_series(0,1000000),'user 1 pay !!!'; test1=# insert into recurive_t select 2 ,generate_series(0,2000000),'user 2 pay !!!'; test1=# insert into recurive_t select 3 ,generate_series(0,3000000),'user 3 pay !!!'; test1=# insert into recurive_t select 4 ,generate_series(0,4000000),'user 4 pay !!!'; test1=# insert into recurive_t select 5 ,generate_series(0,4000000),'user 5 pay !!!'; test1=# analyze recurive_t ; ANALYZE -- count(distinct()) 查询……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/high_level_sql/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -412,6 +419,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
     </li>
     
@@ -447,10 +458,6 @@
         <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -473,7 +480,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (34)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (35)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

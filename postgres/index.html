@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年2月11日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            限流目的 清理是在后台运行的维护任务，对用户查询的影响最小。不应该消耗太多的资源(CPU和磁盘I/O)。 清理成本计算 清理过程相当简单，它从数据文件中读取页面(8kB的数据块)，并检查是否需要清理。如果没有dead tuples，页面将被简单地丢弃，而不进行任何更改。否则，它将被清理(……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/vacuum_limit/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
             </h1>
         </header>
@@ -302,31 +327,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/" title="数据库试图之 pg_stat_bgwriter">数据库试图之 pg_stat_bgwriter</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月31日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            介绍 可查看 backgroud writer， checkpoint ，backend 进程刷写 Shared buffer 情况视图 pg数据库在写入时先在内存中更新shared buffer ，然后有checkpoint机制将脏数据刷写到磁盘。 视图 select * from pg_stat_bgwriter ; -[ RECORD 1 ]---------+------------------------------ checkpoints_timed | 64017 checkpoints_req | 458 checkpoint_write_time | 9608302902 checkpoint_sync_time | 1189286 buffers_checkpoint | 578367652 buffers_clean | 329022 maxwritten_clean | 2353 buffers_backend | 29802728 buffers_backend_fsync | 0 buffers_alloc | 83826180 stats_reset | 2020-08-20 19:41:20.491551+08 负责将shared buffer 中的内容……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -422,6 +422,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
     </li>
     
@@ -457,10 +461,6 @@
         <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -483,7 +483,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (34)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (35)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

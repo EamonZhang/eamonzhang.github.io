@@ -6,7 +6,16 @@
     <description>Recent content in Postgres on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 10 Feb 2022 10:21:07 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Feb 2022 13:51:50 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vacuum 限流</title>
+      <link>https://zhangeamon.top/postgres/vacuum_limit/</link>
+      <pubDate>Fri, 11 Feb 2022 13:51:50 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/vacuum_limit/</guid>
+      <description>限流目的 清理是在后台运行的维护任务，对用户查询的影响最小。不应该消耗太多的资源(CPU和磁盘I/O)。 清理成本计算 清理过程相当简单，它从数据文件中读取页面(8kB的数据块)，并检查是否需要清理。如果没有dead tuples，页面将被简单地丢弃，而不进行任何更改。否则，它将被清理(</description>
+    </item>
+    
     <item>
       <title>查看数据信息常用sql整理</title>
       <link>https://zhangeamon.top/postgres/monitor-sql/</link>

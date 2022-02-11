@@ -92,6 +92,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年8月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            分布式锁场景 秒杀抢购茅台，车票 提前预约抢订车位，共享单车 特点，多个用户同一时间对同一个资源进行申请，并且只能允许一个用户申请成功。 分布式锁必要条件 布式系统环境下，一个方法在同一时间只能被一个机器的一个线程执行； 高可用的获取锁与释放锁； 高性能的获取锁与释放锁； 具备可重入特性； 具备锁……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/distributedlock/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
             </h1>
         </header>
@@ -254,29 +279,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/rabbitmq/manager02/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/openvpn/" title="搭建VPN服务">搭建VPN服务</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年5月18日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            利用Openven搭建VPN服务 服务端 参考 https://github.com/kylemanna/docker-openvpn 初始化 OVPN_DATA=&quot;ovpn-data-example&quot; docker volume create --name $OVPN_DATA docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki 其中 VPN.SERVERNAME.COM 为访问域名 启动服务 docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn 生成key docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full CLIENTNAME nopass docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient CLIENTNAME &gt; CLIENTNAME.ovpn 客户端 openvpn --config CLIENTNAME.ovpn 验证 curl ipinfo.io 查看upd 端口 nc -vu ip port……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/openvpn/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -399,6 +401,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
     </li>
     
@@ -434,10 +440,6 @@
         <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -460,7 +462,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (34)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (35)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
