@@ -92,7 +92,114 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#常用方法">常用方法</a></li>
+    <li><a href="#注意事项">注意事项</a></li>
+    <li><a href="#配置文件">配置文件</a></li>
+    <li><a href="#镜像管理">镜像管理</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#快照管理">快照管理</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -102,7 +209,20 @@
             2020年7月13日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/kvm'>kvm</a></span>
+            
+        </div>
         
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
         
         <div class="post-content">
             <h2 id="介绍">介绍</h2>
@@ -111,9 +231,9 @@
 <p><a href="https://www.virtualbox.org/wiki/Downloads">下载virtualbox</a></p>
 <p><a href="https://www.vagrantup.com/downloads.html">下载vagrant</a></p>
 <pre><code>-- 安装依赖
-#yum --enablerepo=epel -y install fuse-sshfs
-#yum install bsdtar
-#yum -y install gcc kernel kernel-devel
+yum --enablerepo=epel -y install fuse-sshfs
+yum install bsdtar
+yum -y install gcc kernel kernel-devel
 </code></pre><h2 id="常用方法">常用方法</h2>
 <pre><code>--- 镜像管理
 添加镜像
@@ -254,6 +374,34 @@ Rsyncing folder: /当前路径 =&gt; /vagrant
       #yum update -y
     SHELL
 end
+</code></pre><h2 id="镜像管理">镜像管理</h2>
+<h4 id="查看现有虚拟机信息">查看现有虚拟机信息</h4>
+<pre><code>vboxmanage list vms
+&quot;centos-7-1-1.x86_64_1644905216545_42674&quot; {d21b3936-af34-4384-a661-a42b808335e1}
+&quot;kvm_node0_1644905231518_15885&quot; {5bb1e4a9-8a38-4ef8-a763-cd14cebf7463}
+&quot;kvm_node1_1644906746126_25397&quot; {ef45e4a8-24d5-437d-a09e-d2931bdf38f6}
+&quot;kvm_node2_1644908326313_91281&quot; {baf4644f-d1e0-4aa0-a789-0d0a1ea2ad99}
+&quot;kvm_node3_1644908463101_26319&quot; {5958eb7d-feed-432b-839a-e46945de6f17}
+</code></pre><h4 id="查看虚拟机详细信息">查看虚拟机详细信息</h4>
+<pre><code>vboxmanage showvminfo 5bb1e4a9-8a38-4ef8-a763-cd14cebf7463
+</code></pre><h4 id="虚拟机大包成镜像">虚拟机大包成镜像</h4>
+<pre><code>vagrant package --base kvm_node3_1644908463101_26319 --output basekvm.box
+</code></pre><h4 id="载入镜像">载入镜像</h4>
+<pre><code>vagrant box add ./base_kvm.box  --name new_node
+</code></pre><h4 id="查看镜像载入情况">查看镜像载入情况</h4>
+<pre><code>vagrant box list
+</code></pre><h2 id="快照管理">快照管理</h2>
+<pre><code>生成快照
+vagrant snapshot save node0 v.1.1
+
+查看快照
+vagrant snapshot list node0 
+
+删除快照
+vagrant snapshot delete node0 v.1.1
+
+恢复快照
+vagrant snapshot restore node0 v.1.1
 </code></pre>
         </div>
 
@@ -405,13 +553,15 @@ end
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
+    <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
+    
     <li><a href="https://zhangeamon.top/categories/linux/">linux (19)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (35)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (36)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

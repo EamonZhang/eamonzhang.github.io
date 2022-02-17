@@ -188,6 +188,15 @@
     </item>
     
     <item>
+      <title>咨询锁 adlock</title>
+      <link>https://zhangeamon.top/postgres/adlock/</link>
+      <pubDate>Thu, 07 Mar 2019 16:20:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/adlock/</guid>
+      <description>https://github.com/digoal/blog/blob/master/201805/20180524_02.md 行级锁 select .. for update select .. for update skip locked select .. for share</description>
+    </item>
+    
+    <item>
       <title>pgpoolii 读写分离</title>
       <link>https://zhangeamon.top/postgres/pgpool2/</link>
       <pubDate>Wed, 30 Jan 2019 15:43:25 +0800</pubDate>

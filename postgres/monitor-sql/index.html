@@ -167,6 +167,7 @@
     <li><a href="#表膨胀率">表膨胀率</a></li>
     <li><a href="#索引膨胀率">索引膨胀率</a></li>
     <li><a href="#表中锁状态">表中锁状态</a></li>
+    <li><a href="#被锁堵塞的语句">被锁堵塞的语句</a></li>
     <li><a href="#表中锁等待">表中锁等待</a></li>
     <li><a href="#auto-vacuum-预测">auto vacuum 预测</a></li>
   </ul>
@@ -390,6 +391,33 @@ CREATE OR REPLACE VIEW monitor.pg_index_bloat_human AS
                    WHERE query != '&lt;IDLE&gt;' AND query NOT ILIKE '%pg_%' AND query NOT ILIKE '%application_name%'
                       AND query NOT ILIKE '%inet%' AND age(CURRENT_TIMESTAMP, query_start) &gt; '5 milliseconds'::interval
   GROUP BY query_name,wait_event, usename, locktype, mode, granted  ORDER BY max_wait_time DESC;
+</code></pre><h2 id="被锁堵塞的语句">被锁堵塞的语句</h2>
+<pre><code>SELECT                                      
+    blocked_locks.pid AS blocked_pid,
+    blocked_activity.usename AS blocked_user,
+    now() - blocked_activity.query_start AS blocked_duration,
+    blocking_locks.pid AS blocking_pid,
+    blocking_activity.usename AS blocking_user,
+    now() - blocking_activity.query_start AS blocking_duration,
+    blocked_activity.query AS blocked_statement,
+    blocking_activity.query AS blocking_statement
+FROM                                                       
+    pg_catalog.pg_locks AS blocked_locks
+    JOIN pg_catalog.pg_stat_activity AS blocked_activity ON blocked_activity.pid = blocked_locks.pid
+    JOIN pg_catalog.pg_locks AS blocking_locks ON blocking_locks.locktype = blocked_locks.locktype
+        AND blocking_locks.DATABASE IS NOT DISTINCT FROM blocked_locks.DATABASE
+        AND blocking_locks.relation IS NOT DISTINCT FROM blocked_locks.relation
+        AND blocking_locks.page IS NOT DISTINCT FROM blocked_locks.page
+        AND blocking_locks.tuple IS NOT DISTINCT FROM blocked_locks.tuple
+        AND blocking_locks.virtualxid IS NOT DISTINCT FROM blocked_locks.virtualxid
+        AND blocking_locks.transactionid IS NOT DISTINCT FROM blocked_locks.transactionid
+        AND blocking_locks.classid IS NOT DISTINCT FROM blocked_locks.classid
+        AND blocking_locks.objid IS NOT DISTINCT FROM blocked_locks.objid
+        AND blocking_locks.objsubid IS NOT DISTINCT FROM blocked_locks.objsubid
+        AND blocking_locks.pid != blocked_locks.pid
+    JOIN pg_catalog.pg_stat_activity AS blocking_activity ON blocking_activity.pid = blocking_locks.pid
+WHERE
+    NOT blocked_locks.granted;
 </code></pre><h2 id="表中锁等待">表中锁等待</h2>
 <pre><code>with      
 t_wait as      
@@ -648,13 +676,15 @@ ORDER BY 1
     
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
+    <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
+    
     <li><a href="https://zhangeamon.top/categories/linux/">linux (19)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (35)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (36)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
