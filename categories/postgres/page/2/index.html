@@ -308,11 +308,11 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/checkpoint/">checkpoint 检查点</a>
+                <a href="https://zhangeamon.top/postgres/oom/">数据库 OOM 预防</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
-            2019年3月13日
+            2020年6月30日
         </date>
         
         <div class="post-meta meta-category">
@@ -323,8 +323,8 @@
         </div>
         
         <div class="post-content">
-            作用 一般checkpoint会将某个时间点之前的脏数据全部刷新到磁盘，以实现数据的一致性与完整性。其主要目的是为了缩短崩溃恢复时间。 数据库靠谱的原因 一条DML 写入过程 在写入数据的时，当事务提交后修改信息顺序同步写入wal。shared buffer中信息并不是马上落盘。异步同步磁盘……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/checkpoint/">阅读全文</a></p>
+            降低主进程被OOM kill 掉的风险 restart_after_crash 默认崩溃重启 postgres=# show restart_after_crash; restart_after_crash --------------------- on (1 row) vm.overcommit # vi /etc/sysctl.conf # 0 表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程 # 1 表示内核允许分配所有的物理内存，而不管当前的内存状态如何 # 2 表示内核允许分配超……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/oom/">阅读全文</a></p>
         </div>
     </article>
     
@@ -466,13 +466,13 @@
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (19)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (36)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (37)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

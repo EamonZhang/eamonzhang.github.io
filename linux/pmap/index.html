@@ -102,25 +102,24 @@
             2019年3月19日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
         
         
         <div class="post-content">
-            <h5 id="介绍">介绍</h5>
+            <h2 id="介绍">介绍</h2>
 <p>pmap - report memory map of a process(查看进程的内存映像信息)</p>
-<h5 id="参数说明">参数说明</h5>
-<ul>
-<li>
+<h4 id="参数说明">参数说明</h4>
 <ul>
 <li>x extended       Show the extended format. 显示扩展格式</li>
-</ul>
-</li>
-<li>
-<ul>
 <li>d device         Show the deviceformat.   显示设备格式</li>
 </ul>
-</li>
-</ul>
-<h5 id="结果查看说明">结果查看说明</h5>
+<h4 id="结果查看说明">结果查看说明</h4>
 <ul>
 <li>
 <p>Address:  start address ofmap  映像起始地址</p>
@@ -147,7 +146,7 @@
 <p>Device:  device name(major:minor)  设备名</p>
 </li>
 </ul>
-<h5 id="举例说明">举例说明</h5>
+<h4 id="举例说明">举例说明</h4>
 <p>查看进程号为1 的进程</p>
 <pre><code>pmap -d 1
 1:   /usr/lib/systemd/systemd --switched-root --system --deserialize 22
@@ -264,7 +263,7 @@ mapped: 191116K    writeable/private: 18176K    shared: 0K
 <p>shared 表示进程和其他进程共享的内存大小</p>
 </li>
 </ul>
-<h5 id="实际应用">实际应用</h5>
+<h4 id="实际应用">实际应用</h4>
 <p>每隔两秒查看进程号 21215 的状态</p>
 <pre><code>while true; do pmap -d  21215 | tail -1; sleep 2; done
 </code></pre>
@@ -279,11 +278,11 @@ mapped: 191116K    writeable/private: 18176K    shared: 0K
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/storage/minio/">minio 轻量级对象存储</a></li>
+        <li><a href="/postgres/logical-replication/">逻辑复制</a></li>
         
-        <li><a href="/docker/manager/">docker 磁盘空间管理</a></li>
+        <li><a href="/postgres/pg_pathman/">pg_pathman 分区表</a></li>
         
-        <li><a href="/postgres/checkpoint/">checkpoint 检查点</a></li>
+        <li><a href="/postgres/params/">数据库参数</a></li>
         
     </ul>
 </div>
@@ -292,7 +291,11 @@ mapped: 191116K    writeable/private: 18176K    shared: 0K
 
         <div class="post-meta meta-tags">
             
-            没有标签
+            <ul class="clearfix">
+                
+                <li><a href='/tags/'></a></li>
+                
+            </ul>
             
         </div>
     </article>
@@ -420,13 +423,13 @@ mapped: 191116K    writeable/private: 18176K    shared: 0K
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (19)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (36)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (37)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

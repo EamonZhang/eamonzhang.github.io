@@ -143,6 +143,15 @@
     </item>
     
     <item>
+      <title>pmap Linux 进程内存分析</title>
+      <link>https://zhangeamon.top/linux/pmap/</link>
+      <pubDate>Tue, 19 Mar 2019 08:58:40 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/pmap/</guid>
+      <description>介绍 pmap - report memory map of a process(查看进程的内存映像信息) 参数说明 x extended Show the extended format. 显示扩展格式 d device Show the deviceformat. 显示设备格式 结果查看说明 Address: start address ofmap 映像起始地址 Kbytes: size of map in kilobytes 映像大小 RSS: resident set size inkilobytes 驻留集大小 Dirty: dirty pages (both sharedand private) in kilobytes 脏页大小 Mode: permissions on map 映像权限: r=read,w=write, x=execute, s=shared, p=private (copy on write) Mapping: file backing the map ,or &amp;lsquo;[ anon ]&amp;rsquo; for allocated memory, or &amp;lsquo;[ stack ]&amp;rsquo; for the program stack.</description>
+    </item>
+    
+    <item>
       <title>meminfo Linux 内存信息</title>
       <link>https://zhangeamon.top/linux/meminfo/</link>
       <pubDate>Tue, 08 Jan 2019 09:04:15 +0800</pubDate>
