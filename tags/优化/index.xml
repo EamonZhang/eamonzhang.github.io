@@ -34,5 +34,14 @@
       <description>DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压</description>
     </item>
     
+    <item>
+      <title>Sql 优化</title>
+      <link>https://zhangeamon.top/tidb/sql-optimize01/</link>
+      <pubDate>Wed, 21 Nov 2018 09:18:37 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/tidb/sql-optimize01/</guid>
+      <description>一条sql的执行过程 将 SQL 解析成抽象语法树(AST)，将 AST 变换到内部表示(IR)。然后优化器的输入就是 IR，它将生成最优的查询计划（Plan），然后会变成具体的执行器（Executor），里面有许多的算。 优化的阶段为IR 到生成 Plan 的过程，包括逻辑优化和物理优化 逻辑优化 逻辑优化主要是基</description>
+    </item>
+    
   </channel>
 </rss>

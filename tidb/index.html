@@ -101,6 +101,13 @@
             2019年2月18日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/tidb'>tidb</a></span>
+            
+        </div>
+        
         <div class="post-content">
             二叉树：二叉树，每个结点只存储一个关键字，等于则命中，小于走左边，大于走右边； B-Tree：多路搜索树，每个结点存储【M/2-1，M-1]个关键字，非叶子结点存储指向关键字范围的子节点；所有关键字在整棵树中出现【且只出现一次】，非叶子结点可以命中。 B+Tree：在B-Tree基础……
         </div>
@@ -118,6 +125,13 @@
         <date class="post-meta meta-date">
             2018年11月26日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/tidb'>tidb</a></span>
+            
+        </div>
         
         <div class="post-content">
             介绍 LSM-Tree，全称为 log-structured merge-tree，是为了满足日益增长的数据量所带来的高效写性能的需求而提出的设计。考虑到磁盘随机写和顺序写上千倍的性能差距，传统的Btree 结构设计采取的分散的 update-in-place 策略在数据量庞大、写缓存作用有限的情况下，存在大批量的随机写操作，使得写性能完全满足……
@@ -137,6 +151,13 @@
             2018年11月21日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/tidb'>tidb</a></span>
+            
+        </div>
+        
         <div class="post-content">
             一条sql的执行过程 将 SQL 解析成抽象语法树(AST)，将 AST 变换到内部表示(IR)。然后优化器的输入就是 IR，它将生成最优的查询计划（Plan），然后会变成具体的执行器（Executor），里面有许多的算。 优化的阶段为IR 到生成 Plan 的过程，包括逻辑优化和物理优化 逻辑优化 逻辑优化主要是基……
         </div>
@@ -155,6 +176,13 @@
             2018年11月14日
         </date>
         
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/tidb'>tidb</a></span>
+            
+        </div>
+        
         <div class="post-content">
             ERROR 2013 (HY000) Lost connection to MySQL server during query 错误出现场景 select count(id) from account_user where id&gt; 0; +----------+ | count(id) | +----------+ | 2940245 | +----------+ 1 row in set (0.78 sec) delete from account_user where id&gt; 0; ERROR 2013 (HY000): Lost connection to MySQL server during query tidb.log 2018/11/14 10:57:12.476 server.go:303: [info] con:261 new connection 10.1.88.32:54462 2018/11/14 10:57:15.387 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:792.561353ms txn_start_ts:404269101106331649 region_id:77367 store_addr:10.1.88.84:20160 kv_process_ms:537 2018/11/14 10:57:17.227 pd.go:107: [warning] get timestamp too slow: 135.012109ms 2018/11/14 10:57:17.812 pd.go:107: [warning] get timestamp too slow: 56.316863ms 2018/11/14 10:57:17.821 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.226284139s txn_start_ts:404269101106331649 region_id:77863 store_addr:10.1.88.85:20160 kv_process_ms:1580 scan_total_write:314161 scan_processed_write:314160 scan_total_data:314160 scan_processed_data:314160 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.826 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.231259247s txn_start_ts:404269101106331649 region_id:77590 store_addr:10.1.88.85:20160 kv_process_ms:1807 scan_total_write:355885 scan_processed_write:355884 scan_total_data:355884 scan_processed_data:355884 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.872 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.276994472s txn_start_ts:404269101106331649 region_id:77576 store_addr:10.1.88.86:20160 kv_process_ms:1684 scan_total_write:346208 scan_processed_write:346207 scan_total_data:346207 scan_processed_data:346207 scan_total_lock:1 scan_processed_lock:0 2018/11/14……
         </div>
@@ -172,6 +200,13 @@
         <date class="post-meta meta-date">
             2018年10月17日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/tidb'>tidb</a></span>
+            
+        </div>
         
         <div class="post-content">
             ……
@@ -298,6 +333,8 @@
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/redis/">redis (9)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/tidb/">tidb (5)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (9)</a></li>
     
