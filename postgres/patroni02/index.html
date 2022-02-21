@@ -357,10 +357,8 @@ retry_timeout: timeout for DCS and PostgreSQL operation retries (in seconds). DC
 <li>被动方式，DSC已经失效并且短时间内不能修复。已对现有生产造成影响的紧急处理方式。</li>
 </ul>
 <p>思路 pg 脱离patroi 的管理，采用自身流复制</p>
-<pre><code>
-具体方法 
-
-</code></pre><h2 id="加入节点复制数据限流">加入节点复制数据限流</h2>
+<p>具体方法</p>
+<h2 id="加入节点复制数据限流">加入节点复制数据限流</h2>
 <p>pg 流复制新加入节点限流</p>
 <pre><code>pg_basebackup -r
 </code></pre><p>选择从哪个节点拉取完整备份</p>
