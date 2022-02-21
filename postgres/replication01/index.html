@@ -440,8 +440,9 @@ standby_mode = 'on'
 primary_conninfo = 'application_name=standby02 user=postgres host=10.2.0.14 port=5432 sslmode=disable sslcompression=1'
 </code></pre><p>主库查看结果</p>
 <pre><code>psql -U postgres
-postgres=# select sync_state from pg_stat_replication ;
-</code></pre><h2 id="从变主">从变主</h2>
+postgres=# select sync_priority,sync_state from pg_stat_replication ;
+</code></pre><p>sync_priority,sync_priority 状态说明</p>
+<h2 id="从变主">从变主</h2>
 <h5 id="简单有效的方式">简单有效的方式</h5>
 <p>在从库中配置
 cat recovery.conf</p>

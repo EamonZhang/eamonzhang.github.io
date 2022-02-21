@@ -166,6 +166,8 @@
     <li><a href="#fencing">fencing</a></li>
     <li><a href="#dcs失效处理">dcs失效处理</a></li>
     <li><a href="#加入节点复制数据限流">加入节点复制数据限流</a></li>
+    <li><a href="#避免重新拉取">避免重新拉取</a></li>
+    <li><a href="#级联复制">级联复制</a></li>
   </ul>
 </nav>
     </div>
@@ -361,7 +363,14 @@ retry_timeout: timeout for DCS and PostgreSQL operation retries (in seconds). DC
 </code></pre><h2 id="加入节点复制数据限流">加入节点复制数据限流</h2>
 <p>pg 流复制新加入节点限流</p>
 <pre><code>pg_basebackup -r
-</code></pre><p><a href="https://zhuanlan.zhihu.com/p/260958352">https://zhuanlan.zhihu.com/p/260958352</a></p>
+</code></pre><p>选择从哪个节点拉取完整备份</p>
+<pre><code>tags.clonefrom
+</code></pre><h2 id="避免重新拉取">避免重新拉取</h2>
+<pre><code>pg_rewind
+</code></pre><h2 id="级联复制">级联复制</h2>
+<pre><code>tags.replicatefrom: name  
+</code></pre><p>测试结果写IP不生效，写name可以</p>
+<p><a href="https://zhuanlan.zhihu.com/p/260958352">https://zhuanlan.zhihu.com/p/260958352</a></p>
 
         </div>
 
