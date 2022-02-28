@@ -169,6 +169,7 @@
     <li><a href="#参数">参数</a></li>
     <li><a href="#遗留问题">遗留问题</a></li>
     <li><a href="#注意事项-1">注意事项</a></li>
+    <li><a href="#遇见过的错误">遇见过的错误</a></li>
   </ul>
 </nav>
     </div>
@@ -347,6 +348,11 @@ postgres 版本问题
 </code></pre><p>分区表与原生表比较。管理上带来了很大的便利，尤其是数据的归档整理。</p>
 <p>性能上反而可能会变得更差，查询条件一定要带上分区健，否则会扫描所有子表。</p>
 <p>当单个索引的大小超过物理内存的一半时考虑分表</p>
+<h2 id="遇见过的错误">遇见过的错误</h2>
+<pre><code>ERROR:  unrecognized node type: 369
+背景:  SQL statement &quot;select public.create_single_range_partition
+</code></pre><p>解决： <a href="https://github.com/postgrespro/pg_pathman/issues/224">https://github.com/postgrespro/pg_pathman/issues/224</a></p>
+<p>将 1.5.11 升级至 1.5.12</p>
 
         </div>
 
