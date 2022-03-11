@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/awsome-postgres/" title="工作中所使用的postgres">工作中所使用的postgres</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月27日
+        </date>
+        
+        <div class="post-content">
+            Postgres 实际应用概览 MVCC 多版本控制 一个绕不开的话题， 主要是对抗表空间的膨胀。解决垃圾回收问题，主从库之间从库查询冲突问题。 目前方法每日低峰期定时 vaccum ，gocron自定定时任务 。 根据pgstattuple对磁盘空间利用率进行分析。决定是否vaccum full ,pg_repack 流复制 主从复制，读写分离的基础。五种同……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/awsome-postgres/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_prewarm/" title="数据预加载">数据预加载</a>
             </h1>
         </header>
@@ -247,22 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/cpu_temp/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/go/go_mod/" title="依赖管理工具go module">依赖管理工具go module</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年4月30日
-        </date>
-        
-        <div class="post-content">
-            背景 大多数语言都会有包管理工具，像Node有npm，PHP有composer，Java有Maven和Gradle。 在go1.11 版本中，新增了module管理模块功能，用来管理依赖包 开启module特性 要开始使用 go module 的特性， 需要先设置 GO111MODULE 环境变量。 开启 GO111MODULE 要使用go module,首先……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/go/go_mod/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -399,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/lang/" title="Linux 字符集">Linux 字符集</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
@@ -434,10 +438,6 @@
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -456,7 +456,7 @@
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (21)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

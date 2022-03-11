@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>linux | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="linux - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="linux">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/categories/linux/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml+xml" href="https://zhangeamon.top/categories/linux/index.xml" title="Let's go 🐌 🐌 🐌" />
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            <!-- hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699"; -->
+            hm.src = "https://hm.baidu.com/hm.js?0010600e9ae6ff8f5814bb7ec6b36072";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <h3 class="archive-title">
+        分类
+        <span class="keyword">linux</span>
+        中的文章
+    </h3>
+    
+
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/pstack_strace/">进程分析 strace,pstack</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月14日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/linux'>linux</a>
+            
+        </div>
+        
+        <div class="post-content">
+            https://yq.aliyun.com/articles/647468 基本用法 pstack pid strace -e trace=all -T -tt -p pid strace -o server.strace -Ttt -p pid 应用举例 python while True: print('hello') 查看应用进程 ps -ef | grep python root 13491 13054 13 13:27 pts/0 00:00:06 python pstack 13491 #0 0x0000726388f9ea90 in __write_nocancel () at ../sysdeps/unix/syscall-template.S:81 #1 0x0000726388f292f3 in _IO_new_file_write (f=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=0x72638a18d000, n=2) at fileops.c:1258 #2 0x0000726388f2ab0e in new_do_write (to_do=2, data=0x72638a18d000 &quot;1\n. \b[8@while True:\033[C&quot;, fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;) at fileops.c:519 #3 _IO_new_do_write (fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=0x72638a18d000 &quot;1\n. \b[8@while True:\033[C&quot;, to_do=2) at fileops.c:495 #4 0x0000726388f29a50 in _IO_new_file_xsputn (f=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=&lt;optimized out&gt;, n=1) at fileops.c:1326 #5 0x0000726388f1e05b in __GI__IO_fputs (str=0x726389cd2a8d &quot;\n&quot;, fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;) at iofputs.c:39 #6 0x0000726389c0b9c0 in PyFile_WriteString () from /lib64/libpython2.7.so.1.0 #7 0x0000726389c80d48 in PyEval_EvalFrameEx () from /lib64/libpython2.7.so.1.0 #8 0x0000726389c8908d in PyEval_EvalCodeEx () from /lib64/libpython2.7.so.1.0 #9 0x0000726389c89192 in PyEval_EvalCode () from /lib64/libpython2.7.so.1.0 #10……
+            <p class="readmore"><a href="https://zhangeamon.top/linux/pstack_strace/">阅读全文</a></p>
+        </div>
+    </article>
+    
+
+    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="https://zhangeamon.top/categories/linux/page/2/">上一页</a>
+    </li>
+    
+
+    
+    <li >
+        <a href="https://zhangeamon.top/categories/linux/">1</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/categories/linux/page/2/">2</a>
+    </li>
+    
+    <li  class="current">
+        <a href="https://zhangeamon.top/categories/linux/page/3/">3</a>
+    </li>
+    
+
+    
+</ol>
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2022 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/lang/" title="Linux 字符集">Linux 字符集</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/ch/install/" title="ClickHouse">ClickHouse</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/docker/">docker (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (21)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (37)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (9)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/tidb/">tidb (5)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (9)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AD%98%E5%82%A8/">存储 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

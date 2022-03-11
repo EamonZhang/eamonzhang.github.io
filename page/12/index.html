@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/git-nopassword/" title="Git 免输入密码">Git 免输入密码</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年3月19日
+        </date>
+        
+        <div class="post-content">
+            一、配置Git的 git config --global user.name [userName] git config --global user.email [userEmail] 二、配置存储模式 git config --global credential.helper store 执行之后会在linux用户主目录下的.gitconfig文件中多加 helper = store [user] name = eamonzhang email = xxxx@xxxx.com [credential] helper = store 之后cd到项目目录，执行git pull命令，会提示输入账号密码。输完这一次以后就不再需要，并且会在根目录生成一个.git-c……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/git-nopassword/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pgage/" title="数据库年龄">数据库年龄</a>
             </h1>
         </header>
@@ -247,22 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-vim/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/es/curl-es/" title="使用curl命令操作elasticsearch">使用curl命令操作elasticsearch</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年10月16日
-        </date>
-        
-        <div class="post-content">
-            第一：_cat系列 _cat系列提供了一系列查询elasticsearch集群状态的接口。你可以通过执行 curl -XGET localhost:9200/_cat 获取所有_cat系列的操作 =^.^= /_cat/allocation /_cat/shards /_cat/shards/{index} /_cat/master /_cat/nodes /_cat/indices /_cat/indices/{index} /_cat/segments /_cat/segments/{index} /_cat/count /_cat/count/{index} /_cat/recovery /_cat/recovery/{index} /_cat/health /_cat/pending_tasks /_cat/aliases /_cat/aliases/{alias} /_cat/thread_pool /_cat/plugins /_cat/fielddata /_cat/fielddata/{fields} 你也可以后面加一个v，让输出内容表格显示表头，举例 curl -XGET http://10.1.80.85:9200/_cat/indices?v health status index uuid pri rep docs.count docs.deleted store.size pri.store.size green open filebeat-7.3.2-2019.09.27 agrhjW7KR_ObgdwrUOpJMA 1 1 218974 0 181.8mb 91mb 第二：……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/es/curl-es/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -399,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/lang/" title="Linux 字符集">Linux 字符集</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
@@ -434,10 +438,6 @@
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -456,7 +456,7 @@
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (21)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

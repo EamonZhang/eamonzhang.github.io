@@ -92,6 +92,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            长轮询 实现原理： 与传统的轮询方式不同的是，当服务端接收到客户端的请求的时候，如果没有最新消息时不是立刻返回请求，而是等待一个最大超时时间。如果等待期间有最新消息则立刻返回。 相对于暴力的轮询，长轮询能够很大程度的减少客户端与服务端的连接进而缓解服务端的压力。 利用长轮询模拟推送服务，……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/long-polling/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
             </h1>
         </header>
@@ -291,31 +316,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/mysql/connections/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年8月12日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            发布订阅 消息多播，一个发布消息可以同时被多个订阅者收听 常用命令 发布 PUBLISH channel message 订阅 SUBSCRIBE channel [channel ...] PSUBSCRIBE pattern [pattern ...] python demo #!/usr/bin/env python import redis import time redis_pool = redis.ConnectionPool(host=&quot;192.168.6.14&quot;,port=&quot;6379&quot;) redis_client = redis.Redis(connection_pool=redis_pool) #生产者 def publishMessages(): while True: redis_client.publish(&quot;channel.shenyang&quot;,&quot;hello news &quot;+time.asctime(time.localtime(time.time()))) time.sleep(2) #消费者 def subscibeMessages(): p = redis_client.pubsub() p.subscribe(&quot;channel.shenyang&quot;) while True: message = p.get_message() if message: print(message) else: time.sleep(1) ##加入超时时间堵塞读 def subscibeMessages(): p = redis_client.pubsub() p.subscribe(&quot;channel.shenyang&quot;) while True: message = p.get_message(timeout=10) # 10秒等待 if message: print(message) #阻塞消费者 def subscibeBlockMessages(): p = redis_client.pubsub() p.subscribe(&quot;channel.shenyang&quot;) for item in p.listen(): print(item['type'])……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/redis/pubsub/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -431,6 +431,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/lang/" title="Linux 字符集">Linux 字符集</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
@@ -466,10 +470,6 @@
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -488,7 +488,7 @@
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (21)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

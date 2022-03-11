@@ -92,6 +92,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年8月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            发布订阅 消息多播，一个发布消息可以同时被多个订阅者收听 常用命令 发布 PUBLISH channel message 订阅 SUBSCRIBE channel [channel ...] PSUBSCRIBE pattern [pattern ...] python demo #!/usr/bin/env python import redis import time redis_pool = redis.ConnectionPool(host=&quot;192.168.6.14&quot;,port=&quot;6379&quot;) redis_client = redis.Redis(connection_pool=redis_pool) #生产者 def publishMessages(): while True: redis_client.publish(&quot;channel.shenyang&quot;,&quot;hello news &quot;+time.asctime(time.localtime(time.time()))) time.sleep(2) #消费者 def subscibeMessages(): p = redis_client.pubsub() p.subscribe(&quot;channel.shenyang&quot;) while True: message = p.get_message() if message: print(message) else: time.sleep(1) ##加入超时时间堵塞读 def subscibeMessages(): p = redis_client.pubsub() p.subscribe(&quot;channel.shenyang&quot;) while True: message = p.get_message(timeout=10) # 10秒等待 if message: print(message) #阻塞消费者 def subscibeBlockMessages(): p = redis_client.pubsub() p.subscribe(&quot;channel.shenyang&quot;) for item in p.listen(): print(item['type'])……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/pubsub/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
             </h1>
         </header>
@@ -256,29 +281,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/python/ctypes/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年5月22日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/rabbitmq'>rabbitmq</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            AMQP 协议 AMQP，即Advanced Message Queuing Protocol，高级消息队列协议。 AMQP的主要特征是面向消息、队列、路由（包括点对点和发布/订阅）、可靠性、安全。 RabbitMQ是一个开源的AMQP实现，服务器端用Erlang语言编写，支持多种客户端。 组件 Broker：标识消息队列服务……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/rabbitmq/manager02/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -401,6 +403,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/lang/" title="Linux 字符集">Linux 字符集</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
@@ -436,10 +442,6 @@
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -458,7 +460,7 @@
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (21)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

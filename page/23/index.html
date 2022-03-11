@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/params/" title="数据库参数">数据库参数</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月27日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            性能参数 pgtune pgconfig 日志参数 更多参数详解 管理 listen_addresses = &quot;*&quot; # 连接访问控制，哪些ip可以访问， * 全部。 结合pg_hba.conf , iptables设置。 superuser_reserved_connections = 3 # 预留给超级管理员的连接数。 port = 5432 # 默认访问端口 wal_keep_segments = 1024 # wal 日志保存数量 wal日志 wal_log_hints = on full_page_writes = on 成本因子 # - Planner Cost Constants - #seq_page_cost = 1.0 # measured on an arbitrary scale 顺序扫描 random_page_cost……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/params/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/tidb/lsm/" title="LSM Overview">LSM Overview</a>
             </h1>
         </header>
@@ -268,29 +291,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-pstack/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/tidb/2013/" title=" ERROR 2013 (HY000): Lost connection to MySQL server during query "> ERROR 2013 (HY000): Lost connection to MySQL server during query </a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/tidb'>tidb</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            ERROR 2013 (HY000) Lost connection to MySQL server during query 错误出现场景 select count(id) from account_user where id&gt; 0; +----------+ | count(id) | +----------+ | 2940245 | +----------+ 1 row in set (0.78 sec) delete from account_user where id&gt; 0; ERROR 2013 (HY000): Lost connection to MySQL server during query tidb.log 2018/11/14 10:57:12.476 server.go:303: [info] con:261 new connection 10.1.88.32:54462 2018/11/14 10:57:15.387 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:792.561353ms txn_start_ts:404269101106331649 region_id:77367 store_addr:10.1.88.84:20160 kv_process_ms:537 2018/11/14 10:57:17.227 pd.go:107: [warning] get timestamp too slow: 135.012109ms 2018/11/14 10:57:17.812 pd.go:107: [warning] get timestamp too slow: 56.316863ms 2018/11/14 10:57:17.821 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.226284139s txn_start_ts:404269101106331649 region_id:77863 store_addr:10.1.88.85:20160 kv_process_ms:1580 scan_total_write:314161 scan_processed_write:314160 scan_total_data:314160 scan_processed_data:314160 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.826 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.231259247s txn_start_ts:404269101106331649 region_id:77590 store_addr:10.1.88.85:20160 kv_process_ms:1807 scan_total_write:355885 scan_processed_write:355884 scan_total_data:355884 scan_processed_data:355884 scan_total_lock:1 scan_processed_lock:0 2018/11/14 10:57:17.872 coprocessor.go:689: [info] [TIME_COP_PROCESS] resp_time:3.276994472s txn_start_ts:404269101106331649 region_id:77576 store_addr:10.1.88.86:20160 kv_process_ms:1684 scan_total_write:346208 scan_processed_write:346207 scan_total_data:346207 scan_processed_data:346207 scan_total_lock:1 scan_processed_lock:0 2018/11/14……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/tidb/2013/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -427,6 +427,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/lang/" title="Linux 字符集">Linux 字符集</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
@@ -462,10 +466,6 @@
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -484,7 +484,7 @@
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (21)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

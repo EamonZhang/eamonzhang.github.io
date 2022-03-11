@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/ubuntu2004-network/" title="Ubuntu 20.04 网络配置">Ubuntu 20.04 网络配置</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年9月21日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            配置 vim /etc/netplan/00-installer-config.yaml # This is the network config written by 'subiquity' network: ethernets: enp2s0: addresses: - 192.168.6.111/24 gateway4: 192.168.6.1 nameservers: addresses: [119.29.29.29] version: 2 生效 netplan apply 查看网卡 #ethtool enp2s0 Settings for enp2s0: Supported ports: [ TP MII ] Supported link modes: 10baseT/Half 10baseT/Full 100baseT/Half 100baseT/Full 1000baseT/Full Supported pause frame use: Symmetric Receive-only Supports auto-negotiation: Yes Supported FEC modes: Not reported Advertised link modes: 10baseT/Half 10baseT/Full 100baseT/Half 100baseT/Full 1000baseT/Full Advertised pause frame use: Symmetric Receive-only Advertised auto-negotiation: Yes Advertised FEC modes: Not reported Link partner advertised link modes: 10baseT/Half 10baseT/Full 100baseT/Half 100baseT/Full Link partner advertised pause frame use: Symmetric Receive-only Link partner advertised auto-negotiation: Yes Link partner advertised FEC modes: Not reported Speed: 100Mb/s Duplex: Full Port: MII PHYAD: 0 Transceiver: internal Auto-negotiation: on Supports Wake-on: pumbg Wake-on: d Current message level: 0x00000033 (51)……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/ubuntu2004-network/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/repo/" title="Centos7 私有源搭建">Centos7 私有源搭建</a>
             </h1>
         </header>
@@ -260,31 +285,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cmd-vim/" title="vim 编辑">vim 编辑</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年10月22日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            字符串查找 a.查找一个字符串使用：“/你要查询的内容” b.查找下一个 ：“/你要查询的内容” 再输入”n“跳到下一个 字符串替换 a. 文件内全部替换： %s#abc#def#g（用def替换文件中所有的abc） 例如把一个文本文件里面的“linuxidc.com”全部替换成“linuxidc.……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-vim/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -376,6 +376,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/lang/" title="Linux 字符集">Linux 字符集</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
@@ -411,10 +415,6 @@
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -433,7 +433,7 @@
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (21)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

@@ -6,7 +6,16 @@
     <description>Recent content in Linuxes on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 29 Dec 2021 17:27:38 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Mar 2022 15:25:50 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux 字符集</title>
+      <link>https://zhangeamon.top/linux/lang/</link>
+      <pubDate>Fri, 11 Mar 2022 15:25:50 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/lang/</guid>
+      <description>Centos 字符集 yum -y install glibc-locale-source glibc-langpack-en localedef -f UTF-8 -i en_US en_US.UTF-8</description>
+    </item>
+    
     <item>
       <title>快速删除大量文件</title>
       <link>https://zhangeamon.top/linux/fastdeletfiles/</link>
