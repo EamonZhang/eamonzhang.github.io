@@ -92,29 +92,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/auto_vacuum_trigger/" title="auto vacuum 触发机制">auto vacuum 触发机制</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月8日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            数据库自动垃圾回收触发条件分析 在postgres 中 垃圾回收的重要意义及在执行垃圾回收时具体都做了些什么很多地方都有介绍。 但是何时触发垃圾回收，即垃圾回收的触发条件是什么。 官网的介绍一般是有如下几个参数决定 #autovacuum = on # Enable autovacuum subprocess? 'on' #autovacuum_vacuum_threshold = 50 # min number of row updates before vacuum #autovacuum_analyze_threshold = 50 # min number of row updates before analyze #autovacuum_vacuum_scale_factor = 0.2 # fraction of table size……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/auto_vacuum_trigger/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/partition/" title="原生分区表">原生分区表</a>
             </h1>
         </header>
@@ -277,6 +254,22 @@
         <p class="readmore"><a href="https://zhangeamon.top/dw/document/">阅读全文</a></p>
     </article>
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/go/grpc/" title="go grpc">go grpc</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月13日
+        </date>
+        
+        <div class="post-content">
+            python 实现 cat Server.py from SimpleXMLRPCServer import SimpleXMLRPCServer def fun_add(a,b): total = a+b return total if __name__=='__main__': s = SimpleXMLRPCServer(('0.0.0.0',8081)) s.register_function(fun_add) print &quot;server in on line&quot; s.serve_forever() cat Client.py from xmlrpclib import ServerProxy s = ServerProxy(&quot;http://xx.xxx.xxx.xxx:8081&quot;) print s.fun_add(1,2) go 实现……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/go/grpc/">阅读全文</a></p>
+    </article>
+    
     
 
 
@@ -413,10 +406,6 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zhangeamon.top/linux/lang/" title="Linux 字符集">Linux 字符集</a>
-    </li>
-    
-    <li>
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
@@ -452,6 +441,10 @@
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
+    <li>
+        <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
+    </li>
+    
 </ul>
 
     </section>
@@ -470,7 +463,7 @@
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (21)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

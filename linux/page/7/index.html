@@ -94,31 +94,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/init-centos/" title="Centos 初始化配置">Centos 初始化配置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月3日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            网络配置 设置IP 略 ip_froward 查看 sysctl -a | grep ip_ 修改 vi /etc/sysctl.conf net.ipv4.ip_forward = 1 最大使用内存 vm.max_map_count=262144 生效 sysctl -p 系统更新 yum -y update 安装扩展及工具 yum -y install epel-release net-tools bind-utils telnet wget sysstat 文件链接限制 查看 ulimit -n 修改 vi /etc/security/limits.conf * - nofile 65536 * soft nproc 65536 * hard nproc 65536 * soft nofile 65536 * hard nofile 65536 rm /etc/security/limits.d/* -rf 安全 selinux 查看 getenforce 修改 临时 setenforce 0 永久 vi /etc/sysconfig/selinux 设置 firewalld 设置 ssh vi /etc/ssh/sshd_config 禁用root用户，密钥登陆 切换为其他用户登……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/init-centos/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/pstack_strace/" title="进程分析 strace,pstack">进程分析 strace,pstack</a>
             </h1>
         </header>
@@ -318,10 +293,6 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zhangeamon.top/linux/lang/" title="Linux 字符集">Linux 字符集</a>
-    </li>
-    
-    <li>
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
@@ -357,6 +328,10 @@
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
+    <li>
+        <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
+    </li>
+    
 </ul>
 
     </section>
@@ -375,7 +350,7 @@
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (21)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
