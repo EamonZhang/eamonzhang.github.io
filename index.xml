@@ -6,7 +6,16 @@
     <description>Recent content on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 11 Feb 2022 13:51:50 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Mar 2022 14:41:44 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库免密码登陆</title>
+      <link>https://zhangeamon.top/postgres/login_nopasswd/</link>
+      <pubDate>Wed, 23 Mar 2022 14:41:44 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/login_nopasswd/</guid>
+      <description>免密登陆 以下几种PG配置免密的方法。 方法一：设置pg_hab.conf 认证方式为trust #Type database user address method host all postgres 127.0.0.1/32 trust 该方式最不安全，导致通过指定IP连接数据库的连接都可以任意登录数据，毫无安全保障。禁止在生产环境使用。 方法二：设置PG环境变量PGPASSWORD PGPASSWORD是P</description>
+    </item>
+    
     <item>
       <title>vacuum 限流</title>
       <link>https://zhangeamon.top/postgres/vacuum_limit/</link>

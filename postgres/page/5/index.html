@@ -94,6 +94,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/postgres12/" title="postgres 12">postgres 12</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年11月19日
+        </date>
+        
+        <div class="post-content">
+            安装&amp;启动 #下载源 yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm #安装服务 yum install postgresql12 postgresql12-server postgresql12-contrib #初始化 /usr/pgsql-12/bin/postgresql-12-setup initdb #启动服务 systemctl enable postgresql-12 systemctl start postgresql-12 流复制 #从机 建立从库 pg_basebackup -h 10.1.30.13 -U postgres -F p -P -R -D /var/lib/pgsql/12/data/ --checkpoint=fast -l postgresback #从库升级为主库 sudo su postgres -c &quot;/usr/pgsql-12/bin/pg_ctl promote -D /var/lib/pgsql/12/data/&quot; recovery.conf 配置文件不再支持，此文件中的参数合并到 postgresql.conf(postgresql.auto.conf) Recovery Target, 若 recovery.conf 存在，数据库无法启动 新增 recovery.signal 标识文件，表示数据库处于 recovery 模式 新增加 standby.signal……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/postgres12/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/view_pg_stat_activity/" title="数据库视图之 pg_stat_activity">数据库视图之 pg_stat_activity</a>
             </h1>
         </header>
@@ -281,24 +299,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/archive/" title="Archive wal归档">Archive wal归档</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月30日
-        </date>
-        
-        <div class="post-content">
-            介绍 所谓WAL日志归档，其实就是把在线的WAL日志备份出来。 配置 vi postgresql.conf wal_level='replica' # - Archiving - archive_mode = on # enables archiving; off, on, or always # (change requires restart) archive_command = 'test ! -f /mnt/backup/%f &amp;&amp; cp %p /mnt/backup/%f' # command to use to archive a logfile segment # placeholders: %p = path of file to archive # %f = file name only # e.g. 'test ! -f /mnt/server/archivedir/%f &amp;&amp; cp %p /mnt/server/archivedir/%f' #archive_timeout = 0 # force a logfile segment switch after this # number of seconds; 0 disables 参数说明 wal_level archive 或更高级别 archive_mode on 开启归档模式，always……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/archive/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -398,6 +398,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
@@ -433,10 +437,6 @@
         <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -461,7 +461,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (37)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (38)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
