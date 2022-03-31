@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装 ">Haproxy  编译安装 </a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年3月25日
+        </date>
+        
+        <div class="post-content">
+            https://www.yisu.com/zixun/4383.html……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/haproxy_install/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
             </h1>
         </header>
@@ -275,29 +291,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_json/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年12月3日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            快速启动一个本地服务 可临时充当文件下载服务 # python2 python -m SimpleHTTPServer 8888 # python3 python3 -m http.server 8888 flask 服务 from flask import Flask app = Flask(__name__) @app.route(&quot;/&quot;) def hello_world(): result = find_result() return result @app.route('/login', methods=['GET', 'POST']) def login(): if request.method == 'POST': pass else: pass if __name__ == '__main__': app.run(host='0.0.0.0',port='8000') python app.py gunicorn -w 1 -b 127.0.0.1:4000 app:app 操作PG数据库 import psycopg2 import time conn = None try: conn = psycopg2.connect(database=&quot;postgres&quot;, user=&quot;postgres&quot;, host=&quot;192.168.*.*&quot;, port=&quot;5432&quot;,password='*****') print(&quot;Opened database successfully&quot;) cur = conn.cursor() cur.execute(&quot;select * from api&quot;) rows = cur.fetchall() result = '' all_field = cur.description for filed in all_field: print(filed[0]) for row in rows: result += str(row[0]) result += &quot;\n&quot; print(result) print(&quot;Operation done successfully&quot;) conn.close() except Exception as e:……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/python/simple-demo/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -402,6 +395,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装 ">Haproxy  编译安装 </a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
@@ -435,10 +432,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
 </ul>

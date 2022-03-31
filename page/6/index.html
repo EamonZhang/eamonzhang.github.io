@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/ssdiotimeout/" title="SSD IO request Time Out">SSD IO request Time Out</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Intel 论坛相似问题讨论 https://community.intel.com/t5/Solid-State-Drives/I-O-request-timeouts-on-Linux-with-Intel-P3520-P4600-NVMe-PCIe/td-p/577474 临时解决 mkfs.xfs -K /dev/nvme01 -K Do not attempt to discard blocks at mkfs time. 带来问题 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa8188cf9&gt;] schedule_preempt_disabled+0x29/0x70 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa8186c67&gt;] __mutex_lock_slowpath+0xc7/0x1d0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa818603f&gt;] mutex_lock+0x1f/0x2f [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7d2d596&gt;] ima_file_check+0xa6/0x1b0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c5dfba&gt;] do_last+0x59a/0x1340 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c28ba6&gt;] ? kmem_cache_alloc_trace+0x1d6/0x200 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c5ee2d&gt;] path_openat+0xcd/0x5a0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c01158&gt;] ? page_add_new_anon_rmap+0xb8/0x170 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c6107d&gt;] do_filp_open+0x4d/0xb0 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c6f177&gt;] ? __alloc_fd+0x47/0x170 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c4cbc4&gt;] do_sys_open+0x124/0x220 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa7c4ccde&gt;] SyS_open+0x1e/0x20 [Tue Mar 30 12:19:12 2021] [&lt;ffffffffa8194f92&gt;] system_call_fastpath+0x25/0x2a [Tue Mar 30 12:19:12 2021] INFO: task postmaster:119438 blocked for more than 120 seconds. [Tue……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/ssdiotimeout/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
             </h1>
         </header>
@@ -284,29 +307,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/patroni02/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/thinking_in_db_performance/" title="数据库优化思考-性能优化">数据库优化思考-性能优化</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月26日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            为什么要优化 首先了解一个概念，什么是·熵增· 物理定义：熵增过程是一个自发的由有序向无序发展的过程(Bortz, 1986; Roth, 1993) 在一个孤立的系统里，如果没有外力做工，其总混乱度（即熵）会不断增大，直至系统彻底变得无序 从系统软件的角度： 从应用系统上线那一刻开始，随着用户量的增加、业务功能的持续……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_performance/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -443,6 +443,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装 ">Haproxy  编译安装 </a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
@@ -476,10 +480,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
 </ul>

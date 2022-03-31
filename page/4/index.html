@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月28日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            python 访问C 动态库 很多核心的算法库都是C/C++写的,成果物通常以动态库的方式对外提供。 如何利用python访问动态代码库 python访问C/C++的方式 ctypes pybind11 cffi swig ctypes的优势 不要修改动态库的源码 只需要动态库和头文件 使用比较简单,而且目前大部分库都是兼容C/C++ 参考 https://www.cnblogs.com/gaowengang/p/7919219.html……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/ctypes/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/rabbitmq/manager02/" title="Rabbitmq 基础">Rabbitmq 基础</a>
             </h1>
         </header>
@@ -299,29 +322,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <p class="readmore"><a href="https://zhangeamon.top/linux/resetpasswd-centos7/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cpu-affinity/" title="CPU亲和性(亲和力)">CPU亲和性(亲和力)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年4月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            基础知识 查看cpu #lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 128 On-line CPU(s) list: 0-127 Thread(s) per core: 2 Core(s) per socket: 32 Socket(s): 2 NUMA node(s): 2 # 查看物理CPU个数 cat /proc/cpuinfo|grep &quot;physical id&quot;|sort -u|wc -l # 查看每个物理CPU中core的个数(即核数) cat /proc/cpuinfo|grep &quot;cpu cores&quot;|uniq # 查看逻辑CPU的个数 cat /proc/cpuinfo|grep &quot;processor&quot;|wc -l # 查看CPU的名称型号 cat /proc/cpuinfo|grep &quot;name&quot;|cut -f2 -d:|uniq 关系 CPU数量 = Thread(s) per core * Socket(s) * Core(s) per socket Linux查看某个进……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cpu-affinity/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -458,6 +458,10 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装 ">Haproxy  编译安装 </a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
@@ -491,10 +495,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     
     <li>
         <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
 </ul>

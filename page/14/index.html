@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/tpch/" title="tpch AP测试">tpch AP测试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年6月5日
+        </date>
+        
+        <div class="post-content">
+            背景介绍 24sql TPC-H 基准测试 下载安装 tpch-tools安装包 修改makefile.suite 模版 CC=gcc DATABASE-TDAT MACHINE=LINUX WORKLOAD=TPCH 执行 make 进行编译 生成测试数据 生成20G测试数据 ./dbgen -s 20 ls -lrth *.tbl 自动生成的测试数据每行的结尾多余一个 &lsquo;|&rsquo; 需要处理 for i in `ls *.tbl`; do sed 's/|$//' $i &gt; ${i/tbl/csv}; echo $i; done; 创建表及索引 在下面的文件中分别是创建表和对应索引的s……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/tpch/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pgstattuple/" title="表空间膨胀">表空间膨胀</a>
             </h1>
         </header>
@@ -275,29 +291,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/checkpoint/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/adlock/" title="咨询锁 adlock">咨询锁 adlock</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年3月7日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            https://github.com/digoal/blog/blob/master/201805/20180524_02.md 行级锁 select .. for update select .. for update skip locked select .. for share……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/adlock/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -434,6 +427,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装 ">Haproxy  编译安装 </a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
@@ -467,10 +464,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/python/simple-demo/" title="python 简单示例">python 简单示例</a>
     </li>
     
 </ul>
