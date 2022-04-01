@@ -53,15 +53,6 @@
     </item>
     
     <item>
-      <title>Haproxy 算法</title>
-      <link>https://zhangeamon.top/middleware/haproxy/</link>
-      <pubDate>Mon, 26 Nov 2018 08:53:09 +0800</pubDate>
-      
-      <guid>https://zhangeamon.top/middleware/haproxy/</guid>
-      <description>blance roundrobin # 轮询，软负载均衡基本都具备这种算法 balance static-rr # 根据权重，建议使用 balance leastconn # 最少连接者先处理，建议使用 balance source # 根据请求源IP，建议使用 balance uri # 根据请求的URI balance url_param，# 根据请求的URl参数&amp;rsquo;balance url_param&#39; requires an URL parameter name balance hdr(name) # 根据HTTP请求头来锁定每一次HTTP请求</description>
-    </item>
-    
-    <item>
       <title>Sysbench 测试</title>
       <link>https://zhangeamon.top/middleware/sysbench/</link>
       <pubDate>Fri, 16 Nov 2018 19:25:45 +0800</pubDate>

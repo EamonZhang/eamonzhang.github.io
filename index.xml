@@ -8,12 +8,12 @@
     <language>zh-CN</language>
     <lastBuildDate>Fri, 25 Mar 2022 15:31:27 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Haproxy  编译安装 </title>
+      <title>Haproxy  编译安装配置 </title>
       <link>https://zhangeamon.top/middleware/haproxy_install/</link>
       <pubDate>Fri, 25 Mar 2022 15:31:27 +0800</pubDate>
       
       <guid>https://zhangeamon.top/middleware/haproxy_install/</guid>
-      <description>https://www.yisu.com/zixun/4383.html</description>
+      <description>编译安装2.4 https://www.yisu.com/zixun/4383.html 配置 pg数据库负载均衡demo global maxconn 10000 #安全目录 chroot /usr/local/haproxy stats socket /var/lib/haproxy/haproxy.sock mode 600 level admin uid 99 gid 99 daemon #开启工作进程数 #nbproc 1 #一个进程开启线程数，单进程时可用 nbthread 1 #spread-checks 后端server状态check。随机百分百检测时间误差范围 2-5 （20%-50%）之间 pidfile /var/lib/haproxy/haproxy.pid log 127.0.0.1 local3 info defaults # 后端服务挂掉后重新分发 option redispatch option http-keep-alive #</description>
     </item>
     
     <item>
@@ -2021,7 +2021,7 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;amp;mid=2247483770&amp;amp
       <pubDate>Mon, 26 Nov 2018 08:53:09 +0800</pubDate>
       
       <guid>https://zhangeamon.top/middleware/haproxy/</guid>
-      <description>blance roundrobin # 轮询，软负载均衡基本都具备这种算法 balance static-rr # 根据权重，建议使用 balance leastconn # 最少连接者先处理，建议使用 balance source # 根据请求源IP，建议使用 balance uri # 根据请求的URI balance url_param，# 根据请求的URl参数&amp;rsquo;balance url_param&#39; requires an URL parameter name balance hdr(name) # 根据HTTP请求头来锁定每一次HTTP请求</description>
+      <description>blance roundrobin # 轮询，软负载均衡基本都具备这种算法 balance static-rr # 根据权重，不支持慢启动 。建议使用 balance leastconn # 最少连接者先处理，建议使用 balance source # 根据请求源IP，建议使用 balance uri # 根据请求的URI balance url_param，# 根据请求的URl参数&amp;rsquo;balance url_param&#39; requires an URL parameter name balance hdr(name) # 根据HTTP请求头来锁定每一</description>
     </item>
     
     <item>
