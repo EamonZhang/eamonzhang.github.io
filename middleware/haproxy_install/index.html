@@ -92,7 +92,114 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#编译安装haproxy-24">编译安装Haproxy 2.4</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#服务管理">服务管理</a></li>
+    <li><a href="#配置">配置</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -111,10 +218,62 @@
         
         
         
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
         <div class="post-content">
-            <h2 id="编译安装24">编译安装2.4</h2>
-<p><a href="https://www.yisu.com/zixun/4383.html">https://www.yisu.com/zixun/4383.html</a></p>
-<h2 id="配置">配置</h2>
+            <h2 id="编译安装haproxy-24">编译安装Haproxy 2.4</h2>
+<h4 id="下载预备">下载预备</h4>
+<pre><code>sudo wget https://www.haproxy.org/download/2.4/src/haproxy-2.4.15.tar.gz -O /usr/local/src/haproxy-2.4.15.tar.gz
+sudo wget http://www.lua.org/ftp/lua-5.3.5.tar.gz -O /usr/local/src/lua-5.3.5.tar.gz
+sudo yum  install make gcc build-essential libssl-devel zlib1g-devel pcre3 pcre3-devel systemd-devel readline-devel openssl openssl-devel -y 
+</code></pre><h4 id="编译安装">编译安装</h4>
+<p>lua</p>
+<pre><code>cd /usr/local/src &amp;&amp; tar -zxvf lua-5.3.5.tar.gz
+cd /usr/local/src/lua-5.3.5 &amp;&amp; make linux
+src/lua -v
+</code></pre><p>haproxy</p>
+<pre><code>cd /usr/local/src &amp;&amp; tar -zxvf haproxy-2.4.15.tar.gz
+cd /usr/local/src/haproxy-2.4.15 
+make -j `lscpu |awk 'NR==4{print $2}'` ARCH=x86_64 TARGET=linux-glibc USE_PCRE=1 USE_ZLIB=1 USE_SYSTEMD=1 USE_CPU_AFFINITY=1 USE_LUA=1 LUA_INC=/usr/local/src/lua-5.3.5/src/ LUA_LIB=/usr/local/src/lua-5.3.5/src/ PREFIX=/usr/local/haproxy
+make install PREFIX=/usr/local/haproxy
+/usr/local/haproxy/sbin/haproxy -v
+</code></pre><p>如果想添加 openssl 支持参考</p>
+<pre><code>In order to link OpenSSL statically against HAProxy, first download OpenSSL
+from https://www.openssl.org/ then build it with the &quot;no-shared&quot; keyword and
+install it to a local directory, so your system is not affected :
+
+  $ export STATICLIBSSL=/tmp/staticlibssl
+  $ ./config --prefix=$STATICLIBSSL no-shared
+  $ make &amp;&amp; make install_sw
+
+Then when building haproxy, pass that path via SSL_INC and SSL_LIB :
+
+  $ make TARGET=generic \
+    USE_OPENSSL=1 SSL_INC=$STATICLIBSSL/include SSL_LIB=$STATICLIBSSL/lib
+</code></pre><p>更多编译参数信息请参考 INSTALL 文件,在刚刚下载的源码中</p>
+<h2 id="服务管理">服务管理</h2>
+<pre><code>mkdir /etc/haproxy
+mkdir /var/lib/haproxy
+</code></pre><pre><code>cat &gt;&gt; /lib/systemd/system/haproxy.service &lt;&lt; EOF
+
+[Unit]
+Description=HAProxy Load Balancer
+After=syslog.target network.target
+
+[Service]
+ExecStartPre=/usr/local/haproxy/sbin/haproxy -f /etc/haproxy/haproxy.cfg -c
+ExecStart=/usr/local/haproxy/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /var/lib/haproxy/haproxy.pid
+ExecReload=/bin/kill -USR2 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+
+EOF
+</code></pre><h2 id="配置">配置</h2>
 <h4 id="pg数据库负载均衡demo">pg数据库负载均衡demo</h4>
 <pre><code>global
     maxconn 10000
@@ -171,6 +330,8 @@ listen pg_standby
     server pg1 127.0.0.1:5432 maxconn 997 check addr 127.0.0.1 port 5432 inter 3s fall 3 rise 5 weight 100
     server pg2 127.0.0.1:5432 maxconn 997 check addr 127.0.0.1 port 5432 inter 3s fall 3 rise 5 weight 100 backup
 
+</code></pre><p>检查配置</p>
+<pre><code>usr/local/haproxy/sbin/haproxy -f /etc/haproxy/haproxy.cfg -c
 </code></pre><h4 id="健康检查-check-配置">健康检查 check 配置</h4>
 <ul>
 <li>inter <!-- raw HTML omitted -->：设定健康状态检查的时间间隔，单位为毫秒，默认为2000；也可以使用fastinter和downinter来根据服务器端状态优化此时间延迟；</li>
@@ -180,6 +341,10 @@ listen pg_standby
 <li>fall <!-- raw HTML omitted -->：确认server从正常状态转换为不可用状态需要检查的次数。</li>
 </ul>
 <p>配置文档 <a href="http://cbonte.github.io/haproxy-dconv/">http://cbonte.github.io/haproxy-dconv/</a></p>
+<h4 id="动态更新">动态更新</h4>
+<p>socat</p>
+<h4 id="ubuntu-参见">Ubuntu 参见</h4>
+<p><a href="https://www.yisu.com/zixun/4383.html">https://www.yisu.com/zixun/4383.html</a></p>
 
         </div>
 
