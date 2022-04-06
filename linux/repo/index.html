@@ -157,14 +157,17 @@ server {
 
 EOF
 </code></pre><h4 id="客户端">客户端</h4>
-<p>cat &laquo; EOF &gt; /etc/yum.repos.d/private.repo</p>
-<p>[name]
-name=zhaobsh
+<pre><code>cat &lt;&lt; EOF &gt; /etc/yum.repos.d/private.repo
+
+[base]
+name=private
 baseurl=http://mirrors.zhangeamon.top/base/Packages/
 enabled=1
-gpgcheck=0</p>
-<p>EOF</p>
+gpgcheck=0 
 
+EOF
+
+</code></pre>
         </div>
 
         
