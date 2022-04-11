@@ -174,9 +174,42 @@ cat /etc/coredns/Corefile</p>
     }
 }
 
-</code></pre><h4 id="更多">更多</h4>
-<p>将服务注册在etcd中</p>
-<h4 id="遗留">遗留</h4>
+</code></pre><h4 id="将服务注册在etcd中">将服务注册在etcd中</h4>
+<pre><code>zhangeamon.top. {
+    errors
+    health {
+       lameduck 5s
+    }
+    etcd {
+        stubzones
+        path /skydns
+        endpoint http://localhost:2379
+        upstream . 8.8.8.8:53 8.8.4.4:53 /etc/resolv.conf
+        fallthrough
+    }
+    prometheus :9153
+    cache 30
+    reload
+    loadbalance
+    log
+}
+
+. {
+    cache
+    loadbalance   # 负载均衡，开启DNS记录轮询策略
+    forward . 8.8.8.8:53 8.8.4.4:53 /etc/resolv.conf  # 上面etcd未查询到的请求转发给设置的DNS服务器解析
+    log # 打印日志
+}
+
+</code></pre><p>添加记录</p>
+<pre><code>export ETCDCTL_API=3
+etcdctl put /skydns/top/zhangeamon/www/x1 '{&quot;host&quot;:&quot;1.1.1.1&quot;,&quot;ttl&quot;:10}'
+etcdctl put /skydns/top/zhangeamon/www/x2 '{&quot;host&quot;:&quot;1.1.1.2&quot;,&quot;ttl&quot;:10}'
+</code></pre><p>测试</p>
+<pre><code>dig +short  www.zhangeamon.top @localhost
+1.1.1.1
+1.1.1.2
+</code></pre><h4 id="遗留">遗留</h4>
 <p>不支持对后端服务的健康检查</p>
 
         </div>
