@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/mysql/performance-cmd/" title="MySQL常用性能分析命令">MySQL常用性能分析命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/mysql'>mysql</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            MySQL常用性能突发事件分析命令： SHOW PROCESSLIST; —当前MySQL数据库的运行的所有线程 INNODB_TRX; — 当前运行的所有事务 INNODB_LOCKS; — 当前出现的锁 INNODB_LOCK_WAITS; — 锁等待的对应关系计 SHOW OPEN TABLES where In_use &gt;0; — 当前打开表 SHOW ENGINE INNODB STATUS \G; —Innodb状态 SHOW STATUS LIKE &lsquo;innodb_row_lock_%'; — 锁性能状态 SQL语句EXPLAIN; — 查询优化器 数据库size查看 -- databases size select table_schema as '……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/mysql/performance-cmd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_citus/" title="citus 数据库分库">citus 数据库分库</a>
             </h1>
         </header>
@@ -240,22 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/memtest/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/dmidecode/" title="Linux查看内存条信息">Linux查看内存条信息</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月14日
-        </date>
-        
-        <div class="post-content">
-            1.查看内存槽及内存条 $ sudo dmidecode -t memory 2.查看内存的插槽数,已经使用多少插槽.每条内存多大 $ sudo dmidecode -t memory | grep Size 3.查看服务器型号、序列号 $ sudo dmidecode | grep &quot;System Information&quot; -A9 | egrep &quot;Manufacturer|Product|Serial&quot;……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/dmidecode/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -392,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
     </li>
     
@@ -425,10 +436,6 @@
     
     <li>
         <a href="https://zhangeamon.top/ch/install/" title="ClickHouse">ClickHouse</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
     </li>
     
 </ul>
@@ -475,7 +482,7 @@
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (3)</a></li>
     
 </ul>
 

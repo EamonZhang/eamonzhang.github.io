@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年4月14日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%9B%91%E6%8E%A7'> 监控</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            基于consul 的服务发现 prometheus.yaml ## 操作系统监控 动态发现 - job_name: 'os_system' #metrics_path: &quot;/metrics&quot; consul_sd_configs: - server: 127.0.0.1:8500 services: - os_system scheme: http tags: - &quot;node&quot; relabel_configs: - source_labels: [__meta_consul_tags] regex: .*node.* action: keep - regex: __meta_consul_service_metadata_(.+) action: labelmap 注册服务 方式一 curl ## prometheus 与 consul 配置之间的对应关系 ## tags - tags ## service - name ## label - meta ## curl -X PUT -d '{&quot;id&quot;: &quot;node-1&quot;,&quot;name&quot;: &quot;os_system&quot;,&quot;address&quot;: &quot;10.1.x.x&quot;,&quot;port&quot;: 9100, &quot;tags&quot;: [&quot;node&quot;],&quot;meta&quot;:{&quo……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/prometheus-sd/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/monitor/percona-toolkit/" title="Percona Toolkit">Percona Toolkit</a>
             </h1>
         </header>
@@ -274,24 +299,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/monitor/prometheus-altermanager/" title="Promethues Altermanager 报警">Promethues Altermanager 报警</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月21日
-        </date>
-        
-        <div class="post-content">
-            Prometheus Alertmanager 概述 Alertmanager与Prometheus是相互分离的两个组件。Prometheus服务器根据报警规则将警报发送给Alertmanager，然后Alertmanager将silencing、inhibition、aggregation等消息通过电子邮件、PaperDu……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/monitor/prometheus-altermanager/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -359,6 +366,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
     </li>
     
@@ -392,10 +403,6 @@
     
     <li>
         <a href="https://zhangeamon.top/ch/install/" title="ClickHouse">ClickHouse</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
     </li>
     
 </ul>
@@ -442,7 +449,7 @@
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (3)</a></li>
     
 </ul>
 

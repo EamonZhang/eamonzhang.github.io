@@ -6,7 +6,16 @@
     <description>Recent content in 监控 on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 31 Mar 2021 09:08:35 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Apr 2022 15:26:53 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prometheus 服务发现</title>
+      <link>https://zhangeamon.top/monitor/prometheus-sd/</link>
+      <pubDate>Thu, 14 Apr 2022 15:26:53 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/monitor/prometheus-sd/</guid>
+      <description>基于consul 的服务发现 prometheus.yaml ## 操作系统监控 动态发现 - job_name: &#39;os_system&#39; #metrics_path: &amp;quot;/metrics&amp;quot; consul_sd_configs: - server: 127.0.0.1:8500 services: - os_system scheme: http tags: - &amp;quot;node&amp;quot; relabel_configs: - source_labels: [__meta_consul_tags] regex: .*node.* action: keep - regex: __meta_consul_service_metadata_(.+) action: labelmap 注册服务 方式一 curl ## prometheus 与 consul 配置之间的对应关系 ## tags - tags ## service - name ## label - meta ## curl -X PUT -d &#39;{&amp;quot;id&amp;quot;: &amp;quot;node-1&amp;quot;,&amp;quot;name&amp;quot;: &amp;quot;os_system&amp;quot;,&amp;quot;address&amp;quot;: &amp;quot;10.1.x.x&amp;quot;,&amp;quot;port&amp;quot;: 9100, &amp;quot;tags&amp;quot;: [&amp;quot;node&amp;quot;],&amp;quot;meta&amp;quot;:{&amp;quo</description>
+    </item>
+    
     <item>
       <title>Percona Toolkit</title>
       <link>https://zhangeamon.top/monitor/percona-toolkit/</link>
