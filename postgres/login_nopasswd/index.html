@@ -147,7 +147,7 @@ Null display is &quot;NULL&quot;.
 psql (13.2)
 Type &quot;help&quot; for help.
 </code></pre><p>定义pg_service.conf文件，该文件可以包含多个模块，每个模块代表一个连接。</p>
-<p>方法四：设置.pgpass文件</p>
+<h4 id="方法四设置pgpass文件">方法四：设置.pgpass文件</h4>
 <p>改文件默认在/home/postgres/，且该文件的权限要为600，如果文件权限不对，则在登录会有相应的告警输出，并要求输入用户密码。</p>
 <pre><code>WARNING: password file &quot;/home/postgres/.pgpass&quot; has group or world access; permissions should be u=rw (0600) or less
 Password for user postgres:
@@ -166,7 +166,7 @@ Border style is 2.
 Null display is &quot;NULL&quot;.
 psql (13.2)
 Type &quot;help&quot; for help.
-</code></pre><p>方法五： 设置pg_hab.conf 为 ident 或 peer</p>
+</code></pre><h4 id="方法五-设置pg_habconf-为-ident-或-peer">方法五： 设置pg_hab.conf 为 ident 或 peer</h4>
 <p>peer 方式一</p>
 <pre><code>local   all    all       peer
 </code></pre><p>peer 方式二</p>
