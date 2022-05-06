@@ -169,6 +169,11 @@
       </ul>
     </li>
     <li><a href="#快照管理">快照管理</a></li>
+    <li><a href="#遇见错误">遇见错误</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -402,6 +407,18 @@ vagrant snapshot delete node0 v.1.1
 
 恢复快照
 vagrant snapshot restore node0 v.1.1
+</code></pre><h2 id="遇见错误">遇见错误</h2>
+<h4 id="ubuntu-2004-指定-private_network-时">ubuntu 20.04 指定 private_network 时</h4>
+<pre><code>here was an error while executing `VBoxManage`, a CLI used by Vagrant
+for controlling VirtualBox. The command and stderr is shown below.
+
+Command: [&quot;hostonlyif&quot;, &quot;ipconfig&quot;, &quot;vboxnet4&quot;, &quot;--ip&quot;, &quot;10.0.2.1&quot;, &quot;--netmask&quot;, &quot;255.255.255.0&quot;]
+
+Stderr: VBoxManage: error: Code E_ACCESSDENIED (0x80070005) - Access denied (extended info not available)
+VBoxManage: error: Context: &quot;EnableStaticIPConfig(Bstr(pszIp).raw(), Bstr(pszNetmask).raw())&quot; at line 242 of file VBoxManageHostonly.cpp
+
+</code></pre><p>解决  sudo vim /etc/vbox/networks.conf</p>
+<pre><code>* 0.0.0.0/0
 </code></pre>
         </div>
 

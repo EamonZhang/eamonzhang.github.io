@@ -238,7 +238,7 @@
         </date>
         
         <div class="post-content">
-            官网 1.准备源 清除历史残余，有些是系统自带的旧版本数据库 rpm -qa | grep postgres rpm -r **** 安装新数据源 yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm 可将所有的软件更新到最新版本如 ， postgresql-10.2 更新到当前最新的postgresql-10.6 yum update -y 2.安装 yum install -y postgresql10-server postgresql10 postgresql10-contrib 3.初始化 建议开启 checksums /usr/pgsql-10/bin/postgresql-10-setup initdb ‑‑data‑checksums 自定义 /usr/pgsql-10/bin/initdb -D $PGDATA -U postgres -E UTF-8 --lc-collate=en_US.UTF-8……
+            官网 1.准备源 清除历史残余，有些是系统自带的旧版本数据库 rpm -qa | grep postgres rpm -r **** 安装新数据源 yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm 可将所有的软件更新到最新版本如 ， postgresql-10.2 更新到当前最新的postgresql-10.6 yum update -y 2.安装 yum install -y postgresql10-server postgresql10 postgresql10-contrib 3.初始化 默认初始化 /usr/pgsql-10/bin/postgresql-10-setup initdb 建议开启 checksums sudo su postgres -c &quot;/usr/pgsql-10/bin/initdb --data-checksums -D /var/lib/pgsql/10/data&quot; 自定义 /usr/pgsql-10/bin/initdb -D $PGDATA -U postgres -E UTF-8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8 -k -D……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/install01/">阅读全文</a></p>
     </article>
