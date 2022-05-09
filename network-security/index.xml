@@ -6,7 +6,16 @@
     <description>Recent content in Network-securities on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 01 Nov 2021 09:34:45 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/network-security/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 May 2022 15:07:32 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/network-security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Trivy 容器漏洞扫描</title>
+      <link>https://zhangeamon.top/network-security/trivy/</link>
+      <pubDate>Mon, 09 May 2022 15:07:32 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/network-security/trivy/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Wazuh 功能简介</title>
       <link>https://zhangeamon.top/network-security/wazuh/</link>
