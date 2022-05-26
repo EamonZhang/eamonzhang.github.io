@@ -94,6 +94,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年5月26日
+        </date>
+        
+        <div class="post-content">
+            file beat 日志输出管理 默认情况 filebeat日志输出位置为系统日志文件 /var/log/messages 中 重定向日志文件输出处位置 cat /usr/lib/systemd/system/filebeat.service [Unit] Description=Filebeat sends log files to Logstash or directly to Elasticsearch. Documentation=https://www.elastic.co/products/beats/filebeat Wants=network-online.target After=network-online.target [Service] Environment=&quot;BEAT_LOG_OPTS=&quot; Environment=&quot;BEAT_CONFIG_OPTS=-c /etc/filebeat/filebeat.yml&quot; Environment=&quot;BEAT_PATH_OPTS=-path.home /usr/share/filebeat -path.config /etc/filebeat -path.data /var/lib/filebeat -path.logs /var/log/filebeat&quot; ExecStart=/usr/share/filebeat/bin/filebeat -environment systemd $BEAT_LOG_OPTS $BEAT_CONFIG_OPTS $BEAT_PATH_OPTS Restart=always [Install] WantedBy=multi-user.target filebeat.yml logging.level: info logging.to_files: true logging.files: path: /var/log/filebeat name: filebeat keepfiles: 7 permissions: 0644……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/elk/filebeat_log/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/elk/apm/" title="APM">APM</a>
             </h1>
         </header>
@@ -156,6 +174,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/network-security/trivy/" title="Trivy 容器漏洞扫描">Trivy 容器漏洞扫描</a>
     </li>
     
@@ -189,10 +211,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
     </li>
     
 </ul>

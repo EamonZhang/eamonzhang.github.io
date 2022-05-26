@@ -6,7 +6,16 @@
     <description>Recent content in Elks on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 06 Nov 2018 13:39:01 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/elk/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 26 May 2022 10:13:30 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/elk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>filebeat 自身log输出位置问题</title>
+      <link>https://zhangeamon.top/elk/filebeat_log/</link>
+      <pubDate>Thu, 26 May 2022 10:13:30 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/elk/filebeat_log/</guid>
+      <description>file beat 日志输出管理 默认情况 filebeat日志输出位置为系统日志文件 /var/log/messages 中 重定向日志文件输出处位置 cat /usr/lib/systemd/system/filebeat.service [Unit] Description=Filebeat sends log files to Logstash or directly to Elasticsearch. Documentation=https://www.elastic.co/products/beats/filebeat Wants=network-online.target After=network-online.target [Service] Environment=&amp;quot;BEAT_LOG_OPTS=&amp;quot; Environment=&amp;quot;BEAT_CONFIG_OPTS=-c /etc/filebeat/filebeat.yml&amp;quot; Environment=&amp;quot;BEAT_PATH_OPTS=-path.home /usr/share/filebeat -path.config /etc/filebeat -path.data /var/lib/filebeat -path.logs /var/log/filebeat&amp;quot; ExecStart=/usr/share/filebeat/bin/filebeat -environment systemd $BEAT_LOG_OPTS $BEAT_CONFIG_OPTS $BEAT_PATH_OPTS Restart=always [Install] WantedBy=multi-user.target filebeat.yml logging.level: info logging.to_files: true logging.files: path: /var/log/filebeat name: filebeat keepfiles: 7 permissions: 0644</description>
+    </item>
+    
     <item>
       <title>APM</title>
       <link>https://zhangeamon.top/elk/apm/</link>

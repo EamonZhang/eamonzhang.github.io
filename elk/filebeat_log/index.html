@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>云存储介绍 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="云存储介绍 - Let&#39;s go 🐌 🐌 🐌">
+    <title>filebeat 自身log输出位置问题 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="filebeat 自身log输出位置问题 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2018-12-07T11:04:12&#43;08:00'>
+    <meta property="article:published_time" content='2022-05-26T10:13:30&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2018-12-07T11:04:12&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-26T10:13:30&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="云存储介绍">
+    <meta name="description" content="filebeat 自身log输出位置问题">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/storage/introduce/">
+    <meta property="og:url" content="https://zhangeamon.top/elk/filebeat_log/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -92,144 +92,49 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    <style type="text/css">
-    .post-toc {
-        position: fixed;
-        width: 200px;
-        margin-left: -210px;
-        padding: 5px 10px;
-        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
-        font-size: 12px;
-        border: 1px solid rgba(0, 0, 0, .07);
-        border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.98);
-        background-clip: padding-box;
-        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
-        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
-        word-wrap: break-word;
-        white-space: nowrap;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        z-index: 999;
-        cursor: pointer;
-        max-height: 70%;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    .post-toc .post-toc-title {
-        width: 100%;
-        margin: 0 auto;
-        font-size: 20px;
-        font-weight: 400;
-        text-transform: uppercase;
-        text-align: center;
-    }
-
-    .post-toc .post-toc-content {
-        font-size: 15px;
-    }
-
-    .post-toc .post-toc-content>nav>ul {
-        margin: 10px 0;
-    }
-
-    .post-toc .post-toc-content ul {
-        padding-left: 20px;
-        list-style: square;
-        margin: 0.5em;
-        line-height: 1.8em;
-    }
-
-    .post-toc .post-toc-content ul ul {
-        padding-left: 15px;
-        display: none;
-    }
-
-    @media print,
-    screen and (max-width:1057px) {
-        .post-toc {
-            display: none;
-        }
-    }
-</style>
-<div class="post-toc" style="position: absolute; top: 188px;">
-    <h2 class="post-toc-title">目录</h2>
-    <div class="post-toc-content">
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#对象存储oss">对象存储(oss)</a></li>
-    <li><a href="#块存储">块存储</a></li>
-    <li><a href="#文件存储">文件存储</a></li>
-  </ul>
-</nav>
-    </div>
-</div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var postToc = $(".post-toc");
-        if (postToc.length) {
-            var leftPos = $("#main").offset().left;
-            if(leftPos<220){
-                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
-            }
-
-            var t = postToc.offset().top - 20,
-                a = {
-                    start: {
-                        position: "absolute",
-                        top: t
-                    },
-                    process: {
-                        position: "fixed",
-                        top: 20
-                    },
-                };
-            $(window).scroll(function () {
-                var e = $(window).scrollTop();
-                e < t ? postToc.css(a.start) : postToc.css(a.process)
-            })
-        }
-    })
-</script>
+    
 
     <article class="post">
         <header>
-            <h1 class="post-title">云存储介绍</h1>
+            <h1 class="post-title">filebeat 自身log输出位置问题</h1>
         </header>
         <date class="post-meta meta-date">
-            2018年12月7日
+            2022年5月26日
         </date>
         
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E5%AD%98%E5%82%A8'>存储</a></span>
-            
-        </div>
         
-        
-        
-        <div class="clear" style="display: none">
-            <div class="toc-article">
-                <div class="toc-title">文章目录</div>
-            </div>
-        </div>
         
         <div class="post-content">
-            <h2 id="对象存储oss">对象存储(oss)</h2>
-<p>适用于大量的小文件，RESFULL接口方式存储读取迅速,不能修改，不用担心元数据过大问题。通常的架构为使用其他的数据库软件如(Hbase,ES) 等来存放管理元数据。</p>
-<p>swift minio</p>
-<h2 id="块存储">块存储</h2>
-<p>这种接口通常以QEMU Driver或者Kernel Module的方式存在，这种接口需要实现Linux的Block Device的接口或者QEMU提供的Block Driver接口，如Sheepdog，AWS的EBS，青云的云硬盘和阿里云的盘古系统，还有Ceph的RBD(RBD是Ceph面向块存储的接口)。
-理解成一块硬盘</p>
-<p>ceph</p>
-<h2 id="文件存储">文件存储</h2>
-<p>支持POSIX接口，对应的传统的文件系统有Ext3、Ext4等，与传统文件系统的区别在于分布式存储提供了并行化的能力，如Ceph的CephFS，但是有时候又会把GFS，HDFS这种非POSIX接口的类文件存储接口归入此类
-理解成格式化后的文件</p>
-<p>glusterfs<br>
-fastfs</p>
+            <h2 id="file-beat-日志输出管理">file beat 日志输出管理</h2>
+<p>默认情况 filebeat日志输出位置为系统日志文件 <code>/var/log/messages</code> 中</p>
+<h2 id="重定向日志文件输出处位置">重定向日志文件输出处位置</h2>
+<p>cat /usr/lib/systemd/system/filebeat.service</p>
+<pre><code>[Unit]
+Description=Filebeat sends log files to Logstash or directly to Elasticsearch.
+Documentation=https://www.elastic.co/products/beats/filebeat
+Wants=network-online.target
+After=network-online.target
 
+[Service]
+
+Environment=&quot;BEAT_LOG_OPTS=&quot;
+Environment=&quot;BEAT_CONFIG_OPTS=-c /etc/filebeat/filebeat.yml&quot;
+Environment=&quot;BEAT_PATH_OPTS=-path.home /usr/share/filebeat -path.config /etc/filebeat -path.data /var/lib/filebeat -path.logs /var/log/filebeat&quot;
+ExecStart=/usr/share/filebeat/bin/filebeat -environment systemd $BEAT_LOG_OPTS $BEAT_CONFIG_OPTS $BEAT_PATH_OPTS
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><p>filebeat.yml</p>
+<pre><code>logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat
+  keepfiles: 7
+  permissions: 0644
+
+</code></pre>
         </div>
 
         
@@ -241,11 +146,11 @@ fastfs</p>
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/k8s/install/">集群部署安装</a></li>
+        <li><a href="/network-security/trivy/">Trivy 容器漏洞扫描</a></li>
         
-        <li><a href="/postgres/monitor/">Postgres 监控常用工具</a></li>
+        <li><a href="/monitor/prometheus-sd/">Prometheus 服务发现</a></li>
         
-        <li><a href="/linux/sysstat/">Linux 系统性能检测</a></li>
+        <li><a href="/middleware/haproxy_install/">Haproxy  编译安装配置 </a></li>
         
     </ul>
 </div>
