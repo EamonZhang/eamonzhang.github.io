@@ -94,6 +94,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年6月29日
+        </date>
+        
+        <div class="post-content">
+            环境介绍 版本信息 centos7 postgres 14.4 citus 110-2 安装步骤 安装 略 配置 sudo pg_conftool 14 main set wal_level logical sudo pg_conftool 14 main set listen_addresses '*' sudo pg_conftool 14 main set shared_preload_libraries citus sudo vi /etc/postgresql/14/main/pg_hba.conf 创建数据库免密码登录 -- Edit .pgpass in the postgres user’s home directory, hostname:port:database:username:password 节点信息 nodenanme IP role master01 10.10.20.11 coordinator worker01 10.10.2.12 worker worker02 10.10.2.14 worker 搭建集群 创建database&amp;extension 在每个worker节点上执行 CREATE DATABASE newbie; \c newbie CREATE EXTENSION citus; 在ma……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/citus11/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
             </h1>
         </header>
@@ -302,31 +320,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/repmgr/" title="PG高可用 repmgr 搭建">PG高可用 repmgr 搭建</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年4月7日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            ……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/repmgr/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -422,6 +415,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
     </li>
     
@@ -455,10 +452,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
     </li>
     
 </ul>

@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/timescaledb/" title="TimescaleDB 时序数据库">TimescaleDB 时序数据库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-content">
+            时序数据库 https://github.com/timescale/timescaledb 数据库配置 https://github.com/timescale/timescaledb-tune copy并行导入数据 https://github.com/timescale/timescaledb-parallel-copy 常用方法 创建拓展 CREATE EXTENSION timescaledb; 创建一个普通的表 CREATE TABLE conditions ( time TIMESTAMPTZ NOT NULL, location TEXT NOT NULL, temperature DOUBLE PRECISION NULL, humidity DOUBLE PRECISION NULL ); 转换成时序数据库表 SELECT create_hypertable('conditions', 'time'); conditions 表名 time 时序字段 修改时序间隔 对新表生效 SELECT set_chunk_time_interval('conditions', INTERVAL '24 hours'); 查看分区 SELECT show_chunks('conditions'); SELECT show_chunks('conditions', older_than =&gt; INTERVAL '3 months') SELECT show_chunks('conditions', older_than =&gt; DATE '2017-01-01'); SELECT show_chunks(newer_than =&gt; INTERVAL '3 months'); SELECT show_chunks(older_than =&gt; INTERVAL '3 months', newer_than =&gt; INTERVAL '4 months'); 查看数据大……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/timescaledb/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_rewind/" title="PG主从切换 pg_rewind">PG主从切换 pg_rewind</a>
             </h1>
         </header>
@@ -261,22 +277,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/qos/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/4k-wa/" title="SSD 4k对齐写放大">SSD 4k对齐写放大</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月17日
-        </date>
-        
-        <div class="post-content">
-            4k对齐 早期硬盘每个扇区以512字节为标准，新一代硬盘扇区容量为4096个字节，也就是所说的4k扇区。 硬盘标准更新，但操作系统一直使用的是512字节扇区的标准，所以硬盘厂商为了保证兼容性，把4k扇区模拟成512字节扇区。 通常文件系统的块（簇）是512字节的倍数，新的系统基本上都设……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/4k-wa/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -413,6 +413,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
     </li>
     
@@ -446,10 +450,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
     </li>
     
 </ul>

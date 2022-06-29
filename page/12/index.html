@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/daily_management/" title="数据库日常管理">数据库日常管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月7日
+        </date>
+        
+        <div class="post-content">
+            日常管理 可用性 监测项 可用性 主从 HA 全量备份 增量备份 恢复 监测项 磁盘空间 全库 select pg_size_pretty(sum(pg_database_size(oid))) from pg_database; 数据库 select datname, pg_size_pretty(pg_database_size(oid)) from pg_database order by pg_database_size(oid) desc limit 10; 表总 SELECT table_schema || '.' || table_name AS table_full_name, pg_size_pretty(pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;')) AS size FROM information_schema.tables where table_schema = 'public' ORDER BY pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;') DESC limit 10; 表 索引 冷热数据 上次统计信息更新时间 热表dml qps io 热表qdml 冷数据 冷索引 索引利用 全表扫描次数……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/daily_management/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/lock_wait/" title="锁等待">锁等待</a>
             </h1>
         </header>
@@ -240,29 +256,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/time-cmd/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/dw/greenplum-install/" title="Greenplum6 安装">Greenplum6 安装</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年12月6日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E4%BB%93'>数仓</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            环境准备 /ect/hosts groupadd gpadmin useradd gpadmin -r -m -g gpadmin passwd gpadmin su gpadmin ssh-keygen -t rsa -b 4096 visudo %wheel ALL=(ALL) NOPASSWD: ALL usermod -aG wheel gpadmin 软件安装 wget https://github.com/greenplum-db/gpdb/releases/download/6.1.0/greenplum-db-6.1.0-rhel7-x86_64.rpm sudo yum install ./greenplum-db-&lt;version&gt;-&lt;platform&gt;.rpm sudo chown -R gpadmin:gpadmin /usr/local/greenplum* source /usr/local/greenplum-db-&lt;version&gt;/greenplum_path.sh vi /home/gpadmin/.bashrc ssh 免密打通 1-n ssh-copy-id mdw n-n vi /home/gpadmin/hostfile_exkeys mdw smdw sdw1 sdw2 sdw3 sdw4 sdw5 sdw6 gpssh-exkeys -f hostfile_exkeys 创建存储目录 master mkdir -p /data/master segment mkdir -p /data/primary1 mkdir -p /data/primary2 mkdir -p /data/mirror1 mkdir -p /data/mirror2 chown -R gpadmin /data/* 性能测试 网络 gpcheckperf -f hostfile_gpchecknet_ic1 -r N -d /tmp &gt; subnet1.out IO 250G gpcheckperf -f hostfile_gpcheckperf -r ds -D -d /data/primary1 -d /data/primary2 -d /data/mirror1 -d /data/mirror2 gpcheckperf -f gpconfigs/hostfile_gpcheckperf -r ds -D -d /data/primary1 -d /data/primary2……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/dw/greenplum-install/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -399,6 +392,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
     </li>
     
@@ -432,10 +429,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
     </li>
     
 </ul>

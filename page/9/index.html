@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/compile_kylin/" title="kylin系统postgresql编译安装">kylin系统postgresql编译安装</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月16日
+        </date>
+        
+        <div class="post-content">
+            背景 麒麟系统默认自带postgresql10.5 安装过程与centos基本相同 , 注意事项 1 安装postgresql-dev 2 编译 postgis 时./configure &ndash;with-pgconfig=/usr/bin/pg_config 但是如果想安装其他版本的postgres 需一番周折 首先第一个问题麒麟系统对openssl过进行改造。在编译postgres支……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/compile_kylin/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/frp/" title="网络穿透">网络穿透</a>
             </h1>
         </header>
@@ -275,22 +291,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/middleware/consul/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/coredns/" title="coredns">coredns</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年6月22日
-        </date>
-        
-        <div class="post-content">
-            背景 致力于打造云原生中的dns服务和服务发现。 各种功能都是通过插件方式实现 简单例子 服务 cat /usr/lib/systemd/system/coredns.service [Unit] Description=CoreDNS DNS server Documentation=https://coredns.io After=network.target [Service] PermissionsStartOnly=true LimitNOFILE=1048576 LimitNPROC=512 CapabilityBoundingSet=CAP_NET_BIND_SERVICE AmbientCapabilities=CAP_NET_BIND_SERVICE NoNewPrivileges=true User=coredns WorkingDirectory=~ ExecStart=/usr/local/bin/coredns -conf=/etc/coredns/Corefile ExecReload=/bin/kill -SIGUSR1 $MAINPID Restart=on-failure [Install] WantedBy=multi-user.target 配置文件 cat /etc/coredns/Corefile .:53 { # 绑定interface ip bind 127.0.0.1 # 先走本机的hosts # https://coredns.io/plugins/hosts/ hosts { # 自定义sms.service search.service 的解析 # 因为解析的域名少我们这里直接……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/coredns/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -427,6 +427,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
     </li>
     
@@ -460,10 +464,6 @@
     
     <li>
         <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
     </li>
     
 </ul>

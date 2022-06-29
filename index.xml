@@ -6,7 +6,16 @@
     <description>Recent content on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 26 May 2022 10:13:30 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Jun 2022 17:29:11 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>citus11 管理手册</title>
+      <link>https://zhangeamon.top/postgres/citus11/</link>
+      <pubDate>Wed, 29 Jun 2022 17:29:11 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/citus11/</guid>
+      <description>环境介绍 版本信息 centos7 postgres 14.4 citus 110-2 安装步骤 安装 略 配置 sudo pg_conftool 14 main set wal_level logical sudo pg_conftool 14 main set listen_addresses &#39;*&#39; sudo pg_conftool 14 main set shared_preload_libraries citus sudo vi /etc/postgresql/14/main/pg_hba.conf 创建数据库免密码登录 -- Edit .pgpass in the postgres user’s home directory, hostname:port:database:username:password 节点信息 nodenanme IP role master01 10.10.20.11 coordinator worker01 10.10.2.12 worker worker02 10.10.2.14 worker 搭建集群 创建database&amp;amp;extension 在每个worker节点上执行 CREATE DATABASE newbie; \c newbie CREATE EXTENSION citus; 在ma</description>
+    </item>
+    
     <item>
       <title>filebeat 自身log输出位置问题</title>
       <link>https://zhangeamon.top/elk/filebeat_log/</link>
