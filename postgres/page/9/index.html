@@ -94,6 +94,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/log/" title="数据库日志">数据库日志</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月4日
+        </date>
+        
+        <div class="post-content">
+            介绍 PostgreSQL有3种日志，分别是pg_log（数据库运行日志）、pg_xlog（WAL 日志，即重做日志）、pg_clog（事务提交日志，记录的是事务的元数据） postgres 10 版本将文件目录结构改为 log，pg_wal，pg_xact log默认是关闭的，需要设置其参数。wal和xac……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/log/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/template/" title="模板数据库">模板数据库</a>
             </h1>
         </header>
@@ -288,24 +306,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/install01/" title="安装 Postgresql">安装 Postgresql</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月17日
-        </date>
-        
-        <div class="post-content">
-            官网 1.准备源 清除历史残余，有些是系统自带的旧版本数据库 rpm -qa | grep postgres rpm -r **** 安装新数据源 yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm 可将所有的软件更新到最新版本如 ， postgresql-10.2 更新到当前最新的postgresql-10.6 yum update -y 2.安装 yum install -y postgresql10-server postgresql10 postgresql10-contrib 3.初始化 默认初始化 /usr/pgsql-10/bin/postgresql-10-setup initdb 建议开启 checksums sudo su postgres -c &quot;/usr/pgsql-10/bin/initdb --data-checksums -D /var/lib/pgsql/10/data&quot; 自定义 /usr/pgsql-10/bin/initdb -D $PGDATA -U postgres -E UTF-8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8 -k -D……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/install01/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -353,7 +353,15 @@
         <a href="https://zhangeamon.top/postgres/page/9/">9</a>
     </li>
     
+    <li >
+        <a href="https://zhangeamon.top/postgres/page/10/">10</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://zhangeamon.top/postgres/page/10/">下一页</a>
+    </li>
     
 </ol>
 
@@ -401,6 +409,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
     </li>
     
@@ -436,10 +448,6 @@
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -466,7 +474,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (40)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

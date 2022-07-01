@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/haproxy/" title="Haproxy 算法">Haproxy 算法</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月26日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/haproxy'>haproxy</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            blance roundrobin # 轮询，软负载均衡基本都具备这种算法 balance static-rr # 根据权重，不支持慢启动 。建议使用 balance leastconn # 最少连接者先处理，建议使用 balance source # 根据请求源IP，建议使用 balance uri # 根据请求的URI balance url_param，# 根据请求的URl参数&rsquo;balance url_param' requires an URL parameter name balance hdr(name) # 根据HTTP请求头来锁定每一……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/haproxy/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/monitor/prometheus-altermanager/" title="Promethues Altermanager 报警">Promethues Altermanager 报警</a>
             </h1>
         </header>
@@ -261,22 +284,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/istio/concept01/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/istio/install/" title="Istio 1.0.3 安装　">Istio 1.0.3 安装　</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月12日
-        </date>
-        
-        <div class="post-content">
-            Service Mesh(服务网格) Kubernetes 已经给我们带来了诸多的好处。但是仍有些需求比如 A/B 测试、金丝雀发布、限流、访问控制,端到端认证等需要运维人员进一步去解决。 Istio 是完全开源的服务网格,提供了一套完整的解决方案，可以透明地分层到现有的分布式应用程序上。对开发人员几乎无感的同时获得超能力。 如果想要现……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/istio/install/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -413,6 +420,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
     </li>
     
@@ -448,10 +459,6 @@
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -478,7 +485,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (40)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

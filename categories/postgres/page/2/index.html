@@ -101,6 +101,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/django_max_con_age/">Django CONN_MAX_AGE 对数据连接的影响</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年4月20日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/python'>python</a>
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            Django的数据库连接 Django对数据库的链接处理是这样的，Django程序接受到请求之后，在第一访问数据库的时候会创建一个数据库连接,直到请求结束，关闭连接。下次请求也是如此。因此，这种情况下，随着访问的并发数越来越高，就会产生大量的数据库连接 使用CONN_MAX_AGE减……
+            <p class="readmore"><a href="https://zhangeamon.top/python/django_max_con_age/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/repmgr/">PG高可用 repmgr 搭建</a>
             </h1>
         </header>
@@ -305,29 +330,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/thinking_in_db_fd/">数据库优化思考 - 结构设计</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月11日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/postgres'>postgres</a>
-            
-        </div>
-        
-        <div class="post-content">
-            DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_fd/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -355,6 +357,10 @@
     
     <li >
         <a href="https://zhangeamon.top/categories/postgres/page/4/">4</a>
+    </li>
+    
+    <li >
+        <a href="https://zhangeamon.top/categories/postgres/page/5/">5</a>
     </li>
     
 
@@ -409,6 +415,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
     </li>
     
@@ -444,10 +454,6 @@
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -474,7 +480,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (40)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

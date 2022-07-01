@@ -6,7 +6,16 @@
     <description>Recent content on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 01 Jul 2022 16:36:52 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Jul 2022 17:06:25 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pg_rewrite</title>
+      <link>https://zhangeamon.top/postgres/pg_rewrite/</link>
+      <pubDate>Fri, 01 Jul 2022 17:06:25 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/pg_rewrite/</guid>
+      <description>在线分区表 https://github.com/cybertec-postgresql/pg_rewrite 使用测试 PostgreSQL server version 13 or later is required.</description>
+    </item>
+    
     <item>
       <title>逻辑复制实现数据迁移</title>
       <link>https://zhangeamon.top/postgres/dts/</link>

@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgbench/" title="pgbench 压力测试">pgbench 压力测试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月9日
+        </date>
+        
+        <div class="post-content">
+            介绍 pgbench是一种在PostgreSQL上运行基准测试的简单程序。 官方文档 默认测试 自定义测试 默认测试 pgbench中默认自带一套测试数据库和测试sql脚本。 初始化默认数据库 使用 -i 初始化数据库 #pgbench -U postgres -i -s 10 pgbenchdb NOTICE: table &quot;pgbench_history&quot; does not exist, skipping NOTICE: table &quot;pgbench_tellers&quot; does not exist, skipping NOTICE: table &quot;pgbench_accounts&quot; does not exist, skipping NOTICE: table &quot;pgbench_branches&quot; does not exist, skipping creating tables... 100000 of 1000000 tuples (10%)……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgbench/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/at-crontab/" title="定时任务">定时任务</a>
             </h1>
         </header>
@@ -240,22 +256,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-sed/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cmd-awk/" title="awk 命令">awk 命令</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月25日
-        </date>
-        
-        <div class="post-content">
-            What is awk 官网 man 告诉我们 pattern scanning and processing language 那么awk能做什么，awk适合做什么 ？ awk最常用的工作一般是遍历一个文件中的每一行，然后分别对文件的每一行进行处理。 由于awk天生提供对文件中文本分列进行处理，所以如果一个文件中的每行都被特定的分隔符(常见的是空格)隔开， 我们可以将这个文件看成是由……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-awk/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -392,6 +392,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
     </li>
     
@@ -427,10 +431,6 @@
         <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -457,7 +457,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (40)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
