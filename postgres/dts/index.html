@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Redis 6.0安装配置管理 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="Redis 6.0安装配置管理 - Let&#39;s go 🐌 🐌 🐌">
+    <title>逻辑复制实现数据迁移 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="逻辑复制实现数据迁移 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-06-12T14:48:56&#43;08:00'>
+    <meta property="article:published_time" content='2022-07-01T16:36:52&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-06-12T14:48:56&#43;08:00'>
+    <meta property="article:modified_time" content='2022-07-01T16:36:52&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="Redis 6.0安装配置管理">
+    <meta name="description" content="逻辑复制实现数据迁移">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/redis/install/">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/dts/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -158,14 +158,20 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#安装">安装</a></li>
-    <li><a href="#启动">启动</a></li>
-    <li><a href="#配置">配置</a>
+    <li><a href="#实现目标">实现目标</a></li>
+    <li><a href="#迁移前原库检查">迁移前原库检查</a></li>
+    <li><a href="#其他注意事项">其他注意事项</a></li>
+    <li><a href="#迁移过程">迁移过程</a></li>
+    <li><a href="#过程监控">过程监控</a>
       <ul>
-        <li></li>
+        <li><a href="#发布端">发布端</a></li>
+        <li><a href="#订阅端">订阅端</a></li>
       </ul>
     </li>
-    <li><a href="#压测">压测</a></li>
+    <li><a href="#结果检验">结果检验</a></li>
+    <li><a href="#迁移后处理">迁移后处理</a></li>
+    <li><a href="#业务切割">业务切割</a></li>
+    <li><a href="#失败撤回">失败撤回</a></li>
   </ul>
 </nav>
     </div>
@@ -200,16 +206,16 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">Redis 6.0安装配置管理</h1>
+            <h1 class="post-title">逻辑复制实现数据迁移</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年6月12日
+            2022年7月1日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
             
         </div>
         
@@ -222,81 +228,176 @@
         </div>
         
         <div class="post-content">
-            <h2 id="安装">安装</h2>
-<p>yum 方式</p>
-<pre><code>yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
-
-yum --enablerepo=remi install redis
-
-</code></pre><p>make 方式</p>
-<pre><code>升级gcc 版本临时生效,否则编译错误
-
-yum -y install centos-release-scl
-
-yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils
-
-scl enable devtoolset-9 bash
-</code></pre><pre><code>wget http://download.redis.io/releases/redis-6.0.1.tar.gz
-
-tar -xvf redis-6.0.1.tar.gz
-
-cd /usr/local/redis-6.0.1/
-
-make PREFIX=/usr/local/redis install
-</code></pre><h2 id="启动">启动</h2>
-<pre><code>systemctl start redis 
-
-systemctl enalbe redis
-</code></pre><h2 id="配置">配置</h2>
-<h4 id="系统参数">系统参数</h4>
-<p>vi /etc/sysctl.conf</p>
-<pre><code>net.ipv4.tcp_tw_recycle = 1
-net.ipv4.tcp_tw_reuse = 1
-kernel.shmmax = 68719476736
-kernel.shmall = 4294967296
-net.core.netdev_max_backlog = 262144
-net.core.somaxconn = 40960
-net.ipv4.tcp_max_orphans = 3276800
-net.ipv4.tcp_max_syn_backlog = 262144
-</code></pre><h4 id="服务参数">服务参数</h4>
-<p>vi /etc/redis.conf</p>
-<pre><code>daemonize yes 
-pidfile /var/run/redis.pid
-bind * #绑定网卡
-timeout 300 #当客户端闲置多长时间后关闭连接，如果指定为0，表示永不关闭
-tcp-keepalive 60 #设置检测客户端网络中断时间间隔，单位为秒
-databases 16 #设置数据库数量，默认值为16
-save 300 10  #300秒内有10个更改就将数据同步到数据文件
-rdbcompssion yes #指定存储至本地数据库时是否压缩数据，默认为yes，redis采用LZF压缩，如果为了节省CPU时间，可以关闭该选项，但会导致数据库文件0  
-dbfilename dump.rdb  #指定本地数据库文件名
-dir /data/redis6/  #指定本地数据库存放目录
-maxclients 1000 #设置同一时间最大客户端连接数，默认无限制
-maxmemory &lt;bytes&gt; #指定redis最大内存限制  1/4 .  
-</code></pre><ul>
-<li>使用maxmemory参数限制最大可用内存</li>
+            <h1 id="dts-数据迁移服务">DTS 数据迁移服务</h1>
+<h2 id="实现目标">实现目标</h2>
+<p>​		平滑将现有在线业务数据库数据迁移到新数据库中。</p>
+<p>​		 如数据库大版本升级、原pg数据库迁移到citus集群、 多数据源汇总等业务场景。</p>
+<h2 id="迁移前原库检查">迁移前原库检查</h2>
+<ul>
+<li>
+<p>配置检查</p>
+<pre><code>-- 源端
+wal_level = logical
+max_replication_slots = 大于1 
+max_wal_senders = 
+max_worker_processes 
+-- 目标端
+max_replication_slots，大于等于该实例总共需要创建的订阅数
+max_logical_replication_workers，大于等于该实例总共需要创建的订阅数
+max_worker_processes
+</code></pre></li>
+<li>
+<p>表必须存在主键或唯一约束，作为复制标识。</p>
+<pre><code>-- 没有主键或索引的表
+select relname as table_name from pg_stat_user_tables where relid not in (select pc.oid  from pg_class pc join pg_index pi  on pc.oid = pi.indrelid join pg_stat_user_tables psut on psut.relid = pc.oid  where indisunique = 't' and  indisprimary = 't');
+</code></pre><pre><code>-- 特殊表的发布处理
+alter table table_name
+    REPLICA IDENTITY { DEFAULT | USING INDEX index_name | FULL | NOTHING }
+</code></pre></li>
+<li>
+<p>迁移过程中避免DDL操作</p>
+</li>
+<li>
+<p>原库发生故障切换，迁移失败。11版本前不具备failover slot</p>
+</li>
+<li>
+<p>原数据必须预留足够的磁盘空间存储迁移过程中产生的wal日志</p>
+</li>
+<li>
+<p>发布端需为数据库主节点</p>
+</li>
+<li>
+<p>数据库用户及权限</p>
+</li>
+<li>
+<p>源数据库连接</p>
+</li>
 </ul>
-<p>得益于Redis单线程架构和内存限制机制， 即使没有采用虚拟化， 不同的Redis进程之间也可以很好地实现CPU和内存的
-隔离性。可以通过config set maxmemory进行动态修改。</p>
-<h4 id="慢查询日志">慢查询日志</h4>
-<pre><code>slowlog-max-len 
-slowlog-log-slower-than 
-</code></pre><h4 id="密码认证">密码认证</h4>
-<p>永久生效</p>
-<pre><code>requirepass foopassword # 设置redis连接密码默认关闭
-masterauth &lt;master-password&gt; # 当master设置密码时，slave 需要设置
-</code></pre><p>临时生效</p>
-<pre><code>config set requirepass foopassword 
-</code></pre><h4 id="危险命令重新命名或者禁用">危险命令重新命名或者禁用</h4>
-<p>修改配置文件 rename-command</p>
-<pre><code>FLUSHALL
-FLUSHDB
-KEYS 
-CONFIG
-</code></pre><p><a href="https://blog.csdn.net/gfl1427097103/article/details/106256691">更多</a></p>
-<p><a href="https://www.cnblogs.com/richiewlq/p/12191278.html">https://www.cnblogs.com/richiewlq/p/12191278.html</a></p>
-<h2 id="压测">压测</h2>
-<pre><code> redis-benchmark -h 127.0.0.1 -p 6379 -t set,lpush -n 10000 -q
-</code></pre>
+<h2 id="其他注意事项">其他注意事项</h2>
+<ul>
+<li>Sequence不会按照源库的Sequence最大值作为初始值去递增，需要在业务切换前，在源库中查询对应Sequence的最大值，然后在目标库中将其作为对应Sequence的初始值。</li>
+<li>FLOAT或DOUBLE的列的迁移精度是否符合业务预期</li>
+<li>迁移过程中的数据变更仅支持DML，如 INSERT、UPDATE、DELETE操作</li>
+<li>DDL 操作不会同步，可使用触发器完成</li>
+</ul>
+<h2 id="迁移过程">迁移过程</h2>
+<ul>
+<li>
+<p>数据结构迁移</p>
+<pre><code>-- 备份出原始数据结构
+pg_dump \
+   --format=plain \
+   --no-owner \
+   --schema-only \
+   --file=schema.sql \
+   --schema=target_schema \
+   postgres://user:pass@host:5432/db
+  
+-- 在目标端创建表结构
+\i schema.sql
+-- 根据实际业务调整表结构
+  
+</code></pre></li>
+<li>
+<p>存量迁移</p>
+</li>
+<li>
+<p>增量迁移</p>
+<pre><code>在创建slot时，在源数据库端创建SNAPSHOT快照，基于快照完成全量及增量数据迁移
+-- 发布
+select pg_create_logical_relication_slot('logical_slot_name001','pgoutput');
+create publication pub1 for all tables
+-- 详细语法
+CREATE PUBLICATION name
+    [ FOR TABLE [ ONLY ] table_name [ * ] [, ...]
+      | FOR ALL TABLES ]
+    [ WITH ( publication_parameter [= value] [, ... ] ) ]
+URL: https://www.postgresql.org/docs/12/sql-createpublication.html
+  
+-- 订阅
+create  subscription sub1 connection='hostaddr= xxx port=xxx user=xxx dbname=xxx' 
+ publication pub1 with(create_slot='false',slot=name='logical_slot1'); 
+-- 详细语法
+CREATE SUBSCRIPTION subscription_name
+    CONNECTION 'conninfo'
+    PUBLICATION publication_name [, ...]
+    [ WITH ( subscription_parameter [= value] [, ... ] ) ]
+  
+参数说明
+subscription_parameter
+copy_data :  The default is true ,存量数据是否迁移
+create_slot: The default is true. 创建slot
+enabled : The default is true 是否马上开启复制
+slot_name: synchronous_commit (enum) The default value is off.
+connect (boolean) : 
+URL: https://www.postgresql.org/docs/12/sql-createsubscription.html
+  
+--禁止或开启订阅
+ALTER SUBSCRIPTION mysub DISABLE;
+ALTER SUBSCRIPTION mysub ENABLE
+ALTER SUBSCRIPTION name REFRESH PUBLICATION 
+-- 如果发布端修改，订阅端刷新订阅
+ALTER SUBSCRIPTION name REFRESH PUBLICATION 
+</code></pre></li>
+</ul>
+<h2 id="过程监控">过程监控</h2>
+<h3 id="发布端">发布端</h3>
+<pre><code>-- 发布端
+select * from pg_stat_replication ;
+select * from pg_replication_slots ;
+select * from pg_publication;
+select * from pg_publication_tables ;
+
+select pg_size_pretty(pg_wal_location_diff(pg_current_wal_insert_location(), sent_location)), pg_size_pretty(pg_wal_location_diff(pg_current_wal_insert_location(), replay_location)), * from pg_stat_replication ;
+
+</code></pre><h3 id="订阅端">订阅端</h3>
+<pre><code>-- 订阅端
+select * from pg_subscription ;
+select * from pg_stat_subscription ;
+select pg_size_pretty(pg_wal_location_diff(received_lsn, latest_end_lsn)), * from pg_stat_subscription ;
+</code></pre><h2 id="结果检验">结果检验</h2>
+<ul>
+<li>表结构，表数量，索引数量</li>
+<li>表中数据量、数据条数</li>
+<li>数据内容</li>
+</ul>
+<h2 id="迁移后处理">迁移后处理</h2>
+<ul>
+<li>
+<p>新数据库序列处理，业务切割前处理</p>
+<pre><code>-- sql 参考
+do language plpgsql $$
+declare
+  nsp name;
+  rel name;
+  val int8;
+begin
+  for nsp,rel in select nspname,relname from pg_class t2 , pg_namespace t3 where t2.relnamespace=t3.oid and t2.relkind='S'
+  loop
+    execute format($_$select last_value from %I.%I$_$, nsp, rel) into val;
+    raise notice '%',
+    format($_$select setval('%I.%I'::regclass, %s);$_$, nsp, rel, val+1);
+  end loop;
+end;
+$$;
+</code></pre></li>
+<li>
+<p>删除逻辑复制slot ，发布订阅。业务切割后处理</p>
+<pre><code>DROP PUBLICATION mypublication;
+DROP SUBSCRIPTION mysub;
+select pg_drop_replication_slot('myslot');
+</code></pre></li>
+</ul>
+<h2 id="业务切割">业务切割</h2>
+<p>​	略</p>
+<h2 id="失败撤回">失败撤回</h2>
+<ul>
+<li>
+<p>增量回流</p>
+<p>主要是考虑如果新数据库遇到问题需要切换回原来的数据库场景。</p>
+</li>
+</ul>
+
         </div>
 
         
@@ -308,11 +409,11 @@ CONFIG
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/istio/servicediscovery/">服务发现</a></li>
+        <li><a href="/postgres/pg_buffercache/">pg_buffercache</a></li>
         
-        <li><a href="/network-security/firewalld/">Firewall</a></li>
+        <li><a href="/postgres/citus11/">citus11 管理手册</a></li>
         
-        <li><a href="/postgres/ssl/">数据库 ssl认证</a></li>
+        <li><a href="/elk/filebeat_log/">filebeat 自身log输出位置问题</a></li>
         
     </ul>
 </div>

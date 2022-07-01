@@ -101,6 +101,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/dts/">逻辑复制实现数据迁移</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年7月1日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            DTS 数据迁移服务 实现目标 ​ 平滑将现有在线业务数据库数据迁移到新数据库中。 ​ 如数据库大版本升级、原pg数据库迁移到citus集群、 多数据源汇总等业务场景。 迁移前原库检查 配置检查 -- 源端 wal_level = logical max_replication_slots = 大于1 max_wal_senders = max_worker_processes -- 目标端 max_replication_slots，大于等于该实例总共需要创建的……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/dts/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_buffercache/">pg_buffercache</a>
             </h1>
         </header>
@@ -307,29 +330,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/repmgr/">PG高可用 repmgr 搭建</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年4月7日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/postgres'>postgres</a>
-            
-        </div>
-        
-        <div class="post-content">
-            ……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/repmgr/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -407,6 +407,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
     </li>
     
@@ -442,10 +446,6 @@
         <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -472,7 +472,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (39)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (40)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

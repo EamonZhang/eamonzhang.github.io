@@ -6,7 +6,16 @@
     <description>Recent content on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 01 Jul 2022 09:54:49 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Jul 2022 16:36:52 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>逻辑复制实现数据迁移</title>
+      <link>https://zhangeamon.top/postgres/dts/</link>
+      <pubDate>Fri, 01 Jul 2022 16:36:52 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/dts/</guid>
+      <description>DTS 数据迁移服务 实现目标 ​ 平滑将现有在线业务数据库数据迁移到新数据库中。 ​ 如数据库大版本升级、原pg数据库迁移到citus集群、 多数据源汇总等业务场景。 迁移前原库检查 配置检查 -- 源端 wal_level = logical max_replication_slots = 大于1 max_wal_senders = max_worker_processes -- 目标端 max_replication_slots，大于等于该实例总共需要创建的</description>
+    </item>
+    
     <item>
       <title>pg_buffercache</title>
       <link>https://zhangeamon.top/postgres/pg_buffercache/</link>

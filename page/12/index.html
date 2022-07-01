@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/django-index-ops/" title="django 默认创建第二索引">django 默认创建第二索引</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Django使用postgresql做数据库 db_index创建索引时会创建第二个索引varchar_pattern_ops问题 创建默认索引 minion_id = models.CharField(max_length=100, db_index=True, blank=True, null=False, default=&quot;&quot;) 当字段类型是 models.CharField 或者 models.TextField 时 使用 db_index=True创建索引 会创建第二索引 django.db.backends.postgresql.schema class DatabaseSchemaEditor(BaseDatabaseSchemaEditor): sql_alter_column_type = &quot;ALTER COLUMN %(column)s TYPE %(type)s USING %(column)s::%(type)s&quot; sql_create_sequence = &quot;CREATE SEQUENCE %(sequence)s&quot; sql_delete_sequence = &quot;DROP SEQUENCE IF EXISTS %(sequence)s CASCADE&quot; sql_set_sequence_max……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/django-index-ops/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/FunctionsandOperators/" title="方法和函数">方法和函数</a>
             </h1>
         </header>
@@ -240,22 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/network-security/reject-ping/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/parted/" title="linux分区命令parted的用法">linux分区命令parted的用法</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年12月27日
-        </date>
-        
-        <div class="post-content">
-            linux分区命令parted的用法 parted的适用场景 创建操作大于2T的分区 一般情况下，我们都是选择使用fdisk工具来进行分区，但是目前在实际生产环境中使用的磁盘空间越来越大，呈TiB级别增长；而常用的fdisk这个工具对分区是有大小限制的，它只能划分小于2T的磁盘，所以在……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/parted/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -392,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
     </li>
     
@@ -427,10 +438,6 @@
         <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -457,7 +464,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (39)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (40)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
