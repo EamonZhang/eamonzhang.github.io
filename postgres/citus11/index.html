@@ -170,12 +170,6 @@
         <li><a href="#参考表">参考表</a></li>
         <li><a href="#分布表">分布表</a></li>
         <li><a href="#查看表信息">查看表信息</a></li>
-      </ul>
-    </li>
-    <li><a href="#表管理-1">表管理</a>
-      <ul>
-        <li><a href="#参考表创建">参考表创建</a></li>
-        <li><a href="#分布表创建">分布表创建</a></li>
         <li><a href="#恢复表为本地表">恢复表为本地表</a></li>
       </ul>
     </li>
@@ -362,13 +356,35 @@ SELECT * from citus_add_node('10.10.2.14', 5432);
 <h3 id="查看表信息">查看表信息</h3>
 <pre><code>-- 包括参考表和分布表
 select * from citus_tables ;
+
 -- 包括所有类型的表及分布信息
 select * from citus_shards ;
-</code></pre><h2 id="表管理-1">表管理</h2>
-<h3 id="参考表创建">参考表创建</h3>
-<pre><code>SELECT create_reference_table('tablename');
-</code></pre><h3 id="分布表创建">分布表创建</h3>
-<pre><code class="language-istributed" data-lang="istributed">SELECT create_distributed_table('tablename', 'column');
+
+--- 查看库分布表size
+SELECT logicalrelid AS name,
+       pg_size_pretty(citus_table_size(logicalrelid)) AS size
+  FROM pg_dist_partition where name = '$tablename';
+
+--- 查看分布表分布在每个node上的size 
+select table_name, nodename as node_name,round(sum(shard_size)*100.0/citus_table_size(table_name),2) percent, pg_size_pretty(sum(shard_size)) as table_size_node,pg_size_pretty(citus_table_size(table_name)) AS table_size from citus_shards where citus_table_type = 'distributed' group by nodename , table_name;
+
+          table_name           | node_name  | percent | table_size_node | table_size
+-------------------------------+------------+---------+-----------------+------------
+mydistable | 10.10.2.12 |   32.60 | 1424 kB         | 4368 kB
+mydistable | 10.10.2.14 |   60.81 | 2656 kB         | 4368 kB
+(2 rows)
+
+</code></pre><pre><code>
+## 表管理
+
+### 参考表创建
+
+</code></pre><p>SELECT create_reference_table(&lsquo;tablename&rsquo;);</p>
+<pre><code>
+### 分布表创建
+
+```istributed relations cannot have UNIQUE, EXCLUDE, or PRIMARY KEY constraints that do not include the partition column (with an equality operator if EXCLUDE)
+SELECT create_distributed_table('tablename', 'column');
 </code></pre><h4 id="注意事项">注意事项</h4>
 <p><code>distributed relations cannot have UNIQUE, EXCLUDE, or PRIMARY KEY constraints that do not include the partition column (with an equality operator if EXCLUDE)</code></p>
 <h4 id="亲和性">亲和性</h4>
@@ -385,19 +401,6 @@ set citus.shard_count = 64;
 <pre><code>SELECT citus_set_default_rebalance_strategy('by_disk_size');
 </code></pre><h4 id="进度查看">进度查看</h4>
 <pre><code>SELECT * FROM get_rebalance_progress();
-</code></pre><h4 id="查看表分布情况">查看表分布情况</h4>
-<pre><code>select table_name, nodename as node_name,round(sum(shard_size)*100.0/citus_table_size(table_name),2) percent, pg_size_pretty(sum(shard_size)) as table_size_node,pg_size_pretty(citus_table_size(table_name)) AS table_size from citus_shards where citus_table_type = 'distributed' group by nodename , table_name;
-
-          table_name           | node_name  | percent | table_size_node | table_size 
--------------------------------+------------+---------+-----------------+------------
-mydistable | 10.10.2.12 |   32.60 | 1424 kB         | 4368 kB
-mydistable | 10.10.2.14 |   60.81 | 2656 kB         | 4368 kB
-(2 rows)
-
-</code></pre><h4 id="查看数据库分布表size">查看数据库分布表size</h4>
-<pre><code>SELECT logicalrelid AS name,
-       pg_size_pretty(citus_table_size(logicalrelid)) AS size
-  FROM pg_dist_partition where name = '$tablename';
 </code></pre><h4 id="删除本地数据">删除本地数据</h4>
 <pre><code>-- 在将普通表转化化为分布表或参考表后，清空本地数据，待测试
 SELECT truncate_local_data_after_distributing_table('tablename')
