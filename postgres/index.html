@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年7月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            通过插件查看PG数据缓存 create extension pg_buffercache; 查看当前database缓存使用情况 select c.relname,relname,pg_size_pretty(pg_table_size(c.oid)),pg_size_pretty(count(*) * 8192) as buffered, round(100.0*count(*)/(select setting FROM pg_settings where name = 'shared_buffers')::integer,1) as buffer_percent, round(100.0 * count(*) * 8192/pg_table_size(c.oid)) as percent_of_table from pg_class c inner join pg_buffercache b on b.relfilenode = c.relfilenode inner join pg_database d on (b.reldatabase = d.oid and d.datname = current_database()) group by c.oid ,c.relname order by 3 desc limit 10;……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_buffercache/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
             </h1>
         </header>
@@ -302,24 +327,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年7月21日
-        </date>
-        
-        <div class="post-content">
-            物化视图 物化视图与普通视图的区别在于，物化视图是物理上真实存在的表。 物化视图的创建 \h create materialized view Command: CREATE MATERIALIZED VIEW Description: define a new materialized view Syntax: CREATE MATERIALIZED VIEW [ IF NOT EXISTS ] table_name [ (column_name [, ...] ) ] [ USING method ] [ WITH ( storage_parameter [= value] [, ... ] ) ] [ TABLESPACE tablespace_name ] AS query [ WITH [ NO ] DATA ] 与creat table as 基本相同，但是物化视图不同于table 的是物化时候中的数据内容可以……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/materialized/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -415,6 +422,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
     </li>
     
@@ -450,10 +461,6 @@
         <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -480,7 +487,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (38)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (39)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

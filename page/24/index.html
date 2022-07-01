@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/prometheus-concepts/" title="Promethues 基本概念">Promethues 基本概念</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月21日
+        </date>
+        
+        <div class="post-content">
+            数据模型(Data Model) 由指标名称(metric)和一个或一组标签(lable)集合以及float64类型的值组成。 例如 up{instance=&quot;10.1.88.71:9115&quot;,job=&quot;blackbox_exporter_10.1.88.74_icmp&quot;} 1 metric类型 client libraries提供了四种metric类型，包括Counter、Gauge、Histogram、Summary。 Counter 计数器，只允许增加或重置为……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/prometheus-concepts/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/tidb/sql-optimize01/" title="Sql 优化">Sql 优化</a>
             </h1>
         </header>
@@ -261,22 +277,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/es/esrally/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/istio/concept02/" title="蓝绿、A/B测试、金丝雀发布">蓝绿、A/B测试、金丝雀发布</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月9日
-        </date>
-        
-        <div class="post-content">
-            蓝绿发布 准备两套环境，蓝和绿。绿环境为当前正式环境，现在将新版部署到蓝环境当中并进行测试。没有问题后将路由指向蓝环境。若发现问题可将路由指回到原来的绿环境中进行回滚。 问题： 如果是无状态应用还可以，如果应用有状态或类似数据库之类的应该很麻烦，还有新旧版本是否兼容的问题。 A/B 测试 用来测……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/istio/concept02/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -413,6 +413,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
     </li>
     
@@ -448,10 +452,6 @@
         <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/linux/fastdeletfiles/" title="快速删除大量文件">快速删除大量文件</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -478,7 +478,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (38)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (39)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
