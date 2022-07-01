@@ -170,6 +170,12 @@
         <li><a href="#参考表">参考表</a></li>
         <li><a href="#分布表">分布表</a></li>
         <li><a href="#查看表信息">查看表信息</a></li>
+      </ul>
+    </li>
+    <li><a href="#表管理-1">表管理</a>
+      <ul>
+        <li><a href="#参考表创建">参考表创建</a></li>
+        <li><a href="#分布表创建">分布表创建</a></li>
         <li><a href="#恢复表为本地表">恢复表为本地表</a></li>
       </ul>
     </li>
@@ -374,17 +380,11 @@ mydistable | 10.10.2.12 |   32.60 | 1424 kB         | 4368 kB
 mydistable | 10.10.2.14 |   60.81 | 2656 kB         | 4368 kB
 (2 rows)
 
-</code></pre><pre><code>
-## 表管理
-
-### 参考表创建
-
-</code></pre><p>SELECT create_reference_table(&lsquo;tablename&rsquo;);</p>
-<pre><code>
-### 分布表创建
-
-```istributed relations cannot have UNIQUE, EXCLUDE, or PRIMARY KEY constraints that do not include the partition column (with an equality operator if EXCLUDE)
-SELECT create_distributed_table('tablename', 'column');
+</code></pre><h2 id="表管理-1">表管理</h2>
+<h3 id="参考表创建">参考表创建</h3>
+<pre><code>SELECT create_reference_table('tablename');
+</code></pre><h3 id="分布表创建">分布表创建</h3>
+<pre><code class="language-istributed" data-lang="istributed">SELECT create_distributed_table('tablename', 'column');
 </code></pre><h4 id="注意事项">注意事项</h4>
 <p><code>distributed relations cannot have UNIQUE, EXCLUDE, or PRIMARY KEY constraints that do not include the partition column (with an equality operator if EXCLUDE)</code></p>
 <h4 id="亲和性">亲和性</h4>
