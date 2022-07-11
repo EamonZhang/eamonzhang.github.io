@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/postgres-indicators/" title="Postgres 10 监控指标">Postgres 10 监控指标</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年9月27日
+        </date>
+        
+        <div class="post-content">
+            实体机 Cpu 内存 IO 网络 磁盘大小 数据库基本信息 服务启动时间 select pg_postmaster_start_time(); 版本信息 select current_setting('server_version'); 主从角色 select pg_is_in_recovery();……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/postgres-indicators/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/wget/" title="wget">wget</a>
             </h1>
         </header>
@@ -233,29 +249,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pgstattuple/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/nginx/" title="nginx">nginx</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年4月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/nginx'>nginx</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            性能优化 CPU 亲和性 worker_processes 4; # 比如物理CPU的数量为4 worker_cpu_affinity 0001 0010 0100 1000; Nginx最大打开文件数 worker_rlimit_nofile 65535; ulimit -n的值保持一致 GZIP 压缩 节约带宽，加快传输速度。需要CPU资源 压缩： 文本，js，html，css，不压缩: 图片，视频，flash gzip on; # 开启 gzip_min_length 2k; # 小于 2k 不压缩 gzip_buffers 4 32k; # 压缩缓冲区 gzip_http_version 1.1; gzip_comp_level 6; # 压缩比例 1-9 ,9……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/nginx/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -392,6 +385,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
     </li>
     
@@ -427,10 +424,6 @@
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -457,7 +450,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

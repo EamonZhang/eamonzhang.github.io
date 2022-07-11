@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            数据库日志分析 整体架构 filebeat -&gt; logstash -&gt; elasticseach -&gt; kibana filebeat 收集日志 logstash 中转及日志规则匹配过滤 elasticsearch 日志存储检索库 kibana 查看界面 postgresql log_destination = 'csvlog' logging_collector = 'on' log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log' log_rotation_age = '1d' log_rotation_size = '100MB' log_min_messages = 'info' log_min_duration_statement = '1000' log_statement = 'ddl' filebeat filebeat.inputs: - type: log enabled: true paths: - /var/lib/pgsql/***/postgresql-*.csv fields: log_topics: postgresql multiline.pattern: '^[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3} [A-Z]{3}' multiline.negate: true multiline.match: after filebeat.config.modules: path: ${path.config}/modules.d/*.yml reload.enabled: false setup.template.settings: index.number_of_shards: 1 tags: [&quot;postgesql&quot;] setup.kibana: output.logstash: hosts: [&quot;*.*.*.*:5044&quot;] processors: - add_host_metadata: ~ - add_cloud_metadata: ~ logstash # # this config is use for version logstash 7.3.1 # input { beats { port =&gt; 5044 } #sdtin{ # #} } #……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_elk/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
             </h1>
         </header>
@@ -295,31 +320,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/patroni02/" title="Patroni 高可用管理进阶">Patroni 高可用管理进阶</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月5日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            完成目标 主从同步策略 异地多机房策略 failover 触发详情 访问认证 watch-dog 配置文件详情 fencing DCS 失效处理 加入节点复制数据限流 主从切换流量,避免重新拉取 级联复制 callback 日志&amp;监控 主从同步策略 数据库主从之间同步类型 Synchronous state of this standby server. Possible values are: async: This standby server is asynchronous. potential: This standby server is now asynchronous, but can potentially become synchronous if one of current synchronous ones fails. sync: This standby server is synchronous. quorum: This standby server is considered as……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/patroni02/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -423,6 +423,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
     </li>
     
@@ -458,10 +462,6 @@
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -488,7 +488,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

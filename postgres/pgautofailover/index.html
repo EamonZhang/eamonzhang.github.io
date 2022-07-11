@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>数据库高可用pgautofailover | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="数据库高可用pgautofailover - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2022-07-11T15:15:51&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-07-11T15:15:51&#43;08:00'>
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="数据库高可用pgautofailover">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/pgautofailover/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            <!-- hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699"; -->
+            hm.src = "https://hm.baidu.com/hm.js?0010600e9ae6ff8f5814bb7ec6b36072";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">数据库高可用pgautofailover</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年7月11日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h1 id="pg_auto_failover-实践">pg_auto_failover 实践</h1>
+<h2 id="一个简单的架构">一个简单的架构</h2>
+<p>citus同源postgres高可用方案</p>
+<p>角色:</p>
+<ul>
+<li>主节点 (master)</li>
+<li>复制节点 (slave)</li>
+<li>监控节点 (monitor)</li>
+</ul>
+<h2 id="集群搭建">集群搭建</h2>
+<h3 id="环境说明">环境说明</h3>
+<h4 id="软件版本">软件版本</h4>
+<ul>
+<li>postgresql 14.4</li>
+<li>pg_auto_failover 1.6.4</li>
+<li>centos 7</li>
+</ul>
+<h4 id="网络环境">网络环境</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">IP</th>
+<th style="text-align:center">软件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">10.10.2.11</td>
+<td style="text-align:center">monitor</td>
+</tr>
+<tr>
+<td style="text-align:center">10.10.2.12</td>
+<td style="text-align:center">master</td>
+</tr>
+<tr>
+<td style="text-align:center">10.10.2.13</td>
+<td style="text-align:center">replication</td>
+</tr>
+</tbody>
+</table>
+<h3 id="从零开始建设">从零开始建设</h3>
+<p>​	没有任何历史包袱，包括数据库自身的搭建</p>
+<p>​	<strong>手动安装</strong></p>
+<p>​     在所有的节点上执行</p>
+<pre><code>-- 数据库安装
+sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+sudo yum install -y postgresql14-server
+</code></pre><pre><code># install pg_auto_failover
+curl https://install.citusdata.com/community/rpm.sh | sudo bash
+yum install pg_auto_failover_14.x86_64 -y
+
+# confirm installation
+/usr/pgsql-14/bin/pg_autoctl --version
+</code></pre><p>​     创建monitor节点</p>
+<pre><code>--创建监控节点
+su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create monitor \
+   --hostname node0 \
+   --auth trust \
+   --ssl-self-signed \
+   --pgdata /var/lib/pgsql/14/data/ \
+   --pgctl /usr/pgsql-14/bin/pg_ctl &quot;
+
+--启动监控节点服务
+/usr/pgsql-14/bin/pg_autoctl -q show systemd --pgdata &quot;/var/lib/pgsql/14/data&quot; | tee /etc/systemd/system/pgautofailover.service
+
+systemctl start pgautofailover
+
+-- 查看node连接monitor 信息
+/usr/pgsql-14/bin/pg_autoctl show uri --formation monitor --pgdata /var/lib/pgsql/14/data/
+
+postgres://autoctl_node@node0:5432/pg_auto_failover?sslmode=require
+
+</code></pre><p>​		创建数据库主节点</p>
+<pre><code>-- 创建数据库节点
+su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create postgres \
+    --hostname node1 \
+    --name node1 \
+    --pgctl /usr/pgsql-14/bin/pg_ctl \
+    --pgdata /var/lib/pgsql/14/data/ \
+    --auth trust \
+    --ssl-self-signed \
+    --monitor 'postgres://autoctl_node@node0:5432/pg_auto_failover?sslmode=require' \
+    &quot;
+    
+</code></pre><pre><code>创建节点说明，在create postgres后，将在本地生成配置信息。具体可查看
+su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl show file   --pgdata /var/lib/pgsql/14/data/&quot;
+</code></pre><pre><code> ```
+</code></pre>
+<p>&ndash; systemd 管理服务
+su - postgres -c &ldquo;/usr/pgsql-14/bin/pg_autoctl -q show systemd &ndash;pgdata /var/lib/pgsql/14/data &quot;  &gt; /etc/systemd/system/pgautofailover.service</p>
+<p>&ndash; 启动服务
+system start pgautofailover
+```</p>
+<p>​		创建数据库从节点</p>
+<pre><code>-- 在另一个节点创建从库
+su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create postgres \
+    --hostname node2 \
+    --name node2 \
+    --pgctl /usr/pgsql-14/bin/pg_ctl \
+    --pgdata /var/lib/pgsql/14/data/ \
+    --auth trust \
+    --ssl-self-signed \
+    --monitor 'postgres://autoctl_node@node0:5432/pg_auto_failover?sslmode=require' \
+    &quot;
+</code></pre><pre><code>-- systemd 管理服务
+su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl -q show systemd --pgdata /var/lib/pgsql/14/data &quot;  &gt; /etc/systemd/system/pgautofailover.service
+
+-- 启动服务
+system start pgautofailover
+</code></pre><pre><code>-- 在monitor节点查看状态
+/usr/pgsql-14/bin/pg_autoctl   show state --pgdata /var/lib/pgsql/14/data/
+
+  Name |  Node |  Host:Port |       TLI: LSN |   Connection |      Reported State |      Assigned State
+-------+-------+------------+----------------+--------------+---------------------+--------------------
+node1 |     1 | node1:5432 |   1: 0/500BD90 |   read-write |             primary |             primary
+ node2 |   111 | node2:5432 |   1: 0/500BD90 |    read-only |           secondary |           secondary
+
+</code></pre><pre><code>-- 在监控点删除postgres
+su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl drop node  --destroy --force --name node2 &quot;
+</code></pre><h3 id="现有数据库接管">现有数据库接管</h3>
+<p>​	不影响现有数据库业务，使其具有高可用能力</p>
+<p>​    与从零开始创建集群不同的是，在create postgres阶段，根据    &ndash;pgdata 目录所指定的 pg_controldata 来判断数据库数   据目录现有情况。包括是否需要初始化数据库，及现有数据库状态</p>
+<h2 id="集群管理">集群管理</h2>
+<h3 id="状态查看">状态查看</h3>
+<pre><code>/usr/pgsql-14/bin/pg_autoctl   show state --pgdata /var/lib/pgsql/14/data/
+</code></pre><h3 id="手动switch">手动switch</h3>
+<pre><code>/usr/pgsql-14/bin/pg_autoctl  perform switchover --formation default --group 0  --pgdata /var/lib/pgsql/14/data/
+</code></pre><h3 id="自动failover">自动failover</h3>
+<h4 id="节点失败">节点失败</h4>
+<pre><code>- 主节点失败
+  When the primary node is unhealthy, and only when the secondary node is itself in good health, then the primary node is asked to transition to the DRAINING state, and the attached secondary is asked to transition to the state PREPARE_PROMOTION. In this state, the secondary is asked to catch-up with the WAL traffic from the primary, and then report success.
+
+The monitor then continues orchestrating the promotion of the standby: it stops the primary (implementing STONITH in order to prevent any data loss), and promotes the secondary into being a primary now.
+
+Depending on the exact situation that triggered the primary unhealthy, it’s possible that the secondary fails to catch-up with WAL from it, in that case after the PREPARE_PROMOTION_CATCHUP_TIMEOUT the standby reports success anyway, and the failover sequence continues from the monitor.
+
+When the keeper reports an acceptable WAL difference in the two nodes again, then the replication is upgraded back to being synchronous. While a secondary node is not in the SECONDARY state, secondary promotion is disabled.
+主机恢复后重新加入集群中，并且状态为secondary
+</code></pre>
+<pre><code>- 备节点失败
+When the secondary node is unhealthy, the monitor assigns to it the state CATCHINGUP, and assigns the state WAIT_PRIMARY to the primary node. When implementing the transition from PRIMARY to WAIT_PRIMARY, the keeper disables synchronous replication.
+</code></pre><pre><code>- 监控节点失败
+Then the primary and secondary node just work as if you didn’t have setup pg_auto_failover in the first place, as the keeper fails to report local state from the nodes. Also, health checks are not performed. It means that no automated failover may happen, even if needed.
+</code></pre><p>尽量避免监控节点与主节点同时失败的情况，如避免同机架，同机房，同一个网络分区。</p>
+<h4 id="网络问题">网络问题</h4>
+<h3 id="维护模式">维护模式</h3>
+<pre><code>$ pg_autoctl enable maintenance
+$ pg_autoctl disable maintenance
+</code></pre><h3 id="增减节点">增减节点</h3>
+<p>​	添加数据库节点</p>
+<p>​		 与前面加入从节点一致</p>
+<p>​     删除数据库节点</p>
+<pre><code>-- 在监控点删除postgres
+su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl drop node  --destroy --force --name node3 --formation formation_name_003&quot;
+</code></pre><h3 id="切换策略机制">切换策略机制</h3>
+<pre><code> pgautofailover.health_check_max_retries | 2
+ pgautofailover.health_check_period      | 20000
+ pgautofailover.health_check_retry_delay | 2000
+ pgautofailover.health_check_timeout     | 5000
+</code></pre><h2 id="多集群管理">多集群管理</h2>
+<h3 id="多集群管理说明">多集群管理说明</h3>
+<p>​	多集群这里的含义是一个monitor管理多套集群</p>
+<p>​	主要用到的两个概念</p>
+<ul>
+<li>
+<p>formation</p>
+</li>
+<li>
+<p>group</p>
+</li>
+</ul>
+<p><strong>A formation is a logical set of PostgreSQL services that are managed together.</strong></p>
+<p><strong>It is possible to operate many formations with a single monitor instance. Each formation has a group of Postgres nodes and the FSM orchestration implemented by the monitor applies separately to each group.</strong></p>
+<p>通过说明可以知道，利用formation可以实现一个monitor管理多套集群。</p>
+<p><strong>A group consists of a PostgreSQL primary server and a secondary server setup with Hot Standby synchronous replication.</strong></p>
+<p><strong>The notion of a formation that contains multiple groups in pg_auto_failover is useful when setting up and managing a whole Citus formation, where the coordinator nodes belong to group zero of the formation, and each Citus worker node becomes its own group and may have Postgres standby nodes.</strong></p>
+<p>这里提供一个思路，一套citus集群在一个formation之下，citus中的多个主从节点通过group来区分。</p>
+<h3 id="具体实现案例">具体实现案例</h3>
+<h4 id="利用formation-管理多套集群">利用formation 管理多套集群</h4>
+<pre><code>-- 创建formation , 默认使用default
+/usr/pgsql-14/bin/pg_autoctl create formation \
+ --pgdata /var/lib/pgsql/14/data/ \
+ --monitor 'postgres://autoctl_node@node0:5432/pg_auto_failover1?sslmode=require' \
+ --formation formation_name_003 \
+ --kind pgsql \
+ --dbname pg_auto_failover
+</code></pre><pre><code>select * from pgautofailover.formation ;
+    formationid     | kind  |      dbname       | opt_secondary | number_sync_standbys 
+--------------------+-------+-------------------+---------------+----------------------
+ default            | pgsql | postgres          | t             |                    0
+ formation_name_003 | pgsql | postgres          | t             |                    0
+(2 rows)
+</code></pre><pre><code>-- 在创建数据库节点时指定formation
+su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create postgres \
+--hostname node3 \
+--formation formation_name_003 \
+--name node3 \
+--pgctl /usr/pgsql-14/bin/pg_ctl \
+--pgdata /var/lib/pgsql/14/data/ \
+--auth trust \
+--ssl-self-signed \
+--monitor 'postgres://autoctl_node@node0:5432/pg_auto_failover?sslmode=require' \ 
+&quot;
+</code></pre><pre><code>-- 查看数据库节点本地配置文件位置
+su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl show file   --pgdata /var/lib/pgsql/14/data/&quot;
+</code></pre><pre><code>-- 在monitor节点查看 数据库node节点注册情况
+select formationid,nodeid ,groupid,nodename from pgautofailover.node;
+    formationid     | nodeid | groupid | nodename 
+--------------------+--------+---------+----------
+ formation_name_003 |    120 |       0 | node3
+ default            |      1 |       0 | node_1
+ default            |    111 |       0 | node2
+(3 rows)
+
+</code></pre><h4 id="利用group-管理citus中的多集群">利用group 管理citus中的多集群</h4>
+<p>在创建pg节点时并没有参考用来指定group, 文档中有如下关于group的描述。</p>
+<p><strong>in a pgsql formation, there can be only one group, with groupId 0</strong></p>
+<p><strong>At the moment citus formation kinds are not managed in the Open Source version of pg_auto_failover.</strong></p>
+<p>很遗憾，现开源版本并不支持 citus类型的formation。 类型为pgsql的formation中只支持为零的group。</p>
+<p>用pgautofailover来管理citus 集群还是使用多个formaton 吧</p>
+<h2 id="监控节点高可用">监控节点高可用</h2>
+<pre><code>-- 数据库的主从流复制 mon1主节点,mon2复制节点 
+-- 在创建formation 及 postgres 节点时， 将-- monitor 参数指定为
+postgres://mon1:5432,mon2:5432,mon3:5432/pg_auto_failover?target_session_attrs=read-write&amp;sslmode=prefer
+</code></pre><h2 id="客户端高可用">客户端高可用</h2>
+<pre><code>$ psql -d &quot;postgresql://host1,host2/dbname?target_session_attrs=read-write&quot;
+$ psql -d &quot;postgresql://host1:port2,host2:port2/dbname?target_session_attrs=read-write&quot;
+$ psql -d &quot;host=host1,host2 port=port1,port2 target_session_attrs=read-write&quot;
+</code></pre><h2 id="常用命令">常用命令</h2>
+<p><a href="https://pg-auto-failover.readthedocs.io/en/master/ref/manual.html">https://pg-auto-failover.readthedocs.io/en/master/ref/manual.html</a></p>
+<h2 id="安全及权限">安全及权限</h2>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/postgres/pg_rewrite/">pg_rewrite</a></li>
+        
+        <li><a href="/postgres/dts/">逻辑复制实现数据迁移</a></li>
+        
+        <li><a href="/postgres/pg_buffercache/">pg_buffercache</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2022 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/network-security/trivy/" title="Trivy 容器漏洞扫描">Trivy 容器漏洞扫描</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/docker/">docker (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/haproxy/">haproxy (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (9)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/tidb/">tidb (5)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (8)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AD%98%E5%82%A8/">存储 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (3)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

@@ -101,6 +101,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/reback/">误操作闪回</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月11日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            原理 利用mvcc原理，数据在删除或更新时只是标记为删除。当没有发生过gc时历史数据仍然存在。只是对当前事务不可见。 通过修改当前事务号为误操作前的事务号就可以看到历史数据。 例如 T1 （添加数据） T2 - T8（其他操作） T9（删除了T1加入的数据）T10&hellip; (其他操作)。 自需要将……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/reback/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/thinking_in_db_fd/">数据库优化思考 - 结构设计</a>
             </h1>
         </header>
@@ -305,29 +328,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/patroni/">PG高可用Patroni</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月30日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/postgres'>postgres</a>
-            
-        </div>
-        
-        <div class="post-content">
-            环境 操作系统 Centos 7 patroni 版本 2.0.2 postgres 版本 13 实现目标 高可用方案对比 patroni 结构分析 patroni 搭建新集群 patroni 接管现有集群 patroni 管理pg配置 手动swithover 自动failover 维护模式 弹性扩容，缩容 对外提供统一服务 RestFULLAPI 备份恢复 监控 日志 升级 高可用方案对比 pg的高可用方案都是基于流复制来实现 PAF pacemaker + corosyns repmgr repmgr 手动流复制管……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/patroni/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -413,6 +413,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
     </li>
     
@@ -448,10 +452,6 @@
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -478,7 +478,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/index-bloom/" title="Bloom 索引">Bloom 索引</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月23日
+        </date>
+        
+        <div class="post-content">
+            Bloom 索引 Bloom 过滤器代表的是一组值。它的作用是检测一个元素是否可能属于集合，它可以允许有一些false positive，但是不允许存在false negative。也就是说，尽管某个元素不在集合中，测试也可能返回true。然而，如果元素在集合中，就不可能返回false。 创建在一组列中的B……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/index-bloom/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/monitor/nginx-status/" title="Nginx 状态监控">Nginx 状态监控</a>
             </h1>
         </header>
@@ -254,22 +270,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/git-nopassword/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgage/" title="数据库年龄">数据库年龄</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年1月7日
-        </date>
-        
-        <div class="post-content">
-            背景 数据库的事务标识符使用的是32位的,最大可表示42个亿。当前事务的数据在20亿个事务之后将变的不可见。为了解决这个问题（回卷），Postgres引入了一个冻结事务标识的概念。 并实现了名为freeze的冻结过程。 冻结过程 两种模式 惰性模式 迫切模式 惰性模式回跳过页中所有的数据都位可……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgage/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -406,6 +406,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
     </li>
     
@@ -441,10 +445,6 @@
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -471,7 +471,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年7月11日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            pg_auto_failover 实践 一个简单的架构 citus同源postgres高可用方案 角色: 主节点 (master) 复制节点 (slave) 监控节点 (monitor) 集群搭建 环境说明 软件版本 postgresql 14.4 pg_auto_failover 1.6.4 centos 7 网络环境 IP 软件 10.10.2.11 monitor 10.10.2.12 master 10.10.2.13 replication 从零开始建设 ​ 没有任何历史包袱，包括数据库自身的搭建 ​ 手动安装 ​ 在所有的节点上执行 -- 数据库安装 sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm sudo yum install -y postgresql14-server # install pg_auto_failover curl https://install.citusdata.com/community/rpm.sh……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgautofailover/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
             </h1>
         </header>
@@ -309,31 +334,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_elk/" title="数据库日志分析">数据库日志分析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年11月5日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            数据库日志分析 整体架构 filebeat -&gt; logstash -&gt; elasticseach -&gt; kibana filebeat 收集日志 logstash 中转及日志规则匹配过滤 elasticsearch 日志存储检索库 kibana 查看界面 postgresql log_destination = 'csvlog' logging_collector = 'on' log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log' log_rotation_age = '1d' log_rotation_size = '100MB' log_min_messages = 'info' log_min_duration_statement = '1000' log_statement = 'ddl' filebeat filebeat.inputs: - type: log enabled: true paths: - /var/lib/pgsql/***/postgresql-*.csv fields: log_topics: postgresql multiline.pattern: '^[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3} [A-Z]{3}' multiline.negate: true multiline.match: after filebeat.config.modules: path: ${path.config}/modules.d/*.yml reload.enabled: false setup.template.settings: index.number_of_shards: 1 tags: [&quot;postgesql&quot;] setup.kibana: output.logstash: hosts: [&quot;*.*.*.*:5044&quot;] processors: - add_host_metadata: ~ - add_cloud_metadata: ~ logstash # # this config is use for version logstash 7.3.1 # input { beats { port =&gt; 5044 } #sdtin{ # #} } #……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_elk/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -433,6 +433,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
     </li>
     
@@ -468,10 +472,6 @@
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -498,7 +498,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

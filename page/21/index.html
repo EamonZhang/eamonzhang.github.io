@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/ln-s/" title="ln -s 建立软连接">ln -s 建立软连接</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月19日
+        </date>
+        
+        <div class="post-content">
+            创建软连接 类似于windows中的创建快捷方式 ln -s source target 具体方法举例 需求 数据库的数据实际存放位置为 /data/pgsql/10/data/ 数据库的应用访问地址为 /var/lib/pgsql/10/data/ 创建软连接 1 切换目录到需要创建快捷方式的文件目录 cd /var/lib/pgsql/10/ 2.1 创建软连接 ln -s /data/pgsql/10/data/ data 2.2 删除软连接 rm data 删除软连接和数据 rm data/ 3 权限和所有者 chmod chown 修改软连接的所用者 使用 -h 参数 chown -h……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/ln-s/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/hdparm/" title="查看硬盘型号">查看硬盘型号</a>
             </h1>
         </header>
@@ -247,22 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/storage/introduce/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/k8s/install/" title="集群部署安装">集群部署安装</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月7日
-        </date>
-        
-        <div class="post-content">
-            kubeadm kubeadm 可当做体验版，证书可用时间一年 Kubespray Kubespray 是 Kubernetes incubator 中的项目，目标是提供 Production Ready Kubernetes 部署方案，该项目基础是通过 Ansible Playbook 来定义系统与 Kubernetes 集群部署的任务，具有以下几个特点： 可以部署在 AWS, GCE, Azure, OpenStack 以及裸机上. 部署 High Available Kubernetes 集群. 可组合性 (Composable)，可自行选择 Network Plugin (flannel, calico, canal, weave) 来部署. 多种 Linux distributions(CoreOS, Debian Jessie, Ubuntu 16.04, CentOS/RHEL7). kops kops……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/k8s/install/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -399,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
     </li>
     
@@ -434,10 +438,6 @@
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -464,7 +464,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/log/" title="数据库日志">数据库日志</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月4日
+        </date>
+        
+        <div class="post-content">
+            介绍 PostgreSQL有3种日志，分别是pg_log（数据库运行日志）、pg_xlog（WAL 日志，即重做日志）、pg_clog（事务提交日志，记录的是事务的元数据） postgres 10 版本将文件目录结构改为 log，pg_wal，pg_xact log默认是关闭的，需要设置其参数。wal和xac……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/log/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/fio/" title="fio 硬盘性能测试">fio 硬盘性能测试</a>
             </h1>
         </header>
@@ -261,29 +277,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/params/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/tidb/lsm/" title="LSM Overview">LSM Overview</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月26日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/tidb'>tidb</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            介绍 LSM-Tree，全称为 log-structured merge-tree，是为了满足日益增长的数据量所带来的高效写性能的需求而提出的设计。考虑到磁盘随机写和顺序写上千倍的性能差距，传统的Btree 结构设计采取的分散的 update-in-place 策略在数据量庞大、写缓存作用有限的情况下，存在大批量的随机写操作，使得写性能完全满足……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/tidb/lsm/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -420,6 +413,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
     </li>
     
@@ -455,10 +452,6 @@
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -485,7 +478,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

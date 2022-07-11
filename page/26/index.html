@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/dumb-init/" title="Dumb Init">Dumb Init</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月1日
+        </date>
+        
+        <div class="post-content">
+            基础概念 孤儿进程：一个父进程退出，而它的一个或多个子进程还在运行，那么那些子进程将成为孤儿进程。孤儿进程将被init进程(进程号为1)所收养，并由init进程对它们完成状态收集工作。 僵尸进程：一个进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或waitpi……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/dumb-init/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/middleware/proxy/" title="代理">代理</a>
             </h1>
         </header>
@@ -282,22 +298,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/network-security/teleport/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/git-sparsecheckout/" title="Git 只下载指定文件或文件夹下的内容">Git 只下载指定文件或文件夹下的内容</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月23日
-        </date>
-        
-        <div class="post-content">
-            需求 有些时候我们只想下载项目中的部分文件或文件夹下面的内容，而不是整个项目。这个时候使用git clone难免有些过重。 是时候来寻找一个合适的方式来满足我们的需求了。这就是Sparse Checkout模式 具体方法 比如我只想下载 https://github.com/bodani/bodani.github.io.git 中的k8s 目录的内容 mkdir gitSparse cd gitSparse git init git remote add -f origin https://github.com/bodani/bodani.github.io.git git config core.sparsecheckout true echo……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/git-sparsecheckout/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -421,6 +421,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
     </li>
     
@@ -456,10 +460,6 @@
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -486,7 +486,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/tidb/lsm/" title="LSM Overview">LSM Overview</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月26日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/tidb'>tidb</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            介绍 LSM-Tree，全称为 log-structured merge-tree，是为了满足日益增长的数据量所带来的高效写性能的需求而提出的设计。考虑到磁盘随机写和顺序写上千倍的性能差距，传统的Btree 结构设计采取的分散的 update-in-place 策略在数据量庞大、写缓存作用有限的情况下，存在大批量的随机写操作，使得写性能完全满足……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/tidb/lsm/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/middleware/haproxy/" title="Haproxy 算法">Haproxy 算法</a>
             </h1>
         </header>
@@ -268,22 +291,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/tidb/2013/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/istio/concept01/" title="熔断，限流，降级">熔断，限流，降级</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月13日
-        </date>
-        
-        <div class="post-content">
-            写在前面 在学习Service Mesh前还是最好先清楚几个概念，如熔断，限流，降级。接下来一起揭开面纱，让陌生的名词变得没有那么神秘。一切都来自于现实的应用场景，及解决问题的方法方式。 consumer表示服务调用方 provider表示服务提供方 A调用B服务，一般是泛指调用B服务里面……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/istio/concept01/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -420,6 +427,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
     </li>
     
@@ -455,10 +466,6 @@
         <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -485,7 +492,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (41)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
