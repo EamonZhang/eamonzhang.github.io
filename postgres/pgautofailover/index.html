@@ -92,7 +92,131 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一个简单的架构">一个简单的架构</a></li>
+    <li><a href="#集群搭建">集群搭建</a>
+      <ul>
+        <li><a href="#环境说明">环境说明</a></li>
+        <li><a href="#从零开始建设">从零开始建设</a></li>
+        <li><a href="#现有数据库接管">现有数据库接管</a></li>
+      </ul>
+    </li>
+    <li><a href="#集群管理">集群管理</a>
+      <ul>
+        <li><a href="#状态查看">状态查看</a></li>
+        <li><a href="#手动switch">手动switch</a></li>
+        <li><a href="#自动failover">自动failover</a></li>
+        <li><a href="#维护模式">维护模式</a></li>
+        <li><a href="#增减节点">增减节点</a></li>
+        <li><a href="#切换策略机制">切换策略机制</a></li>
+      </ul>
+    </li>
+    <li><a href="#多集群管理">多集群管理</a>
+      <ul>
+        <li><a href="#多集群管理说明">多集群管理说明</a></li>
+        <li><a href="#具体实现案例">具体实现案例</a></li>
+      </ul>
+    </li>
+    <li><a href="#监控节点高可用">监控节点高可用</a></li>
+    <li><a href="#客户端高可用">客户端高可用</a></li>
+    <li><a href="#常用命令">常用命令</a></li>
+    <li><a href="#安全及权限">安全及权限</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -110,6 +234,12 @@
         </div>
         
         
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
         
         <div class="post-content">
             <h1 id="pg_auto_failover-实践">pg_auto_failover 实践</h1>
