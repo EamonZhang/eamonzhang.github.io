@@ -349,7 +349,7 @@ su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create postgres \
 su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl -q show systemd --pgdata /var/lib/pgsql/14/data &quot;  &gt; /etc/systemd/system/pgautofailover.service
 
 -- 启动服务
-system start pgautofailover
+systemctl start pgautofailover
 </code></pre><pre><code>-- 在monitor节点查看状态
 /usr/pgsql-14/bin/pg_autoctl   show state --pgdata /var/lib/pgsql/14/data/
 
