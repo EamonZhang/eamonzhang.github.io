@@ -263,21 +263,21 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">IP</th>
+<th style="text-align:center">IP / host</th>
 <th style="text-align:center">软件</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">10.10.2.11</td>
+<td style="text-align:center">10.10.2.11 / node0</td>
 <td style="text-align:center">monitor</td>
 </tr>
 <tr>
-<td style="text-align:center">10.10.2.12</td>
+<td style="text-align:center">10.10.2.12 / node1</td>
 <td style="text-align:center">master</td>
 </tr>
 <tr>
-<td style="text-align:center">10.10.2.13</td>
+<td style="text-align:center">10.10.2.13 / node2</td>
 <td style="text-align:center">replication</td>
 </tr>
 </tbody>
@@ -423,7 +423,7 @@ su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl drop node  --destroy --force
 <pre><code>-- 创建formation , 默认使用default
 /usr/pgsql-14/bin/pg_autoctl create formation \
  --pgdata /var/lib/pgsql/14/data/ \
- --monitor 'postgres://autoctl_node@node0:5432/pg_auto_failover1?sslmode=require' \
+ --monitor 'postgres://autoctl_node@node0:5432/pg_auto_failover?sslmode=require' \
  --formation formation_name_003 \
  --kind pgsql \
  --dbname pg_auto_failover
