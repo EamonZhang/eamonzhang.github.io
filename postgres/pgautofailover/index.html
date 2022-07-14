@@ -263,21 +263,21 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">IP / host</th>
+<th style="text-align:center">IP</th>
 <th style="text-align:center">软件</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">10.10.2.11 / node0</td>
+<td style="text-align:center">10.10.2.11</td>
 <td style="text-align:center">monitor</td>
 </tr>
 <tr>
-<td style="text-align:center">10.10.2.12 / node1</td>
+<td style="text-align:center">10.10.2.12</td>
 <td style="text-align:center">master</td>
 </tr>
 <tr>
-<td style="text-align:center">10.10.2.13 / node2</td>
+<td style="text-align:center">10.10.2.13</td>
 <td style="text-align:center">replication</td>
 </tr>
 </tbody>
@@ -310,8 +310,7 @@ su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create monitor \
 systemctl start pgautofailover
 
 -- 查看node连接monitor 信息
-su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl show uri --formation monitor --pgdata /var/lib/pgsql/14/data/&quot;
-
+/usr/pgsql-14/bin/pg_autoctl show uri --formation monitor --pgdata /var/lib/pgsql/14/data/
 
 postgres://autoctl_node@node0:5432/pg_auto_failover?sslmode=require
 
@@ -329,12 +328,15 @@ su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create postgres \
     
 </code></pre><pre><code>创建节点说明，在create postgres后，将在本地生成配置信息。具体可查看
 su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl show file   --pgdata /var/lib/pgsql/14/data/&quot;
-</code></pre><pre><code>-- systemd 管理服务
-su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl -q show systemd --pgdata /var/lib/pgsql/14/data &quot;  &gt; /etc/systemd/system/pgautofailover.service
-
--- 启动服务
-system start pgautofailover
-</code></pre><p>​		创建数据库从节点</p>
+</code></pre><pre><code> ```
+ -- systemd 管理服务
+ su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl -q show systemd --pgdata /var/lib/pgsql/14/data &quot;  &gt; /etc/systemd/system/pgautofailover.service
+ 
+ -- 启动服务
+ systemctl start pgautofailover
+ ```
+</code></pre>
+<p>​		创建数据库从节点</p>
 <pre><code>-- 在另一个节点创建从库
 su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create postgres \
     --hostname node2 \
@@ -349,7 +351,7 @@ su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create postgres \
 su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl -q show systemd --pgdata /var/lib/pgsql/14/data &quot;  &gt; /etc/systemd/system/pgautofailover.service
 
 -- 启动服务
-systemctl start pgautofailover
+system start pgautofailover
 </code></pre><pre><code>-- 在monitor节点查看状态
 /usr/pgsql-14/bin/pg_autoctl   show state --pgdata /var/lib/pgsql/14/data/
 
@@ -423,11 +425,12 @@ su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl drop node  --destroy --force
 <pre><code>-- 创建formation , 默认使用default
 /usr/pgsql-14/bin/pg_autoctl create formation \
  --pgdata /var/lib/pgsql/14/data/ \
- --monitor 'postgres://autoctl_node@node0:5432/pg_auto_failover?sslmode=require' \
+ --monitor 'postgres://autoctl_node@node0:5432/pg_auto_failover1?sslmode=require' \
  --formation formation_name_003 \
  --kind pgsql \
  --dbname pg_auto_failover
-</code></pre><pre><code>select * from pgautofailover.formation ;
+</code></pre><pre><code>--查看 formation 信息
+select * from pgautofailover.formation ;
     formationid     | kind  |      dbname       | opt_secondary | number_sync_standbys 
 --------------------+-------+-------------------+---------------+----------------------
  default            | pgsql | postgres          | t             |                    0
@@ -444,6 +447,12 @@ su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create postgres \
 --ssl-self-signed \
 --monitor 'postgres://autoctl_node@node0:5432/pg_auto_failover?sslmode=require' \ 
 &quot;
+
+注意事项: 
+--hostname 本机host，
+--formation 上面创建的formation ,
+--name节点名称 ,
+--monitor monitor节点连接信息
 </code></pre><pre><code>-- 查看数据库节点本地配置文件位置
 su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl show file   --pgdata /var/lib/pgsql/14/data/&quot;
 </code></pre><pre><code>-- 在monitor节点查看 数据库node节点注册情况
