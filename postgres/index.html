@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年7月14日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            HyperLogLog 使用场景 在应用中统计去重后的个数，传统的方法通常是这么操作 count(distict(xxx))。 如果数据量变大，或统计频繁，性能会越来越差。 可以考虑一个近似统计计算方法hll create extension hll; 简单例子 -- 商店的到访统计 CREATE TABLE store_visitors ( store_id integer, -- 商店ID distinct_visitors hll -- 不重复的客户数 ); -- 新店铺注册 INSERT INTO store_visitors(id, set) VALUES (1, hll_empty()); --……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/hll/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
             </h1>
         </header>
@@ -309,31 +334,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年12月20日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            json 与 jsonb json 保持原始格式， jsonb是解析输入后保存的二进制，在解析时会过滤掉不必要的空格和重复的健。 SELECT '{&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;: 17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5}'::json; json ------------------------------------------------------------ {&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;: 17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5} SELECT '{&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;: 17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5}'::jsonb; jsonb ----------------------------------------------- {&quot;age&quot;: 17.5, &quot;sex&quot;: &quot;m&quot;, &quot;name&quot;: &quot;zhangsan&quot;} json 插入可能会更快些，jsonb的读取更快 操作符 json ,jsonb 操作符 操作符 右操作数类型 描述 示例 结果 -&gt; int 获取JSON数组元素（索引从0开始） select……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_json/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -433,6 +433,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
     </li>
     
@@ -468,10 +472,6 @@
         <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -498,7 +498,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (43)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

@@ -6,7 +6,16 @@
     <description>Recent content in postgres on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 11 Jul 2022 15:15:51 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Jul 2022 15:44:53 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用hll数据类型进行数据统计</title>
+      <link>https://zhangeamon.top/postgres/hll/</link>
+      <pubDate>Thu, 14 Jul 2022 15:44:53 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/hll/</guid>
+      <description>HyperLogLog 使用场景 在应用中统计去重后的个数，传统的方法通常是这么操作 count(distict(xxx))。 如果数据量变大，或统计频繁，性能会越来越差。 可以考虑一个近似统计计算方法hll create extension hll; 简单例子 -- 商店的到访统计 CREATE TABLE store_visitors ( store_id integer, -- 商店ID distinct_visitors hll -- 不重复的客户数 ); -- 新店铺注册 INSERT INTO store_visitors(id, set) VALUES (1, hll_empty()); --</description>
+    </item>
+    
     <item>
       <title>数据库高可用pgautofailover</title>
       <link>https://zhangeamon.top/postgres/pgautofailover/</link>

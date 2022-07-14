@@ -101,6 +101,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/hll/">利用hll数据类型进行数据统计</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年7月14日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            HyperLogLog 使用场景 在应用中统计去重后的个数，传统的方法通常是这么操作 count(distict(xxx))。 如果数据量变大，或统计频繁，性能会越来越差。 可以考虑一个近似统计计算方法hll create extension hll; 简单例子 -- 商店的到访统计 CREATE TABLE store_visitors ( store_id integer, -- 商店ID distinct_visitors hll -- 不重复的客户数 ); -- 新店铺注册 INSERT INTO store_visitors(id, set) VALUES (1, hll_empty()); --……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/hll/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pgautofailover/">数据库高可用pgautofailover</a>
             </h1>
         </header>
@@ -305,29 +328,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_elk/">数据库日志分析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年11月5日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/postgres'>postgres</a>
-            
-        </div>
-        
-        <div class="post-content">
-            数据库日志分析 整体架构 filebeat -&gt; logstash -&gt; elasticseach -&gt; kibana filebeat 收集日志 logstash 中转及日志规则匹配过滤 elasticsearch 日志存储检索库 kibana 查看界面 postgresql log_destination = 'csvlog' logging_collector = 'on' log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log' log_rotation_age = '1d' log_rotation_size = '100MB' log_min_messages = 'info' log_min_duration_statement = '1000' log_statement = 'ddl' filebeat filebeat.inputs: - type: log enabled: true paths: - /var/lib/pgsql/***/postgresql-*.csv fields: log_topics: postgresql multiline.pattern: '^[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3} [A-Z]{3}' multiline.negate: true multiline.match: after filebeat.config.modules: path: ${path.config}/modules.d/*.yml reload.enabled: false setup.template.settings: index.number_of_shards: 1 tags: [&quot;postgesql&quot;] setup.kibana: output.logstash: hosts: [&quot;*.*.*.*:5044&quot;] processors: - add_host_metadata: ~ - add_cloud_metadata: ~ logstash # # this config is use for version logstash 7.3.1 # input { beats { port =&gt; 5044 } #sdtin{ # #} } #……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_elk/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -409,6 +409,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
     </li>
     
@@ -444,10 +448,6 @@
         <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -474,7 +474,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (42)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (43)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
