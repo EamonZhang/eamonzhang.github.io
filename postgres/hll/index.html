@@ -296,13 +296,14 @@ CREATE TABLE github_events_rollup_minute(
     event_type text,
     distinct_user_id_count hll
 );
+
+-- 载入数据
 INSERT INTO github_events_rollup_minute(
     created_at,
     event_type,
     distinct_user_id_count
 )
 
--- 载入数据
 SELECT
     date_trunc('minute', created_at) AS created_at,
     event_type,
