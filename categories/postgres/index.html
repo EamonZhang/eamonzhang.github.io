@@ -116,7 +116,7 @@
         </div>
         
         <div class="post-content">
-            HyperLogLog 使用场景 在应用中统计去重后的个数，传统的方法通常是这么操作 count(distict(xxx))。 如果数据量变大，或统计频繁，性能会越来越差。 可以考虑一个近似统计计算方法hll create extension hll; 简单例子 -- 商店的到访统计 CREATE TABLE store_visitors ( store_id integer, -- 商店ID distinct_visitors hll -- 不重复的客户数 ); -- 新店铺注册 INSERT INTO store_visitors(id, set) VALUES (1, hll_empty()); --……
+            HyperLogLog 使用场景 在应用中统计去重后的个数，传统的方法通常是这么操作 count(distict(xxx))。 如果数据量变大，或统计频繁，性能会越来越差。 可以考虑一个近似统计计算方法hll create extension hll; HyperLogLog 是一种算法, 可以用来估算数据集的基数. 基数是指一个集合中不同值的数目, 等同于 COUNT(DISTINCT field) 返回值. 对于超……
             <p class="readmore"><a href="https://zhangeamon.top/postgres/hll/">阅读全文</a></p>
         </div>
     </article>
