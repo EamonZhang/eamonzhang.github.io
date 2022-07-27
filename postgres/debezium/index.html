@@ -190,6 +190,25 @@
         <li><a href="#多表">多表</a></li>
       </ul>
     </li>
+    <li><a href="#kafka-connect-rest-api">Kafka Connect REST API</a>
+      <ul>
+        <li><a href="#获取-connect-集群的基本信息">获取 Connect 集群的基本信息</a></li>
+        <li><a href="#列出-kafka-connect-worker-上安装的插件">列出 Kafka Connect Worker 上安装的插件</a></li>
+        <li><a href="#创建一个连接器">创建一个连接器</a></li>
+        <li><a href="#获取所有现有的连接器名称">获取所有现有的连接器名称</a></li>
+        <li><a href="#获取连接器的配置信息">获取连接器的配置信息</a></li>
+        <li><a href="#获取连接器的状态信息">获取连接器的状态信息</a></li>
+        <li><a href="#获取当前为连接器运行的任务列表">获取当前为连接器运行的任务列表</a></li>
+        <li><a href="#获取任务的当前状态">获取任务的当前状态</a></li>
+        <li><a href="#获取连接器使用的主题topics列表">获取连接器使用的主题(topics)列表</a></li>
+        <li><a href="#清空连接器的活动主题topics列表">清空连接器的活动主题(topics)列表</a></li>
+        <li><a href="#暂停连接器任务">暂停连接器任务</a></li>
+        <li><a href="#恢复连接器任务">恢复连接器任务</a></li>
+        <li><a href="#删除连接器">删除连接器</a></li>
+        <li><a href="#更新连接器">更新连接器</a></li>
+        <li><a href="#重启连接器和任务tasks">重启连接器和任务(tasks)</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -751,6 +770,99 @@ pk.mode ： 主键类型
         &quot;delete.enabled&quot; : &quot;true&quot;
     }
 }
+</code></pre><h2 id="kafka-connect-rest-api">Kafka Connect REST API</h2>
+<p>为了方便查看json 建议安装jq</p>
+<p><code>yum install epel-release jq -y</code></p>
+<p>官方文档</p>
+<p><a href="https://kafka.apache.org/documentation.html#connect_rest">https://kafka.apache.org/documentation.html#connect_rest</a></p>
+<h3 id="获取-connect-集群的基本信息">获取 Connect 集群的基本信息</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">curl -s -X GET localhost:8083/ | jq
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="列出-kafka-connect-worker-上安装的插件">列出 Kafka Connect Worker 上安装的插件</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#a61717;background-color:#e3d2d2">#</span> <span style="color:#a61717;background-color:#e3d2d2">curl</span> <span style="color:#a61717;background-color:#e3d2d2">-s</span> <span style="color:#a61717;background-color:#e3d2d2">-X</span> <span style="color:#a61717;background-color:#e3d2d2">GET</span> <span style="color:#a61717;background-color:#e3d2d2">localhost:</span><span style="color:#099">8083</span><span style="color:#a61717;background-color:#e3d2d2">/connector-plugins</span> <span style="color:#a61717;background-color:#e3d2d2">|</span> <span style="color:#a61717;background-color:#e3d2d2">jq</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="创建一个连接器">创建一个连接器</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">inventory-connector# curl -i -X POST -H <span style="color:#d14">&#34;Accept:application/json&#34;</span> -H <span style="color:#d14">&#34;Content-Type:application/json&#34;</span> 192.168.0.40:8083/connectors/ -d @inventory-connector.json
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="获取所有现有的连接器名称">获取所有现有的连接器名称</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># curl -s -X GET localhost:8083/connectors/ | jq</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="获取连接器的配置信息">获取连接器的配置信息</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># curl -s -X GET localhost:8083/connectors/inventory-connector | jq</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="获取连接器的状态信息">获取连接器的状态信息</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># curl -s -X GET localhost:8083/connectors/inventory-connector/status | jq</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="获取当前为连接器运行的任务列表">获取当前为连接器运行的任务列表</h3>
+<pre><code># curl -s -X GET localhost:8083/connectors/inventory-connector/tasks | jq
+</code></pre><h3 id="获取任务的当前状态">获取任务的当前状态</h3>
+<pre><code># curl -s -X GET localhost:8083/connectors/inventory-connector/tasks/0/status | jq
+</code></pre><h3 id="获取连接器使用的主题topics列表">获取连接器使用的主题(topics)列表</h3>
+<pre><code># curl -s -X GET localhost:8083/connectors/oracle-scott-connector/topics | jq
+</code></pre><h3 id="清空连接器的活动主题topics列表">清空连接器的活动主题(topics)列表</h3>
+<pre><code># curl -s -X PUT localhost:8083/connectors/oracle-scott-connector/topics/reset
+</code></pre><h3 id="暂停连接器任务">暂停连接器任务</h3>
+<pre><code># curl -s -X PUT localhost:8083/connectors/inventory-connector/pause
+</code></pre><h3 id="恢复连接器任务">恢复连接器任务</h3>
+<pre><code># curl -s -X PUT localhost:8083/connectors/inventory-connector/resume
+</code></pre><h3 id="删除连接器">删除连接器</h3>
+<pre><code># curl -s -X DELETE localhost:8083/connectors/inventory-connector
+</code></pre><h3 id="更新连接器">更新连接器</h3>
+<pre><code># curl -i -X PUT -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; localhost:8083/connectors/inventory-connector/config -d @inventory-connector.json
+</code></pre><h3 id="重启连接器和任务tasks">重启连接器和任务(tasks)</h3>
+<ul>
+<li>语法</li>
+</ul>
+<pre><code>POST /connectors/{name}/restart?includeTasks=&lt;true|false&gt;&amp;onlyFailed=&lt;true|false&gt;
+# &quot;includeTasks=true&quot;: 重新启动连接器实例和任务实例
+# &quot;includeTasks=false&quot;(默认): 仅重新启动连接器实例
+# &quot;onlyFailed=true&quot;: 仅重新启动具有 FAILED 状态的实例
+# &quot;onlyFailed=false&quot;(默认): 重新所有实例
+</code></pre><ul>
+<li>示例</li>
+</ul>
+<pre><code># curl -s -X POST localhost:8083/connectors/inventory-connector/restart
+</code></pre><ul>
+<li>默认只重新启动连接器并不会重新启动其所有任务。因此，您也可以重新启动失败的单个任务，然后再次获取其状态：</li>
+</ul>
+<pre><code># curl -s -X POST localhost:8083/connectors/inventory-connector/tasks/0/restart
+# curl -s -X GET localhost:8083/connectors/inventory-connector/tasks/0/status | jq
 </code></pre>
         </div>
 
