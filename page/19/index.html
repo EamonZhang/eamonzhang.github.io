@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cgroups/" title="cgroups">cgroups</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月14日
+        </date>
+        
+        <div class="post-content">
+            https://www.certdepot.net/rhel7-get-started-cgroups/ https://www.oracle.com/technical-resources/articles/linux/resource-controllers-linux.html iops和bps限制 限制sda 的读写 lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sda 8:0 0 931.5G 0 disk /data sdb 8:16 0 223.6G 0 disk ├─sdb1 8:17 0 200M 0 part /boot/efi ├─sdb2 8:18 0 1G 0 part /boot ├─sdb3 8:19 0 7.8G 0 part [SWAP] └─sdb4 8:20 0 214.6G 0 part / cd /sys/fs/cgroup/blkio/ echo &quot;8:0 102400&quot; &gt; blkio.throttle.read_bps_device echo &quot;8:0 10&quot; &gt; blkio.throttle.read_iops_device echo &quot;8:0 204800&quot; &gt; blkio.throttle.write_bps_device echo &quot;8:0 20&quot; &gt; blkio.throttle.write_iops_device……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cgroups/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/monitor/postgres/" title="Postgres">Postgres</a>
             </h1>
         </header>
@@ -240,22 +256,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/mail/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pgbouncer/" title="pgbouncer 连接池">pgbouncer 连接池</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月27日
-        </date>
-        
-        <div class="post-content">
-            背景介绍 Pgbouncer是一个针对PostgreSQL数据库的轻量级连接池 pgbouncer 的目标是降低因为新连接到 PostgreSQL 的连接而导致的性能损失 使用术语说明： 为了后面的描述更清晰，使用如下术语 Client : 指访问者 Pgboucer: 指连接池 Postgres: 指数据库。 Connetions: 指彼此之间的连接 整体架构 原来: Client -&gt; Postgres 现在: Client -&gt; Pgbounce -&gt; Postgres 优势 内存消耗低(默……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgbouncer/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -392,6 +392,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
     </li>
     
@@ -427,10 +431,6 @@
         <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
-    </li>
-    
 </ul>
 
     </section>
@@ -457,7 +457,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (43)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (44)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

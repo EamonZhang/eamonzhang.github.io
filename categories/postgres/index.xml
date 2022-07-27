@@ -6,7 +6,16 @@
     <description>Recent content in postgres on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 14 Jul 2022 15:44:53 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Jul 2022 10:37:46 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用debezium 实现数据变更捕获</title>
+      <link>https://zhangeamon.top/postgres/debezium/</link>
+      <pubDate>Wed, 27 Jul 2022 10:37:46 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/debezium/</guid>
+      <description>整个实现以功能演示为目标，便于流程的梳理和理解。不适合正式生成环境使用。 debezium的几种使用方式 单独部署 下游数据传输到cloud，官方目前不推荐 与kafka联合使用 下游数据传输到kafka 嵌入式 例如Flink使用的debezium作为数据的source connetor模块使</description>
+    </item>
+    
     <item>
       <title>利用hll数据类型进行数据统计</title>
       <link>https://zhangeamon.top/postgres/hll/</link>

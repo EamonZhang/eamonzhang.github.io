@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/network01/" title="Docker 本地网络">Docker 本地网络</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月2日
+        </date>
+        
+        <div class="post-content">
+            基础命令概览 docker network --help Usage: docker network COMMAND Manage networks Commands: connect Connect a container to a network create Create a network disconnect Disconnect a container from a network inspect Display detailed information on one or more networks ls List networks prune Remove all unused networks rm Remove one or more networks 默认网络 docker network ls NETWORK ID NAME DRIVER SCOPE 0770a8275bff bridge bridge local b6617326f199 host host local 31c55ffcf0a8 none null local 创建容器时通过 &ndash;network= 指定网络类型 none 这个网络下的容器除了 lo，没有其他任何网卡。 host 共享Host的网络栈，容器的网络配置与 host 完……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/network01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/docker/cgroup-namespaces/" title="Cgroup Namespaces">Cgroup Namespaces</a>
             </h1>
         </header>
@@ -275,29 +291,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-modules/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/ansible/ansible-overview/" title="Ansible Overview">Ansible Overview</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月25日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/ansible'>ansible</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            主要模块 PLAYBOOKS： 任务剧本（任务集），编排定义Ansible任务集的配置文件，由Ansible顺序依次执行，通常是JSON格式的YML文件 INVENTORY： Ansible管理主机的清单/etc/anaible/hosts MODULES： Ansible执行命令的功能模块……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-overview/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -421,6 +414,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
     </li>
     
@@ -456,10 +453,6 @@
         <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
-    </li>
-    
 </ul>
 
     </section>
@@ -486,7 +479,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (43)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (44)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

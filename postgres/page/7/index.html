@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/patroni/" title="PG高可用Patroni">PG高可用Patroni</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月30日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            环境 操作系统 Centos 7 patroni 版本 2.0.2 postgres 版本 13 实现目标 高可用方案对比 patroni 结构分析 patroni 搭建新集群 patroni 接管现有集群 patroni 管理pg配置 手动swithover 自动failover 维护模式 弹性扩容，缩容 对外提供统一服务 RestFULLAPI 备份恢复 监控 日志 升级 高可用方案对比 pg的高可用方案都是基于流复制来实现 PAF pacemaker + corosyns repmgr repmgr 手动流复制管……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/patroni/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_citus/" title="citus 数据库分库">citus 数据库分库</a>
             </h1>
         </header>
@@ -260,31 +285,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/index-invalid/" title="引起索引失效">引起索引失效</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月20日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            简介 索引的作用，加速检索，排序，分组。 优点： 检索 缺点： 新增，更新时需要维护索引，占磁盘空间，创建时锁表。 维护： 根据统计表发生全表扫描次数，索引使用次数。合理添加删除索引。 索引失效的场景 如果where过滤条件设置不合理，即使索引存在，且where过滤条件中包含索引列，也会导致全表扫……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/index-invalid/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -388,6 +388,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
     </li>
     
@@ -423,10 +427,6 @@
         <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
-    </li>
-    
 </ul>
 
     </section>
@@ -453,7 +453,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (43)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (44)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

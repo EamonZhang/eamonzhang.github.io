@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/ssl/" title="数据库 ssl认证">数据库 ssl认证</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年6月3日
+        </date>
+        
+        <div class="post-content">
+            SSL双向认证和SSL单向认证的区别 双向认证 SSL 协议要求服务器和用户双方都有证书。单向认证 SSL 协议不需要客户拥有CA证书，服务器端不会验证客户证书，以及在协商对称密码方案，对称通话密钥时，服务器发送给客户的是没有加过密的(这并不影响 SSL 过程的安全性)密码方案。 这样，双方具体的通讯内容，……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/ssl/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/awsome-postgres/" title="工作中所使用的postgres">工作中所使用的postgres</a>
             </h1>
         </header>
@@ -240,29 +256,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/network-security/dengbao3/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/cpu_temp/" title="Linux 获取CPU温度">Linux 获取CPU温度</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月7日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            直接读取系统信息 可以通过读取如下路径中的数据来获取cpu的温度信息，不过读取的数据没有经过处理。 cpu0： cat /sys/class/thermal/thermal_zone0/temp cpu1： cat /sys/class/thermal/thermal_zone1/temp 通过命令行的方式获取 安装 lm_sensors 软件包： # rpm yum install lm_sensors # deb apt-get install lm-sensors 执行命令sensors-detect，进行简单配置，此命令执行后会出现一系列选项，一直yes即可； 执行……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/cpu_temp/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -399,6 +392,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
     </li>
     
@@ -434,10 +431,6 @@
         <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
-    </li>
-    
 </ul>
 
     </section>
@@ -464,7 +457,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (43)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (44)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

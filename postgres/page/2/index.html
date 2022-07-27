@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_activity/" title="数据库实时运行信息查看">数据库实时运行信息查看</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年1月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            介绍 类似Linux top 命令 查看数据实时运行情况 https://github.com/dalibo/pg_activity 安装 测试环境centos7 postgresql10 查看已安装的PG版本 如果有9.2 版本，清理,如果没有postgresql10-devel 需要安装 yum list installed | grep postgres 设置环境变量 export PG_HOME=/usr/pgsql-10 export PATH=$PATH:$PG_HOME/bin/ 安装pg_activity python3 -m pip install pg_activity psycopg2-binary 使用 与psql 连接方式相同 pg_activity -U xxx -p xxx 更多……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_activity/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
             </h1>
         </header>
@@ -302,24 +327,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月17日
-        </date>
-        
-        <div class="post-content">
-            流复制过程 synchronous_commit = on ） # synchronization level; on default # off, local, remote_write, or on 同步级别 remote_apply：事务commit或rollback时，等待其redo在primary、以及同步standby(s)已持久化，并且其redo在同步 standby(s)已apply。 on：事务commit或rollback时，……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/replication02/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -423,6 +430,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
     </li>
     
@@ -458,10 +469,6 @@
         <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
-    </li>
-    
 </ul>
 
     </section>
@@ -488,7 +495,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (43)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (44)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

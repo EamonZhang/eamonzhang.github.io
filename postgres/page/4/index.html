@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/auto_vacuum_trigger/" title="auto vacuum 触发机制">auto vacuum 触发机制</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月8日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            数据库自动垃圾回收触发条件分析 在postgres 中 垃圾回收的重要意义及在执行垃圾回收时具体都做了些什么很多地方都有介绍。 但是何时触发垃圾回收，即垃圾回收的触发条件是什么。 官网的介绍一般是有如下几个参数决定 #autovacuum = on # Enable autovacuum subprocess? 'on' #autovacuum_vacuum_threshold = 50 # min number of row updates before vacuum #autovacuum_analyze_threshold = 50 # min number of row updates before analyze #autovacuum_vacuum_scale_factor = 0.2 # fraction of table size……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/auto_vacuum_trigger/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/partition/" title="原生分区表">原生分区表</a>
             </h1>
         </header>
@@ -267,24 +292,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_prewarm/" title="数据预加载">数据预加载</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月27日
-        </date>
-        
-        <div class="post-content">
-            https://blog.csdn.net/Hehuyi_In/article/details/102653909……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_prewarm/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -388,6 +395,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
     </li>
     
@@ -423,10 +434,6 @@
         <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
-    </li>
-    
 </ul>
 
     </section>
@@ -453,7 +460,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (43)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (44)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
