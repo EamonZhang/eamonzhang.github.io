@@ -186,6 +186,7 @@
     <li><a href="#postgres-sinker-connetor">postgres sinker connetor</a>
       <ul>
         <li><a href="#topology-2">Topology</a></li>
+        <li><a href="#docker--citus">docker  citus</a></li>
         <li><a href="#单张表">单张表</a></li>
         <li><a href="#多表">多表</a></li>
       </ul>
@@ -696,6 +697,18 @@ select * from pg_publication;
                    |    citus    |
                    +------+------+
 
+</code></pre><h3 id="docker--citus">docker  citus</h3>
+<pre><code># run PostgreSQL with Citus on port 5500
+docker run -d --name citus -p 5500:5432 -e POSTGRES_PASSWORD=mypassword citusdata/citus
+
+# connect using psql within the Docker container
+docker exec -it citus psql -U postgres
+
+# set user postgres password 111111
+alter user postgres with encrypted password '111111';
+
+# or, connect using local psql
+psql -U postgres -d postgres -h localhost -p 5500
 </code></pre><p>plugin 下载地址，下载后解压到connetor 文件目录下并重新启动kafka connetor</p>
 <p><a href="https://www.confluent.io/hub/">https://www.confluent.io/hub/</a></p>
 <p><a href="https://d1i4a15mxbxib1.cloudfront.net/api/plugins/confluentinc/kafka-connect-jdbc/versions/10.5.1/confluentinc-kafka-connect-jdbc-10.5.1.zip">https://d1i4a15mxbxib1.cloudfront.net/api/plugins/confluentinc/kafka-connect-jdbc/versions/10.5.1/confluentinc-kafka-connect-jdbc-10.5.1.zip</a></p>
