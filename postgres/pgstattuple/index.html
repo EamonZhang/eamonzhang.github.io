@@ -335,7 +335,7 @@ from pg_freespace('tablename');
 <h5 id="表空间数据膨胀的监控与处理">表空间数据膨胀的监控与处理</h5>
 <p>在实际的生产环境中，由于数据量非常大，传统方式统计表空间的膨胀率非常耗时耗资源。</p>
 <p>结合统计情况，利用pg_repack可不停服处理。处理前查看是否有vacuum进程正在执行，避免冲突。</p>
-<pre><code>-- @auth Vonng
+<pre><code>-- CREATE SCHEMA 
 
 CREATE SCHEMA IF NOT EXISTS monitor;
 CREATE EXTENSION IF NOT EXISTS pg_repack WITH SCHEMA monitor;
