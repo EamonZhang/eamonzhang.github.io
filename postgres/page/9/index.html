@@ -94,6 +94,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/toast/" title="TOAST 技术">TOAST 技术</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月6日
+        </date>
+        
+        <div class="post-content">
+            原文……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/toast/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/fillfactor/" title="fillfactor 填充因子">fillfactor 填充因子</a>
             </h1>
         </header>
@@ -281,24 +299,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/stat/" title="Postgresql指标查看&amp;stat统计信息">Postgresql指标查看&amp;stat统计信息</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月6日
-        </date>
-        
-        <div class="post-content">
-            当前连接数 SELECT count(*) FROM pg_stat_activity WHERE NOT pid=pg_backend_pid(); count ------- 3 (1 row) 数据库占用空间 select pg_size_pretty(pg_database_size('postgres')); pg_size_pretty ---------------- 14 MB (1 row) or \l+ 数据库表(不包括索引)或单条索引占用空间 select pg_size_pretty(pg_relation_size('t_name')); pg_size_pretty ---------------- 24 kB (1 行记录) or \d+ 表中所有索引占有的空间 select pg_size_pretty(pg_indexes_size('t_name')); pg_size_pretty ---------------- 280 kB (1 行记录) 表中索引占用的空间大小排序 select indexname , pg_size_pretty(pg_relation_size(indexname::regclass)) ,indexdef from pg_indexes where tablename = 't_name' order by pg_relation_size(indexname::regclass) desc limit 10; 表和索引占用总空间 select pg_size_pretty(pg_total_relation_size('t_name')); pg_size_pretty ---------------- 380 kB (1 行记录) 查……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/stat/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -402,6 +402,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
     </li>
     
@@ -437,10 +441,6 @@
         <a href="https://zhangeamon.top/network-security/trivy/" title="Trivy 容器漏洞扫描">Trivy 容器漏洞扫描</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -467,7 +467,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (44)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (45)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

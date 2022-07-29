@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/ha_fd/" title="数据库高可用设计分析">数据库高可用设计分析</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月23日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            基本概念 集群： 一组多个同时对外提供相同服务的实体机组成一个集群。这里的集群为主从结构，可写节点为主节点，其他只读节点为从节点。 高可用： 在发生局部故障时对整体业务影响很低。即不可用的时间要尽量的短。 对外部应用的访问来说，无需关注如何实现，如同只访问一个节点。并能得到持续的服务能力。……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/ha_fd/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/replication02/" title="流复制同步级别">流复制同步级别</a>
             </h1>
         </header>
@@ -288,31 +313,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/thinking_in_db_fd/" title="数据库优化思考 - 结构设计">数据库优化思考 - 结构设计</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月11日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            DB 与 APP 的不同 有无状态 无状态应用，每个实例提供的服务都是等价、对等的。APP 应用为无状态应用，DB应用为有状态应用。 数据库正是因为有状态，所以维护起来更有挑战。 APP 在面对大量高并发请求时可以无所顾及的增加实例，加机器进行扩容。处理能里也会将得到线性提升。简单粗暴又有效。 DB 面对同样的压……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/thinking_in_db_fd/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -416,6 +416,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
     </li>
     
@@ -451,10 +455,6 @@
         <a href="https://zhangeamon.top/network-security/trivy/" title="Trivy 容器漏洞扫描">Trivy 容器漏洞扫描</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -481,7 +481,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (44)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (45)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

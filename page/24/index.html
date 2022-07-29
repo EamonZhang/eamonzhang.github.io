@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/extention/" title="数据库拓展">数据库拓展</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月27日
+        </date>
+        
+        <div class="post-content">
+            流计算数据库产品 pipelineDB * 推荐数据库产品 recDB 时序数据库 timescaleDB * 分布式数据库插件 citus * 列存储插件 IMCS, cstore等 面向OLAP的codegen数据库 pg_LLVM 向量计算插件 vops 数据库性能分析 pg_stat_statements pg_buffercache 直接访问数据库文件系统 adminpack 加密数据 pgcrypto 预热缓存 pg_prewarm 检查存储，特别是表膨胀 pgstattuple 模糊搜索 pg_trgm 连接到远程服务器 postgres_fdw k近邻（KNN）搜索……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/extention/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/about/en/" title="英语单词">英语单词</a>
             </h1>
         </header>
@@ -268,29 +284,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/middleware/sysbench/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/pstack_strace/" title="进程分析 strace,pstack">进程分析 strace,pstack</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            https://yq.aliyun.com/articles/647468 基本用法 pstack pid strace -e trace=all -T -tt -p pid strace -o server.strace -Ttt -p pid 应用举例 python while True: print('hello') 查看应用进程 ps -ef | grep python root 13491 13054 13 13:27 pts/0 00:00:06 python pstack 13491 #0 0x0000726388f9ea90 in __write_nocancel () at ../sysdeps/unix/syscall-template.S:81 #1 0x0000726388f292f3 in _IO_new_file_write (f=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=0x72638a18d000, n=2) at fileops.c:1258 #2 0x0000726388f2ab0e in new_do_write (to_do=2, data=0x72638a18d000 &quot;1\n. \b[8@while True:\033[C&quot;, fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;) at fileops.c:519 #3 _IO_new_do_write (fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=0x72638a18d000 &quot;1\n. \b[8@while True:\033[C&quot;, to_do=2) at fileops.c:495 #4 0x0000726388f29a50 in _IO_new_file_xsputn (f=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=&lt;optimized out&gt;, n=1) at fileops.c:1326 #5 0x0000726388f1e05b in __GI__IO_fputs (str=0x726389cd2a8d &quot;\n&quot;, fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;) at iofputs.c:39 #6 0x0000726389c0b9c0 in PyFile_WriteString () from /lib64/libpython2.7.so.1.0 #7 0x0000726389c80d48 in PyEval_EvalFrameEx () from /lib64/libpython2.7.so.1.0 #8 0x0000726389c8908d in PyEval_EvalCodeEx () from /lib64/libpython2.7.so.1.0 #9 0x0000726389c89192 in PyEval_EvalCode () from /lib64/libpython2.7.so.1.0 #10……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/pstack_strace/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -427,6 +420,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
     </li>
     
@@ -462,10 +459,6 @@
         <a href="https://zhangeamon.top/network-security/trivy/" title="Trivy 容器漏洞扫描">Trivy 容器漏洞扫描</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -492,7 +485,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (44)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (45)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

@@ -94,6 +94,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年7月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            创建表 DROP TABLE IF EXISTS &quot;goods&quot;; CREATE TABLE &quot;goods&quot; ( &quot;store_cd&quot; int4 NOT NULL, &quot;good_cd&quot; varchar(50) COLLATE &quot;pg_catalog&quot;.&quot;default&quot; NOT NULL, &quot;name&quot; varchar(255) COLLATE &quot;pg_catalog&quot;.&quot;default&quot; ); INSERT INTO &quot;goods&quot; VALUES (101, '1', '张三'); INSERT INTO &quot;goods&quot; VALUES (102, '2', '李四'); INSERT INTO &quot;goods&quot; VALUES (103, '3', '王五'); ALTER TABLE &quot;goods&quot; ADD CONSTRAINT &quot;pr_cd_key&quot; PRIMARY KEY (&quot;store_cd&quot;, &quot;good_cd&quot;); 数据存在则更新数据，不存在则插入数据 --- INSERT INTO GOODS VALUES ( 104, '4', '赵六' ) ON CONFLICT ON CONSTRAINT pr_key_cd DO UPDATE SET NAME = '更新' WHERE GOODS.STORE_CD = '104' AND GOODS.GOOD_CD = '4' ---- pr_key_cd为必须为……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/upset/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
             </h1>
         </header>
@@ -309,31 +334,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/monitor-sql/" title="查看数据信息常用sql整理">查看数据信息常用sql整理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2022年2月10日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            库内存命中率 SELECT 'index hit rate' AS name, (sum(idx_blks_hit)) / nullif(sum(idx_blks_hit + idx_blks_read),0) AS ratio FROM pg_statio_user_indexes UNION ALL SELECT 'table hit rate' AS name, sum(heap_blks_hit) / nullif(sum(heap_blks_hit) + sum(heap_blks_read),0) AS ratio FROM pg_statio_user_tables; 表内存命中率 SELECT relname AS relation, heap_blks_read AS heap_read, heap_blks_hit AS heap_hit, ((heap_blks_hit*100) / NULLIF((heap_blks_hit + heap_blks_read), 0)) AS ratio FROM pg_statio_user_tables order by ratio; 读IO内存占比 磁盘中读取和在内存中直接读取之间的数字和比 SELECT relname AS &quot;relation&quot;, heap_blks_read AS heap_read, heap_blks_hit AS heap_hit, ( (heap_blks_hit*100) / NULLIF((heap_blks_hit + heap_blks_read), 0)) AS ratioFROM pg_statio_user_tables; 表中索引命中率 SELECT relname, CASE idx_scan WHEN 0 THEN NULL ELSE round(100.0 * idx_scan / (seq_scan + idx_scan), 5) END……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/monitor-sql/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -433,6 +433,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
     </li>
     
@@ -468,10 +472,6 @@
         <a href="https://zhangeamon.top/network-security/trivy/" title="Trivy 容器漏洞扫描">Trivy 容器漏洞扫描</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -498,7 +498,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (44)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (45)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
