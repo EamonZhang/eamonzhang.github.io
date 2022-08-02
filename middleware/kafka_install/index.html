@@ -7,20 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>数据仓库介绍 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="数据仓库介绍 - Let&#39;s go 🐌 🐌 🐌">
+    <title> | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content=" - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2018-09-21T09:54:50&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2018-09-21T09:54:50&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="数据仓库介绍">
+    <meta name="description" content="">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/dw/introduce/">
+    <meta property="og:url" content="https://zhangeamon.top/middleware/kafka_install/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -96,37 +92,258 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">数据仓库介绍</h1>
+            <h1 class="post-title"></h1>
         </header>
         <date class="post-meta meta-date">
-            2018年9月21日
+            1年1月1日
         </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E4%BB%93'>数仓</a></span>
-            
-        </div>
         
         
         
         <div class="post-content">
-            <h2 id="数据库与数据仓库的区别">数据库与数据仓库的区别</h2>
+            <h2 id="tags-">title: &ldquo;Kafka集群安装&rdquo;
+date: 2022-08-02T15:54:04+08:00
+draft: false
+toc: false
+categories: [&ldquo;kafka&rdquo;]
+tags: []</h2>
+<h2 id="环境">环境</h2>
 <ul>
-<li>数据库是面向事务的设计，数据仓库是面向主题设计的。</li>
-<li>数据库一般服务于业务系统的，数据仓库一般是服务于分析系统的。</li>
-<li>数据库一般存储在线交易数据，数据仓库存储的一般是历史数据。</li>
-<li>数据库设计是尽量避免冗余，数据仓库在设计是有意引入冗余。</li>
-<li>数据库是为捕获数据而设计，数据仓库是为分析数据而设计。</li>
-<li>数据库一般会对数据进行增删改查，数据仓库一般只对进行增和查，基本不会修改数据。</li>
+<li>操作系统 centos7</li>
+<li>openjdk11</li>
 </ul>
-<ol>
-<li>全量表：每天的所有的最新状态的数据，</li>
-<li>增量表：每天的新增数据，增量数据是上次导出之后的新数据。</li>
-<li>拉链表：维护历史状态，以及最新状态数据的一种表，拉链表根据拉链粒度的不同，实际上相当于快照，只不过做了优化，去除了一部分不变的记录而已,通过拉链表可以很方便的还原出拉链时点的客户记录。</li>
-<li>流水表： 对于表的每一个修改都会记录，可以用于反映实际记录的变更。</li>
-</ol>
+<h2 id="集群规划">集群规划</h2>
+<table>
+<thead>
+<tr>
+<th>IP地址</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.10.2.11/node0</td>
+<td>zk &amp; kafka</td>
+<td></td>
+</tr>
+<tr>
+<td>10.10.2.12/node1</td>
+<td>zk &amp; kafka</td>
+<td></td>
+</tr>
+<tr>
+<td>10.10.2.13/node2</td>
+<td>zk &amp; kafka</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="准备阶段">准备阶段</h2>
+<h3 id="软件准备">软件准备</h3>
+<ul>
+<li>
+<p>kafka  下载地址 <a href="https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.2.0.tgz">https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.2.0.tgz</a></p>
+</li>
+<li>
+<p>connetor plugins</p>
+<p>jdbc  下载地址  <a href="https://d1i4a15mxbxib1.cloudfront.net/api/plugins/confluentinc/kafka-connect-jdbc/versions/10.5.1/confluentinc-kafka-connect-jdbc-10.5.1.zip">https://d1i4a15mxbxib1.cloudfront.net/api/plugins/confluentinc/kafka-connect-jdbc/versions/10.5.1/confluentinc-kafka-connect-jdbc-10.5.1.zip</a></p>
+<p>debezium 下载地址 <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.9.5.Final/debezium-connector-postgres-1.9.5.Final-plugin.tar.gz">https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.9.5.Final/debezium-connector-postgres-1.9.5.Final-plugin.tar.gz</a></p>
+</li>
+<li>
+<p>安装jdk</p>
+<pre><code>yum install java-11-openjdk-devel yum install java-11-openjdk -y
+</code></pre><pre><code>             jdk 下载地址 https://www.oracle.com/java/technologies/downloads/	  
+</code></pre>
+</li>
+</ul>
+<h3 id="系统用户">系统用户</h3>
+<pre><code> group add kafka
+ useradd kafka -g kafka
+</code></pre><h2 id="配置信息">配置信息</h2>
+<p><strong>hosts 配置</strong></p>
+<pre><code>#vi /etc/hosts
+10.10.2.11      node0
+10.10.2.12      node1
+10.10.2.13      node2
+</code></pre><p><strong>zk  配置</strong></p>
+<pre><code># vi zookeeper.properties
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/tmp/zookeeper
+clientPort=2181
+server.1=node0:2888:3888
+server.2=node1:2888:3888
+server.3=node2:2888:3888
+# myid
+echo &quot;1&quot; &gt; /tmp/zookeeper/myid
+echo &quot;2&quot; &gt; /tmp/zookeeper/myid
+echo &quot;3&quot; &gt; /tmp/zookeeper/myid
+</code></pre><p><strong>broker 配置</strong></p>
+<pre><code># vi config/server.properties
+broker.id=1   # 每个节点唯一编号
+log.dirs=/tmp/kafka-logs #数据存储位置
+zookeeper.connect=node0:2181,node1:2181,node2:2181/kafka # 连接zk信息
+
+############################# Internal Topic Settings  #############################
+# The replication factor for the group metadata internal topics &quot;__consumer_offsets&quot; and &quot;__transaction_state&quot;
+# For anything other than development testing, a value greater than 1 is recommended to ensure availability such as 3.
+offsets.topic.replication.factor=3
+transaction.state.log.replication.factor=3
+transaction.state.log.min.isr=3
+</code></pre><p><strong>环境变量</strong></p>
+<pre><code>#vi /etc/profile.d/kafka.sh
+KAFKA_HOME=/opt/kafka
+PATH=$PATH:$KAFKA_HOME/bin
+
+#vi  /etc/profile.d/java.sh
+export JAVA_HOME=/usr/local/jdk-18.0.2
+export PATH=$PATH:$JAVA_HOME/bin
+</code></pre><h2 id="集群管理">集群管理</h2>
+<h3 id="启动集群">启动集群</h3>
+<p>​       <strong>启动zk</strong></p>
+<pre><code>bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
+</code></pre><p>​       <strong>启动kafka</strong></p>
+<pre><code>bin/kafka-server-start.sh -daemon config/server.properties
+</code></pre><h3 id="关闭集群">关闭集群</h3>
+<p>​      <strong>关闭 kafka</strong></p>
+<pre><code>bin/kafka-server-stop.sh
+</code></pre>
+<p>​      <strong>关闭zk</strong></p>
+<pre><code>bin/zookeeper-server-start.sh
+</code></pre><h3 id="connector-服务管理">connector 服务管理</h3>
+<p>​      <strong>配置管理</strong></p>
+<pre><code>#vi config/connect-distributed.properties
+bootstrap.servers=node0:9092,node1:9092,node2:9092
+plugin.path=/opt/kafka/plugins
+</code></pre><p>​     将准备阶段下载的插件文件拷贝到 <code>/opt/kafka/plugins</code>  中</p>
+<p>​	 <strong>启动 connector</strong></p>
+<pre><code>bin/connect-distributed.sh -daemon config/connect-distributed.properties
+</code></pre><p>​     <strong>查看plugins</strong></p>
+<pre><code># curl -s -X GET localhost:8083/connector-plugins | jq
+[
+  {
+    &quot;class&quot;: &quot;io.confluent.connect.jdbc.JdbcSinkConnector&quot;,
+    &quot;type&quot;: &quot;sink&quot;,
+    &quot;version&quot;: &quot;10.5.1&quot;
+  },
+  {
+    &quot;class&quot;: &quot;io.confluent.connect.jdbc.JdbcSourceConnector&quot;,
+    &quot;type&quot;: &quot;source&quot;,
+    &quot;version&quot;: &quot;10.5.1&quot;
+  },
+  {
+    &quot;class&quot;: &quot;io.debezium.connector.postgresql.PostgresConnector&quot;,
+    &quot;type&quot;: &quot;source&quot;,
+    &quot;version&quot;: &quot;1.9.5.Final&quot;
+  },
+  {
+    &quot;class&quot;: &quot;org.apache.kafka.connect.mirror.MirrorCheckpointConnector&quot;,
+    &quot;type&quot;: &quot;source&quot;,
+    &quot;version&quot;: &quot;3.2.0&quot;
+  },
+  {
+    &quot;class&quot;: &quot;org.apache.kafka.connect.mirror.MirrorHeartbeatConnector&quot;,
+    &quot;type&quot;: &quot;source&quot;,
+    &quot;version&quot;: &quot;3.2.0&quot;
+  },
+  {
+    &quot;class&quot;: &quot;org.apache.kafka.connect.mirror.MirrorSourceConnector&quot;,
+    &quot;type&quot;: &quot;source&quot;,
+    &quot;version&quot;: &quot;3.2.0&quot;
+  }
+]
+</code></pre><h2 id="优化">优化</h2>
+<pre><code>#vi kafka-server-start.sh
+...
+if [ &quot;x$KAFKA_HEAP_OPTS&quot; = &quot;x&quot; ]; then
+    export KAFKA_HEAP_OPTS=&quot;-server -Xms2G -Xmx2G -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:ParallelGCThreads=8 -XX:ConcGCThreads=5 -XX:InitiatingHeapOccupancyPercent=70&quot;
+    export JMX_PORT=&quot;9999&quot;
+fi
+
+#vi config/server.properties
+auto.create.topics.enable = true
+auto.create.topics.enable = false
+
+log.dirs=        # 数据存放位置
+num.partitions=1  # 分区数
+
+log.retention.hours= # 保留时长
+
+zookeeper.connect=node0:2181,node1:2181,node2:2181/kafka
+#vi config/log4j.properties
+</code></pre><h2 id="安全">安全</h2>
+<h3 id="授权机制">授权机制</h3>
+<h3 id="访问限制">访问限制</h3>
+<h2 id="kafka-web">kafka web</h2>
+<h3 id="kafka-eagle">kafka-eagle</h3>
+<p>​     软件下载地址 <a href="https://github.com/smartloli/kafka-eagle-bin/archive/v2.1.0.tar.gz">https://github.com/smartloli/kafka-eagle-bin/archive/v2.1.0.tar.gz</a></p>
+<pre><code>--单机版
+tar -zxvf efak-xxx-bin.tar.gz
+rm -rf efak
+mv efak-xxx efak
+
+vi /etc/profile.d/efak.sh
+export KE_HOME=/data/soft/efak
+export PATH=$PATH:$KE_HOME/bin
+
+cd ${KE_HOME}/conf
+vi system-config.properties
+cluster1.zk.list=zk01:2181,zk02:2181,zk03:2181/kafka   # 重点配置
+
+cd ${KE_HOME}/bin
+chmod +x ke.sh 
+ke.sh start
+ke.sh restart
+ke.sh stop
+
+-- 集群版配置
+1. 各节点之间可相互ssh 免密访问
+2. 配置conf/works 填写集群每个节点的ip
+10.10.2.11
+10.10.2.12
+10.10.2.13
+3. vi system-config.properties
+
+######################################
+# EFAK enable distributed
+######################################
+efak.distributed.enable=true
+efak.cluster.mode.status=master # 其他节点 配置为 slave
+efak.worknode.master.host=10.10.2.11 # 主节点IP
+efak.worknode.port=8085
+
+集群状态管理
+ke.sh cluster start
+ke.sh cluster restart
+ke.sh cluster stop
+
+--访问
+http:xxxx:8048  admin:123456  # 修改默认用户密码
+</code></pre><h3 id="kafka-ui">kafka ui</h3>
+<pre><code>#cat docker-compose.yaml
+
+version: '3'
+services:
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=mycluster1
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kakfa_host:9092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=zk_host:2181
+      - KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME=kc1
+      - KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS=http://connect_host:8083
+    ports:
+      - &quot;9080:8080&quot;
+    extra_hosts:
+      zk01: 10.10.2.11
+      zk02: 10.10.2.12
+      zk03: 10.10.2.13
+</code></pre><h2 id="待解决问题">待解决问题</h2>
+<ul>
+<li>ksql 查询时 topic null</li>
+</ul>
 
         </div>
 
@@ -139,11 +356,11 @@
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/about/me/">关于</a></li>
+        <li><a href="/postgres/upset/">upset 用法</a></li>
         
-        <li><a href="/middleware/kafka_install/"></a></li>
+        <li><a href="/postgres/debezium/">利用debezium 实现数据变更捕获</a></li>
         
-        <li><a href="/archives/">归档</a></li>
+        <li><a href="/postgres/hll/">利用hll数据类型进行数据统计</a></li>
         
     </ul>
 </div>

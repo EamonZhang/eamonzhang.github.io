@@ -2511,6 +2511,15 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;amp;mid=2247483770&amp;amp
     </item>
     
     <item>
+      <title></title>
+      <link>https://zhangeamon.top/middleware/kafka_install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/kafka_install/</guid>
+      <description>title: &amp;ldquo;Kafka集群安装&amp;rdquo; date: 2022-08-02T15:54:04+08:00 draft: false toc: false categories: [&amp;ldquo;kafka&amp;rdquo;] tags: [] 环境 操作系统 centos7 openjdk11 集群规划 IP地址 10.10.2.11/node0 zk &amp;amp; kafka 10.10.2.12/node1 zk &amp;amp; kafka 10.10.2.13/node2 zk &amp;amp; kafka 准备阶段 软件准备 kafka 下载地址 https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.2.0.tgz connetor plugins jdbc 下载地址 https://d1i4a15mxbxib1.cloudfront.net/api/plugins/confluentinc/kafka-connect-jdbc/versions/10.5.1/confluentinc-kafka-connect-jdbc-10.5.1.zip debezium 下载地址 https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.9.5.Final/debezium-connector-postgres-1.9.5.Final-plugin.tar.gz 安装jdk yum install java-11-openjdk-devel yum install java-11-openjdk -y jdk 下载地址 https://www.oracle.com/java/technologies/downloads/ 系统用户 group add kafka useradd kafka -g kafka 配置信息 hosts 配置 #vi /etc/hosts 10.10.2.11 node0 10.10.2.12 node1 10.10.2.13 node2 zk 配置 # vi zookeeper.properties</description>
+    </item>
+    
+    <item>
       <title>归档</title>
       <link>https://zhangeamon.top/archives/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
