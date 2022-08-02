@@ -3,10 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zhangeamon.top/categories/</loc>
-    <lastmod>2022-07-29T08:47:34+08:00</lastmod>
+    <lastmod>2022-08-02T15:54:04+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/categories/kafka/</loc>
+    <lastmod>2022-08-02T15:54:04+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/middleware/kafka_install/</loc>
+    <lastmod>2022-08-02T15:54:04+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/</loc>
-    <lastmod>2022-07-29T08:47:34+08:00</lastmod>
+    <lastmod>2022-08-02T15:54:04+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/middleware/</loc>
+    <lastmod>2022-08-02T15:54:04+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/postgres/</loc>
     <lastmod>2022-07-29T08:47:34+08:00</lastmod>
@@ -66,9 +75,6 @@
     <lastmod>2022-03-25T15:31:27+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/middleware/haproxy_install/</loc>
-    <lastmod>2022-03-25T15:31:27+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/middleware/</loc>
     <lastmod>2022-03-25T15:31:27+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/postgres/login_nopasswd/</loc>
@@ -976,8 +982,6 @@
   </url><url>
     <loc>https://zhangeamon.top/about/me/</loc>
     <lastmod>2018-03-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/middleware/kafka_install/</loc>
   </url><url>
     <loc>https://zhangeamon.top/archives/</loc>
   </url><url>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kafka on Let&#39;s go 🐌 🐌 🐌</title>
+    <link>https://zhangeamon.top/categories/kafka/</link>
+    <description>Recent content in kafka on Let&#39;s go 🐌 🐌 🐌</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 02 Aug 2022 15:54:04 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka集群安装</title>
+      <link>https://zhangeamon.top/middleware/kafka_install/</link>
+      <pubDate>Tue, 02 Aug 2022 15:54:04 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/kafka_install/</guid>
+      <description>环境 操作系统 centos7 openjdk11 集群规划 IP地址 10.10.2.11/node0 zk &amp;amp; kafka 10.10.2.12/node1 zk &amp;amp; kafka 10.10.2.13/node2 zk &amp;amp; kafka 准备阶段 软件准备 kafka 下载地址 https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.2.0.tgz connetor plugins jdbc 下载地址 https://d1i4a15mxbxib1.cloudfront.net/api/plugins/confluentinc/kafka-connect-jdbc/versions/10.5.1/confluentinc-kafka-connect-jdbc-10.5.1.zip debezium 下载地址 https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.9.5.Final/debezium-connector-postgres-1.9.5.Final-plugin.tar.gz 安装jdk yum install java-11-openjdk-devel yum install java-11-openjdk -y jdk 下载地址 https://www.oracle.com/java/technologies/downloads/ 系统用户 group add kafka useradd kafka -g kafka 配置信息 hosts 配置 #vi /etc/hosts 10.10.2.11 node0 10.10.2.12 node1 10.10.2.13 node2 zk 配置 # vi zookeeper.properties tickTime=2000 initLimit=10 syncLimit=5 dataDir=/tmp/zookeeper clientPort=2181 server.1=node0:2888:3888 server.2=node1:2888:3888 server.3=node2:2888:3888 # myid echo &amp;quot;1&amp;quot; &amp;gt; /tmp/zookeeper/myid echo &amp;quot;2&amp;quot; &amp;gt; /tmp/zookeeper/myid echo &amp;quot;3&amp;quot; &amp;gt; /tmp/zookeeper/myid broker 配置 # vi config/server.properties broker.id=1 # 每个节点</description>
+    </item>
+    
+  </channel>
+</rss>

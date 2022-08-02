@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/docker/manager/" title="docker 磁盘空间管理">docker 磁盘空间管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年3月18日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/docker'>docker</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            查看docker占用的空间情况 # docker system df TYPE TOTAL ACTIVE SIZE RECLAIMABLE Images 58 36 6.091GB 2.119GB (34%) Containers 90 89 232.3MB 0B (0%) Local Volumes 137 16 232.7MB 194.2MB (83%) Build Cache 0 0 0B 0B 四大资源尽收眼底，可回收多少资源也了然于胸 清除不在需要的资源 This will remove: - all stopped containers - all networks not used by at least one container - all dangling images - all build cach # docker system prune -f 清除一切非活跃状态，将资源还给系统 清除volume 查看 # docker volume ls……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/docker/manager/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/checkpoint/" title="checkpoint 检查点">checkpoint 检查点</a>
             </h1>
         </header>
@@ -268,22 +291,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/fu-cmd/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/mysql/book-list/" title="Mysql 书单">Mysql 书单</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年2月13日
-        </date>
-        
-        <div class="post-content">
-            入门： 《涂抹MySQL：跟着三思一步一步学MySQL》 《MySQL数据库应用从入门到精通（第2版）》 《MySQL核心技术手册》 《MySQL技术内幕（第5版）》 运维实践： 《高性能MySQL》 经典必读 《MySQL管理之道：性能调优、高可用与监控（第2版） 》贺春旸 《深入理解MySQL核……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/mysql/book-list/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -420,6 +427,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
     </li>
     
@@ -455,10 +466,6 @@
         <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/network-security/trivy/" title="Trivy 容器漏洞扫描">Trivy 容器漏洞扫描</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -476,6 +483,8 @@
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/haproxy/">haproxy (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/kafka/">kafka (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     

@@ -6,7 +6,16 @@
     <description>Recent content in Middlewares on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 25 Mar 2022 15:31:27 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/middleware/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 Aug 2022 15:54:04 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/middleware/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka集群安装</title>
+      <link>https://zhangeamon.top/middleware/kafka_install/</link>
+      <pubDate>Tue, 02 Aug 2022 15:54:04 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/middleware/kafka_install/</guid>
+      <description>环境 操作系统 centos7 openjdk11 集群规划 IP地址 10.10.2.11/node0 zk &amp;amp; kafka 10.10.2.12/node1 zk &amp;amp; kafka 10.10.2.13/node2 zk &amp;amp; kafka 准备阶段 软件准备 kafka 下载地址 https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.2.0.tgz connetor plugins jdbc 下载地址 https://d1i4a15mxbxib1.cloudfront.net/api/plugins/confluentinc/kafka-connect-jdbc/versions/10.5.1/confluentinc-kafka-connect-jdbc-10.5.1.zip debezium 下载地址 https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.9.5.Final/debezium-connector-postgres-1.9.5.Final-plugin.tar.gz 安装jdk yum install java-11-openjdk-devel yum install java-11-openjdk -y jdk 下载地址 https://www.oracle.com/java/technologies/downloads/ 系统用户 group add kafka useradd kafka -g kafka 配置信息 hosts 配置 #vi /etc/hosts 10.10.2.11 node0 10.10.2.12 node1 10.10.2.13 node2 zk 配置 # vi zookeeper.properties tickTime=2000 initLimit=10 syncLimit=5 dataDir=/tmp/zookeeper clientPort=2181 server.1=node0:2888:3888 server.2=node1:2888:3888 server.3=node2:2888:3888 # myid echo &amp;quot;1&amp;quot; &amp;gt; /tmp/zookeeper/myid echo &amp;quot;2&amp;quot; &amp;gt; /tmp/zookeeper/myid echo &amp;quot;3&amp;quot; &amp;gt; /tmp/zookeeper/myid broker 配置 # vi config/server.properties broker.id=1 # 每个节点</description>
+    </item>
+    
     <item>
       <title>Haproxy  编译安装配置 </title>
       <link>https://zhangeamon.top/middleware/haproxy_install/</link>
@@ -113,15 +122,6 @@
       
       <guid>https://zhangeamon.top/middleware/proxy/</guid>
       <description>科普 正向代理 对服务端来说是无感的，服务端无需配置，要在客户端指定。代理的是客户端。 访问原来无法访问的资源 用作缓存，加速访问速度 对客户端访问授权，上网进行认证 代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息 反向代理 对客户端来说的无感的，客户端无需配置，要在服务端实现。代理</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://zhangeamon.top/middleware/kafka_install/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhangeamon.top/middleware/kafka_install/</guid>
-      <description>title: &amp;ldquo;Kafka集群安装&amp;rdquo; date: 2022-08-02T15:54:04+08:00 draft: false toc: false categories: [&amp;ldquo;kafka&amp;rdquo;] tags: [] 环境 操作系统 centos7 openjdk11 集群规划 IP地址 10.10.2.11/node0 zk &amp;amp; kafka 10.10.2.12/node1 zk &amp;amp; kafka 10.10.2.13/node2 zk &amp;amp; kafka 准备阶段 软件准备 kafka 下载地址 https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.2.0.tgz connetor plugins jdbc 下载地址 https://d1i4a15mxbxib1.cloudfront.net/api/plugins/confluentinc/kafka-connect-jdbc/versions/10.5.1/confluentinc-kafka-connect-jdbc-10.5.1.zip debezium 下载地址 https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.9.5.Final/debezium-connector-postgres-1.9.5.Final-plugin.tar.gz 安装jdk yum install java-11-openjdk-devel yum install java-11-openjdk -y jdk 下载地址 https://www.oracle.com/java/technologies/downloads/ 系统用户 group add kafka useradd kafka -g kafka 配置信息 hosts 配置 #vi /etc/hosts 10.10.2.11 node0 10.10.2.12 node1 10.10.2.13 node2 zk 配置 # vi zookeeper.properties</description>
     </item>
     
   </channel>

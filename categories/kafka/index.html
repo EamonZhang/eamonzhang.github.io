@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>kafka | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="kafka - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="kafka">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/categories/kafka/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml+xml" href="https://zhangeamon.top/categories/kafka/index.xml" title="Let's go 🐌 🐌 🐌" />
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            <!-- hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699"; -->
+            hm.src = "https://hm.baidu.com/hm.js?0010600e9ae6ff8f5814bb7ec6b36072";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <h3 class="archive-title">
+        分类
+        <span class="keyword">kafka</span>
+        中的文章
+    </h3>
+    
+
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/kafka_install/">Kafka集群安装</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年8月2日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/kafka'>kafka</a>
+            
+        </div>
+        
+        <div class="post-content">
+            环境 操作系统 centos7 openjdk11 集群规划 IP地址 10.10.2.11/node0 zk &amp; kafka 10.10.2.12/node1 zk &amp; kafka 10.10.2.13/node2 zk &amp; kafka 准备阶段 软件准备 kafka 下载地址 https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.2.0.tgz connetor plugins jdbc 下载地址 https://d1i4a15mxbxib1.cloudfront.net/api/plugins/confluentinc/kafka-connect-jdbc/versions/10.5.1/confluentinc-kafka-connect-jdbc-10.5.1.zip debezium 下载地址 https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.9.5.Final/debezium-connector-postgres-1.9.5.Final-plugin.tar.gz 安装jdk yum install java-11-openjdk-devel yum install java-11-openjdk -y jdk 下载地址 https://www.oracle.com/java/technologies/downloads/ 系统用户 group add kafka useradd kafka -g kafka 配置信息 hosts 配置 #vi /etc/hosts 10.10.2.11 node0 10.10.2.12 node1 10.10.2.13 node2 zk 配置 # vi zookeeper.properties tickTime=2000 initLimit=10 syncLimit=5 dataDir=/tmp/zookeeper clientPort=2181 server.1=node0:2888:3888 server.2=node1:2888:3888 server.3=node2:2888:3888 # myid echo &quot;1&quot; &gt; /tmp/zookeeper/myid echo &quot;2&quot; &gt; /tmp/zookeeper/myid echo &quot;3&quot; &gt; /tmp/zookeeper/myid broker 配置 # vi config/server.properties broker.id=1 # 每个节点……
+            <p class="readmore"><a href="https://zhangeamon.top/middleware/kafka_install/">阅读全文</a></p>
+        </div>
+    </article>
+    
+
+    
+
+
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2022 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/docker/">docker (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/haproxy/">haproxy (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/kafka/">kafka (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (45)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (9)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/tidb/">tidb (5)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (8)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AD%98%E5%82%A8/">存储 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (3)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

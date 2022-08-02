@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pg_stat_statements/" title="pg_stat_statements 数据库统计信息">pg_stat_statements 数据库统计信息</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            pg_stat_statements 扩展 安装 yum install postgresql10-contrib.x86_64 修改配置参数 vi $PGDATA/postgresql.conf shared_preload_libraries='pg_stat_statements' # 加载模块 需要重启 , 近期测试不需要添加也可以。自带扩展 track_io_timing = on # 跟踪IO耗时 (可选) track_activity_query_size = 2048 # 设置单条SQL的最长长度，超过被截断显示（可选) pg_stat_statements.max = 10000 #在pg_stat_statements中最多保留多少条统计信息，通过LRU算法，覆盖老的记录。 pg_stat_statements.track = all……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_stat_statements/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/extention/" title="数据库拓展">数据库拓展</a>
             </h1>
         </header>
@@ -261,29 +284,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/index01/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/sysbench/" title="Sysbench 测试">Sysbench 测试</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月16日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6'>中间件</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            下载安装 1.0.15 sysbench官网 curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh | sudo bash sudo yum -y install sysbench 参数说明 sysbench --help Usage: sysbench [options]... [testname] [command] Commands implemented by most tests: prepare run cleanup help General options: --threads=N number of threads to use [1] 线程数 --events=N limit for total number of events [0] 事务数 --time=N limit for total execution time in seconds [10] 测压时间 --forced-shutdown=STRING number of seconds to wait after the --time limit before forcing shutdown, or 'off' to disable [off] --thread-stack-size=SIZE size of stack per thread [64K] --rate=N average transactions rate. 0 for unlimited rate [0] --report-interval=N periodically report intermediate statistics with a specified interval in seconds. 0 disables intermediate reports [0] --report-checkpoints=[LIST,...] dump full statistics and reset all counters……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/sysbench/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -420,6 +420,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
     </li>
     
@@ -455,10 +459,6 @@
         <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/network-security/trivy/" title="Trivy 容器漏洞扫描">Trivy 容器漏洞扫描</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -476,6 +476,8 @@
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/haproxy/">haproxy (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/kafka/">kafka (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     

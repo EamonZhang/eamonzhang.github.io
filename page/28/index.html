@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/cmd-gpasswd/" title="gpasswd 命令">gpasswd 命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月18日
+        </date>
+        
+        <div class="post-content">
+            gpasswd 命令详解 gpasswd命令是Linux下工作组文件/etc/group和/etc/gshadow的管理工具，用于指定要管理的工作组。 选项详解： -a : 添加用户到组 -d : 从组删除用户 -A：指定管理员 -M：指定组成员和-A的用途差不多； -r：删除密码； -R：限制用户登入组，只有组中的成员……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-gpasswd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/k8s/v1.10/" title="Kubernetes 安装　- V1.10">Kubernetes 安装　- V1.10</a>
             </h1>
         </header>
@@ -241,22 +257,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/kafka_install/" title=""></a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            1年1月1日
-        </date>
-        
-        <div class="post-content">
-            title: &ldquo;Kafka集群安装&rdquo; date: 2022-08-02T15:54:04+08:00 draft: false toc: false categories: [&ldquo;kafka&rdquo;] tags: [] 环境 操作系统 centos7 openjdk11 集群规划 IP地址 10.10.2.11/node0 zk &amp; kafka 10.10.2.12/node1 zk &amp; kafka 10.10.2.13/node2 zk &amp; kafka 准备阶段 软件准备 kafka 下载地址 https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.2.0.tgz connetor plugins jdbc 下载地址 https://d1i4a15mxbxib1.cloudfront.net/api/plugins/confluentinc/kafka-connect-jdbc/versions/10.5.1/confluentinc-kafka-connect-jdbc-10.5.1.zip debezium 下载地址 https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.9.5.Final/debezium-connector-postgres-1.9.5.Final-plugin.tar.gz 安装jdk yum install java-11-openjdk-devel yum install java-11-openjdk -y jdk 下载地址 https://www.oracle.com/java/technologies/downloads/ 系统用户 group add kafka useradd kafka -g kafka 配置信息 hosts 配置 #vi /etc/hosts 10.10.2.11 node0 10.10.2.12 node1 10.10.2.13 node2 zk 配置 # vi zookeeper.properties……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/kafka_install/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zhangeamon.top/archives/" title="归档">归档</a>
             </h1>
         </header>
@@ -386,6 +386,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
     </li>
     
@@ -421,10 +425,6 @@
         <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/network-security/trivy/" title="Trivy 容器漏洞扫描">Trivy 容器漏洞扫描</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -442,6 +442,8 @@
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/haproxy/">haproxy (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/kafka/">kafka (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
