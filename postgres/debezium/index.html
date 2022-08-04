@@ -582,7 +582,11 @@ connect:
 	    &quot;table.include.list&quot;: &quot;inventory.orders,inventory.products&quot;,
 	    &quot;publication.name&quot;: &quot;dbz_inventory_connector&quot;,
 	    &quot;publication.autocreate.mode&quot;: &quot;all_tables&quot;,
-	    &quot;plugin.name&quot;: &quot;pgoutput&quot;
+	    &quot;plugin.name&quot;: &quot;pgoutput&quot;,	
+            &quot;topic.creation.default.replication.factor&quot;: 3,
+            &quot;topic.creation.default.partitions&quot;: 10,
+            &quot;topic.creation.default.cleanup.policy&quot;: &quot;delete&quot;,
+            &quot;topic.creation.default.compression.type&quot;: &quot;lz4&quot;
     }
 }
 </code></pre><p>配置文件说明</p>
