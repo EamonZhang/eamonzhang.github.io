@@ -548,7 +548,7 @@
     </item>
     
     <item>
-      <title>PG主从切换 pg_rewind</title>
+      <title>pg_rewind 时间线对齐</title>
       <link>https://zhangeamon.top/postgres/pg_rewind/</link>
       <pubDate>Wed, 30 Jan 2019 10:16:17 +0800</pubDate>
       
