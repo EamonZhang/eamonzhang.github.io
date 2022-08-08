@@ -3,7 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zhangeamon.top/categories/</loc>
-    <lastmod>2022-08-02T15:54:04+08:00</lastmod>
+    <lastmod>2022-08-08T14:58:08+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/</loc>
+    <lastmod>2022-08-08T14:58:08+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/postgres/wal_lsn/</loc>
+    <lastmod>2022-08-08T14:58:08+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/postgres/</loc>
+    <lastmod>2022-08-08T14:58:08+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/categories/postgres/</loc>
+    <lastmod>2022-08-08T14:58:08+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/categories/kafka/</loc>
     <lastmod>2022-08-02T15:54:04+08:00</lastmod>
@@ -11,17 +23,8 @@
     <loc>https://zhangeamon.top/middleware/kafka_install/</loc>
     <lastmod>2022-08-02T15:54:04+08:00</lastmod>
   </url><url>
-    <loc>https://zhangeamon.top/</loc>
-    <lastmod>2022-08-02T15:54:04+08:00</lastmod>
-  </url><url>
     <loc>https://zhangeamon.top/middleware/</loc>
     <lastmod>2022-08-02T15:54:04+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/postgres/</loc>
-    <lastmod>2022-07-29T08:47:34+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/categories/postgres/</loc>
-    <lastmod>2022-07-29T08:47:34+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/postgres/upset/</loc>
     <lastmod>2022-07-29T08:47:34+08:00</lastmod>

@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/vm-config/" title="内核设置">内核设置</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年11月26日
+        </date>
+        
+        <div class="post-content">
+            参数vm.dirty_ratio和vm.dirty_background_ratio https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/ 文件缓存是一项重要的性能改进，在大多数情况下，读缓存在绝大多数情况下是有益无害的（程序可以直接从RAM中读取数据）。写缓存比较复杂，Linux内核将磁盘写入缓存，过段时间再异步将它们刷新到磁盘。……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/vm-config/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/postgres12/" title="postgres 12">postgres 12</a>
             </h1>
         </header>
@@ -240,22 +256,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/es/password/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/view_pg_stat_activity/" title="数据库视图之 pg_stat_activity">数据库视图之 pg_stat_activity</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年8月23日
-        </date>
-        
-        <div class="post-content">
-            介绍 当需要了解数据库当前运行状态或需要排查问题时，首先需要查看的就是pg_stat_activity。该视图中包含了你想知道的数据库连接信息，正在执行的有哪些sql，并处于何状态。 One row per server process, showing information related to the current activity of that process, such as state and current query. 每一行都表示一个系统进程，显示与当前会话的活动进程的一些信……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/view_pg_stat_activity/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -392,6 +392,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
     </li>
     
@@ -427,10 +431,6 @@
         <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -459,7 +459,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (45)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (46)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

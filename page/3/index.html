@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/xz/" title="高压缩比工具 XZ">高压缩比工具 XZ</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            压缩比 xz &gt;biz2 &gt; gzip 安装 默认系统自带 yum install epel-release yum install xz 解压缩 xz -d --threads=`nproc` -k -v hits_v1.tsv.xz 压缩 xz -z --threads=`nproc` -k -v hits_v1.tsv 参数说明 # xz --help Usage: xz [OPTION]... [FILE]... Compress or decompress FILEs in the .xz format. -z, --compress force compression -d, --decompress force decompression -t, --test test compressed file integrity -l, --list list information about .xz files -k, --keep keep (don't delete) input files -f, --force force overwrite of output file and (de)compress links -c, --stdout write to standard output and don't delete input files -0 ... -9 compression preset; default is 6; take compressor *and* decompressor memory usage into account before using 7-9! -e, --extreme try to improve compression ratio by using more CPU time; does not affect……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/xz/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/ch/install/" title="ClickHouse">ClickHouse</a>
             </h1>
         </header>
@@ -286,29 +309,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/network-security/wazuh/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/last/" title="Linux 系统登陆记录">Linux 系统登陆记录</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年10月28日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            背景 登陆系统时，尤其是具有外网ip的主机时经常会看到类似如下信息。 There were 12039 failed login attempts since the last successful login. 说明你的系统被尝试登陆破解。 大部分的破解基本都是自动机器扫描，配合自己的数据字典暴力破解。 系统登陆成功记录 查看命令 last 原理 读取解析 /var/log/wtmp 例如: 查看最近十次登陆记录 last -10 查看某个时间段的登陆记录 last -s 2021-10-10 -t……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/last/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -431,6 +431,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
     </li>
     
@@ -466,10 +470,6 @@
         <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -498,7 +498,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (45)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (46)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

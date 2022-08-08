@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年8月8日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            例子 select pg_current_wal_lsn(),pg_walfile_name(pg_current_wal_lsn()),pg_walfile_name_offset(pg_current_wal_lsn()); pg_current_wal_lsn | pg_walfile_name | pg_walfile_name_offset --------------------+--------------------------+------------------------------------ 2478/BB36EC90 | 0000000300002478000000BB | (0000000300002478000000BB,3599504) (1 row) select x'36EC90'::int ; int4 --------- 3599504 (1 row) 说明 方法 pg_current_wal_lsn()：获得当前wal日志写入位置。 pg_walfile_name():转换wal日志位置为文件名。 pg_walfile_name_offset():返回转换后的wal日志文件名和偏移量。……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/wal_lsn/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
             </h1>
         </header>
@@ -289,22 +312,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/citus11/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2022年5月26日
-        </date>
-        
-        <div class="post-content">
-            file beat 日志输出管理 默认情况 filebeat日志输出位置为系统日志文件 /var/log/messages 中 重定向日志文件输出处位置 cat /usr/lib/systemd/system/filebeat.service [Unit] Description=Filebeat sends log files to Logstash or directly to Elasticsearch. Documentation=https://www.elastic.co/products/beats/filebeat Wants=network-online.target After=network-online.target [Service] Environment=&quot;BEAT_LOG_OPTS=&quot; Environment=&quot;BEAT_CONFIG_OPTS=-c /etc/filebeat/filebeat.yml&quot; Environment=&quot;BEAT_PATH_OPTS=-path.home /usr/share/filebeat -path.config /etc/filebeat -path.data /var/lib/filebeat -path.logs /var/log/filebeat&quot; ExecStart=/usr/share/filebeat/bin/filebeat -environment systemd $BEAT_LOG_OPTS $BEAT_CONFIG_OPTS $BEAT_PATH_OPTS Restart=always [Install] WantedBy=multi-user.target filebeat.yml logging.level: info logging.to_files: true logging.files: path: /var/log/filebeat name: filebeat keepfiles: 7 permissions: 0644……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/elk/filebeat_log/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -409,6 +416,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
     </li>
     
@@ -444,10 +455,6 @@
         <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -476,7 +483,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (45)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (46)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
