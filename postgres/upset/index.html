@@ -145,7 +145,7 @@ WHERE
 	GOODS.STORE_CD = '104' 
 	AND GOODS.GOOD_CD = '4'
 	AND NAME &lt;&gt; '更新' ---过滤 没有必要的更新
-</code></pre><h4 id="数据存在则忽略不存在则插入">数据存在则忽略，不存在则插入</h4>
+</code></pre><h3 id="数据存在则忽略不存在则插入">数据存在则忽略，不存在则插入</h3>
 <pre><code>INSERT INTO GOODS VALUES ( 104, '4', '赵六' ) 
 ON CONFLICT ON CONSTRAINT pr_key_cd DO NOTHING;
 
