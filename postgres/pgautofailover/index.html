@@ -328,15 +328,12 @@ su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create postgres \
     
 </code></pre><pre><code>创建节点说明，在create postgres后，将在本地生成配置信息。具体可查看
 su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl show file   --pgdata /var/lib/pgsql/14/data/&quot;
-</code></pre><pre><code> ```
- -- systemd 管理服务
- su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl -q show systemd --pgdata /var/lib/pgsql/14/data &quot;  &gt; /etc/systemd/system/pgautofailover.service
- 
- -- 启动服务
- systemctl start pgautofailover
- ```
-</code></pre>
-<p>​		创建数据库从节点</p>
+</code></pre><pre><code>-- systemd 管理服务
+su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl -q show systemd --pgdata /var/lib/pgsql/14/data &quot;  &gt; /etc/systemd/system/pgautofailover.service
+   
+-- 启动服务
+systemctl start pgautofailover
+</code></pre><p>​		创建数据库从节点</p>
 <pre><code>-- 在另一个节点创建从库
 su - postgres -c &quot;/usr/pgsql-14/bin/pg_autoctl create postgres \
     --hostname node2 \
