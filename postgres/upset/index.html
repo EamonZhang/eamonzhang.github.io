@@ -155,7 +155,7 @@ insert into goods select 103,'3','赵六' from (select 1) temp where not exists 
 <h3 id="先执行update语句">先执行update语句</h3>
 <pre><code>WITH TABLE1 AS ( UPDATE GOODS SET NAME = '更新' WHERE STORE_CD = '104' AND GOOD_CD = '4' RETURNING * ) 
 INSERT INTO GOODS SELECT  104, '4', '赵六' 
-WHERE NOT EXISTS ( SELECT 1 FROM TABLE1 WHERE STORE_CD = '104' AND GOOD_CD = '4' 
+WHERE NOT EXISTS ( SELECT 1 FROM TABLE1 WHERE STORE_CD = '104' AND GOOD_CD = '4') 
 </code></pre>
         </div>
 
