@@ -175,7 +175,7 @@
       <pubDate>Wed, 07 Apr 2021 10:12:02 +0800</pubDate>
       
       <guid>https://zhangeamon.top/postgres/repmgr/</guid>
-      <description></description>
+      <description>基于Repmgr实现数据库高可用 安装环境 软件环境 postgres 10 repmgr 5.3.2 centos7 网络环境 IP地址 运行软件 10.10.2.12/node1 repmgr,repmgrd,pg 10.10.2.13/node2 repmgr,repmgrd,pg 10.10.2.14/node3 repmgr,repmgrd,pg 前期准备 hosts 文件配置 vi /etc/hosts # 10.10.2.12 node1 10.10.2.13 node2 10.10.2.14 node3 安装PG10 $ yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm $ yum update -y $ yum install -y postgresql10-server postgresql10 postgresql10-contrib # 只有主库需要初始化 $ sudo su postgres -c &amp;quot;/usr/pgsql-10/bin/initdb --data-checksums -D /var/lib/pgsql/10/data&amp;quot; 安装repmgr $ yum install -y repmgr10.x86_64 提升postgres 用户具有部分sudo 执行</description>
     </item>
     
     <item>
