@@ -263,12 +263,14 @@
 </code></pre></li>
 <li>
 <p>安装PG10</p>
-<pre><code>$ yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-$ yum update -y 
-$ yum install -y postgresql10-server postgresql10  postgresql10-contrib
-# 只有主库需要初始化
-$ sudo su postgres -c  &quot;/usr/pgsql-10/bin/initdb  --data-checksums -D /var/lib/pgsql/10/data&quot; 
-</code></pre></li>
+</li>
+</ul>
+<pre><code> $ yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+  $ yum update -y 
+  $ yum install -y postgresql10-server postgresql10  postgresql10-contrib
+  # 只有主库需要初始化
+  $ sudo su postgres -c  &quot;/usr/pgsql-10/bin/initdb  --data-checksums -D /var/lib/pgsql/10/data&quot; 
+</code></pre><ul>
 <li>
 <p>安装repmgr</p>
 <pre><code>$ yum install -y repmgr10.x86_64 
