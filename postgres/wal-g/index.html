@@ -166,8 +166,10 @@
     <li><a href="#恢复数据">恢复数据</a></li>
     <li><a href="#清理存储">清理存储</a></li>
     <li><a href="#将现有的所有wal上传">将现有的所有wal上传</a></li>
+    <li><a href="#定期全备份及清理">定期全备份及清理</a></li>
     <li><a href="#注意事项">注意事项</a></li>
     <li><a href="#思考">思考</a></li>
+    <li><a href="#其他有用脚本">其他有用脚本</a></li>
   </ul>
 </nav>
     </div>
@@ -300,6 +302,10 @@ then
   wal-g wal-push $file
 fi
 done
+</code></pre><h2 id="定期全备份及清理">定期全备份及清理</h2>
+<p>cat /etc/cron.weekly/pg_backup_retain.sh 例如每周一个全备份，保留近半年数据</p>
+<pre><code>source mydir/wal-g.env &amp;&amp;  wal-g  backup-push $PGDATA
+source mydir/wal-g.env &amp;&amp;  wal-g delete retain FULL 26 --confirm
 </code></pre><h2 id="注意事项">注意事项</h2>
 <p>1 需要先进行wal日志的备份在进行全备份。否则在恢复的时候可能会遗漏期间的wal日志。</p>
 <p>2 全备份需要等待当前wal日志发生切换才能完成。如果是写入慢或暂无写入数据库可执行select pg_switch_wal() 进行手动触发。</p>
@@ -307,6 +313,50 @@ done
 <h2 id="思考">思考</h2>
 <p>归档备份wal日志 会比生产系统的数据库滞后一个wal文件 。 是当wal日志写满或切换写新wal日志的时候触发的归档 。</p>
 <p>如果需要使用归档文件恢复数据库时需要考虑时候可以找到最近的wal日志文件，比如在从库中。</p>
+<h2 id="其他有用脚本">其他有用脚本</h2>
+<p>下载一段连续范围内的wal日志文件 到目录 walbackup 目录中，防止下载过程中出现网络问题等。可重复多次执行</p>
+<p>cat refetch_wal.sh</p>
+<pre><code class="language-#!" data-lang="#!">
+walfiles=$(python calc_wal.py $1 $2)
+
+source mydir/wal-g.env
+
+for wal_seq in $walfiles; do
+ if [[ ! -f walbackup/&quot;$wal_seq&quot; ]];then
+   wal-g wal-fetch $wal_seq walbackup/$wal_seq
+   echo &quot;fetch wal file &quot; $wal_seq
+ fi
+done
+</code></pre><p>cat calc_wal.py</p>
+<pre><code>import sys
+
+
+def next_str(start):
+    s_8 = start[:8]
+    s_16 = start[8:16]
+    s_24 = start[16:]
+    if s_24.endswith('FF'):
+        s_24 = hex(int('01',base=16))[2:].zfill(8)
+        s_16 = hex(int(s_16, base=16) + 1)[2:].zfill(8)
+    else:
+        s_24 = hex(int(s_24, base=16) + 1)[2:].zfill(8)
+    return ''.join([s_8, s_16, s_24]).upper()
+
+
+def get_all(start, end):
+    start = start.upper()
+    end = end.upper()
+    new_seq = None
+    print(start)
+    while new_seq != end:
+        new_seq = next_str(new_seq if new_seq is not None else start)
+        print(new_seq)
+
+
+if __name__ == &quot;__main__&quot;:
+    get_all(sys.argv[1], sys.argv[2])
+</code></pre><p>使用方法</p>
+<p>refetch_wal.sh wal开始文件名 wal结束文件名</p>
 
         </div>
 
