@@ -131,7 +131,10 @@
 <ul>
 <li><strong><a href="https://docs.min.io/minio/baremetal/concepts/erasure-coding.html#erasure-sets"> Erasure Sets</a>.</strong></li>
 </ul>
+<p>Erasure set size is automatically calculated based on the number of disks. MinIO  supports unlimited number of disks but each erasure set can be upto 16  disks and a minimum of 2 disks</p>
 <p>首先需要了解一个概念， Erasure Sets。 他是一集合，就是前面纠删码中提到的k+M，minio会根据集群中的磁盘总数，将磁盘划分为多个组，每个组就是一个单独的集合（Erasure Sets), 每个集合拥有的磁盘数为4-16个。</p>
+<p>参考关系表格见 <a href="https://github.com/minio/minio/blob/master/docs/distributed/SIZING.md">https://github.com/minio/minio/blob/master/docs/distributed/SIZING.md</a></p>
+<p><a href="https://min.io/product/erasure-code-calculator">具体计算ES</a></p>
 <ul>
 <li>minio中存储类别有两个级别，<strong>STANDARD</strong>、<strong>REDUCED_REDUNDANCY</strong></li>
 </ul>
@@ -239,6 +242,11 @@ log.Println(&quot;Uploaded&quot;, &quot;my-objectname&quot;, &quot; of size: &qu
     如果集群中没有指定 storage class 类别。终端代码中指定的storage-class类别的值将采用集群的默认值
 </code></pre><p>参考</p>
 <p><a href="https://github.com/minio/minio/blob/9c605ad153fec94df496906bb94ec8733b5620df/docs/erasure/storage-class/README.md">https://github.com/minio/minio/blob/9c605ad153fec94df496906bb94ec8733b5620df/docs/erasure/storage-class/README.md</a></p>
+<h2 id="思考">思考</h2>
+<p><strong>minio 分布式部署方案为什么推荐只是需要4块磁盘，而不是3块</strong></p>
+<p>如果只有3块磁盘，EC最大值为 小于等于3/2 即EC 1， 当其中任何一块磁盘坏掉的情况下，整个集群降为只读模式。</p>
+<p>如果有4块磁盘，EC为2，当坏掉其中一块磁盘的时候，整个集群依然具有读写能力。</p>
+<p>理解minio中EC 对集群如何做到高可用及集群的扩容将非常有帮助</p>
 
         </div>
 
