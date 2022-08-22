@@ -344,6 +344,7 @@ X-Xss-Protection: 1; mode=block
 </code></pre><p>集群</p>
 <pre><code> /minio/health/cluster
 </code></pre><h4 id="使用prometheus-监控">使用prometheus 监控</h4>
+<p>通过命令 <code>mc admin prometheus generate </code> 自动生成</p>
 <p>认证模式 prometheus 配置</p>
 <pre><code>scrape_configs:
 - job_name: minio-job
