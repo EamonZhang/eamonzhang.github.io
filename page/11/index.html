@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/middleware/coredns/" title="coredns">coredns</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年6月22日
+        </date>
+        
+        <div class="post-content">
+            背景 致力于打造云原生中的dns服务和服务发现。 各种功能都是通过插件方式实现 简单例子 服务 cat /usr/lib/systemd/system/coredns.service [Unit] Description=CoreDNS DNS server Documentation=https://coredns.io After=network.target [Service] PermissionsStartOnly=true LimitNOFILE=1048576 LimitNPROC=512 CapabilityBoundingSet=CAP_NET_BIND_SERVICE AmbientCapabilities=CAP_NET_BIND_SERVICE NoNewPrivileges=true User=coredns WorkingDirectory=~ ExecStart=/usr/local/bin/coredns -conf=/etc/coredns/Corefile ExecReload=/bin/kill -SIGUSR1 $MAINPID Restart=on-failure [Install] WantedBy=multi-user.target 配置文件 cat /etc/coredns/Corefile .:53 { # 绑定interface ip bind 127.0.0.1 # 先走本机的hosts # https://coredns.io/plugins/hosts/ hosts { # 自定义sms.service search.service 的解析 # 因为解析的域名少我们这里直接……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/middleware/coredns/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/redis/install/" title="Redis 6.0安装配置管理">Redis 6.0安装配置管理</a>
             </h1>
         </header>
@@ -247,22 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/python/django-ndb/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/network-security/linux-user-passw/" title="Centos 登陆安全管理">Centos 登陆安全管理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年5月9日
-        </date>
-        
-        <div class="post-content">
-            禁用root登陆 注意： 创建一个非root用户 并加入wheel用户组（拥有sudo权限） useradd NewUser passwd NewUser gpasswd -a NewUser wheel 本地禁用root登陆 修改/etc/pam.d/login文件增加下面一行 auth required pam_succeed_if.so user != root quiet 远程禁用root登陆 修改 /etc/ssh/sshd_config #PermitRootLogin yes PermitRootLogin no 修改ssh默认端口 修改 /etc/ssh/sshd_config #Port 22 Port 46608 安全认证 LoginGraceTime 2m PermitRootLogin no #StrictModes yes #MaxAuthTries 6 #MaxSessions……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/network-security/linux-user-passw/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -399,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/storage/minio_ec/" title="Minio存储类别">Minio存储类别</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
     </li>
     
@@ -434,10 +438,6 @@
         <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -461,6 +461,8 @@
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/minio/">minio (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年6月29日
+        </date>
+        
+        <div class="post-content">
+            环境介绍 版本信息 centos7 postgres 14.4 citus 110-2 安装步骤 安装 略 配置 sudo pg_conftool 14 main set wal_level logical sudo pg_conftool 14 main set listen_addresses '*' sudo pg_conftool 14 main set shared_preload_libraries citus sudo vi /etc/postgresql/14/main/pg_hba.conf 创建数据库免密码登录 -- Edit .pgpass in the postgres user’s home directory, hostname:port:database:username:password 节点信息 nodenanme IP role master01 10.10.20.11 coordinator worker01 10.10.2.12 worker worker02 10.10.2.14 worker 搭建集群 创建database&amp;extension 在每个worker节点上执行 CREATE DATABASE newbie; \c newbie CREATE EXTENSION citus; 在ma……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/citus11/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/elk/filebeat_log/" title="filebeat 自身log输出位置问题">filebeat 自身log输出位置问题</a>
             </h1>
         </header>
@@ -282,22 +298,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/fastdeletfiles/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/perf/" title="perf linux 性能分析">perf linux 性能分析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年12月29日
-        </date>
-        
-        <div class="post-content">
-            收集数据 sudo perf record -F 99 -p 13204 -g -- sleep 30 -F 99表示每秒99次， -p 13204是进程号 -g表示记录调用栈 sleep 30则是持续30秒 数据解析 perf script -i perf.data &amp;&gt; perf.unfold 数据展现 git clone https://github.com/brendangregg/FlameGraph.git 将perf.unfold中的符号进行折叠 ./stackcollapse-perf.pl perf.unfold &amp;&gt; perf.folded 生成svg图 ./flamegraph.pl perf.folded &gt; perf.svg 用浏览器打开查看 结果解读 https://www.ruanyifeng.com/blog/2017/09/flame-graph.html……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/perf/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -413,6 +413,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/storage/minio_ec/" title="Minio存储类别">Minio存储类别</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
     </li>
     
@@ -448,10 +452,6 @@
         <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -475,6 +475,8 @@
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/minio/">minio (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

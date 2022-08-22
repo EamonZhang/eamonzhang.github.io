@@ -44,7 +44,8 @@
           var _hmt = _hmt || [];
             (function() {
             var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699";
+            <!-- hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699"; -->
+            hm.src = "https://hm.baidu.com/hm.js?0010600e9ae6ff8f5814bb7ec6b36072";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
           })();
@@ -100,11 +101,11 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zhangeamon.top/storage/minio/">minio 轻量级对象存储</a>
+                <a href="https://zhangeamon.top/storage/minio_ec/">Minio存储类别</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
-            2019年3月18日
+            2022年8月22日
         </date>
         
         <div class="post-meta meta-category">
@@ -115,8 +116,8 @@
         </div>
         
         <div class="post-content">
-            简单了解 minio 完全实现了s3协议，使用简单方便。 支持多机模式，提高数据可用性和整体容量。 限制， 最多5T存储。 单个文件最大5T。 缺点， 不能在线扩容。开发者认为扩容应该是开发人员需要解决的问题。 安装及简单使用 服务端 #下载 wget https://dl.minio.io/server/minio/release/linux-amd64/minio mv minio /usr/local/bin/ chmod 777 /usr/local/bin/minio #启动服务 minio server minidata/ Endpoint: http://10.1.88.74:9000 http://172.17.0.1:9000 http://172.19.0.1:9000 http://172.21.0.1:9000 http://172.22.0.1:9000 http://172.23.0.1:9000 http://127.0.0.1:9000 AccessKey: ZSYLNWA109W0Q4DWDS73 SecretKey: kuqn+i1MpR0yoE9RoT59gYjRuB5IJdz8IhIZOqP9 Browser Access: http://10.1.88.74:9000 http://172.17.0.1:9000 http://172.19.0.1:9000 http://172.21.0.1:9000……
-            <p class="readmore"><a href="https://zhangeamon.top/storage/minio/">阅读全文</a></p>
+            minio 存储类别 副本机制与纠删码方式对比 在分布式数据存储服务中，通常使用的方式有副本机制，与纠删码机制。 原理对比 副本技术的原理比较简单，通过副本机制，数据的冗余写来保证数据的可靠性 纠删码类似于raid5、raid6类似。通过引入校验数据块保障数据冗余，从而获得更多的存储空间 EC ( Erasure Coding) 相对……
+            <p class="readmore"><a href="https://zhangeamon.top/storage/minio_ec/">阅读全文</a></p>
         </div>
     </article>
     
@@ -131,7 +132,7 @@
 
                     <footer id="footer">
     <div>
-        &copy; 2018 - 2021 <a href="https://zhangeamon.top"> By Eamon</a>
+        &copy; 2018 - 2022 <a href="https://zhangeamon.top"> By Eamon</a>
         
     </div>
     <br />
@@ -169,43 +170,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
+        <a href="https://zhangeamon.top/storage/minio_ec/" title="Minio存储类别">Minio存储类别</a>
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
+        <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/postgres/libpg/" title="客户端故障转移">客户端故障转移</a>
+        <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/postgres/prepare/" title="使用prepare预编译SQL">使用prepare预编译SQL</a>
+        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
+        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/python/requests/" title="Requests">Requests</a>
+        <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
+        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/linux/lightdm/" title="关于Ubuntu20.04下向日葵远程软件连接中断的解决方法">关于Ubuntu20.04下向日葵远程软件连接中断的解决方法</a>
+        <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+        <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
     </li>
     
     <li>
-        <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
+        <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
     </li>
     
 </ul>
@@ -220,27 +221,43 @@
     
     <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
     
+    <li><a href="https://zhangeamon.top/categories/docker/">docker (1)</a></li>
+    
     <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (13)</a></li>
+    <li><a href="https://zhangeamon.top/categories/haproxy/">haproxy (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/kafka/">kafka (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/minio/">minio (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (1)</a></li>
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (19)</a></li>
+    <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (13)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (46)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/redis/">redis (7)</a></li>
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (9)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (10)</a></li>
+    <li><a href="https://zhangeamon.top/categories/tidb/">tidb (5)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (8)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AD%98%E5%82%A8/">存储 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (3)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (2)</a></li>
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (3)</a></li>
     
 </ul>
 

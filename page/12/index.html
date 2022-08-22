@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/network-security/linux-user-passw/" title="Centos 登陆安全管理">Centos 登陆安全管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月9日
+        </date>
+        
+        <div class="post-content">
+            禁用root登陆 注意： 创建一个非root用户 并加入wheel用户组（拥有sudo权限） useradd NewUser passwd NewUser gpasswd -a NewUser wheel 本地禁用root登陆 修改/etc/pam.d/login文件增加下面一行 auth required pam_succeed_if.so user != root quiet 远程禁用root登陆 修改 /etc/ssh/sshd_config #PermitRootLogin yes PermitRootLogin no 修改ssh默认端口 修改 /etc/ssh/sshd_config #Port 22 Port 46608 安全认证 LoginGraceTime 2m PermitRootLogin no #StrictModes yes #MaxAuthTries 6 #MaxSessions……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/network-security/linux-user-passw/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/syslog/" title="系统日志 syslog">系统日志 syslog</a>
             </h1>
         </header>
@@ -254,22 +270,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/FunctionsandOperators/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/daily_management/" title="数据库日常管理">数据库日常管理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年4月7日
-        </date>
-        
-        <div class="post-content">
-            日常管理 可用性 监测项 可用性 主从 HA 全量备份 增量备份 恢复 监测项 磁盘空间 全库 select pg_size_pretty(sum(pg_database_size(oid))) from pg_database; 数据库 select datname, pg_size_pretty(pg_database_size(oid)) from pg_database order by pg_database_size(oid) desc limit 10; 表总 SELECT table_schema || '.' || table_name AS table_full_name, pg_size_pretty(pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;')) AS size FROM information_schema.tables where table_schema = 'public' ORDER BY pg_total_relation_size('&quot;' || table_schema || '&quot;.&quot;' || table_name || '&quot;') DESC limit 10; 表 索引 冷热数据 上次统计信息更新时间 热表dml qps io 热表qdml 冷数据 冷索引 索引利用 全表扫描次数……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/daily_management/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -406,6 +406,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/storage/minio_ec/" title="Minio存储类别">Minio存储类别</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
     </li>
     
@@ -441,10 +445,6 @@
         <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -468,6 +468,8 @@
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/minio/">minio (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/es/password/" title="设置密码">设置密码</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年9月12日
+        </date>
+        
+        <div class="post-content">
+            ElasticSearch 设置密码 以前在使用es的时候基本是裸，没有任何的权限管理。用户名密码设置。 配置 elasticsearch.yaml 添加，重启服务 xpack.security.enabled: true xpack.security.transport.ssl.enabled: true 设置用户密码 /usr/share/elasticsearch/elasticsearch-setup-passwords interactive Initiating the setup of passwords for reserved users elastic,kibana,logstash_system,beats_system. You will be prompted to enter passwords as the process progresses. Please confirm that you would like to continue [y/N]y Enter password for [elastic]: passwords must be at least [6] characters long Try again. Enter password for [elastic]: Reenter password for [elastic]: Passwords do not match. Try again. Enter password for [elastic]: Reenter password for [elastic]: Enter password for [kibana]: Reenter password for [kibana]: Enter password for [logstash_system]: Reenter password for……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/es/password/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/view_pg_stat_activity/" title="数据库视图之 pg_stat_activity">数据库视图之 pg_stat_activity</a>
             </h1>
         </header>
@@ -247,29 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/tcpdump/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/pmap/" title="pmap Linux 进程内存分析">pmap Linux 进程内存分析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年3月19日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            介绍 pmap - report memory map of a process(查看进程的内存映像信息) 参数说明 x extended Show the extended format. 显示扩展格式 d device Show the deviceformat. 显示设备格式 结果查看说明 Address: start address ofmap 映像起始地址 Kbytes: size of map in kilobytes 映像大小 RSS: resident set size inkilobytes 驻留集大小 Dirty: dirty pages (both sharedand private) in kilobytes 脏页大小 Mode: permissions on map 映像权限: r=read,w=write, x=execute, s=shared, p=private (copy on write) Mapping: file backing the map ,or &lsquo;[ anon ]&rsquo; for allocated memory, or &lsquo;[ stack ]&rsquo; for the program stack.……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/pmap/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -406,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/storage/minio_ec/" title="Minio存储类别">Minio存储类别</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
     </li>
     
@@ -441,10 +438,6 @@
         <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -468,6 +461,8 @@
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/minio/">minio (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

@@ -6,7 +6,16 @@
     <description>Recent content in Storages on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 09 Mar 2021 16:40:29 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/storage/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Aug 2022 11:37:58 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/storage/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Minio存储类别</title>
+      <link>https://zhangeamon.top/storage/minio_ec/</link>
+      <pubDate>Mon, 22 Aug 2022 11:37:58 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/storage/minio_ec/</guid>
+      <description>minio 存储类别 副本机制与纠删码方式对比 在分布式数据存储服务中，通常使用的方式有副本机制，与纠删码机制。 原理对比 副本技术的原理比较简单，通过副本机制，数据的冗余写来保证数据的可靠性 纠删码类似于raid5、raid6类似。通过引入校验数据块保障数据冗余，从而获得更多的存储空间 EC ( Erasure Coding) 相对</description>
+    </item>
+    
     <item>
       <title>云存储同步 rclone</title>
       <link>https://zhangeamon.top/storage/rclone/</link>

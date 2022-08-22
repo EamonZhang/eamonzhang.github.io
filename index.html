@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/storage/minio_ec/" title="Minio存储类别">Minio存储类别</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年8月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/minio'>minio</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            minio 存储类别 副本机制与纠删码方式对比 在分布式数据存储服务中，通常使用的方式有副本机制，与纠删码机制。 原理对比 副本技术的原理比较简单，通过副本机制，数据的冗余写来保证数据的可靠性 纠删码类似于raid5、raid6类似。通过引入校验数据块保障数据冗余，从而获得更多的存储空间 EC ( Erasure Coding) 相对……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/storage/minio_ec/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
             </h1>
         </header>
@@ -296,22 +319,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_buffercache/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2022年6月29日
-        </date>
-        
-        <div class="post-content">
-            环境介绍 版本信息 centos7 postgres 14.4 citus 110-2 安装步骤 安装 略 配置 sudo pg_conftool 14 main set wal_level logical sudo pg_conftool 14 main set listen_addresses '*' sudo pg_conftool 14 main set shared_preload_libraries citus sudo vi /etc/postgresql/14/main/pg_hba.conf 创建数据库免密码登录 -- Edit .pgpass in the postgres user’s home directory, hostname:port:database:username:password 节点信息 nodenanme IP role master01 10.10.20.11 coordinator worker01 10.10.2.12 worker worker02 10.10.2.14 worker 搭建集群 创建database&amp;extension 在每个worker节点上执行 CREATE DATABASE newbie; \c newbie CREATE EXTENSION citus; 在ma……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/citus11/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -416,6 +423,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/storage/minio_ec/" title="Minio存储类别">Minio存储类别</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
     </li>
     
@@ -451,10 +462,6 @@
         <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/citus11/" title="citus11 管理手册">citus11 管理手册</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -478,6 +485,8 @@
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/minio/">minio (1)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
     

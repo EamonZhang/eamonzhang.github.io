@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>tpch AP测试 | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="tpch AP测试 - Let&#39;s go 🐌 🐌 🐌">
+    <title>Minio存储类别 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="Minio存储类别 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2019-06-05T09:36:21&#43;08:00'>
+    <meta property="article:published_time" content='2022-08-22T11:37:58&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2019-06-05T09:36:21&#43;08:00'>
+    <meta property="article:modified_time" content='2022-08-22T11:37:58&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="tpch AP测试">
+    <meta name="description" content="Minio存储类别">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/postgres/tpch/">
+    <meta property="og:url" content="https://zhangeamon.top/storage/minio_ec/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -96,46 +96,149 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">tpch AP测试</h1>
+            <h1 class="post-title">Minio存储类别</h1>
         </header>
         <date class="post-meta meta-date">
-            2019年6月5日
+            2022年8月22日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/minio'>minio</a></span>
+            
+        </div>
         
         
         
         <div class="post-content">
-            <h4 id="背景介绍">背景介绍</h4>
-<p>24sql</p>
-<h4 id="tpc-h-基准测试">TPC-H 基准测试</h4>
-<h5 id="下载安装">下载安装</h5>
-<p><a href="./tools/tpch-tools.tgz">tpch-tools安装包</a></p>
-<p>修改makefile.suite 模版</p>
-<pre><code>CC=gcc 
-DATABASE-TDAT
-MACHINE=LINUX
-WORKLOAD=TPCH
-</code></pre><p>执行 make 进行编译</p>
-<h5 id="生成测试数据">生成测试数据</h5>
-<p>生成20G测试数据</p>
-<pre><code>./dbgen -s 20
-ls -lrth *.tbl
-</code></pre><p>自动生成的测试数据每行的结尾多余一个 &lsquo;|&rsquo; 需要处理</p>
-<pre><code>for i in `ls *.tbl`; do sed 's/|$//' $i &gt; ${i/tbl/csv}; echo $i; done;
-</code></pre><h5 id="创建表及索引">创建表及索引</h5>
-<p>在下面的文件中分别是创建表和对应索引的sql</p>
-<p>dss.ddl   <br>
-dss.ri</p>
-<h5 id="导入数据">导入数据</h5>
-<pre><code>copy customer from '/opt/tpch-tools/dbgen/customer.csv' with DELIMITER '|';
-copy lineitem from '/opt/tpch-tools/dbgen/lineitem.csv' with DELIMITER '|';
-copy nation from '/opt/tpch-tools/dbgen/nation.csv' with DELIMITER '|';
-copy orders from '/opt/tpch-tools/dbgen/orders.csv' with DELIMITER '|';
-copy partsupp from '/opt/tpch-tools/dbgen/partsupp.csv' with DELIMITER '|';
-copy region from '/opt/tpch-tools/dbgen/region.csv' with DELIMITER '|';
-copy supplier from '/opt/tpch-tools/dbgen/supplier.csv' with DELIMITER '|';
-</code></pre><h5 id="基准测试">基准测试</h5>
-<p>在queries 目录下存放的是24条sql</p>
+            <h1 id="minio-存储类别">minio 存储类别</h1>
+<h2 id="副本机制与纠删码方式对比">副本机制与纠删码方式对比</h2>
+<p>在分布式数据存储服务中，通常使用的方式有副本机制，与纠删码机制。</p>
+<p><strong>原理对比</strong></p>
+<p>副本技术的原理比较简单，通过副本机制，数据的冗余写来保证数据的可靠性</p>
+<p>纠删码类似于raid5、raid6类似。通过引入校验数据块保障数据冗余，从而获得更多的存储空间</p>
+<p>EC ( Erasure Coding) 相对 RAID 技术更加灵活，条带由 K 个数据块和 M 个校验数据块组成，而且 K 和 M 是可以调整的。</p>
+<p><strong>空间利用率</strong></p>
+<p>副本机制空间利用率为只有两个副本时，使用率为50%。副本数越多可靠性越高，空间利用率越低。计算比较简单。</p>
+<p>纠删码通过调整K 数据块,M 校验块比例来设置可靠性与空间利用率。空间利用率 K / (K+M)。 K 越大空间利用率越高，M越大 可靠性越高。</p>
+<p><strong>可靠性</strong></p>
+<p>容忍节点或磁盘故障数量 副本数 (N-1 ) ,N为节点的数量。纠删码 M，为校验块的比例。损失达到M后变为只读</p>
+<p><strong>纠删码代价</strong></p>
+<p>纠删码通过CPU代价补偿硬盘的空间利用率。CPU的开销会更高</p>
+<h2 id="minio-中的存储类别">Minio 中的存储类别</h2>
+<p>minio采用纠删码的方式保证数据的可靠性。不同于raid5 、minio的纠删码使用在对象级别。</p>
+<ul>
+<li><strong><a href="https://docs.min.io/minio/baremetal/concepts/erasure-coding.html#erasure-sets"> Erasure Sets</a>.</strong></li>
+</ul>
+<p>首先需要了解一个概念， Erasure Sets。 他是一集合，就是前面纠删码中提到的k+M，minio会根据集群中的磁盘总数，将磁盘划分为多个组，每个组就是一个单独的集合（Erasure Sets), 每个集合拥有的磁盘数为4-16个。</p>
+<ul>
+<li>minio中存储类别有两个级别，<strong>STANDARD</strong>、<strong>REDUCED_REDUNDANCY</strong></li>
+</ul>
+<p>STANDARD 的N 值大于 REDUCED_REDUNDANCY 中的N 值。 并且小于 磁盘总数的1/2。</p>
+<ul>
+<li><strong>设置纠删码中的N 值</strong></li>
+</ul>
+<p>​	通过在启动集群时设置环境变量的方式</p>
+<pre><code># 设置环境变量
+export MINIO_STORAGE_CLASS_STANDARD=EC:3
+export MINIO_STORAGE_CLASS_RRS=EC:2
+</code></pre><p>​    通过命令方式 mc admin config get/set</p>
+<pre><code># 命令修改EC:N
+mc admin config get myplay/ storage_class
+</code></pre><ul>
+<li><strong>默认值</strong></li>
+</ul>
+<p>如果在启动minio集群时没有设置EC值，将采用默认值。</p>
+<p>​       通过以下代码与实现测试环境观察。与 <a href="https://docs.min.io/minio/baremetal/concepts/erasure-coding.html#">Erasure Coding </a> 文档中的描述 略有不符。</p>
+<pre><code> MinIO sets the `REDUCED_REDUNDANCY` parity to `EC:2` by default
+</code></pre><pre><code>代码位置 https://github.com/minio/minio/blob/master/internal/config/storageclass/storage-class.go
+
+// Default RRS parity is always minimum parity. 默认RRS parity 值 1
+	defaultRRSParity = 1
+
+// DefaultParityBlocks returns default parity blocks for 'drive' count 默认 Standy parity 值与dirve 个数的对应关系
+func DefaultParityBlocks(drive int) int {
+	switch drive {
+	case 1:
+		return 0
+	case 3, 2:
+		return 1
+	case 4, 5:
+		return 2
+	case 6, 7:
+		return 3
+	default:
+		return 4
+	}
+}
+
+// DefaultKVS - default storage class config 配置文件中的默认描述  storage_class standard= rrs=EC:1 # 通过命令 `mc admin config get myplay/ storage_class`
+var (
+	DefaultKVS = config.KVS{
+		config.KV{
+			Key:   ClassStandard,
+			Value: &quot;&quot;,
+		},
+		config.KV{
+			Key:   ClassRRS,
+			Value: &quot;EC:1&quot;,
+		},
+	}
+)
+
+// Standard constats for config info storage class
+const (
+	ClassStandard = &quot;standard&quot;
+	ClassRRS      = &quot;rrs&quot;
+
+	// Reduced redundancy storage class environment variable
+	RRSEnv = &quot;MINIO_STORAGE_CLASS_RRS&quot;
+	// Standard storage class environment variable
+	StandardEnv = &quot;MINIO_STORAGE_CLASS_STANDARD&quot;
+
+	// Supported storage class scheme is EC
+	schemePrefix = &quot;EC&quot;
+
+	// Min parity disks
+	minParityDisks = 0
+
+	// Default RRS parity is always minimum parity.
+	defaultRRSParity = 1
+)
+</code></pre><h2 id="终端指定类别">终端指定类别</h2>
+<p>通过 StorageClass设定使用存储类型</p>
+<pre><code># minio-client.go
+s3Client, err := minio.New(&quot;localhost:9000&quot;, &quot;YOUR-ACCESSKEYID&quot;, &quot;YOUR-SECRETACCESSKEY&quot;, true)
+if err != nil {
+ log.Fatalln(err)
+}
+
+object, err := os.Open(&quot;my-testfile&quot;)
+if err != nil {
+ log.Fatalln(err)
+}
+defer object.Close()
+objectStat, err := object.Stat()
+if err != nil {
+ log.Fatalln(err)
+}
+
+n, err := s3Client.PutObject(&quot;my-bucketname&quot;, &quot;my-objectname&quot;, object, objectStat.Size(), minio.PutObjectOptions{ContentType: &quot;application/octet-stream&quot;, StorageClass: &quot;REDUCED_REDUNDANCY&quot;})
+if err != nil {
+ log.Fatalln(err)
+}
+log.Println(&quot;Uploaded&quot;, &quot;my-objectname&quot;, &quot; of size: &quot;, n, &quot;Successfully.&quot;)
+</code></pre><p>没有指定Storage Class的情况</p>
+<pre><code>    If STANDARD storage class is set via environment variables or mc admin config get/set commands, and x-amz-storage-class is not present in request metadata, MinIO server will apply STANDARD storage class to the object. This means the data and parity disks will be used as set in STANDARD storage class.
+    
+    如果集群中设置了STANDARD 而在终端代码中没有使用 storage-class类别，则默认使用STANDARD
+
+    If storage class is not defined before starting MinIO server, and subsequent PutObject metadata field has x-amz-storage-class present with values REDUCED_REDUNDANCY or STANDARD, MinIO server uses default parity values.
+    
+    如果集群中没有指定 storage class 类别。终端代码中指定的storage-class类别的值将采用集群的默认值
+</code></pre><p>参考</p>
+<p><a href="https://github.com/minio/minio/blob/9c605ad153fec94df496906bb94ec8733b5620df/docs/erasure/storage-class/README.md">https://github.com/minio/minio/blob/9c605ad153fec94df496906bb94ec8733b5620df/docs/erasure/storage-class/README.md</a></p>
 
         </div>
 
@@ -148,11 +251,11 @@ copy supplier from '/opt/tpch-tools/dbgen/supplier.csv' with DELIMITER '|';
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/postgres/pgstattuple/">表空间膨胀</a></li>
+        <li><a href="/postgres/wal_lsn/">LSN 和 wal日志文件名对应关系</a></li>
         
-        <li><a href="/middleware/nginx/">nginx</a></li>
+        <li><a href="/middleware/kafka_install/">Kafka集群安装</a></li>
         
-        <li><a href="/middleware/bind9/">DNS Bind9 &amp; NamedManager </a></li>
+        <li><a href="/postgres/upset/">upset 用法</a></li>
         
     </ul>
 </div>
