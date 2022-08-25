@@ -143,7 +143,8 @@ vi /etc/security/limits.conf</p>
 <pre><code>getenforce
 </code></pre><p>修改 临时 setenforce 0
 永久 vi /etc/sysconfig/selinux</p>
-<h2 id="设置-firewalld">设置 firewalld</h2>
+<pre><code>sed -i '/SELINUX/s/enforcing/disabled/' /etc/selinux/config
+</code></pre><h2 id="设置-firewalld">设置 firewalld</h2>
 <h2 id="设置-ssh">设置 ssh</h2>
 <pre><code>vi /etc/ssh/sshd_config
 </code></pre><p>禁用root用户，密钥登陆 切换为其他用户登录</p>
