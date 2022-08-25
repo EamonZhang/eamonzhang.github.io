@@ -144,6 +144,8 @@ vi /etc/security/limits.conf</p>
 </code></pre><p>修改 临时 setenforce 0
 永久 vi /etc/sysconfig/selinux</p>
 <pre><code>sed -i '/SELINUX/s/enforcing/disabled/' /etc/selinux/config
+
+setenforce 0
 </code></pre><h2 id="设置-firewalld">设置 firewalld</h2>
 <h2 id="设置-ssh">设置 ssh</h2>
 <pre><code>vi /etc/ssh/sshd_config
