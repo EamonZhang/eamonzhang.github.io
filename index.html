@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/backlog-config/" title="Linux backlog/somaxconn 内核参数">Linux backlog/somaxconn 内核参数</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年8月25日
+        </date>
+        
+        <div class="post-content">
+            Linux 网络状态查看 netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}' https://www.cnblogs.com/dream397/p/14785967.html……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/backlog-config/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/storage/minio_ec/" title="Minio存储类别">Minio存储类别</a>
             </h1>
         </header>
@@ -296,29 +312,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/dts/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2022年7月1日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            通过插件查看PG数据缓存 create extension pg_buffercache; 查看当前database缓存使用情况 select c.relname,relname,pg_size_pretty(pg_table_size(c.oid)),pg_size_pretty(count(*) * 8192) as buffered, round(100.0*count(*)/(select setting FROM pg_settings where name = 'shared_buffers')::integer,1) as buffer_percent, round(100.0 * count(*) * 8192/pg_table_size(c.oid)) as percent_of_table from pg_class c inner join pg_buffercache b on b.relfilenode = c.relfilenode inner join pg_database d on (b.reldatabase = d.oid and d.datname = current_database()) group by c.oid ,c.relname order by 3 desc limit 10;……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_buffercache/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -423,6 +416,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/backlog-config/" title="Linux backlog/somaxconn 内核参数">Linux backlog/somaxconn 内核参数</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/storage/minio_ec/" title="Minio存储类别">Minio存储类别</a>
     </li>
     
@@ -456,10 +453,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
     </li>
     
 </ul>

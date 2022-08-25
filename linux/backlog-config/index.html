@@ -7,21 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Asrs | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="Asrs - Let&#39;s go 🐌 🐌 🐌">
+    <title>Linux backlog/somaxconn 内核参数 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="Linux backlog/somaxconn 内核参数 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2022-08-25T08:52:46&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-08-25T08:52:46&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="Asrs">
+    <meta name="description" content="Linux backlog/somaxconn 内核参数">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/asr/">
+    <meta property="og:url" content="https://zhangeamon.top/linux/backlog-config/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml+xml" href="https://zhangeamon.top/asr/index.xml" title="Let's go 🐌 🐌 🐌" />
     
     
     <script type="text/javascript" src="/js/jquery.min.js"></script>
@@ -90,30 +93,65 @@
                     
 <div class="res-cons">
     
-    
+
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/asr/c/" title="C 语言环境">C 语言环境</a>
-            </h1>
+            <h1 class="post-title">Linux backlog/somaxconn 内核参数</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年6月16日
+            2022年8月25日
         </date>
         
+        
+        
         <div class="post-content">
-            Centos7 cmake 版本升级（由 v2.8.12.2 升级至 v3.14.5） #cmake -version cmake version 2.8.12.2 安装基础工具 yum install -y gcc gcc-c++ mkdir /opt/cmake cd /opt/cmake/ wget https://cmake.org/files/v3.14/cmake-3.14.5.tar.gz tar zxvf cmake-3.14.5.tar.gz 安装 yum remove cmake -y ./configure --prefix=/usr/local/cmake make &amp;&amp; make install 查看版本 #/usr/local/cmake/bin/cmake --version cmake version 3.14.5 CMake suite maintained and supported by Kitware (kitware.com/cmake). 设置环境 ln -s /usr/local/cmake/bin/cmake /usr/bin/cmake Clion 中使用MakeFile 默认在Clion中使用CMakeList.txt,但是有些项目提供的是Makefile cmake_minimum_required(VERSION 3.12) project(test)……
+            <h2 id="linux-网络状态查看">Linux 网络状态查看</h2>
+<pre><code>netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+</code></pre><p><a href="https://www.cnblogs.com/dream397/p/14785967.html">https://www.cnblogs.com/dream397/p/14785967.html</a></p>
+
         </div>
-        <p class="readmore"><a href="https://zhangeamon.top/asr/c/">阅读全文</a></p>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/storage/minio_ec/">Minio存储类别</a></li>
+        
+        <li><a href="/postgres/wal_lsn/">LSN 和 wal日志文件名对应关系</a></li>
+        
+        <li><a href="/middleware/kafka_install/">Kafka集群安装</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
     </article>
     
     
+
     
-
-
-
-
-
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
 </div>
 
                     <footer id="footer">
@@ -126,6 +164,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>

@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://zhangeamon.top/categories/</loc>
-    <lastmod>2022-08-22T11:37:58+08:00</lastmod>
-  </url><url>
     <loc>https://zhangeamon.top/</loc>
+    <lastmod>2022-08-25T08:52:46+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/linux/backlog-config/</loc>
+    <lastmod>2022-08-25T08:52:46+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/linux/</loc>
+    <lastmod>2022-08-25T08:52:46+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/categories/</loc>
     <lastmod>2022-08-22T11:37:58+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/categories/minio/</loc>
@@ -100,9 +106,6 @@
   </url><url>
     <loc>https://zhangeamon.top/postgres/pg_activity/</loc>
     <lastmod>2022-01-12T15:47:07+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/linux/</loc>
-    <lastmod>2021-12-29T17:27:38+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/linux/fastdeletfiles/</loc>
     <lastmod>2021-12-29T17:27:38+08:00</lastmod>

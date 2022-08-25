@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/findhidpid/" title="Linux 找出隐藏进程">Linux 找出隐藏进程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月3日
+        </date>
+        
+        <div class="post-content">
+            原理 在top ps 等命令被改写时，利用Linux一切皆文件。找出被隐藏的进程。 以下为python脚本 #!/usr/bin/env python # -*- coding: utf-8 -*- import os def get_max_pid(): out = os.popen('cat /proc/sys/kernel/pid_max') content = out.readline().strip('\n') if content.isdigit(): return int(content) def get_ps_proc_list(): pid_list = [] out = os.popen('ps -e --no-header') lines = out.readlines() for line in lines: parts = line.split(' ') for part in parts: if part == '': parts.remove(part) pid = int(parts[0]) pid_list.append(pid) return pid_list def get_ps_lwp_list(): lwp_list = [] out = os.popen('ps --no-header -eL o lwp') lines = out.readlines() for line in lines: tid = int(line) lwp_list.append(tid) return lwp_list def print_badpid_info(pid): out = os.popen('ls -l /proc/%d/exe' % pid)……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/findhidpid/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/network-security/wazuh/" title="Wazuh 功能简介">Wazuh 功能简介</a>
             </h1>
         </header>
@@ -293,22 +309,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/prepare/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/materialized/" title="物化视图">物化视图</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年7月21日
-        </date>
-        
-        <div class="post-content">
-            物化视图 物化视图与普通视图的区别在于，物化视图是物理上真实存在的表。 物化视图的创建 \h create materialized view Command: CREATE MATERIALIZED VIEW Description: define a new materialized view Syntax: CREATE MATERIALIZED VIEW [ IF NOT EXISTS ] table_name [ (column_name [, ...] ) ] [ USING method ] [ WITH ( storage_parameter [= value] [, ... ] ) ] [ TABLESPACE tablespace_name ] AS query [ WITH [ NO ] DATA ] 与creat table as 基本相同，但是物化视图不同于table 的是物化时候中的数据内容可以……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/materialized/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -445,6 +445,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/backlog-config/" title="Linux backlog/somaxconn 内核参数">Linux backlog/somaxconn 内核参数</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/storage/minio_ec/" title="Minio存储类别">Minio存储类别</a>
     </li>
     
@@ -478,10 +482,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_buffercache/" title="pg_buffercache">pg_buffercache</a>
     </li>
     
 </ul>
