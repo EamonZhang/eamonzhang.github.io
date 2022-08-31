@@ -376,7 +376,11 @@ Rsyncing folder: /当前路径 =&gt; /vagrant
             end
         end
     config.vm.provision &quot;shell&quot;, inline: &lt;&lt;-SHELL
-      #yum update -y
+      # 可以root用户 登录 密码：vagrant
+      sudo sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/g' /etc/ssh/sshd_config
+      sudo sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+      systemctl restart sshd
+
     SHELL
 end
 </code></pre><h2 id="镜像管理">镜像管理</h2>
