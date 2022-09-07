@@ -101,6 +101,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/bmcpasswd/">修改远程管理卡密码</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月29日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/linux'>linux</a>
+            
+        </div>
+        
+        <div class="post-content">
+            更改BMC密码 BMC：基板管理控制器 Baseboard Management Controller 更改BMC密码，需要基于Ipmitool工具实现，需要先下载该工具 安装ipmitool ubuntu安装命令： sudo apt-get -y install ipmitool centos安装命令： yum -y install epel-release（先） yum -y install ipmitool（后） 查看登陆账户名列表 ipmitool user list 2（技嘉主……
+            <p class="readmore"><a href="https://zhangeamon.top/linux/bmcpasswd/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/linux/ssdiotimeout/">SSD IO request Time Out</a>
             </h1>
         </header>
@@ -305,29 +328,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/pstack_strace/">进程分析 strace,pstack</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年11月14日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/linux'>linux</a>
-            
-        </div>
-        
-        <div class="post-content">
-            https://yq.aliyun.com/articles/647468 基本用法 pstack pid strace -e trace=all -T -tt -p pid strace -o server.strace -Ttt -p pid 应用举例 python while True: print('hello') 查看应用进程 ps -ef | grep python root 13491 13054 13 13:27 pts/0 00:00:06 python pstack 13491 #0 0x0000726388f9ea90 in __write_nocancel () at ../sysdeps/unix/syscall-template.S:81 #1 0x0000726388f292f3 in _IO_new_file_write (f=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=0x72638a18d000, n=2) at fileops.c:1258 #2 0x0000726388f2ab0e in new_do_write (to_do=2, data=0x72638a18d000 &quot;1\n. \b[8@while True:\033[C&quot;, fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;) at fileops.c:519 #3 _IO_new_do_write (fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=0x72638a18d000 &quot;1\n. \b[8@while True:\033[C&quot;, to_do=2) at fileops.c:495 #4 0x0000726388f29a50 in _IO_new_file_xsputn (f=0x726389277400 &lt;_IO_2_1_stdout_&gt;, data=&lt;optimized out&gt;, n=1) at fileops.c:1326 #5 0x0000726388f1e05b in __GI__IO_fputs (str=0x726389cd2a8d &quot;\n&quot;, fp=0x726389277400 &lt;_IO_2_1_stdout_&gt;) at iofputs.c:39 #6 0x0000726389c0b9c0 in PyFile_WriteString () from /lib64/libpython2.7.so.1.0 #7 0x0000726389c80d48 in PyEval_EvalFrameEx () from /lib64/libpython2.7.so.1.0 #8 0x0000726389c8908d in PyEval_EvalCodeEx () from /lib64/libpython2.7.so.1.0 #9 0x0000726389c89192 in PyEval_EvalCode () from /lib64/libpython2.7.so.1.0 #10……
-            <p class="readmore"><a href="https://zhangeamon.top/linux/pstack_strace/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -349,7 +349,15 @@
         <a href="https://zhangeamon.top/categories/linux/page/2/">2</a>
     </li>
     
+    <li >
+        <a href="https://zhangeamon.top/categories/linux/page/3/">3</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://zhangeamon.top/categories/linux/page/3/">下一页</a>
+    </li>
     
 </ol>
 
@@ -397,6 +405,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/nice/" title="nice, ionice, cpulimit">nice, ionice, cpulimit</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/backlog-config/" title="Linux backlog/somaxconn 内核参数">Linux backlog/somaxconn 内核参数</a>
     </li>
     
@@ -432,10 +444,6 @@
         <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/dts/" title="逻辑复制实现数据迁移">逻辑复制实现数据迁移</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -458,7 +466,7 @@
     
     <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/linux/">linux (20)</a></li>
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (21)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/minio/">minio (2)</a></li>
     
