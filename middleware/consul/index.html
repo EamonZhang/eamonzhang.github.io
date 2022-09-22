@@ -131,8 +131,8 @@
 <pre><code>consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.84 -bind=10.1.88.84 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -config-dir=/etc/consul.d -ui
 consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.85 -bind=10.1.88.85 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -join=10.1.88.84 -config-dir=/etc/consul.d -ui
 consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.86 -bind=10.1.88.86 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -join=10.1.88.84 -config-dir=/etc/consul.d -ui
-</code></pre><p>服务发现配置</p>
-<p>cat /etc/consul.d.web/json</p>
+</code></pre><h4 id="服务发现配置">服务发现配置</h4>
+<p>cat /etc/consul.d.web.json</p>
 <pre><code>{
   &quot;services&quot;:[
     {
@@ -176,6 +176,7 @@ consul reload</p>
 </code></pre><p>在 10.1.88.85 启动服务8000端口</p>
 <pre><code>python -m SimpleHTTPServer 8000
 </code></pre><p>服务开启时解析到 10.1.88.85 服务关闭时 10.1.88.85 被剔除。</p>
+<h4 id="api-服务发现">API 服务发现</h4>
 <p>cat agent-service.json</p>
 <pre><code>{
   &quot;ID&quot;: &quot;redis1&quot;,
