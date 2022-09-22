@@ -132,7 +132,7 @@
 consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.85 -bind=10.1.88.85 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -join=10.1.88.84 -config-dir=/etc/consul.d -ui
 consul agent -server -bootstrap-expect=3 -data-dir=/tmp/consul -node=10.1.88.86 -bind=10.1.88.86 -client=0.0.0.0 -datacenter=bj -domain=zhangeamon.com -join=10.1.88.84 -config-dir=/etc/consul.d -ui
 </code></pre><p>服务发现配置</p>
-<p>cat /etc/consul.d/web/json</p>
+<p>cat /etc/consul.d.web/json</p>
 <pre><code>{
   &quot;services&quot;:[
     {
@@ -176,7 +176,56 @@ consul reload</p>
 </code></pre><p>在 10.1.88.85 启动服务8000端口</p>
 <pre><code>python -m SimpleHTTPServer 8000
 </code></pre><p>服务开启时解析到 10.1.88.85 服务关闭时 10.1.88.85 被剔除。</p>
-<h4 id="dnsmasq--配置">dnsmasq  配置</h4>
+<p>cat agent-service.json</p>
+<pre><code>{
+  &quot;ID&quot;: &quot;redis1&quot;,
+  &quot;Name&quot;: &quot;redis&quot;,
+  &quot;Tags&quot;: [&quot;primary&quot;, &quot;v1&quot;],
+  &quot;Address&quot;: &quot;10.10.2.11&quot;,
+  &quot;Port&quot;: 8000,
+  &quot;Meta&quot;: {
+    &quot;redis_version&quot;: &quot;4.0&quot;
+  },
+  &quot;EnableTagOverride&quot;: true,
+  &quot;Check&quot;: {
+    &quot;checkID&quot;: &quot;redis001&quot;,
+    &quot;name&quot;: &quot;redis001&quot;,
+    &quot;DeregisterCriticalServiceAfter&quot;: &quot;1m&quot;,
+    &quot;ttl&quot;:&quot;30s&quot;,
+    &quot;status&quot;: &quot;passing&quot;
+  },
+  &quot;Weights&quot;: {
+    &quot;Passing&quot;: 10,
+    &quot;Warning&quot;: 1
+  }
+}
+</code></pre><p>cat agent-service.json</p>
+<pre><code>{
+  &quot;ID&quot;: &quot;redis1&quot;,
+  &quot;Name&quot;: &quot;redis&quot;,
+  &quot;Tags&quot;: [&quot;primary&quot;, &quot;v1&quot;],
+  &quot;Address&quot;: &quot;10.10.2.11&quot;,
+  &quot;Port&quot;: 8000,
+  &quot;Meta&quot;: {
+    &quot;redis_version&quot;: &quot;4.0&quot;
+  },
+  &quot;EnableTagOverride&quot;: true,
+  &quot;Check&quot;: {
+    &quot;DeregisterCriticalServiceAfter&quot;: &quot;1m&quot;,
+    &quot;http&quot;: &quot;http://10.10.2.11:8000&quot;,
+    &quot;Interval&quot;: &quot;10s&quot;,
+    &quot;Timeout&quot;: &quot;5s&quot;
+  },
+  &quot;Weights&quot;: {
+    &quot;Passing&quot;: 10,
+    &quot;Warning&quot;: 1
+  }
+}
+</code></pre><p>服务注册</p>
+<pre><code>curl     --request PUT     --data @agent-service.json     http://10.10.2.12:8500/v1/agent/service/register?replace-existing-checks=true
+</code></pre><p>ttl 状态维护</p>
+<pre><code>curl     --request PUT     --data @agent-service.json     http://10.10.2.12:8500/v1/agent/check/pass/redis001
+</code></pre><h4 id="dnsmasq--配置">dnsmasq  配置</h4>
 <p>vi /etc/dnsmasq.conf</p>
 <pre><code>conf-dir=/etc/dnsmasq.d,.rpmnew,.rpmsave,.rpmorig
 all-servers
