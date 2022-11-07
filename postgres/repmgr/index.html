@@ -509,7 +509,7 @@ confirmed_flush_lsn |
 </ul>
 <h1 id="主动switchover">主动switchover</h1>
 <pre><code># 在计划提升为主库的节点上执行
-/usr/pgsql-10/bin/repmgr -f /etc/repmgr/10/repmgr.conf standby switchover 
+/usr/pgsql-10/bin/repmgr -f /etc/repmgr/10/repmgr.conf standby switchover --siblings-follow 
 
 # 查看切换结果 
 /usr/pgsql-10/bin/repmgr -f /etc/repmgr/10/repmgr.conf cluster show
