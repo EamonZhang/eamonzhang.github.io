@@ -162,6 +162,14 @@
     <li><a href="#网络环境">网络环境</a></li>
     <li><a href="#前期准备">前期准备</a></li>
   </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -618,8 +626,49 @@ $ /usr/pgsql-10/bin/repmgr -f /etc/repmgr/10/repmgr.conf cluster show
 </code></pre><p>node1 节点故障不可恢复情况</p>
 <pre><code># 将node1 节点从集群中注销, 登录到其他任意节点
 $ /usr/pgsql-10/bin/repmgr -f /etc/repmgr/10/repmgr.conf standby unregister --node-id
-</code></pre><pre><code> $ repmgr -f /etc/repmgr.conf cluster event
+</code></pre><pre><code> $ repmgr -f /etc/repmgr/10/repmgr.conf cluster event
 </code></pre><h1 id="自动failover">自动failover</h1>
+<p>修改配置</p>
+<p>vi postgresql.conf</p>
+<pre><code>shared_preload_libraries = 'repmgr'
+</code></pre><p>vi /etc/repmgr/10/repmgr.conf</p>
+<pre><code>failover=automatic
+promote_command='/usr/pgsql-10/bin/repmgr standby promote -f /etc/repmgr/10/repmgr.conf --log-to-file'
+follow_command='/usr/pgsql-10/bin/repmgr standby follow -f /etc/repmgr/10/repmgr.conf --log-to-file --upstream-node-id=%n'
+log_file='/var/lib/pgsql/repmgrd.log'
+monitoring_history=true #（启用监控参数）
+monitor_interval_secs=5 #（定义监视数据间隔写入时间参数）
+reconnect_attempts=10 #（故障转移之前，尝试重新连接主库次数（默认为6）参数）
+reconnect_interval=5 #（每间隔5s尝试重新连接一次参数
+</code></pre><p>重启 postgres</p>
+<pre><code>repmgr node service --action=restart
+</code></pre><p>启动 repmgrd</p>
+<pre><code>systemctl start repmgr-10
+systemctl enable repmgr-10
+</code></pre><p>测试</p>
+<p>略</p>
+<p>主节点重新加入集群</p>
+<pre><code># 全部原主节点保持关闭状态。 首先将执行pg_rewind -&gt;   自动启动服务 - &gt; 注册服务
+ repmgr node rejoin -d 'host=node1 dbname=repmgr user=repmgr' --force-rewind --config-files=postgresql.conf,postgresql.auto.conf --verbose --dry-run
+ repmgr node rejoin -d 'host=node1 dbname=repmgr user=repmgr' --force-rewind --config-files=postgresql.conf,postgresql.auto.conf --verbose
+</code></pre><h4 id="自动failover-几点说明">自动failover 几点说明</h4>
+<p>为预防网络脑裂发生： repmgr 做了如下努力： 1 ，使用见证节点。主要应用于只有主从两个节点的场景， 将见证节点与主节点部署在同一个网络区间。 当主节点与见证节点同时不可见时，认为是网络错误，不发生切换。当见证节点可见，主节点不可见时，认为主节点失效，触发切换。</p>
+<p>引入见证节点提高了维护成本。</p>
+<p>多IDC网络场景，方案2 ： 使用location 标记服务所在的位置。当与主节点location相同的节点都不可见时，认为是网络错误，不发生切换。如果集群中没有其他节点与主节点的location配置相同，则永远不发生切换。</p>
+<p>举例： 三个IDC，三个pg服务。location分别设置为dc1（主节点），dc2（从节点），dc3（从节点）。 当dc1 节点发生故障时不会发生故障转移。 因为集群中location 为dc1的节点（只有一个）都不可见。</p>
+<p>合理的设置应该为cd1(主节点) ,dc1(一个从)，dc2（另一个从）。 此时当dc1 发生以外时，可故障转移。</p>
+<p>注意事项： 当主节点网络问题。如网卡，网线故障。服务正常的情况下。集群也会发生故障转移。当网络恢复的时候发生脑裂。 主要问题。当主节点脱离集群时没有彻底关闭服务。repmgr不能管理pg服务,将其关闭。</p>
+<h4 id="location-修改">location 修改</h4>
+<p>localtion 参数在高可用架构中为防止网络分区问题发挥重要作用。 发生故障转移后location 通常也需要重新设计。</p>
+<p>修改 /etc/repmgr/10/repmgr.conf</p>
+<p>生效</p>
+<pre><code>repmgr standby register --force
+systemctl restart repmgr-10
+</code></pre><p>查看</p>
+<pre><code>repmgr cluster show
+或
+select * from repmgr.nodes;
+</code></pre><p><a href="https://repmgr.org/docs/current/repmgrd-basic-configuration.html#REPMGRD-RELOADING-CONFIGURATION">修改location</a></p>
 
         </div>
 
