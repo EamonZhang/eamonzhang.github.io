@@ -663,8 +663,16 @@ systemctl enable repmgr-10
 <p>多IDC网络场景，方案2 ： 使用location 标记服务所在的位置。当与主节点location相同的节点都不可见时，认为是网络错误，不发生切换。如果集群中没有其他节点与主节点的location配置相同，则永远不发生切换。</p>
 <p>举例： 三个IDC，三个pg服务。location分别设置为dc1（主节点），dc2（从节点），dc3（从节点）。 当dc1 节点发生故障时不会发生故障转移。 因为集群中location 为dc1的节点（只有一个）都不可见。</p>
 <p>合理的设置应该为cd1(主节点) ,dc1(一个从)，dc2（另一个从）。 此时当dc1 发生以外时，可故障转移。</p>
-<p>注意事项： 当主节点网络问题。如网卡，网线故障。服务正常的情况下。集群也会发生故障转移。当网络恢复的时候发生脑裂。 主要问题。当主节点脱离集群时没有彻底关闭服务。repmgr不能管理pg服务,将其关闭。</p>
-<h4 id="location-修改">location 修改</h4>
+<h4 id="注意事项-当主节点网络问题如网卡网线故障服务正常的情况下集群也会发生故障转移当网络恢复的时候发生脑裂-主要问题当主节点脱离集群时没有彻底关闭服务repmgr不能管理pg服务将其关闭">注意事项： 当主节点网络问题。如网卡，网线故障。服务正常的情况下。集群也会发生故障转移。当网络恢复的时候发生脑裂。 主要问题。当主节点脱离集群时没有彻底关闭服务。repmgr不能管理pg服务,将其关闭。</h4>
+<p>可以如下设置，通过确定与从节点连接个数决定是否关闭当前服务。在command中关闭当前pg</p>
+<pre><code>#child_nodes_check_interval=5           # Interval (in seconds) to check for attached child nodes (standbys)
+#child_nodes_connected_min_count=-1     # Minimum number of child nodes which must remain connected, otherwise
+                                        # disconnection command will be triggered
+#child_nodes_disconnect_min_count=-1    # Minimum number of disconnected child nodes required to execute disconnection command
+                                        # (ignored if &quot;child_nodes_connected_min_count&quot; set)
+#child_nodes_disconnect_timeout=30      # Interval between child node disconnection and disconnection command execution
+child_nodes_disconnect_command='' 
+</code></pre><h4 id="location-修改">location 修改</h4>
 <p>localtion 参数在高可用架构中为防止网络分区问题发挥重要作用。 发生故障转移后location 通常也需要重新设计。</p>
 <p>修改 /etc/repmgr/10/repmgr.conf</p>
 <p>生效</p>
