@@ -112,7 +112,154 @@
         
         
         <div class="post-content">
-            
+            <h2 id="逻辑复制故障转移">逻辑复制故障转移</h2>
+<h4 id="测试环境">测试环境</h4>
+<ul>
+<li>主库 10.10.2.11</li>
+<li>物理从库 10.10.2.12</li>
+<li>逻辑从库 10.10.2.13</li>
+</ul>
+<h4 id="测试任务">测试任务</h4>
+<p>当主库发生故障，物理复制从库变为新主库。逻辑从库将订阅地址变更为新主库。</p>
+<h4 id="开始测试">开始测试</h4>
+<p>环境搭建参考</p>
+<ul>
+<li><a href="/postgres/replication01/">物理复制</a></li>
+<li><a href="/postgres/logical-replication/">逻辑复制</a></li>
+</ul>
+<p>状态查看 复制关系</p>
+<pre><code> select * from pg_stat_replication ;
+-[ RECORD 1 ]----+------------------------------
+pid              | 2628
+usesysid         | 24576
+usename          | repuser
+application_name | sub1
+client_addr      | 10.10.2.13
+client_hostname  | 
+client_port      | 40230
+backend_start    | 2022-11-23 05:46:59.50291+00
+backend_xmin     | 
+state            | streaming
+sent_lsn         | 0/21000140
+write_lsn        | 0/21000140
+flush_lsn        | 0/21000140
+replay_lsn       | 0/21000140
+write_lag        | 
+flush_lag        | 
+replay_lag       | 
+sync_priority    | 0
+sync_state       | async
+-[ RECORD 2 ]----+------------------------------
+pid              | 2757
+usesysid         | 24576
+usename          | repuser
+application_name | walreceiver
+client_addr      | 10.10.2.12
+client_hostname  | 
+client_port      | 37698
+backend_start    | 2022-11-23 06:05:19.818834+00
+backend_xmin     | 
+state            | streaming
+sent_lsn         | 0/21000140
+write_lsn        | 0/21000140
+flush_lsn        | 0/21000140
+replay_lsn       | 0/21000140
+write_lag        | 
+flush_lag        | 
+replay_lag       | 
+sync_priority    | 0
+sync_state       | async
+</code></pre><p>复制槽</p>
+<pre><code>select * from pg_replication_slots ;
+ slot_name |  plugin  | slot_type | datoid | database | temporary | active | active_pid | xmin | catalog_xmin | restart_lsn | confirmed_flush_lsn 
+-----------+----------+-----------+--------+----------+-----------+--------+------------+------+--------------+-------------+---------------------
+ node14    |          | physical  |        |          | f         | f      |            |      |              | 0/1F0005B8  | 
+ sub1      | pgoutput | logical   |  12953 | postgres | f         | t      |       2628 |      |          570 | 0/21000108  | 0/21000140
+(2 rows)
+</code></pre><p>逻辑订阅表</p>
+<pre><code>select * from pg_publication_tables ;
+ pubname | schemaname | tablename 
+---------+------------+-----------
+ test01  | public     | test01
+(1 row)
+</code></pre><p>表数据</p>
+<pre><code> select * from test01 ;
+ id 
+----
+  1
+  2
+  3
+  4
+(4 rows)
+</code></pre><h4 id="主从切换">主从切换</h4>
+<p>关闭主库</p>
+<pre><code>systemctl stop postgresql
+</code></pre><p>拷贝逻辑复制槽, 将主库pg_replsolt目录下的逻辑复制槽拷贝到从库对应目录下. 注意对应的用户及用户组。</p>
+<pre><code>scp -r pg_replslot/sub1/ 10.10.2.12:$PGDATA/data/pg_replslot/
+</code></pre><p>将从库升级为主库并重新启动加载slot</p>
+<pre><code>pg_ctl promote 
+waiting for server to promote.... done
+server promoted
+</code></pre><pre><code>systemctl stop postgresql
+</code></pre><p>查看复制槽加载情况</p>
+<pre><code>select * from pg_replication_slots ;
+ slot_name |  plugin  | slot_type | datoid | database | temporary | active | active_pid | xmin | catalog_xmin | restart_lsn | confirmed_flush_lsn 
+-----------+----------+-----------+--------+----------+-----------+--------+------------+------+--------------+-------------+---------------------
+ sub1      | pgoutput | logical   |  12953 | postgres | f         | f      |            |      |          570 | 0/210001B8  | 0/210001B8
+(1 row)
+
+</code></pre><p>此时复制关系,无数据</p>
+<pre><code>select * from pg_stat_replication ;
+</code></pre><p>在逻辑复制从库查看订阅信息</p>
+<pre><code>select * from pg_subscription;
+ subdbid | subname | subowner | subenabled |                              subconninfo                               | subslotname | subsynccommit | subpublications 
+---------+---------+----------+------------+------------------------------------------------------------------------+-------------+---------------+-----------------
+   12953 | sub1    |       10 | t          | host=10.10.2.11 port=5432 dbname=postgres user=repuser password=123456 | sub1        | off           | {test01}
+
+</code></pre><p>修改订阅信息</p>
+<pre><code>postgres=# alter subscription sub1 connection 'host=10.10.2.12 port=5432 dbname=postgres user=repuser password=123456';
+ALTER SUBSCRIPTION
+postgres=# select * from pg_subscription;
+ subdbid | subname | subowner | subenabled |                              subconninfo                               | subslotname | subsynccommit | subpublications 
+---------+---------+----------+------------+------------------------------------------------------------------------+-------------+---------------+-----------------
+   12953 | sub1    |       10 | t          | host=10.10.2.12 port=5432 dbname=postgres user=repuser password=123456 | sub1        | off           | {test01}
+(1 row)
+
+</code></pre><p>查看复制关系 10.10.2.12</p>
+<pre><code>select * from pg_stat_replication ;
+-[ RECORD 1 ]----+------------------------------
+pid              | 3938
+usesysid         | 24576
+usename          | repuser
+application_name | sub1
+client_addr      | 10.10.2.13
+client_hostname  | 
+client_port      | 42330
+backend_start    | 2022-11-23 07:10:27.604722+00
+backend_xmin     | 
+state            | streaming
+sent_lsn         | 0/210004F8
+write_lsn        | 0/210004F8
+flush_lsn        | 0/210004F8
+replay_lsn       | 0/210004F8
+write_lag        | 
+flush_lag        | 
+replay_lag       | 
+sync_priority    | 0
+sync_state       | async
+
+</code></pre><p>新主库插入数据查看逻辑复制情况</p>
+<pre><code>insert INTO test01 values (5);
+</code></pre><p>逻辑从库查看结果</p>
+<pre><code>select * from test01 
+</code></pre><h4 id="自动化基础">自动化基础</h4>
+<ul>
+<li>拷贝repslot 目录</li>
+<li>重启新从库加载 repslot</li>
+</ul>
+<p>Postgres 11 版本后，新增加函数  pg_replication_slot_advance</p>
+<h4 id="patroni-自动-failover配置">patroni 自动 failover配置</h4>
+
         </div>
 
         
