@@ -6,7 +6,16 @@
     <description>Recent content on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 07 Sep 2022 14:49:31 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Nov 2022 09:33:13 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>逻辑复制故障转移</title>
+      <link>https://zhangeamon.top/postgres/logical-replication_failover/</link>
+      <pubDate>Wed, 23 Nov 2022 09:33:13 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/logical-replication_failover/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>nice, ionice, cpulimit</title>
       <link>https://zhangeamon.top/linux/nice/</link>

@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/hdparm/" title="查看硬盘型号">查看硬盘型号</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月19日
+        </date>
+        
+        <div class="post-content">
+            通过总线查看硬盘连接 cat /proc/scsi/scsi Attached devices: Host: scsi0 Channel: 00 Id: 00 Lun: 00 Vendor: ATA Model: INTEL SSDSC2KB24 Rev: 0110 Type: Direct-Access ANSI SCSI revision: 05 Host: scsi1 Channel: 00 Id: 00 Lun: 00 Vendor: ATA Model: INTEL SSDSC2KB96 Rev: 0110 Type: Direct-Access ANSI SCSI revision: 05 Host: scsi2 Channel: 00 Id: 00 Lun: 00 Vendor: ATA Model: INTEL SSDSC2KB96 Rev: 0110 Type: Direct-Access ANSI SCSI revision: 05 通过系统查看 安装 yum install hdparm 查看 -i参数是在引导驱动器时获得的识别信息，这个信息有时候不完整也不一 定准确 hdparm -i /dev/sdb /dev/sdb: Model=INTEL SSDSC2KW512G8, FwRev=LHF002C, SerialNo=PHLA75210153512DGN Config={ Fixed } RawCHS=16383/16/63, TrkSize=0, SectSize=0,……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/hdparm/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/about/3brothers/" title="扁鹊三兄弟">扁鹊三兄弟</a>
             </h1>
         </header>
@@ -247,29 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/k8s/install/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/monitor/" title="Postgres 监控常用工具">Postgres 监控常用工具</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月6日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            各种监控方式 zabbix Monitor PostgreSQL with Zabbix postgres_exporter A PostgresSQL metric exporter for Prometheus pgwatch2 PostgreSQL metrics monitor/dashboard pgmetrics Collect and display information and stats from a running PostgreSQL server pgdash (收费) pganalyze PostgreSQL Performance Monitoring 参考自己实现 状态查看 pgcenter pgcenter top pgcenter: 2018-12-20 11:10:25, load average: 0.94, 0.84, 0.86 state [ok]: ::1:5432 postgres@postgres (ver: 10.6, up 8 days 19:57:54, recovery: f) %cpu: 15.0 us, 3.7 sy, 0.0 ni, 75.3 id, 5.7 wa, 0.0 hi, 0.2 si, 0.0 st activity: 5/1000 conns, 0/0 prepared, 2 idle, 0 idle_xact, 3 active, 0 waiting, 0 others MiB mem: 7821 total, 162 free, 424 used, 7235 buff/cached autovacuum: 0/3 workers/max, 0 manual, 0 wraparound, 00:00:00 vac_maxtime MiB swap: 1023 total, 903 free, 120 used, 0/0 dirty/writeback statements: 1888 stmt/s,……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/monitor/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -406,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/logical-replication_failover/" title="逻辑复制故障转移">逻辑复制故障转移</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/nice/" title="nice, ionice, cpulimit">nice, ionice, cpulimit</a>
     </li>
     
@@ -441,10 +438,6 @@
         <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -475,7 +468,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (46)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (47)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

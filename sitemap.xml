@@ -3,10 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zhangeamon.top/categories/</loc>
-    <lastmod>2022-09-07T14:49:31+08:00</lastmod>
+    <lastmod>2022-11-23T09:33:13+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/</loc>
-    <lastmod>2022-09-07T14:49:31+08:00</lastmod>
+    <lastmod>2022-11-23T09:33:13+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/postgres/</loc>
+    <lastmod>2022-11-23T09:33:13+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/categories/postgres/</loc>
+    <lastmod>2022-11-23T09:33:13+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/postgres/logical-replication_failover/</loc>
+    <lastmod>2022-11-23T09:33:13+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/categories/linux/</loc>
     <lastmod>2022-09-07T14:49:31+08:00</lastmod>
@@ -30,12 +39,6 @@
     <lastmod>2022-08-22T11:37:58+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/postgres/wal_lsn/</loc>
-    <lastmod>2022-08-08T14:58:08+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/postgres/</loc>
-    <lastmod>2022-08-08T14:58:08+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/categories/postgres/</loc>
     <lastmod>2022-08-08T14:58:08+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/categories/kafka/</loc>
