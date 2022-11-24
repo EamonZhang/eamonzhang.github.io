@@ -113,12 +113,14 @@
         
         <div class="post-content">
             <h2 id="逻辑复制故障转移">逻辑复制故障转移</h2>
-<h4 id="测试环境">测试环境</h4>
 <ul>
 <li>主库 10.10.2.11</li>
 <li>物理从库 10.10.2.12</li>
 <li>逻辑从库 10.10.2.13</li>
 </ul>
+<p>
+        <img class="mx-auto" alt="logical_replication_failover" src="/images/logical_replication_failover.excalidraw.png" />   
+    </p>
 <h4 id="测试任务">测试任务</h4>
 <p>当主库发生故障，物理复制从库变为新主库。逻辑从库将订阅地址变更为新主库。</p>
 <h4 id="开始测试">开始测试</h4>

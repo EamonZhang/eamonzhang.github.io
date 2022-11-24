@@ -107,7 +107,7 @@
         </div>
         
         <div class="post-content">
-            逻辑复制故障转移 测试环境 主库 10.10.2.11 物理从库 10.10.2.12 逻辑从库 10.10.2.13 测试任务 当主库发生故障，物理复制从库变为新主库。逻辑从库将订阅地址变更为新主库。 开始测试 环境搭建参考 物理复制 逻辑复制 状态查看 复制关系 select * from pg_stat_replication ; -[ RECORD 1 ]----+------------------------------ pid | 2628 usesysid | 24576 usename | repuser application_name | sub1 client_addr | 10.10.2.13 client_hostname | client_port | 40230 backend_start | 2022-11-23 05:46:59.50291+00 backend_xmin | state | streaming sent_lsn | 0/21000140 write_lsn | 0/21000140 flush_lsn | 0/21000140 replay_lsn |……
+            逻辑复制故障转移 主库 10.10.2.11 物理从库 10.10.2.12 逻辑从库 10.10.2.13 测试任务 当主库发生故障，物理复制从库变为新主库。逻辑从库将订阅地址变更为新主库。 开始测试 环境搭建参考 物理复制 逻辑复制 状态查看 复制关系 select * from pg_stat_replication ; -[ RECORD 1 ]----+------------------------------ pid | 2628 usesysid | 24576 usename | repuser application_name | sub1 client_addr | 10.10.2.13 client_hostname | client_port | 40230 backend_start | 2022-11-23 05:46:59.50291+00 backend_xmin | state | streaming sent_lsn | 0/21000140 write_lsn | 0/21000140 flush_lsn | 0/21000140 replay_lsn | 0/21000140 write_lag | flush_lag……
         </div>
         <p class="readmore"><a href="https://zhangeamon.top/postgres/logical-replication_failover/">阅读全文</a></p>
     </article>
