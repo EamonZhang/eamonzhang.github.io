@@ -92,7 +92,116 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#使用场景">使用场景</a></li>
+    <li><a href="#基本原理">基本原理</a></li>
+    <li><a href="#开始实验">开始实验</a></li>
+    <li><a href="#实际操作">实际操作</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#备注">备注</a></li>
+    <li><a href="#扩展">扩展</a></li>
+    <li><a href="#更多">更多</a></li>
+    <li><a href="#应用">应用</a></li>
+    <li><a href="#原理">原理</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
 
     <article class="post">
         <header>
@@ -110,6 +219,12 @@
         </div>
         
         
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
         
         <div class="post-content">
             <p>pg_rewind requires that the target server either has the wal_log_hints option enabled in postgresql.conf or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. full_page_writes must also be set to on, but is enabled by default.</p>
@@ -166,8 +281,11 @@ sudo su - postgres
 <pre><code>recovery_target_timeline='latest'
 standby_mode = 'on'
 primary_conninfo = 'user=postgres passfile=''/root/.pgpass'' host=10.1.88.72 port=5432 sslmode=prefer sslcompression=1 krbsrvname=postgres target_session_attrs=any'
-</code></pre><p>注意事项: host 指向新主库地址</p>
-<p>以上过程中保持数据库是关闭状态!!!!</p>
+</code></pre><h4 id="注意事项">注意事项:</h4>
+<p>host 指向新主库地址</p>
+<p>以上过程中保持数据库是关闭状态!!!! ， 如果出现数据库以主库的形式运行的情况，pg_stat_replication 中的 flush_lsn , replay_lsn 不在更新。及主从数据不更新。 只能重新拉取。</p>
+<p>pg_rewind 会将 recovery.conf 会被 recovery.done。复制过程会，如果主库有的recovery.done文件，则会复制到备库并覆盖文件。此时重新修改recovery.done并重命名为recovery.conf</p>
+<p>谨记，在启动数据前仔细检测 recovery.conf 文件。确保数据库以从库形式运行。</p>
 <p>4 启动数据库，并验证</p>
 <h2 id="备注">备注</h2>
 <p>以前操作时，主从切换后，主从状态是对的，但是向主库写数据，从库没有同步。（原因不详） <br>
