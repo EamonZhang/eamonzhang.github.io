@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年7月11日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            pg_auto_failover 实践 一个简单的架构 citus同源postgres高可用方案 角色: 主节点 (master) 复制节点 (slave) 监控节点 (monitor) 集群搭建 环境说明 软件版本 postgresql 14.4 pg_auto_failover 1.6.4 centos 7 网络环境 IP 软件 10.10.2.11 monitor 10.10.2.12 master 10.10.2.13 replication 从零开始建设 ​ 没有任何历史包袱，包括数据库自身的搭建 ​ 手动安装 ​ 在所有的节点上执行 -- 数据库安装 sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm sudo yum install -y postgresql14-server # install pg_auto_failover curl https://install.citusdata.com/community/rpm.sh……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/pgautofailover/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_rewrite/" title="pg_rewrite">pg_rewrite</a>
             </h1>
         </header>
@@ -282,29 +305,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/postgres/login_nopasswd/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2022年2月11日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            限流目的 清理是在后台运行的维护任务，对用户查询的影响最小。不应该消耗太多的资源(CPU和磁盘I/O)。 清理成本计算 清理过程相当简单，它从数据文件中读取页面(8kB的数据块)，并检查是否需要清理。如果没有dead tuples，页面将被简单地丢弃，而不进行任何更改。否则，它将被清理(……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/vacuum_limit/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -420,6 +420,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/monitor/nginx-log-exporter/" title="prometheus-nginxlog-exporter构建Nginx日志监控">prometheus-nginxlog-exporter构建Nginx日志监控</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/logical-replication_failover/" title="逻辑复制故障转移">逻辑复制故障转移</a>
     </li>
     
@@ -453,10 +457,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
     </li>
     
 </ul>

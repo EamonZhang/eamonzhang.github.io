@@ -92,6 +92,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/redis/automated-keyword/" title="联想搜索">联想搜索</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Redis 联想搜索实现 基于redis ZSET 例子: 当输入n时显示所有n开头的数据，当输入nb时显示所有nb开头的数据。 # 数据录入 127.0.0.1:6379&gt; ZADD ss 0 'n' (integer) 1 127.0.0.1:6379&gt; ZADD ss 0 'nb' (integer) 1 127.0.0.1:6379&gt; ZADD ss 0 'nba' (integer) 1 # 搜索n 127.0.0.1:6379&gt; ZRANK ss 'n' (integer) 0 127.0.0.1:6379&gt; ZRANGE ss 0 -1 1) &quot;n&quot; 2) &quot;nb&quot; 3) &quot;nba&quot; # 搜索nb 127.0.0.1:6379&gt; ZRANK ss 'nb' (integer) 1 127.0.0.1:6379&gt; ZRANGE ss 1 -1 1) &quot;nb&quot; 2) &quot;nba&quot;……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/redis/automated-keyword/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/python/push_messages/" title="消息推送">消息推送</a>
             </h1>
         </header>
@@ -291,31 +316,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/redis/pubsub/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/redis/distributedlock/" title="基于Redis 的分布式锁实现">基于Redis 的分布式锁实现</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年8月10日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            分布式锁场景 秒杀抢购茅台，车票 提前预约抢订车位，共享单车 特点，多个用户同一时间对同一个资源进行申请，并且只能允许一个用户申请成功。 分布式锁必要条件 布式系统环境下，一个方法在同一时间只能被一个机器的一个线程执行； 高可用的获取锁与释放锁； 高性能的获取锁与释放锁； 具备可重入特性； 具备锁……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/redis/distributedlock/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -452,6 +452,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/monitor/nginx-log-exporter/" title="prometheus-nginxlog-exporter构建Nginx日志监控">prometheus-nginxlog-exporter构建Nginx日志监控</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/logical-replication_failover/" title="逻辑复制故障转移">逻辑复制故障转移</a>
     </li>
     
@@ -485,10 +489,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
     </li>
     
 </ul>

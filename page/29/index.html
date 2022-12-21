@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/replication01/" title="主从流复制">主从流复制</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月17日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            历史演变 replication 主库配置 根据实际情况分配流复制权限 vi pg_hba.conf host replication all 10.2.0.0/0 trust vi postgresql.conf max_wal_senders = 10 wal_level = logical # minimal, replica, or logical hot_standby = on # 正常在从库配置，如果在主库配置完毕，因为从库复制主库配置不需要再修改从库配置。 wal_log_hints = on 从库配置 数据库安装 从主库复制数据 pg_basebackup -h 10.2.0.14 -U postgres -F p -P -R -D /var/lib/pgsql/10/data/ --checkpoint=fast -l postgresback20181219 pg_basebackup支持两种全量备份的……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/replication01/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/install01/" title="安装 Postgresql">安装 Postgresql</a>
             </h1>
         </header>
@@ -295,6 +318,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/monitor/nginx-log-exporter/" title="prometheus-nginxlog-exporter构建Nginx日志监控">prometheus-nginxlog-exporter构建Nginx日志监控</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/logical-replication_failover/" title="逻辑复制故障转移">逻辑复制故障转移</a>
     </li>
     
@@ -328,10 +355,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
     </li>
     
 </ul>

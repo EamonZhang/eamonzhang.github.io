@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://zhangeamon.top/categories/</loc>
-    <lastmod>2022-11-23T09:33:13+08:00</lastmod>
-  </url><url>
     <loc>https://zhangeamon.top/</loc>
+    <lastmod>2022-12-21T11:38:46+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/monitor/</loc>
+    <lastmod>2022-12-21T11:38:46+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/monitor/nginx-log-exporter/</loc>
+    <lastmod>2022-12-21T11:38:46+08:00</lastmod>
+  </url><url>
+    <loc>https://zhangeamon.top/categories/</loc>
     <lastmod>2022-11-23T09:33:13+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/postgres/</loc>
@@ -88,9 +94,6 @@
   </url><url>
     <loc>https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2022-05-09T15:07:32+08:00</lastmod>
-  </url><url>
-    <loc>https://zhangeamon.top/monitor/</loc>
-    <lastmod>2022-04-14T15:26:53+08:00</lastmod>
   </url><url>
     <loc>https://zhangeamon.top/monitor/prometheus-sd/</loc>
     <lastmod>2022-04-14T15:26:53+08:00</lastmod>

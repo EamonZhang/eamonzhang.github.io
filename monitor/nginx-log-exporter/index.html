@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Cgroup Namespaces | Let&#39;s go 🐌 🐌 🐌</title>
-    <meta property="og:title" content="Cgroup Namespaces - Let&#39;s go 🐌 🐌 🐌">
+    <title>prometheus-nginxlog-exporter构建Nginx日志监控 | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content="prometheus-nginxlog-exporter构建Nginx日志监控 - Let&#39;s go 🐌 🐌 🐌">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2018-11-02T14:17:44&#43;08:00'>
+    <meta property="article:published_time" content='2022-12-21T11:38:46&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2018-11-02T14:17:44&#43;08:00'>
+    <meta property="article:modified_time" content='2022-12-21T11:38:46&#43;08:00'>
         
     <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
-    <meta name="description" content="Cgroup Namespaces">
+    <meta name="description" content="prometheus-nginxlog-exporter构建Nginx日志监控">
         
     <meta name="author" content="Eamon">
-    <meta property="og:url" content="https://zhangeamon.top/docker/cgroup-namespaces/">
+    <meta property="og:url" content="https://zhangeamon.top/monitor/nginx-log-exporter/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -96,32 +96,17 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">Cgroup Namespaces</h1>
+            <h1 class="post-title">prometheus-nginxlog-exporter构建Nginx日志监控</h1>
         </header>
         <date class="post-meta meta-date">
-            2018年11月2日
+            2022年12月21日
         </date>
         
         
         
         <div class="post-content">
-            <h4 id="cgroup-实现资源限额">cgroup 实现资源限额</h4>
-<p>cgroup 全称 Control Group。Linux 操作系统通过 cgroup 可以设置进程使用 CPU、内存 和 IO 资源的限额。</p>
-<p>在启动容器时可使用参数 docker run &ndash;blkio-weight-device &ndash;cpu-shares &ndash;memory 等 。</p>
-<pre><code>ll /sys/fs/cgroup/cpu/docker/
-ll /sys/fs/cgroup/memory/docker 
-ll /sys/fs/cgroup/blkio/docker
-</code></pre><h4 id="namespace-实现资源隔离">namespace 实现资源隔离</h4>
-<h5 id="mount">Mount</h5>
-<p>Mount namespace 让容器看上去拥有整个文件系统。
-容器有自己的 / 目录，可以执行 mount 和 umount 命令。当然我们知道这些操作只在当前容器中生效，不会影响到 host 和其他容器。</p>
-<h5 id="uts-hostname">UTS hostname</h5>
-<p>简单的说，UTS namespace 让容器有自己的 hostname。 默认情况下，容器的 hostname 是它的短ID，可以通过 -h 或 &ndash;hostname 参数设置。</p>
-<h5 id="ipc">IPC</h5>
-<p>IPC namespace 让容器拥有自己的共享内存和信号量（semaphore）来实现进程间通信，而不会与 host 和其他容器的 IPC 混在一起。</p>
-<h5 id="pid">PID</h5>
-<!-- raw HTML omitted -->
-<h5 id="user">User</h5>
+            <p>prometheus-nginxlog-exporter构建Nginx日志监控</p>
+<p><a href="https://www.martin-helmich.de/en/blog/monitoring-nginx.html">https://www.martin-helmich.de/en/blog/monitoring-nginx.html</a></p>
 
         </div>
 
@@ -134,11 +119,11 @@ ll /sys/fs/cgroup/blkio/docker
     <h2>其他文章</h2>
     <ul class="listing">
         
-        <li><a href="/docker/dumb-init/">Dumb Init</a></li>
+        <li><a href="/postgres/logical-replication_failover/">逻辑复制故障转移</a></li>
         
-        <li><a href="/middleware/proxy/">代理</a></li>
+        <li><a href="/linux/nice/">nice, ionice, cpulimit</a></li>
         
-        <li><a href="/about/favorites/">我的收藏</a></li>
+        <li><a href="/linux/backlog-config/">Linux backlog/somaxconn 内核参数</a></li>
         
     </ul>
 </div>

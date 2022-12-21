@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/k8s/install/" title="集群部署安装">集群部署安装</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年12月7日
+        </date>
+        
+        <div class="post-content">
+            kubeadm kubeadm 可当做体验版，证书可用时间一年 Kubespray Kubespray 是 Kubernetes incubator 中的项目，目标是提供 Production Ready Kubernetes 部署方案，该项目基础是通过 Ansible Playbook 来定义系统与 Kubernetes 集群部署的任务，具有以下几个特点： 可以部署在 AWS, GCE, Azure, OpenStack 以及裸机上. 部署 High Available Kubernetes 集群. 可组合性 (Composable)，可自行选择 Network Plugin (flannel, calico, canal, weave) 来部署. 多种 Linux distributions(CoreOS, Debian Jessie, Ubuntu 16.04, CentOS/RHEL7). kops kops……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/k8s/install/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/monitor/" title="Postgres 监控常用工具">Postgres 监控常用工具</a>
             </h1>
         </header>
@@ -261,22 +277,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/middleware/vsftp/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/log/" title="数据库日志">数据库日志</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年12月4日
-        </date>
-        
-        <div class="post-content">
-            介绍 PostgreSQL有3种日志，分别是pg_log（数据库运行日志）、pg_xlog（WAL 日志，即重做日志）、pg_clog（事务提交日志，记录的是事务的元数据） postgres 10 版本将文件目录结构改为 log，pg_wal，pg_xact log默认是关闭的，需要设置其参数。wal和xac……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/log/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -413,6 +413,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/monitor/nginx-log-exporter/" title="prometheus-nginxlog-exporter构建Nginx日志监控">prometheus-nginxlog-exporter构建Nginx日志监控</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/postgres/logical-replication_failover/" title="逻辑复制故障转移">逻辑复制故障转移</a>
     </li>
     
@@ -446,10 +450,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/pgautofailover/" title="数据库高可用pgautofailover">数据库高可用pgautofailover</a>
     </li>
     
 </ul>
