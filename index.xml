@@ -6,7 +6,16 @@
     <description>Recent content on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 21 Dec 2022 11:38:46 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Mar 2023 09:03:24 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux 优化指南</title>
+      <link>https://zhangeamon.top/linux/linux_tunning/</link>
+      <pubDate>Thu, 16 Mar 2023 09:03:24 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/linux/linux_tunning/</guid>
+      <description>linux性能调试和优化 linux内核动态追踪 linux系统的内存管理</description>
+    </item>
+    
     <item>
       <title>prometheus-nginxlog-exporter构建Nginx日志监控</title>
       <link>https://zhangeamon.top/monitor/nginx-log-exporter/</link>

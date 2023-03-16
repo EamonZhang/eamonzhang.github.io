@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/login_nopasswd/" title="数据库免密码登陆">数据库免密码登陆</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年3月23日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            免密登陆 以下几种PG配置免密的方法。 方法一：设置pg_hab.conf 认证方式为trust #Type database user address method host all postgres 127.0.0.1/32 trust 该方式最不安全，导致通过指定IP连接数据库的连接都可以任意登录数据，毫无安全保障。禁止在生产环境使用。 方法二：设置PG环境变量PGPASSWORD PGPASSWORD是P……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/login_nopasswd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/vacuum_limit/" title="vacuum 限流">vacuum 限流</a>
             </h1>
         </header>
@@ -275,31 +298,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/python/simple-demo/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/redis/long-polling/" title="长轮询">长轮询</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年11月16日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-            <span class="meta-category"><a href='/categories/redis'>redis</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            长轮询 实现原理： 与传统的轮询方式不同的是，当服务端接收到客户端的请求的时候，如果没有最新消息时不是立刻返回请求，而是等待一个最大超时时间。如果等待期间有最新消息则立刻返回。 相对于暴力的轮询，长轮询能够很大程度的减少客户端与服务端的连接进而缓解服务端的压力。 利用长轮询模拟推送服务，……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/redis/long-polling/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -422,6 +420,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/linux/linux_tunning/" title="Linux 优化指南">Linux 优化指南</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/monitor/nginx-log-exporter/" title="prometheus-nginxlog-exporter构建Nginx日志监控">prometheus-nginxlog-exporter构建Nginx日志监控</a>
     </li>
     
@@ -455,10 +457,6 @@
     
     <li>
         <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
-    </li>
-    
-    <li>
-        <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
     </li>
     
 </ul>
