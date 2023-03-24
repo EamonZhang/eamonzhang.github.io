@@ -101,7 +101,13 @@
         
         
         <div class="post-content">
-            <h1 id="repmgrd介绍">repmgrd介绍</h1>
+            <p>title: &ldquo;repmgrd介绍&rdquo;
+date: 2023-03-24T16:20:16+08:00
+draft: false
+categories: [&ldquo;postgres&rdquo;]
+toc : true</p>
+<h1 id="repmgrd介绍">repmgrd介绍</h1>
+<p>v 5.2</p>
 <p>repmgrd 作为运行在集群中每个节点上的一个管理和监控的守护程序，可以自动进行故障转移和维护复制关系，并提供有关每个节点状态的监控信息。</p>
 <p>repmgrd 不依赖其他服务</p>
 <p>提供的功能包括:</p>
@@ -119,6 +125,7 @@
 <p>目的是当发生failover场景时，用来证明主服务自身不可用还是数据中心网络问题</p>
 <p>一个典型的场景</p>
 <p>位于两个数据中心的主从复制结构。和主服务同一个数据中心上创建一个见证服务。当主服务不可用时，从节点判断逻辑，如果主服务和见证节点都不可见则认为是网络问题。如果主服务不可见，见证节点可见则认为是主服务发生问题。</p>
+<p>注意事项:</p>
 <p>不要将见证节点与主从服务安装在同一个物理机上。</p>
 <p>多数据中心场景建议使用localiton来预防脑裂问题</p>
 <p>见证节点只在repmgrd启用时有效。</p>
@@ -126,18 +133,18 @@
 <p>安装一个独立的Postgresql实例，配置参考普通的repmgr。</p>
 <p>注册见证节点</p>
 <pre><code>repmgr -f /etc/repmgr.conf witness register -h node1
-</code></pre><h2 id="解决脑裂问题">解决脑裂问题</h2>
-<p>多数据中心带来的脑裂问题，当不同数据中心的节点不可见时，从库的服务发生failover 产生也新的主节点。此时整个集群同时拥有两个主服务。</p>
+</code></pre><p>思考: 见证节点是否需要运行repmgrd。 见证节点不同于其他从节点，元数据可以通过流复制直接获取到。需要repmgrd来维护。</p>
+<h2 id="解决脑裂问题">解决脑裂问题</h2>
+<p>多数据中心带来的脑裂问题，当不同数据中心的节点彼此不可见时，从库的服务发生failover 产生一个新的主节点。此时整个集群同时拥有两个主服务。</p>
 <p>虽然见证服务可以在仲裁。但是见证服务存在如下弊端。</p>
 <ul>
 <li>需要保证见证节点与主服务节点位于同一个数据中心。</li>
-<li>当集群中多数节点与主服务节点不在同一个数据中心事</li>
-<li>增加额外的维护成本，且不便扩展，尤其是大规模应用时。</li>
+<li>当集群中多数节点与主服务节点不在同一个数据中心时，增加额外的维护成本，且不便扩展，尤其是大规模应用时。</li>
 </ul>
 <p>repmgr4 提出location的概念，通过配置location来指定节点的物理位置。</p>
-<p>当发生failover时。repmgr首先检测是否存在与主服务位于同一个localtion的服务是可见的。如果不存（即整个与主服务位于同一个数据中心的节点都不可见）在则认为是网络问题。不提升新主库，并且集群进入降级模式。</p>
+<p>当发生failover时。repmgr首先检测是否存在与主服务位于同一个localtion的服务是可见的。如果不存（即整个与主服务位于同一个数据中心的节点都不可见）在则认为是网络问题。不提升新主库，并且进入降级模式。</p>
 <h2 id="主服务可见性共识">主服务可见性共识</h2>
-<p>更复杂的集群结构，当从节点服务连接不到主服务时，询问其他从服务最后一次看到主服务的时间。当有节点可以连接到主服务证明主服务还存活，并且可以正常提供写服务。此时不发生新的选举。</p>
+<p>更复杂的集群结构，当从节点服务连接不到主服务时，询问其他从服务最后一次看到主服务的时间。当存在节点可以连接到主服务则证明主服务还存活，并且可以正常提供写服务。此时不发生新的选举。</p>
 <p>配置参数</p>
 <pre><code> primary_visibility_consensus=true
 </code></pre><p>注意事项。必须每个服务都设置为true才生效</p>
@@ -160,7 +167,7 @@
 </li>
 </ul>
 <h2 id="故障转移验证">故障转移验证</h2>
-<p>在发生故障转移时，某个节点被选举为新的主节点时，可以通过配置自定义判断脚本，进一步决定当前是否可以被提升为主节点。  必须在所有节点进行配置。</p>
+<p>在发生故障转移时，某个节点被选举为新的主节点时，可以通过配置自定义判断脚本，进一步决定当前是否可以被提升为主节点（用户可以自定义辅助逻辑）。  必须在所有节点进行配置。</p>
 <p>配置如下：</p>
 <pre><code>failover_validation_command=/path/to/script.sh %n     
 </code></pre><p>可使用参数：</p>
@@ -174,11 +181,11 @@
 <p>根据脚本返回码（是否非0）决定是否可以将当前节点提升为主节点，如果不符合条件，中断本次故障转移流程，<code>election_rerun_interval</code> 秒后进入下一轮故障转移流程。</p>
 <h2 id="级联复制">级联复制</h2>
 <p>Postgresql 9.2 数据库具有了级联复制功能。repmgr 可以提供级联复制支持。</p>
-<p>当发生故障转移时，repmgr保持级联关系不便。</p>
+<p>当发生故障转移时，repmgr保持级联关系不变。</p>
 <p>在上游节点发生故障时下游节点自动重新尝试连接原上游节点的父节点。</p>
 <h2 id="主节点检测从库连接">主节点检测从库连接</h2>
-<p>以上的考虑情形大多是通过从节点观测主节点的运行情况来决定是否发生故障转移。在repmgr中主节点也可以观测到从节点的连接情况。</p>
-<p>通过主机点不断的检测从节点的连接情况，当满足某些状况时可以执行自定义脚本。如发生故障转移后产生一个新的主服务时，其他的从节点也都跟着指向了新主节点，元主节点的从节点个数变为零。这时可以通过执行一个特殊的命令来阻止应用写入旧的主节点。</p>
+<p>以上的考虑情形大多是通过从节点检测主节点的运行情况来决定是否发生故障转移。在repmgr中主节点也可以检测到从节点的连接情况。</p>
+<p>通过主机点不断的检测从节点的连接情况，当满足某些状况时可以执行自定义脚本。如发生故障转移后产生一个新的主服务时，其他的从节点也都跟着指向了新主节点，原主节点的从节点个数变为零。这时可以通过执行一个特殊的命令来阻止应用写入原主节点。</p>
 <h3 id="检测过程和标准">检测过程和标准</h3>
 <ul>
 <li>间隔时间<code>child_nodes_check_interval</code> 默认5秒查询一次pg_stat_replication 视图，并与注册repmgr时指定upstream node为主及节点的列表进行对比</li>
@@ -218,15 +225,27 @@
 </code></pre><h1 id="repmgrd-配置">repmgrd 配置</h1>
 <p>Postgresql 配置 postgressql.conf  需要重启服务</p>
 <pre><code>shared_preload_libraries = 'repmgr'
-</code></pre><p>monitor_interval_secs 检测上游节点时间间隔 默认2秒</p>
+</code></pre><ul>
+<li>
+<p>monitor_interval_secs 检测上游节点时间间隔 默认2秒</p>
+</li>
+<li>
 <p>connection_check_type 检测类型 PQping (default)、connection、query</p>
+</li>
+<li>
 <p>reconnect_attempts 重连尝试次数 默认6次</p>
+</li>
+<li>
 <p>reconnect_interval 重连尝试间隔时间</p>
+</li>
+<li>
 <p>degraded_monitoring_timeout 默认-1 禁止。默认情况下，repmgrd将无限期地继续处于降级监视模式。设置该参数超时（以秒为单位），之后repmgrd将终止。</p>
+</li>
+</ul>
 <h2 id="必须设置的参数">必须设置的参数</h2>
 <ul>
-<li><code>failover</code> =automatic</li>
-<li><code>promote_command</code>='/usr/bin/repmgr standby promote -f /etc/repmgr.conf &ndash;log-to-file'</li>
+<li><code>failover</code>      =automatic</li>
+<li><code>promote_command</code>   =/&lsquo;usr/bin/repmgr standby promote -f /etc/repmgr.conf &ndash;log-to-file&rsquo;</li>
 <li><code>follow_command</code>=  &lsquo;/usr/bin/repmgr standby follow -f /etc/repmgr.conf &ndash;log-to-file &ndash;upstream-node-id=%n&rsquo;</li>
 </ul>
 <h2 id="可选参数">可选参数</h2>
@@ -279,7 +298,7 @@ repmgr -f /etc/repmgr.conf service status
 <p>默认情况，降级模式将一致持续下去。但如果设置了degraded_monitoring_timeout参数，超过指定值，repmgrd将停止运行。</p>
 <h2 id="监控数据存储">监控数据存储</h2>
 <p>当参数monitoring_history=true时，监控记录数据将会不断的写入到<code>repmgr.monitoring_history</code>表中。 可以使用命令<code>repmgr cluster cleanup -k/ --keep-history</code> (选择需要保留记录天数) 定期清理数据。</p>
-<p>这些数据也会复制到从节点中，可以通过设置<code> ALTER TABLE repmgr.monitoring_history SET UNLOGGED;</code> 使数据不复制从节点。</p>
+<p>这些数据也会复制到从节点中，可以通过设置<code> ALTER TABLE repmgr.monitoring_history SET UNLOGGED;</code> 使数据不复制到从节点。</p>
 <h1 id="选举流程简介">选举流程简介</h1>
 <p>源码位置 <code>repmgrd-physical.c</code></p>
 <p>当primary 节点被检测到发生故障，进入选举阶段时的大概流程。</p>
@@ -866,6 +885,7 @@ do_election(NodeInfoList *sibling_nodes, int *new_primary_id)
 		}
 	}
 </code></pre><h2 id="总结">总结:</h2>
+<p><code>选举结果状态</code></p>
 <pre><code>ELECTION_NOT_CANDIDAT
 ELECTION_WON
 ELECTION_LOST
@@ -884,10 +904,11 @@ ELECTION_RERUN
 <li>wal 处于 pause 状态将被resume。但resume失败</li>
 </ul>
 <p>Repmgr选举候选备节点会以以下顺序选举：LSN-&gt; Priority-&gt; Node_ID。</p>
-<h2 id="流程图runuser1000doc8bb85d50repmgrd自动选举流程png">流程图
-        <img class="mx-auto" alt="" src="/run/user/1000/doc/8bb85d50/repmgrd%e8%87%aa%e5%8a%a8%e9%80%89%e4%b8%be%e6%b5%81%e7%a8%8b.png" />   
+<h2 id="流程图imagesrepmgrdpng">流程图
+        <img class="mx-auto" alt="" src="images/repmgrd.png" />   
     </h2>
 <h1 id="功能增强">功能增强</h1>
+<p>如何将repmgrd真正投入到生产中，真正的落地。在某些CASE面向仍能满足HA要求</p>
 <h3 id="virtual-ip"><strong>Virtual IP</strong></h3>
 <ul>
 <li>注册主节点时，绑定vip</li>
@@ -939,6 +960,23 @@ ELECTION_RERUN
 </li>
 <li>
 <p>在Postgresql对外提供服务时进行健康状态检测。如果不满足需求，停止对应用提供服务，待恢复后在提供服务</p>
+</li>
+</ul>
+<h1 id="故障切换时间预估">故障切换时间预估</h1>
+<p>switchover &amp; failover: 故障发生后检测切换的总时间预估</p>
+<p>主要参考因素:</p>
+<ul>
+<li>
+<p>monitor_interval_secs 检测上游节点时间间隔 默认2秒</p>
+</li>
+<li>
+<p>connection_check_type 检测类型 每次检测的timeout</p>
+</li>
+<li>
+<p>reconnect_attempts 重连尝试次数 默认6次</p>
+</li>
+<li>
+<p>reconnect_interval 重连尝试间隔时间</p>
 </li>
 </ul>
 
