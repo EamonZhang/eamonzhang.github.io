@@ -6,7 +6,16 @@
     <description>Recent content in postgres on Let&#39;s go 🐌 🐌 🐌</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 23 Nov 2022 09:33:13 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Mar 2023 16:20:16 +0800</lastBuildDate><atom:link href="https://zhangeamon.top/categories/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>repmgrd介绍</title>
+      <link>https://zhangeamon.top/postgres/repmgrd/</link>
+      <pubDate>Fri, 24 Mar 2023 16:20:16 +0800</pubDate>
+      
+      <guid>https://zhangeamon.top/postgres/repmgrd/</guid>
+      <description>repmgrd介绍 version 5.2 repmgrd 作为运行在集群中每个节点上的一个管理和监控的守护程序，可以自动进行故障转移和维护复制关系，并提供有关每个节点状态的监控信息。 repmgrd 不依赖其他服务 提供的功能包括: 众多的配置项提供选择 根据场景可自定义对应执行脚本 一个命令进入维护模式 多数据中心场景，通过locati</description>
+    </item>
+    
     <item>
       <title>逻辑复制故障转移</title>
       <link>https://zhangeamon.top/postgres/logical-replication_failover/</link>

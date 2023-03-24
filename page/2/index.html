@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年7月27日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            整个实现以功能演示为目标，便于流程的梳理和理解。不适合正式生成环境使用。 debezium的几种使用方式 单独部署 下游数据传输到cloud，官方目前不推荐 与kafka联合使用 下游数据传输到kafka 嵌入式 例如Flink使用的debezium作为数据的source connetor模块使……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/debezium/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/hll/" title="利用hll数据类型进行数据统计">利用hll数据类型进行数据统计</a>
             </h1>
         </header>
@@ -282,29 +305,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/monitor/prometheus-sd/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2022年3月25日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/haproxy'>haproxy</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            编译安装Haproxy 2.4 下载预备 sudo wget https://www.haproxy.org/download/2.4/src/haproxy-2.4.15.tar.gz -O /usr/local/src/haproxy-2.4.15.tar.gz sudo wget http://www.lua.org/ftp/lua-5.3.5.tar.gz -O /usr/local/src/lua-5.3.5.tar.gz sudo yum install make gcc build-essential libssl-devel zlib1g-devel pcre3 pcre3-devel systemd-devel readline-devel openssl openssl-devel -y 编译安装 lua cd /usr/local/src &amp;&amp; tar -zxvf lua-5.3.5.tar.gz cd /usr/local/src/lua-5.3.5 &amp;&amp; make linux src/lua -v haproxy cd /usr/local/src &amp;&amp; tar -zxvf haproxy-2.4.15.tar.gz cd /usr/local/src/haproxy-2.4.15 make -j `lscpu |awk 'NR==4{print $2}'` ARCH=x86_64 TARGET=linux-glibc USE_PCRE=1 USE_ZLIB=1 USE_SYSTEMD=1 USE_CPU_AFFINITY=1 USE_LUA=1 LUA_INC=/usr/local/src/lua-5.3.5/src/ LUA_LIB=/usr/local/src/lua-5.3.5/src/ PREFIX=/usr/local/haproxy make install PREFIX=/usr/local/haproxy /usr/local/haproxy/sbin/haproxy -v 如果想添加 openssl 支持参考 In order to link OpenSSL statically against HAProxy, first download OpenSSL from https://www.openssl.org/ then build it with the &quot;no-shared&quot; keyword and install it to a local directory, so your system is not affected : $ export STATICLIBSSL=/tmp/staticlibssl $ ./config --prefix=$STATICLIBSSL no-shared……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/middleware/haproxy_install/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -420,6 +420,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgrd/" title="repmgrd介绍">repmgrd介绍</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/linux_tunning/" title="Linux 优化指南">Linux 优化指南</a>
     </li>
     
@@ -455,10 +459,6 @@
         <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -489,7 +489,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (47)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (48)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

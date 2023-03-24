@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/mysql/connections/" title="连接数管理">连接数管理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月24日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/mysql'>mysql</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            连接池 show variables like &quot;thread%&quot;; +-------------------+---------------------------+ | Variable_name | Value | +-------------------+---------------------------+ | thread_cache_size | 9 | | thread_handling | one-thread-per-connection | | thread_stack | 286720 | +-------------------+---------------------------+ 3 rows in set (0.01 sec) 全局设置 -- 查看全局连接 show variables like &quot;%connections%&quot;; +------------------------+-------+ | Variable_name | Value | +------------------------+-------+ | max_connections | 151 | | max_user_connections | 0 | | mysqlx_max_connections | 100 | +------------------------+-------+ -- 超级用户连接 show variables like &quot;admin_%&quot;; +------------------------+-------------------------------+ | Variable_name | Value | +------------------------+-------------------------------+ | admin_address | 127.0.0.1 | | admin_port | 33062 | -- 运行状态 show status like &quot;thread%&quot;; +-------------------+-------+ | Variable_name | Value | +-------------------+-------+ | Threads_cached | 0 | | Threads_connected | 1 | | Threads_created | 1 | | Threads_running | 2 | +-------------------+-------+ user……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/mysql/connections/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/redis/pubsub/" title="发布订阅">发布订阅</a>
             </h1>
         </header>
@@ -258,29 +281,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/so/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年5月28日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/python'>python</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            python 访问C 动态库 很多核心的算法库都是C/C++写的,成果物通常以动态库的方式对外提供。 如何利用python访问动态代码库 python访问C/C++的方式 ctypes pybind11 cffi swig ctypes的优势 不要修改动态库的源码 只需要动态库和头文件 使用比较简单,而且目前大部分库都是兼容C/C++ 参考 https://www.cnblogs.com/gaowengang/p/7919219.html……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/python/ctypes/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -417,6 +417,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgrd/" title="repmgrd介绍">repmgrd介绍</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/linux_tunning/" title="Linux 优化指南">Linux 优化指南</a>
     </li>
     
@@ -452,10 +456,6 @@
         <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -486,7 +486,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (47)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (48)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

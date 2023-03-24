@@ -94,6 +94,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/unlogged_table/" title="unlogged table">unlogged table</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月12日
+        </date>
+        
+        <div class="post-content">
+            介绍 在写数据的时候不记录wal的表。 在意外发生时表中的数据被trunce 。如断电、 主进程kill 、scrash 等。 正常关闭重启数据库时数据不会丢失。 优点： 提高写入效率 不足： 数据安全性不能得到保障。 由于没有wal 流复制从库不能同步 应用场景： 数据可丢失，如频繁更新，只保留最后状态信息……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/unlogged_table/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/reback/" title="误操作闪回">误操作闪回</a>
             </h1>
         </header>
@@ -274,31 +292,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/readonly/" title="创建只读用户">创建只读用户</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月8日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            创建只读用户readonly 1.创建一个用户名为readonly密码为ropass的用户 CREATE USER readonly WITH ENCRYPTED PASSWORD 'ropass'; 2.用户只读事务 alter user readonly set default_transaction_read_only=on; 3.把所有库的语言的USAGE权限给到readonly GRANT USAGE ON SCHEMA public to readonly; 4.授予select权限(这句要进入具体数据库操作在哪个db环境执行就授予那个db的……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/readonly/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -402,6 +395,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgrd/" title="repmgrd介绍">repmgrd介绍</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/linux_tunning/" title="Linux 优化指南">Linux 优化指南</a>
     </li>
     
@@ -437,10 +434,6 @@
         <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -471,7 +464,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (47)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (48)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     

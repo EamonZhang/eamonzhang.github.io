@@ -101,6 +101,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/">数据库试图之 pg_stat_bgwriter</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月31日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/postgres'>postgres</a>
+            
+        </div>
+        
+        <div class="post-content">
+            介绍 可查看 backgroud writer， checkpoint ，backend 进程刷写 Shared buffer 情况视图 pg数据库在写入时先在内存中更新shared buffer ，然后有checkpoint机制将脏数据刷写到磁盘。 视图 select * from pg_stat_bgwriter ; -[ RECORD 1 ]---------+------------------------------ checkpoints_timed | 64017 checkpoints_req | 458 checkpoint_write_time | 9608302902 checkpoint_sync_time | 1189286 buffers_checkpoint | 578367652 buffers_clean | 329022 maxwritten_clean | 2353 buffers_backend | 29802728 buffers_backend_fsync | 0 buffers_alloc | 83826180 stats_reset | 2020-08-20 19:41:20.491551+08 负责将shared buffer 中的内容……
+            <p class="readmore"><a href="https://zhangeamon.top/postgres/view_pg_stat_bgwriter/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/ha_fd/">数据库高可用设计分析</a>
             </h1>
         </header>
@@ -305,29 +328,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/oom/">数据库 OOM 预防</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年6月30日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/postgres'>postgres</a>
-            
-        </div>
-        
-        <div class="post-content">
-            降低主进程被OOM kill 掉的风险 restart_after_crash 默认崩溃重启 postgres=# show restart_after_crash; restart_after_crash --------------------- on (1 row) vm.overcommit # vi /etc/sysctl.conf # 0 表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程 # 1 表示内核允许分配所有的物理内存，而不管当前的内存状态如何 # 2 表示内核允许分配超……
-            <p class="readmore"><a href="https://zhangeamon.top/postgres/oom/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -413,6 +413,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zhangeamon.top/postgres/repmgrd/" title="repmgrd介绍">repmgrd介绍</a>
+    </li>
+    
+    <li>
         <a href="https://zhangeamon.top/linux/linux_tunning/" title="Linux 优化指南">Linux 优化指南</a>
     </li>
     
@@ -448,10 +452,6 @@
         <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -482,7 +482,7 @@
     
     <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (47)</a></li>
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (48)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
     
