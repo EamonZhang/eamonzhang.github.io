@@ -1,0 +1,1173 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title> | Let&#39;s go 🐌 🐌 🐌</title>
+    <meta property="og:title" content=" - Let&#39;s go 🐌 🐌 🐌">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="postgres 、python、pg 、linix 、docker、 kubernetes、 cloud、hadoop、promethues ">
+    <meta name="description" content="">
+        
+    <meta name="author" content="Eamon">
+    <meta property="og:url" content="https://zhangeamon.top/postgres/repmgrd/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    
+    
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+   
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+   
+        <a href=https://github.com/eamonzhang><img style="position: absolute; top: 0; left: 0; border: 0;" src="/images/forkme_left_red_aa0000.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme_left_red_aa0000.png"></a>
+
+   
+        <script>
+          var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            <!-- hm.src = "https://hm.baidu.com/hm.js?1f6605a363a50554aa03adcc685b7699"; -->
+            hm.src = "https://hm.baidu.com/hm.js?0010600e9ae6ff8f5814bb7ec6b36072";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+       </script>
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zhangeamon.top">
+                        Let&#39;s go 🐌 🐌 🐌
+                    </a>
+                
+                <p class="description">Let&#39;s build our own cloud native together  </p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://zhangeamon.top">首页</a>
+                    
+                    <a  href="https://zhangeamon.top/archives" title="归档">归档</a>
+                    
+                    <a  href="https://zhangeamon.top/postgresql" title="Postgres">Postgres</a>
+                    
+                    <a  href="https://zhangeamon.top/linux" title="Linux">Linux</a>
+                    
+                    <a  href="https://zhangeamon.top/about/me" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+
+    <article class="post">
+        <header>
+            <h1 class="post-title"></h1>
+        </header>
+        <date class="post-meta meta-date">
+            1年1月1日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h1 id="repmgrd介绍">repmgrd介绍</h1>
+<p>repmgrd 作为运行在集群中每个节点上的一个管理和监控的守护程序，可以自动进行故障转移和维护复制关系，并提供有关每个节点状态的监控信息。</p>
+<p>repmgrd 不依赖其他服务</p>
+<p>提供的功能包括:</p>
+<ul>
+<li>众多的配置项提供选择</li>
+<li>根据场景可自定义对应执行脚本</li>
+<li>一个命令进入维护模式</li>
+<li>多数据中心场景，通过location限制候选主节点</li>
+<li>多种验证Postgresql存活状态方法（PostgreSQL ping, query execution or new connection）</li>
+<li>保留监控数据（可选）</li>
+</ul>
+<h1 id="repmgrd-故障转移">repmgrd 故障转移</h1>
+<h2 id="见证节点介绍">见证节点介绍</h2>
+<p>是一个独立于当前主从复制数据库的Postgresql数据库。</p>
+<p>目的是当发生failover场景时，用来证明主服务自身不可用还是数据中心网络问题</p>
+<p>一个典型的场景</p>
+<p>位于两个数据中心的主从复制结构。和主服务同一个数据中心上创建一个见证服务。当主服务不可用时，从节点判断逻辑，如果主服务和见证节点都不可见则认为是网络问题。如果主服务不可见，见证节点可见则认为是主服务发生问题。</p>
+<p>不要将见证节点与主从服务安装在同一个物理机上。</p>
+<p>多数据中心场景建议使用localiton来预防脑裂问题</p>
+<p>见证节点只在repmgrd启用时有效。</p>
+<h2 id="添加见证节点">添加见证节点</h2>
+<p>安装一个独立的Postgresql实例，配置参考普通的repmgr。</p>
+<p>注册见证节点</p>
+<pre><code>repmgr -f /etc/repmgr.conf witness register -h node1
+</code></pre><h2 id="解决脑裂问题">解决脑裂问题</h2>
+<p>多数据中心带来的脑裂问题，当不同数据中心的节点不可见时，从库的服务发生failover 产生也新的主节点。此时整个集群同时拥有两个主服务。</p>
+<p>虽然见证服务可以在仲裁。但是见证服务存在如下弊端。</p>
+<ul>
+<li>需要保证见证节点与主服务节点位于同一个数据中心。</li>
+<li>当集群中多数节点与主服务节点不在同一个数据中心事</li>
+<li>增加额外的维护成本，且不便扩展，尤其是大规模应用时。</li>
+</ul>
+<p>repmgr4 提出location的概念，通过配置location来指定节点的物理位置。</p>
+<p>当发生failover时。repmgr首先检测是否存在与主服务位于同一个localtion的服务是可见的。如果不存（即整个与主服务位于同一个数据中心的节点都不可见）在则认为是网络问题。不提升新主库，并且集群进入降级模式。</p>
+<h2 id="主服务可见性共识">主服务可见性共识</h2>
+<p>更复杂的集群结构，当从节点服务连接不到主服务时，询问其他从服务最后一次看到主服务的时间。当有节点可以连接到主服务证明主服务还存活，并且可以正常提供写服务。此时不发生新的选举。</p>
+<p>配置参数</p>
+<pre><code> primary_visibility_consensus=true
+</code></pre><p>注意事项。必须每个服务都设置为true才生效</p>
+<h2 id="从节点断开连接">从节点断开连接</h2>
+<p>当standby_disconnect_on_failover设置为true时，在发生故障转移时首先从节点断开本地的wal receiver,并且等待所有其他节点断开自己的wal receiver。</p>
+<p>这样做的目的是为确保在故障转移时，所有的节点lsn处于静止状态。</p>
+<p>重要提示:</p>
+<ul>
+<li>
+<p>Postgresql9.5 及以上，repmgr 的数据库用户具有超级用户权限</p>
+</li>
+<li>
+<p><code>standby_disconnect_on_failover</code> 必须要所有节点服务都设置才生效</p>
+</li>
+<li>
+<p>注意设置此参数后将带来的延迟，包括确定自己wal receiver是否已经关闭。等他确认其他节点wal receiver 是否已经完全关闭</p>
+</li>
+<li>
+<p>开启此参数建议同时开启   <code>primary_visibility_consensus</code></p>
+</li>
+</ul>
+<h2 id="故障转移验证">故障转移验证</h2>
+<p>在发生故障转移时，某个节点被选举为新的主节点时，可以通过配置自定义判断脚本，进一步决定当前是否可以被提升为主节点。  必须在所有节点进行配置。</p>
+<p>配置如下：</p>
+<pre><code>failover_validation_command=/path/to/script.sh %n     
+</code></pre><p>可使用参数：</p>
+<ul>
+<li><code>%n</code>: node ID</li>
+<li><code>%a</code>: node name</li>
+<li><code>%v</code>: 可见节点数</li>
+<li><code>%u</code>: number of shared upstream nodes</li>
+<li><code>%t</code>: 总节点数</li>
+</ul>
+<p>根据脚本返回码（是否非0）决定是否可以将当前节点提升为主节点，如果不符合条件，中断本次故障转移流程，<code>election_rerun_interval</code> 秒后进入下一轮故障转移流程。</p>
+<h2 id="级联复制">级联复制</h2>
+<p>Postgresql 9.2 数据库具有了级联复制功能。repmgr 可以提供级联复制支持。</p>
+<p>当发生故障转移时，repmgr保持级联关系不便。</p>
+<p>在上游节点发生故障时下游节点自动重新尝试连接原上游节点的父节点。</p>
+<h2 id="主节点检测从库连接">主节点检测从库连接</h2>
+<p>以上的考虑情形大多是通过从节点观测主节点的运行情况来决定是否发生故障转移。在repmgr中主节点也可以观测到从节点的连接情况。</p>
+<p>通过主机点不断的检测从节点的连接情况，当满足某些状况时可以执行自定义脚本。如发生故障转移后产生一个新的主服务时，其他的从节点也都跟着指向了新主节点，元主节点的从节点个数变为零。这时可以通过执行一个特殊的命令来阻止应用写入旧的主节点。</p>
+<h3 id="检测过程和标准">检测过程和标准</h3>
+<ul>
+<li>间隔时间<code>child_nodes_check_interval</code> 默认5秒查询一次pg_stat_replication 视图，并与注册repmgr时指定upstream node为主及节点的列表进行对比</li>
+<li>如果检测到从节点不在pg_stat_replication 视图中。记录检测到的时间并触发   <code>child_node_disconnect</code> 事件</li>
+<li>如果从节点重新出现在pg_stat_repliation视图中，清除上面的检测时间记录，并触发  <code>child_node_reconnect</code>事件</li>
+<li>如果检测到一个新的从节点加入，将新节点加入到内部列表中并触发<code>child_node_new_connect</code> 事件</li>
+<li>如果在repmgr.conf中配置了参数<code>child_nodes_disconnect_command</code>，repmgrd会循环检测所有节点，如果检测到连接的从节点数小于<code>child_nodes_connected_min_count</code> （默认零）并且超过<code>child_nodes_disconnect_timeout</code>（默认30s）所指定的时间时，触发          <code>child_nodes_disconnect_command</code> 事件</li>
+<li>注意事项，在 repmgrd 启动时没有连接的子节点不会被认为是丢失的，因为 repmgrd 无法知道它们为什么没有被连接。</li>
+</ul>
+<h3 id="注意事项">注意事项</h3>
+<ul>
+<li>
+<p>子节点配置为归档复制时</p>
+</li>
+<li>
+<p>子节点的primary_conninfo信息中的application_name与节点的 repmgr.conf文件中定义的节点名称相同。此外，这个application_name在整个复制集群中必须是唯一的。如果使用自定义的application_name，或者application_name在整个复制集群中不是唯一的，repmgr将无法可靠地监控子节点的连接。</p>
+</li>
+</ul>
+<h3 id="配置参数">配置参数</h3>
+<ul>
+<li>child_nodes_check_interval  检测间隔时间 默认值5s</li>
+<li>child_nodes_disconnect_command 自定义脚本</li>
+<li>child_nodes_disconnect_timeout  超时时间 默认值30s</li>
+<li>child_nodes_connected_min_count  存活从库的最小值。当检测到存活的从节点数小于该值时，触发child_nodes_disconnect_command 事件。</li>
+<li>child_nodes_disconnect_min_count 丢失节点的最小值，当丢失的节点数大于该值时触发child_nodes_disconnect_command 事件。</li>
+</ul>
+<p>注意child_nodes_connected_min_count 值会覆盖child_nodes_disconnect_min_count。当这两个参数都未设置时。检测到从节点存在个数为零时触发child_nodes_disconnect_command 事件。</p>
+<h3 id="事件类型">事件类型</h3>
+<ul>
+<li>child_node_disconnect</li>
+<li>child_node_reconnect</li>
+<li>child_node_new_connect</li>
+<li>child_nodes_disconnect_command</li>
+</ul>
+<h3 id="查看事件">查看事件</h3>
+<pre><code>repmgr cluster event --event=xxxxx (事件类型)
+</code></pre><h1 id="repmgrd-配置">repmgrd 配置</h1>
+<p>Postgresql 配置 postgressql.conf  需要重启服务</p>
+<pre><code>shared_preload_libraries = 'repmgr'
+</code></pre><p>monitor_interval_secs 检测上游节点时间间隔 默认2秒</p>
+<p>connection_check_type 检测类型 PQping (default)、connection、query</p>
+<p>reconnect_attempts 重连尝试次数 默认6次</p>
+<p>reconnect_interval 重连尝试间隔时间</p>
+<p>degraded_monitoring_timeout 默认-1 禁止。默认情况下，repmgrd将无限期地继续处于降级监视模式。设置该参数超时（以秒为单位），之后repmgrd将终止。</p>
+<h2 id="必须设置的参数">必须设置的参数</h2>
+<ul>
+<li><code>failover</code> =automatic</li>
+<li><code>promote_command</code>='/usr/bin/repmgr standby promote -f /etc/repmgr.conf &ndash;log-to-file'</li>
+<li><code>follow_command</code>=  &lsquo;/usr/bin/repmgr standby follow -f /etc/repmgr.conf &ndash;log-to-file &ndash;upstream-node-id=%n&rsquo;</li>
+</ul>
+<h2 id="可选参数">可选参数</h2>
+<pre><code>priority
+failover_validation_command
+primary_visibility_consensus
+always_promote
+standby_disconnect_on_failover
+election_rerun_interval
+sibling_nodes_disconnect_timeout
+</code></pre><h2 id="其他参数">其他参数</h2>
+<p>除了以上配置，conninfo 也会影响 repmgr 如何与 PostgreSQL 进行网络连接，如参数connect_timeout。同时也受到系统网络设置  <code>tcp_syn_retries</code>将影响。</p>
+<h2 id="日志自动切割">日志自动切割</h2>
+<pre><code>  /var/log/repmgr/repmgrd.log {
+        missingok
+        compress
+        rotate 52
+        maxsize 100M
+        weekly
+        create 0600 postgres postgres
+        postrotate
+            /usr/bin/killall -HUP repmgrd
+        endscript
+    }
+</code></pre><h1 id="repmgrd-操作">repmgrd 操作</h1>
+<h2 id="repmgrd-维护模式">repmgrd 维护模式</h2>
+<p>进入维护模式后，将不会发生自动故障转移。</p>
+<pre><code># 维护模式
+repmgr -f /etc/repmgr.conf service pause
+# 解除维护模式
+repmgr -f /etc/repmgr.conf service unpause
+# 查看当前模式
+repmgr -f /etc/repmgr.conf service status
+</code></pre><p>注意: 维护模式的状态不会因为重启repmgrd或Postgresql服务而改变。</p>
+<p>当进行Postgresql 版本升级时，要完全关闭repmgrd 服务。并且安装与数据库对应的新版本repmgr。</p>
+<p>手动故障转移<code>repmgr standby switchover</code> 会自动进行 pause/unpause 状态切换。</p>
+<p>当Postgresql数据库通过<code>pg_wal_replay_pause</code>处于暂停wal日志回放状态时，故障转移会自动恢复wal回放。</p>
+<p>注意执行repmgr_standby_promote 将被拒绝，直到管理员wal resumed恢复回放。</p>
+<h2 id="降级模式">降级模式</h2>
+<p>当遇到某些情况时将进入 &ldquo;降级监控 &ldquo;模式，即 repmgrd 仍处于活动状态，但在等待情况的解决。</p>
+<p>情况包括: 当发生故障时</p>
+<ul>
+<li>与主节点位于同一个数据中的的其他节点都不可见。根据location参数</li>
+<li>没有可以提升为主节点的候选节点</li>
+<li>候选节点不能被提升主节点</li>
+<li>节点不能作为新主节点的从节点</li>
+<li>节点没有设置自动故障转移</li>
+<li>主节点故障，但是没其他节点被提升为主节点</li>
+</ul>
+<p>默认情况，降级模式将一致持续下去。但如果设置了degraded_monitoring_timeout参数，超过指定值，repmgrd将停止运行。</p>
+<h2 id="监控数据存储">监控数据存储</h2>
+<p>当参数monitoring_history=true时，监控记录数据将会不断的写入到<code>repmgr.monitoring_history</code>表中。 可以使用命令<code>repmgr cluster cleanup -k/ --keep-history</code> (选择需要保留记录天数) 定期清理数据。</p>
+<p>这些数据也会复制到从节点中，可以通过设置<code> ALTER TABLE repmgr.monitoring_history SET UNLOGGED;</code> 使数据不复制从节点。</p>
+<h1 id="选举流程简介">选举流程简介</h1>
+<p>源码位置 <code>repmgrd-physical.c</code></p>
+<p>当primary 节点被检测到发生故障，进入选举阶段时的大概流程。</p>
+<pre><code>/*
+ * Failover decision for nodes attached to the current primary.
+ *
+ * NB: this function sets &quot;sibling_nodes&quot;; caller (do_primary_failover)
+ * expects to be able to read this list
+ */
+# 选举流程 Postgresql 支持级联复制。新的主节点只能在一级子节点中产生。
+#  sibling_nodes 兄弟节点
+static ElectionResult
+do_election(NodeInfoList *sibling_nodes, int *new_primary_id)
+{
+	int			electoral_term = -1;
+    #
+	NodeInfoListCell *cell = NULL;
+# 
+	t_node_info *candidate_node = NULL;
+# 选举状态
+	election_stats stats;
+
+	ReplInfo	local_replication_info;
+
+	/* To collate details of nodes with primary visible for logging purposes */
+	PQExpBufferData nodes_with_primary_visible;
+
+	/*
+	 * Check if at least one server in the primary's location is visible; if
+	 * not we'll assume a network split between this node and the primary
+	 * location, and not promote any standby.
+	 *
+	 * NOTE: this function is only ever called by standbys attached to the
+	 * current (unreachable) primary, so &quot;upstream_node_info&quot; will always
+	 * contain the primary node record.
+	 */
+	# 根据是否存在与故障节点位置相同的可见节点。如果都为不可见状态，则认为是网络问题。PS: 每个节点可配置location 参数指定所在的物理位置。如多数据中心场景
+	bool		primary_location_seen = false;
+
+	int			nodes_with_primary_still_visible = 0;
+
+	if (config_file_options.failover_delay &gt; 0)
+	{
+		log_debug(&quot;sleeping %i seconds (\&quot;failover_delay\&quot;) before initiating failover&quot;,
+				  config_file_options.failover_delay);
+		sleep(config_file_options.failover_delay);
+	}
+
+	/* we're visible */ 
+	#可见节点数
+	stats.visible_nodes = 1;
+	#与当前node为相同上游的节点数 shared_upstream_nodes = sibling_nodes + 1(当前节点)
+	stats.shared_upstream_nodes = 0;
+	# 集群中所有节点数
+	stats.all_nodes = 0;
+    # SELECT term FROM repmgr.voting_term; 初始值为1 , 执行repmgr standby promote加一
+	electoral_term = get_current_term(local_conn);
+
+	if (electoral_term == -1)
+	{
+		log_error(_(&quot;unable to determine electoral term&quot;));
+
+		return ELECTION_NOT_CANDIDATE;
+	}
+
+	log_debug(&quot;do_election(): electoral term is %i&quot;, electoral_term);
+   # 如果repmgr.conf中failover参数设置为manual ,该节点不参与选举
+	if (config_file_options.failover == FAILOVER_MANUAL)
+	{
+		log_notice(_(&quot;this node is not configured for automatic failover so will not be considered as promotion candidate, and will not follow the new primary&quot;));
+		log_detail(_(&quot;\&quot;failover\&quot; is set to \&quot;manual\&quot; in repmgr.conf&quot;));
+		log_hint(_(&quot;manually execute \&quot;repmgr standby follow\&quot; to have this node follow the new primary&quot;));
+
+		return ELECTION_NOT_CANDIDATE;
+	}
+#如果设置priority为0 ，该节点不参与选举 。见证节点的priority=0。 及见证节点到这里已经出局
+	/* node priority is set to zero - don't become a candidate, and lose by default */
+	if (local_node_info.priority &lt;= 0)
+	{
+		log_notice(_(&quot;this node's priority is %i so will not be considered as an automatic promotion candidate&quot;),
+				   local_node_info.priority);
+
+		return ELECTION_LOST;
+	}
+    #该方法 SQL 查询 视图repmgr.nodes ,获取兄弟节点。何为兄弟，与当前节点上游节点相同的节点，不包括自身。
+    # 注意一点。 见证节点的也算在兄弟节点中。因为在nodes表中他们的upstream_node_id 相同 
+    # SELECT REPMGR_NODES_COLUMNS FROM repmgr.nodes n  WHERE n.upstream_node_id = %i  AND n.node_id != %i    AND n.active IS TRUE ORDER BY n.node_id  
+	/* get all active nodes attached to upstream, excluding self */
+	get_active_sibling_node_records(local_conn,
+									local_node_info.node_id,
+									upstream_node_info.node_id,
+									sibling_nodes);
+
+	log_info(_(&quot;%i active sibling nodes registered&quot;), sibling_nodes-&gt;node_count);
+
+	stats.shared_upstream_nodes = sibling_nodes-&gt;node_count + 1;
+    #获取集群中所有节点数量 SELECT count(*) FROM repmgr.nodes n 
+	get_all_nodes_count(local_conn, &amp;stats.all_nodes);
+
+	log_info(_(&quot;%i total nodes registered&quot;), stats.all_nodes);
+    #判断记录当前节点位置是否与 上游节点（主节点）位置相同
+	if (strncmp(upstream_node_info.location, local_node_info.location, MAXLEN) != 0)
+	{
+		log_info(_(&quot;primary node \&quot;%s\&quot; (ID: %i) has location \&quot;%s\&quot;, this node's location is \&quot;%s\&quot;&quot;),
+				 upstream_node_info.node_name,
+				 upstream_node_info.node_id,
+				 upstream_node_info.location,
+				 local_node_info.location);
+	}
+	else 
+	{
+		log_info(_(&quot;primary node  \&quot;%s\&quot; (ID: %i) and this node have the same location (\&quot;%s\&quot;)&quot;),
+				 upstream_node_info.node_name,
+				 upstream_node_info.node_id,
+				 local_node_info.location);
+	}
+
+	local_node_info.last_wal_receive_lsn = InvalidXLogRecPtr;
+	# 没有兄弟节点，没有见证节点，独生子。如果与主节点位置相同直接继承王位，江湖中的打打杀杀在这里不存在。
+	/* fast path if no other standbys (or witness) exists - normally win by default */
+	if (sibling_nodes-&gt;node_count == 0)
+	{	# 比较上游节点（原主节点）与当前节点的位置，如果相同
+		if (strncmp(upstream_node_info.location, local_node_info.location, MAXLEN) == 0)
+		{# 升级为主服务前的配置的验证脚本，是否返回值为0
+			if (config_file_options.failover_validation_command[0] != '\0')
+			{ 
+				return execute_failover_validation_command(&amp;local_node_info, &amp;stats);
+			}
+
+			log_info(_(&quot;no other sibling nodes - we win by default&quot;));
+          # 胜出，新王诞生。
+			return ELECTION_WON;
+		}
+		else
+		{
+			/*
+			 * If primary and standby have different locations set, the assumption
+			 * is that no action should be taken as we can't tell whether there's
+			 * been a network interruption or not.
+			 *
+			 * Normally a situation with primary and standby in different physical
+			 * locations would be handled by leaving the location as &quot;default&quot; and
+			 * setting up a witness server in the primary's location.
+			 */
+			log_debug(&quot;no other nodes, but primary and standby locations differ&quot;);
+           # 虽然只有一个从节点，但是与主节点的位置不同，不能进行升级。集群进行降级处理。很遗憾。
+           # 相当于 主节点相同位置的节点都不可见。被认为网络分区故障。
+			monitoring_state = MS_DEGRADED;
+			INSTR_TIME_SET_CURRENT(degraded_monitoring_start);
+
+			return ELECTION_NOT_CANDIDATE;
+		}
+	}
+	# 当有多个兄弟的时候
+	else 
+	{
+		/* standby nodes found - check if we're in the primary location before checking theirs */ # 当前节点是否与主节点位置相同
+		if (strncmp(upstream_node_info.location, local_node_info.location, MAXLEN) == 0)
+		{   # 存在与主节点位置相同的直接从节点
+			primary_location_seen = true;
+		}
+	}
+
+	/* get our lsn */ # 
+	if (get_replication_info(local_conn, STANDBY, &amp;local_replication_info) == false)
+	{
+		log_error(_(&quot;unable to retrieve replication information for local node&quot;));
+		return ELECTION_LOST;
+	}
+     # wal 回放状态为 paused ，尝试恢复wal回放状态 , resume失败 当前节点不参与选举
+	/* check if WAL replay on local node is paused */
+	if (local_replication_info.wal_replay_paused == true)
+	{
+		log_debug(&quot;WAL replay is paused&quot;);
+		if (local_replication_info.last_wal_receive_lsn &gt; local_replication_info.last_wal_replay_lsn)
+		{
+			log_warning(_(&quot;WAL replay on this node is paused and WAL is pending replay&quot;));
+			log_detail(_(&quot;replay paused at %X/%X; last WAL received is %X/%X&quot;),
+					   format_lsn(local_replication_info.last_wal_replay_lsn),
+					   format_lsn(local_replication_info.last_wal_receive_lsn));
+		}
+		# 尝试恢复wal状态
+		/* attempt to resume WAL replay - unlikely this will fail, but just in case */
+		if (resume_wal_replay(local_conn) == false)
+		{
+			log_error(_(&quot;unable to resume WAL replay&quot;));
+			log_detail(_(&quot;this node cannot be reliably promoted&quot;));
+			# resume 失败，该节点不参与选举
+			return ELECTION_LOST;
+		}
+
+		log_notice(_(&quot;WAL replay forcibly resumed&quot;));
+	}
+
+	local_node_info.last_wal_receive_lsn = local_replication_info.last_wal_receive_lsn;
+
+	log_info(_(&quot;local node's last receive lsn: %X/%X&quot;), format_lsn(local_node_info.last_wal_receive_lsn));
+
+	/* pointer to &quot;winning&quot; node, initially self */
+	candidate_node = &amp;local_node_info;
+
+	initPQExpBuffer(&amp;nodes_with_primary_visible);
+   # 众候选节点进入选举会场，开始厮杀。
+	for (cell = sibling_nodes-&gt;head; cell; cell = cell-&gt;next)
+	{
+		ReplInfo	sibling_replication_info;
+
+		log_info(_(&quot;checking state of sibling node \&quot;%s\&quot; (ID: %i)&quot;),
+				 cell-&gt;node_info-&gt;node_name,
+				 cell-&gt;node_info-&gt;node_id);
+
+		/* assume the worst case */
+		cell-&gt;node_info-&gt;node_status = NODE_STATUS_UNKNOWN;
+
+		cell-&gt;node_info-&gt;conn = establish_db_connection(cell-&gt;node_info-&gt;conninfo, false);
+
+		if (PQstatus(cell-&gt;node_info-&gt;conn) != CONNECTION_OK)
+		{
+			close_connection(&amp;cell-&gt;node_info-&gt;conn);
+
+			continue;
+		}
+
+		cell-&gt;node_info-&gt;node_status = NODE_STATUS_UP;
+
+		stats.visible_nodes++;
+
+		/*
+		 * see if the node is in the primary's location (but skip the check if
+		 * we've seen a node there already)
+		 */
+		if (primary_location_seen == false)
+		{
+			if (strncmp(cell-&gt;node_info-&gt;location, upstream_node_info.location, MAXLEN) == 0)
+			{
+				log_debug(&quot;node %i in primary location \&quot;%s\&quot;&quot;,
+						  cell-&gt;node_info-&gt;node_id,
+						  cell-&gt;node_info-&gt;location);
+				primary_location_seen = true;
+			}
+		}
+
+		/*
+		 * check if repmgrd running - skip if not
+		 *
+		 * TODO: include pid query in replication info query?
+		 *
+		 * NOTE: from Pg12 we could execute &quot;pg_promote()&quot; from a running repmgrd;
+		 * here we'll need to find a way of ensuring only one repmgrd does this
+		 */
+		if (repmgrd_get_pid(cell-&gt;node_info-&gt;conn) == UNKNOWN_PID)
+		{
+			log_warning(_(&quot;repmgrd not running on node \&quot;%s\&quot; (ID: %i), skipping&quot;),
+						cell-&gt;node_info-&gt;node_name,
+						cell-&gt;node_info-&gt;node_id);
+			continue;
+		}
+
+		if (get_replication_info(cell-&gt;node_info-&gt;conn, cell-&gt;node_info-&gt;type, &amp;sibling_replication_info) == false)
+		{
+			log_warning(_(&quot;unable to retrieve replication information for node \&quot;%s\&quot; (ID: %i), skipping&quot;),
+						cell-&gt;node_info-&gt;node_name,
+						cell-&gt;node_info-&gt;node_id);
+			continue;
+		}
+
+		/*
+		 * Check if node is not in recovery - it may have been promoted
+		 * outside of the failover mechanism, in which case we may be able
+		 * to follow it.
+		 */
+
+		# 有兄弟节点被手动提升为主节点
+		if (sibling_replication_info.in_recovery == false &amp;&amp; cell-&gt;node_info-&gt;type != WITNESS)
+		{
+			bool can_follow;
+
+			log_warning(_(&quot;node \&quot;%s\&quot; (ID: %i) is not in recovery&quot;),
+						cell-&gt;node_info-&gt;node_name,
+						cell-&gt;node_info-&gt;node_id);
+
+			/*
+			 * Node is not in recovery, but still reporting an upstream
+			 * node ID; possible it was promoted manually (e.g. with &quot;pg_ctl promote&quot;),
+			 * or (less likely) the node's repmgrd has just switched to primary
+			 * monitoring node but has not yet unset the upstream node ID in
+			 * shared memory. Either way, log this.
+			 */
+			if (sibling_replication_info.upstream_node_id != UNKNOWN_NODE_ID)
+			{
+				log_warning(_(&quot;node \&quot;%s\&quot; (ID: %i) still reports its upstream is node %i, last seen %i second(s) ago&quot;),
+							cell-&gt;node_info-&gt;node_name,
+							cell-&gt;node_info-&gt;node_id,
+							sibling_replication_info.upstream_node_id,
+							sibling_replication_info.upstream_last_seen);
+			}
+			#检验当前节点是否能follow 被提升的兄弟节点
+			can_follow = check_node_can_follow(local_conn,
+											   local_node_info.last_wal_receive_lsn,
+											   cell-&gt;node_info-&gt;conn,
+											   cell-&gt;node_info);
+			# 在选举结果前有节点手动提升节点为主节点。并且当前节点可以follower。当前节点不在参与选举
+			if (can_follow == true)
+			{
+				*new_primary_id = cell-&gt;node_info-&gt;node_id;
+				termPQExpBuffer(&amp;nodes_with_primary_visible);
+				return ELECTION_CANCELLED;
+			}
+			# 如果不能follower主节点。这种情况会很棘手。
+			/*
+			 * Tricky situation here - we'll assume the node is a rogue primary
+			 */
+			log_warning(_(&quot;not possible to attach to node \&quot;%s\&quot; (ID: %i), ignoring&quot;),
+						cell-&gt;node_info-&gt;node_name,
+						cell-&gt;node_info-&gt;node_id);
+			continue;
+		}
+		else
+		{
+			log_info(_(&quot;node \&quot;%s\&quot; (ID: %i) reports its upstream is node %i, last seen %i second(s) ago&quot;),
+					 cell-&gt;node_info-&gt;node_name,
+					 cell-&gt;node_info-&gt;node_id,
+					 sibling_replication_info.upstream_node_id,
+					 sibling_replication_info.upstream_last_seen);
+		}
+
+		/* check if WAL replay on node is paused */
+		if (sibling_replication_info.wal_replay_paused == true)
+		{
+			/*
+			 * Theoretically the repmgrd on the node should have resumed WAL play
+			 * at this point.
+			 */
+			if (sibling_replication_info.last_wal_receive_lsn &gt; sibling_replication_info.last_wal_replay_lsn)
+			{
+				log_warning(_(&quot;WAL replay on node \&quot;%s\&quot; (ID: %i) is paused and WAL is pending replay&quot;),
+							cell-&gt;node_info-&gt;node_name,
+							cell-&gt;node_info-&gt;node_id);
+			}
+		}
+
+		/*
+		 * Check if node has seen primary &quot;recently&quot; - if so, we may have &quot;partial primary visibility&quot;.
+		 * For now we'll assume the primary is visible if it's been seen less than
+		 * monitor_interval_secs * 2 seconds ago. We may need to adjust this, and/or make the value
+		 * configurable.
+		 */
+
+		if (sibling_replication_info.upstream_last_seen &gt;= 0 &amp;&amp; sibling_replication_info.upstream_last_seen &lt; (config_file_options.monitor_interval_secs * 2))
+		{
+			if (sibling_replication_info.upstream_node_id != upstream_node_info.node_id)
+			{
+				log_warning(_(&quot;assumed sibling node \&quot;%s\&quot; (ID: %i) monitoring different upstream node %i&quot;),
+							cell-&gt;node_info-&gt;node_name,
+							cell-&gt;node_info-&gt;node_id,
+							sibling_replication_info.upstream_node_id);
+
+			}
+			else
+			{
+				nodes_with_primary_still_visible++;
+				log_notice(_(&quot;%s node \&quot;%s\&quot; (ID: %i) last saw primary node %i second(s) ago, considering primary still visible&quot;),
+						   get_node_type_string(cell-&gt;node_info-&gt;type),
+						   cell-&gt;node_info-&gt;node_name,
+						   cell-&gt;node_info-&gt;node_id,
+						   sibling_replication_info.upstream_last_seen);
+				appendPQExpBuffer(&amp;nodes_with_primary_visible,
+								  &quot; - node \&quot;%s\&quot; (ID: %i): %i second(s) ago\n&quot;,
+								  cell-&gt;node_info-&gt;node_name,
+								  cell-&gt;node_info-&gt;node_id,
+								  sibling_replication_info.upstream_last_seen);
+			}
+		}
+		else
+		{
+			log_info(_(&quot;%s node \&quot;%s\&quot; (ID: %i) last saw primary node %i second(s) ago&quot;),
+					 get_node_type_string(cell-&gt;node_info-&gt;type),
+					 cell-&gt;node_info-&gt;node_name,
+					 cell-&gt;node_info-&gt;node_id,
+					 sibling_replication_info.upstream_last_seen);
+		}
+
+		# 见证节点不参与选举
+		/* don't interrogate a witness server */
+		if (cell-&gt;node_info-&gt;type == WITNESS)
+		{
+			log_debug(&quot;node %i is witness, not querying state&quot;, cell-&gt;node_info-&gt;node_id);
+			continue;
+		}
+        # priority=0 的节点不参与选举
+		/* don't check 0-priority nodes */
+		if (cell-&gt;node_info-&gt;priority &lt;= 0)
+		{
+			log_info(_(&quot;node \&quot;%s\&quot; (ID: %i) has priority of %i, skipping&quot;),
+					   cell-&gt;node_info-&gt;node_name,
+					   cell-&gt;node_info-&gt;node_id,
+					   cell-&gt;node_info-&gt;priority);
+			continue;
+		}
+
+
+		/* get node's last receive LSN - if &quot;higher&quot; than current winner, current node is candidate */
+		cell-&gt;node_info-&gt;last_wal_receive_lsn = sibling_replication_info.last_wal_receive_lsn;
+
+		log_info(_(&quot;last receive LSN for sibling node \&quot;%s\&quot; (ID: %i) is: %X/%X&quot;),
+				 cell-&gt;node_info-&gt;node_name,
+				 cell-&gt;node_info-&gt;node_id,
+				 format_lsn(cell-&gt;node_info-&gt;last_wal_receive_lsn));
+
+		/* compare LSN */ # 比较LSN
+		if (cell-&gt;node_info-&gt;last_wal_receive_lsn &gt; candidate_node-&gt;last_wal_receive_lsn)
+		{
+			/* other node is ahead */
+			log_info(_(&quot;node \&quot;%s\&quot; (ID: %i) is ahead of current candidate \&quot;%s\&quot; (ID: %i)&quot;),
+					 cell-&gt;node_info-&gt;node_name,
+					 cell-&gt;node_info-&gt;node_id,
+					 candidate_node-&gt;node_name,
+					 candidate_node-&gt;node_id);
+
+			candidate_node = cell-&gt;node_info;
+		}
+		# LSN 相同比较 priority,priority也相同然后比较 node_id
+		/* LSN is same - tiebreak on priority, then node_id */
+		#LSN 对比
+		else if (cell-&gt;node_info-&gt;last_wal_receive_lsn == candidate_node-&gt;last_wal_receive_lsn)
+		{
+			log_info(_(&quot;node \&quot;%s\&quot; (ID: %i) has same LSN as current candidate \&quot;%s\&quot; (ID: %i)&quot;),
+					 cell-&gt;node_info-&gt;node_name,
+					 cell-&gt;node_info-&gt;node_id,
+					 candidate_node-&gt;node_name,
+					 candidate_node-&gt;node_id);
+            #priority 对比
+			if (cell-&gt;node_info-&gt;priority &gt; candidate_node-&gt;priority)
+			{
+				log_info(_(&quot;node \&quot;%s\&quot; (ID: %i) has higher priority (%i) than current candidate \&quot;%s\&quot; (ID: %i) (%i)&quot;),
+						 cell-&gt;node_info-&gt;node_name,
+						 cell-&gt;node_info-&gt;node_id,
+						 cell-&gt;node_info-&gt;priority,
+						 candidate_node-&gt;node_name,
+						 candidate_node-&gt;node_id,
+						 candidate_node-&gt;priority);
+
+				candidate_node = cell-&gt;node_info;
+			}
+			else if (cell-&gt;node_info-&gt;priority == candidate_node-&gt;priority)
+			{
+				if (cell-&gt;node_info-&gt;node_id &lt; candidate_node-&gt;node_id)
+				{
+					log_info(_(&quot;node \&quot;%s\&quot; (ID: %i) has same priority but lower node_id than current candidate \&quot;%s\&quot; (ID: %i)&quot;),
+							 cell-&gt;node_info-&gt;node_name,
+							 cell-&gt;node_info-&gt;node_id,
+							 candidate_node-&gt;node_name,
+							 candidate_node-&gt;node_id);
+
+					candidate_node = cell-&gt;node_info;
+				}
+			}
+			else
+			{
+				log_info(_(&quot;node \&quot;%s\&quot; (ID: %i) has lower priority (%i) than current candidate \&quot;%s\&quot; (ID: %i) (%i)&quot;),
+						 cell-&gt;node_info-&gt;node_name,
+						 cell-&gt;node_info-&gt;node_id,
+						 cell-&gt;node_info-&gt;priority,
+						 candidate_node-&gt;node_name,
+						 candidate_node-&gt;node_id,
+						 candidate_node-&gt;priority);
+			}
+		}
+	}
+    # 网络分区，降级。
+	if (primary_location_seen == false)
+	{
+		log_notice(_(&quot;no nodes from the primary location \&quot;%s\&quot; visible - assuming network split&quot;),
+				   upstream_node_info.location);
+		log_detail(_(&quot;node will enter degraded monitoring state waiting for reconnect&quot;));
+
+		monitoring_state = MS_DEGRADED;
+		INSTR_TIME_SET_CURRENT(degraded_monitoring_start);
+
+		reset_node_voting_status();
+
+		termPQExpBuffer(&amp;nodes_with_primary_visible);
+
+		return ELECTION_CANCELLED;
+	}
+    # 主节点仍可见
+	if (nodes_with_primary_still_visible &gt; 0)
+	{
+		log_info(_(&quot;%i nodes can see the primary&quot;),
+				   nodes_with_primary_still_visible);
+
+		log_detail(_(&quot;following nodes can see the primary:\n%s&quot;),
+				   nodes_with_primary_visible.data);
+		#主节点可见性共识
+		if (config_file_options.primary_visibility_consensus == true)
+		{
+			log_notice(_(&quot;cancelling failover as some nodes can still see the primary&quot;));
+			monitoring_state = MS_DEGRADED;
+			INSTR_TIME_SET_CURRENT(degraded_monitoring_start);
+
+			reset_node_voting_status();
+
+			termPQExpBuffer(&amp;nodes_with_primary_visible);
+
+			return ELECTION_CANCELLED;
+		}
+	}
+
+	termPQExpBuffer(&amp;nodes_with_primary_visible);
+
+	log_info(_(&quot;visible nodes: %i; total nodes: %i; no nodes have seen the primary within the last %i seconds&quot;),
+			 stats.visible_nodes,
+			 stats.shared_upstream_nodes,
+			 (config_file_options.monitor_interval_secs * 2));
+	# 同级节点中大部分不可见，不参与选举
+	if (stats.visible_nodes &lt;= (stats.shared_upstream_nodes / 2.0))
+	{
+		log_notice(_(&quot;unable to reach a qualified majority of nodes&quot;));
+		log_detail(_(&quot;node will enter degraded monitoring state waiting for reconnect&quot;));
+
+		monitoring_state = MS_DEGRADED;
+		INSTR_TIME_SET_CURRENT(degraded_monitoring_start);
+
+		reset_node_voting_status();
+
+		return ELECTION_CANCELLED;
+	}
+
+	log_notice(_(&quot;promotion candidate is \&quot;%s\&quot; (ID: %i)&quot;),
+			   candidate_node-&gt;node_name,
+			   candidate_node-&gt;node_id);
+   # 新选出的节点为当前节点
+	if (candidate_node-&gt;node_id == local_node_info.node_id)
+	{
+		/*
+		 * If &quot;failover_validation_command&quot; is set, execute that command
+		 * and decide the result based on the command's output
+		 */
+      # 验证failover_validation_command 脚本的执行
+		if (config_file_options.failover_validation_command[0] != '\0')
+		{
+			return execute_failover_validation_command(candidate_node, &amp;stats);
+		}
+		# 当前节点宣布胜出，为主节点
+		return ELECTION_WON;
+	}
+
+	return ELECTION_LOST;
+}if (primary_location_seen == false)
+	{
+		log_notice(_(&quot;no nodes from the primary location \&quot;%s\&quot; visible - assuming network split&quot;),
+				   upstream_node_info.location);
+		log_detail(_(&quot;node will enter degraded monitoring state waiting for reconnect&quot;));
+
+		monitoring_state = MS_DEGRADED;
+		INSTR_TIME_SET_CURRENT(degraded_monitoring_start);
+
+		reset_node_voting_status();
+
+		termPQExpBuffer(&amp;nodes_with_primary_visible);
+
+		return ELECTION_CANCELLED;
+	}
+
+	if (nodes_with_primary_still_visible &gt; 0)
+	{
+		log_info(_(&quot;%i nodes can see the primary&quot;),
+				   nodes_with_primary_still_visible);
+
+		log_detail(_(&quot;following nodes can see the primary:\n%s&quot;),
+				   nodes_with_primary_visible.data);
+
+		if (config_file_options.primary_visibility_consensus == true)
+		{
+			log_notice(_(&quot;cancelling failover as some nodes can still see the primary&quot;));
+			monitoring_state = MS_DEGRADED;
+			INSTR_TIME_SET_CURRENT(degraded_monitoring_start);
+
+			reset_node_voting_status();
+
+			termPQExpBuffer(&amp;nodes_with_primary_visible);
+
+			return ELECTION_CANCELLED;
+		}
+	}
+</code></pre><h2 id="总结">总结:</h2>
+<pre><code>ELECTION_NOT_CANDIDAT
+ELECTION_WON
+ELECTION_LOST
+ELECTION_CANCELLED
+ELECTION_RERUN
+</code></pre><p>根据location 或 winess节点决定集群是否处于网络分区状态，进入选举或降级模式。</p>
+<p>当只有一个一级从节点</p>
+<ul>
+<li>从节点原主节点位置相同直接选举成功。</li>
+<li>从节点与原主节点位置不同且没有见证节点则降级。</li>
+</ul>
+<p>不参与选举的节点</p>
+<ul>
+<li>Priority=0</li>
+<li>repmgr.conf中failover参数设置为manual</li>
+<li>wal 处于 pause 状态将被resume。但resume失败</li>
+</ul>
+<p>Repmgr选举候选备节点会以以下顺序选举：LSN-&gt; Priority-&gt; Node_ID。</p>
+<h2 id="流程图runuser1000doc8bb85d50repmgrd自动选举流程png">流程图
+        <img class="mx-auto" alt="" src="/run/user/1000/doc/8bb85d50/repmgrd%e8%87%aa%e5%8a%a8%e9%80%89%e4%b8%be%e6%b5%81%e7%a8%8b.png" />   
+    </h2>
+<h1 id="功能增强">功能增强</h1>
+<h3 id="virtual-ip"><strong>Virtual IP</strong></h3>
+<ul>
+<li>注册主节点时，绑定vip</li>
+<li>Failover &amp; Switchover时 利用failover_validation_command事件重新绑定vip</li>
+<li>整个集群重启时，识别出主节点绑定vip</li>
+</ul>
+<h3 id="主节点异常后恢复处理">主节点异常后恢复处理</h3>
+<ul>
+<li>主节点网络问题，如网络防火墙等原因。Postgresql服务仍在运行，并可写。</li>
+</ul>
+<pre><code>设置参数 child_nodes_connected_min_count
+触发事件 child_nodes_disconnect_command 中定义回调方法将主节点降级为只读，或关闭。
+</code></pre><ul>
+<li>
+<p>异常恢复时，网络重新恢复连接。</p>
+<p>找出集群故障转移后新主节点， 方法 libpq 中可写多个hosts。</p>
+<p>pg_rewind 对齐时间线</p>
+<p>rejoin 新集群</p>
+</li>
+<li>
+<p>断电 ，不能做任何处理</p>
+</li>
+<li>
+<p>电力恢复。服务重启，检测从库数量如果为0 暂时不提供服务。等待一段时间 stop service -&gt; rejoin集群</p>
+</li>
+</ul>
+<h3 id="从节点故障及恢复">从节点故障及恢复</h3>
+<ul>
+<li>当从节点发生故障时不会引起故障转移。当需要注意当从节点故障恢复后wal日志会落后与主库。</li>
+</ul>
+<h3 id="对外服务管理">对外服务管理</h3>
+<p>应用在通常情况下不会直接连接数据库，比如通过dns，haproxy等中间管理服务进行负载均衡和解耦。</p>
+<p>在数据库发生故障转移时，对应用程序来说尽量做到不需变化，无感。</p>
+<p>新增一个独立与现有服务之外的服务。</p>
+<h4 id="主要功能">主要功能</h4>
+<p>提供一个七层http请求, 包括访问权限验证</p>
+<p><code>返回值</code>: 服务已经正常运行的时间 ps:上层负载均衡用户可参考该值进行权限分配。如节点刚接入集群缓存数据尚未准备充分，建议业务流量逐步接入。</p>
+<p><code>返回码</code>: 200 , 其他</p>
+<p><code>主库</code>  访问地址 ip:port/master ?xxx</p>
+<p>​      如返回码为200，当前节点为主节点并且服务正常。</p>
+<p>​      其他返回码,暂时不能提供写服务</p>
+<p>​	  主要判断逻辑: PG服务可连接性，下游节点个数</p>
+<p><code>从库</code> 访问地址 ip:port/replocation ?xxx</p>
+<p>​      主要判断逻辑: PG服务可连接性，落后主节点的wal差值</p>
+<h4 id="可解决的问题">可解决的问题</h4>
+<ul>
+<li>
+<p>vip 不能跨网段管理</p>
+</li>
+<li>
+<p>在Postgresql对外提供服务时进行健康状态检测。如果不满足需求，停止对应用提供服务，待恢复后在提供服务</p>
+</li>
+</ul>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>其他文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/linux/linux_tunning/">Linux 优化指南</a></li>
+        
+        <li><a href="/monitor/nginx-log-exporter/">prometheus-nginxlog-exporter构建Nginx日志监控</a></li>
+        
+        <li><a href="/postgres/logical-replication_failover/">逻辑复制故障转移</a></li>
+        
+    </ul>
+</div>
+
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "your github repo"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2018 - 2023 <a href="https://zhangeamon.top"> By Eamon</a>
+        
+    </div>
+    <br />
+  
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zhangeamon.top/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zhangeamon.top">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/linux_tunning/" title="Linux 优化指南">Linux 优化指南</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/monitor/nginx-log-exporter/" title="prometheus-nginxlog-exporter构建Nginx日志监控">prometheus-nginxlog-exporter构建Nginx日志监控</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/logical-replication_failover/" title="逻辑复制故障转移">逻辑复制故障转移</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/nice/" title="nice, ionice, cpulimit">nice, ionice, cpulimit</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/linux/backlog-config/" title="Linux backlog/somaxconn 内核参数">Linux backlog/somaxconn 内核参数</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/storage/minio_ec/" title="Minio存储类别">Minio存储类别</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/wal_lsn/" title="LSN 和 wal日志文件名对应关系">LSN 和 wal日志文件名对应关系</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
+    </li>
+    
+    <li>
+        <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zhangeamon.top/categories/ansible/">ansible (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/docker/">docker (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/etcd/">etcd (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/haproxy/">haproxy (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/kafka/">kafka (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/kvm/">kvm (1)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/linux/">linux (21)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/minio/">minio (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/mysql/">mysql (4)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/nginx/">nginx (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/postgres/">postgres (47)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/redis/">redis (9)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/tidb/">tidb (5)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件 (8)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AD%98%E5%82%A8/">存储 (2)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E5%AE%89%E5%85%A8/">安全 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E6%95%B0%E4%BB%93/">数仓 (3)</a></li>
+    
+    <li><a href="https://zhangeamon.top/categories/%E7%9B%91%E6%8E%A7/">监控 (3)</a></li>
+    
+</ul>
+
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags.html'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zhangeamon.top/tags/%E4%BC%98%E5%8C%96/">优化</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">配置管理</a>
+    
+    <a href="https://zhangeamon.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+    
+</div>
+
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/zhangeamon" title="历史博客">历史博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zhangeamon.top/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>
