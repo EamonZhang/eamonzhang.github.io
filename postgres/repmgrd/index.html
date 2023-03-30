@@ -206,6 +206,7 @@
       </ul>
     </li>
     <li><a href="#故障切换时间预估">故障切换时间预估</a></li>
+    <li><a href="#只有两个节点">只有两个节点</a></li>
   </ul>
 </nav>
     </div>
@@ -1136,7 +1137,21 @@ ELECTION_RERUN
 <p>reconnect_interval 重连尝试间隔时间</p>
 </li>
 </ul>
-
+<h2 id="只有两个节点">只有两个节点</h2>
+<p>主要面临问题: 两个节点主要是当发生网络故障时，而非postgres数据库应用问题时。从库无法判断是网络还是主库发生了故障。见证节点主要是为了解决这样的问题。</p>
+<p>解决思路: 模拟见证节点。在从库无法与主库通信时，ping 一个其他节点。或ping 网关或自己的ip。 当ping失败时认为发生了网络问题。</p>
+<p>具体实现: 配置 <code>failover_validation_command</code></p>
+<p>​	failover_validation_command.sh</p>
+<pre><code>#! bin/bash
+ping -c 5 {{ inventory_hostname }}
+if [ $? -eq 0 ]; then
+	echo &quot;ping $ip  success!&quot;
+	return 0
+else
+	echo &quot;ping  $ip fail!&quot;
+	return 1
+fi
+</code></pre>
         </div>
 
         
