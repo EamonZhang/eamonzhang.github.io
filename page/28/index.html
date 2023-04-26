@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/ansible/ansible-modules/" title="Ansible Modules">Ansible Modules</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年10月25日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/ansible'>ansible</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            准备工作 安装 yum install ansible-doc.noarch ansible.noarch -y tree /etc/ansible/ /etc/ansible/ ├── ansible.cfg ├── hosts └── roles ansible --version ansible 2.7.0 config file = /etc/ansible/ansible.cfg configured module search path = [u'/root/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules'] ansible python module location = /usr/lib/python2.7/site-packages/ansible executable location = /usr/bin/ansible python version = 2.7.5 (default, Jul 13 2018, 13:06:57) [GCC 4.8.5 20150623 (Red Hat 4.8.5-28)] 配置清单 cat hosts [webservers] 10.1.88.72 10.1.88.73 免密登录 常用命令 Usage: ansible &lt;host-pattern&gt; [options] 常用选项： -m MOD_NAME -a MOD_ARGS 获取模块列表：ansible-doc -l 获取指定模块的使用帮助：ansible-doc -s MOD_NAME……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/ansible/ansible-modules/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/ansible/ansible-overview/" title="Ansible Overview">Ansible Overview</a>
             </h1>
         </header>
@@ -247,22 +270,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/cmd-gpasswd/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/k8s/v1.10/" title="Kubernetes 安装　- V1.10">Kubernetes 安装　- V1.10</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年10月18日
-        </date>
-        
-        <div class="post-content">
-            ……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/k8s/v1.10/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -343,6 +350,8 @@
     <div>
         &copy; 2018 - 2023 <a href="https://zhangeamon.top"> By Eamon</a>
         
+        | <a rel="nofollow" target="_blank" href="http://www.beian.miit.gov.cn/">辽ICP备2022000054号-1</a>
+        
     </div>
     <br />
   
@@ -377,6 +386,10 @@
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pip/" title="python pip">python pip</a>
+    </li>
     
     <li>
         <a href="https://zhangeamon.top/postgres/repmgrd/" title="repmgrd介绍">repmgrd介绍</a>
@@ -414,10 +427,6 @@
         <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -450,7 +459,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (48)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (18)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

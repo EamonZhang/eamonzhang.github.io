@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年4月14日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%9B%91%E6%8E%A7'> 监控</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            基于consul 的服务发现 prometheus.yaml ## 操作系统监控 动态发现 - job_name: 'os_system' #metrics_path: &quot;/metrics&quot; consul_sd_configs: - server: 127.0.0.1:8500 services: - os_system scheme: http tags: - &quot;node&quot; relabel_configs: - source_labels: [__meta_consul_tags] regex: .*node.* action: keep - regex: __meta_consul_service_metadata_(.+) action: labelmap 注册服务 方式一 curl ## prometheus 与 consul 配置之间的对应关系 ## tags - tags ## service - name ## label - meta ## curl -X PUT -d '{&quot;id&quot;: &quot;node-1&quot;,&quot;name&quot;: &quot;os_system&quot;,&quot;address&quot;: &quot;10.1.x.x&quot;,&quot;port&quot;: 9100, &quot;tags&quot;: [&quot;node&quot;],&quot;meta&quot;:{&quo……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/monitor/prometheus-sd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/middleware/haproxy_install/" title="Haproxy  编译安装配置 ">Haproxy  编译安装配置 </a>
             </h1>
         </header>
@@ -275,29 +298,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/ch/install/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/pg_json/" title="数据库的json类型">数据库的json类型</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年12月20日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            json 与 jsonb json 保持原始格式， jsonb是解析输入后保存的二进制，在解析时会过滤掉不必要的空格和重复的健。 SELECT '{&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;: 17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5}'::json; json ------------------------------------------------------------ {&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;: 17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5} SELECT '{&quot;name&quot;: &quot;zhangsan&quot;, &quot;age&quot;: 17, &quot;sex&quot;:&quot;m&quot;,&quot;age&quot;:17.5}'::jsonb; jsonb ----------------------------------------------- {&quot;age&quot;: 17.5, &quot;sex&quot;: &quot;m&quot;, &quot;name&quot;: &quot;zhangsan&quot;} json 插入可能会更快些，jsonb的读取更快 操作符 json ,jsonb 操作符 操作符 右操作数类型 描述 示例 结果 -&gt; int 获取JSON数组元素（索引从0开始） select……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/pg_json/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -384,6 +384,8 @@
     <div>
         &copy; 2018 - 2023 <a href="https://zhangeamon.top"> By Eamon</a>
         
+        | <a rel="nofollow" target="_blank" href="http://www.beian.miit.gov.cn/">辽ICP备2022000054号-1</a>
+        
     </div>
     <br />
   
@@ -418,6 +420,10 @@
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pip/" title="python pip">python pip</a>
+    </li>
     
     <li>
         <a href="https://zhangeamon.top/postgres/repmgrd/" title="repmgrd介绍">repmgrd介绍</a>
@@ -455,10 +461,6 @@
         <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -491,7 +493,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (48)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (18)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

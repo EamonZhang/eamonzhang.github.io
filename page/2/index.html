@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年7月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            创建表 DROP TABLE IF EXISTS &quot;goods&quot;; CREATE TABLE &quot;goods&quot; ( &quot;store_cd&quot; int4 NOT NULL, &quot;good_cd&quot; varchar(50) COLLATE &quot;pg_catalog&quot;.&quot;default&quot; NOT NULL, &quot;name&quot; varchar(255) COLLATE &quot;pg_catalog&quot;.&quot;default&quot; ); INSERT INTO &quot;goods&quot; VALUES (101, '1', '张三'); INSERT INTO &quot;goods&quot; VALUES (102, '2', '李四'); INSERT INTO &quot;goods&quot; VALUES (103, '3', '王五'); ALTER TABLE &quot;goods&quot; ADD CONSTRAINT &quot;pr_cd_key&quot; PRIMARY KEY (&quot;store_cd&quot;, &quot;good_cd&quot;); 数据存在则更新数据，不存在则插入数据 --- INSERT INTO GOODS VALUES ( 104, '4', '赵六' ) ON CONFLICT ON CONSTRAINT pr_key_cd DO UPDATE SET NAME = '更新' WHERE GOODS.STORE_CD = '104' AND GOODS.GOOD_CD = '4' ---- pr_key_cd为必须为……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/postgres/upset/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/debezium/" title="利用debezium 实现数据变更捕获">利用debezium 实现数据变更捕获</a>
             </h1>
         </header>
@@ -282,29 +305,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/network-security/trivy/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/monitor/prometheus-sd/" title="Prometheus 服务发现">Prometheus 服务发现</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2022年4月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%9B%91%E6%8E%A7'> 监控</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            基于consul 的服务发现 prometheus.yaml ## 操作系统监控 动态发现 - job_name: 'os_system' #metrics_path: &quot;/metrics&quot; consul_sd_configs: - server: 127.0.0.1:8500 services: - os_system scheme: http tags: - &quot;node&quot; relabel_configs: - source_labels: [__meta_consul_tags] regex: .*node.* action: keep - regex: __meta_consul_service_metadata_(.+) action: labelmap 注册服务 方式一 curl ## prometheus 与 consul 配置之间的对应关系 ## tags - tags ## service - name ## label - meta ## curl -X PUT -d '{&quot;id&quot;: &quot;node-1&quot;,&quot;name&quot;: &quot;os_system&quot;,&quot;address&quot;: &quot;10.1.x.x&quot;,&quot;port&quot;: 9100, &quot;tags&quot;: [&quot;node&quot;],&quot;meta&quot;:{&quo……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/monitor/prometheus-sd/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -384,6 +384,8 @@
     <div>
         &copy; 2018 - 2023 <a href="https://zhangeamon.top"> By Eamon</a>
         
+        | <a rel="nofollow" target="_blank" href="http://www.beian.miit.gov.cn/">辽ICP备2022000054号-1</a>
+        
     </div>
     <br />
   
@@ -418,6 +420,10 @@
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pip/" title="python pip">python pip</a>
+    </li>
     
     <li>
         <a href="https://zhangeamon.top/postgres/repmgrd/" title="repmgrd介绍">repmgrd介绍</a>
@@ -455,10 +461,6 @@
         <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -491,7 +493,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (48)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (18)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

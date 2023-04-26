@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/mysql/performance-cmd/" title="MySQL常用性能分析命令">MySQL常用性能分析命令</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年1月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/mysql'>mysql</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            MySQL常用性能突发事件分析命令： SHOW PROCESSLIST; —当前MySQL数据库的运行的所有线程 INNODB_TRX; — 当前运行的所有事务 INNODB_LOCKS; — 当前出现的锁 INNODB_LOCK_WAITS; — 锁等待的对应关系计 SHOW OPEN TABLES where In_use &gt;0; — 当前打开表 SHOW ENGINE INNODB STATUS \G; —Innodb状态 SHOW STATUS LIKE &lsquo;innodb_row_lock_%'; — 锁性能状态 SQL语句EXPLAIN; — 查询优化器 数据库size查看 -- databases size select table_schema as '……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/mysql/performance-cmd/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/pg_citus/" title="citus 数据库分库">citus 数据库分库</a>
             </h1>
         </header>
@@ -240,22 +263,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/linux/memtest/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/dmidecode/" title="Linux查看内存条信息">Linux查看内存条信息</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2019年1月14日
-        </date>
-        
-        <div class="post-content">
-            1.查看内存槽及内存条 $ sudo dmidecode -t memory 2.查看内存的插槽数,已经使用多少插槽.每条内存多大 $ sudo dmidecode -t memory | grep Size 3.查看服务器型号、序列号 $ sudo dmidecode | grep &quot;System Information&quot; -A9 | egrep &quot;Manufacturer|Product|Serial&quot;……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/dmidecode/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -356,6 +363,8 @@
     <div>
         &copy; 2018 - 2023 <a href="https://zhangeamon.top"> By Eamon</a>
         
+        | <a rel="nofollow" target="_blank" href="http://www.beian.miit.gov.cn/">辽ICP备2022000054号-1</a>
+        
     </div>
     <br />
   
@@ -390,6 +399,10 @@
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pip/" title="python pip">python pip</a>
+    </li>
     
     <li>
         <a href="https://zhangeamon.top/postgres/repmgrd/" title="repmgrd介绍">repmgrd介绍</a>
@@ -427,10 +440,6 @@
         <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -463,7 +472,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (48)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (18)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

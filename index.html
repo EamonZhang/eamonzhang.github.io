@@ -92,6 +92,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/python/pip/" title="python pip">python pip</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年4月26日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/python'>python</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            介绍 pip python第三方库管理工具,从 Python 3.4 开始，pip 已经内置在 Python。 升级 pip install --upgrade pip 或 pip install -U pip 安装第三方库 pip install package_name==包版本 批量安装 pip install -r requirements.txt cat requirements.txt tensorflow==2.3.1 uvicorn==0.12.2 fastapi==0.63.0 卸载 pip uninstall package_name 升级 pip install -U package_name 冻结当前环境 有时您想输出当前环境中所有已安装的包，或生成一个需求文件 pip freeze 查看需要升……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/python/pip/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/postgres/repmgrd/" title="repmgrd介绍">repmgrd介绍</a>
             </h1>
         </header>
@@ -275,29 +298,6 @@
         <p class="readmore"><a href="https://zhangeamon.top/middleware/kafka_install/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2022年7月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/postgres'>postgres</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            创建表 DROP TABLE IF EXISTS &quot;goods&quot;; CREATE TABLE &quot;goods&quot; ( &quot;store_cd&quot; int4 NOT NULL, &quot;good_cd&quot; varchar(50) COLLATE &quot;pg_catalog&quot;.&quot;default&quot; NOT NULL, &quot;name&quot; varchar(255) COLLATE &quot;pg_catalog&quot;.&quot;default&quot; ); INSERT INTO &quot;goods&quot; VALUES (101, '1', '张三'); INSERT INTO &quot;goods&quot; VALUES (102, '2', '李四'); INSERT INTO &quot;goods&quot; VALUES (103, '3', '王五'); ALTER TABLE &quot;goods&quot; ADD CONSTRAINT &quot;pr_cd_key&quot; PRIMARY KEY (&quot;store_cd&quot;, &quot;good_cd&quot;); 数据存在则更新数据，不存在则插入数据 --- INSERT INTO GOODS VALUES ( 104, '4', '赵六' ) ON CONFLICT ON CONSTRAINT pr_key_cd DO UPDATE SET NAME = '更新' WHERE GOODS.STORE_CD = '104' AND GOODS.GOOD_CD = '4' ---- pr_key_cd为必须为……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/postgres/upset/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -366,6 +366,8 @@
     <div>
         &copy; 2018 - 2023 <a href="https://zhangeamon.top"> By Eamon</a>
         
+        | <a rel="nofollow" target="_blank" href="http://www.beian.miit.gov.cn/">辽ICP备2022000054号-1</a>
+        
     </div>
     <br />
   
@@ -400,6 +402,10 @@
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pip/" title="python pip">python pip</a>
+    </li>
     
     <li>
         <a href="https://zhangeamon.top/postgres/repmgrd/" title="repmgrd介绍">repmgrd介绍</a>
@@ -437,10 +443,6 @@
         <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -473,7 +475,7 @@
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (48)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (18)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     

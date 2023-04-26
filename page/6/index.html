@@ -92,6 +92,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zhangeamon.top/linux/so/" title="动态库">动态库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年6月1日
+        </date>
+        
+        <div class="post-content">
+            centos中运行程序出现&rsquo;GLIBCXX_3.4.21' not found 查看动态库依赖 #ldd ./**.so **.so: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found #strings /usr/lib64/libstdc++.so.6 |grep ^GLIBCXX GLIBCXX_3.4 GLIBCXX_3.4.1 GLIBCXX_3.4.2 GLIBCXX_3.4.3 GLIBCXX_3.4.4 GLIBCXX_3.4.5 GLIBCXX_3.4.6 GLIBCXX_3.4.7 GLIBCXX_3.4.8 GLIBCXX_3.4.9 GLIBCXX_3.4.10 GLIBCXX_3.4.11 GLIBCXX_3.4.12 GLIBCXX_3.4.13 GLIBCXX_3.4.14 GLIBCXX_3.4.15 GLIBCXX_3.4.16 GLIBCXX_3.4.17 GLIBCXX_3.4.18 GLIBCXX_3.4.19 GLIBCXX_DEBUG_MESSAGE_LENGTH centos7 中的gcc 版本太老，需要升级 gcc 升级 centos7 中的gcc 版本太老，需要升级 yum groupinstall &quot;Development Tools&quot; yum install glibc-static libstdc++-static 下载gcc http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/ 安装 tar -xvf gcc-5.4.0.tar.bz2 cd gcc-5.4.0 ./contrib/download_prerequisits mkdir build cd build ../configure --enable-checking=release --enable-languages=c,c++ --disable-multilib……
+        </div>
+        <p class="readmore"><a href="https://zhangeamon.top/linux/so/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zhangeamon.top/python/ctypes/" title="python 与 C 交互编程">python 与 C 交互编程</a>
             </h1>
         </header>
@@ -299,29 +315,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <p class="readmore"><a href="https://zhangeamon.top/python/virtualenv/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zhangeamon.top/linux/resetpasswd-centos7/" title="Centos7 重置密码">Centos7 重置密码</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年4月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/linux'>linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            进入开机界面 按e 后 修改如下两处 ctrl+X 进入系统 上图中最后一个指令为保持设置 touch /.autorelabel 重新进入系统 exec /sbin/init……
-        </div>
-        <p class="readmore"><a href="https://zhangeamon.top/linux/resetpasswd-centos7/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -422,6 +415,8 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     <div>
         &copy; 2018 - 2023 <a href="https://zhangeamon.top"> By Eamon</a>
         
+        | <a rel="nofollow" target="_blank" href="http://www.beian.miit.gov.cn/">辽ICP备2022000054号-1</a>
+        
     </div>
     <br />
   
@@ -456,6 +451,10 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://zhangeamon.top/python/pip/" title="python pip">python pip</a>
+    </li>
     
     <li>
         <a href="https://zhangeamon.top/postgres/repmgrd/" title="repmgrd介绍">repmgrd介绍</a>
@@ -493,10 +492,6 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
         <a href="https://zhangeamon.top/middleware/kafka_install/" title="Kafka集群安装">Kafka集群安装</a>
     </li>
     
-    <li>
-        <a href="https://zhangeamon.top/postgres/upset/" title="upset 用法">upset 用法</a>
-    </li>
-    
 </ul>
 
     </section>
@@ -529,7 +524,7 @@ https://mp.weixin.qq.com/s?__biz=MzU5MDY1MzcyOQ==&amp;mid=2247483770&amp;idx=1&a
     
     <li><a href="https://zhangeamon.top/categories/postgres/">postgres (48)</a></li>
     
-    <li><a href="https://zhangeamon.top/categories/python/">python (17)</a></li>
+    <li><a href="https://zhangeamon.top/categories/python/">python (18)</a></li>
     
     <li><a href="https://zhangeamon.top/categories/rabbitmq/">rabbitmq (2)</a></li>
     
