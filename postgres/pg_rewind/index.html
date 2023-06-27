@@ -171,6 +171,7 @@
     <li><a href="#更多">更多</a></li>
     <li><a href="#应用">应用</a></li>
     <li><a href="#原理">原理</a></li>
+    <li><a href="#创建rewind-用户">创建rewind 用户</a></li>
   </ul>
 </nav>
     </div>
@@ -306,7 +307,13 @@ primary_conninfo = 'user=postgres passfile=''/root/.pgpass'' host=10.1.88.72 por
 <p>4 把旧主改成恢复模式，恢复的起点则设置为分叉点前的最近一次checkpoint</p>
 <p>5 当启动旧主库后，自动重放wal日志即可完成数据的同步</p>
 <p>参加官方文档 <a href="https://www.postgresql.org/docs/14/app-pgrewind.html">https://www.postgresql.org/docs/14/app-pgrewind.html</a></p>
-
+<h2 id="创建rewind-用户">创建rewind 用户</h2>
+<pre><code>CREATE USER {{ REWIND_USER }} ENCRYPTED PASSWORD '{{ REWIND_PASSWORD }}';
+GRANT EXECUTE ON function pg_catalog.pg_ls_dir(text, boolean, boolean) TO {{ REWIND_USER }};
+GRANT EXECUTE ON function pg_catalog.pg_stat_file(text, boolean) TO {{ REWIND_USER }};
+GRANT EXECUTE ON function pg_catalog.pg_read_binary_file(text) TO {{ REWIND_USER }};
+GRANT EXECUTE ON function pg_catalog.pg_read_binary_file(text, bigint, bigint, boolean) TO {{ REWIND_USER }};
+</code></pre>
         </div>
 
         
