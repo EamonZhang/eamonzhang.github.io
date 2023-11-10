@@ -1,7 +1,7 @@
 #contentDir = "content"
 staticDir = "static"
 #uglyurls = true 
-baseURL = "https://zhangeamon.top"
+baseURL = "http://zhangeamon.top"
 languageCode = "zh-CN"
 title = "Let's go 🐌 🐌 🐌"
 theme = "maupassant-hugo"
